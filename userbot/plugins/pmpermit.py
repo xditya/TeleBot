@@ -10,13 +10,13 @@ PM_WARNS = {}
 PREV_REPLY_MESSAGE = {}
 
 
-DEFAULTUSER = str(ALIVE_NAME) if ALIVE_NAME else "**No name set yet mahn, check pinned message in** @XTeleBotHelp"
-USER_BOT_WARN_ZERO = "`You were spamming my peru master's inbox, henceforth your retarded lame ass has been blocked by my master's userbot.` **Now GTFO, I'm playing PUBGM** "
-USER_BOT_NO_WARN = ("[...........███ ]▄▄▄▄▄▃ \n..▂▄▅█████▅▄▃▂\n[███████████████]\n◥⊙▲⊙▲⊙▲⊙▲⊙▲⊙◤](tg://user?id=719195224)\n\n"
-                    "`Hello, this is TeleBot Security Service.You have found your way here to my master,`"
+DEFAULTUSER = str(ALIVE_NAME) if ALIVE_NAME else "**No name set yet nibba, check pinned message in** @TeleBotHelp"
+USER_BOT_WARN_ZERO = "`You were spamming my master's inbox, henceforth your retarded lame ass has been blocked by my master's userbot.` **Now GTFO, i'm playing minecraft** "
+USER_BOT_NO_WARN = ("[...........███ ]▄▄▄▄▄▃ \n..▂▄▅█████▅▄▃▂\n[███████████████]\n◥⊙▲⊙▲⊙▲⊙▲⊙▲⊙◤](t.me/TeleBotHelp)\n\n"
+                    "`Hello, this is TeleBot Security Service. This is an automated message,`"
                     f"{DEFAULTUSER}'s` inbox.\n\n"
-                    "Leave your name, phone number, address and 10k$ and hopefully you'll get a reply within 2 light years.`\n\n"
-                    "** Send** `/start` ** so that we can decide why you're here.**")
+                    "Do not spam here, else you will be blocked automatically.`\n\n"
+                    "** Send** `/start` ** to access the available options.**")
 
 
 if Var.PRIVATE_GROUP_ID is not None:
@@ -36,7 +36,7 @@ if Var.PRIVATE_GROUP_ID is not None:
                     await PREV_REPLY_MESSAGE[chat.id].delete()
                     del PREV_REPLY_MESSAGE[chat.id]
                 pmpermit_sql.approve(chat.id, reason)
-                await event.edit("Approved Nibba [{}](tg://user?id={})".format(firstname, chat.id))
+                await event.edit("My master has approved you to PM [{}](tg://user?id={})".format(firstname, chat.id))
                 await asyncio.sleep(3)
                 await event.delete()
 
@@ -50,7 +50,7 @@ if Var.PRIVATE_GROUP_ID is not None:
             if not pmpermit_sql.is_approved(chat.id):
                 if not chat.id in PM_WARNS:
                     pmpermit_sql.approve(chat.id, "outgoing")
-                    bruh = "__Added user to approved pms cuz outgoing message >~<__"
+                    bruh = "__User Approved bcoz outgoing message >~<__"
                     rko = await borg.send_message(event.chat_id, bruh)
                     await asyncio.sleep(3)
                     await rko.delete()
@@ -67,7 +67,7 @@ if Var.PRIVATE_GROUP_ID is not None:
         if event.is_private:
             if pmpermit_sql.is_approved(chat.id):
                 pmpermit_sql.disapprove(chat.id)
-                await event.edit(" ███████▄▄███████████▄  \n▓▓▓▓▓▓█░░░░░░░░░░░░░░█\n▓▓▓▓▓▓█░░░░░░░░░░░░░░█\n▓▓▓▓▓▓█░░░░░░░░░░░░░░█\n▓▓▓▓▓▓█░░░░░░░░░░░░░░█\n▓▓▓▓▓▓█░░░░░░░░░░░░░░█\n▓▓▓▓▓▓███░░░░░░░░░░░░█\n██████▀▀▀█░░░░██████▀  \n░░░░░░░░░█░░░░█  \n░░░░░░░░░░█░░░█  \n░░░░░░░░░░░█░░█  \n░░░░░░░░░░░█░░█  \n░░░░░░░░░░░░▀▀ \n\nGet Lost Idiot, Now You Can't Message Me..[{}](tg://user?id={})".format(firstname, chat.id))
+                await event.edit(" ███████▄▄███████████▄  \n▓▓▓▓▓▓█░░░░░░░░░░░░░░█\n▓▓▓▓▓▓█░░░░░░░░░░░░░░█\n▓▓▓▓▓▓█░░░░░░░░░░░░░░█\n▓▓▓▓▓▓█░░░░░░░░░░░░░░█\n▓▓▓▓▓▓█░░░░░░░░░░░░░░█\n▓▓▓▓▓▓███░░░░░░░░░░░░█\n██████▀▀▀█░░░░██████▀  \n░░░░░░░░░█░░░░█  \n░░░░░░░░░░█░░░█  \n░░░░░░░░░░░█░░█  \n░░░░░░░░░░░█░░█  \n░░░░░░░░░░░░▀▀ \n\nGet lost, Now You Can't Message Me..[{}](tg://user?id={})".format(firstname, chat.id))
                 await asyncio.sleep(3)
                 await event.client(functions.contacts.BlockRequest(chat.id))
 
@@ -150,11 +150,6 @@ if Var.PRIVATE_GROUP_ID is not None:
             await do_pm_permit_action(chat_id, event)
 
     async def do_pm_permit_action(chat_id, event):
-        if chat_id == "967883138" or "719877937" or "742506768":
-        # Miss an opportunity to flex? Mwahaha no way. gg, wp.
-            chat = await event.get_chat()
-            pmpermit_sql.approve(chat.id, "supreme lord ehehe")
-            await borg.send_message(event.chat_id, "__this inbox has been blessed by the presence of my master!__\n**Increased karma and improved stability of this account.**")
         if chat_id not in PM_WARNS:
             PM_WARNS.update({chat_id: 0})
         if PM_WARNS[chat_id] == Config.MAX_FLOOD_IN_P_M_s:
