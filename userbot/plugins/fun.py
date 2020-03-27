@@ -703,7 +703,7 @@ GAMBAR_TITIT = """
 
 
 
-@javes05(pattern="^!slap(?: |$)(.*)", outgoing=True)
+@borg.on(pattern="^!slap(?: |$)(.*)", outgoing=True)
 async def who(event):
     """ slaps a user, or get slapped if not a reply. """
     replied_user = await get_user_from_event(event)
