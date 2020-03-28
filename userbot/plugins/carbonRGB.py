@@ -186,7 +186,7 @@ async def carbon_api(e):
 
          file,
 
-         caption="Carbonised by [IndianBot](https://t.me/movislink1)",
+         caption="Carbonised by [TeleBot](https://t.me/TeleBotHelp)",
 
          force_document=False,
 
