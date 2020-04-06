@@ -1,4 +1,4 @@
-# FORK AT YOUR OWN RISK
+# FORK AND STAR BEFORE INSTALLING
 # Installing
 Join https://t.me/TeleBotHelp for updates and tuts
 ### The Easy Way
