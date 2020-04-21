@@ -58,7 +58,7 @@ async def _(event):
         uploaded_sticker = await borg.upload_file(file, file_name=file_ext_ns_ion)
         packname = f"{userid}'s @AnimatedStickersGroup"
         if userid == 719877937:
-            packshortname = "TheAnubis_Animated"
+            packshortname = "TeleBot_Animated"
         else:
             packshortname = f"Uni_Borg_{userid}_as" # format: Uni_Borg_userid
     elif not is_message_image(reply_message):
@@ -70,7 +70,7 @@ async def _(event):
             sticker.seek(0)
             uploaded_sticker = await borg.upload_file(sticker, file_name=file_ext_ns_ion)
 
-    await event.edit("`Sticker is being kanged.... @TeleBotHelp`")
+    await event.edit("`Sticker is being kanged.... `")
 
     async with borg.conversation("@Stickers") as bot_conv:
         now = datetime.datetime.now()
