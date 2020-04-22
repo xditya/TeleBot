@@ -44,7 +44,7 @@ IS_SELECTED_DIFFERENT_BRANCH = (
     "in this case, Updater is unable to identify the branch to be updated."
     "please check out to an official branch, and re-start the updater."
 )
-OFFICIAL_UPSTREAM_REPO = "https://github.com/xditya/TeleBot"
+OFFICIAL_UPSTREAM_REPO = "https://GitHub.com/xditya/TeleBot"
 BOT_IS_UP_TO_DATE = "`The userbot is up-to-date.\nThank you for Using this Service.`"
 NEW_BOT_UP_DATE_FOUND = (
     "new update found for {branch_name}\n"
@@ -53,12 +53,12 @@ NEW_BOT_UP_DATE_FOUND = (
 )
 NEW_UP_DATE_FOUND = (
     "New update found for {branch_name}\n"
-    "`Updating 👍 ...`"
+    "`updating ...`"
 )
 REPO_REMOTE_NAME = "temponame"
 IFFUCI_ACTIVE_BRANCH_NAME = "master"
 DIFF_MARKER = "HEAD..{remote_name}/{branch_name}"
-NO_HEROKU_APP_CFGD = "No heroku application found, but a key given? 😕 "
+NO_HEROKU_APP_CFGD = "no heroku application found, but a key given? 😕 "
 HEROKU_GIT_REF_SPEC = "HEAD:refs/heads/master"
 RESTARTING_APP = "re-starting heroku application"
 # -- Constants End -- #
