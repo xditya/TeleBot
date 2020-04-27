@@ -3,15 +3,15 @@
 from telethon import events
 import asyncio
 from collections import deque
+from uniborg.util import admin_cmd
 
-
-@borg.on(events.NewMessage(pattern=r"\.tlol", outgoing=True))
+@borg.on(admin_cmd(pattern=r"lol"))
 async def _(event):
 	if event.fwd_from:
 		return
-	deq = deque(list("🤔🧐🤔🧐🤔🧐"))
+	deq = deque(list("😂🤣😂🤣😂🤣"))
 	for _ in range(999):
-		await asyncio.sleep(0.1)
+		await asyncio.sleep(1)
 		await event.edit("".join(deq))
 		deq.rotate(1)
     
