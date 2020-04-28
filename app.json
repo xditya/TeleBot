@@ -191,6 +191,22 @@
    "required": false
 
   },
+  
+  "MAX_FLOOD_IN_P_M_s": {
+      "description": "Maximum number of messages a person can send in pm before getting blocked. Value must be an integer. 3 by default.",
+      "value": "3",
+      "required": false
+    },
+    "OCR_SPACE_API_KEY": {
+      "description": "Required for OCR functionality. Get from https://ocr.space/ocrapi",
+      "value": "",
+      "required": false
+    },
+    "REM_BG_API_KEY": {
+      "description": "Required for Removing image background functionality. Get from https://www.remove.bg/",
+      "value": "",
+      "required": false
+    },
 
   "TZ": {
 
