@@ -13,8 +13,8 @@ async def amireallyalive(alive):
     """ For .alive command, check if the bot is running.  """
     await alive.edit("   **Welcome To TeleBot ** \n\n"
         "**`Hey! I'm alive. All systems online and functioning normally... ψ(｀∇´)ψ`**\n\n"
-                      "` 🔸 Telethon version:` **6.9.0**\n` 🔹 Python:` **3.7.3** \n` 🔸 Fork by:` @xditya\n"
+                      "` 🔸 Telethon version:` **6.9.0**\n` 🔹 Python:` **3.7.3** \n` 🔸 More info:` @TeleBotHelpChat\n"
                      "` 🔹 Bot created by:` [Aditya 🇮🇳](tg://user?id=719195224)\n"
                      "` 🔸 Database Status:` **All OK 👌!**\n"
                      f"` 🔹 My peru owner`: {DEFAULTUSER}\n\n"
-                     "           [Deploy this userbot Now](https://github.com/xditya/TeleBot)")
+                     "           [✨ GitHub Repository ✨](https://github.com/xditya/TeleBot)")
