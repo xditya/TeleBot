@@ -1,4 +1,5 @@
 # FORK AND STAR BEFORE INSTALLING
+[Watch video tutorial on deploying](https://youtu.be/XmvdDHiIDb4)
 # Installing
 Join https://t.me/TeleBotHelp for updates and tuts
 ### The Easy Way
