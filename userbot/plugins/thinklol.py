@@ -5,11 +5,11 @@ import asyncio
 from collections import deque
 from uniborg.util import admin_cmd
 
-@borg.on(admin_cmd(pattern=r"lol"))
+@borg.on(admin_cmd(pattern=r"tlol"))
 async def _(event):
 	if event.fwd_from:
 		return
-	deq = deque(list("😂🤣😂🤣😂🤣"))
+	deq = deque(list("🤔🧐🤨🤔🧐🤨"))
 	for _ in range(999):
 		await asyncio.sleep(1)
 		await event.edit("".join(deq))
