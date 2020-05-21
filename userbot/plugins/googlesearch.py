@@ -12,7 +12,7 @@ from telethon.tl.types import DocumentAttributeAudio
 
 @register(outgoing=True, pattern=r"^\.gs (.*)")
 async def gsearch(q_event):
-    """ For .google command, do a Google search. """
+    """ For .google command, do a Google search from @TeleBotHelp. """
     match = q_event.pattern_match.group(1)
     page = findall(r"page=\d+", match)
     try:
