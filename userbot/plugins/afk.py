@@ -145,7 +145,7 @@ async def on_afk(event):
             else:
                 afk_since = f"`{int(seconds)}s` **ago**"
         msg = None
-        message_to_reply = f"__My Master is [AFk](https://telegra.ph/AFK-05-22) since__ `{total_afk_time}`\n Where He Is: ~~ONLY GOD KNOWS~~ " + \
+        message_to_reply = f"**TeleBot** - __My Master is [AFk](https://telegra.ph/AFK-05-22) since__ `{total_afk_time}`\n Where He Is: ~~ONLY GOD KNOWS~~ " + \
             f"\n\n__I promise I'll back in a few light years__\n**REASON**: {reason}" \
             if reason \
             else f"**Heya!**\n__I am currently [unavailable](https://telegra.ph/AFK-05-22). Since when, you ask? For {total_afk_time} I guess.__\n\nWhen will I be back? ~~Soon~~ __Whenever I feel like it__**( ಠ ʖ̯ ಠ)**  "
