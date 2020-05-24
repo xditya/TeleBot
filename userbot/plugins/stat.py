@@ -56,7 +56,7 @@ logger = logging.getLogger(__name__)
 @borg.on(admin_cmd(pattern='count'))  
 async def stats(event: NewMessage.Event) -> None:  # pylint: disable = R0912, R0914, R0915
     """Command to get stats about the account"""
-    waiting_message = await event.edit('`Collecting stats, Wait Nibba`')
+    waiting_message = await event.edit('`Collecting stats, Wait Master`')
     start_time = time.time()
     private_chats = 0
     bots = 0
