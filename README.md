@@ -4,7 +4,7 @@
 Join https://t.me/TeleBotHelp for updates and tuts
 ### The Easy Way
 
-[![Deploy To Heroku](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy)
+[![Deploy To Heroku](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/xditya/TeleBot/tree/master)
 
 ### The Normal Way
 
