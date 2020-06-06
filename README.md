@@ -1,10 +1,12 @@
 # FORK AND STAR BEFORE INSTALLING
 [Watch video tutorial on deploying](https://youtu.be/XmvdDHiIDb4)
-# Installing
-Join https://t.me/TeleBotHelp for updates and tuts
-### The Easy Way
+
+### The Easy Way to install
 
 [![Deploy To Heroku](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/xditya/TeleBot/tree/master)
+
+# Support
+Join https://t.me/TeleBotHelp for updates and suggestions.
 
 ### The Normal Way
 
