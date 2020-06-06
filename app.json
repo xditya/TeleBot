@@ -145,11 +145,11 @@
 
   "TG_BOT_TOKEN_BF_HER": {
 
-   "description": "Needed for inline buttons maker. Make a bot at [BotFather](http://telegram.dog/BotFather) and get the token of your bot.Worth it. Get it.",
+   "description": "Needed for inline buttons maker. Make a bot at [BotFather](http://telegram.dog/BotFather) and get the token of your bot. Get it else .help won't work.",
 
    "value": "",
 
-   "required": false
+   "required": true
 
   },
 
@@ -175,11 +175,11 @@
 
   "TG_BOT_USER_NAME_BF_HER": {
 
-   "description": "Needed for inline buttons maker. Make a bot at [BotFather](http://telegram.dog/BotFather) and get the username of your bot",
+   "description": "Needed for inline buttons maker. Make a bot at [BotFather](http://telegram.dog/BotFather) and get the username of your bot. Needed for .help to work.",
 
    "value": "",
 
-   "required": false
+   "required": true
 
   },
 
