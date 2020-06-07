@@ -18,7 +18,7 @@ async def autopic(event):
         place_holder = None
     while True:
         shutil.copy(downloaded_file_name, photo)
-        current_time = datetime.now().strftime("🕑 Time: %H:%M 🕑\n 🗓️ Date: %d.%m.%y 🗓️\n 🕶️ TeleBot 🕶️")
+        current_time = datetime.now().strftime("    TeleBot\n⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡ \n  Time: %H:%M \n  Date: %d.%m.%y \n⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡")
         img = Image.open(photo)
         drawn_text = ImageDraw.Draw(img)
         fnt = ImageFont.truetype(FONT_FILE_TO_USE, 30)
