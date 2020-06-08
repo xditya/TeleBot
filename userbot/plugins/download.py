@@ -1,7 +1,8 @@
 """Download Files to your local server
 Syntax:
 .download
-.download url | file.name to download files from a Public Link"""
+.download url | file.name to download files from a Public Link
+Credits @TeleBotHelp """
 
 import aiohttp
 import asyncio
@@ -78,8 +79,8 @@ async def _(event):
         end = datetime.now()
         ms = (end - start).seconds
         if downloader.isSuccessful():
-            await mone.edit("Downloaded to `{}` in {} seconds.".format(downloaded_file_name, ms))
+            await mone.edit("TeleBot has downloaded it to `{}` in {} seconds.".format(downloaded_file_name, ms))
         else:
             await mone.edit("Incorrect URL\n {}".format(input_str))
     else:
-        await mone.edit("Reply to a message to download to my local server.")
+        await mone.edit("Reply to a message for TeleBot to download to your local server.")
