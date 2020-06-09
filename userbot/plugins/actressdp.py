@@ -1,8 +1,8 @@
-#Made By @MarioDevs Keep Credits If You Are Goanna Kang This Lol
+#Made By @TeleBotComms Keep Credits If You Are Goanna Kang This Lol
 
 #And Thanks To The Creator Of Autopic This Script Was Made from Snippets From That Script
 
-#Usage .avengersdp Im Not Responsible For Any Ban caused By This
+#Usage .actressdp Im Not Responsible For Any Ban caused By This
 
 import requests , re , random 
 
@@ -62,7 +62,7 @@ async def animepp():
 
 async def main(event):
 
-    await event.edit("**Starting Actress Profile Pic...\n\nDone !!! Check Your DP By @MarioDevs**")
+    await event.edit("**Starting Actress Profile Pic...\n\nDone !!! Check Your DP in 5 seconds. \n By [TeleBot](https://github.com/xditya/TeleBot)**")
 
     while True:
 
