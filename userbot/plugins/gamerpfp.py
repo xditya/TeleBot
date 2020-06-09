@@ -1,4 +1,4 @@
-#Made By @Nihinivi Keep Credits If You Are Goanna Kang This Lol
+#Made By @TeleBotComms Keep Credits If You Are Goanna Kang This Lol
 
 #And Thanks To The Creator Of Autopic This Script Was Made from Snippets From That Script
 
@@ -62,7 +62,7 @@ async def animepp():
 
 async def main(event):
 
-    await event.edit("**Starting Gamer Profile Pic.\n\nModded by @ViperAdnan") #Owner @NihiNivi
+    await event.edit("**Starting Gamer Profile Pic.\n\nModded by[TeleBot](https://github.com/xditya/TeleBot)") #Owner @NihiNivi
 
     while True:
 
