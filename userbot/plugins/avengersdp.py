@@ -1,4 +1,4 @@
-#Made By @MarioDevs Keep Credits If You Are Goanna Kang This Lol
+#Made By @TeleBotComms Keep Credits If You Are Goanna Kang This Lol
 
 #And Thanks To The Creator Of Autopic This Script Was Made from Snippets From That Script
 
@@ -62,7 +62,7 @@ async def animepp():
 
 async def main(event):
 
-    await event.edit("**Starting Avengers Profile Pic...\n\nDone !!! Check Your DP By @MarioDevs**")
+    await event.edit("**Starting Avengers Profile Pic...\n\nDone !!! Check Your DP in 5 seconds. By [TeleBot](https://github.com/xditya/TeleBot)**")
 
     while True:
 
@@ -74,5 +74,5 @@ async def main(event):
 
         os.system("rm -rf donottouch.jpg")
 
-        await asyncio.sleep(1000) #Edit this to your required needs
+        await asyncio.sleep(600) #Edit this to your required needs
 
