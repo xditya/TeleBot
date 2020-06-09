@@ -100,7 +100,7 @@ async def updater(message):
     )
 
     if not changelog:
-        await message.edit("`Updating...`")
+        await message.edit("`TeleBot is now updating to latest version...`")
         await asyncio.sleep(8)
  
     message_one = NEW_BOT_UP_DATE_FOUND.format(
