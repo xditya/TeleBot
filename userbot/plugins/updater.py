@@ -137,7 +137,7 @@ async def updater(message):
                     if i.name == Var.HEROKU_APP_NAME:
                         heroku_app = i
                 if heroku_app is None:
-                    await message.edit("Invalid APP Name. Please set the name of your bot in heroku in the var `HEROKU_APP_NAME.`")
+                    await message.edit("Invalid APP Name. Please set the name of your bot in heroku in the var `HEROKU_APP_NAME. Get more help from @TeleBotHelpChat`")
                     return
                 heroku_git_url = heroku_app.git_url.replace(
                     "https://",
@@ -151,7 +151,7 @@ async def updater(message):
                 asyncio.get_event_loop().create_task(deploy_start(tgbot, message, HEROKU_GIT_REF_SPEC, remote))
 
             else:
-                await message.edit("Please create the var `HEROKU_APP_NAME` as the key and the name of your bot in heroku as your value.")
+                await message.edit("Please create the var `HEROKU_APP_NAME` as the key and the name of your bot in heroku as your value. Get more help from @TeleBotHelpChat")
                 return
         else:
             await message.edit(NO_HEROKU_APP_CFGD)
@@ -168,7 +168,7 @@ def generate_change_log(git_repo, diff_marker):
 
 async def deploy_start(tgbot, message, refspec, remote):
     await message.edit(RESTARTING_APP)
-    await message.edit("Updating and Deploying New Branch. Please wait for 5 minutes then use `.alive` to check if i'm working or not.")
+    await message.edit("TeleBot is being updated and new branch is being deployed. Please wait for 2 to 3 minutes for me to finish updating. Then use `.alive` to check if I am working or not.")
     await remote.push(refspec=refspec)
     await tgbot.disconnect()
     os.execl(sys.executable, sys.executable, *sys.argv)
