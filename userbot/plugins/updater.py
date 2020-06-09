@@ -47,13 +47,13 @@ IS_SELECTED_DIFFERENT_BRANCH = (
 OFFICIAL_UPSTREAM_REPO = "https://GitHub.com/xditya/TeleBot"
 BOT_IS_UP_TO_DATE = "`The userbot is up-to-date.\nThank you for Using this Service.`"
 NEW_BOT_UP_DATE_FOUND = (
-    "new update found for {branch_name}\n"
-    "changelog: \n\n{changelog}\n"
-    "updating ..."
+    "A new update is found for {branch_name}\n"
+    "Changelog: \n\n{changelog}\n"
+    "Updating..."
 )
 NEW_UP_DATE_FOUND = (
     "New update found for {branch_name}\n"
-    "`updating ...`"
+    "`Updating ...`"
 )
 REPO_REMOTE_NAME = "temponame"
 IFFUCI_ACTIVE_BRANCH_NAME = "master"
