@@ -1,3 +1,6 @@
+# Kangers keep credits
+# © @TeleBotHelp
+
 """command: .hack"""
 
 from telethon import events
