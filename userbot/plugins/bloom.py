@@ -2,7 +2,7 @@
 Time In Profile Pic.....
 Command: `.bloom`
 
-Hmmmm U need to config RAVANA_LEELA var in Heroku with any telegraph image link
+Hmmmm U need to config DOWNLOAD_PFP_URL_CLOCK var in Heroku with any telegraph image link
 
 :::::Credit Time::::::
 1) Coded By: @s_n_a_p_s
