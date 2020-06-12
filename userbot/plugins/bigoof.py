@@ -1,8 +1,8 @@
 """Available Commands:
 .bigoof
-Credits to @T3b0N3
+Credits to @TeleBotHelp
 
-   Ultroid
+   TeleBot
 """
 
 # Main Credits Goes to @T3b0N3
