@@ -1,5 +1,4 @@
-
-eleBotHelp
+# (c) @TeleBotHelp
 # By @xditya. Kangers keep credits xD
 # All in one code.
 
@@ -9,7 +8,8 @@ Available Commands:
 .lol
 .heart
 .candy
-.nothappy"""
+.nothappy
+More cmds are there, me lazy af to type em here 😅"""
 
 from telethon import events
 import asyncio
