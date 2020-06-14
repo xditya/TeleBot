@@ -3,7 +3,7 @@ import io
 import userbot.plugins.sql_helper.pmpermit_sql as pmpermit_sql
 from telethon.tl.functions.users import GetFullUserRequest
 from telethon import events, errors, functions, types
-from userbot import ALIVE_NAME, LESS_SPAMMY
+from userbot import ALIVE_NAME, LESS_SPAMMY, CUSTOM_PMPERMIT
 from userbot.utils import admin_cmd
 
 PM_WARNS = {}
