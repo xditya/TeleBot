@@ -74,9 +74,17 @@
   
    "CUSTOM_PMPERMIT": {
 
-   "description": "THE message that appears when someone PM's you.",
+   "description": "The message that appears when someone PM's you.",
 
    "value": "Do not spam here, else you will be blocked automatically."
+
+  },
+  
+    "CUSTOM_BLOCK": {
+
+   "description": "The message that appears when you block someone in PM.",
+
+   "value": "" ███████▄▄███████████▄  \n▓▓▓▓▓▓█░░░░░░░░░░░░░░█\n▓▓▓▓▓▓█░░░░░░░░░░░░░░█\n▓▓▓▓▓▓█░░░░░░░░░░░░░░█\n▓▓▓▓▓▓█░░░░░░░░░░░░░░█\n▓▓▓▓▓▓█░░░░░░░░░░░░░░█\n▓▓▓▓▓▓███░░░░░░░░░░░░█\n██████▀▀▀█░░░░██████▀  \n░░░░░░░░░█░░░░█  \n░░░░░░░░░░█░░░█  \n░░░░░░░░░░░█░░█  \n░░░░░░░░░░░█░░█  \n░░░░░░░░░░░░▀▀ \n\nGet lost, Now You Can't Message Me..."
 
   },
 
