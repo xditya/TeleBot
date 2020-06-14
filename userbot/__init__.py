@@ -108,7 +108,9 @@ if bool(ENV):
 
     # Clean Welcome
     CLEAN_WELCOME = sb(os.environ.get("CLEAN_WELCOME", "True"))
-
+    
+    # CUSTOM
+    CUSTOM_PMPERMIT = os.environ.get("CUSTOM_PMPERMIT", None)
     # Last.fm Module
     BIO_PREFIX = os.environ.get("BIO_PREFIX", None)
     DEFAULT_BIO = os.environ.get("DEFAULT_BIO", None)
