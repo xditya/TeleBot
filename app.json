@@ -71,6 +71,14 @@
    "value": ""
 
   },
+  
+   "CUSTOM_PMPERMIT": {
+
+   "description": "THE message that appears when someone PM's you.",
+
+   "value": "Do not spam here, else you will be blocked automatically."
+
+  },
 
   "GITHUB_ACCESS_TOKEN": {
 
