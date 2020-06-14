@@ -113,7 +113,7 @@ if bool(ENV):
     CUSTOM_PMPERMIT = os.environ.get("CUSTOM_PMPERMIT", None)
     
     # CUSTOM BLOCK
-    CUSTOM_BLOCK = 
+    CUSTOM_BLOCK = os.environ.get("CUSTOM_BLOCK", None)
     
     # CUSTOM AFK
     CUSTOM_AFK = os.environ.get("CUSTOM_AFK", None)
