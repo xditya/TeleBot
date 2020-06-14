@@ -89,7 +89,7 @@
 
   "CUSTOM_AFK": {
 
-   "description": "The message that appears when you go afk. Leave blank for default.",
+   "description": "The message that appears when you go afk. Leave it as such for default.",
 
    "value": "My Master is [AFK](https://telegra.ph/AFK-05-22)"
   },
