@@ -3,15 +3,16 @@ import io
 import userbot.plugins.sql_helper.pmpermit_sql as pmpermit_sql
 from telethon.tl.functions.users import GetFullUserRequest
 from telethon import events, errors, functions, types
-from userbot import ALIVE_NAME, LESS_SPAMMY, CUSTOM_PMPERMIT
+from userbot import ALIVE_NAME, LESS_SPAMMY, CUSTOM_PMPERMIT, CUSTOM_BLOCK
 from userbot.utils import admin_cmd
 
 PM_WARNS = {}
 PREV_REPLY_MESSAGE = {}
 
+BLK = str(CUSTOM_BLOCK) if CUSTOM_BLOCK else "███████▄▄███████████▄  \n▓▓▓▓▓▓█░░░░░░░░░░░░░░█\n▓▓▓▓▓▓█░░░░░░░░░░░░░░█\n▓▓▓▓▓▓█░░░░░░░░░░░░░░█\n▓▓▓▓▓▓█░░░░░░░░░░░░░░█\n▓▓▓▓▓▓█░░░░░░░░░░░░░░█\n▓▓▓▓▓▓███░░░░░░░░░░░░█\n██████▀▀▀█░░░░██████▀  \n░░░░░░░░░█░░░░█  \n░░░░░░░░░░█░░░█  \n░░░░░░░░░░░█░░█  \n░░░░░░░░░░░█░░█  \n░░░░░░░░░░░░▀▀ \n\nGet lost, Now You Can't Message Me..[{}](tg://user?id={})".format(firstname, chat.id))
 MESAG = str(CUSTOM_PMPERMIT) if CUSTOM_PMPERMIT else "**Do not spam here, else you will be blocked automatically.**"
 DEFAULTUSER = str(ALIVE_NAME) if ALIVE_NAME else "**No name set yet, check pinned message in** @TeleBotHelp"
-USER_BOT_WARN_ZERO = "`You were spamming my master's inbox, henceforth your retarded lame ass has been blocked by my master's userbot.` **Now GTFO, i'm playing minecraft** "
+USER_BOT_WARN_ZERO = "`You were spamming my master's inbox, henceforth your retarded lame ass has been blocked by my master's userbot.` **Now GTFO, i'm playing PUBG** "
 USER_BOT_NO_WARN = ("[...........███ ]▄▄▄▄▄▃ \n..▂▄▅█████▅▄▃▂\n[███████████████]\n◥⊙▲⊙▲⊙▲⊙▲⊙▲⊙◤](tg://user?id=719195224)\n\n"
                     "`Hello, this is TeleBot Security Service. This is an automated message in `"
                     f"{DEFAULTUSER}'s` inbox.\n\n"
@@ -67,7 +68,8 @@ if Var.PRIVATE_GROUP_ID is not None:
         if event.is_private:
             if pmpermit_sql.is_approved(chat.id):
                 pmpermit_sql.disapprove(chat.id)
-                await event.edit(" ███████▄▄███████████▄  \n▓▓▓▓▓▓█░░░░░░░░░░░░░░█\n▓▓▓▓▓▓█░░░░░░░░░░░░░░█\n▓▓▓▓▓▓█░░░░░░░░░░░░░░█\n▓▓▓▓▓▓█░░░░░░░░░░░░░░█\n▓▓▓▓▓▓█░░░░░░░░░░░░░░█\n▓▓▓▓▓▓███░░░░░░░░░░░░█\n██████▀▀▀█░░░░██████▀  \n░░░░░░░░░█░░░░█  \n░░░░░░░░░░█░░░█  \n░░░░░░░░░░░█░░█  \n░░░░░░░░░░░█░░█  \n░░░░░░░░░░░░▀▀ \n\nGet lost, Now You Can't Message Me..[{}](tg://user?id={})".format(firstname, chat.id))
+                await event.edit(f"{MESAG}"
+                                 "Blocked [{}](tg://user?id={})".format(firstname, chat.id))
                 await asyncio.sleep(3)
                 await event.client(functions.contacts.BlockRequest(chat.id))
 
