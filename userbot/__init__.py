@@ -113,7 +113,10 @@ if bool(ENV):
     CUSTOM_PMPERMIT = os.environ.get("CUSTOM_PMPERMIT", None)
     
     # CUSTOM BLOCK
-    CUSTOM_BLOCK = os.environ.get("CUSTOM_BLOCK", None)
+    CUSTOM_BLOCK = 
+    
+    # CUSTOM AFK
+    CUSTOM_AFK = os.environ.get("CUSTOM_AFK", None)
     
     # Last.fm Module
     BIO_PREFIX = os.environ.get("BIO_PREFIX", None)
