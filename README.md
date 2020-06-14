@@ -3,7 +3,7 @@
 
 ### The Easy Way to install
 
-[![Deploy To Heroku](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/xditya/TeleBot/tree/master)
+[![Deploy To Heroku](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/xditya/TeleBot)
 
 # Support
 Join https://t.me/TeleBotHelp for updates and suggestions.
