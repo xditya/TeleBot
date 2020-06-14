@@ -9,14 +9,14 @@ from userbot.utils import admin_cmd
 PM_WARNS = {}
 PREV_REPLY_MESSAGE = {}
 
-
+MESAG = str(CUSTOM_PMPERMIT) if CUSTOM_PMPERMIT else "**Do not spam here, else you will be blocked automatically.**"
 DEFAULTUSER = str(ALIVE_NAME) if ALIVE_NAME else "**No name set yet nibba, check pinned message in** @TeleBotHelp"
 USER_BOT_WARN_ZERO = "`You were spamming my master's inbox, henceforth your retarded lame ass has been blocked by my master's userbot.` **Now GTFO, i'm playing minecraft** "
 USER_BOT_NO_WARN = ("[...........███ ]▄▄▄▄▄▃ \n..▂▄▅█████▅▄▃▂\n[███████████████]\n◥⊙▲⊙▲⊙▲⊙▲⊙▲⊙◤](tg://user?id=719195224)\n\n"
                     "`Hello, this is TeleBot Security Service. This is an automated message in `"
                     f"{DEFAULTUSER}'s` inbox.\n\n"
-                    "Do not spam here, else you will be blocked automatically.`\n\n"
-                    "** Send** `/start` ** to access the available options.**")
+                    f"{MESAG}"
+                    "\n\n** Send** `/start` ** to access the available options.**")
 
 
 if Var.PRIVATE_GROUP_ID is not None:
