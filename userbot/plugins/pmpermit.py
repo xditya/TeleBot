@@ -17,7 +17,7 @@ USER_BOT_NO_WARN = ("[...........███ ]▄▄▄▄▄▃ \n..▂▄▅█�
                     "`Hello, this is TeleBot Security Service. This is an automated message in `"
                     f"{DEFAULTUSER}'s` inbox.\n\n"
                     f"{MESAG}"
-                    "\n\n Send `/start`  to access the available options.")
+                    "\n\n ** Send** `/start` ** to access the available options.**")
 
 
 if Var.PRIVATE_GROUP_ID is not None:
