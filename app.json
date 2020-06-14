@@ -74,7 +74,7 @@
   
    "CUSTOM_PMPERMIT": {
 
-   "description": "The message that appears when someone PM's you.",
+   "description": "The message that appears when someone PM's you. Leave it for default message.",
 
    "value": "Do not spam here, else you will be blocked automatically."
 
@@ -87,6 +87,14 @@
    "value": ""
   },
 
+  "CUSTOM_AFK": {
+
+   "description": "The message that appears when you go afk. Leave blank for default.",
+
+   "value": "Do not spam here, else you will be blocked automatically."
+
+  },
+  
   "GITHUB_ACCESS_TOKEN": {
 
    "description": "Your Github Access Token for gitcommit plugin.Google 'Github access token' to find.",
