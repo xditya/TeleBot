@@ -5,7 +5,7 @@ import datetime
 from datetime import datetime
 from telethon import events
 from telethon.tl import functions, types
-from userbot import CUSTOM_AFK
+from userbot import CUSTOM_AFK as CAFK
 
 global USER_AFK  # pylint:disable=E0602
 global afk_time  # pylint:disable=E0602
