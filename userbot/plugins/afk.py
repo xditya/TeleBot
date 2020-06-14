@@ -5,7 +5,7 @@ import datetime
 from datetime import datetime
 from telethon import events
 from telethon.tl import functions, types
-
+from userbot import CUSTOM_AFK
 
 global USER_AFK  # pylint:disable=E0602
 global afk_time  # pylint:disable=E0602
@@ -17,7 +17,7 @@ afk_time = None
 last_afk_message = {}
 afk_start = {}
 
-
+CAFK = str(CAFK) if CAFK else "My Master is [AFk](https://telegra.ph/AFK-05-22)"
 @borg.on(events.NewMessage(pattern=r"\.afk ?(.*)", outgoing=True))  # pylint:disable=E0602
 async def _(event):
     if event.fwd_from:
@@ -72,7 +72,7 @@ async def set_not_afk(event):
         total_afk_time = str((afk_end - afk_start))
     current_message = event.message.message
     if ".afk" not in current_message and "yes" in USER_AFK:  # pylint:disable=E0602
-        shite = await borg.send_message(event.chat_id, "__I am back alive!__\n**No Longer afk.**\n `i was afk for:``" + total_afk_time + "`")
+        shite = await borg.send_message(event.chat_id, "__I am back online!__\n**No Longer afk.**\n `I was afk for:``" + total_afk_time + "`")
         try:
             await borg.send_message(  # pylint:disable=E0602
                 Config.PRIVATE_GROUP_BOT_API_ID,  # pylint:disable=E0602
@@ -83,7 +83,7 @@ async def set_not_afk(event):
                 event.chat_id,
                 "Please set `PRIVATE_GROUP_BOT_API_ID` " + \
                 "for the proper functioning of afk functionality " + \
-                "in @TeleBotHelp\nCheck pinned message for more info.\n\n `{}`".format(str(e)),
+                "In` @TeleBotHelp\nCheck pinned message for more info.\n\n {}`".format(str(e)),
                 reply_to=event.message.id,
                 silent=True
             )
@@ -145,8 +145,9 @@ async def on_afk(event):
             else:
                 afk_since = f"`{int(seconds)}s` **ago**"
         msg = None
-        message_to_reply = f"**TeleBot** - __My Master is [AFk](https://telegra.ph/AFK-05-22) since__ `{total_afk_time}`\n Where He Is: ~~ONLY GOD KNOWS~~ " + \
-            f"\n\n__I promise I'll back in a few light years__\n**REASON**: {reason}" \
+        message_to_reply = f"**TeleBot**"
+        f"{CAFK} \nAFK since __ `{total_afk_time}`\n Where master is: ~~ONLY GOD KNOWS~~ " + \
+            f"\n\nI promise I'll back in a few light years\n**REASON**: {reason}" \
             if reason \
             else f"**Heya!**\n__I am currently [unavailable](https://telegra.ph/AFK-05-22). Since when, you ask? For {total_afk_time} I guess.__\n\nWhen will I be back? ~~Soon~~ __Whenever I feel like it__**( ಠ ʖ̯ ಠ)**  "
         msg = await event.reply(message_to_reply)
