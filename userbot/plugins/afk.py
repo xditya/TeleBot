@@ -17,7 +17,7 @@ afk_time = None
 last_afk_message = {}
 afk_start = {}
 
-CAFK = str(CAFK) if CAFK else "My Master is [AFk](https://telegra.ph/AFK-05-22)"
+CAFK = str(CAFK) if CAFK else "My Master is npw AFK"
 @borg.on(events.NewMessage(pattern=r"\.afk ?(.*)", outgoing=True))  # pylint:disable=E0602
 async def _(event):
     if event.fwd_from:
@@ -145,8 +145,8 @@ async def on_afk(event):
             else:
                 afk_since = f"`{int(seconds)}s` **ago**"
         msg = None
-        message_to_reply = f"**TeleBot**"
-        f"{CAFK} \nAFK since __ `{total_afk_time}`\n Where master is: ~~ONLY GOD KNOWS~~ " + \
+        message_to_reply = f"**TeleBot**\n"
+                           f"{CAFK} \nAFK since __ `{total_afk_time}`\n Where master is: ~~ONLY GOD KNOWS~~ " + \
             f"\n\nI promise I'll back in a few light years\n**REASON**: {reason}" \
             if reason \
             else f"**Heya!**\n__I am currently [unavailable](https://telegra.ph/AFK-05-22). Since when, you ask? For {total_afk_time} I guess.__\n\nWhen will I be back? ~~Soon~~ __Whenever I feel like it__**( ಠ ʖ̯ ಠ)**  "
