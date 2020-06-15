@@ -74,7 +74,7 @@
   
    "CUSTOM_PMPERMIT": {
 
-   "description": "The message that appears when someone PM's you. Leave it for default message.",
+   "description": "The message that appears when someone PM's you. Leave it as such for default message.",
 
    "value": "Do not spam here, else you will be blocked automatically."
 
@@ -85,6 +85,8 @@
    "description": "The message that appears when you block someone in PM. Leave blank for default.",
 
    "value": ""
+
+   "required": false
   },
 
   "CUSTOM_AFK": {
