@@ -145,7 +145,7 @@ async def on_afk(event):
             else:
                 afk_since = f"`{int(seconds)}s` **ago**"
         msg = None
-        message_to_reply = f"**TeleBot**\n"
+        message_to_reply = "__TeleBot__ - My master is offline\n"
         f"{CAFK}"
         f"\nAFK since __ `{total_afk_time}`\n Where master is: ~~ONLY GOD KNOWS~~ " + \
             f"\n\nI promise I'll back in a few light years\n**REASON**: {reason}" \
