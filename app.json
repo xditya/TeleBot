@@ -86,7 +86,7 @@
 
    "value": ""
 
-   "required": false
+   "required" : false
   },
 
   "CUSTOM_AFK": {
