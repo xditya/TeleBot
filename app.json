@@ -72,7 +72,7 @@
 
   },
   
-   "CUSTOM_PMPERMIT": {
+  "CUSTOM_PMPERMIT": {
 
    "description": "The message that appears when someone PM's you. Leave it as such for default message.",
 
@@ -80,7 +80,7 @@
 
   },
   
-    "CUSTOM_BLOCK": {
+  "CUSTOM_BLOCK": {
 
    "description": "The message that appears when you block someone in PM. Leave blank for default.",
 
