@@ -1,297 +1,160 @@
-
-
 {
-
  "name": "TeleBot",
-
  "description": "Userbot created by a Aditya\n\n join https://t.me/TeleBotHelpChat for any problems or support",
-
  "logo": "https://telegra.ph/file/f1143e4dd5a4c699e3614.jpg",
-
  "keywords": [
-
   "telegram",
-
   "userbot",
-
   "plugin",
-
   "modular",
-
   "productivity"
-
  ],
-
  "repository": "https://github.com/xditya/TeleBot/",
-
  "website": "#TODO",
-
  "success_url": "#TODO",
-
  "env": {
-
   "ENV": {
-
    "description": "Setting this to ANYTHING will enable heroku.",
-
    "value": "ANYTHING"
-
   },
-
   "TEMP_DOWNLOAD_DIRECTORY": {
-
    "description": "Where downloaded files will go.",
-
    "value": "./userbot/DOWNLOADS/",
-
    "required": false
-
   },
-
   "APP_ID": {
-
    "description": "Get this value from my.telegram.org! Please do not steal",
-
    "value": ""
-
   },
-
   "API_HASH": {
-
    "description": "Get this value from my.telegram.org! Please do not steal",
-
    "value": ""
-
   },
-
   "STRING_SESSION": {
-
    "description": "Get this value by running python3 telesetup.py locally",
-
    "value": ""
-
-  },
-  
+  },  
   "CUSTOM_PMPERMIT": {
-
    "description": "The message that appears when someone PM's you. Leave it as such for default message.",
-
    "value": "Do not spam here, else you will be blocked automatically."
-
-  },
-  
+  },  
   "CUSTOM_BLOCK": {
-
    "description": "The message that appears when you block someone in PM. Leave blank for default.",
-
-   "value": ""
-
+   "value": "",
    "required": false
   },
-
   "CUSTOM_AFK": {
-
    "description": "The message that appears when you go afk. Leave it as such for default.",
-
    "value": "My Master is [AFK](https://telegra.ph/AFK-05-22)"
   },
-  
   "GITHUB_ACCESS_TOKEN": {
-
    "description": "Your Github Access Token for gitcommit plugin.Google 'Github access token' to find.",
-
    "value": "",
-
    "required": false
-
   },
-
   "GIT_REPO_NAME": {
-
    "description": "Your repo name Example: xditya/TeleBot, but GITHUB_ACCESS_TOKEN must be setup first.",
-
    "value": "",
-
    "required": false
-
   },
-
   "LYDIA_API_KEY": {
-
    "description": "Needed for Lydia AI. Follow https://telegra.ph/Lydia-09-05 to get your API.",
-
    "value": "",
-
    "required": false
-
   },
-
   "HEROKU_API_KEY": {
-
    "description": "Go to https://dashboard.heroku.com/account, scroll down and press Reveal API.Required for updater to work.",
-
    "value": "",
-
    "required": true
-
-  },
-  
+  },  
   "CHROME_BIN": {
-      "description": "For Carbon.py. Leave as it is. ",
-      "value": "/app/.apt/usr/bin/google-chrome",
-      "required": false
-    },
-    "CHROME_DRIVER": {
-      "description": "For Carbon.py. Leave as it is. ",
-      "value": "/app/.chromedriver/bin/chromedriver",
-      "required": false
-    },
-  
-  "SUDO_USERS": {
-
-   "description": "Makes your acc and bot stable",
-
-   "value": "719195224",
-
-   "required": false
-
-  },
-
-  "HEROKU_APP_NAME": {
-
-   "description": "The Value of App Name you filled in right on top.Required for updater to work.",
-
-   "value": "",
-
-   "required": true
-
-  },
-
-  "TG_BOT_TOKEN_BF_HER": {
-
-   "description": "Needed for inline buttons maker. Make a bot at [BotFather](http://telegram.dog/BotFather) and get the token of your bot.Worth it. Get it.",
-
-   "value": "",
-
-   "required": false
-
-  },
-
-  "CHROME_BIN": {
-
    "description": "For Carbon.py. Leave as it is. ",
-
    "value": "/app/.apt/usr/bin/google-chrome",
-
    "required": false
-
   },
-
   "CHROME_DRIVER": {
-
    "description": "For Carbon.py. Leave as it is. ",
-
    "value": "/app/.chromedriver/bin/chromedriver",
-
    "required": false
-
+  }, 
+  "SUDO_USERS": {
+   "description": "Makes your acc and bot stable",
+   "value": "719195224",
+   "required": false
   },
-
+  "HEROKU_APP_NAME": {
+   "description": "The Value of App Name you filled in right on top.Required for updater to work.",
+   "value": "",
+   "required": true
+  },
+  "TG_BOT_TOKEN_BF_HER": {
+   "description": "Needed for inline buttons maker. Make a bot at [BotFather](http://telegram.dog/BotFather) and get the token of your bot.Worth it. Get it.",
+   "value": "",
+   "required": false
+  },
+  "CHROME_BIN": {
+   "description": "For Carbon.py. Leave as it is. ",
+   "value": "/app/.apt/usr/bin/google-chrome",
+   "required": false
+  },
+  "CHROME_DRIVER": {
+   "description": "For Carbon.py. Leave as it is. ",
+   "value": "/app/.chromedriver/bin/chromedriver",
+   "required": false
+  },
   "TG_BOT_USER_NAME_BF_HER": {
-
    "description": "Needed for inline buttons maker. Make a bot at [BotFather](http://telegram.dog/BotFather) and get the username of your bot",
-
    "value": "",
-
    "required": false
-
   },
-
   "DOWNLOAD_PFP_URL_CLOCK": {
-
    "description": "Needed for autopic module. A url that is a preview link of your Profile Pic",
-
    "value": "",
-
    "required": false
-
   },
-
   "ALIVE_NAME": {
-
    "description": "Your Telegram Username. ",
-
    "value": "",
-
    "required": false
-
-  },
-  
+  },  
   "MAX_FLOOD_IN_P_M_s": {
-      "description": "Maximum number of messages a person can send in pm before getting blocked. Value must be an integer. 3 by default.",
-      "value": "3",
-      "required": false
-    },
-    "OCR_SPACE_API_KEY": {
-      "description": "Required for OCR functionality. Get from https://ocr.space/ocrapi",
-      "value": "",
-      "required": false
-    },
-    "REM_BG_API_KEY": {
-      "description": "Required for Removing image background functionality. Get from https://www.remove.bg/",
-      "value": "",
-      "required": false
-    },
-
-  "TZ": {
-
-   "description": "Required for Correct Time on autopic/get time. Know your timezone from http://www.timezoneconverter.com/cgi-bin/findzone.tzc",
-
-   "value": "",
-
+   "description": "Maximum number of messages a person can send in pm before getting blocked. Value must be an integer. 3 by default.",
+   "value": "3",
    "required": false
-
+  },
+  "OCR_SPACE_API_KEY": {
+   "description": "Required for OCR functionality. Get from https://ocr.space/ocrapi",
+   "value": "",
+   "required": false
+  },
+  "REM_BG_API_KEY": {
+   "description": "Required for Removing image background functionality. Get from https://www.remove.bg/",
+   "value": "",
+   "required": false
+  },
+  "TZ": {
+   "description": "Required for Correct Time on autopic/get time. Know your timezone from http://www.timezoneconverter.com/cgi-bin/findzone.tzc",
+   "value": "",
+   "required": false
   }
-
  },
-
  "addons": [{
-
   "plan": "heroku-postgresql",
-
   "options": {
-
    "version": "9.5"
-
   }
-
  }],
-
  "buildpacks": [{
-
   "url": "https://github.com/jonathanong/heroku-buildpack-ffmpeg-latest"
-
  },{
-
   "url":"https://github.com/amivin/aria2-heroku.git"
-
  },{
-
   "url":"https://github.com/heroku/heroku-buildpack-google-chrome"
-
  },{
-
   "url":"https://github.com/heroku/heroku-buildpack-chromedriver"
-
  },{
-
   "url": "https://github.com/opendoor-labs/heroku-buildpack-p7zip"
-
  },{
-
   "url": "heroku/python"
-
  }]
-
 }
-
