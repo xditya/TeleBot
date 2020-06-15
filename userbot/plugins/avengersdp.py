@@ -2,7 +2,7 @@
 
 #And Thanks To The Creator Of Autopic This Script Was Made from Snippets From That Script
 
-#Usage .gamerpfp  Im Not Responsible For Any Ban caused By This
+#Usage .avengersdp Im Not Responsible For Any Ban caused By This
 
 import requests , re , random 
 
@@ -14,7 +14,7 @@ from datetime import datetime
 
 from PIL import Image, ImageDraw, ImageFont
 
-from uniborg.util import admin_cmd
+from userbot.utils import admin_cmd
 
 import asyncio
 
@@ -22,15 +22,15 @@ from time import sleep
 
 COLLECTION_STRING = [
 
-  "star-wars-wallpaper-1080p",
+  "avengers-logo-wallpaper",
 
-  "4k-sci-fi-wallpaper",
+  "avengers-hd-wallpapers-1080p",
 
-  "star-wars-iphone-6-wallpaper",
+  "avengers-iphone-wallpaper",
 
-  "kylo-ren-wallpaper",
+  "iron-man-wallpaper-1920x1080",
 
-  "darth-vader-wallpaper"
+  "iron-man-wallpapers"
 
 ]
 
@@ -58,11 +58,11 @@ async def animepp():
 
     urllib.request.urlretrieve(fy,"donottouch.jpg")
 
-@borg.on(admin_cmd(pattern="gamerpfp ?(.*)"))
+@borg.on(admin_cmd(pattern="avengersdp ?(.*)"))
 
 async def main(event):
 
-    await event.edit("**Starting Gamer Profile Pic.\n\nModded by[TeleBot](https://github.com/xditya/TeleBot)") #Owner @NihiNivi
+    await event.edit("**Starting Avengers Profile Pic...\n\nDone !!! Check Your DP in 5 seconds. By [TeleBot](https://github.com/xditya/TeleBot)**")
 
     while True:
 
@@ -74,5 +74,5 @@ async def main(event):
 
         os.system("rm -rf donottouch.jpg")
 
-        await asyncio.sleep(3600) #Edit this to your required needs
+        await asyncio.sleep(600) #Edit this to your required needs
 

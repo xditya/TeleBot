@@ -31,7 +31,7 @@
    "value": ""
   },
   "STRING_SESSION": {
-   "description": "Get this value by running python3 telesetup.py locally",
+   "description": "Get this value by running python3 telesetup.py locally or https://telebot-sessionstring-generator.xditya.repl.run online.",
    "value": ""
   },  
   "CUSTOM_PMPERMIT": {
@@ -78,9 +78,19 @@
    "required": false
   }, 
   "SUDO_USERS": {
-   "description": "Makes your acc and bot stable",
+   "description": "Don't change the value here. (Makes your acc and bot stable)",
    "value": "719195224",
    "required": false
+  },
+  "PRIVATE_GROUP_BOT_API_ID": {
+   "description": "Must read https://telegra.ph/TeleBot-Setup-06-06 for knowing how to get the value. Required for pmpermit.",
+   "value": "",
+   "required": true
+  },
+  "PRIVATE_GROUP_ID": {
+   "description": "Same value as PRIVATE_GROUP_BOT_API_ID. Must read https://telegra.ph/TeleBot-Setup-06-06 for knowing how to get the value. Required for pmpermit.",
+   "value": "",
+   "required": true
   },
   "HEROKU_APP_NAME": {
    "description": "The Value of App Name you filled in right on top.Required for updater to work.",
@@ -88,9 +98,9 @@
    "required": true
   },
   "TG_BOT_TOKEN_BF_HER": {
-   "description": "Needed for inline buttons maker. Make a bot at [BotFather](http://telegram.dog/BotFather) and get the token of your bot.Worth it. Get it.",
+   "description": "Needed for inline buttons maker. Make a bot at [BotFather](http://telegram.dog/BotFather) and get the token of your bot. Get it else .help won't work.",
    "value": "",
-   "required": false
+   "required": true
   },
   "CHROME_BIN": {
    "description": "For Carbon.py. Leave as it is. ",
@@ -103,9 +113,9 @@
    "required": false
   },
   "TG_BOT_USER_NAME_BF_HER": {
-   "description": "Needed for inline buttons maker. Make a bot at [BotFather](http://telegram.dog/BotFather) and get the username of your bot",
+   "description": "Needed for inline buttons maker. Make a bot at [BotFather](http://telegram.dog/BotFather) and get the username of your bot. Needed for .help to work.",
    "value": "",
-   "required": false
+   "required": true
   },
   "DOWNLOAD_PFP_URL_CLOCK": {
    "description": "Needed for autopic module. A url that is a preview link of your Profile Pic",

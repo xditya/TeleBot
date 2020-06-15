@@ -2,7 +2,7 @@
 
 #And Thanks To The Creator Of Autopic This Script Was Made from Snippets From That Script
 
-#Usage .gamerpfp  Im Not Responsible For Any Ban caused By This
+#Usage .actressdp Im Not Responsible For Any Ban caused By This
 
 import requests , re , random 
 
@@ -14,7 +14,7 @@ from datetime import datetime
 
 from PIL import Image, ImageDraw, ImageFont
 
-from uniborg.util import admin_cmd
+from userbot.utils import admin_cmd
 
 import asyncio
 
@@ -22,15 +22,15 @@ from time import sleep
 
 COLLECTION_STRING = [
 
-  "star-wars-wallpaper-1080p",
+  "indian-actress-wallpapers",
 
-  "4k-sci-fi-wallpaper",
+  "latest-bollywood-actress-wallpapers-2018-hd",
 
-  "star-wars-iphone-6-wallpaper",
+  "bollywood-actress-wallpaper",
 
-  "kylo-ren-wallpaper",
+  "hd-wallpapers-of-bollywood-actress",
 
-  "darth-vader-wallpaper"
+  "new-bollywood-actress-wallpaper-2018"
 
 ]
 
@@ -58,11 +58,11 @@ async def animepp():
 
     urllib.request.urlretrieve(fy,"donottouch.jpg")
 
-@borg.on(admin_cmd(pattern="gamerpfp ?(.*)"))
+@borg.on(admin_cmd(pattern="actressdp ?(.*)"))
 
 async def main(event):
 
-    await event.edit("**Starting Gamer Profile Pic.\n\nModded by[TeleBot](https://github.com/xditya/TeleBot)") #Owner @NihiNivi
+    await event.edit("**Starting Actress Profile Pic...\n\nDone !!! Check Your DP in 5 seconds. \n By [TeleBot](https://github.com/xditya/TeleBot)**")
 
     while True:
 
@@ -74,5 +74,5 @@ async def main(event):
 
         os.system("rm -rf donottouch.jpg")
 
-        await asyncio.sleep(3600) #Edit this to your required needs
+        await asyncio.sleep(600) #Edit this to your required needs
 
