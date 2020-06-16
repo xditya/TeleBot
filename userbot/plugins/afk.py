@@ -86,7 +86,7 @@ async def set_not_afk(event):
             await borg.send_message(  # pylint:disable=E0602
                 event.chat_id,
                 "Please set `PRIVATE_GROUP_BOT_API_ID` " + \
-                "for the proper functioning of afk functionality ",
+                "for the proper functioning of afk functionality. Check pinned mssg in @TeleBotHelp ",
                 reply_to=event.message.id,
                 silent=True
             )
