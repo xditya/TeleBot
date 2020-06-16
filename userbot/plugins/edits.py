@@ -18,6 +18,7 @@ from userbot import ALIVE_NAME
 from uniborg.util import admin_cmd
 from userbot import CMD_HELP
 import random, re
+from userbot.utils import register
 
 DEFAULTUSER = str(ALIVE_NAME) if ALIVE_NAME else "TeleBot"
 
@@ -678,3 +679,12 @@ async def _(event):
             await asyncio.sleep(animation_interval)
 
             await event.edit(animation_chars[i % 30])        
+
+		
+@register(outgoing=True, pattern="^.lul$")
+
+async def join(e):
+
+    if not e.text[0].isalpha() and e.text[0] not in ("/", "#", "@", "!"):
+
+        await e.edit("╱┏┓╱╱╱╭━━━╮┏┓╱╱╱╱ \n╱┃┃╱╱╱┃╭━╮┃┃┃╱╱╱╱ \n╱┃┗━━┓┃╰━╯┃┃┗━━┓╱ \n╱┗━━━┛╰━━━╯┗━━━┛╱")
