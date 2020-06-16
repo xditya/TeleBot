@@ -1,11 +1,13 @@
-"""AFK Plugin for @UniBorg
+# Kangers keep credits
+"""Custom AFK Plugin for @TeleBotHelp
 Syntax: .afk REASON"""
 import asyncio
 import datetime
 from datetime import datetime
 from telethon import events
 from telethon.tl import functions, types
-from userbot import CUSTOM_AFK as CAFK
+from userbot import CUSTOM_AFK
+
 
 global USER_AFK  # pylint:disable=E0602
 global afk_time  # pylint:disable=E0602
@@ -17,7 +19,9 @@ afk_time = None
 last_afk_message = {}
 afk_start = {}
 
-CAFK = str(CAFK) if CAFK else "My Master is npw AFK"
+AFK_MSG = str(CUSTOM_AFK) if CUSTOM_AFK else "**Sorry**!! I'm AFK now."
+AFKSTR = f"{AFK_MSG}"
+
 @borg.on(events.NewMessage(pattern=r"\.afk ?(.*)", outgoing=True))  # pylint:disable=E0602
 async def _(event):
     if event.fwd_from:
@@ -47,13 +51,13 @@ async def _(event):
         if reason:
             await borg.send_message(event.chat_id, f"**I shall be Going afk!** __because ~ {reason}__")
         else:
-            await borg.send_message(event.chat_id, f"**I am Going afk! Do not disturb me.**")
+            await borg.send_message(event.chat_id, f"**I am Going afk!**")
         await asyncio.sleep(5)
         await event.delete()
         try:
             await borg.send_message(  # pylint:disable=E0602
                 Config.PRIVATE_GROUP_BOT_API_ID,  # pylint:disable=E0602
-                f"TeleBot set AFK mode to True, and Reason is {reason}"
+                f"Set AFK mode to True, and Reason is {reason}"
             )
         except Exception as e:  # pylint:disable=C0103,W0703
             logger.warn(str(e))  # pylint:disable=E0602
@@ -72,7 +76,7 @@ async def set_not_afk(event):
         total_afk_time = str((afk_end - afk_start))
     current_message = event.message.message
     if ".afk" not in current_message and "yes" in USER_AFK:  # pylint:disable=E0602
-        shite = await borg.send_message(event.chat_id, "__I am back online!__\n**No Longer afk.**\n `I was afk for:``" + total_afk_time + "`")
+        shite = await borg.send_message(event.chat_id, "__Back alive!__\n**No Longer afk.**\n `Was afk for:``" + total_afk_time + "`")
         try:
             await borg.send_message(  # pylint:disable=E0602
                 Config.PRIVATE_GROUP_BOT_API_ID,  # pylint:disable=E0602
@@ -82,8 +86,7 @@ async def set_not_afk(event):
             await borg.send_message(  # pylint:disable=E0602
                 event.chat_id,
                 "Please set `PRIVATE_GROUP_BOT_API_ID` " + \
-                "for the proper functioning of afk functionality " + \
-                "In` @TeleBotHelp\nCheck pinned message for more info.\n\n {}`".format(str(e)),
+                "for the proper functioning of afk functionality ",
                 reply_to=event.message.id,
                 silent=True
             )
@@ -145,12 +148,10 @@ async def on_afk(event):
             else:
                 afk_since = f"`{int(seconds)}s` **ago**"
         msg = None
-        message_to_reply = "__TeleBot__ - My master is offline\n"
-        f"{CAFK}"
-        f"\nAFK since __ `{total_afk_time}`\n Where master is: ~~ONLY GOD KNOWS~~ " + \
-            f"\n\nI promise I'll back in a few light years\n**REASON**: {reason}" \
+        message_to_reply = f"**My Master Is Offline!!** \n**Since:-** `{total_afk_time}`" + \
+            f"\n\n**MASTER:-** ` Following is the reason for AFK`\n**REASON**: `{reason}`" \
             if reason \
-            else f"**Heya!**\n__I am currently [unavailable](https://telegra.ph/AFK-05-22). Since when, you ask? For {total_afk_time} I guess.__\n\nWhen will I be back? ~~Soon~~ __Whenever I feel like it__**( ಠ ʖ̯ ಠ)**  "
+            else f"**{AFKSTR}**.\n\n**AFK Since** {total_afk_time} "
         msg = await event.reply(message_to_reply)
         await asyncio.sleep(5)
         if event.chat_id in last_afk_message:  # pylint:disable=E0602
