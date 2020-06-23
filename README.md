@@ -1,5 +1,6 @@
 # FORK AND STAR BEFORE INSTALLING
-[Watch video tutorial on deploying](https://youtu.be/XmvdDHiIDb4)
+Click the below button to watch the video tutorial on deploying
+<a href="https://youtu.be/XmvdDHiIDb4"><img src="https://img.shields.io/badge/How%20To-Deploy-red.svg?logo=Youtube"></a>
 
 ### The Easy Way to install
 
