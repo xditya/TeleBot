@@ -1,4 +1,4 @@
-# FORK AND STAR BEFORE INSTALLING
+## Video Tutorial on deploying
 Click the below button to watch the video tutorial on deploying
 
 <a href="https://youtu.be/XmvdDHiIDb4"><img src="https://img.shields.io/badge/How%20To-Deploy-red.svg?logo=Youtube"></a>
@@ -9,6 +9,7 @@ Click the below button to watch the video tutorial on deploying
 
 # Support
 Join https://t.me/TeleBotHelp for updates and suggestions.
+Do fork and star the repo 
 
 ### The Normal Way
 
