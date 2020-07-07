@@ -32,7 +32,7 @@ async def _(event):
          
          PM = ("`Hello. You are accessing the menu of available options of `"
                f"{DEFAULTUSER}.\n"
-               "__Please let me know why you are here.__\n"
+               "__Please let me know why you are here.__\n\n"
                "**Please send the number corresponding to your option- **\n\n"
                "`1`. To chat with my master\n"
                "`2`. To spam my master's inbox.\n"
