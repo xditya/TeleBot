@@ -19,7 +19,6 @@ USER_BOT_NO_WARN = ("[...........███ ]▄▄▄▄▄▃ \n..▂▄▅█�
                     f"{MESAG}"
                     "\n\n ** Send** `/start` ** to see available options.**")
 
-
 if Var.PRIVATE_GROUP_ID is not None:
     @command(pattern="^.approve ?(.*)")
     async def approve_p_m(event):
@@ -197,3 +196,4 @@ if Var.PRIVATE_GROUP_ID is not None:
         if chat_id in PREV_REPLY_MESSAGE:
             await PREV_REPLY_MESSAGE[chat_id].delete()
         PREV_REPLY_MESSAGE[chat_id] = r
+ 

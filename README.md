@@ -1,12 +1,15 @@
-# FORK AND STAR BEFORE INSTALLING
-[Watch video tutorial on deploying](https://youtu.be/XmvdDHiIDb4)
+## Video Tutorial on deploying
+Click the below button to watch the video tutorial on deploying
 
-### The Easy Way to install
+<a href="https://youtu.be/XmvdDHiIDb4"><img src="https://img.shields.io/badge/How%20To-Deploy-red.svg?logo=Youtube"></a>
+
+## The Easy Way to install
 
 [![Deploy To Heroku](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/xditya/TeleBot)
 
-# Support
+## Support
 Join https://t.me/TeleBotHelp for updates and suggestions.
+Do fork and star the repo 
 
 ### The Normal Way
 
