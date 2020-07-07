@@ -1,6 +1,5 @@
 """Emoji
-Available Commands:
-.jio"
+.jio"""
 
 from telethon import events
 
@@ -10,7 +9,7 @@ from uniborg.util import admin_cmd
 
 
 
-@borg.on(admin_cmd(pattern=r"JIO"))
+@borg.on(admin_cmd(pattern=r"jio"))
 
 async def _(event):
 
@@ -24,7 +23,7 @@ async def _(event):
 
    # input_str = event.pattern_match.group(1)
 
-   # if input_str == "jio":
+   # if input_str == "JIO":
 
     await event.edit("jio")
 
