@@ -30,7 +30,7 @@ async def _(event):
             return
         if event.is_private:
          
-         PM = ("`Hello. You are accessing the menu of available options,`"
+         PM = ("`Hello. You are accessing the menu of available options of `"
                f"{DEFAULTUSER}.\n"
                "__Please let me know why you are here.__\n"
                "**Please send the number corresponding to your option- **\n\n"
@@ -45,7 +45,7 @@ async def _(event):
          FOUR = ("__Okay. My master has not seen your message yet.He usually responds to people,though idk about retarted ones.__\n __He'll respond when he comes back, if he wants to.There's already a lot of pending messages😶__\n **Please do not spam unless you wish to be blocked and reported.**")
          FIVE = ("`Okay. please have the basic manners as to not bother my master too much. If he wishes to help you, he will respond to you soon.`\n**Do not ask repeatdly else you will be blocked and reported.**")
          LWARN = ("**This is your last warning. DO NOT send another message else you will be blocked and reported. Keep patience. My master will respond you ASAP.**\n__Use__ `/start` __to go back to the main menu.__")
-     
+         THIRD = ("See pinned message in @TeleBotHelp or watch this [video tutorial](https://www.youtube.com/watch?v=XmvdDHiIDb4).
         async with borg.conversation(chat) as conv:
          await borg.send_message(chat, PM)
          chat_id = event.from_id
@@ -76,7 +76,7 @@ async def _(event):
          
 
          elif y == "3":
-             await borg.send_message(chat, FOUR)
+             await borg.send_message(chat, THIRD)
              response = await conv.get_response(chat)
              await event.delete()
              await response.delete()
