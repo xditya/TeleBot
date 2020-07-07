@@ -1,9 +1,6 @@
 """Emoji
 Available Commands:
-.emoji shrug
-.emoji apple
-.emoji :/
-.emoji -_-"""
+.jio"
 
 from telethon import events
 
@@ -27,9 +24,9 @@ async def _(event):
 
    # input_str = event.pattern_match.group(1)
 
-   # if input_str == "JIO":
+   # if input_str == "jio":
 
-    await event.edit("JIO")
+    await event.edit("jio")
 
     animation_chars = [
         
