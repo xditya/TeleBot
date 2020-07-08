@@ -45,7 +45,7 @@ IS_SELECTED_DIFFERENT_BRANCH = (
     "please check out to an official branch, and re-start the updater."
 )
 OFFICIAL_UPSTREAM_REPO = "https://GitHub.com/xditya/TeleBot"
-BOT_IS_UP_TO_DATE = "`The userbot is up-to-date.\nThank you for Using this Service.`"
+BOT_IS_UP_TO_DATE = "`TeleBot is up-to-date.\nThank you for Using this Service.`"
 NEW_BOT_UP_DATE_FOUND = (
     "A new update is found for {branch_name}\n"
     "Changelog: \n\n{changelog}\n"
@@ -168,7 +168,7 @@ def generate_change_log(git_repo, diff_marker):
 
 async def deploy_start(tgbot, message, refspec, remote):
     await message.edit(RESTARTING_APP)
-    await message.edit("TeleBot is being updated and new branch is being deployed. Please wait for 2 to 3 minutes for me to finish updating. Then use `.online` or `.alive` to check if I am working or not.")
+    await message.edit("TeleBot is being updated.\nDeploying branch **master** \nPlease wait for 2 to 3 minutes and then use `.online` or `.alive`.")
     await remote.push(refspec=refspec)
     await tgbot.disconnect()
     os.execl(sys.executable, sys.executable, *sys.argv)
