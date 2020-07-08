@@ -29,7 +29,7 @@ async def cmd_list(event):
                 await event.edit(string)
         elif input_str:
             if input_str in CMD_LIST:
-                string = "Commands found in {}:".format(input_str)
+                string = "Commands available in {}: \n© @TeleBotHelp".format(input_str)
                 for i in CMD_LIST[input_str]:
                     string += "    " + i
                     string += "\n"
@@ -37,7 +37,7 @@ async def cmd_list(event):
             else:
                 await event.edit(input_str + " is not a valid plugin!")
         else:
-            help_string = """Userbot Helper provided by @TeleBotHelp \n\n [More help](https://t.me/TeleBotHelpChat) \n
+            help_string = """Userbot Helper provided by [TeleBot](https://telegra.ph/TeleBot-07-08) \n\n [More help](https://t.me/TeleBotHelpChat) \n
 `Userbot Helper to reveal all the commands of `**[TeleBot](https://github.com/xditya/TeleBot)**"""
             results = await bot.inline_query(  # pylint:disable=E0602
                 tgbotusername,
