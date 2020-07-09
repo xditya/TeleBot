@@ -1,4 +1,5 @@
-"""Check if userbot alive. If you change these, you become the gayest gay such that even the gay world will disown you."""
+# For @TeleBotHelp
+"""Check if your userbot is working."""
 import asyncio
 from telethon import events
 from telethon.tl.types import ChannelParticipantsAdmins
@@ -11,10 +12,14 @@ DEFAULTUSER = str(ALIVE_NAME) if ALIVE_NAME else "No name set yet, check pinned 
 @command(outgoing=True, pattern="^.alive$")
 async def amireallyalive(alive):
     """ For .alive command, check if the bot is running.  """
-    await alive.edit("   **Welcome To TeleBot ** \n\n"
-        "**`Hey! I'm alive. All systems online and functioning normally... ψ(｀∇´)ψ`**\n\n"
-                      "` 🔸 Telethon version:` **6.9.0**\n` 🔹 Python:` **3.7.3** \n` 🔸 More info:` [TeleBot](https://telegra.ph/TeleBot-07-08)\n"
+    
+    await borg.send_message(alive.chat_id, "   **Welcome To TeleBot ** \n\n"
+        "**`Hey! I'm alive. All systems online and functioning normally!`**\n\n"
+                      "` 🔸 Telethon version:` **1.15.0**\n` 🔹 Python:` **3.8.3** \n` 🔸 More info:` [TeleBot](https://telegra.ph/TeleBot-07-08)\n"
                      "` 🔹 Bot created by:` [Aditya 🇮🇳](tg://user?id=719195224)\n"
                      "` 🔸 Database Status:` **All OK 👌!**\n"
-                     f"` 🔹 My peru owner`: {DEFAULTUSER}\n\n"
-                     "           [✨ GitHub Repository ✨](https://github.com/xditya/TeleBot)")
+                     f"` 🔹 My pro owner`: {DEFAULTUSER}\n\n"
+                     "           [✨ GitHub Repository ✨](https://github.com/xditya/TeleBot)", link_preview = False)
+
+    await borg.forward_messages(alive.chat_id, 167, -1001195912925)
+    await alive.delete()
