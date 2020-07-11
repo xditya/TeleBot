@@ -2,8 +2,8 @@ import os
 import sys
 from telethon.sessions import StringSession
 from telethon import TelegramClient
-
 from var import Var
+import time
 
 os.system("pip install --upgrade pip")
 if Var.STRING_SESSION:
@@ -13,6 +13,7 @@ else:
     session_name = "startup"
     bot = TelegramClient(session_name, Var.APP_ID, Var.API_HASH)
 
+StartTime = time.time()
 
 CMD_LIST = {}
 # for later purposes
