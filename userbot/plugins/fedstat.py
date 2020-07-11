@@ -1,4 +1,4 @@
-# Plugin to show the feda you are banned in.
+# Plugin to show the feds you are banned in.
 # For TeleBot
 # Kangers keep credits
 # By @Akash_AM1 and @xditya
