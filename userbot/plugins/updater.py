@@ -71,8 +71,8 @@ async def upstream(ups):
     except InvalidGitRepositoryError as error:
         if conf != "now":
             await ups.edit(
-                f"`Unfortunately, the directory {error} does not seem to be a git repository.\
-            \nBut we can fix that by force updating the userbot using .update now.`"
+                f"Unfortunately, the directory {error} does not seem to be a git repository.\
+            \nBut we can fix that by force updating the userbot using `.update now.`"
             )
             return
         repo = Repo.init()
@@ -154,7 +154,7 @@ async def upstream(ups):
             )
             repo.__del__()
             return
-        await ups.edit('`Userbot dyno build in progress, please wait 5 min only for it to complete.`'
+        await ups.edit('`Userbot dyno build in progress, please wait for 5 mins for it to complete.`'
                        )
         ups_rem.fetch(ac_br)
         repo.git.reset("--hard", "FETCH_HEAD")
