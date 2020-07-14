@@ -40,7 +40,7 @@ async def _(event):
         await event.edit("Reply to a photo to add to my personal sticker pack.")
         return
     reply_message = await event.get_reply_message()
-    sticker_emoji = "➖"
+    sticker_emoji = "🔴"
     input_str = event.pattern_match.group(1)
     if input_str:
         sticker_emoji = input_str
@@ -57,8 +57,8 @@ async def _(event):
         packshortname = "TeleBotStickerPack"
     else:
         packname = f"{DEFAULTUSER}'s TeleBot Vol.{pack}"
-        packshortname = f"TeleBot_{userid}_kang"
-    await event.edit("`There is nothing happening here, except me kanging this stcker.. Hehe ヽ༼ ಠ益ಠ ༽ﾉ`")
+        packshortname = f"TeleBot_{userid}_KangPack"
+    await event.edit("`There is nothing happening here, except me kanging this stcker...`")
 
     is_a_s = is_it_animated_sticker(reply_message)
     file_ext_ns_ion = "@TeleBotHelp.png"
