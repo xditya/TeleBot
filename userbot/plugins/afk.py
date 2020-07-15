@@ -1,6 +1,6 @@
-"""Customisable AFK Plugin for @TeleBotHelp
+# Kangers keep credits
+"""Custom AFK Plugin for @TeleBotHelp
 Syntax: .afk REASON"""
-#Kang without reason = death of ur repo
 import asyncio
 import datetime
 from datetime import datetime
@@ -148,9 +148,8 @@ async def on_afk(event):
             else:
                 afk_since = f"`{int(seconds)}s` **ago**"
         msg = None
-        message_to_reply = f"**TeleBot**"
-        f"{CAFK} \nAFK since __ `{total_afk_time}`\n Where master is: Nearby, I guess... " + \
-            f"\n\nI promise I'll back in a few light years\n**REASON**: {reason}" \
+        message_to_reply = f"**My Master Is Offline!!** \n**Since:-** `{total_afk_time}`" + \
+            f"\n\n**MASTER:-** ` Following is the reason for AFK`\n**REASON**: `{reason}`" \
             if reason \
             else f"**{AFKSTR}**.\n\n**AFK Since** {total_afk_time} "
         msg = await event.reply(message_to_reply)
