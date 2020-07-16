@@ -250,7 +250,7 @@ async def _(event):
             return
         is_a_s = is_it_animated_sticker(reply_message)
         file_ext_ns_ion = "webp"
-        file_caption = "https://t.me/RoseSupport/33801"
+        file_caption = "Sticker pack downloaded. \nCheck [TeleBot](https://telegra.ph/TeleBot-07-08)"
         if is_a_s:
             file_ext_ns_ion = "tgs"
             file_caption = "Forward the ZIP file to @AnimatedStickersRoBot to get lottIE JSON containing the vector information."
@@ -307,7 +307,7 @@ async def _(event):
             os.remove(directory_name)
         except:
             pass
-        await event.edit("task Completed")
+        await event.edit("Task Completed")
         await asyncio.sleep(3)
         await event.delete()
     else:
