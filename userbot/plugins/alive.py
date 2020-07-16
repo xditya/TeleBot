@@ -32,7 +32,7 @@ async def amireallyalive(alive):
             "` 🔸 More info:` [TeleBot](https://telegra.ph/TeleBot-07-08)\n"
             "` 🔹 Bot created by:` [Aditya](https://t.me/xditya)\n"
             "` 🔸 Database Status:` **All OK 👌!**\n"
-            f"` 🔹 My pro owner`: {DEFAULTUSER}\n"
+            f"` 🔹 My pro owner`: {DEFAULTUSER}\n\n"
             "    [✨ GitHub Repository ✨](https://github.com/xditya/TeleBot)", link_preview = False)
         await borg.send_file(alive.chat_id, file=sticker) 
         await alive.delete()
