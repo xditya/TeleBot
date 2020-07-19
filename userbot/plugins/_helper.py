@@ -34,6 +34,7 @@ async def cmd_list(event):
                     string += "    " + i
                     string += "\n"
                     string +="© @TeleBotHelp"
+                await event.edit(string)
             else:
                 await event.edit(input_str + " is not a valid plugin!")
         else:
