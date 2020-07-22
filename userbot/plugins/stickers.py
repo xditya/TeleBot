@@ -134,7 +134,7 @@ async def _(event):
                     prevv = int(pack) - 1
                     packname = f"{DEFAULTUSER}'s TeleBot Vol.{pack}"
                     packshortname = f"Vol_{pack}_with_{userid}"
-                    #if userid == 948408212:
+                    #if userid == 719195224:
                        # packname = f"{user.first_name}'s TeleBot Vol.{pack}"
                        # packshortname = "Vol._{pack}_TeleBotStickerPack"
                    # else:
