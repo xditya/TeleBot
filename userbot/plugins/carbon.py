@@ -4,6 +4,7 @@
 # you may not use this file except in compliance with the License.
 #
 # Fixed and made better by @anubisxx
+
 """ Userbot module containing various scrapers. """
 import os
 import shutil
@@ -99,7 +100,7 @@ async def carbon_api(e):
    await e.client.send_file(
          e.chat_id,
          file,
-         caption="<< `Here's your carbon!` \n **Carbonised by** [TeleBotHelp.](https://telegra.ph/TeleBot-07-08)>>\n**Colour Scheme: **`{}`".format(color_name),
+         caption="<< `Here's your carbon!` \n **Carbonised by** [TeleBot.](https://github.com/xditya/TeleBot)>>\n**Colour Scheme: **`{}`".format(color_name),
          force_document=True,
          reply_to=e.message.reply_to_msg_id,
          )
