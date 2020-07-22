@@ -35,8 +35,8 @@ async def trumptweet(text):
         r = requests.get(
             f"https://nekobot.xyz/api/imagegen?type=trumptweet&text={text}").json()
         wew = r.get("message")
-        fridayurl = url(wew)
-        if not fridayurl:
+        TeleBoturl = url(wew)
+        if not TeleBoturl:
             return  "check syntax once more"
         with open("temp.png", "wb") as f:
             f.write(requests.get(wew).content)
@@ -48,8 +48,8 @@ async def changemymind(text):
         r = requests.get(
             f"https://nekobot.xyz/api/imagegen?type=changemymind&text={text}").json()
         wew = r.get("message")
-        fridayurl = url(wew)
-        if not fridayurl:
+        TeleBoturl = url(wew)
+        if not TeleBoturl:
             return  "check syntax once more"
         with open("temp.png", "wb") as f:
             f.write(requests.get(wew).content)
@@ -61,8 +61,8 @@ async def kannagen(text):
         r = requests.get(
             f"https://nekobot.xyz/api/imagegen?type=kannagen&text={text}").json()
         wew = r.get("message")
-        fridayurl = url(wew)
-        if not fridayurl:
+        TeleBoturl = url(wew)
+        if not TeleBoturl:
             return  "check syntax once more"
         with open("temp.png", "wb") as f:
             f.write(requests.get(wew).content)
@@ -74,8 +74,8 @@ async def moditweet(text):
         r = requests.get(
             f"https://nekobot.xyz/api/imagegen?type=tweet&text={text}&username=narendramodi").json()
         wew = r.get("message")
-        fridayurl = url(wew)
-        if not fridayurl:
+        TeleBoturl = url(wew)
+        if not TeleBoturl:
             return  "check syntax once more"
         with open("temp.png", "wb") as f:
             f.write(requests.get(wew).content)
@@ -87,8 +87,8 @@ async def tweets(text1,text2):
         r = requests.get(
             f"https://nekobot.xyz/api/imagegen?type=tweet&text={text1}&username={text2}").json()
         wew = r.get("message")
-        fridayurl = url(wew)
-        if not fridayurl:
+        TeleBoturl = url(wew)
+        if not TeleBoturl:
             return  "check syntax once more"
         with open("temp.png", "wb") as f:
             f.write(requests.get(wew).content)
