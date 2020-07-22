@@ -1,3 +1,7 @@
+# Ported from other Telegram UserBots for TeleBot//Made for TeleBot
+# Kangers, don't remove this line 
+# @its_xditya
+
 """COMMAND : .pbio, .ppic, .pname"""
 
 import os
