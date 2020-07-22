@@ -1,6 +1,6 @@
-#Made By @TeleBotComms Keep Credits If You Are Goanna Kang This Lol
-
-#And Thanks To The Creator Of Autopic This Script Was Made from Snippets From That Script
+# Ported from other Telegram UserBots for TeleBot//Made for TeleBot
+# Kangers, don't remove this line 
+# @its_xditya
 
 #Usage .actressdp Im Not Responsible For Any Ban caused By This
 
