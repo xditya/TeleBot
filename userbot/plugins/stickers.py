@@ -67,9 +67,9 @@ async def _(event):
     if is_a_s:
         file_ext_ns_ion = "AnimatedSticker.tgs"
         uploaded_sticker = await borg.upload_file(file, file_name=file_ext_ns_ion)
-        if userid == 953414679:
-            packname = f"TeleBotAnimetedPack"
-            packshortname = "TeleBot_Animated_Pack"
+        if userid == 719195224:
+            packname = f"@XDlTYA's Animated Stickers"
+            packshortname = "TeleBotAnimatedPack"
         else:
             packname = f"{DEFAULTUSER}'s TeleBot Animated Vol.{pack}"
             packshortname = f"TeleBot_{userid}" # format: Uni_Borg_userid
