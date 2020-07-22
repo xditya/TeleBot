@@ -132,7 +132,7 @@ async def _(event):
                 while response.text == FILLED_UP_DADDY:
                     pack += 1
                     prevv = int(pack) - 1
-                    packname = f"{DEFAULTUSER}'s IndianBot Vol.{pack}"
+                    packname = f"{DEFAULTUSER}'s TeleBot Vol.{pack}"
                     packshortname = f"Vol_{pack}_with_{userid}"
                     #if userid == 948408212:
                        # packname = f"{user.first_name}'s TeleBot Vol.{pack}"
