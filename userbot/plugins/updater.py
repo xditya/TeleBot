@@ -154,7 +154,7 @@ async def upstream(ups):
             )
             repo.__del__()
             return
-        await ups.edit('`Userbot dyno build in progress, please wait for 5 mins for it to complete.`'
+        await ups.edit('`Userbot dyno build is in progress, please wait 5 mins for it to complete.`'
                        )
         ups_rem.fetch(ac_br)
         repo.git.reset("--hard", "FETCH_HEAD")
