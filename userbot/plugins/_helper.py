@@ -1,3 +1,7 @@
+# Ported from other Telegram UserBots for TeleBot
+# Kangers, don't remove this line 
+# @its_xditya
+
 from userbot import CMD_LIST
 
 @command(pattern="^.help ?(.*)")
