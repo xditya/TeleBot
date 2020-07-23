@@ -1,5 +1,10 @@
-#Serious Kangers can take the Credits xD, by @WhySooSerious
+# Made for TeleBot
+# Re-written by @its_xditya 
+# Kangers kwwp the credits
+
+#Made by @WhySooSerious
 #From Nekos API
+
 import datetime
 from telethon import events
 from telethon.errors.rpcerrorlist import YouBlockedUserError
