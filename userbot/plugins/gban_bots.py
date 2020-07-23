@@ -11,7 +11,7 @@ from telethon import events
 import asyncio
 from userbot.utils import admin_cmd
 
-@borg.on(admin_cmd(pattern="gban ?(.*)"))
+@borg.on(admin_cmd(pattern="botgban ?(.*)"))
 async def _(event):
     if Config.G_BAN_LOGGER_GROUP is None:
         await event.edit("Make a group, add all your sudo bots and paste it's id in ENV VAR (G_BAN_LOGGER_GROUP) for this module to work.")
@@ -48,3 +48,8 @@ async def _(event):
             "/ungban [user](tg://user?id={}) {}".format(r_from_id, reason)
         )
     await event.delete()
+
+CMD_HELP.update({
+    'GBAN':
+    ".botgban (as reply)"
+})
