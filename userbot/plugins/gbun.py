@@ -13,7 +13,7 @@ async def gbun(event):
     gbunVar = event.text
     gbunVar = gbunVar[6:]
     mentions = "`Warning!! User 𝙂𝘽𝘼𝙉𝙉𝙀𝘿 By Admin...\n`"
-    no_reason = "__Reason: Potential Porn Addict. __"
+    no_reason = "__Reason: Retarded Dumb af Spammer. __"
     await event.edit("**Summoning out le Gungnir ❗️⚜️☠️**")
     asyncio.sleep(3.5)
     chat = await event.get_input_chat()

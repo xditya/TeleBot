@@ -149,7 +149,7 @@ async def on_afk(event):
                 afk_since = f"`{int(seconds)}s` **ago**"
         msg = None
         message_to_reply = f"**My Master Is Offline!!** \n**Since:-** `{total_afk_time}`" + \
-            f"\n\n**MASTER:-** ` Following is the reason for AFK`\n**REASON**: `{reason}`" \
+            f"\n\n**Please do not tag me again and again...** `:/ `\n**REASON**: `{reason}`" \
             if reason \
             else f"**{AFKSTR}**.\n\n**AFK Since** {total_afk_time} "
         msg = await event.reply(message_to_reply)

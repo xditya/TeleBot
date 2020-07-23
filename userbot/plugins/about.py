@@ -1,3 +1,7 @@
+# Ported from other Telegram UserBots for TeleBot//Made for TeleBot
+# Kangers, don't remove this line 
+# @its_xditya
+
 """Available Commands:
 .info
 """

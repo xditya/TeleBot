@@ -31,7 +31,7 @@ async def _(event):
 		await asyncio.sleep(1)
 		await event.edit("".join(deq))
 		deq.rotate(1)
-    
+# By @xditya. Kangers keep credits xD    
 @borg.on(admin_cmd(pattern=r"nothappy"))
 async def _(event):
 	if event.fwd_from:
@@ -41,7 +41,7 @@ async def _(event):
 		await asyncio.sleep(1)
 		await event.edit("".join(deq))
 		deq.rotate(1)
-
+# By @xditya. Kangers keep credits xD
 @borg.on(admin_cmd(pattern=r"heart"))
 async def _(event):
 	if event.fwd_from:
@@ -51,7 +51,7 @@ async def _(event):
 		await asyncio.sleep(1)
 		await event.edit("".join(deq))
 		deq.rotate(1)
-    
+# By @xditya. Kangers keep credits xD   
 @borg.on(admin_cmd(pattern=r"tlol"))
 async def _(event):
 	if event.fwd_from:
@@ -61,7 +61,7 @@ async def _(event):
 		await asyncio.sleep(1)
 		await event.edit("".join(deq))
 		deq.rotate(1)
-    
+# By @xditya. Kangers keep credits xD    
 @borg.on(admin_cmd(pattern=r"lol"))
 async def _(event):
 	if event.fwd_from:
@@ -71,7 +71,7 @@ async def _(event):
 		await asyncio.sleep(1)
 		await event.edit("".join(deq))
 		deq.rotate(1)
-    
+# By @xditya. Kangers keep credits xD    
 @borg.on(admin_cmd(pattern=r"police"))
 
 async def _(event):
@@ -108,7 +108,7 @@ async def _(event):
         await asyncio.sleep(animation_interval)
 
         await event.edit(animation_chars[i % 12])
-
+# By @xditya. Kangers keep credits xD
 @borg.on(admin_cmd(pattern=f"smoon", outgoing=True))
 
 async def _(event):
@@ -148,7 +148,7 @@ async def _(event):
 
 
 
-
+# By @xditya. Kangers keep credits xD
 @borg.on(admin_cmd(pattern=f"tmoon", outgoing=True))
 
 async def _(event):
@@ -209,7 +209,7 @@ async def _(event):
 
             await event.edit(animation_chars[i % 117])
 
-
+# By @xditya. Kangers keep credits xD
 @borg.on(admin_cmd(pattern="loveu", outgoing=True))
 async def _(event):
 
@@ -297,7 +297,7 @@ async def _(event):
     await asyncio.sleep(3)
     await event.delete()           
     
-    
+# By @xditya. Kangers keep credits xD    
 @borg.on(admin_cmd(pattern=r"police"))
 
 async def _(event):
@@ -335,7 +335,7 @@ async def _(event):
 
         await event.edit(animation_chars[i % 12])    
 
-        
+# By @xditya. Kangers keep credits xD        
 @borg.on(admin_cmd(pattern=f"rain", outgoing=True))
 async def _(event):
 	if event.fwd_from:
@@ -345,7 +345,7 @@ async def _(event):
 		await asyncio.sleep(0.1)
 		await event.edit("".join(deq))
 		deq.rotate(1)        
-        
+# By @xditya. Kangers keep credits xD        
 @borg.on(admin_cmd(pattern=f"snake", outgoing=True))
 
 async def _(event):
@@ -592,7 +592,7 @@ async def _(event):
 		await event.edit("".join(deq))
 		deq.rotate(1)
         
-        
+# By @xditya. Kangers keep credits xD       
 @borg.on(admin_cmd(pattern=f"virus", outgoing=True))
 
 async def _(event):
@@ -680,7 +680,7 @@ async def _(event):
 
             await event.edit(animation_chars[i % 30])        
 
-		
+# By @xditya. Kangers keep credits xD		
 @register(outgoing=True, pattern="^.lul$")
 
 async def join(e):
@@ -688,7 +688,7 @@ async def join(e):
     if not e.text[0].isalpha() and e.text[0] not in ("/", "#", "@", "!"):
 
         await e.edit("╱┏┓╱╱╱╭━━━╮┏┓╱╱╱╱ \n╱┃┃╱╱╱┃╭━╮┃┃┃╱╱╱╱ \n╱┃┗━━┓┃╰━╯┃┃┗━━┓╱ \n╱┗━━━┛╰━━━╯┗━━━┛╱")
-	
+# By @xditya. Kangers keep credits xD	
 @register(outgoing=True, pattern="^.yes$")
 
 async def join(e):
@@ -696,14 +696,14 @@ async def join(e):
     if not e.text[0].isalpha() and e.text[0] not in ("/", "#", "@", "!"):
 
         await e.edit("┈┈┈┈┈┈▕▔╲ \n┈┈┈┈┈┈┈▏▕ \n┈┈┈┈┈┈┈▏▕▂▂▂ \n▂▂▂▂▂▂╱┈▕▂▂▂▏ \n▉▉▉▉▉┈┈┈▕▂▂▂▏ \n▉▉▉▉▉┈┈┈▕▂▂▂▏ \n▔▔▔▔▔▔╲▂▕▂▂▂I")
-
+# By @xditya. Kangers keep credits xD
 @register(outgoing=True, pattern="^.gn$")
 
 async def join(e):
 
     await e.edit("｡♥｡･ﾟ♡ﾟ･｡♥｡･｡･｡･｡♥｡･\n╱╱╱╱╱╱╱╭╮╱╱╱╭╮╱╭╮╭╮\n╭━┳━┳━┳╯┃╭━┳╋╋━┫╰┫╰╮\n┃╋┃╋┃╋┃╋┃┃┃┃┃┃╋┃┃┃╭┫\n┣╮┣━┻━┻━╯╰┻━┻╋╮┣┻┻━╯\n╰━╯╱╱╱╱╱╱╱╱╱╱╰━╯\n｡♥｡･ﾟ♡ﾟ･｡♥° ♥｡･ﾟ♡ﾟ･")
     
-
+# By @xditya. Kangers keep credits xD
 @register(outgoing=True, pattern="^.gm$")
 
 async def join(e):
