@@ -48,8 +48,3 @@ async def _(event):
             "/ungban [user](tg://user?id={}) {}".format(r_from_id, reason)
         )
     await event.delete()
-
-CMD_HELP.update({
-    'GBAN':
-    ".botgban (as reply)"
-})
