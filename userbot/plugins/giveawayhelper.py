@@ -14,9 +14,9 @@ from telethon.tl.types import (
     InputStickerSetShortName,
     MessageMediaPhoto
 )
-from userbot.plugins.sql_helper.ghdb_sql import in_channels, add_channel, rm_channel, get_all_channels
+from sql_helpers.ghdb_sql import in_channels, add_channel, rm_channel, get_all_channels
 
-logs_id = Var.LOG_ID
+logs_id = Config.LOG_ID
 
 
 
@@ -141,14 +141,30 @@ async def _(event):
             await borg.send_message(logs_id, f"{error_count} Errors")
         except:
             await event.edit("Set up log channel for checking errors.")
-            
-# Written by @HeisenbergTheDanger 
-  
+
+# Written by @HeisenbergTheDanger
+
 @borg.on(admin_cmd("add ?(.*)"))
 async def add_ch(event):
     if event.fwd_from:
         return
+    if event.reply_to_msg_id:
+        await event.edit("Adding...")
+        previous_message = await event.get_reply_message()
+        raw_text = previous_message.text
+        lines = raw_text.split("\n")
+        length = len(lines)
+        for line_number in range(1, length - 2):
+            channel_id = lines[line_number][4:-1]
+            if not in_channels(channel_id):
+                add_channel(channel_id)
+        await event.edit("Channels added!")
+        await asyncio.sleep(3)
+        await event.delete()
+        return
     chat_id = event.chat_id
+    if int(chat_id) == logs_id:
+        return
     if not in_channels(chat_id):
         add_channel(chat_id)
         await event.edit("`Added to database!`")
