@@ -29,6 +29,7 @@ class Var(object):
     G_DRIVE_CLIENT_SECRET = os.environ.get("G_DRIVE_CLIENT_SECRET", None)
     GDRIVE_FOLDER_ID = os.environ.get("GDRIVE_FOLDER_ID", "root")
     AUTH_TOKEN_DATA = os.environ.get("AUTH_TOKEN_DATA", None)
+    LOG_ID = int(os.environ.get("LOG_ID", None))
     if AUTH_TOKEN_DATA != None:
         os.makedirs(TEMP_DOWNLOAD_DIRECTORY)
         t_file = open(TEMP_DOWNLOAD_DIRECTORY+"auth_token.txt","w")
