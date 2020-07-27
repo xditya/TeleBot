@@ -14,9 +14,9 @@ from telethon.tl.types import (
     InputStickerSetShortName,
     MessageMediaPhoto
 )
-from sql_helpers.ghdb_sql import in_channels, add_channel, rm_channel, get_all_channels
+from sql_helper.ghdb_sql import in_channels, add_channel, rm_channel, get_all_channels
 
-logs_id = Config.LOG_ID
+logs_id = Var.LOG_ID
 
 
 
