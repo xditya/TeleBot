@@ -163,8 +163,11 @@ async def add_ch(event):
         await event.delete()
         return
     chat_id = event.chat_id
-    if int(chat_id) == logs_id:
-        return
+    try:
+        if int(chat_id) == logs_id:
+            return
+    except:
+        pass
     if not in_channels(chat_id):
         add_channel(chat_id)
         await event.edit("`Added to database!`")
