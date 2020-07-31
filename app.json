@@ -137,11 +137,6 @@
    "value": "",
    "required": false
   },
-  "LOG_ID": {
-   "description": "ID of log channel for broadcasting msgs.",
-   "value": "",
-   "required": false
-  },
   "REM_BG_API_KEY": {
    "description": "Required for Removing image background functionality. Get from https://www.remove.bg/",
    "value": "",
