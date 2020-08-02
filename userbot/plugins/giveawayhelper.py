@@ -52,7 +52,7 @@ async def forw(event):
       except:
         pass
       error_count+=1
-      await event.edit(f"Sent : {sent_count}\nError : {error_count}")
+      await event.edit(f"Sent : {sent_count}\nError : {error_count}\nTotal : {len(channels)}")
   await event.edit(f"{sent_count} messages sent with {error_count} errors.")
   if error_count > 0:
     try:
@@ -230,3 +230,17 @@ async def list(event):
             await event.delete()
     else:
         await event.edit(msg)
+
+        
+@borg.on(admin_cmd("search ?(.*)"))
+async def search(event):
+    channel_id =  event.pattern_match.group(1)
+    try:
+        channel = await borg.get_entity(int(channel_id))
+    except ValueError:
+        await event.edit("Invalid id.")
+    name = channel.title
+    username = channel.username
+    if username:
+        username = "@" + username
+    await event.edit(f"Name : {name}\nUsername: {username}")
