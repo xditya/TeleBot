@@ -1,6 +1,6 @@
 # TeleBot
 <p align="center">
-    <a href="https://github.com/xditya/TeleBot/commits/sql-extended"><img src="https://img.shields.io/github/last-commit/xditya/TeleBot/sql-extended?label=Last%20Commit&style=flat-square&logo=github&color=8C86AA" alt="Commit" /></a>
+    <a href="https://github.com/xditya/TeleBot/commits/"><img src="https://img.shields.io/github/last-commit/xditya/TeleBot/sql-extended?label=Last%20Commit&style=flat-square&logo=github&color=8C86AA" alt="Commit" /></a>
 </p>
     
 ## Video Tutorial on deploying
