@@ -1,3 +1,7 @@
+# TeleBot
+
+    <a href="https://github.com/xditya/TeleBot/commits/sql-extended"><img src="https://img.shields.io/github/last-commit/xditya/TeleBot/sql-extended?label=Last%20Commit&style=flat-square&logo=github&color=8C86AA" alt="Commit" /></a>
+    
 ## Video Tutorial on deploying
 Click the below button to watch the video tutorial on deploying
 
