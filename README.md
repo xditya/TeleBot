@@ -1,6 +1,6 @@
 # TeleBot
-<p align="center">
-    <a href="https://github.com/xditya/TeleBot/commits/"><img src="https://img.shields.io/github/last-commit/xditya/TeleBot/sql-extended?label=Last%20Commit&style=flat-square&logo=github&color=8C86AA" alt="Commit" /></a>
+<p align="left">
+    <a href="https://t.me/TeleBotHelpChat"> <img src="https://img.shields.io/badge/telegram-Support_Group-blue?style=social&logo=telegram" alt="Support" /></a>
 </p>
     
 ## Video Tutorial on deploying
