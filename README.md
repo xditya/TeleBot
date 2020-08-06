@@ -8,13 +8,16 @@ Click the below button to watch the video tutorial on deploying
 
 <a href="https://youtu.be/XmvdDHiIDb4"><img src="https://img.shields.io/badge/How%20To-Deploy-red.svg?logo=Youtube"></a>
 
-## The Easy Way to install
+## The Easier Way to install
 
 [![Deploy To Heroku](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/xditya/TeleBot)
 
 ## Support
 Join https://t.me/TeleBotHelp for updates and suggestions.
 Do fork and star the repo 
+
+### Session String 
+<a href="https://telebot-sessionstring-generator.xditya.repl.run/" target="_blank"><img src="https://img.shields.io/badge/run-string__session.py-blue?style=for-the-badge&logo=repl.it" alt="generate_string" /></a>
 
 ### The Normal Way
 
