@@ -1,4 +1,4 @@
-# TeleBot
+# TeleBot - Telegram UserBot
 <p align="left">
     <a href="https://t.me/TeleBotHelpChat"> <img src="https://img.shields.io/badge/telegram-Support_Group-blue?style=social&logo=telegram" alt="Support" /></a>
 </p>
@@ -61,3 +61,21 @@ Fortunately there are no Mandatory vars for the UniBorg Support Config.
     - `APP_ID`:   You can get this value from https://my.telegram.org
     - `API_HASH`:   You can get this value from https://my.telegram.org
 - The userbot will not work without setting the mandatory vars.
+
+```
+#include <std/disclaimer.h>
+/**
+    Your Telegram account may get banned.
+    I am not responsible for any improper use of this bot
+    This bot is intended for the purpose of having fun with memes,
+    as well as efficiently managing groups.
+    You ended up spamming groups, getting reported left and right,
+    and you ended up in a Finale Battle with Telegram and at the end
+    Telegram Team deleted your account?
+    And after that, then you pointed your fingers at us
+    for getting your acoount deleted?
+    I will be rolling on the floor laughing at you.
+/**
+```
+
+
