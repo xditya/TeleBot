@@ -11,7 +11,9 @@ import random
 from telethon import events, types, functions, utils
 
 
-def choser(cmd, pack, blacklist={}):
+def choser(cmd, pack, blacklist=None):
+    if blacklist is None:
+        blacklist = {}
     docs = None
     @borg.on(events.NewMessage(pattern=rf'\.{cmd}', outgoing=True))
     async def handler(event):
