@@ -12,13 +12,9 @@ import requests
 
 import bs4
 
-import re
-
 
 
 from telethon import *
-
-from userbot import CMD_HELP
 
 from userbot.events import register
 

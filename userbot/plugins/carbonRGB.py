@@ -2,15 +2,10 @@
 usage: .karb //as a reply to any text message
 
 Thanks to @TeleBotHelp for THIS PLUGIN"""
-
-from selenium.webdriver.support.ui import Select
 from selenium.webdriver.chrome.options import Options
 from selenium import webdriver
-from telethon import events
 from urllib.parse import quote_plus
-from urllib.error import HTTPError
 from time import sleep
-import asyncio
 import os
 import random
 from userbot.utils import admin_cmd

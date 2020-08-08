@@ -1,6 +1,5 @@
 """Get info about a File Extension
 Syntax: .filext EXTENSION"""
-from telethon import events
 import requests
 from bs4 import BeautifulSoup
 from uniborg.util import admin_cmd

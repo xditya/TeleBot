@@ -8,8 +8,6 @@ Userbot module to help you manage a group
 
 from asyncio import sleep
 from os import remove
-from telethon import events
-import asyncio
 from datetime import datetime
 from telethon.tl.functions.channels import EditBannedRequest
 from telethon.tl.types import ChatBannedRights
@@ -17,8 +15,7 @@ from telethon.tl.types import ChatBannedRights
 from telethon.errors import (BadRequestError, ChatAdminRequiredError,
                              ImageProcessFailedError, PhotoCropSizeSmallError,
                              UserAdminInvalidError)
-from telethon.errors.rpcerrorlist import (UserIdInvalidError,
-                                          MessageTooLongError)
+from telethon.errors.rpcerrorlist import (MessageTooLongError)
 from telethon.tl.functions.channels import (EditAdminRequest,
                                             EditBannedRequest,
                                             EditPhotoRequest)
@@ -27,7 +24,7 @@ from telethon.tl.types import (ChannelParticipantsAdmins, ChatAdminRights,
                                ChatBannedRights, MessageEntityMentionName,
                                MessageMediaPhoto)
 
-from userbot import BOTLOG, BOTLOG_CHATID, CMD_HELP, bot 
+from userbot import BOTLOG, BOTLOG_CHATID, CMD_HELP 
 from userbot.utils import register, errors_handler, admin_cmd
 
 # =================== CONSTANT ===================

@@ -6,11 +6,9 @@ Available Commands:
 .addblacklist
 .listblacklist
 .rmblacklist"""
-import asyncio
 import re
 import userbot.plugins.sql_helper.blacklist_sql as sql
-from telethon import events, utils
-from telethon.tl import types, functions
+from telethon import events
 from userbot.utils import admin_cmd
 
 

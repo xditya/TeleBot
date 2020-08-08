@@ -1,22 +1,8 @@
 #imported from ppe-remix by @heyworld & @DeletedUser420
 #Translated & Updated by @Sur_vivor
-from asyncio import sleep
-from random import choice, getrandbits, randint
 import re
-from re import sub
 import random
-from os import execl
-import time
-from telethon import events
 from userbot import bot
-from collections import deque
-import requests
-import sys
-import os
-import io
-import html
-import json
-from PIL import ImageEnhance, ImageOps
 
 from userbot import CMD_HELP
 from userbot.events import register

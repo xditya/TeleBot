@@ -3,14 +3,8 @@
 # Kangers keep credits
 # By @Akash_AM1 and @xditya
 
-import datetime
-import asyncio
-from telethon import events
-from telethon.errors.rpcerrorlist import YouBlockedUserError, UserAlreadyParticipantError
-from telethon.tl.functions.account import UpdateNotifySettingsRequest
-from telethon.tl.functions.messages import ImportChatInviteRequest
+from telethon.errors.rpcerrorlist import YouBlockedUserError
 from userbot.utils import admin_cmd
-import time
 from userbot import ALIVE_NAME
 
 naam = str(ALIVE_NAME)

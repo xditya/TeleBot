@@ -1,14 +1,9 @@
 from userbot import bot
 from sys import argv
-import sys
-from telethon.errors.rpcerrorlist import PhoneNumberInvalidError
-import os
 from telethon import TelegramClient
 from var import Var
 from userbot.utils import load_module
-from userbot import LOAD_PLUG, BOTLOG_CHATID, LOGS
 from pathlib import Path
-import asyncio
 import telethon.utils
 
 async def add_bot(bot_token):
