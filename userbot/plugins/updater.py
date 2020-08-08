@@ -71,7 +71,7 @@ async def upstream(ups):
     except InvalidGitRepositoryError as error:
         if conf != "now":
             await ups.edit(
-                "Please use `.update now` to update!"
+                "Please use  `.update now`  to update!"
             )
             return
         repo = Repo.init()
