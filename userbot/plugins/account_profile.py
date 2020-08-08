@@ -5,7 +5,6 @@
 """COMMAND : .pbio, .ppic, .pname"""
 
 import os
-from telethon import events
 from telethon.tl import functions
 from userbot.utils import admin_cmd
 

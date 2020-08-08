@@ -1,12 +1,9 @@
 """FFMpeg for @UniBorg
 """
 import asyncio
-import io
 import os
 import time
 from datetime import datetime
-from hachoir.metadata import extractMetadata
-from hachoir.parser import createParser
 from userbot.utils import admin_cmd, progress
 
 

@@ -1,6 +1,5 @@
 """Auto Profile Updation Commands
 .autoname"""
-from telethon import events
 import asyncio
 import time
 from telethon.tl import functions

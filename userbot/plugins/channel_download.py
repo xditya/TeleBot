@@ -4,12 +4,9 @@ usage: .geta channel_username [will  get all media from channel, tho there is li
        .getc number_of_messsages channel_username  
 By: @Zero_cool7870
 """
-from telethon import events
-import asyncio
 import os
 import subprocess
-import sys
-from uniborg.util import admin_cmd, humanbytes, progress, time_formatter
+from uniborg.util import admin_cmd
 
 @borg.on(admin_cmd(pattern=r"getc"))
 async def get_media(event):
@@ -32,7 +29,7 @@ async def get_media(event):
     	f.write(str(msgs))
     for msg in msgs:
        if msg.media is not None:
-	        await borg.download_media(
+         await borg.download_media(
                 msg,dir)
     ps = subprocess.Popen(('ls', 'temp'), stdout=subprocess.PIPE)
     output = subprocess.check_output(('wc', '-l'), stdin=ps.stdout)
@@ -68,7 +65,7 @@ async def get_media(event):
     	f.write(str(msgs))
     for msg in msgs:
        if msg.media is not None:
-	        await borg.download_media(
+         await borg.download_media(
                 msg,dir)          
     ps = subprocess.Popen(('ls', 'temp'), stdout=subprocess.PIPE)
     output = subprocess.check_output(('wc', '-l'), stdin=ps.stdout)

@@ -3,7 +3,7 @@ For TeleBot, credits to @pureindialover
 '''
 # Re-written by @its_xditya
 
-from telethon.tl import functions, types
+from telethon.tl import functions
 
 from userbot.events import register
 

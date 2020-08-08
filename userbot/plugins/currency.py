@@ -1,6 +1,4 @@
 """command: .currency usd inr"""
-from telethon import events
-import asyncio
 from datetime import datetime
 import requests
 from uniborg.util import admin_cmd

@@ -1,6 +1,5 @@
 """Quickly make a decision
 Syntax: .decide"""
-from telethon import events
 import requests
 from userbot.utils import admin_cmd
 

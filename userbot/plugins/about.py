@@ -6,8 +6,6 @@
 .info
 """
 
-from telethon import events
-
 import asyncio
 
 from userbot.utils import admin_cmd

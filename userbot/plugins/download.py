@@ -3,17 +3,13 @@ Syntax:
 .download
 .download url | file.name to download files from a Public Link
 Credits @TeleBotHelp """
-
-import aiohttp
 import asyncio
 import math
 import os
 import time
 from datetime import datetime
 from pySmartDL import SmartDL
-from telethon import events
-from telethon.tl.types import DocumentAttributeVideo
-from uniborg.util import admin_cmd, humanbytes, progress, time_formatter
+from uniborg.util import admin_cmd, humanbytes, progress
 
 
 @borg.on(admin_cmd(pattern="download ?(.*)"))

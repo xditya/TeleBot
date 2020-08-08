@@ -1,7 +1,5 @@
 """Malayalam Calendar plugin for Indian Bot 
 SYNTAX: .calendar YYYY-MM-DD"""
-from telethon import events
-import asyncio
 from datetime import datetime
 import requests
 import json

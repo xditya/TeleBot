@@ -10,15 +10,9 @@ import urllib , os
 
 from telethon.tl import functions
 
-from datetime import datetime
-
-from PIL import Image, ImageDraw, ImageFont
-
 from userbot.utils import admin_cmd
 
 import asyncio
-
-from time import sleep
 
 COLLECTION_STRING = [
 
