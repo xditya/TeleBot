@@ -34,7 +34,7 @@ async def sticklet(event):
     draw = ImageDraw.Draw(image)
     fontsize = 230
 
-    FONT_FILE = await get_font_file(event.client, "@FontRes")
+    FONT_FILE = await get_font_file(event.client, "@xtrafonts")
 
     font = ImageFont.truetype(FONT_FILE, size=fontsize)
 
