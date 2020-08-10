@@ -98,7 +98,7 @@ async def sticklet(event):
 
 
 
-    FONT_FILE = await get_font_file(event.client, "@FontRes", font_file_name)
+    FONT_FILE = await get_font_file(event.client, "@xtrafonts", font_file_name)
 
 
 
