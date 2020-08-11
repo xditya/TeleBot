@@ -55,3 +55,4 @@ covid
 geopy
 validators
 lyricsgenius
+tswift
