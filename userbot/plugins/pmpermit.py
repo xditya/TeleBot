@@ -3,17 +3,17 @@ import io
 import userbot.plugins.sql_helper.pmpermit_sql as pmpermit_sql
 from telethon.tl.functions.users import GetFullUserRequest
 from telethon import events, errors, functions, types
-from userbot import ALIVE_NAME, LESS_SPAMMY, CUSTOM_PMPERMIT, CUSTOM_BLOCK
+from userbot import ALIVE_NAME, LESS_SPAMMY, CUSTOM_PMPERMIT, CUSTOM_BLOCK, OWNER_ID
 from userbot.utils import admin_cmd
 
 PM_WARNS = {}
 PREV_REPLY_MESSAGE = {}
-
+TELE_ID = str(OWNER_ID) if OWNER_ID else "719195224"
 BLK = str(CUSTOM_BLOCK) if CUSTOM_BLOCK else "███████▄▄███████████▄  \n▓▓▓▓▓▓█░░░░░░░░░░░░░░█\n▓▓▓▓▓▓█░░░░░░░░░░░░░░█\n▓▓▓▓▓▓█░░░░░░░░░░░░░░█\n▓▓▓▓▓▓█░░░░░░░░░░░░░░█\n▓▓▓▓▓▓█░░░░░░░░░░░░░░█\n▓▓▓▓▓▓███░░░░░░░░░░░░█\n██████▀▀▀█░░░░██████▀  \n░░░░░░░░░█░░░░█  \n░░░░░░░░░░█░░░█  \n░░░░░░░░░░░█░░█  \n░░░░░░░░░░░█░░█  \n░░░░░░░░░░░░▀▀ \n\nGet lost, Now You Can't Message Me.."
 MESAG = str(CUSTOM_PMPERMIT) if CUSTOM_PMPERMIT else "**Do not spam here, else you will be blocked automatically.**"
 DEFAULTUSER = str(ALIVE_NAME) if ALIVE_NAME else "**No name set yet, check pinned message in** @TeleBotHelp"
 USER_BOT_WARN_ZERO = "`You were spamming my master's inbox, henceforth your retarded lame ass has been blocked by my master's userbot.` **Now GTFO, i'm playing PUBG** "
-USER_BOT_NO_WARN = ("[...........███ ]▄▄▄▄▄▃ \n..▂▄▅█████▅▄▃▂\n[███████████████]\n◥⊙▲⊙▲⊙▲⊙▲⊙▲⊙◤](tg://user?id=719195224)\n\n"
+USER_BOT_NO_WARN = (f"[...........███ ]▄▄▄▄▄▃ \n..▂▄▅█████▅▄▃▂\n[███████████████]\n◥⊙▲⊙▲⊙▲⊙▲⊙▲⊙◤](tg://user?id={TELE_ID})\n\n"
                     "Hello, this is TeleBot Security Service. This is an automated message in "
                     f"{DEFAULTUSER}'s inbox. Please don't spam and wait for me to respond.\n\n"
                     f"{MESAG}"
