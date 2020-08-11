@@ -1,6 +1,7 @@
 # For @TeleBotHelp
 """Check if your userbot is working."""
 import requests
+import time
 from PIL import Image
 from io import BytesIO
 from userbot import ALIVE_NAME
