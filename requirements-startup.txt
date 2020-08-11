@@ -54,3 +54,4 @@ youtube-dl
 covid
 geopy
 validators
+lyricsgenius
