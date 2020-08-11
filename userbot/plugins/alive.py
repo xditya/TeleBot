@@ -6,7 +6,7 @@ from io import BytesIO
 from userbot import ALIVE_NAME
 from userbot.utils import admin_cmd
 from userbot.__init__ import StartTime
-import time
+from datetime import datetime
 def get_readable_time(seconds: int) -> str:
     count = 0
     ping_time = ""
