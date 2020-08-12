@@ -15,7 +15,7 @@ Click the below button to watch the video tutorial on deploying
 [![Deploy To Heroku](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/xditya/TeleBot)
 
 ## Support
-Join https://t.me/TeleBotHelp for updates and suggestions.
+Join [TeleBot Support group](https://t.me/TeleBotHelp) for updates and new plugin suggestions.
 Do fork and star the repo 
 
 ### Session String 
