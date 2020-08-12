@@ -8,7 +8,7 @@
 ## Video Tutorial on deploying
 Click the below button to watch the video tutorial on deploying
 
-<a href="https://youtu.be/XmvdDHiIDb4"><img src="https://img.shields.io/badge/How%20To-Deploy-red.svg?logo=Youtube"></a>
+<a href="https://youtu.be/XmvdDHiIDb4"><img src="https://img.shields.io/badge/How%20To-Deploy-blue.svg?logo=Youtube"></a>
 <a href="https://youtu.be/XmvdDHiIDb4"><img src="https://img.shields.io/youtube/views/XmvdDHiIDb4?style=social">
 ## The Easier Way to install
 
