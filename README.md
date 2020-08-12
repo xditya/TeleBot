@@ -2,13 +2,14 @@
 <p align="left">
     <a href="https://t.me/TeleBotHelpChat"> <img src="https://img.shields.io/badge/telegram-Support_Group-blue?style=social&logo=telegram" alt="Support" /></a>
     <img src="https://img.shields.io/github/stars/xditya/TeleBot?style=social"></a>
+    <img src="https://img.shields.io/github/last-commit/xditya/TeleBot?style=flat-square"></a>
 </p>
     
 ## Video Tutorial on deploying
 Click the below button to watch the video tutorial on deploying
 
 <a href="https://youtu.be/XmvdDHiIDb4"><img src="https://img.shields.io/badge/How%20To-Deploy-red.svg?logo=Youtube"></a>
-
+<img src="https://img.shields.io/youtube/views/XmvdDHiIDb4?style=social">
 ## The Easier Way to install
 
 [![Deploy To Heroku](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/xditya/TeleBot)
