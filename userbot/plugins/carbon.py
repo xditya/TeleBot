@@ -1,27 +1,38 @@
-# Copyright (C) 2019 The Raphielscape Company LLC.
-#
-# Licensed under the Raphielscape Public License, Version 1.b (the "License");
-# you may not use this file except in compliance with the License.
-#
-# Fixed and made better by @anubisxx
-
 """ Userbot module containing various scrapers. """
 import os
+import shutil
+from bs4 import BeautifulSoup
+import re
 import random
 from time import sleep
+from html import unescape
+from re import findall
+from datetime import datetime
 from selenium import webdriver
 from urllib.parse import quote_plus
+from urllib.error import HTTPError
 from selenium.webdriver.common.keys import Keys
+from selenium.webdriver.support.ui import Select
 from selenium.webdriver.chrome.options import Options
-from userbot import CHROME_DRIVER, GOOGLE_CHROME_BIN
-from userbot.utils import register
+from wikipedia import summary
+from wikipedia.exceptions import DisambiguationError, PageError
+from urbandict import define
+from requests import get
+from google_images_download import google_images_download
+from googleapiclient.discovery import build
+from googleapiclient.errors import HttpError
+from googletrans import LANGUAGES, Translator
+from gtts import gTTS
+from emoji import get_emoji_regexp
+from userbot import CMD_HELP, BOTLOG, BOTLOG_CHATID, YOUTUBE_API_KEY, CHROME_DRIVER, GOOGLE_CHROME_BIN
+from userbot.utils import admin_cmd
 
 
 CARBONLANG = "auto"
 LANG = "en"
 
 
-@register(outgoing=True, pattern="^.carbon")
+@borg.on(admin_cmd(pattern="carbon"))
 async def carbon_api(e):
  if not e.text[0].isalpha() and e.text[0] not in ("/", "#", "@", "!"):
  
@@ -42,7 +53,7 @@ async def carbon_api(e):
          pcode = str(textx.message)
          skeme = None # Importing message to module
    code = quote_plus(pcode) # Converting to urlencoded
-   await e.edit("`Meking Carbon...\n25%`")
+   await e.edit("`Making Carbon...\n25%`")
    url = CARBON.format(code=code, lang=CARBONLANG)
    chrome_options = Options()
    chrome_options.add_argument("--headless")
@@ -76,17 +87,17 @@ async def carbon_api(e):
    # Waiting for downloading
    sleep(2.5)
    color_name = driver.find_element_by_xpath('/html/body/div[1]/main/div[3]/div[2]/div[1]/div[1]/div/span[2]/input').get_attribute('value')
-   await e.edit("`Done Dana Done...\n100%`")
-   file = './TeleBot.png'
+   await e.edit("`Done...\n100%`")
+   file = './carbon.png'
    await e.edit("`Uploading..`")
    await e.client.send_file(
          e.chat_id,
          file,
-         caption="<< `Here's your carbon!` \n **Carbonised by** [TeleBot.](https://telegra.ph/TeleBot-07-08)>>\n**Colour Scheme: **`{}`".format(color_name),
+         caption="<< `Here's your carbon!` >>\n**Colour Scheme: **`{}`".format(color_name),
          force_document=True,
          reply_to=e.message.reply_to_msg_id,
          )
-   os.remove('./TeleBot.png')
+   os.remove('./carbon.png')
    driver.quit()
    # Removing carbon.png after uploading
    await e.delete() # Deleting msg
