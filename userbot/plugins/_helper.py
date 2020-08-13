@@ -4,6 +4,8 @@
 
 from userbot import CMD_LIST
 
+DEFAULTUSER = str(ALIVE_NAME) if ALIVE_NAME else "No name set yet, check pinned in @TeleBotHelp"
+
 @command(pattern="^.help ?(.*)")
 async def cmd_list(event):
     if not event.text[0].isalpha() and event.text[0] not in ("/", "#", "@", "!"):
@@ -42,8 +44,7 @@ async def cmd_list(event):
             else:
                 await event.edit(input_str + " is not a valid plugin!")
         else:
-            help_string = """Userbot Helper provided by [TeleBot](https://telegra.ph/TeleBot-07-08) \n [More help](https://t.me/TeleBotHelpChat) \n
-`Userbot Helper to reveal all the commands of `**[TeleBot](https://github.com/xditya/TeleBot)**"""
+            help_string = f"""`Userbot Helper for {DEFAULTUSER} to reveal all the commands of `**[TeleBot](https://xditya.gitbook.io/telebot/)**"""
             results = await bot.inline_query(  # pylint:disable=E0602
                 tgbotusername,
                 help_string
