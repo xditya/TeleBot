@@ -3,6 +3,7 @@
 # @its_xditya
 
 from userbot import CMD_LIST
+from userbot import ALIVE_NAME
 
 DEFAULTUSER = str(ALIVE_NAME) if ALIVE_NAME else "No name set yet, check pinned in @TeleBotHelp"
 
