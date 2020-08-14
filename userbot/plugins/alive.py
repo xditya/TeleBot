@@ -57,7 +57,7 @@ async def amireallyalive(alive):
         await borg.send_message(alive.chat_id, f"**Welcome To TeleBot **\n\n"
             "**`Hey! I'm alive. All systems online and functioning normally!`**\n\n"
             "` 🔸 Telethon version:` **1.15.0**\n` 🔹 Python:` **3.8.3**\n"
-            "` 🔸 More info:` [TeleBot](https://telegra.ph/TeleBot-07-08)\n"
+            "` 🔸 More info:` [TeleBot](https://xditya.gitbook.io/telebot/)\n"
             "` 🔹 Bot created by:` [Aditya](https://t.me/xditya)\n"
             f"` 🔸 TeleBot Uptime:` {uptime}\n"
             "` 🔸 Database Status:` **All OK 👌!**\n"
