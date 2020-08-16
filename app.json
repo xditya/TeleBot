@@ -12,6 +12,7 @@
  "repository": "https://github.com/xditya/TeleBot/",
  "website": "#TODO",
  "success_url": "#TODO",
+ "stack": "container",
  "env": {
   "ENV": {
    "description": "Setting this to ANYTHING will enable heroku.",
