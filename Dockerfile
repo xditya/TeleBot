@@ -52,7 +52,7 @@ RUN mkdir -p /tmp/ && \
     unzip /tmp/chromedriver.zip chromedriver -d /usr/bin/ && \
     # clean up the container "layer", after we are done
     rm /tmp/chromedriver.zip
-
+    
 # install required packages
 RUN apt -qq install -y --no-install-recommends \
     # this package is required to fetch "contents" via "TLS"
