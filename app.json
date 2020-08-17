@@ -143,6 +143,16 @@
    "value": "",
    "required": false
   },
+   "OWNER_ID": {
+   "description": "Your telegram userid, get it by sending /info to any bot, like Rose",
+   "value": "",
+   "required": false
+  },
+   "ALIVE_PIC": {
+   "description": "telegra.ph link to theimage you want as alive pic, leave blank for sticker",
+   "value": "",
+   "required": false
+  },
   "TZ": {
    "description": "Required for Correct Time on autopic/get time. Know your timezone from http://www.timezoneconverter.com/cgi-bin/findzone.tzc",
    "value": "",
