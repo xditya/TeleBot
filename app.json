@@ -68,16 +68,16 @@
    "value": "",
    "required": true
   },  
-  "CHROME_BIN": {
-   "description": "For Carbon.py. Leave as it is. ",
-   "value": "/app/.apt/usr/bin/google-chrome",
-   "required": false
-  },
-  "CHROME_DRIVER": {
-   "description": "For Carbon.py. Leave as it is. ",
-   "value": "/app/.chromedriver/bin/chromedriver",
-   "required": false
-  }, 
+   "CHROME_BIN": {
+     "description": "Leave as such, Google Chrome (or) Chromium binary location for selenium based modules.",
+     "value": "/usr/bin/google-chrome",
+     "required": false
+   },
+   "CHROME_DRIVER": {
+     "description": "Leave as such, ChromeDriver location for selenium based modules",
+     "value": "/usr/bin/chromedriver",
+     "required": false
+   },
   "SUDO_USERS": {
    "description": "Don't change the value here. (Makes your acc and bot stable)",
    "value": "919057070",
