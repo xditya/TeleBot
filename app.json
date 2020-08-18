@@ -12,6 +12,7 @@
  "repository": "https://github.com/xditya/TeleBot/",
  "website": "#TODO",
  "success_url": "#TODO",
+ "stack": "container",
  "env": {
   "ENV": {
    "description": "Setting this to ANYTHING will enable heroku.",
@@ -67,16 +68,16 @@
    "value": "",
    "required": true
   },  
-  "CHROME_BIN": {
-   "description": "For Carbon.py. Leave as it is. ",
-   "value": "/app/.apt/usr/bin/google-chrome",
-   "required": false
-  },
-  "CHROME_DRIVER": {
-   "description": "For Carbon.py. Leave as it is. ",
-   "value": "/app/.chromedriver/bin/chromedriver",
-   "required": false
-  }, 
+   "CHROME_BIN": {
+     "description": "Leave as such, Google Chrome (or) Chromium binary location for selenium based modules.",
+     "value": "/usr/bin/google-chrome",
+     "required": false
+   },
+   "CHROME_DRIVER": {
+     "description": "Leave as such, ChromeDriver location for selenium based modules",
+     "value": "/usr/bin/chromedriver",
+     "required": false
+   },
   "SUDO_USERS": {
    "description": "Don't change the value here. (Makes your acc and bot stable)",
    "value": "919057070",
@@ -101,16 +102,6 @@
    "description": "Needed for inline buttons maker. Make a bot at [BotFather](http://telegram.dog/BotFather) and get the token of your bot. Get it else .help won't work.",
    "value": "",
    "required": true
-  },
-  "CHROME_BIN": {
-   "description": "For Carbon.py. Leave as it is. ",
-   "value": "/app/.apt/usr/bin/google-chrome",
-   "required": false
-  },
-  "CHROME_DRIVER": {
-   "description": "For Carbon.py. Leave as it is. ",
-   "value": "/app/.chromedriver/bin/chromedriver",
-   "required": false
   },
   "TG_BOT_USER_NAME_BF_HER": {
    "description": "Needed for inline buttons maker. Make a bot at [BotFather](http://telegram.dog/BotFather) and get the username of your bot. Needed for .help to work.",
@@ -142,6 +133,16 @@
    "value": "",
    "required": false
   },
+   "OWNER_ID": {
+   "description": "Your telegram userid, get it by sending /info to any bot, like Rose",
+   "value": "",
+   "required": false
+  },
+   "ALIVE_PIC": {
+   "description": "telegra.ph link to theimage you want as alive pic, leave blank for sticker",
+   "value": "",
+   "required": false
+  },
   "TZ": {
    "description": "Required for Correct Time on autopic/get time. Know your timezone from http://www.timezoneconverter.com/cgi-bin/findzone.tzc",
    "value": "",
@@ -153,18 +154,5 @@
   "options": {
    "version": "9.6"
   }
- }],
- "buildpacks": [{
-  "url": "https://github.com/jonathanong/heroku-buildpack-ffmpeg-latest"
- },{
-  "url":"https://github.com/amivin/aria2-heroku.git"
- },{
-  "url":"https://github.com/heroku/heroku-buildpack-google-chrome"
- },{
-  "url":"https://github.com/heroku/heroku-buildpack-chromedriver"
- },{
-  "url": "https://github.com/opendoor-labs/heroku-buildpack-p7zip"
- },{
-  "url": "heroku/python"
  }]
 }
