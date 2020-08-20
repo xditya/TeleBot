@@ -144,9 +144,11 @@ async def _(event):
 
 # Written by @HeisenbergTheDanger
 
-@borg.on(admin_cmd("dbadd ?(.*)"))
+@borg.on(admin_cmd("add ?(.*)"))
 async def add_ch(event):
     if event.fwd_from:
+        return
+    if "addcf" in event.raw_text.lower():   # fix for .addcf in lydia
         return
     if event.reply_to_msg_id:
         await event.edit("Adding...")
@@ -190,8 +192,7 @@ async def remove_ch(event):
         for channel in channels:
             rm_channel(channel.chat_id)
         await event.edit("Database cleared.")
-        return
-        
+        return    
     if in_channels(chat_id):
         rm_channel(chat_id)
         await event.edit("Removed from database")
