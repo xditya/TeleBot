@@ -10,8 +10,8 @@
   "productivity"
  ],
  "repository": "https://github.com/xditya/TeleBot/",
- "website": "#TODO",
- "success_url": "#TODO",
+ "website": "https://xditya.gitbook.io/telebot/",
+ "success_url": "https://t.me/TeleBotHelp/13",
  "stack": "container",
  "env": {
   "ENV": {
