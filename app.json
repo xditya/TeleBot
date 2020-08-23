@@ -1,11 +1,11 @@
 {
- "name": "TeleBot",
- "description": "Userbot created by a Aditya\n\n join https://t.me/TeleBotHelpChat for any problems or support",
+ "name": "TeleBot - UserBot",
+ "description": "An advanced Telethon Userbot, from @TeleBotSupport",
  "logo": "https://telegra.ph/file/34b810002e7a3ee86a21e.png",
  "keywords": [
   "telegram",
   "userbot",
-  "plugin",
+  "TeleBot",
   "modular",
   "productivity"
  ],
