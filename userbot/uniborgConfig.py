@@ -2,7 +2,6 @@ import os
 from telethon.tl.types import ChatBannedRights
 ENV = bool(os.environ.get("ENV", False))
 if ENV:
-    import os
     class Config(object):
         LOGGER = True
         # Get this value from my.telegram.org! Please do not steal

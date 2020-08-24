@@ -93,11 +93,6 @@ async def _(event):
 ""
 
 
-from telethon import events
-
-import asyncio
-
-
 
 
 

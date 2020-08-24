@@ -80,9 +80,7 @@ def load_module(shortname):
         pass
     elif shortname.endswith("_"):
         import userbot.utils
-        import sys
         import importlib
-        from pathlib import Path
         path = Path(f"userbot/plugins/{shortname}.py")
         name = "userbot.plugins.{}".format(shortname)
         spec = importlib.util.spec_from_file_location(name, path)
@@ -91,9 +89,7 @@ def load_module(shortname):
         print("Successfully (re)imported "+shortname)
     else:
         import userbot.utils
-        import sys
         import importlib
-        from pathlib import Path
         path = Path(f"userbot/plugins/{shortname}.py")
         name = "userbot.plugins.{}".format(shortname)
         spec = importlib.util.spec_from_file_location(name, path)
@@ -178,10 +174,7 @@ def admin_cmd(pattern=None, **args):
 
 """ Userbot module for managing events.
  One of the main components of the userbot. """
-
-from telethon import events
 import asyncio
-from userbot import bot
 from traceback import format_exc
 from time import gmtime, strftime
 import math

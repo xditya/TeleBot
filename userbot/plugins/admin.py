@@ -17,11 +17,10 @@ from telethon.errors import (BadRequestError, ChatAdminRequiredError,
                              UserAdminInvalidError)
 from telethon.errors.rpcerrorlist import (MessageTooLongError)
 from telethon.tl.functions.channels import (EditAdminRequest,
-                                            EditBannedRequest,
                                             EditPhotoRequest)
 from telethon.tl.functions.messages import UpdatePinnedMessageRequest
 from telethon.tl.types import (ChannelParticipantsAdmins, ChatAdminRights,
-                               ChatBannedRights, MessageEntityMentionName,
+                               MessageEntityMentionName,
                                MessageMediaPhoto)
 
 from userbot import BOTLOG, BOTLOG_CHATID, CMD_HELP 

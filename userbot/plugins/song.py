@@ -13,7 +13,6 @@ import io
 import asyncio
 from userbot.utils import admin_cmd
 import glob
-import os  
 
 async def catmusic(cat , QUALITY):
   search = cat
