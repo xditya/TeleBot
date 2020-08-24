@@ -12,8 +12,7 @@ from telethon import events
 import asyncio
 from datetime import datetime
 import time
-from userbot.utils import register, errors_handler, admin_cmd
-import asyncio
+from userbot.utils import register, errors_handler
 import logging
 import os
 import sys

@@ -119,10 +119,6 @@ Available Commands:
 
 .emoji -_-"""
 
-from telethon import events
-
-import asyncio
-
 
 
 

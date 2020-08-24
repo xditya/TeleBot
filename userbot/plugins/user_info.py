@@ -14,8 +14,6 @@ from userbot.events import register
 
 from re import findall, match
 from typing import List
-
-from telethon.events import NewMessage
 from telethon.tl.custom import Message
 from telethon.tl.functions.channels import GetFullChannelRequest
 from telethon.tl.functions.messages import GetFullChatRequest
