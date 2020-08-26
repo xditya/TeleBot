@@ -4,7 +4,7 @@
 """ 
 Available Commands:
 .unbanall
-.kick option
+.skick option
 Available Options:
 nostat - userstatusempty
 onemonth - userstatuslastmonth
@@ -54,7 +54,7 @@ async def _(event):
         await event.edit("{}: {} unbanned".format(event.chat_id, p))
 
 
-@borg.on(admin_cmd("kick ?(.*)"))
+@borg.on(admin_cmd("skick ?(.*)"))
 async def _(event):
     if event.fwd_from:
         return
@@ -203,7 +203,7 @@ async def ban_user(chat_id, i, rights):
 CMD_HELP.update({
     'TeleBot':
     ".unbanall\
-     \n.kick option\
+     \n.skick option\
      \nAvailable Options: \
      \nnostat - userstatusempty\
      \nonemonth - userstatuslastmonth\
