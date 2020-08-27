@@ -148,7 +148,7 @@ async def _(event):
 async def add_ch(event):
     if event.fwd_from:
         return
-    if "addcf" in event.raw_text.lower():   # fix for .addcf in lydia
+    if "addcf" in event.raw_text.lower() or "addblacklist" in event.raw_text.lower():   # fix for ".addcf" in lydia and ".addblacklist"
         return
     if event.reply_to_msg_id:
         await event.edit("Adding...")
