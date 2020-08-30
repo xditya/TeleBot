@@ -59,7 +59,7 @@
    "required": false
   },
   "LYDIA_API_KEY": {
-   "description": "Needed for Lydia AI. Follow https://telegra.ph/Lydia-09-05 to get your API.",
+   "description": "Needed for Lydia AI. Create a Intellivoid Account by visting https://coffeehouse.intellivoid.info/ to get your API.",
    "value": "",
    "required": false
   },
