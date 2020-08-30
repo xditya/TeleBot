@@ -6,6 +6,7 @@ import userbot.utils
 from datetime import datetime
 
 DELETE_TIMEOUT = 5
+thumb_image_path = "./TeleBot.png"
 
 @command(pattern="^.install", outgoing=True)
 async def install(event):
@@ -36,6 +37,7 @@ async def send(event):
     if event.fwd_from:
         return
     message_id = event.message.id
+    thumb = thumb_image_path
     input_str = event.pattern_match["shortname"]
     the_plugin_file = "./userbot/plugins/{}.py".format(input_str)
     start = datetime.now()
@@ -44,6 +46,7 @@ async def send(event):
         the_plugin_file,
         force_document=True,
         allow_cache=False,
+        thumb=thumb,
         reply_to=message_id
     )
     end = datetime.now()
