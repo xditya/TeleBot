@@ -4,11 +4,9 @@ import asyncio
 import os
 import userbot.utils
 from datetime import datetime
-from .. import ALIVE_NAME 
 
 DELETE_TIMEOUT = 5
 thumb_image_path = "./TeleBot.png"
-DEFAULTUSER = str(ALIVE_NAME) if ALIVE_NAME else "Telebot User"
 
 @command(pattern="^.install", outgoing=True)
 async def install(event):
