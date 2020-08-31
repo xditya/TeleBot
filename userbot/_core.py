@@ -38,12 +38,13 @@ async def install(event):
 async def send(event):
     if event.fwd_from:
         return
+    hmm = bot.uid
     message_id = event.message.id
     thumb = thumb_image_path
-    input_str = event.pattern_match["shortname"]
+    input_str = event.pattern_match.group(1)
     the_plugin_file = "./userbot/plugins/{}.py".format(input_str)
     start = datetime.now()
-    await event.client.send_file(  # pylint:disable=E0602
+    pro = await event.client.send_file(  # pylint:disable=E0602
         event.chat_id,
         the_plugin_file,
         force_document=True,
@@ -53,7 +54,7 @@ async def send(event):
     )
     end = datetime.now()
     time_taken_in_ms = (end - start).seconds
-    await event.edit(f"__**Plugin Name:- {input_str} .**__\n__**Uploaded in {time_taken_in_ms} seconds.**__\n__**Uploaded by :-**__ [{DEFAULTUSER}](tg://user?id={hmm})\n©@TeleBotSupport")
+    await pro.edit(f"__**Plugin Name:- {input_str} .**__\n__**Uploaded in {time_taken_in_ms} seconds.**__\n__**Uploaded by :-**__ [{DEFAULTUSER}](tg://user?id={hmm})\n©@TeleBotSupport")
     await asyncio.sleep(DELETE_TIMEOUT)
     await event.delete()
 
