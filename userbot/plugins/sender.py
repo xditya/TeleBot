@@ -13,7 +13,7 @@ thumb_image_path = "./TeleBot.png"
 
 DEFAULTUSER = str(ALIVE_NAME) if ALIVE_NAME else "TeleBot User"
 
-@command(pattern="^.peru (?P<shortname>\w+)$", outgoing=True)
+@command(pattern="^.send (?P<shortname>\w+)$", outgoing=True)
 async def send(event):
     if event.fwd_from:
         return
@@ -33,6 +33,6 @@ async def send(event):
     )
     end = datetime.now()
     time_taken_in_ms = (end - start).seconds
-    await pro.edit(f"__**Plugin Name:- {input_str} .**__\n__**Uploaded in {time_taken_in_ms} seconds.**__\n__**Uploaded by :-**__ [{DEFAULTUSER}](tg://user?id={hmm})")
+    await pro.edit(f"__**Plugin Name:- {input_str} .**__\n__**Uploaded in {time_taken_in_ms} seconds.**__\n__**Uploaded by :-**__ [{DEFAULTUSER}](tg://user?id={hmm})\n© @TeleBotSupport")
     await asyncio.sleep(DELETE_TIMEOUT)
     await event.delete()
