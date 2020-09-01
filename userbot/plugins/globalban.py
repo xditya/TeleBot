@@ -84,7 +84,7 @@ async def gspider(rk):
         rkp = await lazy.reply("`processing...`")
    else:
     	rkp = await lazy.edit("`processing...`")      
-   me = await rk.client.get_me() ; await rkp.edit(f"**Requesting  to gban user!**") ; my_mention = "[{}](tg://user?id={})".format(me.first_name, me.id) ; my_username = f"@{me.username}" if me.username else my_mention ; chat = await rk.get_chat() ; a = b = 0
+   me = await rk.client.get_me() ; await rkp.edit(f"**Global Banning User - **") ; my_mention = "[{}](tg://user?id={})".format(me.first_name, me.id) ; my_username = f"@{me.username}" if me.username else my_mention ; chat = await rk.get_chat() ; a = b = 0
    if rk.is_private:       
    	user = rk.chat ; reason = rk.pattern_match.group(1) ; chat_title = 'PM'  
    else:
@@ -115,7 +115,7 @@ async def gspider(rk):
             try:
                  await rk.client.edit_permissions(i, user, view_messages=False)          
                  a += 1
-                 await rkp.edit(f"**Requesting  to gban user!\nGbanned in {a} chats.....**")
+                 await rkp.edit(f"**Gbanning user!\nDone in {a} chats.....**")
             except:
                  b += 1                     
    else:
@@ -182,9 +182,9 @@ async def gspider(rk):
 
 CMD_HELP.update({
     "gban":
-    "!gban <username> / <userid> / <reply to a user>\
+    ".gban <username> / <userid> / <reply to a user>\
 \n**Usage**: Globel ban the person in all groups, channels , block in pm , add gban watch (use with solution) \
-\n\n!ungban <username> / <userid> / <reply to a user>\
+\n\n.ungban <username> / <userid> / <reply to a user>\
 \n**Usage**: unban user from all groups, channels , remove user from gban watch.\
 "
 })

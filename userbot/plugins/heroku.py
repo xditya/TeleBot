@@ -1,3 +1,5 @@
+# TeleBot 
+
 # Copyright (C) 2020 Adek Maulana.
 # All rights reserved.
 """
@@ -76,12 +78,12 @@ async def variable(var):
                 return await var.edit(">`.set var <ConfigVars-name> <value>`")
         await asyncio.sleep(1.5)
         if variable in heroku_var:
-            await var.edit(f"**{variable}**  `TeleBot successfully changed to`  ->  **{value}**")
+            await var.edit(f"**{variable}**  `successfully changed to`  ->  **{value}**")
         else:
-            await var.edit(f"**{variable}**  `TeleBot successfully added with value`  ->  **{value}**")
+            await var.edit(f"**{variable}**  `successfully added with value`  ->  **{value}**")
         heroku_var[variable] = value
     elif exe == "del":
-        await var.edit("`TeleBot is getting information to deleting variable...`")
+        await var.edit("`Getting information to deleting variable...`")
         try:
             variable = var.pattern_match.group(2).split()[0]
         except IndexError:
@@ -141,7 +143,7 @@ async def dyno_usage(dyno):
 
     await asyncio.sleep(1.5)
 
-    return await dyno.edit("**Dyno Usage**:\n\n"
+    return await dyno.edit("**⚙️ Dyno Usage ⚙️**:\n\n"
                            f" -> `Dyno usage for`  **{Var.HEROKU_APP_NAME}**:\n"
                            f"     •  `{AppHours}`**h**  `{AppMinutes}`**m**  "
                            f"**|**  [`{AppPercentage}`**%**]"
@@ -165,23 +167,24 @@ def prettyjson(obj, indent=2, maxlinelength=80):
     items, _ = getsubitems(obj, itemkey="", islast=True, maxlinelength=maxlinelength - indent, indent=indent)
     return indentitems(items, indent, level=0)
 
+
 @register(outgoing=True, pattern=r"^\.logs")
-async def _(dyno):        
+async def _(givelogs):        
         try:
              Heroku = heroku3.from_key(Var.HEROKU_API_KEY)                         
              app = Heroku.app(Var.HEROKU_APP_NAME)
         except:
-  	       return await dyno.reply(" Please make sure your Heroku API Key, Your App name are configured correctly in the heroku var please check https://t.me/Zzaacckkyy/43?single")
-        await dyno.edit("Getting Logs....")
+  	       return await givelogs.reply(" Please make sure your Heroku API Key, Your App name are configured correctly in the heroku var !")
+        await givelogs.edit("Downloading Logs..")
         with open('logs.txt', 'w') as log:
             log.write(app.get_log())
-        await dyno.client.send_file(
-            dyno.chat_id,
+        await givelogs.client.send_file(
+            givelogs.chat_id,
             "logs.txt",
-            reply_to=dyno.id,
-            caption="logs of 100+ lines",
+            reply_to=givelogs.id,
+            caption="Logs Collected Using Heroku",
         )
-        await dyno.edit("TeleBot is sending your heroku logs...")
+        await givelogs.edit("Trying To Send Logs.....")
         await asyncio.sleep(5)
-        await dyno.delete()
+        await givelogs.delete()
         return os.remove('logs.txt')
