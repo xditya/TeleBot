@@ -8,7 +8,7 @@ from userbot import CMD_LIST
 import re
 import logging
 import inspect
-
+handler = Config.CMD_HNLDR
 def command(**args):
     args["func"] = lambda e: e.via_bot_id is None
 
@@ -142,8 +142,8 @@ def admin_cmd(pattern=None, **args):
             # special fix for snip.py
             args["pattern"] = re.compile(pattern)
         else:
-            args["pattern"] = re.compile("\." + pattern)
-            cmd = "." + pattern
+            args["pattern"] = re.compile(handler + pattern)
+            cmd = handler + pattern
             try:
                 CMD_LIST[file_test].append(cmd)
             except:
