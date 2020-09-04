@@ -3,7 +3,7 @@ import asyncio
 import time
 from userbot.utils import admin_cmd
 
-@telebot.on(admin_cmd((pattern="bash ?(.*)"))
+@telebot.on(admin_cmd(pattern="bash ?(.*)"))
 async def _(event):
     if event.fwd_from:
         return
