@@ -9,18 +9,11 @@
 # Ported by @its_xditya for TeleBot
 
 import requests
-
 import bs4
-
-
-
 from telethon import *
-
 from userbot.events import register
 
-
-
-@register(pattern="^.app (.*)")
+@telebot.on(admin_cmd(pattern="app (.*)"))
 
 async def apk(e):
 
@@ -76,7 +69,7 @@ async def apk(e):
 
 
 
-@register(pattern="^.appr (.*)")
+@telebot.on(admin_cmd(pattern="appr (.*)"))
 
 async def apkr(e):
 

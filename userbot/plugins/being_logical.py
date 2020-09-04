@@ -6,14 +6,12 @@ Quotes credits: Being logical Channel
 """
 
 from telethon import events
-
 import asyncio
-
 import random
+from userbot.utils admin_cmd
 
 
-
-@borg.on(events.NewMessage(pattern=r"\.belo", outgoing=True))
+@borg.on(admin_cmd(pattern=r"belo", outgoing=True))
 
 async def _(event):
 

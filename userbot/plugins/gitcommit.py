@@ -13,10 +13,10 @@ import time
 from datetime import datetime
 from telethon import events
 from telethon.tl.types import DocumentAttributeVideo
-
+from userbot.utils admin_cmd
 
 GIT_TEMP_DIR = "./userbot/temp/"
-@command(pattern="^.commit", outgoing=True)
+@telebot.on(admin_cmd(pattern="commit", outgoing=True))
 async def download(event):
     if event.fwd_from:
         return	

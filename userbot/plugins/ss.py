@@ -1,9 +1,9 @@
 # By @xditya Copy with credits
-#Thanks to @HEisenbergTheDanger
+# Thanks to @HEisenbergTheDanger
 from telethon import events, errors, functions, types
 from uniborg.util import admin_cmd
 
-@borg.on(admin_cmd("ss"))
+@borg.on(admin_cmd(pattern="ss"))
 async def _(event):
     if event.fwd_from:
         return

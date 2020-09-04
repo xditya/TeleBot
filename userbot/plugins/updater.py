@@ -91,7 +91,7 @@ async def upstream(ups):
             f'**[UPDATER]:**` Looks like you are using your own custom branch ({ac_br}). '
             'in that case, Updater is unable to identify '
              'which branch is to be merged. '
-            'Please checkout to any official branch`')
+            'Please checkout the official branch of TeleBot`')
         repo.__del__()
         return
 

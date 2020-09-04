@@ -10,10 +10,7 @@ from userbot.events import register
 from userbot import CMD_HELP
 
 
-
-
-
-@register(outgoing=True, pattern="^.create (b|g|c)(?: |$)(.*)")
+@telebot.on(admin_cmd(outgoing=True, pattern="create (b|g|c)(?: |$)(.*)"))
 
 async def telegraphs(grop):
 

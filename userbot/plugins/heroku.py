@@ -1,3 +1,5 @@
+# TeleBot 
+
 # Copyright (C) 2020 Adek Maulana.
 # All rights reserved.
 """
@@ -17,7 +19,7 @@ Heroku = heroku3.from_key(Var.HEROKU_API_KEY)
 heroku_api = "https://api.heroku.com"
 
 
-@register(outgoing=True, pattern=r"^\.(set|get|del) var(?: |$)(.*)(?: |$)([\s\S]*)")
+@telebot.on(admin_cmd(outgoing=True, pattern=r"(set|get|del) var(?: |$)(.*)(?: |$)([\s\S]*)"))
 async def variable(var):
     """
         Manage most of ConfigVars setting, set new var, get current var,
@@ -76,12 +78,12 @@ async def variable(var):
                 return await var.edit(">`.set var <ConfigVars-name> <value>`")
         await asyncio.sleep(1.5)
         if variable in heroku_var:
-            await var.edit(f"**{variable}**  `TeleBot successfully changed to`  ->  **{value}**")
+            await var.edit(f"**{variable}**  `successfully changed to`  ->  **{value}**")
         else:
-            await var.edit(f"**{variable}**  `TeleBot successfully added with value`  ->  **{value}**")
+            await var.edit(f"**{variable}**  `successfully added with value`  ->  **{value}**")
         heroku_var[variable] = value
     elif exe == "del":
-        await var.edit("`TeleBot is getting information to deleting variable...`")
+        await var.edit("`Getting information to deleting variable...`")
         try:
             variable = var.pattern_match.group(2).split()[0]
         except IndexError:
@@ -94,7 +96,7 @@ async def variable(var):
             return await var.edit(f"**{variable}**  `is not exists`")
 
 
-@register(outgoing=True, pattern=r"^\.usage(?: |$)")
+@telebot.on(admin_cmd(outgoing=True, pattern=r"usage(?: |$)"))
 async def dyno_usage(dyno):
     """
         Get your account Dyno Usage
@@ -141,7 +143,7 @@ async def dyno_usage(dyno):
 
     await asyncio.sleep(1.5)
 
-    return await dyno.edit("**Dyno Usage**:\n\n"
+    return await dyno.edit("**⚙️ Dyno Usage ⚙️**:\n\n"
                            f" -> `Dyno usage for`  **{Var.HEROKU_APP_NAME}**:\n"
                            f"     •  `{AppHours}`**h**  `{AppMinutes}`**m**  "
                            f"**|**  [`{AppPercentage}`**%**]"
@@ -152,7 +154,7 @@ async def dyno_usage(dyno):
                            )
 
 
-@command(pattern="^.info heroku")
+@telebot.on(admin_cmd(pattern="info heroku"))
 async def info(event):
     await borg.send_message(event.chat_id, "**Info for Module to Manage Heroku:**\n\n`.usage`\nUsage:__Check your heroku dyno hours status.__\n\n`.set var <NEW VAR> <VALUE>`\nUsage: __add new variable or update existing value variable__\n**!!! WARNING !!!, after setting a variable the bot will restart.**\n\n`.get var or .get var <VAR>`\nUsage: __get your existing varibles, use it only on your private group!__\n**This returns all of your private information, please be cautious...**\n\n`.del var <VAR>`\nUsage: __delete existing variable__\n**!!! WARNING !!!, after deleting variable the bot will restarted**")
     await event.delete()
@@ -165,23 +167,24 @@ def prettyjson(obj, indent=2, maxlinelength=80):
     items, _ = getsubitems(obj, itemkey="", islast=True, maxlinelength=maxlinelength - indent, indent=indent)
     return indentitems(items, indent, level=0)
 
-@register(outgoing=True, pattern=r"^\.logs")
-async def _(dyno):        
+
+@telebot.on(admin_cmd(outgoing=True, pattern=r"logs"))
+async def _(givelogs):        
         try:
              Heroku = heroku3.from_key(Var.HEROKU_API_KEY)                         
              app = Heroku.app(Var.HEROKU_APP_NAME)
         except:
-  	       return await dyno.reply(" Please make sure your Heroku API Key, Your App name are configured correctly in the heroku var please check https://t.me/Zzaacckkyy/43?single")
-        await dyno.edit("Getting Logs....")
+  	       return await givelogs.reply(" Please make sure your Heroku API Key, Your App name are configured correctly in the heroku var !")
+        await givelogs.edit("Downloading Logs..")
         with open('logs.txt', 'w') as log:
             log.write(app.get_log())
-        await dyno.client.send_file(
-            dyno.chat_id,
+        await givelogs.client.send_file(
+            givelogs.chat_id,
             "logs.txt",
-            reply_to=dyno.id,
-            caption="logs of 100+ lines",
+            reply_to=givelogs.id,
+            caption="[Heroku] TeleBot Logs ",
         )
-        await dyno.edit("TeleBot is sending your heroku logs...")
+        await givelogs.edit("Heroku Logs Incoming!!")
         await asyncio.sleep(5)
-        await dyno.delete()
+        await givelogs.delete()
         return os.remove('logs.txt')

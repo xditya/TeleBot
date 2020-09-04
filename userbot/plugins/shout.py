@@ -1,6 +1,6 @@
-"""Shouts a message in MEME way
-usage: .shout message
-originaly from : @corsicanu_bot
+"""
+syntax - .shout message
+
 """
 
 import sys
@@ -9,7 +9,7 @@ from userbot.utils import admin_cmd
 import random
 
 
-@borg.on(events.NewMessage(pattern=r"\.shout", outgoing=True))
+@borg.on(admin_cmd(pattern=r"shout", outgoing=True))
 async def shout(args):
     if args.fwd_from:
         return

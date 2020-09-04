@@ -1,4 +1,6 @@
-#credits to @mrconfused 
+# credits to @mrconfused
+# @TeleBotSupport 
+ 
 from telethon import events, errors, functions, types
 import inspect
 import traceback

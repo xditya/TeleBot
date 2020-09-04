@@ -13,12 +13,12 @@ from os.path import exists, isdir
 from userbot import CMD_HELP
 from userbot.events import register
 from userbot.utils import humanbytes
-
+from userbot.utils admin_cmd
 
 MAX_MESSAGE_SIZE_LIMIT = 4095
 
 
-@register(outgoing=True, pattern=r"^\.ls ?(.*)")
+@telebot.on(admin_cmd(outgoing=True, pattern=r"ls ?(.*)"))
 async def lst(event):
     if event.fwd_from:
         return

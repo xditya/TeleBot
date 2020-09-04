@@ -58,7 +58,7 @@ async def _(event):
     else:
         packname = f"{DEFAULTUSER}'s TeleBot Vol.{pack}"
         packshortname = f"TeleBot_{userid}_KangPack"
-    await event.edit("`There is nothing happening here, except me kanging this stcker...`")
+    await event.edit("`Kanging this sticker to your pack...`")
 
     is_a_s = is_it_animated_sticker(reply_message)
     file_ext_ns_ion = "@TeleBotHelp.png"
@@ -88,7 +88,7 @@ async def _(event):
         now = datetime.datetime.now()
         dt = now + datetime.timedelta(minutes=1)
         if not await stickerset_exists(bot_conv, packshortname):
-            await event.edit("`Brewing a new pack! ヽ(´▽｀)ノ`")
+            await event.edit("`Making a new pack!`")
             await silently_send_message(bot_conv, "/cancel")
             if is_a_s:
                 response = await silently_send_message(bot_conv, "/newanimated")
@@ -192,7 +192,7 @@ async def _(event):
                 await silently_send_message(bot_conv, response)
                 await silently_send_message(bot_conv, sticker_emoji)
                 await silently_send_message(bot_conv, "/done")
-    await event.edit(f"sticker added! Your personal pack can be found [here](t.me/addstickers/{packshortname})")
+    await event.edit(f"Sticker added! Your personal pack can be found [here](t.me/addstickers/{packshortname})")
 
 
 @borg.on(admin_cmd(pattern="packinfo"))

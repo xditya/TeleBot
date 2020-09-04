@@ -19,7 +19,6 @@ from uniborg.util import admin_cmd
 
 langi = "en"
 
-#kanged from Blank-x ;---;
 @borg.on(admin_cmd(pattern="imdb (.*)")) 
 async def imdb(e):
  try:

@@ -4,9 +4,9 @@
 from telethon import events
 import asyncio
 from collections import deque
+from userbot.utils admin_cmd
 
-
-@borg.on(events.NewMessage(pattern=r"\.earth", outgoing=True))
+@telebot.on(admin_cmd(pattern=r"earth", outgoing=True))
 async def _(event):
 	if event.fwd_from:
 		return

@@ -70,16 +70,15 @@ Fortunately there are no Mandatory vars for the UniBorg Support Config.
 # Disclaimer
 ```
 /**
-    Your Telegram account may get banned.
-    I am not responsible for any improper use of this bot
-    This bot is intended for the purpose of having fun with memes,
-    as well as efficiently managing groups.
-    You ended up spamming groups, getting reported left and right,
-    and you ended up in a Finale Battle with Telegram and at the end
-    Telegram Team deleted your account?
-    And after that, then you pointed your fingers at us
-    for getting your acoount deleted?
-    I will be rolling on the floor laughing at you.
+	Improper use may lead to ban.
+    I am not responsible if you misuse this bot.
+	This bot is just for managing groups more effectively and having some fun
+	with your telegram account.
+	No one is responsible for your actions.
+	If you spammed and got reported again and again, 
+	and, at last got your account banned, and you
+	point your fingers at me, I'll be rolling on the floor laughing at you.
+	
 /**
 ```
 

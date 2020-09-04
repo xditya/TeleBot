@@ -8,12 +8,13 @@ import os
 import userbot.utils
 from datetime import datetime
 from .. import ALIVE_NAME 
+from userbot.utils import admin_cmd
 DELETE_TIMEOUT = 5
 thumb_image_path = "./TeleBot.png"
 
 DEFAULTUSER = str(ALIVE_NAME) if ALIVE_NAME else "TeleBot User"
 
-@command(pattern="^.send (?P<shortname>\w+)$", outgoing=True)
+@telebot.on(admin_cmd(pattern="send (?P<shortname>\w+)", outgoing=True))
 async def send(event):
     if event.fwd_from:
         return

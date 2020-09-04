@@ -19,7 +19,7 @@ from oauth2client.file import Storage
 from oauth2client import file, client, tools
 from mimetypes import guess_type
 import httplib2
-
+from userbot.utils admin_cmd
 
 # Path to token json file, it should be in same directory as script
 G_DRIVE_TOKEN_FILE = Var.TEMP_DOWNLOAD_DIRECTORY + "/auth_token.txt"
@@ -34,7 +34,7 @@ parent_id = Var.GDRIVE_FOLDER_ID
 G_DRIVE_DIR_MIME_TYPE = "application/vnd.google-apps.folder"
 
 
-@command(pattern="^.ugdrive ?(.*)")
+@telebot.on(admin_cmd(pattern="ugdrive ?(.*)"))
 async def _(event):
     if event.fwd_from:
         return
@@ -99,7 +99,7 @@ async def _(event):
     else:
         await mone.edit("File Not found in local server. Give me a file path :((")
 
-@command(pattern="^.drivesch ?(.*)")
+@telebot.on(admin_cmd(pattern="drivesch ?(.*)"))
 async def sch(event):
     if event.fwd_from:
         return
@@ -149,7 +149,7 @@ async def gsearch(http,query,filename):
     return msg        
 
 
-@command(pattern="^.gdrivedir ?(.*)")
+@telebot.on(admin_cmd(pattern="gdrivedir ?(.*)"))
 async def _(event):
     if event.fwd_from:
         return
@@ -318,7 +318,7 @@ async def upload_file(http, file_path, file_name, mime_type, event, parent_id):
     return download_url
 
 
-@command(pattern="^.gfolder ?(.*)")
+@telebot.on(admin_cmd(pattern="gfolder ?(.*)"))
 async def _(event):
     if event.fwd_from:
         return

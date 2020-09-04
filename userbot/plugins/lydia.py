@@ -2,6 +2,7 @@ from coffeehouse.lydia import LydiaAI
 from coffeehouse.api import API
 import asyncio
 from telethon import events
+from userbot.utils admin_cmd
 
 # Non-SQL Mode
 ACC_LYDIA = {}
@@ -11,7 +12,7 @@ if Var.LYDIA_API_KEY:
     api_client = API(api_key)
     lydia = LydiaAI(api_client)
 
-@command(pattern="^.repcf", outgoing=True)
+@telebot.on(admin_cmd(pattern="repcf", outgoing=True))
 async def repcf(event):
     if event.fwd_from:
         return
@@ -26,7 +27,7 @@ async def repcf(event):
     except Exception as e:
         await event.edit(str(e))
 
-@command(pattern="^.addcf", outgoing=True)
+@telebot.on(admin_cmd(pattern="addcf", outgoing=True))
 async def addcf(event):
     if event.fwd_from:
         return
@@ -44,7 +45,7 @@ async def addcf(event):
     else:
         await event.edit("Reply to a user to activate Lydia AI on them")
 
-@command(pattern="^.remcf", outgoing=True)
+@telebot.on(admin_cmd(pattern="remcf", outgoing=True))
 async def remcf(event):
     if event.fwd_from:
         return

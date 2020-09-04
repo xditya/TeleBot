@@ -8,7 +8,7 @@ from googletrans import Translator
 from userbot.utils import admin_cmd
 
 
-@borg.on(admin_cmd("tr ?(.*)"))
+@borg.on(admin_cmd(pattern="tr ?(.*)"))
 async def _(event):
     if event.fwd_from:
         return
@@ -33,7 +33,7 @@ async def _(event):
         after_tr_text = translated.text
         # TODO: emojify the :
         # either here, or before translation
-        output_str = """**TRANSLATED** from {} to {}
+        output_str = """**Translated by TeleBot**\nFrom {} to {}
 {}""".format(
             translated.src,
             lan,

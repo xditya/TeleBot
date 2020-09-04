@@ -1,7 +1,6 @@
 """Emoji
 Available Commands:
 .np
-Credits to @pureindialover
 """
 
 from telethon import events
@@ -10,7 +9,7 @@ import asyncio
 
 from userbot.utils import admin_cmd
 
-@borg.on(admin_cmd("np"))
+@borg.on(admin_cmd(pattern="np"))
 async def _(event):
     if event.fwd_from:
         return

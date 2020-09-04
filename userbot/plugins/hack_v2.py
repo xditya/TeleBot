@@ -4,10 +4,10 @@
 """command: .hack"""
 
 from telethon import events
-
+from userbot.utils admin_cmd
 import asyncio
 
-@borg.on(events.NewMessage(pattern=r"\.(.*)", outgoing=True))
+@telebot.on(admin_cmd(pattern=r"(.*)", outgoing=True))
 
 async def _(event):
 

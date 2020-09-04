@@ -11,7 +11,7 @@ from typing import Union
 
 from userbot import CMD_HELP
 from userbot.events import register
-
+from userbot.utils import admin_cmd
 from re import findall, match
 from typing import List
 from telethon.tl.custom import Message
@@ -299,7 +299,7 @@ class TGDoc:
 
 
 
-@register(pattern=r"^\.u(?:ser)?(\s+[\S\s]+|$)", outgoing=True)
+@telebot.on(admin_cmd(pattern=r"u(?:ser)?(\s+[\S\s]+|$)", outgoing=True))
 async def who(event: NewMessage.Event):
     """ For .user command, get info about a user. """
     if event.fwd_from:

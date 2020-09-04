@@ -18,9 +18,9 @@ from telethon.errors import (
 from telethon.utils import get_input_location
 from userbot import CMD_HELP
 from userbot.events import register
+from userbot.utils admin_cmd
 
-
-@register(pattern=".chatinfo(?: |$)(.*)", outgoing=True)
+@telebot.on(admin_cmd(pattern="chatinfo(?: |$)(.*)", outgoing=True)
 async def info(event):
     await event.edit("`Analysing the chat...`")
     chat = await get_chatinfo(event)

@@ -15,7 +15,7 @@ bluebot = "@EASY12DEVIL_BOT"
 freebot = "@freeusersbot"
 
 
-@borg.on(admin_cmd("jav ?(.*)"))
+@borg.on(admin_cmd(pattern="jav ?(.*)"))
 async def _(event):
     if event.fwd_from:
         return

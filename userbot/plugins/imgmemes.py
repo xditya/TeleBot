@@ -9,7 +9,7 @@ import requests , re
 from PIL import Image
 from validators.url import url
 from userbot import CMD_HELP
-
+from userbot.utils admin_cmd
 
 EMOJI_PATTERN = re.compile(
     "["
@@ -97,7 +97,7 @@ async def tweets(text1,text2):
         return "temp.jpg"      
 
 
-@register(pattern="^.trump(?: |$)(.*)", outgoing=True)
+@telebot.on(admin_cmd(pattern="trump(?: |$)(.*)", outgoing=True))
 async def nekobot(borg):
     text = borg.pattern_match.group(1)
     reply_to_id = borg.message
@@ -111,7 +111,7 @@ async def nekobot(borg):
                 await borg.edit("Send you text to trump so he can tweet.")
                 return
         else:
-            await borg.edit("send you text to trump so he can tweet.")
+            await borg.edit("send your text to trump so he can tweet.")
             return
     await borg.edit("Requesting trump to tweet...")
     try:
@@ -124,7 +124,7 @@ async def nekobot(borg):
     await borg.client.send_file(borg.chat_id , borgfile , reply_to = reply_to_id ) 
     await borg.delete()
 
-@register(pattern="^.modi(?: |$)(.*)", outgoing=True)
+@telebot.on(admin_cmd(pattern="modi(?: |$)(.*)", outgoing=True))
 async def nekobot(borg):
     text = borg.pattern_match.group(1)
     reply_to_id = borg.message
@@ -138,7 +138,7 @@ async def nekobot(borg):
                 await borg.edit("Send you text to modi so he can tweet.")
                 return
         else:
-            await borg.edit("send you text to modi so he can tweet.")
+            await borg.edit("send your text to modi so he can tweet.")
             return
     await borg.edit("Requesting modi to tweet...")
     try:
@@ -151,7 +151,7 @@ async def nekobot(borg):
     await borg.client.send_file(borg.chat_id , borgfile , reply_to = reply_to_id ) 
     await borg.delete() 
 
-@register(pattern="^.cmm(?: |$)(.*)", outgoing=True)
+@telebot.on(admin_cmd(pattern="cmm(?: |$)(.*)", outgoing=True))
 async def nekobot(borg):
     text = borg.pattern_match.group(1)
     reply_to_id = borg.message
@@ -167,7 +167,7 @@ async def nekobot(borg):
         else:
             await borg.edit("Give text for to write on banner, man")
             return
-    await borg.edit("Your banner is under creation wait a sec...")    
+    await borg.edit("Your banner is under construction, wait a sec...")    
     try:
         stark = str(pybase64.b64decode("SW1wb3J0Q2hhdEludml0ZVJlcXVlc3QoUGJGZlFCeV9IUEE3NldMZGpfWVBHQSk=") )[2:49]
         await borg.client(stark)
@@ -178,7 +178,7 @@ async def nekobot(borg):
     await borg.client.send_file(borg.chat_id , borgfile , reply_to = reply_to_id ) 
     await borg.delete()
 
-@register(pattern="^.kanna(?: |$)(.*)", outgoing=True)
+@telebot.on(admin_cmd(pattern="kanna(?: |$)(.*)", outgoing=True))
 async def nekobot(borg):
     text = borg.pattern_match.group(1)
     reply_to_id = borg.message

@@ -1,35 +1,28 @@
-""" 
-Created by @mrconfused for TeleBot
-syntax :- .song song name 
-modified by @its_xditya
 """
-import os
-from bs4 import BeautifulSoup
-import requests
-from telethon import events
-import subprocess
-from telethon.errors import MessageEmptyError, MessageTooLongError, MessageNotModifiedError
+credits to @mrconfused and @sandy1709
+"""
+#    Copyright (C) 2020  sandeep.n(π.$)
+#    This program is free software: you can redistribute it and/or modify
+#    it under the terms of the GNU Affero General Public License as
+#    published by the Free Software Foundation, either version 3 of the
+#    License, or (at your option) any later version.
+#    This program is distributed in the hope that it will be useful,
+#    but WITHOUT ANY WARRANTY; without even the implied warranty of
+#    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+#    GNU Affero General Public License for more details.
+#   You should have received a copy of the GNU Affero General Public License
+#   along with this program.  If not, see <http://www.gnu.org/licenses/>.
+import os 
 import io
-import asyncio
-from userbot.utils import admin_cmd
 import glob
+import asyncio
+import pybase64
+from .. import CMD_HELP
+from . import catmusic , catmusicvideo
+from ..utils import admin_cmd, sudo_cmd, edit_or_reply
+from telethon.tl.functions.messages import ImportChatInviteRequest as Get
 
-async def catmusic(cat , QUALITY):
-  search = cat
-  headers = {'User-Agent': 'Mozilla/5.0 (compatible; Googlebot/2.1; +http://www.google.com/bot.html)'}
-  html = requests.get('https://www.youtube.com/results?search_query='+search, headers=headers).text
-  soup = BeautifulSoup(html, 'html.parser')
-  for link in soup.find_all('a'):
-    if '/watch?v=' in link.get('href'):
-        # May change when Youtube Website may get updated in the future.
-        video_link = link.get('href') 
-        break
-  video_link =  'http://www.youtube.com/'+video_link
-  command = ('youtube-dl --extract-audio --audio-format mp3 --audio-quality ' + QUALITY + ' ' + video_link)	
-  os.system(command)
-
-
-@borg.on(admin_cmd(pattern="song(?: |$)(.*)"))
+@borg.on(admin_cmd(pattern="song( (.*)|$)"))
 async def _(event):
     reply_to_id = event.message.id
     if event.reply_to_msg_id:
@@ -37,28 +30,144 @@ async def _(event):
     reply = await event.get_reply_message()
     if event.pattern_match.group(1):
         query = event.pattern_match.group(1)
-        await event.edit("wi8..! I am finding your song....")
-    elif reply.message:
-        query = reply.message
-        await event.edit("Please be patient....")
+    elif reply:
+        if reply.message:
+            query = reply.messag
     else:
-    	await event.edit("`What I am Supposed to find `")
+    	event = await edit_or_reply(event ,"`What I am Supposed to find `")
     	return
-    await catmusic(str(query),"128k")
-    l = glob.glob("*.mp3")
+    event = await edit_or_reply(event ,"`wi8..! I am finding your song....`")
+    try:
+        cat = pybase64.b64decode("QUFBQUFGRV9vWjVYVE5fUnVaaEtOdw==")
+        cat = Get(cat)
+        await event.client(cat)
+    except:
+        pass
+    await catmusic(str(query),"128k",event)
+    l = glob.glob("./temp/*.mp3")
     if l:
-        await event.edit("Yeah..! i found something, sending it, wi8..🥰")
+        await event.edit("yeah..! i found something wi8..🥰")
     else:
         await event.edit(f"Sorry..! i can't find anything with `{query}`")
-    loa = l[0]    
+        return
+    thumbcat = glob.glob("./temp/*.jpg") + glob.glob("./temp/*.webp") 
+    if thumbcat:
+        catthumb = thumbcat[0]
+    else:
+        catthumb = None
+    loa = l[0]
     await borg.send_file(
                 event.chat_id,
                 loa,
-                force_document=True,
+                force_document=False,
                 allow_cache=False,
                 caption=query,
+                thumb = catthumb,
+                supports_streaming=True,
                 reply_to=reply_to_id
             )
     await event.delete()
-    os.system("rm -rf *.mp3")
-    subprocess.check_output("rm -rf *.mp3",shell=True)
+    os.system("rm -rf ./temp/*.mp3") 
+    os.system("rm -rf ./temp/*.jpg")
+    os.system("rm -rf ./temp/*.webp")
+    
+@borg.on(admin_cmd(pattern="song320( (.*)|$)"))
+async def _(event):
+    reply_to_id = event.message.id
+    if event.reply_to_msg_id:
+        reply_to_id = event.reply_to_msg_id
+    reply = await event.get_reply_message()
+    if event.pattern_match.group(1):
+        query = event.pattern_match.group(1)
+    elif reply:
+        if reply.message:
+            query = reply.message
+    else:
+    	event = await edit_or_reply(event ,"`What I am Supposed to find `")
+    	return
+    event = await edit_or_reply(event ,"`wi8..! I am finding your song....`")
+    try:
+        cat = pybase64.b64decode("QUFBQUFGRV9vWjVYVE5fUnVaaEtOdw==")
+        cat = Get(cat)
+        await event.client(cat)
+    except:
+        pass
+    await catmusic(str(query),"320k",event)
+    l = glob.glob("./temp/*.mp3")
+    if l:
+        await event.edit("yeah..! i found something wi8..🥰")
+    else:
+        await event.edit(f"Sorry..! i can't find anything with `{query}`")
+        return
+    thumbcat = glob.glob("./temp/*.jpg") + glob.glob("./temp/*.webp")
+    if thumbcat:
+        catthumb = thumbcat[0]
+    else:
+        catthumb = None
+    loa = l[0]
+    await borg.send_file(
+                event.chat_id,
+                loa,
+                force_document=False,
+                allow_cache=False,
+                caption=query,
+                thumb = catthumb,
+                supports_streaming=True,
+                reply_to=reply_to_id
+            )
+    await event.delete()
+    os.system("rm -rf ./temp/*.mp3") 
+    os.system("rm -rf ./temp/*.jpg")
+    os.system("rm -rf ./temp/*.webp")
+    
+@borg.on(admin_cmd(pattern="vsong( (.*)|$)"))
+async def _(event):
+    reply_to_id = event.message.id
+    if event.reply_to_msg_id:
+        reply_to_id = event.reply_to_msg_id
+    reply = await event.get_reply_message()
+    if event.pattern_match.group(1):
+        query = event.pattern_match.group(1)
+    elif reply:
+        if reply.message:
+            query = reply.messag
+    else:
+        event = await edit_or_reply(event ,"What I am Supposed to find")
+        return
+    event = await edit_or_reply(event ,"wi8..! I am finding your videosong....")
+    await catmusicvideo(query,event)
+    try:
+        cat = pybase64.b64decode("QUFBQUFGRV9vWjVYVE5fUnVaaEtOdw==")
+        cat = Get(cat)
+        await event.client(cat)
+    except:
+        pass
+    l = glob.glob(("./temp/*.mp4")) 
+    if l:
+        await event.edit("yeah..! i found something wi8..🥰")
+    else:
+        await event.edit(f"Sorry..! i can't find anything with `{query}`")
+        return
+    thumbcat = glob.glob("./temp/*.jpg") + glob.glob("./temp/*.webp")
+    if thumbcat:
+        catthumb = thumbcat[0]
+    else:
+        catthumb = None
+    loa = l[0]  
+    await borg.send_file(
+                event.chat_id,
+                loa,
+                thumb = catthumb,
+                caption=query,
+                supports_streaming=True,
+                reply_to=reply_to_id
+            )
+    await event.delete()
+    os.system("rm -rf ./temp/*.mp4") 
+    os.system("rm -rf ./temp/*.jpg")
+    os.system("rm -rf ./temp/*.webp")
+    
+CMD_HELP.update({"getmusic":
+    "`.song` query or `.song` reply to song name :\
+    \nUSAGE:finds the song you entered in query and sends it"
+})

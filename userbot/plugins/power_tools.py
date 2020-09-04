@@ -12,7 +12,7 @@ import sys
 from userbot.utils import admin_cmd
 
 
-@borg.on(admin_cmd("restart"))
+@borg.on(admin_cmd(pattern="restart"))
 async def _(event):
     if event.fwd_from:
         return
@@ -21,7 +21,7 @@ async def _(event):
     # await asyncio.sleep(2)
     # await event.edit("Restarting [███]...\nDo`.online` or `.alive` to check if I am online after a lil bit.")
     # await asyncio.sleep(2)
-    await event.edit("Restarted. Do `.online` or `.alive` to check if I am online")
+    await event.edit("Restarting, please wait for 4 to 5 minutes and then do `.online` or `.alive` to check if I am online. ")
     await borg.disconnect()
     # https://archive.is/im3rt
     os.execl(sys.executable, sys.executable, *sys.argv)
@@ -29,9 +29,9 @@ async def _(event):
     quit()
 
 
-@borg.on(admin_cmd("shutdown"))
+@borg.on(admin_cmd(pattern="shutdown"))
 async def _(event):
     if event.fwd_from:
         return
-    await event.edit("TeleBot is turning off ...Manually turn me on later")
+    await event.edit("TeleBot is turning off ...Manually turn me on later, from heroku.")
     await borg.disconnect()

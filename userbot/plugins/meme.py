@@ -8,9 +8,9 @@ from telethon import events
 import asyncio
 import os
 import sys
+from userbot.utils admin_cmd
 
-
-@borg.on(events.NewMessage(pattern=r"\.meme", outgoing=True))
+@borg.on(admin_cmd(pattern=r"meme", outgoing=True))
 async def meme(event):
     if event.fwd_from:
         return   
@@ -40,7 +40,7 @@ Bonus : Flower Boquee Generater
 usage:- .flower
 
 """
-@borg.on(events.NewMessage(pattern=r"\.flower", outgoing=True))
+@borg.on(admin_cmd(pattern=r"flower", outgoing=True))
 async def meme(event):
     if event.fwd_from:
         return   

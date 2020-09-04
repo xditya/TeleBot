@@ -1,6 +1,7 @@
 import pyfiglet
+from userbot.utils admin_cmd
 
-@command(pattern="^.figlet ?(.*)", outgoing=True)
+@telebot.on(admin_cmd(pattern="figlet ?(.*)", outgoing=True))
 async def figlet(event):
     if event.fwd_from:
         return
