@@ -20,7 +20,7 @@ from userbot import CMD_HELP
 from userbot.events import register
 from userbot.utils import admin_cmd
 
-@telebot.on(admin_cmd(pattern="chatinfo(?: |$)(.*)", outgoing=True)
+@telebot.on(admin_cmd(pattern="chatinfo(?: |$)(.*)", outgoing=True))
 async def info(event):
     await event.edit("`Analysing the chat...`")
     chat = await get_chatinfo(event)
