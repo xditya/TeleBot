@@ -8,7 +8,7 @@ from userbot import CMD_LIST
 import re
 import logging
 import inspect
-handler = Var.CMD_HNLDR
+handler = Config.CMD_HNDLR
 def command(**args):
     args["func"] = lambda e: e.via_bot_id is None
 
