@@ -12,7 +12,7 @@ import random
 import re
 import time
 
-from userbot.utils admin_cmd
+from userbot.utils import admin_cmd
 from collections import deque
 
 import requests
