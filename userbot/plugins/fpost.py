@@ -12,7 +12,7 @@ from userbot.utils import admin_cmd
 
 msg_cache = {}
 
-@telebot.on(admin_cmd((pattern=r"fpost\s+(.*)", outgoing=True))
+@telebot.on(admin_cmd(pattern=r"fpost\s+(.*)", outgoing=True))
 async def _(event):
     await event.delete()
     text = event.pattern_match.group(1)
