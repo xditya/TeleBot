@@ -18,7 +18,7 @@ DEVICES_DATA = 'https://raw.githubusercontent.com/androidtrackers/' \
                'certified-android-devices/master/devices.json'
 
 
-@telebot.on(admin_cmd(outgoing=True, pattern="magisk")
+@telebot.on(admin_cmd(outgoing=True, pattern="magisk"))
 async def magisk(request):
     """ magisk latest releases """
     magisk_dict = {
