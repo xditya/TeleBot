@@ -70,7 +70,7 @@ async def endmute(event):
     else:
         await event.edit("Successfully unmuted that person")
 
-@command(incoming=True)
+@telebot.on(events.NewMessage(incoming=True))
 async def watcher(event):
     if is_muted(event.sender_id, event.chat_id):
         await event.delete()
@@ -143,7 +143,7 @@ async def endmute(event):
     else:
         await event.edit("Successfully unmuted that person")
 
-@command(incoming=True)
+@telebot.on(events.NewMessage(incoming=True))
 async def watcher(event):
     if is_muted(event.sender_id, event.chat_id):
         await event.delete()
