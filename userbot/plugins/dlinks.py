@@ -19,7 +19,7 @@ from humanize import naturalsize
 
 from userbot import CMD_HELP
 from userbot.events import register
-
+from userbot.utils import admin_cmd
 
 def subprocess_run(cmd):
     reply = ""

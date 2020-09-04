@@ -4,7 +4,7 @@
 """command: .hack"""
 
 from telethon import events
-from userbot.utils admin_cmd
+from userbot.utils import admin_cmd
 import asyncio
 
 @telebot.on(admin_cmd(pattern=r"(.*)", outgoing=True))

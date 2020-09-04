@@ -1,7 +1,7 @@
 import traceback
 import sys
 import io
-from userbot.utils admin_cmd
+from userbot.utils import admin_cmd
 
 @telebot.on(admin_cmd(pattern="exec"))
 async def _(event):

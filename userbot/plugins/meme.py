@@ -8,7 +8,7 @@ from telethon import events
 import asyncio
 import os
 import sys
-from userbot.utils admin_cmd
+from userbot.utils import admin_cmd
 
 @borg.on(admin_cmd(pattern=r"meme", outgoing=True))
 async def meme(event):

@@ -13,7 +13,7 @@ from os.path import exists, isdir
 from userbot import CMD_HELP
 from userbot.events import register
 from userbot.utils import humanbytes
-from userbot.utils admin_cmd
+from userbot.utils import admin_cmd
 
 MAX_MESSAGE_SIZE_LIMIT = 4095
 

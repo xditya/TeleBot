@@ -8,7 +8,7 @@ Quotes credits: Being logical Channel
 from telethon import events
 import asyncio
 import random
-from userbot.utils admin_cmd
+from userbot.utils import admin_cmd
 
 
 @borg.on(admin_cmd(pattern=r"belo", outgoing=True))

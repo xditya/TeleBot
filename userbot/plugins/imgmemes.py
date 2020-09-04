@@ -9,7 +9,7 @@ import requests , re
 from PIL import Image
 from validators.url import url
 from userbot import CMD_HELP
-from userbot.utils admin_cmd
+from userbot.utils import admin_cmd
 
 EMOJI_PATTERN = re.compile(
     "["

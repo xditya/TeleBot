@@ -11,7 +11,7 @@ import asyncio
 import traceback
 import os
 import userbot.utils
-from userbot.utils admin_cmd
+from userbot.utils import admin_cmd
 
 @telebot.on(admin_cmd(pattern="extdl", outgoing=True))
 async def install(event):

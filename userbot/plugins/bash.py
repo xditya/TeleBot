@@ -1,7 +1,7 @@
 import io
 import asyncio
 import time
-from userbot.utils admin_cmd
+from userbot.utils import admin_cmd
 
 @telebot.on(admin_cmd((pattern="bash ?(.*)"))
 async def _(event):

@@ -4,7 +4,7 @@ from asyncio import sleep
 from telethon.errors import rpcbaseerrors
 from userbot import BOTLOG, BOTLOG_CHATID, CMD_HELP
 from userbot.utils import register, errors_handler
-from userbot.utils admin_cmd
+from userbot.utils import admin_cmd
 
 @telebot.on(admin_cmd(outgoing=True, pattern="purge"))
 @errors_handler

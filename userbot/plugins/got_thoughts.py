@@ -16,7 +16,7 @@ import sys
 
 import random
 
-from userbot.utils admin_cmd
+from userbot.utils import admin_cmd
 
 @telebot.on(admin_cmd((pattern=r"gott", outgoing=True))
 

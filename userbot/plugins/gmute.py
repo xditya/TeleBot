@@ -1,6 +1,6 @@
 from userbot.plugins.sql_helper.mute_sql import is_muted, mute, unmute
 import asyncio
-from userbot.utils admin_cmd
+from userbot.utils import admin_cmd
 
 @telebot.on(admin_cmd(outgoing=True, pattern=r"gmute ?(\d+)?"))
 async def startgmute(event):

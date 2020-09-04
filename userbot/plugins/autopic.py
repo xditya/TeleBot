@@ -5,7 +5,7 @@ from pySmartDL import SmartDL
 from telethon.tl import functions
 import asyncio
 import shutil
-from userbot.utils admin_cmd
+from userbot.utils import admin_cmd
 
 FONT_FILE_TO_USE = "/usr/share/fonts/truetype/dejavu/DejaVuSansMono.ttf"
 

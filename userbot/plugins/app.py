@@ -12,6 +12,7 @@ import requests
 import bs4
 from telethon import *
 from userbot.events import register
+from userbot.utils import admin_cmd
 
 @telebot.on(admin_cmd(pattern="app (.*)"))
 

@@ -5,7 +5,7 @@ import subprocess
 import time
 import json
 import sys
-from userbot.utils admin_cmd
+from userbot.utils import admin_cmd
 
 @telebot.on(admin_cmd(pattern="labstack ?(.*)"))
 async def labstack(event):

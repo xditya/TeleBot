@@ -1,4 +1,4 @@
-from userbot.utils admin_cmd
+from userbot.utils import admin_cmd
 
 @telebot.on(admin_cmd(outgoing=True, pattern="group"))
 async def join(e):

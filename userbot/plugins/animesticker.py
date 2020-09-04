@@ -6,7 +6,7 @@ from userbot import bot
 
 from userbot import CMD_HELP
 from userbot.events import register
-from userbot.utils admin_cmd
+from userbot.utils import admin_cmd
 
 
 EMOJI_PATTERN = re.compile(

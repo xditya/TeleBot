@@ -16,7 +16,7 @@ from userbot.utils admin_cmd
 from collections import deque
 
 import requests
-
+from userbot.utils import admin_cmd
 from telethon.tl.functions.users import GetFullUserRequest
 from telethon.tl.types import MessageEntityMentionName
 

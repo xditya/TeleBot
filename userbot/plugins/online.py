@@ -7,7 +7,7 @@ from telethon import events, functions, version, __version__
 import random
 from userbot.utils import register
 from userbot import ALIVE_NAME
-from userbot.utils admin_cmd
+from userbot.utils import admin_cmd
 
 DEFAULTUSER = str(ALIVE_NAME) if ALIVE_NAME else "TeleBot User"
 

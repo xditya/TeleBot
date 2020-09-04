@@ -4,7 +4,7 @@
 from telethon import events
 import asyncio
 from collections import deque
-from userbot.utils admin_cmd
+from userbot.utils import admin_cmd
 
 @telebot.on(admin_cmd(pattern=r"earth", outgoing=True))
 async def _(event):
