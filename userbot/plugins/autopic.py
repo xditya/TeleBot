@@ -9,7 +9,7 @@ from userbot.utils import admin_cmd
 
 FONT_FILE_TO_USE = "/usr/share/fonts/truetype/dejavu/DejaVuSansMono.ttf"
 
-@telebot.on(admin_cmd((pattern="autopic", outgoing=True))
+@telebot.on(admin_cmd(pattern="autopic", outgoing=True))
 async def autopic(event):
     await event.edit("**Autopic** has been Enabled!!")
     downloaded_file_name = "userbot/original_pic.png"
