@@ -11,7 +11,7 @@ from bs4 import BeautifulSoup
 
 from userbot import CMD_HELP
 from userbot.utils import register
-from userbot.utils admin_cmd
+from userbot.utils import admin_cmd
 
 GITHUB = 'https://github.com'
 DEVICES_DATA = 'https://raw.githubusercontent.com/androidtrackers/' \
