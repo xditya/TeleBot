@@ -48,7 +48,7 @@ async def _(event):
             update_previous_welcome(event.chat_id, current_message.id)
 
 
-@telebot.on(admin_cmd(pattern="savewelcome")  # pylint:disable=E0602
+@telebot.on(admin_cmd(pattern="savewelcome"))  # pylint:disable=E0602
 async def _(event):
     if event.fwd_from:
         return
@@ -63,7 +63,7 @@ async def _(event):
         await event.edit("Welcome note saved. ")
 
 
-@telebot.on(admin_cmd(pattern="clearwelcome")  # pylint:disable=E0602
+@telebot.on(admin_cmd(pattern="clearwelcome"))  # pylint:disable=E0602
 async def _(event):
     if event.fwd_from:
         return
@@ -74,7 +74,7 @@ async def _(event):
         "The previous welcome message was `{}`.".format(cws.custom_welcome_message)
     )
 
-@telebot.on(admin_cmd(pattern="listwelcome")  # pylint:disable=E0602
+@telebot.on(admin_cmd(pattern="listwelcome"))  # pylint:disable=E0602
 async def _(event):
     if event.fwd_from:
         return
