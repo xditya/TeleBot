@@ -19,7 +19,7 @@ from oauth2client.file import Storage
 from oauth2client import file, client, tools
 from mimetypes import guess_type
 import httplib2
-from userbot.utils admin_cmd
+from userbot.utils import admin_cmd
 
 # Path to token json file, it should be in same directory as script
 G_DRIVE_TOKEN_FILE = Var.TEMP_DOWNLOAD_DIRECTORY + "/auth_token.txt"
