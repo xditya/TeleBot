@@ -423,7 +423,7 @@ async def gspider(gspdr):
                 f"CHAT: {gspdr.chat.title}(`{gspdr.chat_id}`)")
 
 
-@telebot.on(admin_cmd(outgoing=True, pattern="delusers(?: |$)(.*)")
+@telebot.on(admin_cmd(outgoing=True, pattern="delusers(?: |$)(.*)"))
 @errors_handler
 async def rm_deletedacc(show):
     """ For .delusers command, list all the ghost/deleted accounts in a chat. """
