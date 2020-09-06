@@ -54,7 +54,7 @@
    "required": false
   },
    "CMD_HNDR": {
-   "description": "Used to invoke commands, leave blank for default, i.i, "."",
+   "description": "Used to invoke commands, leave blank for default, (dot)",
    "value": "",
    "required": false
   },  
