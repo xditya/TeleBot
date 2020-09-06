@@ -75,7 +75,7 @@ if ENV:
         NO_OF_BUTTONS_DISPLAYED_IN_H_ME_CMD = int(os.environ.get("NO_OF_BUTTONS_DISPLAYED_IN_H_ME_CMD", 5))
         # specify command handler that should be used for the plugins
         # this should be a valid "regex" pattern
-        CMD_HNDLR = os.environ.get("CMD_HNDLR", ".")
+        CMD_HNDLR = os.environ.get("CMD_HNDLR", "\.")
         # specify list of users allowed to use bot
         # WARNING: be careful who you grant access to your bot.
         # malicious users could do ".exec rm -rf /*"
