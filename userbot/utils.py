@@ -9,7 +9,7 @@ import re
 import logging
 import inspect
 
-handler = Config.CMD_HNDLR if Config.CMD_HNDLR ese "."
+handler = Config.CMD_HNDLR if Config.CMD_HNDLR else "."
 
 def command(**args):
     args["func"] = lambda e: e.via_bot_id is None
