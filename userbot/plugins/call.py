@@ -11,14 +11,10 @@ Available Commands:
 .emoji -_-"""
 
 from telethon import events
-
 import asyncio
+from userbot.utils import admin_cmd
 
-
-
-
-
-@borg.on(events.NewMessage(pattern=r"\.(.*)", outgoing=True))
+@borg.on(admin_cmd(pattern=r"(.*)", outgoing=True))
 
 async def _(event):
 
@@ -41,13 +37,13 @@ async def _(event):
             "`Connecting To Telegram Headquarters...`",
             "`Call Connected.`",
             "`Telegram: Hello This is Telegram HQ. Who is this?`",
-            "`Me: Yo this is` @TeleBotHelp admin ,`Please Connect me to my lil bro,Pavel Durov`",
+            "`Me: Yo this is` a TeleBot user ,`Please Connect me to my lil bro, Pavel Durov`",
             "`User Authorised.`",
             "`Calling Pavel Durov`  `At +916969696969`",
             "`Private  Call Connected...`",
             "`Me: Hello Sir, Please Ban This Telegram Account.`",    
             "`Pavel: May I Know Who Is This?`",
-            "`Me: Yo Brah, I Am` @Dark_Princ3 ",
+            "`Me: Yo Brah, I Am from ` @TeleBotSupport ",
             "`Pavel: OMG!!! Long time no see, Wassup Brother...\nI'll Make Sure That Guy Account Will Get Blocked Within 24Hrs.`",
             "`Me: Thanks, See You Later Brah.`",
             "`Pavel: Please Don't Thank Brah, Telegram Is Our's. Just Gimme A Call When You Become Free.`",

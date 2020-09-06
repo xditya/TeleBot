@@ -7,6 +7,7 @@ import asyncio
 #from userbot.utils import admin_cmd
 from userbot.events import register 
 from userbot import bot, CMD_HELP
+from userbot.utils import admin_cmd
 from telethon.errors.rpcerrorlist import YouBlockedUserError
 import os
 try:
@@ -25,7 +26,7 @@ def bruh(name):
     
 
 
-@register(outgoing=True, pattern="^.spd(?: |$)(.*)")
+@telebot.on(admin_cmd(outgoing=True, pattern="spd(?: |$)(.*)"))
 async def _(event):
     if event.fwd_from:
         return
@@ -45,7 +46,7 @@ async def _(event):
           await event.delete()
           await bot.forward_messages(event.chat_id, respond.message)
 
-@register(outgoing=True, pattern="^.netease(?: |$)(.*)")
+@telebot.on(admin_cmd(outgoing=True, pattern="netease(?: |$)(.*)"))
 async def WooMai(netase):
     if netase.fwd_from:
         return
@@ -73,7 +74,7 @@ async def WooMai(netase):
     await netase.delete()
 
 
-@register(outgoing=True, pattern="^.dzd(?: |$)(.*)")
+@telebot.on(admin_cmd(outgoing=True, pattern="dzd(?: |$)(.*)"))
 async def DeezLoader(Deezlod):
     if Deezlod.fwd_from:
         return

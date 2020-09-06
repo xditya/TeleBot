@@ -8,7 +8,7 @@ from telethon.tl.functions.messages import ImportChatInviteRequest
 from userbot.utils import admin_cmd
 from userbot import CMD_HELP 
 
-@borg.on(admin_cmd("ascii ?(.*)"))
+@borg.on(admin_cmd(pattern="ascii ?(.*)"))
 async def _(event):
     if event.fwd_from:
         return 

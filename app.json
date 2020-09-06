@@ -53,6 +53,11 @@
    "value": "",
    "required": false
   },
+   "CMD_HNDR": {
+   "description": "Used to invoke commands, leave blank for default, (dot)",
+   "value": "",
+   "required": false
+  },  
   "GIT_REPO_NAME": {
    "description": "Your repo name Example: xditya/TeleBot, but GITHUB_ACCESS_TOKEN must be setup first.",
    "value": "",
@@ -68,16 +73,16 @@
    "value": "",
    "required": true
   },  
-   "CHROME_BIN": {
-     "description": "Leave as such, Google Chrome (or) Chromium binary location for selenium based modules.",
-     "value": "/usr/bin/google-chrome",
-     "required": false
-   },
-   "CHROME_DRIVER": {
-     "description": "Leave as such, ChromeDriver location for selenium based modules",
-     "value": "/usr/bin/chromedriver",
-     "required": false
-   },
+  "CHROME_BIN": {
+   "description": "Leave as such, Google Chrome (or) Chromium binary location for selenium based modules.",
+   "value": "/usr/bin/google-chrome",
+   "required": false
+  },
+  "CHROME_DRIVER": {
+   "description": "Leave as such, ChromeDriver location for selenium based modules",
+   "value": "/usr/bin/chromedriver",
+   "required": false
+  },
   "SUDO_USERS": {
    "description": "Don't change the value here. (Makes your acc and bot stable)",
    "value": "919057070",
@@ -133,12 +138,12 @@
    "value": "",
    "required": false
   },
-   "OWNER_ID": {
+  "OWNER_ID": {
    "description": "Your telegram userid, get it by sending /info to any bot, like Rose",
    "value": "",
    "required": false
   },
-   "ALIVE_PIC": {
+  "ALIVE_PIC": {
    "description": "telegra.ph link to theimage you want as alive pic, leave blank for sticker",
    "value": "",
    "required": false

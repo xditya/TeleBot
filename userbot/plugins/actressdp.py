@@ -5,13 +5,9 @@
 #Usage .actressdp Im Not Responsible For Any Ban caused By This
 
 import requests , re , random 
-
 import urllib , os 
-
 from telethon.tl import functions
-
 from userbot.utils import admin_cmd
-
 import asyncio
 
 COLLECTION_STRING = [

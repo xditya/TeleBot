@@ -5,7 +5,7 @@ from telethon.tl.types import ChannelParticipantsAdmins
 from userbot.utils import admin_cmd
 
 
-@borg.on(admin_cmd("warn1"))
+@borg.on(admin_cmd(pattern="warn1"))
 async def _(event):
     if event.fwd_from:
         return
@@ -24,7 +24,7 @@ async def _(event):
 """.admin Plugin for @UniBorg"""
 
 
-@borg.on(admin_cmd("warn2"))
+@borg.on(admin_cmd(pattern="warn2"))
 async def _(event):
     if event.fwd_from:
         return
@@ -43,7 +43,7 @@ async def _(event):
 """.admin Plugin for @UniBorg"""
 
 
-@borg.on(admin_cmd("warn3"))
+@borg.on(admin_cmd(pattern="warn3"))
 async def _(event):
     if event.fwd_from:
         return
@@ -62,7 +62,7 @@ async def _(event):
 """.admin Plugin for @UniBorg"""
 
 
-@borg.on(admin_cmd("warn0"))
+@borg.on(admin_cmd(pattern="warn0"))
 async def _(event):
     if event.fwd_from:
         return
@@ -79,7 +79,7 @@ async def _(event):
     await event.delete()
 
 
-@borg.on(admin_cmd("ocb"))
+@borg.on(admin_cmd(pattern="ocb"))
 async def _(event):
     if event.fwd_from:
         return
@@ -95,7 +95,7 @@ async def _(event):
         await event.reply(mentions)
     await event.delete()
 
-@borg.on(admin_cmd("fw"))
+@borg.on(admin_cmd(pattern="fw"))
 async def _(event):
     if event.fwd_from:
         return

@@ -9,8 +9,9 @@ from search_engine_parser import GoogleSearch
 from asyncio import sleep
 from userbot.utils import register
 from telethon.tl.types import DocumentAttributeAudio
+from userbot.utils import admin_cmd
 
-@register(outgoing=True, pattern=r"^\.gs (.*)")
+@telebot.on(admin_cmd(outgoing=True, pattern=r"go (.*)"))
 async def gsearch(q_event):
     """ For .google command, do a Google search from @TeleBotHelp. """
     match = q_event.pattern_match.group(1)

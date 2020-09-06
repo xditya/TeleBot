@@ -6,7 +6,7 @@ from telethon.tl.types import ChannelParticipantsAdmins
 from userbot.utils import admin_cmd
 
 
-@borg.on(admin_cmd("gbun"))
+@borg.on(admin_cmd(pattern="gbun"))
 async def gbun(event):
     if event.fwd_from:
         return
@@ -26,20 +26,20 @@ async def gbun(event):
         firstname = replied_user.user.first_name
         usname = replied_user.user.username
         idd = reply_message.from_id
-        # make meself invulnerable cuz why not xD
-        if idd == 742506768:
-            await reply_message.reply("`Wait a second, This is my master!`\n**How dare you threaten to ban my master nigger!**\n\n__Your account has been hacked! Pay 69$ to my master__ [Anubis](tg://user?id=742506768) __to release your account__😏")
+        # make myself invulnerable cuz why not xD
+        if idd == 719195224:
+            await reply_message.reply("`Wait a second, This is my master!`\n**How dare you threaten to ban my master nigger!**\n\n__Your account has been hacked! 😏")
         else:
             jnl=("`Warning!! `"
                   "[{}](tg://user?id={})"
                   "` 𝙂𝘽𝘼𝙉𝙉𝙀𝘿 By Admin...\n\n`"
-                  "**Rendi's Name: ** __{}__\n"
+                  "**Name: ** __{}__\n"
                   "**ID : ** `{}`\n"
                 ).format(firstname, idd, firstname, idd)
             if usname == None:
-                jnl += "**Victim Nigga's username: ** `Doesn't own a username!`\n"
+                jnl += "**Victim's username: ** `Doesn't own a username!`\n"
             elif usname != "None":
-                jnl += "**Victim Nigga's username** : @{}\n".format(usname)
+                jnl += "**Victim's username** : @{}\n".format(usname)
             if len(gbunVar) > 0:
                 gbunm = "`{}`".format(gbunVar)
                 gbunr = "**Reason: **"+gbunm

@@ -1,7 +1,9 @@
 from userbot.plugins.sql_helper.mute_sql import is_muted, mute, unmute
+from telethon import events
 import asyncio
+from userbot.utils import admin_cmd
 
-@command(outgoing=True, pattern=r"^.mute ?(\d+)?", allow_sudo=True)
+@telebot.on(admin_cmd(outgoing=True, pattern=r"mute ?(\d+)?", allow_sudo=True))
 async def startmute(event):
     private = False
     if event.fwd_from:
@@ -41,7 +43,7 @@ async def startmute(event):
     else:
         await event.edit("Successfully muted that person")
 
-@command(outgoing=True, pattern=r"^.unmute ?(\d+)?", allow_sudo=True)
+@telebot.on(admin_cmd(outgoing=True, pattern=r"unmute ?(\d+)?", allow_sudo=True))
 async def endmute(event):
     private = False
     if event.fwd_from:
@@ -69,12 +71,12 @@ async def endmute(event):
     else:
         await event.edit("Successfully unmuted that person")
 
-@command(incoming=True)
+@telebot.on(admin_cmd(incoming=True))
 async def watcher(event):
     if is_muted(event.sender_id, event.chat_id):
         await event.delete()
 
-@command(outgoing=True, pattern=r"^.mute ?(\d+)?")
+@telebot.on(admin_cmd(outgoing=True, pattern=r"mute ?(\d+)?"))
 async def startmute(event):
     private = False
     if event.fwd_from:
@@ -114,7 +116,7 @@ async def startmute(event):
     else:
         await event.edit("Successfully muted that person")
 
-@command(outgoing=True, pattern=r"^.unmute ?(\d+)?")
+@telebot.on(admin_cmd(outgoing=True, pattern=r"unmute ?(\d+)?"))
 async def endmute(event):
     private = False
     if event.fwd_from:
@@ -142,7 +144,7 @@ async def endmute(event):
     else:
         await event.edit("Successfully unmuted that person")
 
-@command(incoming=True)
+@telebot.on(admin_cmd(incoming=True))
 async def watcher(event):
     if is_muted(event.sender_id, event.chat_id):
         await event.delete()

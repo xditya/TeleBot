@@ -9,6 +9,8 @@ import re
 import logging
 import inspect
 
+handler = Config.CMD_HNDLR if Config.CMD_HNDLR else "."
+
 def command(**args):
     args["func"] = lambda e: e.via_bot_id is None
 
@@ -103,6 +105,7 @@ def load_module(shortname):
         sys.modules["uniborg.util"] = userbot.utils
         mod.Config = Config
         mod.borg = bot
+        mod.telebot = bot
         # support for paperplaneextended
         sys.modules["userbot.events"] = userbot.utils
         spec.loader.exec_module(mod)
@@ -142,8 +145,8 @@ def admin_cmd(pattern=None, **args):
             # special fix for snip.py
             args["pattern"] = re.compile(pattern)
         else:
-            args["pattern"] = re.compile("\." + pattern)
-            cmd = "." + pattern
+            args["pattern"] = re.compile(handler + pattern)
+            cmd = handler + pattern
             try:
                 CMD_LIST[file_test].append(cmd)
             except:

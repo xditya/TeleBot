@@ -12,10 +12,11 @@ import random
 import re
 import time
 
+from userbot.utils import admin_cmd
 from collections import deque
 
 import requests
-
+from userbot.utils import admin_cmd
 from telethon.tl.functions.users import GetFullUserRequest
 from telethon.tl.types import MessageEntityMentionName
 
@@ -647,7 +648,7 @@ HIT = [
 # ===========================================
 
 
-@register(outgoing=True, pattern=r"^.(\w+)say (.*)")
+@telebot.on(admin_cmd(outgoing=True, pattern=r"(\w+)say (.*)"))
 async def univsaye(cowmsg):
     """ For .cowsay module, userbot wrapper for cow which says things. """
     if not cowmsg.text[0].isalpha() and cowmsg.text[0] not in ("/", "#", "@", "!"):
@@ -664,7 +665,7 @@ async def univsaye(cowmsg):
         await cowmsg.edit(f"`{cheese.milk(text).replace('`', '´')}`")
 
 
-@register(outgoing=True, pattern="^:/$")
+@telebot.on(admin_cmd(outgoing=True, pattern=":/"))
 async def kek(keks):
     if not keks.text[0].isalpha() and keks.text[0] not in ("/", "#", "@", "!"):
         """ Check yourself ;)"""
@@ -673,7 +674,7 @@ async def kek(keks):
             time.sleep(0.3)
             await keks.edit(":" + uio[i % 2])
 
-@register(outgoing=True, pattern=r"^.coinflip (.*)")
+@telebot.on(admin_cmd(outgoing=True, pattern=r"coinflip (.*)"))
 async def _(event):
     if not event.text[0].isalpha() and event.text[0] not in ("/", "#", "@", "!"):
         if event.fwd_from:
@@ -699,7 +700,7 @@ async def _(event):
         else:
             await event.edit("Gimme another coin, this one fake AF !!")
 
-@register(pattern="^.slap(?: |$)(.*)", outgoing=True)
+@telebot.on(admin_cmd(pattern="slap(?: |$)(.*)", outgoing=True))
 async def who(event):
     if not event.text[0].isalpha() and event.text[0] not in ("/", "#", "@", "!"):
         """ slaps a user, or get slapped if not a reply. """
@@ -780,7 +781,7 @@ async def lol(lel):
             okay = okay[:-1] + "_-"
             await lel.edit(okay)
 
-@register(outgoing=True, pattern="^.decide$")
+@telebot.on(admin_cmd(outgoing=True, pattern="decide"))
 async def _(event):
     if not event.text[0].isalpha() and event.text[0] not in ("/", "#", "@", "!"):
         if event.fwd_from:
@@ -805,19 +806,19 @@ async def fun(e):
             t = t[:-1] + "_;"
             await e.edit(t)
 
-@register(outgoing=True, pattern="^.cry$")
+@telebot.on(admin_cmd(outgoing=True, pattern="cry"))
 async def cry(e):
     """ y u du dis, i cry everytime !! """
     if not e.text[0].isalpha() and e.text[0] not in ("/", "#", "@", "!"):
         await e.edit(random.choice(CRI))
 
-@register(outgoing=True, pattern="^.insult$")
+@telebot.on(admin_cmd(outgoing=True, pattern="insult"))
 async def insult(e):
     """ I make you cry !! """
     if not e.text[0].isalpha() and e.text[0] not in ("/", "#", "@", "!"):
         await e.edit(random.choice(INSULT_STRINGS))
 
-@register(outgoing=True, pattern="^.cp(?: |$)(.*)")
+@telebot.on(admin_cmd(outgoing=True, pattern="cp(?: |$)(.*)"))
 async def copypasta(cp_e):
     """ Copypasta the famous meme """
     if not cp_e.text[0].isalpha() and cp_e.text[0] not in ("/", "#", "@", "!"):
@@ -853,7 +854,7 @@ async def copypasta(cp_e):
         await cp_e.edit(reply_text)
 
 
-@register(outgoing=True, pattern="^.vapor(?: |$)(.*)")
+@telebot.on(admin_cmd(outgoing=True, pattern="vapor(?: |$)(.*)"))
 async def vapor(vpr):
     """ Vaporize everything! """
     if not vpr.text[0].isalpha() and vpr.text[0] not in ("/", "#", "@", "!"):
@@ -879,13 +880,13 @@ async def vapor(vpr):
         await vpr.edit("".join(reply_text))
 
 			  
-@register(outgoing=True, pattern="^.repo$")
+@telebot.on(admin_cmd(outgoing=True, pattern="repo"))
 async def source(e):
     if not e.text[0].isalpha() and e.text[0] not in ("/", "#", "@", "!"):
         await e.edit("Click [here](https://github.com/xditya/TeleBot) to get my source code :)\n\nDo check @TeleBotSupport ")
 			  
 			  
-@register(outgoing=True, pattern="^.str(?: |$)(.*)")
+@telebot.on(admin_cmd(outgoing=True, pattern="str(?: |$)(.*)"))
 async def stretch(stret):
     """ Stretch it."""
     if not stret.text[0].isalpha() and stret.text[0] not in ("/", "#", "@", "!"):
@@ -909,7 +910,7 @@ async def stretch(stret):
         await stret.edit(reply_text)
 
 
-@register(outgoing=True, pattern="^.zal(?: |$)(.*)")
+@telebot.on(admin_cmd(outgoing=True, pattern="zal(?: |$)(.*)"))
 async def zal(zgfy):
     """ Invoke the feeling of chaos. """
     if not zgfy.text[0].isalpha() and zgfy.text[0] not in ("/", "#", "@", "!"):
@@ -949,13 +950,19 @@ async def zal(zgfy):
         await zgfy.edit("".join(reply_text))
 
 
-@register(outgoing=True, pattern="^.hi$")
+@telebot.on(admin_cmd(outgoing=True, pattern="hi"))
 async def hoi(hello):
     """ Greet everyone! """
     if not hello.text[0].isalpha() and hello.text[0] not in ("/", "#", "@", "!"):
         await hello.edit(random.choice(HELLOSTR))
 			  
-@register(outgoing=True, pattern="^.kill$")
+@borg.on(admin_cmd(pattern=r"hi2"))
+async def hi(event):
+    if event.fwd_from:
+        return
+    await event.edit("🌺✨✨🌺✨🌺🌺🌺\n🌺✨✨🌺✨✨🌺✨\n🌺🌺🌺🌺✨✨🌺✨\n🌺✨✨🌺✨✨🌺✨\n🌺✨✨🌺✨🌺🌺🌺\n☁☁☁☁☁☁☁☁")
+
+@telebot.on(admin_cmd(outgoing=True, pattern="kill"))
 async def killing (killed):
     """ Dont Kill Too much -_-"""
     if not killed.text[0].isalpha() and killed.text[0] not in ("/", "#", "@", "!"):
@@ -1335,6 +1342,160 @@ async def typewriter(typew):
             await asyncio.sleep(sleep_time)
             await typew.edit(old_text)
             await asyncio.sleep(sleep_time)
+
+from telethon import events
+
+import asyncio
+
+
+
+
+
+@borg.on(events.NewMessage(pattern=r"\.(.*)", outgoing=True))
+
+async def _(event):
+
+    if event.fwd_from:
+
+        return
+
+    animation_interval = 0.5
+
+    animation_ttl = range(0, 101)
+
+    input_str = event.pattern_match.group(1)
+
+    if input_str == "pornhub":
+
+        await event.edit(input_str)
+
+        animation_chars = [
+
+            "P_",
+
+            "PO_",
+
+            "POR_",
+
+            "PORN_",
+            
+            "PORNH_",
+            
+            "PORNHU_",
+            
+           "PORNHUB_", 
+           
+           "PORNHUB",
+
+        ]
+
+        for i in animation_ttl:
+
+            await asyncio.sleep(animation_interval)
+
+            await event.edit(animation_chars[i % 10])
+
+
+@borg.on(events.NewMessage(pattern=r"\.(.*)", outgoing=True))
+
+async def _(event):
+
+    if event.fwd_from:
+
+        return
+
+    animation_interval = 0.5
+
+    animation_ttl = range(0, 101)
+
+    input_str = event.pattern_match.group(1)
+
+    if input_str == "amore":
+
+        await event.edit(input_str)
+
+        animation_chars = [
+
+            "A_",
+
+            "AM_",
+
+            "AMO_",
+
+            "AMOR_",
+            
+            "AMORE_",
+            
+            "AMORE❤_",
+            
+            ".-.",
+
+        ]
+
+        for i in animation_ttl:
+
+            await asyncio.sleep(animation_interval)
+
+            await event.edit(animation_chars[i % 10])
+
+
+
+"""Emoji
+
+Available Commands:
+
+.emoji shrug
+
+.emoji apple
+
+.emoji :/
+
+.emoji -_-"""
+
+
+
+
+
+@borg.on(events.NewMessage(pattern=r"\.(.*)", outgoing=True))
+
+async def _(event):
+
+    if event.fwd_from:
+
+        return
+
+    animation_interval = 0.5
+
+    animation_ttl = range(0, 101)
+
+    input_str = event.pattern_match.group(1)
+
+    if input_str == "sexy":
+
+        await event.edit(input_str)
+
+        animation_chars = [
+
+            "S_",
+
+            "SE_",
+
+            "SEX_",
+
+            "SEXY_",
+            
+            "SEXY👄_",
+            
+            "SEXY👄",
+            
+        ]
+
+        for i in animation_ttl:
+
+            await asyncio.sleep(animation_interval)
+
+            await event.edit(animation_chars[i % 10])
+
 
 CMD_HELP.update({
     "memes": ".cowsay\

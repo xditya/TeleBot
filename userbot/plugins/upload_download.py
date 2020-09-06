@@ -20,7 +20,7 @@ import asyncio
 from hachoir.metadata import extractMetadata
 from hachoir.parser import createParser
 from telethon.tl.types import DocumentAttributeVideo
-
+from userbot.utils import admin_cmd
 from userbot import LOGS, CMD_HELP, TEMP_DOWNLOAD_DIRECTORY
 from userbot.events import register
 
@@ -83,7 +83,7 @@ def time_formatter(milliseconds: int) -> str:
     return tmp[:-2]
 
 
-@register(pattern=r".dl(?: |$)(.*)", outgoing=True)
+@telebot.on(admin_cmd(pattern=r"dl(?: |)(.*)", outgoing=True))
 async def download(target_file):
     """ For .dl command, download files to the userbot's server. """
     await target_file.edit("Processing ...")
@@ -158,7 +158,7 @@ async def download(target_file):
             "Reply to a message to download to my local server.")
 
 
-@register(pattern=r".uploadir (.*)", outgoing=True)
+@telebot.on(admin_cmd(pattern=r"uploadir (.*)", outgoing=True))
 async def uploadir(udir_event):
     """ For .uploadir command, allows you to upload everything from a folder in the server"""
     input_str = udir_event.pattern_match.group(1)
@@ -234,7 +234,7 @@ async def uploadir(udir_event):
         await udir_event.edit("404: Directory Not Found")
 
 
-@register(pattern=r".ul (.*)", outgoing=True)
+@telebot.on(admin_cmd(pattern=r"ul (.*)", outgoing=True))
 async def upload(u_event):
     """ For .ul command, allows you to upload a file from the userbot's server """
     await u_event.edit("Processing ...")
@@ -310,7 +310,7 @@ def extract_w_h(file):
         return width, height
 
 
-@register(pattern=r".uploadas(stream|vn|all) (.*)", outgoing=True)
+@telebot.on(admin_cmd(pattern=r"uploadas(stream|vn|all) (.*)", outgoing=True))
 async def uploadas(uas_event):
     """ For .uploadas command, allows you to specify some arguments for upload. """
     await uas_event.edit("Processing ...")

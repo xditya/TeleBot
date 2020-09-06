@@ -1,17 +1,11 @@
-#Made By @TeleBotComms Keep Credits If You Are Goanna Kang This Lol
-
-#And Thanks To The Creator Of Autopic This Script Was Made from Snippets From That Script
-
-#Usage .avengersdp Im Not Responsible For Any Ban caused By This
+# @TeleBotSupport Keep Credits If You Are Goanna Kang This Lol
+# And Thanks To The Creator Of Autopic This Script Was Made from Snippets From That Script
+# Usage .avengersdp Im Not Responsible For Any Ban caused By This
 
 import requests , re , random 
-
 import urllib , os 
-
 from telethon.tl import functions
-
 from userbot.utils import admin_cmd
-
 import asyncio
 
 COLLECTION_STRING = [

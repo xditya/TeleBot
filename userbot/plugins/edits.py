@@ -13,7 +13,7 @@ More cmds are there, me lazy af to type em here 😅"""
 import asyncio
 from collections import deque
 from userbot import ALIVE_NAME
-from uniborg.util import admin_cmd
+from userbot.utils import admin_cmd
 from userbot.utils import register
 
 DEFAULTUSER = str(ALIVE_NAME) if ALIVE_NAME else "TeleBot"
@@ -677,7 +677,7 @@ async def _(event):
             await event.edit(animation_chars[i % 30])        
 
 # By @xditya. Kangers keep credits xD		
-@register(outgoing=True, pattern="^.lul$")
+@telebot.on(admin_cmd(outgoing=True, pattern="lul"))
 
 async def join(e):
 
@@ -685,7 +685,7 @@ async def join(e):
 
         await e.edit("╱┏┓╱╱╱╭━━━╮┏┓╱╱╱╱ \n╱┃┃╱╱╱┃╭━╮┃┃┃╱╱╱╱ \n╱┃┗━━┓┃╰━╯┃┃┗━━┓╱ \n╱┗━━━┛╰━━━╯┗━━━┛╱")
 # By @xditya. Kangers keep credits xD	
-@register(outgoing=True, pattern="^.yes$")
+@telebot.on(admin_cmd(outgoing=True, pattern="yes"))
 
 async def join(e):
 
@@ -693,21 +693,496 @@ async def join(e):
 
         await e.edit("┈┈┈┈┈┈▕▔╲ \n┈┈┈┈┈┈┈▏▕ \n┈┈┈┈┈┈┈▏▕▂▂▂ \n▂▂▂▂▂▂╱┈▕▂▂▂▏ \n▉▉▉▉▉┈┈┈▕▂▂▂▏ \n▉▉▉▉▉┈┈┈▕▂▂▂▏ \n▔▔▔▔▔▔╲▂▕▂▂▂I")
 # By @xditya. Kangers keep credits xD
-@register(outgoing=True, pattern="^.gn$")
+@telebot.on(admin_cmd(outgoing=True, pattern="gn"))
 
 async def join(e):
 
     await e.edit("｡♥｡･ﾟ♡ﾟ･｡♥｡･｡･｡･｡♥｡･\n╱╱╱╱╱╱╱╭╮╱╱╱╭╮╱╭╮╭╮\n╭━┳━┳━┳╯┃╭━┳╋╋━┫╰┫╰╮\n┃╋┃╋┃╋┃╋┃┃┃┃┃┃╋┃┃┃╭┫\n┣╮┣━┻━┻━╯╰┻━┻╋╮┣┻┻━╯\n╰━╯╱╱╱╱╱╱╱╱╱╱╰━╯\n｡♥｡･ﾟ♡ﾟ･｡♥° ♥｡･ﾟ♡ﾟ･")
     
 # By @xditya. Kangers keep credits xD
-@register(outgoing=True, pattern="^.gm$")
+@telebot.on(admin_cmd(outgoing=True, pattern="gm"))
 
 async def join(e):
 
     await e.edit("｡♥｡･ﾟ♡ﾟ･｡♥｡･｡･｡･｡♥｡･｡♥｡･ﾟ♡ﾟ･\n╱╱╱╱╱╱╱╭╮╱╱╱╱╱╱╱╱╱╱╭╮\n╭━┳━┳━┳╯┃╭━━┳━┳┳┳━┳╋╋━┳┳━╮\n┃╋┃╋┃╋┃╋┃┃┃┃┃╋┃╭┫┃┃┃┃┃┃┃╋┃\n┣╮┣━┻━┻━╯╰┻┻┻━┻╯╰┻━┻┻┻━╋╮┃\n╰━╯╱╱╱╱╱╱╱╱╱╱╱╱╱╱╱╱╱╱╱╱╰━╯\n｡♥｡･ﾟ♡ﾟ･｡♥｡･｡･｡･｡♥｡･｡♥｡･ﾟ♡ﾟ･")
 
-@register(outgoing=True, pattern="^.like$")
+@telebot.on(admin_cmd(outgoing=True, pattern="like"))
 
 async def join(e):
 
     await e.edit("👍🏿👇🏿👇🏿👇🏿👇🏿👇🏿👇🏿👇🏿👇🏿👇🏿👍🏿\n👉🏿👍🏾👇🏾👇🏾👇🏾👇🏾👇🏾👇🏾👇🏾👍🏾👈🏿\n👉🏿👉🏾👍🏽👇🏽👇🏽👇🏽👇🏽👇🏽👍🏽👈🏾👈🏿\n👉🏿👉🏾👉🏽👍🏼👇🏼👇🏼👇🏼👍🏼👈🏽👈🏾👈🏿\n👉🏿👉🏾👉🏽👉🏼👍🏻👇🏻👍🏻👈🏼👈🏽👈🏾👈🏿\n👉🏿👉🏾👉🏽👉🏼👉🏻❤👈🏻👈🏼👈🏽👈🏾👈🏿\n👉🏿👉🏾👉🏽👉🏼👍🏻👆🏻👍🏻👈🏼👈🏽👈🏾👈🏿\n👉🏿👉🏾👉🏽👍🏼👆🏼👆🏼👆🏼👍🏼👈🏽👈🏾👈🏿\n👉🏿👉🏾👍🏽👆🏽👆🏽👆🏽👆🏽👆🏽👍🏽👈🏾👈🏿\n👉🏿👍🏾👆🏾👆🏾👆🏾👆🏾👆🏾👆🏾👆🏾👍🏾👈🏿\n👍🏿👆🏿👆🏿👆🏿👆🏿👆🏿👆🏿👆🏿👆🏿👆🏿👍🏿")
+
+from telethon import events
+import asyncio
+import os
+import sys
+
+
+@telebot.on(admin_cmd(pattern=r"plane", outgoing=True))
+async def _(event):
+    if event.fwd_from:
+        return
+        
+        
+    await event.edit("✈-------------")
+    await event.edit("-✈------------")
+    await event.edit("--✈-----------")
+    await event.edit("---✈----------")
+    await event.edit("----✈---------")
+    await event.edit("-----✈--------")
+    await event.edit("------✈-------")
+    await event.edit("-------✈------")
+    await event.edit("--------✈-----") 
+    await event.edit("---------✈----")
+    await event.edit("----------✈---")
+    await event.edit("-----------✈--")
+    await event.edit("------------✈-")
+    await event.edit("-------------✈")
+    await asyncio.sleep(3)
+    await event.delete()
+
+from telethon import events
+import asyncio
+
+@borg.on(events.NewMessage(pattern=r"\.(.*)", outgoing=True))
+
+async def _(event):
+
+    if event.fwd_from:
+
+        return
+
+    animation_interval = 1.5
+
+    animation_ttl = range(0, 11)
+
+    input_str = event.pattern_match.group(1)
+
+    if input_str == "music":
+
+        await event.edit(input_str)
+
+        animation_chars = [
+            "⬤⬤⬤ 81% ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀`✖️`\n\n⠀⠀⠀⠀⠀[cee jay Music Player](tg://user?id=689811472)\n\n⠀⠀⠀⠀**Now Playing:Kamasutra BGM**\n\n**00:00** ▱▱▱▱▱▱▱▱▱▱ **00:10**\n\n⠀⠀⠀⠀⠀`🔂` `⏮️` `⏪️` `▶️` `⏩️` `⏭️`\n\n**⠀Next Song:** __I Am Sexy And I Know It.__\n\n⠀⠀⠀⠀**⠀Device: Nokia 1100**",
+            "⬤⬤⬤ 81% ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀`✖️`\n\n⠀⠀⠀⠀⠀[cee jay Music Player](tg://user?id=689811472)\n\n⠀⠀⠀⠀**Now Playing:Kamasutra BGM**\n\n**00:01** ▰▱▱▱▱▱▱▱▱▱ **00:10**\n\n⠀⠀⠀⠀⠀`🔂` `⏮️` `⏪️` `⏸️` `⏩️` `⏭️`\n\n**⠀Next Song:** __I Am Sexy And I Know It.__\n\n⠀⠀⠀⠀**⠀Device: Nokia 1100**",
+            "⬤⬤⬤ 81% ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀`✖️`\n\n⠀⠀⠀⠀⠀[cee jay  Music Player](tg://user?id=689811472)\n\n⠀⠀⠀⠀**Now Playing:Kamasutra BGM**\n\n**00:02** ▰▰▱▱▱▱▱▱▱▱ **00:10**\n\n⠀⠀⠀⠀⠀`🔂` `⏮️` `⏪️` `⏸️` `⏩️` `⏭️`\n\n**⠀Next Song:** __I Am Sexy And I Know It.__\n\n⠀⠀⠀⠀**⠀Device: Nokia 1100**",
+            "⬤⬤⬤ 81% ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀`✖️`\n\n⠀⠀⠀⠀⠀[cee jay Music Player](tg://user?id=689811472)\n\n⠀⠀⠀⠀**Now Playing:Kamasutra BGM**\n\n**00:03** ▰▰▰▱▱▱▱▱▱▱ **00:10**\n\n⠀⠀⠀⠀⠀`🔂` `⏮️` `⏪️` `⏸️` `⏩️` `⏭️`\n\n**⠀Next Song:** __I Am Sexy And I Know It.__\n\n⠀⠀⠀⠀**⠀Device: Nokia 1100**",
+            "⬤⬤◯ 80% ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀`✖️`\n\n⠀⠀⠀⠀⠀[cee jay Music Player](tg://user?id=689811472)\n\n⠀⠀⠀⠀**Now Playing:Kamasutra BGM**\n\n**00:04** ▰▰▰▰▱▱▱▱▱▱ **00:10**\n\n⠀⠀⠀⠀⠀`🔂` `⏮️` `⏪️` `⏸️` `⏩️` `⏭️`\n\n**⠀Next Song:** __I Am Sexy And I Know It.__\n\n⠀⠀⠀⠀**⠀Device: Nokia 1100**",
+            "⬤⬤◯ 80% ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀`✖️`\n\n⠀⠀⠀⠀⠀[cee jay Music Player](tg://user?id=689811472)\n\n⠀⠀⠀⠀**Now Playing:Kamasutra BGM**\n\n**00:05** ▰▰▰▰▱▱▱▱▱▱ **00:10**\n\n⠀⠀⠀⠀⠀`🔂` `⏮️` `⏪️` `⏸️` `⏩️` `⏭️`\n\n**⠀Next Song:** __I Am Sexy And I Know It.__\n\n⠀⠀⠀⠀**⠀Device: Nokia 1100**",    
+            "⬤⬤◯ 80% ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀`✖️`\n\n⠀⠀⠀⠀⠀[cee jay Music Player](tg://user?id=689811472)\n\n⠀⠀⠀⠀**Now Playing:Kamasutra BGM**\n\n**00:06** ▰▰▰▰▰▰▱▱▱▱ **00:10**\n\n⠀⠀⠀⠀⠀`🔂` `⏮️` `⏪️` `⏸️` `⏩️` `⏭️`\n\n**⠀Next Song:** __I Am Sexy And I Know It.__\n\n⠀⠀⠀⠀**⠀Device: Nokia 1100**",
+            "⬤⬤◯ 80% ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀`✖️`\n\n⠀⠀⠀⠀⠀[cee jay Music Player](tg://user?id=689811472)\n\n⠀⠀⠀⠀**Now Playing:Kamasutra BGM**\n\n**00:07** ▰▰▰▰▰▰▰▱▱▱ **00:10**\n\n⠀⠀⠀⠀⠀`🔂` `⏮️` `⏪️` `⏸️` `⏩️` `⏭️`\n\n**⠀Next Song:** __I Am Sexy And I Know It.__\n\n⠀⠀⠀⠀**⠀Device: Nokia 1100**",
+            "⬤⬤◯ 80% ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀`✖️`\n\n⠀⠀⠀⠀⠀[cee jay Music Player](tg://user?id=689811472)\n\n⠀⠀⠀⠀**Now Playing:Kamasutra BGM**\n\n**00:08** ▰▰▰▰▰▰▰▰▱▱ **00:10**\n\n⠀⠀⠀⠀⠀`🔂` `⏮️` `⏪️` `⏸️` `⏩️` `⏭️`\n\n**⠀Next Song:** __I Am Sexy And I Know It.__\n\n⠀⠀⠀⠀**⠀Device: Nokia 1100**",
+            "⬤⬤◯ 80% ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀`✖️`\n\n⠀⠀⠀⠀⠀[cee jay Music Player](tg://user?id=689811472)\n\n⠀⠀⠀⠀**Now Playing:Kamasutra BGM**\n\n**00:09** ▰▰▰▰▰▰▰▰▰▱ **00:10**\n\n⠀⠀⠀⠀⠀`🔂` `⏮️` `⏪️` `⏸️` `⏩️` `⏭️`\n\n**⠀Next Song:** __I Am Sexy And I Know It.__\n\n⠀⠀⠀⠀**⠀Device: Nokia 1100**",
+            "⬤⬤◯ 80% ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀`✖️`\n\n⠀⠀⠀⠀⠀[cee jay Music Player](tg://user?id=689811472)\n\n⠀⠀⠀⠀**Now Playing:Kamasutra BGM**\n\n**00:10** ▰▰▰▰▰▰▰▰▰▰ **00:10**\n\n⠀⠀⠀⠀⠀`🔂` `⏮️` `⏪️` `⏺️` `⏩️` `⏭️`\n\n**⠀Next Song:** __I Am Sexy And I Know It.__\n\n⠀⠀⠀⠀**⠀Device: Nokia 1100**"
+        ]
+
+        for i in animation_ttl:
+
+            await asyncio.sleep(animation_interval)
+
+            await event.edit(animation_chars[i % 11])
+
+"""Available Commands:
+
+.unoob
+.menoob
+.upro
+.mepro
+
+@arnab431"""
+
+from telethon import events
+
+import asyncio
+
+from userbot.utils import admin_cmd
+
+
+
+
+
+@borg.on(admin_cmd("(.*)"))
+
+async def _(event):
+
+    if event.fwd_from:
+
+        return
+
+    animation_interval = 0.5
+    
+
+    animation_ttl = range(0, 9)
+
+    input_str = event.pattern_match.group(1)
+
+    if input_str == "unoob":
+
+        await event.edit(input_str)
+
+        animation_chars = [
+            "EvErYbOdY",
+            "iZ",
+            "BiGGeSt",
+            "NoOoB" ,
+            "uNtiL",
+            "YoU",
+            "aRriVe",
+            "😈",
+            "EvErYbOdY iZ BiGGeSt NoOoB uNtiL YoU aRriVe 😈"
+        ]
+
+        for i in animation_ttl:
+
+
+            await event.edit(animation_chars[i % 9])
+            await asyncio.sleep(animation_interval)
+            
+@borg.on(admin_cmd("(.*)"))
+
+async def _(event):
+
+    if event.fwd_from:
+
+        return
+
+    animation_interval = 0.5
+    
+
+    animation_ttl = range(0, 9)
+
+    input_str = event.pattern_match.group(1)
+
+    if input_str == "menoob":
+
+        await event.edit(input_str)
+
+        animation_chars = [
+            "EvErYbOdY",
+            "iZ",
+            "BiGGeSt",
+            "NoOoB" ,
+            "uNtiL",
+            "i",
+            "aRriVe",
+            "😈",
+            "EvErYbOdY iZ BiGGeSt NoOoB uNtiL i aRriVe 😈"
+        ]
+
+        for i in animation_ttl:
+
+
+            await event.edit(animation_chars[i % 9])
+            await asyncio.sleep(animation_interval) 
+            
+@borg.on(admin_cmd("(.*)"))
+
+async def _(event):
+
+    if event.fwd_from:
+
+        return
+
+    animation_interval = 0.5
+    
+
+    animation_ttl = range(0, 8)
+
+    input_str = event.pattern_match.group(1)
+
+    if input_str == "upro":
+
+        await event.edit(input_str)
+
+        animation_chars = [
+            "EvErYbOdY",
+            "iZ",
+            "PeRu" ,
+            "uNtiL",
+            "YoU",
+            "aRriVe",
+            "😈",
+            "EvErYbOdY iZ PeRu uNtiL YoU aRriVe 😈"
+        ]
+
+        for i in animation_ttl:
+
+
+            await event.edit(animation_chars[i % 8])
+            await asyncio.sleep(animation_interval)  
+            
+@borg.on(admin_cmd("(.*)"))
+
+async def _(event):
+
+    if event.fwd_from:
+
+        return
+
+    animation_interval = 0.5
+    
+
+    animation_ttl = range(0, 8)
+
+    input_str = event.pattern_match.group(1)
+
+    if input_str == "mepro":
+
+        await event.edit(input_str)
+
+        animation_chars = [
+            "EvErYbOdY",
+            "iZ",
+            "PeRu" ,
+            "uNtiL",
+            "i",
+            "aRriVe",
+            "😈",
+            "EvErYbOdY iZ PeRu uNtiL i aRriVe 😈"
+        ]
+
+        for i in animation_ttl:
+
+
+            await event.edit(animation_chars[i % 8])
+            await asyncio.sleep(animation_interval)                                
+
+#Originally created By KingMars ✅ Rain Sequence 2 {Updated}
+from telethon import events
+import asyncio
+from collections import deque
+
+
+@borg.on(admin_cmd(pattern=r"km_rain2", outgoing=True))
+async def _(event):
+	if event.fwd_from:
+		return
+	deq = deque(list("☁️⛈Ř/~\İŇ🌬⚡🌪"))
+	for _ in range(100):
+		await asyncio.sleep(0.1)
+		await event.edit("".join(deq))
+		deq.rotate(1)
+    
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+# (c) @INF1N17Y
+
+from telethon import events
+import random
+import asyncio
+from userbot.utils import admin_cmd
+
+@telebot.on(admin_cmd(pattern=r"react (.*)", outgoing=True))
+async def _(event):
+    if event.fwd_from:
+        return
+    input_str = event.pattern_match.group(1)
+    if input_str in "happy":
+        emoticons = [
+            "( ͡° ͜ʖ ͡°)",
+            "(ʘ‿ʘ)",
+            "(✿´‿`)",
+            "=͟͟͞͞٩(๑☉ᴗ☉)੭ु⁾⁾",
+            "(*⌒▽⌒*)θ～♪",
+            "°˖✧◝(⁰▿⁰)◜✧˖°",
+            "✌(-‿-)✌",
+            "⌒°(❛ᴗ❛)°⌒",
+            "(ﾟ<|＼(･ω･)／|>ﾟ)",
+            "ヾ(o✪‿✪o)ｼ",
+        ]
+    elif input_str in "thinking":
+        emoticons = [
+            "(҂⌣̀_⌣́)",
+            "（；¬＿¬)",
+            "(-｡-;",
+            "┌[ O ʖ̯ O ]┐",
+            "〳 ͡° Ĺ̯ ͡° 〵",
+        ]
+    elif input_str in "waving":
+        emoticons = [
+            "(ノ^∇^)",
+            "(;-_-)/",
+            "@(o・ェ・)@ノ",
+            "ヾ(＾-＾)ノ",
+            "ヾ(◍’౪`◍)ﾉﾞ♡",
+            "(ό‿ὸ)ﾉ",
+            "(ヾ(´・ω・｀)",
+        ]
+    elif input_str in "wtf":
+        emoticons = [
+            "༎ຶ‿༎ຶ",
+            "(‿ˠ‿)",
+            "╰U╯☜(◉ɷ◉ )",
+            "(;´༎ຶ益༎ຶ`)♡",
+            "╭∩╮(︶ε︶*)chu",
+            "( ＾◡＾)っ (‿|‿)",
+        ]
+    elif input_str in "love":
+        emoticons = [
+            "乂❤‿❤乂",
+            "(｡♥‿♥｡)",
+            "( ͡~ ͜ʖ ͡°)",
+            "໒( ♥ ◡ ♥ )७",
+            "༼♥ل͜♥༽",
+        ]
+    elif input_str in "confused":
+        emoticons = [
+            "(・_・ヾ",
+            "｢(ﾟﾍﾟ)",
+            "﴾͡๏̯͡๏﴿",
+            "(￣■￣;)!?",
+            "▐ ˵ ͠° (oo) °͠ ˵ ▐",
+            "(-_-)ゞ゛",
+        ]
+    elif input_str in "dead":
+        emoticons = [
+            "(✖╭╮✖)",
+            "✖‿✖",
+            "(+_+)",
+            "(✖﹏✖)",
+            "∑(✘Д✘๑)",
+        ]
+    elif input_str in "sad":
+        emoticons = [
+            "(＠´＿｀＠)",
+            "⊙︿⊙",
+            "(▰˘︹˘▰)",
+            "●︿●",
+            "(　´_ﾉ` )",
+            "彡(-_-;)彡",
+        ]
+    elif input_str in "dog":
+        emoticons = [
+            "-ᄒᴥᄒ-",
+            "◖⚆ᴥ⚆◗",
+        ]
+    else:    
+        emoticons = [
+            "( ͡° ͜ʖ ͡°)",
+            "¯\_(ツ)_/¯",
+            "( ͡°( ͡° ͜ʖ( ͡° ͜ʖ ͡°)ʖ ͡°) ͡°)",
+            "ʕ•ᴥ•ʔ",
+            "(▀̿Ĺ̯▀̿ ̿)",
+            "(ง ͠° ͟ل͜ ͡°)ง",
+            "༼ つ ◕_◕ ༽つ",
+            "ಠ_ಠ",
+            "(☞ ͡° ͜ʖ ͡°)☞",
+            "¯\_༼ ି ~ ି ༽_/¯",
+            "c༼ ͡° ͜ʖ ͡° ༽⊃",
+        ]
+    index = random.randint(0, len(emoticons))
+    output_str = emoticons[index]
+    await event.edit(output_str)
+
+# By Priyam Kalra and Mp SinGH
+# Use .syntax emoji/reactions/ascii to know all commands
+from telethon import events
+from userbot.utils import admin_cmd
+import asyncio
+from telethon.tl import functions, types
+
+
+emojis = {
+    "yee": "ツ",
+    "happy": "(ʘ‿ʘ)",
+    "veryhappy": "=͟͟͞͞٩(๑☉ᴗ☉)੭ु⁾⁾",
+    "amazed": "ヾ(o✪‿✪o)ｼ",
+    "crying": "༎ຶ︵༎ຶ",
+    "dicc": "╰U╯☜(◉ɷ◉ )",
+    "fek": "╰U╯\n(‿ˠ‿)",
+    "ded": "✖‿✖",
+    "sad": "⊙︿⊙",
+    "lenny": "( ͡°( ͡° ͜ʖ( ͡° ͜ʖ ͡°)ʖ ͡°) ͡°)",
+    "idc": "¯\_(ツ)_/¯",
+    "f": "😂😂😂😂😂😂😂😂\n😂😂😂😂😂😂😂😂😂\n😂😂\n😂😂\n😂😂😂😂😂😂\n😂😂😂😂😂😂\n😂😂\n😂😂\n😂😂\n😂😂\n😂😂"
+}
+
+unpacked_emojis = ""
+
+for emoji in emojis:
+    unpacked_emojis += f"`{emoji}`\n"
+
+# this dictionary is a mess but meh
+ascii = {
+    "mf": "'                            / ¯͡  ) \n                           /...../ \n                         /´¯´/ \n                       /¯..../ \n                    /....  / \n             /´¯/'...' /´¯¯·¸ \n          / '/.../..../..../.. /¨¯\ \n        ('(...´...´.... ¯~'/...')  /\n         \.................'..... /´ \n          \................ _.·´\n            \..............( \n'             \.............\ ",
+    "dislike": "███████▄▄███████████▄\n▓▓▓▓▓▓█░░░░░░░░░░░░░░█\n▓▓▓▓▓▓█░░░░░░░░░░░░░░█\n▓▓▓▓▓▓█░░░░░░░░░░░░░░█\n▓▓▓▓▓▓█░░░░░░░░░░░░░░█\n▓▓▓▓▓▓█░░░░░░░░░░░░░░█\n▓▓▓▓▓▓███░░░░░░░░░░░░█\n██████▀░░█░░░░██████▀\n░░░░░░░░░█░░░░█\n░░░░░░░░░░█░░░█\n░░░░░░░░░░░█░░█\n░░░░░░░░░░░█░░█\n░░░░░░░░░░░░▀▀ ",
+    "music": "╔══╗ \n║██║ \n║(O)║♫ ♪ ♫ ♪\n╚══╝\n▄ █ ▄ █ ▄ ▄ █ ▄ █ ▄ █\n\nVol- --------------------------● Vol+ ",
+    "chess": "♜♞♝♚♛♝♞♜\n♟♟♟♟♟♟♟♟\n▓░▓░▓░▓░\n░▓░▓░▓░▓\n▓░▓░▓░▓░\n░▓░▓░▓░▓\n♙♙♙♙♙♙♙♙\n♖♘♗♔♕♗♘♖ ",
+    "shitos": "╭━━━┳╮╱╱╭╮╱╭━━━┳━━━╮\n┃╭━╮┃┃╱╭╯╰╮┃╭━╮┃╭━╮┃\n┃╰━━┫╰━╋╮╭╯┃┃╱┃┃╰━━╮\n╰━━╮┃╭╮┣┫┃╱┃┃╱┃┣━━╮┃\n┃╰━╯┃┃┃┃┃╰╮┃╰━╯┃╰━╯┃\n╰━━━┻╯╰┻┻━╯╰━━━┻━━━╯ ",
+    "qrcode": "█▀▀▀▀▀█░▀▀░░░█░░░░█▀▀▀▀▀█\n█░███░█░█▄░█▀▀░▄▄░█░███░█\n█░▀▀▀░█░▀█▀▀▄▀█▀▀░█░▀▀▀░█\n▀▀▀▀▀▀▀░▀▄▀▄▀▄█▄▀░▀▀▀▀▀▀▀\n█▀█▀▄▄▀░█▄░░░▀▀░▄█░▄▀█▀░▀\n░█▄▀░▄▀▀░░░▄▄▄█░▀▄▄▄▀▄▄▀▄\n░░▀█░▀▀▀▀▀▄█░▄░████ ██▀█▄\n▄▀█░░▄▀█▀█▀░█▄▀░▀█▄██▀░█▄\n░░▀▀▀░▀░█▄▀▀▄▄░▄█▀▀▀█░█▀▀\n█▀▀▀▀▀█░░██▀█░░▄█░▀░█▄░██\n█░███░█░▄▀█▀██▄▄▀▀█▀█▄░▄▄\n█░▀▀▀░█░█░░▀▀▀░█░▀▀▀▀▄█▀░\n▀▀▀▀▀▀▀░▀▀░░▀░▀░░░▀▀░▀▀▀▀` ",
+    "youjoined": "━━━━━┓ \n┓┓┓┓┓┃\n┓┓┓┓┓┃　ヽ○ノ ⇦ Me When \n┓┓┓┓┓┃.      /　        You Joined\n┓┓┓┓┓┃  ノ) \n┓┓┓┓┓┃\n┓┓┓┓┓┃\n┓┓┓┓┓┃\n┓┓┓┓┓┃\n┓┓┓┓┓┃\n┓┓┓┓┓┃\n┓┓┓┓┓┃\n┓┓┓┓┓┃\n┓┓┓┓┓┃\n┓┓┓┓┓┃\n┓┓┓┓┓┃\n┓┓┓┓┓┃\n┓┓┓┓┓┃\n┓┓┓┓┓┃\n┓┓┓┓┓┃\n┓┓┓┓┓┃ "
+}
+
+unpacked_ascii = ""
+
+for art in ascii:
+    unpacked_ascii += f"{art}\n"
+
+
+@borg.on(admin_cmd(pattern="oof ?(.*)"))
+async def _(event):
+    if event.fwd_from:
+        return
+    oof = event.pattern_match.group(1)
+    if not oof:
+        oof = 10
+    try:
+        oof = int(oof)
+    except:
+        return await event.edit("Count must be an integer!")
+    oof = int(oof/2)
+    output = ""
+    for _ in range(oof):
+        output += "Oo"
+        await event.edit(output)
+    output += "f"
+    await event.edit(output)
+
+
+@borg.on(admin_cmd(pattern="hek ?(.*)"))
+async def _(event):
+    if event.fwd_from:
+        return
+    for _ in range(5):
+        await event.edit(";_;")
+        await event.edit("_;;")
+        await event.edit(";;_")
+    await event.edit(";_;")
+
+
+@borg.on(admin_cmd(pattern="sed ?(.*)"))
+async def _(event):
+    if event.fwd_from:
+        return
+    for _ in range(4):
+        await event.edit(":/")
+        await event.edit(":|")
+        await event.edit(":\\")
+        await event.edit(":|")
+    await event.edit(":/")
+
+
+@borg.on(admin_cmd(pattern="emoji ?(.*)"))
+async def _(event):
+    if event.fwd_from:
+        return
+    input_str = event.pattern_match.group(1)
+    try:
+        req_emoji = emojis[str(input_str)]
+        await event.edit(req_emoji)
+    except KeyError:
+        await event.edit("Emoji not found!")
+
+import asyncio
+from asyncio import wait
+from userbot.utils import admin_cmd
+
+
+@borg.on(admin_cmd(pattern="repeat ?(.*)"))
+async def _(event):
+    message = event.text[10:]
+    count = int(event.text[8:10])
+    repmessage = message * count
+    await wait([event.respond(repmessage)for i in range(count)])
+    await event.delete()
+

@@ -2,7 +2,7 @@ from telethon import events
 from telethon.utils import pack_bot_file_id
 from userbot.plugins.sql_helper.welcome_sql import get_current_welcome_settings, \
     add_welcome_setting, rm_welcome_setting, update_previous_welcome
-
+from userbot.utils import admin_cmd
 
 @bot.on(events.ChatAction())  # pylint:disable=E0602
 async def _(event):
@@ -48,7 +48,7 @@ async def _(event):
             update_previous_welcome(event.chat_id, current_message.id)
 
 
-@command(pattern="^.savewelcome")  # pylint:disable=E0602
+@telebot.on(admin_cmd(pattern="savewelcome"))  # pylint:disable=E0602
 async def _(event):
     if event.fwd_from:
         return
@@ -63,7 +63,7 @@ async def _(event):
         await event.edit("Welcome note saved. ")
 
 
-@command(pattern="^.clearwelcome")  # pylint:disable=E0602
+@telebot.on(admin_cmd(pattern="clearwelcome"))  # pylint:disable=E0602
 async def _(event):
     if event.fwd_from:
         return
@@ -74,7 +74,7 @@ async def _(event):
         "The previous welcome message was `{}`.".format(cws.custom_welcome_message)
     )
 
-@command(pattern="^.listwelcome")  # pylint:disable=E0602
+@telebot.on(admin_cmd(pattern="listwelcome"))  # pylint:disable=E0602
 async def _(event):
     if event.fwd_from:
         return

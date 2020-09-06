@@ -1,6 +1,6 @@
 # Imported by @its_xditya
 
-from userbot.events import admin_cmd
+from userbot.utils import admin_cmd
 from userbot import bot, BOTLOG_CHATID, CMD_HELP
 import asyncio
 from telethon import events

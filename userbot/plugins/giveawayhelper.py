@@ -20,7 +20,7 @@ logs_id = Var.PRIVATE_GROUP_ID
 
 
 
-@borg.on(admin_cmd("forward ?(.*)"))
+@borg.on(admin_cmd(pattern="forward ?(.*)"))
 
 async def forw(event): 
   if event.fwd_from:
@@ -61,7 +61,7 @@ async def forw(event):
         await event.edit("Set up log channel for checking errors.")
     
     
-@borg.on(admin_cmd("broadcast ?(.*)"))
+@borg.on(admin_cmd(pattern="broadcast ?(.*)"))
 
 async def _(event):
   if event.fwd_from:
@@ -144,7 +144,7 @@ async def _(event):
 
 # Written by @HeisenbergTheDanger
 
-@borg.on(admin_cmd("add ?(.*)"))
+@borg.on(admin_cmd(pattern="add ?(.*)"))
 async def add_ch(event):
     if event.fwd_from:
         return
@@ -181,7 +181,7 @@ async def add_ch(event):
         await event.delete()
 
 
-@borg.on(admin_cmd("rm ?(.*)"))
+@borg.on(admin_cmd(pattern="rm ?(.*)"))
 async def remove_ch(event):
     if event.fwd_from:
         return
@@ -208,7 +208,7 @@ async def remove_ch(event):
         await asyncio.sleep(3)
         await event.delete()
         
-@borg.on(admin_cmd("listchannels"))
+@borg.on(admin_cmd(pattern="listchannels"))
 async def list(event):
     if event.fwd_from:
         return
@@ -233,7 +233,7 @@ async def list(event):
         await event.edit(msg)
 
         
-@borg.on(admin_cmd("search ?(.*)"))
+@borg.on(admin_cmd(pattern="search ?(.*)"))
 async def search(event):
     channel_id =  event.pattern_match.group(1)
     try:

@@ -19,7 +19,7 @@ from humanize import naturalsize
 
 from userbot import CMD_HELP
 from userbot.events import register
-
+from userbot.utils import admin_cmd
 
 def subprocess_run(cmd):
     reply = ""
@@ -37,7 +37,7 @@ def subprocess_run(cmd):
     return talk
 
 
-@register(outgoing=True, pattern=r"^\.direct(?: |$)([\s\S]*)")
+@telebot.on(admin_cmd(outgoing=True, pattern=r"direct(?: |$)([\s\S]*)"))
 async def direct_link_generator(request):
     """ direct links generator """
     await request.edit("`Processing...`")

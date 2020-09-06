@@ -7,7 +7,7 @@
 credit: lejend @r4v4n4"""
 
 import random
-
+from userbot.utils import admin_cmd
 from telethon import events, types, functions, utils
 
 
@@ -15,7 +15,7 @@ def choser(cmd, pack, blacklist=None):
     if blacklist is None:
         blacklist = {}
     docs = None
-    @borg.on(events.NewMessage(pattern=rf'\.{cmd}', outgoing=True))
+    @borg.on(admin_cmd(pattern=rf'{cmd}', outgoing=True))
     async def handler(event):
         await event.delete()
 

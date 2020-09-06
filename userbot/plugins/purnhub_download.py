@@ -30,7 +30,7 @@ from telethon.tl.functions.messages import ImportChatInviteRequest
 
 from userbot.utils import admin_cmd
 
-@borg.on(admin_cmd("phd ?(.*)"))
+@borg.on(admin_cmd(pattern="phd ?(.*)"))
 
 async def _(event):
 
