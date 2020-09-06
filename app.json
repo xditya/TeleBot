@@ -99,8 +99,8 @@
    "required": true
   },
   "CMD_HNDLR": {
-   "description": "Used to invoke bot commands. Change it if needed or leave as such.",
-   "value": "\.",
+   "description": "Used to invoke bot commands. Change it if needed or leave as such. Read https://t.me/TeleBotHelpChat/63538",
+   "value": ".",
    "required": true
   },
   "TG_BOT_TOKEN_BF_HER": {
