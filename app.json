@@ -100,7 +100,7 @@
   },
   "CMD_HNDLR": {
    "description": "Used to invoke bot commands. Change it if needed or leave as such.",
-   "value": ".",
+   "value": "\.",
    "required": true
   },
   "TG_BOT_TOKEN_BF_HER": {
