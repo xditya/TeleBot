@@ -1,4 +1,5 @@
 # TeleBot - Telegram UserBot
+
 <p align="left">
     <a href="https://t.me/TeleBotHelpChat"> <img src="https://img.shields.io/badge/telegram-Support_Group-blue?style=social&logo=telegram" alt="Support" /></a>
     <a href="https://github.com/xditya/TeleBot/stargazers"><img src="https://img.shields.io/github/stars/xditya/TeleBot?style=social"></a>
@@ -6,16 +7,21 @@
 </p>
     
 ## Video Tutorial on deploying
+
 Click the below button to watch the video tutorial on deploying
 
-<a href="https://youtu.be/XmvdDHiIDb4"><img src="https://img.shields.io/badge/How%20To-Deploy-blue.svg?logo=Youtube"></a>
+<a href="https://youtu.be/aPU334icQSM"><img src="https://img.shields.io/badge/How%20To-Deploy-LATEST-blue.svg?logo=Youtube"></a>
+<a href="https://youtu.be/aPU334icQSM"><img src="https://img.shields.io/youtube/views/XmvdDHiIDb4?style=social">
+    
+<a href="https://youtu.be/XmvdDHiIDb4"><img src="https://img.shields.io/badge/How%20To-Deploy-OLD METHOD-blue.svg?logo=Youtube"></a>
 <a href="https://youtu.be/XmvdDHiIDb4"><img src="https://img.shields.io/youtube/views/XmvdDHiIDb4?style=social">
+    
 ## The Easier Way to install
 
 [![Deploy To Heroku](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/xditya/TeleBot)
 
 ## Support
-Join [TeleBot Support group](https://t.me/TeleBotHelp) for updates and new plugin suggestions.
+Join [TeleBot Support group](https://t.me/TeleBotSupport) for updates and new plugin suggestions.
 Do fork and star the repo 
 
 ### Session String 
@@ -70,16 +76,14 @@ Fortunately there are no Mandatory vars for the UniBorg Support Config.
 # Disclaimer
 ```
 /**
-    Your Telegram account may get banned.
-    I am not responsible for any improper use of this bot
-    This bot is intended for the purpose of having fun with memes,
-    as well as efficiently managing groups.
-    You ended up spamming groups, getting reported left and right,
-    and you ended up in a Finale Battle with Telegram and at the end
-    Telegram Team deleted your account?
-    And after that, then you pointed your fingers at us
-    for getting your acoount deleted?
-    I will be rolling on the floor laughing at you.
+    Improper use may lead to ban.
+    I am not responsible if you misuse this bot.
+	This bot is just for managing groups more effectively and having some fun
+	with your telegram account.
+	No one is responsible for your actions.
+	If you spammed and got reported again and again, 
+	and, at last got your account banned, and you
+	point your fingers at me, I'll be rolling on the floor laughing at you.
 /**
 ```
 
