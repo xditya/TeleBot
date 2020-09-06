@@ -53,6 +53,11 @@
    "value": "",
    "required": false
   },
+   "CMD_HNDR": {
+   "description": "Used to invoke commands, leave blank for default, i.i, "."",
+   "value": "",
+   "required": false
+  },  
   "GIT_REPO_NAME": {
    "description": "Your repo name Example: xditya/TeleBot, but GITHUB_ACCESS_TOKEN must be setup first.",
    "value": "",
