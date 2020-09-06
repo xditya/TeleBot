@@ -13,7 +13,7 @@ Click the below button to watch the video tutorial on deploying
 <a href="https://youtu.be/aPU334icQSM"><img src="https://img.shields.io/badge/How%20To-Deploy-LATEST-blue.svg?logo=Youtube"></a>
 <a href="https://youtu.be/aPU334icQSM"><img src="https://img.shields.io/youtube/views/XmvdDHiIDb4?style=social">
     
-<a href="https://youtu.be/XmvdDHiIDb4"><img src="https://img.shields.io/badge/How%20To-Deploy-OLD METHOD-blue.svg?logo=Youtube"></a>
+<a href="https://youtu.be/XmvdDHiIDb4"><img src="https://img.shields.io/badge/How%20To-Deploy-blue.svg?logo=Youtube"></a>
 <a href="https://youtu.be/XmvdDHiIDb4"><img src="https://img.shields.io/youtube/views/XmvdDHiIDb4?style=social">
     
 ## The Easier Way to install
