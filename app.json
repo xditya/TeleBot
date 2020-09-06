@@ -98,6 +98,11 @@
    "value": "",
    "required": true
   },
+   "CMD_HNDLR": {
+   "description": "Used to invoke bot commands, default is ".". Change it if needed or leave as such.",
+   "value": ".",
+   "required": true
+  },
   "TG_BOT_TOKEN_BF_HER": {
    "description": "Needed for inline buttons maker. Make a bot at [BotFather](http://telegram.dog/BotFather) and get the token of your bot. Get it else .help won't work.",
    "value": "",
