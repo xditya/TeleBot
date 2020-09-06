@@ -98,11 +98,6 @@
    "value": "",
    "required": true
   },
-   "CMD_HNDLR": {
-   "description": "Used to invoke bot commands. Change it if needed or leave as such. Use \(a character), \ is must.",
-   "value": "\.",
-   "required": true
-  },
   "TG_BOT_TOKEN_BF_HER": {
    "description": "Needed for inline buttons maker. Make a bot at [BotFather](http://telegram.dog/BotFather) and get the token of your bot. Get it else .help won't work.",
    "value": "",
@@ -148,7 +143,12 @@
    "value": "",
    "required": false
   },
-  "TZ": {
+   "CMD_HNDLR": {
+   "description": "Used to invoke commands, leave as such for default ("."), else use \character.",
+   "value": "\.",
+   "required": true
+  },
+   "TZ": {
    "description": "Required for Correct Time on autopic/get time. Know your timezone from http://www.timezoneconverter.com/cgi-bin/findzone.tzc",
    "value": "",
    "required": false
