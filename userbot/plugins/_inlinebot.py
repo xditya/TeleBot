@@ -43,6 +43,13 @@ if Var.TG_BOT_USER_NAME_BF_HER is not None and tgbot is not None:
             reply_pop_up_alert = "Please get your own Userbot from @TeleBotHelp , and don't use mine!"
             await event.answer(reply_pop_up_alert, cache_time=0, alert=True)
 
+    @tgbot.on(events.callbackquery.CallbackQuery(data=re.compile(b"close")))
+    async def on_plug_in_callback_query_handler(event):
+        if event.query.user_id == bot.uid:
+            await event.edit("Help Menu Closed.")
+        else:
+            reply_pop_up_alert = "Please get your own catuserbot, and don't use mine! Join @catuserbot17 help "
+            await event.answer(reply_pop_up_alert, cache_time=0, alert=True)
 
     @tgbot.on(events.callbackquery.CallbackQuery(  # pylint:disable=E0602
         data=re.compile(b"helpme_prev\((.+?)\)")
@@ -102,7 +109,7 @@ def paginate_help(page_number, loaded_plugins, prefix):
             helpable_plugins.append(p)
     helpable_plugins = sorted(helpable_plugins)
     modules = [custom.Button.inline(
-        "{} {}".format("⚡", x),
+        "{} {}".format("⚡", x, "⚡"),
         data="us_plugin_{}".format(x))
         for x in helpable_plugins]
     pairs = list(zip(modules[::number_of_cols], modules[1::number_of_cols]))
@@ -114,6 +121,7 @@ def paginate_help(page_number, loaded_plugins, prefix):
         pairs = pairs[modulo_page * number_of_rows:number_of_rows * (modulo_page + 1)] + \
             [
             (custom.Button.inline("⏮️ Previous", data="{}_prev({})".format(prefix, modulo_page)),
+             custom.Button.inline("❌ Close ❌", data="close"),
              custom.Button.inline("Next ⏭️", data="{}_next({})".format(prefix, modulo_page)))
         ]
     return pairs
