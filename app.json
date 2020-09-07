@@ -53,7 +53,7 @@
    "value": "",
    "required": false
   },
-   "CMD_HNDR": {
+   "CMD_HNDLR": {
    "description": "Used to invoke commands, leave blank for default, (dot)",
    "value": "",
    "required": false
