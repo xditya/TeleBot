@@ -2,9 +2,8 @@ import os, time, asyncio, io
 import userbot.plugins.sql_helper.pmpermit_sql as pmpermit_sql
 from telethon.tl.functions.users import GetFullUserRequest
 from telethon import events, errors, functions, types
-from userbot import ALIVE_NAME, CUSTOM_PMPERMIT, CUSTOM_BLOCK
+from userbot import ALIVE_NAME, CUSTOM_PMPERMIT, CUSTOM_BLOCK, COUNT_MSG, COUNT_PM
 from userbot.utils import admin_cmd
-from global_variables import COUNT_MSG, COUNT_PM
 
 BLK = str(CUSTOM_BLOCK) if CUSTOM_BLOCK else "You have been blocked, goodbye!"
 MESAG = str(CUSTOM_PMPERMIT) if CUSTOM_PMPERMIT else "**Please leave your message in a single line and wait for me to approve you.**"
