@@ -323,7 +323,7 @@ def sudo_cmd(pattern=None, **args):
             args["pattern"] = re.compile(pattern)
         else:
             args["pattern"] = re.compile(sudo_hndlr + pattern)
-            cmd = sduo_hndlr + pattern
+            cmd = sudo_hndlr + pattern
             try:
                 CMD_LIST[file_test].append(cmd)
             except:
