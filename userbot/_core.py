@@ -4,11 +4,12 @@ import asyncio
 import os
 import userbot.utils
 from datetime import datetime
+from userbot.utils import admin_cmd
 
 DELETE_TIMEOUT = 5
 thumb_image_path = "./TeleBot.png"
 
-@command(pattern="^.install", outgoing=True)
+@telebot.on(admin_cmd(pattern="install", outgoing=True))
 async def install(event):
     if event.fwd_from:
         return
@@ -32,7 +33,7 @@ async def install(event):
     await asyncio.sleep(DELETE_TIMEOUT)
     await event.delete()
 
-@command(pattern="^.unload (?P<shortname>\w+)$", outgoing=True)
+@telebot.on(admin_cmd(pattern="unload (?P<shortname>\w+)", outgoing=True))
 async def unload(event):
     if event.fwd_from:
         return
@@ -43,7 +44,7 @@ async def unload(event):
     except Exception as e:
         await event.edit("TeleBot has successfully unloaded {shortname}\n{}".format(shortname, str(e)))
 
-@command(pattern="^.load (?P<shortname>\w+)$", outgoing=True)
+@telebot.on(admin_cmd(pattern="load (?P<shortname>\w+)", outgoing=True))
 async def load(event):
     if event.fwd_from:
         return

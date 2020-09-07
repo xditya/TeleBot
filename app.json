@@ -53,8 +53,13 @@
    "value": "",
    "required": false
   },
-   "CMD_HNDR": {
+   "CMD_HNDLR": {
    "description": "Used to invoke commands, leave blank for default, (dot)",
+   "value": "",
+   "required": false
+  },  
+   "SUDO_HNDLR": {
+   "description": "Used to invoke sudo commands, leave blank for default",
    "value": "",
    "required": false
   },  
