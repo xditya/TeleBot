@@ -10,6 +10,7 @@ import logging
 import inspect
 
 handler = Config.CMD_HNDLR if Config.CMD_HNDLR else "."
+sudo_hndlr = Config.SUDO_HNDLR if Config.SUDO_HNDLR else "^"
 
 def command(**args):
     args["func"] = lambda e: e.via_bot_id is None
