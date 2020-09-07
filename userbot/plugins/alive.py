@@ -6,7 +6,7 @@ import time
 from PIL import Image
 from io import BytesIO
 from userbot import ALIVE_NAME
-from userbot.utils import admin_cmd
+from userbot.utils import admin_cmd, sudo_cmd
 from userbot.__init__ import StartTime
 from datetime import datetime
 
@@ -39,9 +39,10 @@ def get_readable_time(seconds: int) -> str:
 
     return ping_time
 
-DEFAULTUSER = str(ALIVE_NAME) if ALIVE_NAME else "No name set yet, check pinned in @TeleBotHelp"
+DEFAULTUSER = str(ALIVE_NAME) if ALIVE_NAME else "@TeleBotSupport"
 
 @telebot.on(admin_cmd(outgoing=True, pattern="alive"))
+@telebot.on(sudo_cmd(outgoing=True, pattern="alive", allow_sudo=True))
 async def amireallyalive(alive):
     start = datetime.now()
     """ For .alive command, check if the bot is running.  """

