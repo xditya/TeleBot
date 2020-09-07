@@ -4,6 +4,7 @@ import asyncio
 import os
 import userbot.utils
 from datetime import datetime
+telebot = bot
 
 DELETE_TIMEOUT = 5
 thumb_image_path = "./TeleBot.png"
