@@ -2,7 +2,7 @@ import os, time, asyncio, io
 import userbot.plugins.sql_helper.pmpermit_sql as pmpermit_sql
 from telethon.tl.functions.users import GetFullUserRequest
 from telethon import events, errors, functions, types
-from userbot import ALIVE_NAME, CUSTOM_PMPERMIT, CUSTOM_BLOCK, COUNT_MSG, COUNT_PM
+from userbot import ALIVE_NAME, CUSTOM_PMPERMIT, COUNT_MSG, COUNT_PM
 from userbot.utils import admin_cmd
 
 BLK = str(CUSTOM_BLOCK) if CUSTOM_BLOCK else "You have been blocked, goodbye!"
@@ -70,7 +70,7 @@ if Var.PRIVATE_GROUP_ID is not None:
             await event.edit("You tried to block my creator, now goodbye for 100 seconds!")
             await asyncio.sleep(100)
           else:
-          	await event.edit(f"{BLK} \n\n Blocked [{}](tg://user?id={})".format(DEFAULTUSER, reason,firstname, chat.id))
+          	await event.edit("Blocked [{}](tg://user?id={}).".format(DEFAULTUSER, reason,firstname, chat.id))
           	pmpermit_sql.disapprove(chat.id)
           	await event.client(functions.contacts.BlockRequest(chat.id))
 
