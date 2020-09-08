@@ -29,12 +29,12 @@ def check(tele):
 # @sn12384
 
 async def telealive():
-	start = datetime.now()
+    start = datetime.now()
     if Config.SUDO_USERS:
         sudo = "Active"
     else:
         sudo = "Disabled"
-	end = datetime.now()
+    end = datetime.now()
     ms = (end - start).microseconds / 1000
     try:
         useragent = ('Mozilla/5.0 (Linux; Android 10; SM-G975F) '
