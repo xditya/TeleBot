@@ -5,7 +5,7 @@ import math
 import heroku3
 import requests
 from .. import StartTime
-from userbot.uniborgConfig import Config
+from heroku_config import Var
 
 Heroku = heroku3.from_key(Var.HEROKU_API_KEY)
 heroku_api = "https://api.heroku.com"
