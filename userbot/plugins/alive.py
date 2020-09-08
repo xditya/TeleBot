@@ -5,7 +5,7 @@ import requests
 import time
 from PIL import Image
 from io import BytesIO
-from userbot import ALIVE_NAME
+from userbot import ALIVE_NAME, telever
 from userbot.utils import admin_cmd, sudo_cmd
 from userbot.__init__ import StartTime
 from datetime import datetime
@@ -45,6 +45,7 @@ DEFAULTUSER = str(ALIVE_NAME) if ALIVE_NAME else "@TeleBotSupport"
 @telebot.on(sudo_cmd(outgoing=True, pattern="alive", allow_sudo=True))
 async def amireallyalive(alive):
     start = datetime.now()
+    myid = bot.uid
     """ For .alive command, check if the bot is running.  """
     end = datetime.now()
     ms = (end - start).microseconds / 1000
@@ -53,11 +54,11 @@ async def amireallyalive(alive):
         tele = f"**Welcome To TeleBot **\n\n"
         tele += "**`Hey! I'm alive. All systems online and functioning normally!`**\n\n"
         tele += "` 🔸 Telethon version:` **1.16.4**\n` 🔹 Python:` **3.8.3**\n"
-        tele += "` 🔸 More info:` [TeleBot](https://xditya.gitbook.io/telebot/)\n"
-        tele += "` 🔹 Bot created by:` [Aditya 🇮🇳](https://t.me/xditya)\n"
+        tele += f"` 🔸 TeleBot Version: {telever}\n"
+        tele += "` 🔹 More Info:` @TeleBotSupport\n"
         tele += f"` 🔸 TeleBot Uptime:` {uptime}\n"
         tele += "` 🔸 Database Status:` **All OK 👌!**\n"
-        tele += f"` 🔹 My pro owner`: {DEFAULTUSER}\n\n"
+        tele += f"` 🔹 My pro owner`: [{DEFAULTUSER}](tg://user?id={myid})\n\n"
         tele += "    [✨ GitHub Repository ✨](https://github.com/xditya/TeleBot)"
 
         chat = await alive.get_chat()
@@ -78,11 +79,11 @@ async def amireallyalive(alive):
         await borg.send_message(alive.chat_id, f"**Welcome To TeleBot **\n\n"
                 "**`Hey! I'm alive. All systems online and functioning normally!`**\n\n"
                 "` 🔸 Telethon version:` **1.16.4**\n` 🔹 Python:` **3.8.3**\n"
-                "` 🔸 More info:` [TeleBot](https://xditya.gitbook.io/telebot/)\n"
-                "` 🔹 Bot created by:` [Aditya 🇮🇳](https://t.me/xditya)\n"
+                f"` 🔸 TeleBot Version: {telever}\n"
+                "` 🔹 More Info:` @TeleBotSupport\n"
                 f"` 🔸 TeleBot Uptime:` {uptime}\n"
                 "` 🔸 Database Status:` **All OK 👌!**\n"
-                f"` 🔹 My pro owner`: {DEFAULTUSER}\n\n"
+                f"` 🔹 My pro owner`: [{DEFAULTUSER}](tg://user?id={myid})\n\n"
                 "    [✨ GitHub Repository ✨](https://github.com/xditya/TeleBot)", link_preview = False)
         await borg.send_file(alive.chat_id, file=sticker) 
         await alive.delete()
@@ -93,13 +94,14 @@ async def amireallyalive(alive):
     if alive.fwd_from:
         return
     tgbotusername = Var.TG_BOT_USER_NAME_BF_HER
+    myid = bot.uid
     reply_to_id = alive.message
     if alive.reply_to_msg_id:
         reply_to_id = await alive.get_reply_message()
     tele = f"**Welcome To TeleBot **\n\n"
     tele += "`🔹 Telethon version:` **1.16.4**\n`🔹 Python:` **3.8.3**\n"
     tele += "`🔸 More info:` @TeleBotSupport\n"
-    tele += f"`🔹 Owner`: {DEFAULTUSER}\n\n"
+    tele += f"`🔹 Owner`: [{DEFAULTUSER}](tg://user?id={myid})\n\n"
     results = await bot.inline_query(  # pylint:disable=E0602
         tgbotusername,
         tele
