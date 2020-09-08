@@ -52,7 +52,7 @@ async def amireallyalive(alive):
     if ALV_PIC:
         tele = f"**Welcome To TeleBot **\n\n"
         tele += "**`Hey! I'm alive. All systems online and functioning normally!`**\n\n"
-        tele += "` 🔸 Telethon version:` **1.15.0**\n` 🔹 Python:` **3.8.3**\n"
+        tele += "` 🔸 Telethon version:` **1.16.4**\n` 🔹 Python:` **3.8.3**\n"
         tele += "` 🔸 More info:` [TeleBot](https://xditya.gitbook.io/telebot/)\n"
         tele += "` 🔹 Bot created by:` [Aditya 🇮🇳](https://t.me/xditya)\n"
         tele += f"` 🔸 TeleBot Uptime:` {uptime}\n"
@@ -77,7 +77,7 @@ async def amireallyalive(alive):
         sticker.seek(0)
         await borg.send_message(alive.chat_id, f"**Welcome To TeleBot **\n\n"
                 "**`Hey! I'm alive. All systems online and functioning normally!`**\n\n"
-                "` 🔸 Telethon version:` **1.15.0**\n` 🔹 Python:` **3.8.3**\n"
+                "` 🔸 Telethon version:` **1.16.4**\n` 🔹 Python:` **3.8.3**\n"
                 "` 🔸 More info:` [TeleBot](https://xditya.gitbook.io/telebot/)\n"
                 "` 🔹 Bot created by:` [Aditya 🇮🇳](https://t.me/xditya)\n"
                 f"` 🔸 TeleBot Uptime:` {uptime}\n"
