@@ -88,7 +88,7 @@ async def telealive():
         sudo = "Enabled"
     else:
         sudo = "Disabled"
-        end = datetime.now()
+    end = datetime.now()
     ms = (end - start).microseconds / 1000
     uptime = get_readable_time((time.time() - StartTime))
     try:
