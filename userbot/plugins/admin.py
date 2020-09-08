@@ -24,13 +24,13 @@ from telethon.tl.types import (ChannelParticipantsAdmins, ChatAdminRights,
                                MessageMediaPhoto)
 
 from userbot import BOTLOG, BOTLOG_CHATID, CMD_HELP 
-from userbot.utils import register, errors_handler, admin_cmd
+from userbot.utils import register, errors_handler, admin_cmd, sudo_cmd
 
 # =================== CONSTANT ===================
 PP_TOO_SMOL = "`The image is too small`"
 PP_ERROR = "`Failure while processing the image`"
-NO_ADMIN = "`I am not an admin nub nibba!`"
-NO_PERM = "`I don't have sufficient permissions! This is so sed. Alexa play despacito`"
+NO_ADMIN = "`I am not an admin here!`"
+NO_PERM = "`No sufficient permissions!`"
 NO_SQL = "`Running on Non-SQL mode!`"
 
 CHAT_PP_CHANGED = "`Chat Picture Changed`"
@@ -69,6 +69,7 @@ UNMUTE_RIGHTS = ChatBannedRights(until_date=None, send_messages=False)
 
 
 @telebot.on(admin_cmd(outgoing=True, pattern="setgpic"))
+@telebot.on(sudo_cmd(outgoing=True, pattern="setgpic", allow_sudo=True))
 @errors_handler
 async def set_group_photo(gpic):
     """ For .setgpic command, changes the picture of a group """
@@ -107,6 +108,7 @@ async def set_group_photo(gpic):
 
 
 @telebot.on(admin_cmd(outgoing=True, pattern="promote(?: |$)(.*)"))
+@telebot.on(sudo_cmd(outgoing=True, pattern="promote(?: |$)(.*)", allow_sudo=True))
 @errors_handler
 async def promote(promt):
     """ For .promote command, promotes the replied/tagged person """
@@ -131,7 +133,7 @@ async def promote(promt):
     await promt.edit("`Promoting...`")
     user, rank = await get_user_from_event(promt)
     if not rank:
-        rank = "Admeen"  # Just in case.
+        rank = "pro-admin"  # Just in case.
     if user:
         pass
     else:
@@ -158,6 +160,7 @@ async def promote(promt):
 
 
 @telebot.on(admin_cmd(outgoing=True, pattern="demote(?: |$)(.*)"))
+@telebot.on(sudo_cmd(outgoing=True, pattern="demote(?: |$)(.*)", allow_sudo=True))
 @errors_handler
 async def demote(dmod):
     """ For .demote command, demotes the replied/tagged person """
@@ -207,7 +210,8 @@ async def demote(dmod):
             f"CHAT: {dmod.chat.title}(`{dmod.chat_id}`)")
 
 
-@borg.on(admin_cmd(pattern="(ban|unban) ?(.*)", allow_sudo=True))
+@borg.on(admin_cmd(pattern="(ban|unban) ?(.*)"))
+@borg.on(sudo_cmd(pattern="(ban|unban) ?(.*)", allow_sudo=True))
 async def _(event):
     # Space weirdness in regex required because argument is optional and other
     # commands start with ".unban"
@@ -238,7 +242,8 @@ async def _(event):
         await event.edit(f"{input_cmd}ned Successfully!")
 
 
-@borg.on(admin_cmd(pattern="pgs ?(.*)", allow_sudo=True))
+@borg.on(admin_cmd(pattern="pgs ?(.*)"))
+@borg.on(sudo_cmd(pattern="pgs ?(.*)", allow_sudo=True))
 async def _(event):
     if event.fwd_from:
         return
@@ -269,6 +274,7 @@ async def _(event):
 
 
 @borg.on(admin_cmd(pattern="(ban|unban) ?(.*)"))
+@borg.on(sudo_cmd(pattern="(ban|unban) ?(.*)", allow_sudo=True))
 async def _(event):
     # Space weirdness in regex required because argument is optional and other
     # commands start with ".unban"
@@ -331,7 +337,8 @@ async def muter(moot):
             await moot.delete()
 
 
-@borg.on(admin_cmd(pattern="affk(?: |$)(.*)", allow_sudo=True))
+@borg.on(admin_cmd(pattern="affk(?: |$)(.*)"))
+@borg.on(sudo_cmd(pattern="affk(?: |$)(.*)", allow_sudo=True))
 @errors_handler
 async def promote(promt):
     """ For .promote command, promotes the replied/tagged person """
@@ -352,7 +359,7 @@ async def promote(promt):
     await promt.edit("`Promoting...`")
     user, rank = await get_user_from_event(promt)
     if not rank:
-        rank = "Admeen"  # Just in case.
+        rank = "pero"  # Just in case.
     if user:
         pass
     else:
@@ -379,6 +386,7 @@ async def promote(promt):
 
 
 @telebot.on(admin_cmd(outgoing=True, pattern="gmute(?: |$)(.*)"))
+@telebot.on(sudo_cmd(outgoing=True, pattern="gmute(?: |$)(.*)", allow_sudo=True))
 @errors_handler
 async def gspider(gspdr):
     """ For .gmute command, globally mutes the replied/tagged person """
@@ -422,79 +430,6 @@ async def gspider(gspdr):
                 f"USER: [{user.first_name}](tg://user?id={user.id})\n"
                 f"CHAT: {gspdr.chat.title}(`{gspdr.chat_id}`)")
 
-
-@telebot.on(admin_cmd(outgoing=True, pattern="delusers(?: |$)(.*)"))
-@errors_handler
-async def rm_deletedacc(show):
-    """ For .delusers command, list all the ghost/deleted accounts in a chat. """
-    if not show.is_group:
-        await show.edit("`I don't think this is a group.`")
-        return
-    con = show.pattern_match.group(1)
-    del_u = 0
-    del_status = "`No deleted accounts found, Group is cleaned as Hell`"
-
-    if con != "clean":
-        await show.edit("`Searching for zombie accounts...`")
-        async for user in show.client.iter_participants(show.chat_id,
-                                                        aggressive=True):
-            if user.deleted:
-                del_u += 1
-                await sleep(1)
-        if del_u > 0:
-            del_status = f"Found **{del_u}** deleted account(s) in this group,\
-            \nclean them by using .delusers clean"
-
-        await show.edit(del_status)
-        return
-
-    # Here laying the sanity check
-    chat = await show.get_chat()
-    admin = chat.admin_rights
-    creator = chat.creator
-
-    # Well
-    if not admin and not creator:
-        await show.edit("`I am not an admin here!`")
-        return
-
-    await show.edit("`Deleting deleted accounts...\nOh I can do that?!?!`")
-    del_u = 0
-    del_a = 0
-
-    async for user in show.client.iter_participants(show.chat_id):
-        if user.deleted:
-            try:
-                await show.client(
-                    EditBannedRequest(show.chat_id, user.id, BANNED_RIGHTS))
-            except ChatAdminRequiredError:
-                await show.edit("`I don't have ban rights in this group`")
-                return
-            except UserAdminInvalidError:
-                del_u -= 1
-                del_a += 1
-            await show.client(
-                EditBannedRequest(show.chat_id, user.id, UNBAN_RIGHTS))
-            del_u += 1
-
-    if del_u > 0:
-        del_status = f"Cleaned **{del_u}** deleted account(s)"
-
-    if del_a > 0:
-        del_status = f"Cleaned **{del_u}** deleted account(s) \
-        \n**{del_a}** deleted admin accounts are not removed"
-
-    await show.edit(del_status)
-    await sleep(2)
-    await show.delete()
-
-    if BOTLOG:
-        await show.client.send_message(
-            BOTLOG_CHATID, "#CLEANUP\n"
-            f"Cleaned **{del_u}** deleted account(s) !!\
-            \nCHAT: {show.chat.title}(`{show.chat_id}`)")
-
-
 @telebot.on(admin_cmd(outgoing=True, pattern="admins$"))
 @errors_handler
 async def get_admin(show):
@@ -517,6 +452,7 @@ async def get_admin(show):
 
 
 @telebot.on(admin_cmd(outgoing=True, pattern="pin(?: |$)(.*)"))
+@telebot.on(sudo_cmd(outgoing=True, pattern="pin(?: |$)(.*)", allow_sudo=True))
 @errors_handler
 async def pin(msg):
     """ For .pin command, pins the replied/tagged message on the top the chat. """
@@ -563,6 +499,7 @@ async def pin(msg):
 
 
 @telebot.on(admin_cmd(outgoing=True, pattern="kick(?: |$)(.*)"))
+@telebot.on(sudo_cmd(outgoing=True, pattern="kick(?: |$)(.*)", allow_sudo=True))
 @errors_handler
 async def kick(usr):
     """ For .kick command, kicks the replied/tagged person from the group. """

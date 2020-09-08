@@ -31,13 +31,14 @@ from gtts import gTTS
 from emoji import get_emoji_regexp
 from userbot import CMD_HELP, BOTLOG, BOTLOG_CHATID, YOUTUBE_API_KEY, CHROME_DRIVER, GOOGLE_CHROME_BIN
 from userbot.utils import register
-from userbot.utils import admin_cmd
+from userbot.utils import admin_cmd, sudo_cmd
 
 CARBONLANG = "auto"
 LANG = "en"
 
 
 @telebot.on(admin_cmd(outgoing=True, pattern="carbon"))
+@telebot.on(sudo_cmd(outgoing=True, pattern="carbon", allow_sudo=True))
 async def carbon_api(e):
  if not e.text[0].isalpha() and e.text[0] not in ("/", "#", "@", "!"):
  
@@ -98,7 +99,7 @@ async def carbon_api(e):
    await e.client.send_file(
          e.chat_id,
          file,
-         caption="<< `Here's your carbon!` \n **Carbonised Using** [Friday](https://github.com/Starkgang/FridayUserbot)>>\n**Colour Scheme: **`{}`".format(color_name),
+         caption="`Here's your carbon!` \n<< **Carbonised By TeleBot**>>\n**Colour Scheme: **`{}`".format(color_name),
          force_document=True,
          reply_to=e.message.reply_to_msg_id,
          )

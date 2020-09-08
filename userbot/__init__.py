@@ -13,6 +13,7 @@ else:
     bot = TelegramClient(session_name, Var.APP_ID, Var.API_HASH)
 
 StartTime = time.time()
+telever = "3.5"
 
 CMD_LIST = {}
 # for later purposes
@@ -113,7 +114,7 @@ if bool(ENV):
     CUSTOM_PMPERMIT = os.environ.get("CUSTOM_PMPERMIT", None)
     
     # CUSTOM BLOCK
-    CUSTOM_BLOCK = os.environ.get("CUSTOM_BLOCK", None)
+    CUSTOM_BLOCK = os.environ.get("CUSTOM_BLOCK", "You have been blocked, goodbye!")
     
     # CUSTOM AFK
     CUSTOM_AFK = os.environ.get("CUSTOM_AFK", None)
@@ -121,6 +122,10 @@ if bool(ENV):
     # OWNER ID
     OWNER_ID = os.environ.get("OWNER_ID", "719195224")
    
+    # PMPERMIT
+    COUNT_MSG = 0
+    COUNT_PM = {}
+    
     # Last.fm Module
     BIO_PREFIX = os.environ.get("BIO_PREFIX", None)
     DEFAULT_BIO = os.environ.get("DEFAULT_BIO", None)

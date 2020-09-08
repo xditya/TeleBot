@@ -71,7 +71,7 @@ RUN apt -qq install -y --no-install-recommends \
 # requiring the use of the entire repo, hence
 RUN pip3 install --upgrade pip setuptools
 # adds files from your Docker client’s current directory.
-RUN git clone https://github.com/xditya/TeleBot /root/userbot
+RUN git clone -b sudo_beta https://github.com/xditya/TeleBot /root/userbot
 RUN mkdir /root/userbot/bin/
 WORKDIR /root/userbot/
 RUN chmod +x /usr/local/bin/*

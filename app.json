@@ -58,6 +58,11 @@
    "value": "",
    "required": false
   },  
+   "SUDO_HNDLR": {
+   "description": "Used to invoke sudo commands, leave blank for default",
+   "value": "",
+   "required": false
+  },  
   "GIT_REPO_NAME": {
    "description": "Your repo name Example: xditya/TeleBot, but GITHUB_ACCESS_TOKEN must be setup first.",
    "value": "",
@@ -84,8 +89,8 @@
    "required": false
   },
   "SUDO_USERS": {
-   "description": "Don't change the value here. (Makes your acc and bot stable)",
-   "value": "919057070",
+   "description": "Users you want to give access to your bot. (Don't allow unknown people)",
+   "value": "",
    "required": false
   },
   "PRIVATE_GROUP_BOT_API_ID": {
