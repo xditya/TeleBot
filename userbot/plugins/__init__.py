@@ -6,15 +6,11 @@ import heroku3
 import requests
 from .. import StartTime
 from heroku_config import Var
-from .uniborgConfig import Config
 
 Heroku = heroku3.from_key(Var.HEROKU_API_KEY)
 heroku_api = "https://api.heroku.com"
 HEROKU_APP_NAME = Var.HEROKU_APP_NAME
 HEROKU_API_KEY = Var.HEROKU_API_KEY
-
-if not os.path.isdir(Config.TMP_DOWNLOAD_DIRECTORY):
-    os.makedirs(Config.TMP_DOWNLOAD_DIRECTORY)
 
 def check(tele):
     if "/start" in tele:
