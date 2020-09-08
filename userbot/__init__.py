@@ -13,7 +13,7 @@ else:
     bot = TelegramClient(session_name, Var.APP_ID, Var.API_HASH)
 
 StartTime = time.time()
-telever = "3.0"
+telever = "3.5"
 
 CMD_LIST = {}
 # for later purposes
