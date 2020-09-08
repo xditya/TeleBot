@@ -1,6 +1,6 @@
 # Imported by @its_xditya
 
-from userbot.utils import admin_cmd
+from userbot.utils import admin_cmd, sudo_cmd
 from userbot import bot, BOTLOG_CHATID, CMD_HELP
 import asyncio
 from telethon import events
@@ -78,6 +78,7 @@ async def handler(tele):
                     return 
 
 @borg.on(admin_cmd(pattern="gban(?: |$)(.*)"))
+@borg.on(sudo_cmd(pattern="gban(?: |$)(.*)", allow_sudo=True))
 async def gspider(rk): 
    lazy = rk ; sender = await lazy.get_sender() ; me = await lazy.client.get_me()
    if not sender.id == me.id:
@@ -129,6 +130,7 @@ async def gspider(rk):
         
 
 @borg.on(admin_cmd(pattern="ungban(?: |$)(.*)"))
+@borg.on(sudo_cmd(pattern="ungban(?: |$)(.*)", allow_sudo=True))
 async def gspider(rk):
    lazy = rk ; sender = await lazy.get_sender() ; me = await lazy.client.get_me()
    if not sender.id == me.id:
