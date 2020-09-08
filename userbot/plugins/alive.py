@@ -102,7 +102,8 @@ async def amireallyalive(alive):
     tele += f"` 🔹 Owner`: {DEFAULTUSER}\n\n"
     results = await bot.inline_query(  # pylint:disable=E0602
         tgbotusername,
-        tele
+        tele,
+        link_preview = False
     )
     await results[0].click(
         alive.chat_id,
