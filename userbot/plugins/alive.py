@@ -52,9 +52,9 @@ async def amireallyalive(alive):
     uptime = get_readable_time((time.time() - StartTime))
     if ALV_PIC:
         tele = f"**Welcome To TeleBot **\n\n"
-        tele += "**`Hey! I'm alive. All systems online and functioning normally!`**\n\n"
+        tele += "`Hey! I'm alive. All systems online and functioning normally!`\n\n"
         tele += "` 🔸 Telethon version:` **1.16.4**\n` 🔹 Python:` **3.8.3**\n"
-        tele += f"` 🔸 TeleBot Version: {telever}\n"
+        tele += f"` 🔸 TeleBot Version:` **{telever}**\n"
         tele += "` 🔹 More Info:` @TeleBotSupport\n"
         tele += f"` 🔸 TeleBot Uptime:` {uptime}\n"
         tele += "` 🔸 Database Status:` **All OK 👌!**\n"
@@ -77,9 +77,9 @@ async def amireallyalive(alive):
         sticker.name = "sticker.webp"
         sticker.seek(0)
         await borg.send_message(alive.chat_id, f"**Welcome To TeleBot **\n\n"
-                "**`Hey! I'm alive. All systems online and functioning normally!`**\n\n"
+                "`Hey! I'm alive. All systems online and functioning normally!`\n\n"
                 "` 🔸 Telethon version:` **1.16.4**\n` 🔹 Python:` **3.8.3**\n"
-                f"` 🔸 TeleBot Version: {telever}\n"
+                f"` 🔸 TeleBot Version:` **{telever}**\n"
                 "` 🔹 More Info:` @TeleBotSupport\n"
                 f"` 🔸 TeleBot Uptime:` {uptime}\n"
                 "` 🔸 Database Status:` **All OK 👌!**\n"
@@ -101,7 +101,7 @@ async def amireallyalive(alive):
     tele = f"**Welcome To TeleBot **\n\n"
     tele += "`🔹 Telethon version:` **1.16.4**\n`🔹 Python:` **3.8.3**\n"
     tele += "`🔸 More info:` @TeleBotSupport\n"
-    tele += f"`🔹 Owner`: [{DEFAULTUSER}](tg://user?id={myid})\n\n"
+    tele += f"`🔹 My Owner`: [{DEFAULTUSER}](tg://user?id={myid})\n\n"
     results = await bot.inline_query(  # pylint:disable=E0602
         tgbotusername,
         tele
