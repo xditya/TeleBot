@@ -51,7 +51,7 @@ def check_data_base_heal_th():
     return is_database_working, output
 
 
-async def tele_alv():
+async def telealive():
     _, check_sgnirts = check_data_base_heal_th()
     if Config.SUDO_USERS:
         sudo = "Enabled"
