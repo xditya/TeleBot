@@ -7,6 +7,7 @@ import requests
 from .. import StartTime
 from heroku_config import Var
 from userbot import telever
+from userbot.uniborgConfig import Config
 
 Heroku = heroku3.from_key(Var.HEROKU_API_KEY)
 heroku_api = "https://api.heroku.com"
