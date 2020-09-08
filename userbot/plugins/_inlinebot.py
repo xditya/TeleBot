@@ -10,6 +10,7 @@ import re
 from telethon import events, errors, custom, Button
 from userbot import CMD_LIST
 import io
+from . import telealive
 
 if Var.TG_BOT_USER_NAME_BF_HER is not None and tgbot is not None:
     @tgbot.on(events.InlineQuery)  # pylint:disable=E0602
