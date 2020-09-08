@@ -70,7 +70,7 @@ if Var.PRIVATE_GROUP_ID is not None:
             await event.edit("You tried to block my creator, now goodbye for 100 seconds!")
             await asyncio.sleep(100)
           else:
-          	await event.edit("f{BLK} \n\n Blocked [{}](tg://user?id={})".format(DEFAULTUSER, reason,firstname, chat.id))
+          	await event.edit(f"{BLK} \n\n Blocked [{}](tg://user?id={})".format(DEFAULTUSER, reason,firstname, chat.id))
           	pmpermit_sql.disapprove(chat.id)
           	await event.client(functions.contacts.BlockRequest(chat.id))
 
