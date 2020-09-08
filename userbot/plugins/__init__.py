@@ -101,8 +101,8 @@ async def tele_alv():
         dyno = e
     conclusion = f"TeleBot Stats\
                  \n\nDatabase : {check_sgnirts}\
+                  \nSudo : {sudo}\
                   \nUptime : {uptime}\
                   \nDyno : {dyno}\
-                  \nSudo : {sudo}\				  
                   "
     return conclusion
