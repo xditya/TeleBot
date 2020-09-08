@@ -97,7 +97,7 @@ async def amireallyalive(alive):
     if alive.reply_to_msg_id:
         reply_to_id = await alive.get_reply_message()
     tele = f"**Welcome To TeleBot **\n\n"
-    tele += "`🔹 Telethon version:` **1.16.4**\n` 🔹 Python:` **3.8.3**\n"
+    tele += "`🔹 Telethon version:` **1.16.4**\n`🔹 Python:` **3.8.3**\n"
     tele += "`🔸 More info:` @TeleBotSupport\n"
     tele += f"`🔹 Owner`: {DEFAULTUSER}\n\n"
     results = await bot.inline_query(  # pylint:disable=E0602
