@@ -76,9 +76,9 @@ async def telealive():
     except Exception as e:
         dyno = e
     info = f"TeleBot Stats\
-                  \n\nTeleBot Version : {telever}\
+                  \n\nVersion : {telever}\
                   \nSudo : {sudo}\
-				  \nPing : {ms}\
+		  \nPing : {ms}\
                   \nDyno : {dyno}\
                   "
     return info
