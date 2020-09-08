@@ -4,6 +4,7 @@ import time
 import math
 import heroku3
 import requests
+import time
 from .. import StartTime
 from heroku_config import Var
 from userbot import telever
@@ -52,14 +53,43 @@ def check_data_base_heal_th():
         is_database_working = True
     return is_database_working, output
 
+def get_readable_time(seconds: int) -> str:
+    count = 0
+    ping_time = ""
+    time_list = []
+    time_suffix_list = ["s", "m", "h", "days"]
+
+    while count < 4:
+        count += 1
+        if count < 3:
+            remainder, result = divmod(seconds, 60)
+        else:
+            remainder, result = divmod(seconds, 24)
+        if seconds == 0 and remainder == 0:
+            break
+        time_list.append(int(result))
+        seconds = int(remainder)
+
+    for x in range(len(time_list)):
+        time_list[x] = str(time_list[x]) + time_suffix_list[x]
+    if len(time_list) == 4:
+        ping_time += time_list.pop() + ", "
+
+    time_list.reverse()
+    ping_time += ":".join(time_list)
+
+    return ping_time
 
 async def telealive():
     _, check_sgnirts = check_data_base_heal_th()
+    start = datetime.now()
     if Config.SUDO_USERS:
         sudo = "Enabled"
     else:
         sudo = "Disabled"
-    uptime = await get_readable_time((time.time() - StartTime))
+        end = datetime.now()
+    ms = (end - start).microseconds / 1000
+    uptime = get_readable_time((time.time() - StartTime))
     try:
         useragent = ('Mozilla/5.0 (Linux; Android 10; SM-G975F) '
                      'AppleWebKit/537.36 (KHTML, like Gecko) '
