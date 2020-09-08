@@ -6,6 +6,7 @@ import heroku3
 import requests
 from .. import StartTime
 from heroku_config import Var
+from userbot import telever
 
 Heroku = heroku3.from_key(Var.HEROKU_API_KEY)
 heroku_api = "https://api.heroku.com"
@@ -96,7 +97,8 @@ async def telealive():
     except Exception as e:
         dyno = e
     conclusion = f"TeleBot Stats\
-                 \n\nDatabase : {check_sgnirts}\
+                  \n\nTeleBot Version : {telever}\
+                  \nDatabase : {check_sgnirts}\
                   \nSudo : {sudo}\
                   \nUptime : {uptime}\
                   \nDyno : {dyno}\
