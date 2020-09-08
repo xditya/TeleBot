@@ -5,7 +5,6 @@ from telethon import events, errors, functions, types
 from userbot import ALIVE_NAME, CUSTOM_PMPERMIT, COUNT_MSG, COUNT_PM
 from userbot.utils import admin_cmd
 
-BLK = str(CUSTOM_BLOCK) if CUSTOM_BLOCK else "You have been blocked, goodbye!"
 MESAG = str(CUSTOM_PMPERMIT) if CUSTOM_PMPERMIT else "**Please leave your message in a single line and wait for me to approve you.**"
 PMPIC = os.environ.get("PMPERMITPIC", None)
 if PMPIC is None:
