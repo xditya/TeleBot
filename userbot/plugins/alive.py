@@ -88,3 +88,28 @@ async def amireallyalive(alive):
         await borg.send_file(alive.chat_id, file=sticker) 
         await alive.delete()
 
+@telebot.on(admin_cmd(pattern="ialive", outgoing=True))
+@telebot.on(sudo_cmd(pattern="ialive", allow_sudo=True))
+async def amireallyalive(alive):
+    if alive.fwd_from:
+        return
+    tgbotusername = Var.TG_BOT_USER_NAME_BF_HER
+    myid = bot.uid
+    reply_to_id = alive.message
+    if alive.reply_to_msg_id:
+        reply_to_id = await alive.get_reply_message()
+    tele = f"**Welcome To TeleBot **\n\n"
+    tele += "`🔹 Telethon version:` **1.16.4**\n`🔹 Python:` **3.8.3**\n"
+    tele += "`🔸 More info:` @TeleBotSupport\n"
+    tele += f"`🔹 My Owner`: [{DEFAULTUSER}](tg://user?id={myid})\n\n"
+    results = await bot.inline_query(  # pylint:disable=E0602
+        tgbotusername,
+        tele
+    )
+    await results[0].click(
+        alive.chat_id,
+        reply_to=reply_to_id,
+        hide_via=True
+    )
+    await alive.delete()
+

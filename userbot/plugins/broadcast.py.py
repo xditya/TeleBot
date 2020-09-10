@@ -18,7 +18,7 @@ from userbot.plugins.sql_helper.ghdb_sql import in_channels, add_channel, rm_cha
 
 logs_id = Var.PRIVATE_GROUP_ID
 
-
+# Keep all credits pls, made with great effort by @HeisenbergTheDanger
 
 @borg.on(admin_cmd(pattern="forward ?(.*)"))
 

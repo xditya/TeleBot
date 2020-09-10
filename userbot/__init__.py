@@ -100,6 +100,7 @@ if bool(ENV):
     # Default .alive name
     ALIVE_NAME = os.environ.get("ALIVE_NAME", None)
     CMD_HNDLR = os.environ.get("CMD_HNDLR", ".")
+
     LESS_SPAMMY = os.environ.get("LESS_SPAMMY", True)
 
     # Time & Date - Country and Time Zone
@@ -112,10 +113,7 @@ if bool(ENV):
     
     # CUSTOM PMPERMIT
     CUSTOM_PMPERMIT = os.environ.get("CUSTOM_PMPERMIT", None)
-    
-    # CUSTOM BLOCK
-    CUSTOM_BLOCK = os.environ.get("CUSTOM_BLOCK", "You have been blocked, goodbye!")
-    
+     
     # CUSTOM AFK
     CUSTOM_AFK = os.environ.get("CUSTOM_AFK", None)
        
