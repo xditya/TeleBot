@@ -39,11 +39,6 @@
    "description": "The message that appears when someone PM's you. Leave it as such for default message.",
    "value": "Do not spam here, else you will be blocked automatically."
   },  
-  "CUSTOM_BLOCK": {
-   "description": "The message that appears when you block someone in PM. Leave blank for default.",
-   "value": "",
-   "required": false
-  },
   "CUSTOM_AFK": {
    "description": "The message that appears when you go afk. Leave it as such for default.",
    "value": "My Master is [AFK](https://telegra.ph/AFK-05-22)"
@@ -143,15 +138,15 @@
    "value": "",
    "required": false
   },
-  "OWNER_ID": {
-   "description": "Your telegram userid, get it by sending /info to any bot, like Rose",
-   "value": "",
-   "required": false
-  },
   "ALIVE_PIC": {
    "description": "telegra.ph link to theimage you want as alive pic, leave blank for sticker",
    "value": "",
    "required": false
+  },
+  "PMPERMIT_PIC": {
+  "description": "telegra.ph link to theimage you want as pmpermit pic, leave blank for default one!",
+  "value": "",
+  "required": false
   },
   "TZ": {
    "description": "Required for Correct Time on autopic/get time. Know your timezone from http://www.timezoneconverter.com/cgi-bin/findzone.tzc",
