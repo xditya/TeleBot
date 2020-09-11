@@ -37,11 +37,11 @@ async def cmd_list(event):
                 await event.edit(string)
         elif input_str:
             if input_str in CMD_LIST:
-                string = "Commands available in {}: \n".format(input_str)
+                string = "Commands available in {}: \n\n".format(input_str)
                 for i in CMD_LIST[input_str]:
                     string += "    " + i
                     string += "\n"
-                string +="\n© @TeleBotHelp"
+                string +="\n© @TeleBotSupport"
                 await event.edit(string)
             else:
                 await event.edit(input_str + " is not a valid plugin!")
