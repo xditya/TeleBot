@@ -22,8 +22,6 @@ if ENV:
         HASH_TO_TORRENT_API = os.environ.get("HASH_TO_TORRENT_API", "https://example.com/torrent/{}");
         # This is required for the @telegraph functionality.
         TELEGRAPH_SHORT_NAME = os.environ.get("TELEGRAPH_SHORT_NAME", "TeleBot")
-        # For Command Handler
-        CMD_HNDLR = os.environ.get("CMD_HNDLR", "\.")
         # Get a Free API Key from OCR.Space
         OCR_SPACE_API_KEY = os.environ.get("OCR_SPACE_API_KEY", None)
         # Send .get_id in any group with all your administration bots (added)
@@ -78,7 +76,7 @@ if ENV:
         # specify command handler that should be used for the plugins
         # this should be a valid "regex" pattern
         CMD_HNDLR = os.environ.get("CMD_HNDLR", "\.")
-        SUDO_HNDLR = os.environ.get("SUDO_HNDLR", "\^")
+        SUDO_HNDLR = os.environ.get("SUDO_HNDLR", "\!")
         # specify list of users allowed to use bot
         # WARNING: be careful who you grant access to your bot.
         # malicious users could do ".exec rm -rf /*"
