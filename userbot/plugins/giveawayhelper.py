@@ -16,7 +16,7 @@ from telethon.tl.types import (
 )
 from userbot.plugins.sql_helper.ghdb_sql import in_channels, add_channel, rm_channel, get_all_channels
 
-logs_id = Var.PRIVATE_GROUP_ID
+logs_id = Config.PRIVATE_GROUP_ID
 
 # Keep all credits pls, made with great effort by @HeisenbergTheDanger
 
