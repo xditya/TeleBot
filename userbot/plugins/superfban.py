@@ -49,7 +49,7 @@ async def _(event):
         await bot_conv.send_message("/myfeds")
         response = await bot_conv.get_response()
         if "make a file" in response.text:
-            await asyncio.sleep(1)
+            await asyncio.sleep(6)
             await response.click(0)
             fedfile = await bot_conv.get_response()
             if fedfile.media:
