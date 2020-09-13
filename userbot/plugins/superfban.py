@@ -14,16 +14,23 @@ async def _(event):
     if event.fwd_from:
         return
     await event.edit("Starting a Mass-FedBan...")
-    arg = event.pattern_match.group(1)
-    args = arg.split()
-    if len(args) > 1:
-        FBAN = args[0]
-        REASON = ""
-        for a in args[1:]:
-            REASON += (a + " ")
+    if event.reply_to_msg_id:
+        previous_message = await event.get_reply_message()
+        FBAN = previous_message.from_id
+        REASON = event.pattern_match.group(1)
+        if REASON.strip() == "":
+            REASON = " #TBMassBanned "
     else:
-        FBAN = arg
-        REASON = " #TBMassBanned "
+        arg = event.pattern_match.group(1)
+        args = arg.split()
+        if len(args) > 1:
+            FBAN = args[0]
+            REASON = ""
+            for a in args[1:]:
+                REASON += (a + " ")
+        else:
+            FBAN = arg
+            REASON = " #TBMassBanned "
     try:
         int(FBAN)
         if int(FBAN) == 630654925 or int(FBAN) == 719195224:
@@ -100,7 +107,11 @@ async def _(event):
     if event.fwd_from:
         return
     await event.edit("Starting a Mass-UnFedBan...")
-    FBAN = event.pattern_match.group(1)
+    if event.reply_to_msg_id:
+        previous_message = await event.get_reply_message()
+        FBAN = previous_message.from_id
+    else:
+        FBAN = event.pattern_match.group(1)
     
     if Config.FBAN_GROUP_ID:
         chat = Config.FBAN_GROUP_ID
