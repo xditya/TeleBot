@@ -1,9 +1,10 @@
 #Join @TeleBotHelp for custom plugins
 
 import asyncio
-from userbot.utils import admin_cmd
+from userbot.utils import admin_cmd, sudo_cmd
 
 @telebot.on(admin_cmd(pattern="cmds", outgoing=True))
+@telebot.on(sudo_cmd(pattern="cmds", incoming=True, allow_sudo=True))
 async def install(event):
     if event.fwd_from:
         return

@@ -3,7 +3,7 @@
 
 from telethon import events
 from datetime import datetime
-from userbot.utils import admin_cmd
+from userbot.utils import admin_cmd, sudo_cmd
 from userbot.__init__ import StartTime
 import time
 
@@ -36,6 +36,7 @@ def get_readable_time(seconds: int) -> str:
 
 #@command(pattern="^.ping$")
 @borg.on(admin_cmd(pattern="ping$"))
+@telebot.on(sudo_cmd(pattern="ping$", allow_sudo=True))
 async def _(event):
     if event.fwd_from:
         return

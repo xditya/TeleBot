@@ -38,7 +38,7 @@ LANG = "en"
 
 
 @telebot.on(admin_cmd(outgoing=True, pattern="carbon"))
-@telebot.on(sudo_cmd(outgoing=True, pattern="carbon", allow_sudo=True))
+@telebot.on(sudo_cmd(incoming=True, pattern="carbon", allow_sudo=True))
 async def carbon_api(e):
  if not e.text[0].isalpha() and e.text[0] not in ("/", "#", "@", "!"):
  
