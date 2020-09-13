@@ -24,6 +24,13 @@ async def _(event):
     else:
         FBAN = arg
         REASON = " #TBMassBanned "
+    try:
+        int(FBAN)
+        if int(FBAN) == 630654925 or int(FBAN) == 719195224:
+            return
+    except:
+        if FBAN == "@HeisenbergTheDanger" or FBAN == "@its_xditya":
+            return
     if Config.FBAN_GROUP_ID:
         chat = Config.FBAN_GROUP_ID
     else:
