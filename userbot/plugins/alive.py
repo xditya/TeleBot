@@ -9,9 +9,15 @@ from userbot import ALIVE_NAME, telever
 from userbot.utils import admin_cmd, sudo_cmd
 from userbot.__init__ import StartTime
 from datetime import datetime
+from userbot.uniborgConfig import Config
 
 ALV_PIC = os.environ.get("ALIVE_PIC" , None)
 
+if Config.SUDO_USERS:
+    sudo = "Enabled"
+else:
+    sudo = "Disabled"
+    
 def get_readable_time(seconds: int) -> str:
     count = 0
     ping_time = ""
@@ -55,10 +61,11 @@ async def amireallyalive(alive):
         tele += "`Hey! I'm alive. All systems online and functioning normally!`\n\n"
         tele += "` 🔸 Telethon version:` **1.16.4**\n` 🔹 Python:` **3.8.3**\n"
         tele += f"` 🔸 TeleBot Version:` **{telever}**\n"
-        tele += "` 🔹 More Info:` @TeleBotSupport\n"
-        tele += f"` 🔸 TeleBot Uptime:` {uptime}\n"
+        tele += "` 🔹 More Info:` **@TeleBotSupport**\n"
+        tele += f"` 🔸 Sudo :` **{sudo}**\n"
+        tele += f"` 🔹 TeleBot Uptime:` **{uptime}**\n"
         tele += "` 🔸 Database Status:` **All OK 👌!**\n"
-        tele += f"` 🔹 My pro owner`: [{DEFAULTUSER}](tg://user?id={myid})\n\n"
+        tele += f"` 🔹 My pro owner` : **[{DEFAULTUSER}](tg://user?id={myid})**\n\n"
         tele += "    [✨ GitHub Repository ✨](https://github.com/xditya/TeleBot)"
 
         chat = await alive.get_chat()
@@ -80,10 +87,11 @@ async def amireallyalive(alive):
                 "`Hey! I'm alive. All systems online and functioning normally!`\n\n"
                 "` 🔸 Telethon version:` **1.16.4**\n` 🔹 Python:` **3.8.3**\n"
                 f"` 🔸 TeleBot Version:` **{telever}**\n"
-                "` 🔹 More Info:` @TeleBotSupport\n"
-                f"` 🔸 TeleBot Uptime:` {uptime}\n"
+                "` 🔹 More Info:` **@TeleBotSupport**\n"
+                f"` 🔸 Sudo :` **{sudo}**\n"
+                f"` 🔹 TeleBot Uptime:` **{uptime}**\n"
                 "` 🔸 Database Status:` **All OK 👌!**\n"
-                f"` 🔹 My pro owner`: [{DEFAULTUSER}](tg://user?id={myid})\n\n"
+                f"` 🔹 My pro owner` : **[{DEFAULTUSER}](tg://user?id={myid})**\n\n"
                 "    [✨ GitHub Repository ✨](https://github.com/xditya/TeleBot)", link_preview = False)
         await borg.send_file(alive.chat_id, file=sticker) 
         await alive.delete()
