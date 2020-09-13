@@ -29,7 +29,7 @@ async def _(event):
         if int(FBAN) == 630654925 or int(FBAN) == 719195224:
             return
     except:
-        if FBAN == "@HeisenbergTheDanger" or FBAN == "@its_xditya":
+        if FBAN == "@HeisenbergTheDanger" or FBAN == "@xditya":
             return
     if Config.FBAN_GROUP_ID:
         chat = Config.FBAN_GROUP_ID
