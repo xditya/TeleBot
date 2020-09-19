@@ -2,6 +2,7 @@
 
 from telethon import events
 import asyncio
+from time import time
 import zipfile
 from pySmartDL import SmartDL
 from datetime import datetime
@@ -14,7 +15,7 @@ async def _(event):
     if event.fwd_from:
         return
     if not event.is_reply:
-        await event.edit("Reply to a file to compress it.")
+        await event.edit("Reply to a file pro saar.")
         return
     mone = await event.edit("Processing ...")
     if not os.path.isdir(Config.TMP_DOWNLOAD_DIRECTORY):
@@ -22,14 +23,10 @@ async def _(event):
     if event.reply_to_msg_id:
         reply_message = await event.get_reply_message()
         try:
-            c_time = time.time()
             downloaded_file_name = await borg.download_media(
                 reply_message,
-                Config.TMP_DOWNLOAD_DIRECTORY,
-                progress_callback=lambda d, t: asyncio.get_event_loop().create_task(
-                    progress(d, t, mone, c_time, "trying to download")
+                Config.TMP_DOWNLOAD_DIRECTORY
                 )
-            )
             directory_name = downloaded_file_name
             await event.edit(downloaded_file_name)
         except Exception as e:  # pylint:disable=C0103,W0703
@@ -38,7 +35,7 @@ async def _(event):
     await borg.send_file(
         event.chat_id,
         directory_name + ".zip",
-        caption="Zipped By SnapDragon",
+        caption="Zipped Successfully!",
         force_document=True,
         allow_cache=False,
         reply_to=event.message.id,
