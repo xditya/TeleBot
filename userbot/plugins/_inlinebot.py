@@ -7,10 +7,9 @@ import asyncio
 import json
 import random
 import re
-from telethon import events, errors, custom, Button
+from telethon import events, errors, custom
 from userbot import CMD_LIST
 import io
-from . import telealive
 
 if Var.TG_BOT_USER_NAME_BF_HER is not None and tgbot is not None:
     @tgbot.on(events.InlineQuery)  # pylint:disable=E0602
@@ -18,29 +17,29 @@ if Var.TG_BOT_USER_NAME_BF_HER is not None and tgbot is not None:
         builder = event.builder
         result = None
         query = event.text
-        if query.startswith(
-                "**Welcome") and event.query.user_id == bot.uid:
-            buttons = [
-                (custom.Button.inline(
-                    "Stats", data="telestatus"), Button.url(
-                    "Source", "https://github.com/xditya/TeleBot"))]
-            result = builder.article(
-                title="TeleBot",
-                text=query,
-                buttons=buttons
-            )
-            await event.answer([result] if result else None)
-        elif event.query.user_id == bot.uid and query.startswith("`Userbot"):
+        if event.query.user_id == bot.uid and query.startswith("`Userbot"):
             rev_text = query[::-1]
             buttons = paginate_help(0, CMD_LIST, "helpme")
             result = builder.article(
-                "© Telebot Help",
+                "© TeleBot Help",
                 text="{}\nCurrently Loaded Plugins: {}".format(
                     query, len(CMD_LIST)),
                 buttons=buttons,
                 link_preview=False
             )
-            await event.answer([result] if result else None)
+        else:
+            result = builder.article(
+            "Source Code",
+            text="**Welcome to TeleBot**\n\n`Click below buttons for more`",
+            buttons=[
+                    [custom.Button.url("Creator🧑", "https://t.me/its_xditya")],
+                    [custom.Button.url("👨‍💻Source Code‍💻", "https://github.com/xditya/TeleBot"), custom.Button.url(
+                        "Deploy 🌀", "https://dashboard.heroku.com/new?template=https%3A%2F%2Fgithub.com%2Fxditya%2FTeleBot")],
+                    [custom.Button.url("Updates and Support Group↗️", "https://t.me/TeleBotSupport")]
+                ],
+                link_preview=False
+            )
+        await event.answer([result] if result else None)
     @tgbot.on(events.callbackquery.CallbackQuery(  # pylint:disable=E0602
         data=re.compile(b"helpme_next\((.+?)\)")
     ))
@@ -79,9 +78,8 @@ if Var.TG_BOT_USER_NAME_BF_HER is not None and tgbot is not None:
             # https://t.me/TelethonChat/115200
             await event.edit(buttons=buttons)
         else:
-            reply_pop_up_alert = "Please get your own Userbot from @TeleBotSupport"
+            reply_pop_up_alert = "Please get your own Userbot, and don't use mine!"
             await event.answer(reply_pop_up_alert, cache_time=0, alert=True)
-            
     @tgbot.on(events.callbackquery.CallbackQuery(  # pylint:disable=E0602
         data=re.compile(b"us_plugin_(.*)")
     ))
@@ -112,11 +110,7 @@ if Var.TG_BOT_USER_NAME_BF_HER is not None and tgbot is not None:
                     allow_cache=False,
                     caption=plugin_name
                 )
-    @tgbot.on(events.callbackquery.CallbackQuery(data=re.compile(b"telestatus")))
-    async def on_plug_in_callback_query_handler(event):
-        statustext = await telealive()
-        reply_pop_up_alert = statustext
-        await event.answer(reply_pop_up_alert, cache_time=0, alert=True)
+
 
 def paginate_help(page_number, loaded_plugins, prefix):
     number_of_rows = 5
