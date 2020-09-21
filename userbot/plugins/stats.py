@@ -23,9 +23,14 @@ else:
  lyd = "Disabled"
  
 if Config.SUDO_USERS:
- sudo = "Enabled"
-else:
  sudo = "Disabled"
+else:
+ sudo = "Enabled"
+ 
+if Var.PMSECURITY.lower() == "off":
+ pm = "Disabled" 
+else:
+ pm = "Enabled"
  
 TELEUSER = str(ALIVE_NAME) if ALIVE_NAME else "@TeleBotSupport"
 @telebot.on(admin_cmd(outgoing=True, pattern="stats"))
@@ -38,6 +43,7 @@ async def telestats(stats):
  tele +=f"**Assistant Bot**: {bots}\n"
  tele +=f"**Lydia**: {lyd}\n"
  tele +=f"**Sudo**: {sudo}\n"
+ tele +=f"**PMSecurity**: {pm}\n"
  tele +=f"\nVisit @TeleBotSupport\nfor assistance.\n"
  chat = await stats.get_chat()
  await borg.send_message(stats.chat_id, tele)
