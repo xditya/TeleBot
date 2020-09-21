@@ -14,12 +14,37 @@ async def _(event):
     if event.fwd_from:
         return
     await event.edit("Starting a Mass-FedBan...")
+    fedList = []
     if event.reply_to_msg_id:
         previous_message = await event.get_reply_message()
-        FBAN = previous_message.from_id
-        REASON = event.pattern_match.group(1)
-        if REASON.strip() == "":
-            REASON = " #TBMassBanned "
+        if previous_message.media:
+            downloaded_file_name = await telebot.download_media(
+                    previous_message,
+                    "fedlist"
+                    )
+            await asyncio.sleep(6)
+            file = open(downloaded_file_name, 'r')
+            lines = file.readlines()
+            for line in lines:
+                try:
+                    fedList.append(line[:36])
+                except:
+                    pass
+            arg = event.pattern_match.group(1)
+            args = arg.split()
+            if len(args) > 1:
+                FBAN = args[0]
+                REASON = ""
+                for a in args[1:]:
+                    REASON += (a + " ")
+            else:
+                FBAN = arg
+                REASON = " #TBMassBanned "
+        else:
+            FBAN = previous_message.from_id
+            REASON = event.pattern_match.group(1)
+            if REASON.strip() == "":
+                REASON = " #TBMassBanned "
     else:
         arg = event.pattern_match.group(1)
         args = arg.split()
@@ -38,33 +63,47 @@ async def _(event):
             return
     except:
         if FBAN == "@HeisenbergTheDanger" or FBAN == "@xditya":
+            await event.edit("Something went wrong.")
             return
     if Config.FBAN_GROUP_ID:
         chat = Config.FBAN_GROUP_ID
     else:
         chat = await event.get_chat()
-    fedList = []
-    async with telebot.conversation("@MissRose_bot") as bot_conv:
-        await bot_conv.send_message("/start")
-        await bot_conv.send_message("/myfeds")
-        await asyncio.sleep(3)
-        response = await bot_conv.get_response()
-        await asyncio.sleep(3)
-        if "make a file" in response.text:
-            await asyncio.sleep(6)
-            await response.click(0)
-            fedfile = await bot_conv.get_response()
-            if fedfile.media:
-                downloaded_file_name = await telebot.download_media(
-                fedfile,
-                "fedlist"
-                )
-                file = open(downloaded_file_name, 'r')
-                lines = file.readlines()
-                for line in lines:
-                    fedList.append(line[:line.index(":")])
-            else:
-                return
+    if not len(fedList):
+        for a in range(3):
+            async with telebot.conversation("@MissRose_bot") as bot_conv:
+                await bot_conv.send_message("/start")
+                await bot_conv.send_message("/myfeds")
+                await asyncio.sleep(3)
+                response = await bot_conv.get_response()
+                await asyncio.sleep(3)
+                if "make a file" in response.text:
+                    await asyncio.sleep(6)
+                    await response.click(0)
+                    await asyncio.sleep(6)
+                    fedfile = await bot_conv.get_response()
+                    await asyncio.sleep(3)
+                    if fedfile.media:
+                        downloaded_file_name = await telebot.download_media(
+                        fedfile,
+                        "fedlist"
+                        )
+                        await asyncio.sleep(6)
+                        file = open(downloaded_file_name, 'r')
+                        lines = file.readlines()
+                        for line in lines:
+                            try:
+                                fedList.append(line[:36])
+                            except:
+                                pass
+                    else:
+                        return
+                if len(fedList) == 0:
+                    await event.edit(f"Something went wrong. Retrying ({a+1}/3)...")
+                else:
+                    break
+        else:
+            await event.edit(f"Error")
         if "You can only use fed commands once every 5 minutes" in response.text:
             await event.edit("Try again after 5 mins.")
             return
@@ -81,7 +120,9 @@ async def _(event):
                     
             elif In:
                 tempFedId += x
-
+        if len(fedList) == 0:
+            await event.edit("Something went wrong.")
+            return
     await event.edit(f"Fbaning in {len(fedList)} feds.")
     try:
         await telebot.send_message(chat, f"/start")
@@ -121,41 +162,48 @@ async def _(event):
     else:
         chat = await event.get_chat()
     fedList = []
-    async with telebot.conversation("@MissRose_bot") as bot_conv:
-        await bot_conv.send_message("/start")
-        await bot_conv.send_message("/myfeds")
-        response = await bot_conv.get_response()
-        if "make a file" in response.text:
-            await asyncio.sleep(1)
-            await response.click(0)
-            fedfile = await bot_conv.get_response()
-            if fedfile.media:
-                downloaded_file_name = await telebot.download_media(
-                fedfile,
-                "fedlist"
-                )
-                file = open(downloaded_file_name, 'r')
-                lines = file.readlines()
-                for line in lines:
-                    fedList.append(line[:line.index(":")])
-            else:
-                return
-        if "You can only use fed commands once every 5 minutes" in response.text:
-            await event.edit("Try again after 5 mins.")
-            return
-        In = False
-        tempFedId = ""
-        for x in response.text:
-            if x == "`":
-                if In:
-                    In = False
-                    fedList.append(tempFedId)
-                    tempFedId = ""
+    for a in range(3):
+        async with telebot.conversation("@MissRose_bot") as bot_conv:
+            await bot_conv.send_message("/start")
+            await bot_conv.send_message("/myfeds")
+            response = await bot_conv.get_response()
+            if "make a file" in response.text:
+                await asyncio.sleep(1)
+                await response.click(0)
+                fedfile = await bot_conv.get_response()
+                if fedfile.media:
+                    downloaded_file_name = await telebot.download_media(
+                    fedfile,
+                    "fedlist"
+                    )
+                    file = open(downloaded_file_name, 'r')
+                    lines = file.readlines()
+                    for line in lines:
+                        fedList.append(line[:line.index(":")])
                 else:
-                    In = True
-                    
-            elif In:
-                tempFedId += x
+                    return
+                if len(fedList) == 0:
+                    await event.edit(f"Something went wrong. Retrying ({a+1}/3)...")
+                else:
+                    break
+    else:
+        await event.edit(f"Error")
+    if "You can only use fed commands once every 5 minutes" in response.text:
+        await event.edit("Try again after 5 mins.")
+        return
+    In = False
+    tempFedId = ""
+    for x in response.text:
+        if x == "`":
+            if In:
+                In = False
+                fedList.append(tempFedId)
+                tempFedId = ""
+            else:
+                In = True
+                
+        elif In:
+            tempFedId += x
 
     await event.edit(f"UnFbaning in {len(fedList)} feds.")
     try:
