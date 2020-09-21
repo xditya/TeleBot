@@ -9,7 +9,7 @@ from userbot.utils import admin_cmd
 import asyncio
 
 # By @HeisenbergTheDanger, @its_xditya
-@telebot.on(admin_cmd("superfban ?(.*)"))
+@telebot.on(admin_cmd("sfban ?(.*)"))
 async def _(event):
     if event.fwd_from:
         return
@@ -146,7 +146,7 @@ async def _(event):
         await asyncio.sleep(3)
     await event.edit(f"SuperFBan Completed. Affected {len(fedList) - exCount} feds.\n#TB")  
 # By @HeisenbergTheDanger, @its_xditya
-@telebot.on(admin_cmd("superunfban ?(.*)"))
+@telebot.on(admin_cmd("sunfban ?(.*)"))
 async def _(event):
     if event.fwd_from:
         return
@@ -221,7 +221,7 @@ async def _(event):
 # By @HeisenbergTheDanger, @its_xditya
 
 """
-.superfban <username/userid> <reason>\
+.sfban <username/userid> <reason>\
 \n**Usage**: Mass-Ban in all feds you are admin in.\
 \nSet `EXCLUDE_FED fedid1|fedid2` in heroku vars to exclude those feds.\
 \nSet var `FBAN_GROUP_ID` ti the group with rose, where you want FBan to take place.\
