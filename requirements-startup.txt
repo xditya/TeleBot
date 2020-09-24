@@ -2,7 +2,6 @@ Pillow>=5.3.0
 PyGithub
 aiofiles
 aiohttp
-aria2p
 async_generator
 beautifulsoup4
 bs4
