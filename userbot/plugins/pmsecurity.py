@@ -1,5 +1,7 @@
-# Fixed by @its_xditya
-
+#  (c)2020 TeleBot
+#
+# You may not use this plugin without proper authorship and consent from @TeleBotSupport
+#
 import time
 import asyncio
 import io
