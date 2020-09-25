@@ -123,8 +123,8 @@
    "value": "",
    "required": false
   },  
-  "MAX_FLOOD_IN_P_M_s": {
-   "description": "Maximum number of messages a person can send in pm before getting blocked. Value must be an integer. 3 by default.",
+  "MAX_SPAM": {
+   "description": "Number of messages one can send in your PM before being approved. By default, it is 3.",
    "value": "3",
    "required": false
   },
