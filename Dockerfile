@@ -51,16 +51,16 @@ RUN apt -qq install -y --no-install-recommends \
     # this package is required to fetch "contents" via "TLS"
     apt-transport-https \
     # install coreutils
-    # coreutils aria2 jq pv gcc g++ \
+    coreutils aria2 jq pv gcc g++ \
     # install encoding tools
-    # ffmpeg mediainfo rclone \
+    ffmpeg mediainfo rclone \
     # miscellaneous
     neofetch python3-dev \
     # install extraction tools
     mkvtoolnix \
     p7zip rar unrar zip \
     # miscellaneous helpers
-    # megatools mediainfo rclone && \
+    megatools mediainfo rclone && \
     # clean up the container "layer", after we are done
     rm -rf /var/lib/apt/lists /var/cache/apt/archives /tmp
  
