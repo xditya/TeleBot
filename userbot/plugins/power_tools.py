@@ -21,7 +21,7 @@ async def _(event):
     # await asyncio.sleep(2)
     # await event.edit("Restarting [███]...\nDo`.online` or `.alive` to check if I am online after a lil bit.")
     # await asyncio.sleep(2)
-    await event.edit("Restarting, please wait for 4 to 5 minutes and then do `.online` or `.alive` to check if I am online. ")
+    await event.edit("Restarting... Please give me a minute or two! ")
     await borg.disconnect()
     # https://archive.is/im3rt
     os.execl(sys.executable, sys.executable, *sys.argv)
