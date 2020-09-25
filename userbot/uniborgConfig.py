@@ -102,9 +102,11 @@ if ENV:
             t_file.close()
         YOUTUBE_API_KEY = os.environ.get("YOUTUBE_API_KEY", None)
         GDRIVE_FOLDER_ID = os.environ.get("GDRIVE_FOLDER_ID", None)
-        #MongoDB
+        # MongoDB
         MONGO_URI = os.environ.get("MONGO_URI", None)
-        #Lydia API
+        # PMSECURITY
+        MAX_SPAM = int(os.environ.get("MAX_SPAM", 3))
+        # Lydia API
         LYDIA_API = os.environ.get("LYDIA_API",None)
         FBAN_GROUP_ID = os.environ.get("FBAN_GROUP_ID", None)
         if FBAN_GROUP_ID:
