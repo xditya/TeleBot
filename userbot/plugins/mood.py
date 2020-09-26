@@ -16,8 +16,8 @@ async def _(event):
     if event.fwd_from:
         return
     names = event.pattern_match.group(1)
-    first_name = f"「{names}」"
-    last_name = f"{ALIVE_NAME}"
+    first_name = f"「{names}」 {ALIVE_NAME}"
+    last_name = ""
     try:
         await borg(functions.account.UpdateProfileRequest(  # pylint:disable=E0602
             first_name=first_name,
