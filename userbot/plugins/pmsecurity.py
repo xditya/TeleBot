@@ -2,6 +2,7 @@
 #
 # You may not use this plugin without proper authorship and consent from @TeleBotSupport
 #
+
 import time
 import asyncio
 import io
@@ -22,8 +23,8 @@ MESAG = str(CUSTOM_PMPERMIT) if CUSTOM_PMPERMIT else "`TeleBot PM security! Plea
 DEFAULTUSER = str(ALIVE_NAME) if ALIVE_NAME else "TeleBot User"
 USER_BOT_WARN_ZERO = "`I had warned you not to spam. Now you have been blocked and reported until further notice.`\n\n**GoodBye!** "
 USER_BOT_NO_WARN = ("**Welcome to TeleBot's PM security.**\n\nNice to see you here, but  "
-                    f"[{DEFAULTUSER}](tg://user?id={myid}) is currently unavailable.\nThis is an automated message..\n\n"
-                    f"{MESAG}"
+                    "[{}](tg://user?id={}) is currently unavailable.\nThis is an automated message.\n\n"
+                    "{}\n\n**You have** `{}/{}` **warnings...**"
                     "\n\n   ~ Thank You.")
 
 
@@ -199,7 +200,8 @@ async def do_pm_permit_action(chat_id, event):
             return
         except:
             return
-    r = await borg.send_file(event.chat_id, TELEPIC, caption=USER_BOT_NO_WARN, force_document=False)
+    MSG = USER_BOT_NO_WARN.format(DEFAULTUSER, myid, MESAG, PM_WARNS[chat_id] + 1, Config.MAX_SPAM)
+    r = await borg.send_file(event.chat_id, TELEPIC, caption=MSG, force_document=False)
     PM_WARNS[chat_id] += 1
     if chat_id in PREV_REPLY_MESSAGE:
         await PREV_REPLY_MESSAGE[chat_id].delete()
