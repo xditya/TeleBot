@@ -76,8 +76,8 @@ Fortunately there are no Mandatory vars for the UniBorg Support Config.
 # Disclaimer
 ```
 /**
-    Improper use may lead to ban.
-    I am not responsible if you misuse this bot.
+    	Improper use may lead to ban.
+    	I am not responsible if you misuse this bot.
 	This bot is just for managing groups more effectively and having some fun
 	with your telegram account.
 	No one is responsible for your actions.
