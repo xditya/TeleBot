@@ -2,8 +2,8 @@
 #
 # You may not use this plugin without proper authorship and consent from @TeleBotSupport
 #
-# By @buddhhu
-
+# By @buddhhu, @Itzsjdude
+#
 import os
 from userbot.utils import admin_cmd, sudo_cmd
 
