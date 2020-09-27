@@ -30,7 +30,7 @@ async def _(event):
     if event.fwd_from:
         return
     if Config.REM_BG_API_KEY is None:
-        await event.edit("You need API token from remove.bg to use this plugin.")
+        await event.edit("Get your API key from [here](https://www.remove.bg/) and add in the var `REM_BG_API_KEY` for this plugin to work.")
         return False
     input_str = event.pattern_match.group(1)
     start = datetime.now()
