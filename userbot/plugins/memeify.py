@@ -7,7 +7,7 @@ import textwrap, os
 from userbot.utils import admin_cmd, sudo_cmd
 
 @telebot.on(admin_cmd(pattern="mmf ?(.*)"))
-@telebot.on(sudo_cmd(pattern="mmf ?(.*)"))
+@telebot.on(sudo_cmd(pattern="mmf ?(.*)", incoming=True))
 async def handler(event):
     if event.fwd_from:
         return
