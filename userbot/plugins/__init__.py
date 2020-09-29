@@ -34,13 +34,13 @@ else:
  
 TELEUSER = str(ALIVE_NAME) if ALIVE_NAME else "@TeleBotSupport"
 
-tele =f"**TeleBot Version**: {telever}\n"
-tele +=f"**Log Group**: {log}\n"
-tele +=f"**Assistant Bot**: {bots}\n"
-tele +=f"**Lydia**: {lyd}\n"
+tele =f"TeleBot Version: {telever}\n"
+tele +=f"Log Group: {log}\n"
+tele +=f"Assistant Bot: {bots}\n"
+tele +=f"Lydia: {lyd}\n"
 tele +=f"**Sudo**: {sudo}\n"
-tele +=f"**PMSecurity**: {pm}\n"
-tele +=f"\nVisit @TeleBotSupport\nfor assistance.\n"
+tele +=f"PMSecurity: {pm}\n"
+tele +=f"\nVisit @TeleBotSupport for assistance.\n"
 telestats = (f"{tele}")
 
 """
