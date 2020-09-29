@@ -31,6 +31,17 @@ if Var.TG_BOT_USER_NAME_BF_HER is not None and tgbot is not None:
                 buttons=buttons,
                 link_preview=False
             )
+        if query == "stats":
+           result = builder.article(
+           title="Stats",
+           text=f"**TeleBot Stats For {DEFAULTUSER}\n\n(c) @TeleBotSupport",
+           buttons = [
+                   [custom.Button.inline("Stats", data="statcheck")],
+                   [Button.url("Repo", "https://github.com/xditya/TeleBot")],
+                   [Button.url("Deploy Now!", "https://dashboard.heroku.com/new?button-url=https%3A%2F%2Fgithub.com%2Fxditya%2FTeleBot&template=https%3A%2F%2Fgithub.com%2Fxditya%2FTeleBot")],
+             ]
+         )
+        await event.answer([result] if result else None)            
         else:
             result = builder.article(
             "Source Code",
@@ -43,17 +54,6 @@ if Var.TG_BOT_USER_NAME_BF_HER is not None and tgbot is not None:
                 ],
                 link_preview=False
             )
-        await event.answer([result] if result else None)
-        if query == "stats":
-           result = builder.article(
-           title="Stats",
-           text=f"**TeleBot Stats For {DEFAULTUSER}\n\n(c) @TeleBotSupport",
-           buttons = [
-                   [custom.Button.inline("Stats", data="statcheck")],
-                   [Button.url("Repo", "https://github.com/xditya/TeleBot")],
-                   [Button.url("Deploy Now!", "https://dashboard.heroku.com/new?button-url=https%3A%2F%2Fgithub.com%2Fxditya%2FTeleBot&template=https%3A%2F%2Fgithub.com%2Fxditya%2FTeleBot")],
-             ]
-         )
         await event.answer([result] if result else None)
         
     @tgbot.on(events.callbackquery.CallbackQuery(  # pylint:disable=E0602
