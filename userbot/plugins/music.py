@@ -15,27 +15,21 @@ try:
 except:
  os.system("pip install instantmusic")
  
-
-
 os.system("rm -rf *.mp3")
 
-
 def bruh(name):
-    
     os.system("instantmusic -q -s "+name)
     
-
-
 @telebot.on(admin_cmd(outgoing=True, pattern="spd(?: |$)(.*)"))
 async def _(event):
     if event.fwd_from:
         return
     link = event.pattern_match.group(1)
     chat = "@SpotifyMusicDownloaderBot"
-    await event.edit("```Getting Your Music```")
+    await event.edit(f"```Searching for Song - ``` __{link}__")
     async with bot.conversation(chat) as conv:
           await asyncio.sleep(2)
-          await event.edit("`Downloading music taking some times,  Stay Tuned.....`")
+          await event.edit("`Downloading music, this might take some time...`")
           try:
               response = conv.wait_event(events.NewMessage(incoming=True,from_users=752979930))
               await bot.send_message(chat, link)
@@ -56,7 +50,7 @@ async def WooMai(netase):
     await netase.edit("```Getting Your Music```")
     async with bot.conversation(chat) as conv:
           await asyncio.sleep(2)
-          await netase.edit("`Downloading...Please wait`")
+          await netase.edit("`Downloading... Please wait`")
           try:
               msg = await conv.send_message(link)
               response = await conv.get_response()
