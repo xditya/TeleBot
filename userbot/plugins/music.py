@@ -1,6 +1,5 @@
 # Originally from Bothub
-# Port to UserBot by @heyworld
-#Copyright (C) 2020 azrim.
+# (c) 2020 TeleBot
 
 from telethon import events
 import asyncio
@@ -38,7 +37,8 @@ async def _(event):
               await event.reply("```Please unblock @SpotifyMusicDownloaderBot and try again```")
               return
           await event.delete()
-          await bot.forward_messages(event.chat_id, respond.message)
+          msg = await bot.forward_messages(event.chat_id, respond.message)
+          await msg.edit(f"Song name - __{link}__\nUploaded by [TeleBot](https://t.me/TeleBotSupport)")
 
 @telebot.on(admin_cmd(outgoing=True, pattern="netease(?: |$)(.*)"))
 async def WooMai(netase):
@@ -63,8 +63,9 @@ async def WooMai(netase):
           await netase.edit("`Sending Your Music...`")
           await asyncio.sleep(3)
           await bot.send_file(netase.chat_id, respond)
-    await netase.client.delete_messages(conv.chat_id,
+    msg = await netase.client.delete_messages(conv.chat_id,
                                        [msg.id, response.id, respond.id])
+    await msg.edit(f"Song name - __{link}__\nUploaded by [TeleBot](https://t.me/TeleBotSupport)")
     await netase.delete()
 
 
@@ -92,8 +93,9 @@ async def DeezLoader(Deezlod):
               await Deezlod.edit("**Error:** `unblock` @DeezLoadBot `and retry!`")
               return
           await bot.send_file(Deezlod.chat_id, song, caption=details.text)
-          await Deezlod.client.delete_messages(conv.chat_id,
+          msg = await Deezlod.client.delete_messages(conv.chat_id,
                                              [msg_start.id, response.id, r.id, msg.id, details.id, song.id])
+          await msg.edit(f"Song name - __{d_link}__\nUploaded by [TeleBot](https://t.me/TeleBotSupport)")
           await Deezlod.delete()          
     
 CMD_HELP.update({
