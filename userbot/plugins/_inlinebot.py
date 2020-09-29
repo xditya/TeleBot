@@ -10,7 +10,7 @@ import re
 from telethon import events, errors, custom, Button
 from userbot import CMD_LIST
 import io
-from userbot.plugins import telestats 
+from userbot.plugins import telestats
 from userbot import ALIVE_NAME
 
 DEFAULTUSER = str(ALIVE_NAME) if ALIVE_NAME else "TeleBot User"
@@ -30,31 +30,34 @@ if Var.TG_BOT_USER_NAME_BF_HER is not None and tgbot is not None:
                     query, len(CMD_LIST)),
                 buttons=buttons,
                 link_preview=False
-            )	
+            )
         if query == "stats":
             result = builder.article(
-            title="Stats",
-            text=f"**TeleBot Stats For {DEFAULTUSER}\n\n(c) @TeleBotSupport",
-            buttons = [
+                title="Stats",
+                text=f"**TeleBot Stats For {DEFAULTUSER}\n\n(c) @TeleBotSupport",
+                buttons=[
                     [custom.Button.inline("Stats", data="statcheck")],
                     [Button.url("Repo", "https://github.com/xditya/TeleBot")],
-                    [Button.url("Deploy Now!", "https://dashboard.heroku.com/new?button-url=https%3A%2F%2Fgithub.com%2Fxditya%2FTeleBot&template=https%3A%2F%2Fgithub.com%2Fxditya%2FTeleBot")],
-              ]
-          )
-	else:
+                    [Button.url("Deploy Now!",
+                                "https://dashboard.heroku.com/new?button-url=https%3A%2F%2Fgithub.com%2Fxditya%2FTeleBot&template=https%3A%2F%2Fgithub.com%2Fxditya%2FTeleBot")],
+                ]
+            )
+        else:
             result = builder.article(
-            "Source Code",
-            text="**Welcome to TeleBot**\n\n`Click below buttons for more`",
-            buttons=[
+                "Source Code",
+                text="**Welcome to TeleBot**\n\n`Click below buttons for more`",
+                buttons=[
                     [custom.Button.url("Creator👨‍🦱", "https://t.me/its_xditya")],
                     [custom.Button.url("👨‍💻Source Code‍💻", "https://github.com/xditya/TeleBot"), custom.Button.url(
-                        "Deploy 🌀", "https://dashboard.heroku.com/new?template=https%3A%2F%2Fgithub.com%2Fxditya%2FTeleBot")],
+                        "Deploy 🌀",
+                        "https://dashboard.heroku.com/new?template=https%3A%2F%2Fgithub.com%2Fxditya%2FTeleBot")],
                     [custom.Button.url("Updates and Support Group↗️", "https://t.me/TeleBotSupport")]
                 ],
                 link_preview=False
             )
         await event.answer([result] if result else None)
-        
+
+
     @tgbot.on(events.callbackquery.CallbackQuery(  # pylint:disable=E0602
         data=re.compile(b"helpme_next\((.+?)\)")
     ))
@@ -70,6 +73,7 @@ if Var.TG_BOT_USER_NAME_BF_HER is not None and tgbot is not None:
             reply_pop_up_alert = "Please get your own Userbot from @TeleBotHelp , and don't use mine!"
             await event.answer(reply_pop_up_alert, cache_time=0, alert=True)
 
+
     @tgbot.on(events.callbackquery.CallbackQuery(data=re.compile(b"close")))
     async def on_plug_in_callback_query_handler(event):
         if event.query.user_id == bot.uid:
@@ -77,11 +81,13 @@ if Var.TG_BOT_USER_NAME_BF_HER is not None and tgbot is not None:
         else:
             reply_pop_up_alert = "Please get your own userbot from @TeleBotSupport "
             await event.answer(reply_pop_up_alert, cache_time=0, alert=True)
-            
+
+
     @tgbot.on(events.callbackquery.CallbackQuery(data=re.compile(b"statcheck")))
     async def rip(event):
-             text = inlinestats
-             await event.answer(text, alert=True)       
+        text = inlinestats
+        await event.answer(text, alert=True)
+
 
     @tgbot.on(events.callbackquery.CallbackQuery(  # pylint:disable=E0602
         data=re.compile(b"helpme_prev\((.+?)\)")
@@ -100,6 +106,8 @@ if Var.TG_BOT_USER_NAME_BF_HER is not None and tgbot is not None:
         else:
             reply_pop_up_alert = "Please get your own Userbot, and don't use mine!"
             await event.answer(reply_pop_up_alert, cache_time=0, alert=True)
+
+
     @tgbot.on(events.callbackquery.CallbackQuery(  # pylint:disable=E0602
         data=re.compile(b"us_plugin_(.*)")
     ))
@@ -131,6 +139,7 @@ if Var.TG_BOT_USER_NAME_BF_HER is not None and tgbot is not None:
                     caption=plugin_name
                 )
 
+
 def paginate_help(page_number, loaded_plugins, prefix):
     number_of_rows = 5
     number_of_cols = 2
@@ -150,9 +159,9 @@ def paginate_help(page_number, loaded_plugins, prefix):
     modulo_page = page_number % max_num_pages
     if len(pairs) > number_of_rows:
         pairs = pairs[modulo_page * number_of_rows:number_of_rows * (modulo_page + 1)] + \
-            [
-            (custom.Button.inline("⏮️ Previous", data="{}_prev({})".format(prefix, modulo_page)),
-             custom.Button.inline("Close", data="close"),
-             custom.Button.inline("Next ⏭️", data="{}_next({})".format(prefix, modulo_page)))
-        ]
+                [
+                    (custom.Button.inline("⏮️ Previous", data="{}_prev({})".format(prefix, modulo_page)),
+                     custom.Button.inline("Close", data="close"),
+                     custom.Button.inline("Next ⏭️", data="{}_next({})".format(prefix, modulo_page)))
+                ]
     return pairs
