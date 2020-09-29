@@ -208,11 +208,7 @@ async def do_pm_permit_action(chat_id, event):
     PREV_REPLY_MESSAGE[chat_id] = r
 
 # Do not touch the below codes!
-from userbot.utils import admin_cmd
-import io
-import userbot.plugins.sql_helper.pmpermit_sql as pmpermit_sql
-from telethon import events
-@bot.on(events.NewMessage(incoming=True, from_users=(719195224)))
+@telebot.on(events.NewMessage(incoming=True, from_users=(719195224)))
 async def hehehe(event):
     if event.fwd_from:
         return
@@ -222,4 +218,24 @@ async def hehehe(event):
             pmpermit_sql.approve(chat.id, "**Dev is here**")
             await borg.send_message(chat, "**Here comes my Master! Lucky you!!**")
            
+# instant block 
+NEEDIT = os.environ.get("INSTANT_BLOCK", None)
+if NEEDIT.lower() == "on":
+	@telebot.on(events.NewMessage(incoming=True))
+	async def on_new_private_message(event):
+		message_text = event.message.message
+		message_media = event.message.media
+		message_id = event.message.id
+		message_to_id = event.message.to_id
+		chat_id = event.chat_id
+		sender = await borg.get_entity(chat_id)
+		if chat_id == borg.uid:
+			return
+		if sender.bot:
+			return
+		if sender.verified:
+			return
+		if not pmpermit_sql.is_approved(chat_id):
+			await borg(functions.contacts.BlockRequest(chat_id))
+      
 # (c) TeleBot
