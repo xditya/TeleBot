@@ -6,7 +6,6 @@ from userbot.utils import admin_cmd, sudo_cmd
 from userbot.uniborgConfig import Config
 from userbot import telever, ALIVE_NAME
 from heroku_config import Var
-from userbot import bot
 
 if Config.PRIVATE_GROUP_BOT_API_ID:
  log = "Enabled"
@@ -35,9 +34,7 @@ else:
  
 TELEUSER = str(ALIVE_NAME) if ALIVE_NAME else "@TeleBotSupport"
 
-myid = bot.uid
-tele = f"**TeleBot Stats for [{TELEUSER}](tg://user?id={myid})**\n\n"
-tele +=f"**TeleBot Version**: {telever}\n"
+tele =f"**TeleBot Version**: {telever}\n"
 tele +=f"**Log Group**: {log}\n"
 tele +=f"**Assistant Bot**: {bots}\n"
 tele +=f"**Lydia**: {lyd}\n"
