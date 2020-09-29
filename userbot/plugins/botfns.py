@@ -123,7 +123,6 @@ async def stats(event):
     await tap[0].click(event.chat_id)
     await event.delete()
 
-
 @borg.on(admin_cmd(pattern="xogame$"))
 async def gamez(event):
     if event.fwd_from:
@@ -159,3 +158,21 @@ async def mod(event):
     tap = await bot.inline_query(botusername, modr) 
     await tap[0].click(event.chat_id)
     await event.delete()
+
+@borg.on(admin_cmd(pattern="checkspam ?(.*)"))
+async def _(event):
+    if event.fwd_from:
+        return
+    sysarg = event.pattern_match.group(1)
+    if sysarg == "":
+      async with borg.conversation(bot) as conv:
+          try:
+              await conv.send_message("/start")
+              response = await conv.get_response()
+              await conv.send_message("/start")
+              audio = await conv.get_response()
+              final = ("See if you are limited..\n(c)@TeleBotSupport" , "")
+              await borg.send_message(event.chat_id, audio.text)
+              await event.delete()
+          except YouBlockedUserError:
+              await event.edit("**Error:** `unblock` @spambot `and retry!")    
