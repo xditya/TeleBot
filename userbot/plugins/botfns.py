@@ -111,7 +111,7 @@ async def _(event):
           await event.delete()
           await event.client.send_message(event.chat_id, response.message, reply_to=reply_message)
 
-@borg.on(admin_cmd(pattern="stat$"))
+@borg.on(admin_cmd(pattern="stats$"))
 async def stats(event):
     if event.fwd_from:
         return
@@ -136,7 +136,7 @@ async def gamez(event):
     await tap[0].click(event.chat_id)
     await event.delete()
 
-@borg.on(admin_cmd(pattern="whisepr ?(.*)"))
+@borg.on(admin_cmd(pattern="whisper ?(.*)"))
 async def wspr(event):
     if event.fwd_from:
         return
