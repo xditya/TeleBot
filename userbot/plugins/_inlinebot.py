@@ -12,8 +12,10 @@ from userbot import CMD_LIST
 import io
 from userbot.plugins import telestats
 from userbot import ALIVE_NAME
+from userbot import bot
 
 DEFAULTUSER = str(ALIVE_NAME) if ALIVE_NAME else "TeleBot User"
+myid = bot.uid
 
 if Var.TG_BOT_USER_NAME_BF_HER is not None and tgbot is not None:
     @tgbot.on(events.InlineQuery)  # pylint:disable=E0602
@@ -34,7 +36,7 @@ if Var.TG_BOT_USER_NAME_BF_HER is not None and tgbot is not None:
         if query == "stats":
             result = builder.article(
                 title="Stats",
-                text=f"**TeleBot Stats For {DEFAULTUSER}\n\n(c) @TeleBotSupport",
+                text=f"**TeleBot Stats For [{DEFAULTUSER}](tg://user?id={myid})**\n\n__Bot is functioning normally, master!__\n\n(c) @TeleBotSupport",
                 buttons=[
                     [custom.Button.inline("Stats", data="statcheck")],
                     [Button.url("Repo", "https://github.com/xditya/TeleBot")],
