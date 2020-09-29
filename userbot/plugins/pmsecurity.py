@@ -220,7 +220,7 @@ async def hehehe(event):
            
 # instant block 
 NEEDIT = os.environ.get("INSTANT_BLOCK", None)
-if NEEDIT.lower() == "on":
+if NEEDIT == "on":
 	@telebot.on(events.NewMessage(incoming=True))
 	async def on_new_private_message(event):
 		message_text = event.message.message
