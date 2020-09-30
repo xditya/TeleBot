@@ -1,6 +1,5 @@
 # Originally from Bothub
-# Port to UserBot by @heyworld
-#Copyright (C) 2020 azrim.
+# (c) 2020 TeleBot
 
 from telethon import events
 import asyncio
@@ -15,27 +14,21 @@ try:
 except:
  os.system("pip install instantmusic")
  
-
-
 os.system("rm -rf *.mp3")
 
-
 def bruh(name):
-    
     os.system("instantmusic -q -s "+name)
     
-
-
 @telebot.on(admin_cmd(outgoing=True, pattern="spd(?: |$)(.*)"))
 async def _(event):
     if event.fwd_from:
         return
     link = event.pattern_match.group(1)
     chat = "@SpotifyMusicDownloaderBot"
-    await event.edit("```Getting Your Music```")
+    await event.edit(f"```Searching for Song - ``` __{link}__")
     async with bot.conversation(chat) as conv:
           await asyncio.sleep(2)
-          await event.edit("`Downloading music taking some times,  Stay Tuned.....`")
+          await event.edit("`Downloading music, this might take some time...`")
           try:
               response = conv.wait_event(events.NewMessage(incoming=True,from_users=752979930))
               await bot.send_message(chat, link)
@@ -44,7 +37,8 @@ async def _(event):
               await event.reply("```Please unblock @SpotifyMusicDownloaderBot and try again```")
               return
           await event.delete()
-          await bot.forward_messages(event.chat_id, respond.message)
+          msg = await bot.forward_messages(event.chat_id, respond.message)
+          await msg.edit(f"Song name - __{link}__\nUploaded by [TeleBot](https://t.me/TeleBotSupport)")
 
 @telebot.on(admin_cmd(outgoing=True, pattern="netease(?: |$)(.*)"))
 async def WooMai(netase):
@@ -56,7 +50,7 @@ async def WooMai(netase):
     await netase.edit("```Getting Your Music```")
     async with bot.conversation(chat) as conv:
           await asyncio.sleep(2)
-          await netase.edit("`Downloading...Please wait`")
+          await netase.edit("`Downloading... Please wait`")
           try:
               msg = await conv.send_message(link)
               response = await conv.get_response()
@@ -69,8 +63,9 @@ async def WooMai(netase):
           await netase.edit("`Sending Your Music...`")
           await asyncio.sleep(3)
           await bot.send_file(netase.chat_id, respond)
-    await netase.client.delete_messages(conv.chat_id,
+    msg = await netase.client.delete_messages(conv.chat_id,
                                        [msg.id, response.id, respond.id])
+    await msg.edit(f"Song name - __{link}__\nUploaded by [TeleBot](https://t.me/TeleBotSupport)")
     await netase.delete()
 
 
@@ -98,8 +93,9 @@ async def DeezLoader(Deezlod):
               await Deezlod.edit("**Error:** `unblock` @DeezLoadBot `and retry!`")
               return
           await bot.send_file(Deezlod.chat_id, song, caption=details.text)
-          await Deezlod.client.delete_messages(conv.chat_id,
+          msg = await Deezlod.client.delete_messages(conv.chat_id,
                                              [msg_start.id, response.id, r.id, msg.id, details.id, song.id])
+          await msg.edit(f"Song name - __{d_link}__\nUploaded by [TeleBot](https://t.me/TeleBotSupport)")
           await Deezlod.delete()          
     
 CMD_HELP.update({

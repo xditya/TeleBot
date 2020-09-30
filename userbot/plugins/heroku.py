@@ -80,20 +80,20 @@ async def variable(var):
         if variable in heroku_var:
             await var.edit(f"**{variable}**  `successfully changed to`  ->  **{value}**")
         else:
-            await var.edit(f"**{variable}**  `successfully added with value`  ->  **{value}**")
+            await var.edit(f"`Successfully added` **{variable}** `with value`  ->  **{value}**")
         heroku_var[variable] = value
     elif exe == "del":
         await var.edit("`Getting information to deleting variable...`")
         try:
             variable = var.pattern_match.group(2).split()[0]
         except IndexError:
-            return await var.edit("`Please specify ConfigVars you want to delete`")
+            return await var.edit("`Please specify which ConfigVars you want to delete`")
         await asyncio.sleep(1.5)
         if variable in heroku_var:
             await var.edit(f"**{variable}**  `successfully deleted`")
             del heroku_var[variable]
         else:
-            return await var.edit(f"**{variable}**  `is not exists`")
+            return await var.edit(f"**{variable}**  `does not exist`")
 
 
 @telebot.on(admin_cmd(outgoing=True, pattern=r"usage(?: |$)"))
