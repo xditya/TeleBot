@@ -33,7 +33,7 @@ if Var.TG_BOT_USER_NAME_BF_HER is not None and tgbot is not None:
                 buttons=buttons,
                 link_preview=False
             )
-        if query == "stats":
+        elif event.query.user_id == bot.uid and query == "stats":
             result = builder.article(
                 title="Stats",
                 text=f"**TeleBot Stats For [{DEFAULTUSER}](tg://user?id={myid})**\n\n__Bot is functioning normally, master!__\n\n(c) @TeleBotSupport",
