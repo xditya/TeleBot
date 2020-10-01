@@ -133,8 +133,8 @@ if Var.TG_BOT_USER_NAME_BF_HER is not None and tgbot is not None:
         except:
             with io.BytesIO(str.encode(reply_pop_up_alert)) as out_file:
                 out_file.name = "{}.txt".format(plugin_name)
-                await bot.send_file(
-                    event.chat_id,
+                await tgbot.send_file(
+                    event.sender_id,
                     out_file,
                     force_document=True,
                     allow_cache=False,
