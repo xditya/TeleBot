@@ -13,7 +13,7 @@ import os
 from pySmartDL import SmartDL
 from telethon.tl.types import DocumentAttributeVideo
 from uniborg.util import progress, humanbytes, time_formatter, admin_cmd
-
+from userbot.uniborgConfig import Config
 
 thumb_image_path = Config.TMP_DOWNLOAD_DIRECTORY + "/thumb_image.jpg"
 
@@ -23,6 +23,7 @@ async def _(event):
     if event.fwd_from:
         return
     thumb = None
+    xyz = Config.CMD_HNDLR
     if os.path.exists(thumb_image_path):
         thumb = thumb_image_path
     await event.edit("**Downloading, renaming and uploading...**")
@@ -59,4 +60,4 @@ async def _(event):
         else:
             await event.edit("File Not Found {}".format(input_str))
     else:
-        await event.edit("Syntax // .rnupload file.name as reply to a Telegram media")
+        await event.edit(f"Syntax ~ `{xyz}rename file_name.extension` as reply to a Telegram media")
