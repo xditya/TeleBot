@@ -24,8 +24,8 @@ async def cmd_list(event):
             if len(string) > 4095:
                 with io.BytesIO(str.encode(string)) as out_file:
                     out_file.name = "cmd.txt"
-                    await bot.send_file(
-                        event.chat_id,
+                    await tgbot.send_file(
+                        event.sender_id,
                         out_file,
                         force_document=True,
                         allow_cache=False,
