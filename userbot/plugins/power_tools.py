@@ -10,18 +10,22 @@ import asyncio
 import os
 import sys
 from userbot.utils import admin_cmd
-
+from userbot import CMD_HNDLR
 
 @borg.on(admin_cmd(pattern="restart"))
 async def _(event):
     if event.fwd_from:
         return
-    # await asyncio.sleep(2)
-    # await event.edit("Restarting [██░] ...\nDo `.alive` or `.online` to check if I am online after a lil bit.")
-    # await asyncio.sleep(2)
-    # await event.edit("Restarting [███]...\nDo`.online` or `.alive` to check if I am online after a lil bit.")
-    # await asyncio.sleep(2)
-    await event.edit("Restarting... Please give me a minute or two! ")
+    await asyncio.sleep(2)
+    await event.edit("Restarting \n□□□□□□□□□□")
+    await asyncio.sleep(2)
+    await event.edit(f"Restarting \n■■■■□□□□□□  ")
+    await asyncio.sleep(2)
+    await event.edit(f"Restarting \n■■■■■■■■□□   ")
+    await asyncio.sleep(2)
+    await event.edit(f"Done! \n■■■■■■■■■■  ")
+    await asyncio.sleep(2)
+    await event.edit(f"Please give me a minute or two and then use `{CMD_HNDLR}online` or `{CMD_HNDLR}alive`! ")
     await borg.disconnect()
     # https://archive.is/im3rt
     os.execl(sys.executable, sys.executable, *sys.argv)
