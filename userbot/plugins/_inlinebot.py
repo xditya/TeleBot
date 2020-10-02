@@ -114,33 +114,30 @@ if Var.TG_BOT_USER_NAME_BF_HER is not None and tgbot is not None:
         data=re.compile(b"us_plugin_(.*)")
     ))
     async def on_plug_in_callback_query_handler(event):
-        plugin_name = event.data_match.group(1).decode("UTF-8")
-        help_string = ""
-        try:
-            for i in CMD_LIST[plugin_name]:
-                help_string += i
-                help_string += "\n"
-        except:
-            pass
-        if help_string == "":
-            reply_pop_up_alert = "{} is useless".format(plugin_name)
+        if event.query.user_id == bot.uid:
+            plugin_name = event.data_match.group(1).decode("UTF-8")
+            help_string = ""
+            try:
+                for i in CMD_LIST[plugin_name]:
+                    help_string += i
+                    help_string += "\n"
+            except:
+                pass
+            if help_string is "":
+                reply_pop_up_alert = "{} is useless".format(plugin_name)
+            else:
+                reply_pop_up_alert = help_string
+            reply_pop_up_alert += "\n Use .unload {} to remove this plugin\n\
+                © Telebot".format(
+                plugin_name
+            )
+            try:
+                await event.answer(reply_pop_up_alert, cache_time=0, alert=True)
+            except:
+                halps = "Do .help {} to get the list of commands.".format(plugin_name)
+                await event.answer(halps, cache_time=0, alert=True)
         else:
-            reply_pop_up_alert = help_string
-        reply_pop_up_alert += "\n Use .unload {} to remove this plugin\n\
-            © Userbot".format(plugin_name)
-        try:
-            await event.answer(reply_pop_up_alert, cache_time=0, alert=True)
-        except:
-            with io.BytesIO(str.encode(reply_pop_up_alert)) as out_file:
-                out_file.name = "{}.txt".format(plugin_name)
-                await tgbot.send_file(
-                    event.sender_id,
-                    out_file,
-                    force_document=True,
-                    allow_cache=False,
-                    caption=plugin_name
-                )
-
+            reply_pop_up_alert = "Please get your own Userbot, and don't use mine!"
 
 def paginate_help(page_number, loaded_plugins, prefix):
     number_of_rows = 5
