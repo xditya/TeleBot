@@ -104,6 +104,8 @@ if ENV:
         GDRIVE_FOLDER_ID = os.environ.get("GDRIVE_FOLDER_ID", None)
         # MongoDB
         MONGO_URI = os.environ.get("MONGO_URI", None)
+        # TAG LOG GROUP
+        TAG_LOG = os.environ.get("TAG_LOG", None)
         # PMSECURITY
         MAX_SPAM = int(os.environ.get("MAX_SPAM", 3))
         # Lydia API
