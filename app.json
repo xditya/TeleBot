@@ -39,10 +39,6 @@
    "description": "The message that appears when someone PM's you. Leave it as such for default message.",
    "value": "Do not spam here, else you will be blocked automatically."
   },  
-  "CUSTOM_AFK": {
-   "description": "The message that appears when you go afk. Leave it as such for default.",
-   "value": "My Master is [AFK](https://telegra.ph/AFK-05-22)"
-  },
   "GITHUB_ACCESS_TOKEN": {
    "description": "Your Github Access Token for gitcommit plugin.Google 'Github access token' to find.",
    "value": "",
