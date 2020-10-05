@@ -117,13 +117,7 @@ if bool(ENV):
     
     # CUSTOM PMPERMIT
     CUSTOM_PMPERMIT = os.environ.get("CUSTOM_PMPERMIT", None)
-     
-    # CUSTOM AFK
-    CUSTOM_AFK = os.environ.get("CUSTOM_AFK", None)
-       
-    # OWNER ID
-    OWNER_ID = os.environ.get("OWNER_ID", "719195224")
-   
+      
     # PMPERMIT
     COUNT_MSG = 0
     COUNT_PM = {}
