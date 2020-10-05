@@ -4,10 +4,10 @@
 from telethon.tl.types import InputMediaDice
 from userbot.events import register 
 from userbot import CMD_HELP
+from userbot.utils import admin_cmd, sudo_cmd
 
 
-
-@register(outgoing=True, pattern="^.dice(?: |$)(.*)")
+@telebot.on(admin_cmd(outgoing=True, pattern="dice(?: |$)(.*)"))
 async def _(event):
     if event.fwd_from:
         return
@@ -24,7 +24,7 @@ async def _(event):
             pass
 
         
-@register(outgoing=True, pattern="^.dart(?: |$)(.*)")
+@telebot.on(admin_cmd(outgoing=True, pattern="dart(?: |$)(.*)"))
 async def _(event):
     if event.fwd_from:
         return
@@ -41,7 +41,7 @@ async def _(event):
             pass   
         
         
-@register(outgoing=True, pattern="^.bb(?: |$)(.*)")
+@telebot.on(admin_cmd(outgoing=True, pattern="bb(?: |$)(.*)"))
 async def _(event):
     if event.fwd_from:
         return
