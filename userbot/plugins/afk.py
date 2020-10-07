@@ -1,11 +1,32 @@
-"""AFK Plugin for TeleBot
-Syntax: .afk REASON"""
+#    TeleBot - UserBot
+#    Copyright (C) 2020 TeleBot
+
+#    This program is free software: you can redistribute it and/or modify
+#    it under the terms of the GNU Affero General Public License as published by
+#    the Free Software Foundation, either version 3 of the License, or
+#    (at your option) any later version.
+
+#    This program is distributed in the hope that it will be useful,
+#    but WITHOUT ANY WARRANTY; without even the implied warranty of
+#    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+#    GNU Affero General Public License for more details.
+
+#    You should have received a copy of the GNU Affero General Public License
+#    along with this program.  If not, see <https://www.gnu.org/licenses/>.
+
+"""
+AFK Plugin for TeleBot
+Syntax: .afk REASON
+"""
+
 import asyncio
 import datetime
 from telethon import events
 from telethon.tl import functions, types
 from userbot.utils import admin_cmd
+from userbot import ALIVE_NAME
 
+ALIVE_NAME = str(ALIVE_NAME) if ALIVE_NAME else "TeleBot User"
 global USER_AFK  # pylint:disable=E0602
 global afk_time  # pylint:disable=E0602
 global last_afk_message  # pylint:disable=E0602
@@ -19,6 +40,8 @@ async def set_not_afk(event):
     global afk_time  # pylint:disable=E0602
     global last_afk_message  # pylint:disable=E0602
     current_message = event.message.message
+    me = await borg.get_me()
+    telname = (me.first_name)
     if ".afk" not in current_message and "yes" in USER_AFK:  # pylint:disable=E0602
         try:
             await borg.send_message(  # pylint:disable=E0602
@@ -34,6 +57,13 @@ async def set_not_afk(event):
                 reply_to=event.message.id,
                 silent=True
             )
+        try:
+            await borg(functions.account.UpdateProfileRequest(  # pylint:disable=E0602
+            first_name=f"{ALIVE_NAME}",
+            last_name = ""
+        ))
+        except Exception as e:  # pylint:disable=C0103,W0703
+            await event.edit(str(e))
         USER_AFK = {}  # pylint:disable=E0602
         afk_time = None  # pylint:disable=E0602
 
@@ -50,6 +80,9 @@ async def _(event):
     afk_time = None
     last_afk_message = {}
     reason = event.pattern_match.group(1)
+    me = await borg.get_me()
+    telname = (me.first_name)
+    telnm = (me.last_name)
     if not USER_AFK:  # pylint:disable=E0602
         last_seen_status = await borg(  # pylint:disable=E0602
             functions.account.GetPrivacyRequest(
@@ -59,6 +92,13 @@ async def _(event):
         if isinstance(last_seen_status.rules, types.PrivacyValueAllowAll):
             afk_time = datetime.datetime.now()  # pylint:disable=E0602
         USER_AFK = f"yes: {reason}"  # pylint:disable=E0602
+        try:
+            await borg(functions.account.UpdateProfileRequest(  # pylint:disable=E0602
+            first_name=f"「AFK」 {telname}",
+            last_name = ""
+        ))
+        except Exception as e:  # pylint:disable=C0103,W0703
+            await event.edit(str(e))
         if reason:
             await event.edit(f"`Your status has been set to AFK.`\n**Reason** - __{reason}__")
         else:
