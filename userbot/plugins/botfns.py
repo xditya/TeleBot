@@ -160,7 +160,9 @@ async def mod(event):
     await event.delete()
 
 @borg.on(admin_cmd(pattern="checkspam ?(.*)"))
+@borg.on(sudo_cmd(pattern="checkspam ?(.*)", allow_sudo=True))
 async def _(event):
+    bot = "@SpamBot"
     if event.fwd_from:
         return
     sysarg = event.pattern_match.group(1)
@@ -175,4 +177,4 @@ async def _(event):
               await borg.send_message(event.chat_id, audio.text)
               await event.delete()
           except YouBlockedUserError:
-              await event.edit("**Error:** `unblock` @spambot `and retry!")    
+              await event.edit_or_reply("**Error:** `unblock` @spambot `and retry!")    
