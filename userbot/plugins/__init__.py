@@ -65,8 +65,7 @@ tele +=f"\nVisit @TeleBotSupport for assistance.\n"
 telestats = (f"{tele}")
 
 # /start
-x = bot.uid
-started = f"**Welcome To TeleBot**\nHi, this is the assistant bot of [{ALIVE_NAME}](tg://user?id={x}).\nSend `/help` to see what you can do here!\n\n(c) @TeleBotSupport"
+started = f"**Welcome To TeleBot**\nHi, this is the assistant bot of {ALIVE_NAME}.\nSend `/help` to see what you can do here!\n\n(c) @TeleBotSupport"
 
 # /help
 helpmefast = "Here are the things that you can do with this bot!\n\n`/info @username` - get information about the user.\n`/ping` - Ping stats\n`/help` - This menu.\n\n__Set-up your own TeleBot via @TeleBotSupport to get such amazing features and more!__"
