@@ -107,7 +107,7 @@ async def _(event):
     except Exception as e:
         dc_id = "Need a Profile Picture to check **this**"
         location = str(e)
-    caption = """Extracted Userdata From TeleBot's DATABASE
+    forinfo = """Extracted Userdata From TeleBot's DATABASE
 ID: <code>{}</code>
 Target's Name: <a href='tg://user?id={}'>{}</a>
 Bio: {}
@@ -186,7 +186,6 @@ async def get_full_user(event):
                 return replied_user, None
             except Exception as e:
                 return None, e
-forinfo = caption
 
 def get_readable_time(seconds: int) -> str:
     count = 0
