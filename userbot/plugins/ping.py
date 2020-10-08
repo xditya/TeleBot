@@ -3,7 +3,7 @@
 
 from telethon import events
 from datetime import datetime
-from userbot.utils import admin_cmd, sudo_cmd
+from userbot.utils import admin_cmd, sudo_cmd, edit_or_reply
 from userbot.__init__ import StartTime
 import time
 
@@ -45,4 +45,4 @@ async def _(event):
     end = datetime.now()
     ms = (end - start).microseconds / 1000
     uptime = get_readable_time((time.time() - StartTime))
-    await event.edit(f"🏓Ping speed: {ms}\n🤖TeleBot Uptime: {uptime}")
+    await event.edit_or_reply(f"🏓Ping speed: {ms}\n🤖TeleBot Uptime: {uptime}")
