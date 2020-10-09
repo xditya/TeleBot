@@ -88,4 +88,7 @@ async def _(event):
             lan,
             after_tr_text
         ) 
+    except Exception as exc:
+        output_str = str(exc)
+        
 fortr = output_str
