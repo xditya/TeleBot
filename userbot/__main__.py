@@ -2,7 +2,7 @@ from userbot import bot
 from sys import argv
 from telethon import TelegramClient
 from var import Var
-from userbot.utils import load_module
+from userbot.utils import load_module, start_mybot
 from pathlib import Path
 import telethon.utils
 
@@ -47,7 +47,7 @@ for name in files:
     with open(name) as f:
         path1 = Path(f.name)
         shortname = path1.stem
-        start_assistant(shortname.replace(".py", ""))
+        start_mybot(shortname.replace(".py", ""))
 print("TGBot has been set up!")      
 
 print("TeleBot has been fully deployed! Do Visit @TeleBotSupport")
