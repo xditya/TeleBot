@@ -26,7 +26,7 @@ from telethon.tl.types import InputMessagesFilterDocument
 DELETE_TIMEOUT = 5
 thumb_image_path = "./TeleBot.png"
 
-@telebot.on(admin_cmd(sudo_cmd(pattern="install")))
+@telebot.on(admin_cmd(pattern="install"))
 async def install(event):
     if event.fwd_from:
         return
