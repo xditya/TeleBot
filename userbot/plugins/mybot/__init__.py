@@ -59,36 +59,3 @@ start = datetime.now()
 end = datetime.now()
 ms = (end - start).microseconds / 1000
 forping = f"🏓Ping speed: {ms}"
-
-# translate
-async def _(event):
-    if event.fwd_from:
-        return
-    if "trim" in event.raw_text:
-        return
-    input_str = event.pattern_match.group(1)
-    if event.reply_to_msg_id:
-        previous_message = await event.get_reply_message()
-        text = previous_message.message
-        lan = input_str or "ml"
-    elif "|" in input_str:
-        lan, text = input_str.split("|")
-    else:
-        await event.edit("`.tr LanguageCode` as reply to a message")
-        return
-    text = emoji.demojize(text.strip())
-    lan = lan.strip()
-    translator = Translator()
-    try:
-        translated = translator.translate(text, dest=lan)
-        after_tr_text = translated.text
-        output_str = """**Translated by TeleBot**\nFrom {} to {}
-{}""".format(
-            translated.src,
-            lan,
-            after_tr_text
-        ) 
-    except Exception as exc:
-        output_str = str(exc)
-        
-fortr = output_str
