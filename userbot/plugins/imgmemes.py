@@ -127,6 +127,8 @@ async def nekobot(borg):
 @telebot.on(admin_cmd(pattern="modi(?: |$)(.*)", outgoing=True))
 async def nekobot(borg):
     text = borg.pattern_match.group(1)
+    if "mod" in borg.text:
+        return
     reply_to_id = borg.message
     if borg.reply_to_msg_id:
         reply_to_id = await borg.get_reply_message()
