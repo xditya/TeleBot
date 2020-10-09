@@ -152,6 +152,8 @@ async def mod(event):
     if event.fwd_from:
         return
     modr = event.pattern_match.group(1)
+    if "modi" in borg.text:
+        return
     botusername = "@PremiumAppBot"
     if event.reply_to_msg_id:
         reply_to_id = await event.get_reply_message()
