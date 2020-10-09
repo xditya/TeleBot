@@ -11,8 +11,6 @@ async def add_bot(bot_token):
     bot.me = await bot.get_me() 
     bot.uid = telethon.utils.get_peer_id(bot.me)
 
-
-
 if len(argv) not in (1, 3, 4):
     bot.disconnect()
 else:
@@ -32,7 +30,6 @@ else:
     else:
         bot.start()
     
-
 import glob
 path = 'userbot/plugins/*.py'
 files = glob.glob(path)
@@ -41,10 +38,19 @@ for name in files:
         path1 = Path(f.name)
         shortname = path1.stem
         load_module(shortname.replace(".py", ""))
+print("TeleBot has been deployed! ")
 
-import userbot._core
+print("Setting up TGBot")
+path = "userbot/plugins/mybot/*.py"
+files = glob.glob(path)
+for name in files:
+    with open(name) as f:
+        path1 = Path(f.name)
+        shortname = path1.stem
+        start_assistant(shortname.replace(".py", ""))
+print("TGBot has been set up!")      
 
-print("Yay! your userbot is officially working. Enjoy! Bot by SnapDragon. Mod by @xditya. Do join  @TeleBotHelp")
+print("TeleBot has been fully deployed! Do Visit @TeleBotSupport")
 
 if len(argv) not in (1, 3, 4):
     bot.disconnect()
