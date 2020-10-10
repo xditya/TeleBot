@@ -219,12 +219,12 @@ async def _(event):
            [Button.url("More", "https://t.me/TeleBotSupport")]
             ]
         )
-        except Exception as exc:
-            xx = str(exc)
-            await tgbot.send_message(
-            event.chat_id,
-            message=xx,
-            buttons = [
+    except Exception as exc:
+        xx = str(exc)
+        await tgbot.send_message(
+        event.chat_id,
+        message=xx,
+        buttons = [
            [Button.url("More", "https://t.me/TeleBotSupport")]
             ]
-            )
+        )
