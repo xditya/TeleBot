@@ -39,6 +39,7 @@ async def thisfn(event):
     await tgbot.send_message(
            event.chat_id,
            message=helpmefast,
+           link_preview = False,
            buttons = [
            [Button.url("TeleBot", "https://t.me/TeleBotSupport")]
             ]
@@ -62,7 +63,7 @@ async def _(event):
     if replied_user is None:
         await event.edit(str(error_i_a))
         return False
-    replied_user_profile_photos = await borg(GetUserPhotosRequest(
+    replied_user_profile_photos = await tgbot(GetUserPhotosRequest(
         user_id=replied_user.user.id,
         offset=42,
         max_id=0,
