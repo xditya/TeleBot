@@ -63,7 +63,7 @@ async def _(event):
     if replied_user is None:
         await event.edit(str(error_i_a))
         return False
-    replied_user_profile_photos = await tgbot(GetUserPhotosRequest(
+    replied_user_profile_photos = await event.client(GetUserPhotosRequest(
         user_id=replied_user.user.id,
         offset=42,
         max_id=0,
