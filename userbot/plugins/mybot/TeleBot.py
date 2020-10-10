@@ -14,63 +14,48 @@
 #    You should have received a copy of the GNU Affero General Public License
 #    along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-import html, time
+from telethon import events, Button
+from userbot.plugins.mybot import started, helpmefast, forping
+import html
 from telethon.tl.functions.photos import GetUserPhotosRequest
 from telethon.tl.functions.users import GetFullUserRequest
 from telethon.tl.types import MessageEntityMentionName
 from telethon.utils import get_input_location
-from userbot import ALIVE_NAME
-from userbot.__init__ import StartTime
-from datetime import datetime
-from userbot.utils import admin_cmd, sudo_cmd
-from userbot.uniborgConfig import Config
-from userbot import telever, ALIVE_NAME
-from heroku_config import Var
+import emoji
+from googletrans import Translator
 
-# stats
-if Config.PRIVATE_GROUP_BOT_API_ID:
- log = "Enabled"
-else:
- log = "Disabled"
+@tgbot.on(events.NewMessage(pattern="^/start"))
+async def thisfn(event):
+    await tgbot.send_message(
+           event.chat_id,
+           message=started,
+           buttons = [
+           [Button.url("Repository", "https://github.com/xditya/TeleBot/")]
+            ]
+      )
+     
+@tgbot.on(events.NewMessage(pattern="^/help"))
+async def thisfn(event):
+    await tgbot.send_message(
+           event.chat_id,
+           message=helpmefast,
+           link_preview = False,
+           buttons = [
+           [Button.url("TeleBot", "https://t.me/TeleBotSupport")]
+            ]
+      )
+      
+@tgbot.on(events.NewMessage(pattern="^/ping"))
+async def thisfn(event):
+    await tgbot.send_message(
+           event.chat_id,
+           message=forping,
+           buttons = [
+           [Button.url("Deploy", "https://dashboard.heroku.com/new?button-url=https%3A%2F%2Fgithub.com%2Fxditya%2FTeleBot&template=https%3A%2F%2Fgithub.com%2Fxditya%2FTeleBot")]
+            ]
+      )
 
-if Config.TG_BOT_USER_NAME_BF_HER:
- bots = "Enabled"
-else:
- bots = "Disabled"
- 
-if Var.LYDIA_API_KEY:
- lyd = "Enabled"
-else:
- lyd = "Disabled"
- 
-if Config.SUDO_USERS:
- sudo = "Disabled"
-else:
- sudo = "Enabled"
- 
-if Var.PMSECURITY.lower() == "off":
- pm = "Disabled" 
-else:
- pm = "Enabled"
- 
-TELEUSER = str(ALIVE_NAME) if ALIVE_NAME else "@TeleBotSupport"
-
-tele =f"TeleBot Version: {telever}\n"
-tele +=f"Log Group: {log}\n"
-tele +=f"Assistant Bot: {bots}\n"
-tele +=f"Lydia: {lyd}\n"
-tele +=f"Sudo: {sudo}\n"
-tele +=f"PMSecurity: {pm}\n"
-tele +=f"\nVisit @TeleBotSupport for assistance.\n"
-telestats = (f"{tele}")
-
-# /start
-started = f"**Welcome To TeleBot**\nHi, this is the assistant bot of {ALIVE_NAME}.\nSend `/help` to see what you can do here!\n\n(c) @TeleBotSupport"
-
-# /help
-helpmefast = "Here are the things that you can do with this bot!\n\n`/info @username` - get information about the user.\n`/ping` - Ping stats\n`/tr <lang_code>` - Use as reply to the text to translate.\n`/help` - This menu.\n\n__Set-up your own TeleBot via @TeleBotSupport to get such amazing features and more!__"
-
-# /info
+@tgbot.on(events.NewMessage(pattern="^/info ?(.*)"))
 async def _(event):
     if event.fwd_from:
         return
@@ -78,7 +63,7 @@ async def _(event):
     if replied_user is None:
         await event.edit(str(error_i_a))
         return False
-    replied_user_profile_photos = await borg(GetUserPhotosRequest(
+    replied_user_profile_photos = await event.client(GetUserPhotosRequest(
         user_id=replied_user.user.id,
         offset=42,
         max_id=0,
@@ -107,7 +92,7 @@ async def _(event):
     except Exception as e:
         dc_id = "Need a Profile Picture to check **this**"
         location = str(e)
-    forinfo = """Extracted Userdata From TeleBot's DATABASE
+    caption = """Extracted Userdata From TeleBot's DATABASE
 ID: <code>{}</code>
 Target's Name: <a href='tg://user?id={}'>{}</a>
 Bio: {}
@@ -132,7 +117,19 @@ No. of Common Groups : {}
     message_id_to_reply = event.message.reply_to_msg_id
     if not message_id_to_reply:
         message_id_to_reply = event.message.id
-        
+    await tgbot.send_message(
+        event.chat_id,
+        caption,
+        reply_to=message_id_to_reply,
+        parse_mode="HTML",
+        file=replied_user.profile_photo,
+        force_document=False,
+        silent=True,
+        buttons = [
+           [Button.url("More", "https://t.me/TeleBotSupport")]
+            ]
+    )
+
 async def get_full_user(event):
     if event.reply_to_msg_id:
         previous_message = await event.get_reply_message()
@@ -186,38 +183,84 @@ async def get_full_user(event):
                 return replied_user, None
             except Exception as e:
                 return None, e
+            
+@tgbot.on(events.NewMessage(pattern="^/tr ?(.*)"))
+async def _(event):
+    if event.fwd_from:
+        return
+    if "trim" in event.raw_text:
+        return
+    input_str = event.pattern_match.group(1)
+    if event.reply_to_msg_id:
+        previous_message = await event.get_reply_message()
+        text = previous_message.message
+        lan = input_str or "ml"
+    elif "|" in input_str:
+        lan, text = input_str.split("|")
+    else:
+        await event.edit("`.tr LanguageCode` as reply to a message")
+        return
+    text = emoji.demojize(text.strip())
+    lan = lan.strip()
+    translator = Translator()
+    try:
+        translated = translator.translate(text, dest=lan)
+        after_tr_text = translated.text
+        output_str = """**Translated by TeleBot**\nFrom {} to {}
+{}""".format(
+            translated.src,
+            lan,
+            after_tr_text
+        )    
+        await tgbot.send_message(
+        event.chat_id,
+        message=output_str,
+        buttons = [
+           [Button.url("More", "https://t.me/TeleBotSupport")]
+            ]
+        )
+    except Exception as exc:
+        xx = str(exc)
+        await tgbot.send_message(
+        event.chat_id,
+        message=xx,
+        buttons = [
+           [Button.url("More", "https://t.me/TeleBotSupport")]
+            ]
+        )
 
-def get_readable_time(seconds: int) -> str:
-    count = 0
-    ping_time = ""
-    time_list = []
-    time_suffix_list = ["s", "m", "h", "days"]
-
-    while count < 4:
-        count += 1
-        if count < 3:
-            remainder, result = divmod(seconds, 60)
+@tgbot.on(events.NewMessage(pattern="^/id"))
+async def _(event):
+    if event.fwd_from:
+        return
+    if event.reply_to_msg_id:
+        chat = await event.get_input_chat()
+        r_msg = await event.get_reply_message()
+        if r_msg.media:
+            bot_api_file_id = pack_bot_file_id(r_msg.media)
+            tosend = "Current Chat ID: `{}`\nFrom User ID: `{}`\nBot API File ID: `{}`".format(str(event.chat_id), str(r_msg.from_id), bot_api_file_id)
+            await tgbot.send_message(
+            event.chat_id,
+            message=tosend,
+            buttons = [
+                [Button.url("More", "https://t.me/TeleBotSupport")]
+            ]
+        )
         else:
-            remainder, result = divmod(seconds, 24)
-        if seconds == 0 and remainder == 0:
-            break
-        time_list.append(int(result))
-        seconds = int(remainder)
-
-    for x in range(len(time_list)):
-        time_list[x] = str(time_list[x]) + time_suffix_list[x]
-    if len(time_list) == 4:
-        ping_time += time_list.pop() + ", "
-
-    time_list.reverse()
-    ping_time += ":".join(time_list)
-
-    return ping_time
-
-start = datetime.now()
-uptime = get_readable_time((time.time() - StartTime))
-end = datetime.now()
-ms = (end - start).microseconds / 1000
-
-forping = f"🏓Ping speed: {ms}\n🤖TeleBot Uptime: {uptime}"
-
+            sendit = "Current Chat ID: `{}`\nFrom User ID: `{}`".format(str(event.chat_id), str(r_msg.from_id))
+            await tgbot.send_message(
+            event.chat_id,
+            message=sendit,
+            buttons = [
+                [Button.url("More", "https://t.me/TeleBotSupport")]
+            ]
+        )
+    else:
+        kek = "Current Chat ID: `{}`".format(str(event.chat_id))
+        await tgbot.send_message(
+            event.chat_id,
+            message=kek,
+            buttons = [
+                [Button.url("More", "https://t.me/TeleBotSupport")]
+            ]
+        )

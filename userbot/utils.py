@@ -107,6 +107,10 @@ def load_module(shortname):
         mod.Config = Config
         mod.borg = bot
         mod.telebot = bot
+        # auto-load
+        mod.admin_cmd = admin_cmd
+        mod.sudo_cmd = sudo_cmd
+        mod.edit_or_reply = edit_or_reply
         # support for paperplaneextended
         sys.modules["userbot.events"] = userbot.utils
         spec.loader.exec_module(mod)
@@ -359,3 +363,37 @@ async def edit_or_reply(event, text):
             return await reply_to.reply(text)
         return await event.reply(text)
     return await event.edit(text)
+
+# TGBot
+def start_mybot(shortname):
+    if shortname.startswith("__"):
+        pass
+    elif shortname.endswith("_"):
+        import importlib
+        import sys
+        from pathlib import Path
+
+        import userbot.utils
+
+        path = Path(f"userbot/plugins/mybot/{shortname}.py")
+        name = "userbot.plugins.mybot.{}".format(shortname)
+        spec = importlib.util.spec_from_file_location(name, path)
+        mod = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(mod)
+        print("Initialising TGBot.")
+        print("TGBot - Imported " + shortname)
+    else:
+        import importlib
+        import sys
+        from pathlib import Path
+
+        import userbot.utils
+
+        path = Path(f"userbot/plugins/mybot/{shortname}.py")
+        name = "userbot.plugins.mybot.{}".format(shortname)
+        spec = importlib.util.spec_from_file_location(name, path)
+        mod = importlib.util.module_from_spec(spec)
+        mod.tgbot = bot.tgbot
+        spec.loader.exec_module(mod)
+        sys.modules["userbot.plugins.mybot" + shortname] = mod
+        print("TGBot Has imported " + shortname)
