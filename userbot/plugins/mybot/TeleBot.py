@@ -354,7 +354,7 @@ async def _(givelogs):
                 caption="[Heroku] TeleBot Logs",
                 buttons = [
            [Button.url("Crashed?", "t.me/TeleBotHelpChat")]
-            )
+                ])
         else:
             resp = f"This option is available only for my master, {DEF}!"
             await tgbot.send_message(givelogs.chat_id, message=resp, buttons = [
