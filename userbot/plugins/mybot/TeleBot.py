@@ -129,7 +129,6 @@ No. of Common Groups : {}
            [Button.url("More", "https://t.me/TeleBotSupport")]
             ]
     )
-    await event.delete()
 
 async def get_full_user(event):
     if event.reply_to_msg_id:
