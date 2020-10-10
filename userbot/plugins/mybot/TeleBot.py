@@ -229,3 +229,41 @@ async def _(event):
            [Button.url("More", "https://t.me/TeleBotSupport")]
             ]
         )
+
+@tgbot.on(events.NewMessage(pattern="^/id")
+async def _(event):
+    if event.fwd_from:
+        return
+    if event.reply_to_msg_id:
+        chat = await event.get_input_chat()
+        r_msg = await event.get_reply_message()
+        if r_msg.media:
+            bot_api_file_id = pack_bot_file_id(r_msg.media)
+            tosend = "Current Chat ID: `{}`\nFrom User ID: `{}`\nBot API File ID: `{}`".format(str(event.chat_id), str(r_msg.from_id), bot_api_file_id)
+            await tgbot.send_message(
+            event.chat_id,
+            message=tosend,
+            buttons = [
+                [Button.url("More", "https://t.me/TeleBotSupport")]
+            ]
+        )
+        else:
+            sendit = "Current Chat ID: `{}`\nFrom User ID: `{}`".format(str(event.chat_id), str(r_msg.from_id))
+            await tgbot.send_message(
+            event.chat_id,
+            message=sendit,
+            buttons = [
+                [Button.url("More", "https://t.me/TeleBotSupport")]
+            ]
+        )
+    else:
+        kek = "Current Chat ID: `{}`".format(str(event.chat_id))
+        await tgbot.send_message(
+            event.chat_id,
+            message=kek,
+            buttons = [
+                [Button.url("More", "https://t.me/TeleBotSupport")]
+            ]
+        )
+
+        
