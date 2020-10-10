@@ -230,7 +230,7 @@ async def _(event):
             ]
         )
 
-@tgbot.on(events.NewMessage(pattern="^/id")
+@tgbot.on(events.NewMessage(pattern="^/id"))
 async def _(event):
     if event.fwd_from:
         return
@@ -265,5 +265,3 @@ async def _(event):
                 [Button.url("More", "https://t.me/TeleBotSupport")]
             ]
         )
-
-        
