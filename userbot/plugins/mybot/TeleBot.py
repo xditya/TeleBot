@@ -31,6 +31,7 @@ import math
 from telethon import events, Button
 from userbot import ALIVE_NAME
 from heroku_config import Var
+from userbot import bot
 
 DEF = str(ALIVE_NAME) if ALIVE_NAME else "TeleBot"
 
