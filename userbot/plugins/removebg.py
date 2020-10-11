@@ -74,7 +74,7 @@ async def _(event):
         ms = (end - start).seconds
         await event.edit("Removed dat annoying Backgroup in {} seconds, powered by @TeleBotHelp".format(ms))
     else:
-        await event.edit("Get your API key from [here](https://www.remove.bg/) and add in the var `REM_BG_API_KEY` for this plugin to work.\nGet help from @TeleBotSupport.\n\nError- \n`{}`".format(output_file_name.content.decode("UTF-8")))
+        await event.edit("RemoveBG returned an error - \n`{}`".format(output_file_name.content.decode("UTF-8")))
 
 
 # this method will call the API, and return in the appropriate format
