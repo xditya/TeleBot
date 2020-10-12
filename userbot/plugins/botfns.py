@@ -180,3 +180,27 @@ async def _(event):
               await event.delete()
           except YouBlockedUserError:
               await event.edit_or_reply("**Error:** `unblock` @spambot `and retry!")    
+
+@telebot.on(admin_cmd(pattern="gitdl ?(.*)"))
+@telebot.on(sudo_cmd(pattern="gitdl ?(.*)", allow_sudo=True))
+async def _(event):
+    if event.fwd_from:
+        return 
+    if not event.reply_to_msg_id:
+       await event.reply("**Reply to a github repo url.**")
+       return
+    reply_message = await event.get_reply_message() 
+    chat = "@gitdownloadbot"
+    sender = reply_message.sender
+    await event.edit("**Downloading the repository...**")
+    async with event.client.conversation(chat) as conv:
+          try:     
+              response = conv.wait_event(events.NewMessage(incoming=True,from_users=1282593576))
+              await event.client.forward_messages(chat, reply_message)
+              response = await response 
+          except YouBlockedUserError: 
+              await a.edit("```Please unblock me (@gitdownloadbot) u Nigga```")
+              return
+          await event.delete()
+          x = await event.client.send_message(event.chat_id, response.message, reply_to=reply_message)
+          await x.edit("Downloaded by [TeleBot](t.me/TeleBotSupport), via @gitdownloadbot")                
