@@ -44,7 +44,7 @@ if Var.TG_BOT_USER_NAME_BF_HER is not None and tgbot is not None:
                                 "https://dashboard.heroku.com/new?button-url=https%3A%2F%2Fgithub.com%2Fxditya%2FTeleBot&template=https%3A%2F%2Fgithub.com%2Fxditya%2FTeleBot")],
                 ]
             )
-        elif query.startswith("**Welcome"):     
+        elif query.startswith("**PM"):     
             result = builder.article(
                 title="PMSecurity",
                 text=f"Test In InlineBot",
