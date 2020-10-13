@@ -44,6 +44,14 @@ if Var.TG_BOT_USER_NAME_BF_HER is not None and tgbot is not None:
                                 "https://dashboard.heroku.com/new?button-url=https%3A%2F%2Fgithub.com%2Fxditya%2FTeleBot&template=https%3A%2F%2Fgithub.com%2Fxditya%2FTeleBot")],
                 ]
             )
+        elif query.startswith("**Welcome"):     
+            result = builder.article(
+                title="PMSecurity",
+                text=f"Test In InlineBot",
+                buttons=[
+                    [custom.Button.inline("What is this ❓", data="pmclick")]
+                ]
+            )
         else:
             result = builder.article(
                 "Source Code",
@@ -139,6 +147,18 @@ if Var.TG_BOT_USER_NAME_BF_HER is not None and tgbot is not None:
         else:
             reply_pop_up_alert = "Please get your own Userbot, and don't use mine!"
 
+    @tgbot.on(events.callbackquery.CallbackQuery(data=re.compile(b"pmclick")))
+    async def help(event):
+        await event.delete()
+        txt=f"This is the PMSecurity of {DEFAAULTUSER} to prevent spammers."
+        await tgbot.send_message(
+            event.chat_id,
+            message=txt,
+            buttons = [
+                [Button.url("TeleBot 🔗", "https://t.me/TeleBotSupport")],
+                ]
+            )
+    
 def paginate_help(page_number, loaded_plugins, prefix):
     number_of_rows = 5
     number_of_cols = 2
