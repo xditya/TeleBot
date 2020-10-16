@@ -11,38 +11,37 @@ import asyncio
 import os
 import requests
 import math
-from userbot.utils import register
-from userbot.utils import admin_cmd
-
+from userbot import CMD_HNDLR
 
 Heroku = heroku3.from_key(Var.HEROKU_API_KEY)
 heroku_api = "https://api.heroku.com"
 
-
-@telebot.on(admin_cmd(outgoing=True, pattern=r"(set|get|del) var(?: |$)(.*)(?: |$)([\s\S]*)"))
+@telebot.on(admin_cmd(pattern=r"(set|get|del) var (.*)", outgoing=True))
 async def variable(var):
     """
-        Manage most of ConfigVars setting, set new var, get current var,
-        or delete var...
+    Manage most of ConfigVars setting, set new var, get current var,
+    or delete var...
     """
     if Var.HEROKU_APP_NAME is not None:
         app = Heroku.app(Var.HEROKU_APP_NAME)
     else:
-        return await var.edit("`[HEROKU]:"
-                              "\nPlease setup your` **HEROKU_APP_NAME**")
+        return await edit_or_reply(
+            var, "`[HEROKU]:" "\nPlease setup your` **HEROKU_APP_NAME**"
+        )
     exe = var.pattern_match.group(1)
     heroku_var = app.config()
     if exe == "get":
-        await var.edit("`Getting information...`")
-        await asyncio.sleep(1.5)
+        toput = await edit_or_reply(var, "`Getting information...`")
+        await asyncio.sleep(1.0)
         try:
             variable = var.pattern_match.group(2).split()[0]
             if variable in heroku_var:
-                return await var.edit("**ConfigVars**:"
-                                      f"\n\n`{variable} = {heroku_var[variable]}`\n")
-            else:
-                return await var.edit("**ConfigVars**:"
-                                      f"\n\n`Error:\n-> {variable} don't exists`")
+                return await toput.edit(
+                    "**ConfigVars**:" f"\n\n`{variable} = {heroku_var[variable]}`\n"
+                )
+            return await toput.edit(
+                "**ConfigVars**:" f"\n\n`Error:\n-> {variable} don't exists`"
+            )
         except IndexError:
             configs = prettyjson(heroku_var.to_dict(), indent=2)
             with open("configs.json", "w") as fp:
@@ -50,50 +49,50 @@ async def variable(var):
             with open("configs.json", "r") as fp:
                 result = fp.read()
                 if len(result) >= 4096:
-                    await var.client.send_file(
+                    await bot.send_file(
                         var.chat_id,
                         "configs.json",
                         reply_to=var.id,
                         caption="`Output too large, sending it as a file`",
                     )
                 else:
-                    await var.edit("`[HEROKU]` ConfigVars:\n\n"
-                                   "================================"
-                                   f"\n```{result}```\n"
-                                   "================================"
-                                   )
+                    await toput.edit(
+                        "`[HEROKU]` ConfigVars:\n\n"
+                        "================================"
+                        f"\n```{result}```\n"
+                        "================================"
+                    )
             os.remove("configs.json")
             return
     elif exe == "set":
-        await var.edit("`Setting information...`")
-        variable = var.pattern_match.group(2)
+        variable = "".join(var.text.split(maxsplit=2)[2:])
+        toput = await edit_or_reply(var, "`Setting information...`")
         if not variable:
-            return await var.edit(">`.set var <ConfigVars-name> <value>`")
-        value = var.pattern_match.group(3)
+            return await toput.edit("`.set var <ConfigVars-name> <value>`")
+        value = "".join(variable.split(maxsplit=1)[1:])
+        variable = "".join(variable.split(maxsplit=1)[0])
         if not value:
-            variable = variable.split()[0]
-            try:
-                value = var.pattern_match.group(2).split()[1]
-            except IndexError:
-                return await var.edit(">`.set var <ConfigVars-name> <value>`")
+            return await toput.edit(f"`{CMD_HNDLR}set var <ConfigVars-name> <value>`")
         await asyncio.sleep(1.5)
         if variable in heroku_var:
-            await var.edit(f"**{variable}**  `successfully changed to`  ->  **{value}**")
+            await toput.edit(f"`{variable}` **successfully changed to **`{value}`")
         else:
-            await var.edit(f"`Successfully added` **{variable}** `with value`  ->  **{value}**")
+            await toput.edit(
+                f"`{variable}`** successfully added with value` **{value}`"
+            )
         heroku_var[variable] = value
     elif exe == "del":
-        await var.edit("`Getting information to deleting variable...`")
+        toput = await edit_or_reply(var, "`Getting information to delete variable...`")
         try:
             variable = var.pattern_match.group(2).split()[0]
         except IndexError:
-            return await var.edit("`Please specify which ConfigVars you want to delete`")
+            return await toput.edit("`Please specify ConfigVars you want to delete`")
         await asyncio.sleep(1.5)
         if variable in heroku_var:
-            await var.edit(f"**{variable}**  `successfully deleted`")
+            await toput.edit(f"`{variable}` **has been successfully deleted**")
             del heroku_var[variable]
         else:
-            return await var.edit(f"**{variable}**  `does not exist`")
+            return await toput.edit(f"`{variable}`** doesn't exist**")
 
 
 @telebot.on(admin_cmd(outgoing=True, pattern=r"usage(?: |$)"))
@@ -110,7 +109,7 @@ async def dyno_usage(dyno):
     headers = {
      'User-Agent': useragent,
      'Authorization': f'Bearer {Var.HEROKU_API_KEY}',
-     'Accept': 'application/vnd.heroku+json; version=3.account-quotas',
+     'Accept': 'applitopution/vnd.heroku+json; version=3.account-quotas',
     }
     path = "/accounts/" + user_id + "/actions/get-quota"
     r = requests.get(heroku_api + path, headers=headers)
@@ -161,7 +160,7 @@ async def info(event):
 
 
 def prettyjson(obj, indent=2, maxlinelength=80):
-    """Renders JSON content with indentation and line splits/concatenations to fit maxlinelength.
+    """Renders JSON content with indentation and line splits/contoputenations to fit maxlinelength.
     Only dicts, lists and basic types are supported"""
 
     items, _ = getsubitems(obj, itemkey="", islast=True, maxlinelength=maxlinelength - indent, indent=indent)

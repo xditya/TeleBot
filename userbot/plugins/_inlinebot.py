@@ -1,21 +1,53 @@
-# Ported from other Telegram UserBots for TeleBot
-# Kangers, don't remove this line 
-# @its_xditya
+#    TeleBot - UserBot
+#    Copyright (C) 2020 TeleBot
 
+#    This program is free software: you can redistribute it and/or modify
+#    it under the terms of the GNU Affero General Public License as published by
+#    the Free Software Foundation, either version 3 of the License, or
+#    (at your option) any later version.
+
+#    This program is distributed in the hope that it will be useful,
+#    but WITHOUT ANY WARRANTY; without even the implied warranty of
+#    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+#    GNU Affero General Public License for more details.
+
+#    You should have received a copy of the GNU Affero General Public License
+#    along with this program.  If not, see <https://www.gnu.org/licenses/>.
+
+import html
 from math import ceil
 import asyncio
 import json
 import random
 import re
-from telethon import events, errors, custom, Button
+from telethon import events, errors, custom, Button, functions, types
+from telethon.tl.functions.users import GetFullUserRequest
 from userbot import CMD_LIST
 import io
 from userbot.plugins import telestats
-from userbot import ALIVE_NAME
+from userbot import ALIVE_NAME, CUSTOM_PMPERMIT
 from userbot import bot
+import userbot.plugins.sql_helper.pmpermit_sql as pmpermit_sql
+import time
+import os
+from telethon.tl.functions.users import GetFullUserRequest
+from telethon import events, errors, functions, types
+from userbot.utils import admin_cmd
+from heroku_config import Var
 
-DEFAULTUSER = str(ALIVE_NAME) if ALIVE_NAME else "TeleBot User"
+PMPERMIT_PIC = os.environ.get("PMPERMIT_PIC", None)
+TELEPIC = PMPERMIT_PIC if PMPERMIT_PIC else "https://telegra.ph/file/572a121f67b75f97c7a6a.jpg"
+PM_WARNS = {}
+PREV_REPLY_MESSAGE = {}
 myid = bot.uid
+LOG_GP = Var.PRIVATE_GROUP_ID
+MESAG = str(CUSTOM_PMPERMIT) if CUSTOM_PMPERMIT else "`TeleBot PM security! Please wait for me to approve you. 😊"
+DEFAULTUSER = str(ALIVE_NAME) if ALIVE_NAME else "TeleBot User"
+USER_BOT_WARN_ZERO = "`I had warned you not to spam. Now you have been blocked and reported until further notice.`\n\n**GoodBye!** "
+USER_BOT_NO_WARN = (f"**PM Security ~ TeleBot**\n\nNice to see you here, but  "
+                    "[{}](tg://user?id={}) is currently unavailable.\nThis is an automated message.\n\n"
+                    "{}\n"
+                    "\nPlease choose why you are here, from the available options\n\n            ~ Thank You.")
 
 if Var.TG_BOT_USER_NAME_BF_HER is not None and tgbot is not None:
     @tgbot.on(events.InlineQuery)  # pylint:disable=E0602
@@ -42,6 +74,19 @@ if Var.TG_BOT_USER_NAME_BF_HER is not None and tgbot is not None:
                     [Button.url("Repo", "https://github.com/xditya/TeleBot")],
                     [Button.url("Deploy Now!",
                                 "https://dashboard.heroku.com/new?button-url=https%3A%2F%2Fgithub.com%2Fxditya%2FTeleBot&template=https%3A%2F%2Fgithub.com%2Fxditya%2FTeleBot")],
+                ]
+            )
+        elif event.query.user_id == bot.uid and query.startswith("**PM"):
+            TELEBT = USER_BOT_NO_WARN.format(DEFAULTUSER, myid, MESAG)
+            result = builder.photo(
+                file=TELEPIC,
+                text= TELEBT,
+                buttons=[
+                    [custom.Button.inline("To Request Something 😁", data="req"),
+                    custom.Button.inline("To Get Help 🆘", data="plshelpme")],
+                    [custom.Button.inline("Random Chat 💭", data="chat"),
+                    custom.Button.inline("To spam 🚫", data="heheboi")],
+                    [custom.Button.inline("What is this ❓", data="pmclick")],
                 ]
             )
         else:
@@ -75,6 +120,76 @@ if Var.TG_BOT_USER_NAME_BF_HER is not None and tgbot is not None:
             reply_pop_up_alert = "Please get your own Userbot from @TeleBotHelp , and don't use mine!"
             await event.answer(reply_pop_up_alert, cache_time=0, alert=True)
 
+    @tgbot.on(events.callbackquery.CallbackQuery(data=re.compile(b"pmclick")))
+    async def on_pm_click(event):
+        if event.query.user_id == bot.uid:
+            reply_pop_up_alert = "This ain't for you, master!"
+            await event.answer(reply_pop_up_alert, cache_time=0, alert=True)     
+        else:
+          await event.edit(f"This is the PM Security for {DEFAULTUSER} to keep away spammers and retards.\n\nProtected by [TeleBot](t.me/TeleBotSupport)")
+
+    @tgbot.on(events.callbackquery.CallbackQuery(data=re.compile(b"req")))
+    async def on_pm_click(event):
+        if event.query.user_id == bot.uid:
+            reply_pop_up_alert = "This ain't for you, master!"
+            await event.answer(reply_pop_up_alert, cache_time=0, alert=True)     
+        else:
+            await event.edit(f"Okay, `{DEFAULTUSER}` would get back to you soon!\nTill then please **wait patienly and don't spam here.**")
+            target = await event.client(GetFullUserRequest(event.query.user_id))
+            first_name = html.escape(target.user.first_name)
+            if first_name is not None:               
+                first_name = first_name.replace("\u2060", "")
+            tosend = f"Hey {DEFAULTUSER}, {first_name} is requesting something in PM!"
+            await tgbot.send_message(LOG_GP,
+                                    tosend
+                                    )
+    @tgbot.on(events.callbackquery.CallbackQuery(data=re.compile(b"chat")))
+    async def on_pm_click(event):
+        x = event.query.user_id
+        if event.query.user_id == bot.uid:
+            reply_pop_up_alert = "This ain't for you, master!"
+            await event.answer(reply_pop_up_alert, cache_time=0, alert=True)     
+        else:
+            await event.edit(f"Oho, you want to chat...\nPlease wait and see if {DEFAULTUSER} is in a mood to chat, if yes, he will be replying soon!\nTill then, **do not spam.**")
+            target = await event.client(GetFullUserRequest(event.query.user_id))
+            first_name = html.escape(target.user.first_name)
+            if first_name is not None:               
+                first_name = first_name.replace("\u2060", "")
+            tosend = f"Hey {DEFAULTUSER}, {first_name} wants to PM you for Random Chatting!"
+            await tgbot.send_message(LOG_GP,
+                                    tosend
+                                    )
+
+    @tgbot.on(events.callbackquery.CallbackQuery(data=re.compile(b"plshelpme")))
+    async def on_pm_click(event):
+        if event.query.user_id == bot.uid:
+            reply_pop_up_alert = "This ain't for you, master!"
+            await event.answer(reply_pop_up_alert, cache_time=0, alert=True)     
+        else:
+            await event.edit(f"Oh!\n{DEFAULTUSER} would be glad to help you out...\nPlease leave your message here **in a single line** and wait till I respond 😊")
+            target = await event.client(GetFullUserRequest(event.query.user_id))
+            first_name = html.escape(target.user.first_name)
+            if first_name is not None:               
+                first_name = first_name.replace("\u2060", "")
+            tosend = f"Hey {DEFAULTUSER}, {first_name} wants to PM you for help!"
+            await tgbot.send_message(LOG_GP,
+                                    tosend
+                                    )
+
+    @tgbot.on(events.callbackquery.CallbackQuery(data=re.compile(b"heheboi")))
+    async def on_pm_click(event):
+        if event.query.user_id == bot.uid:
+            reply_pop_up_alert = "This ain't for you, master!"
+            await event.answer(reply_pop_up_alert, cache_time=0, alert=True)
+        else:
+            await event.edit(f"Oh, so you are here to spam 😤\nGoodbye.\nYour message has been read and successfully ignored.")
+            await borg(functions.contacts.BlockRequest(event.query.user_id))
+            target = await event.client(GetFullUserRequest(event.query.user_id))
+            first_name = html.escape(target.user.first_name)
+            if first_name is not None:               
+                first_name = first_name.replace("\u2060", "")
+            first_name = html.escape(target.user.first_name)
+            await tgbot.send_message(LOG_GP, f"{first_name} tried to spam your inbox.\nHenceforth, **blocked**")
 
     @tgbot.on(events.callbackquery.CallbackQuery(data=re.compile(b"close")))
     async def on_plug_in_callback_query_handler(event):
@@ -108,7 +223,6 @@ if Var.TG_BOT_USER_NAME_BF_HER is not None and tgbot is not None:
         else:
             reply_pop_up_alert = "Please get your own Userbot, and don't use mine!"
             await event.answer(reply_pop_up_alert, cache_time=0, alert=True)
-
 
     @tgbot.on(events.callbackquery.CallbackQuery(  # pylint:disable=E0602
         data=re.compile(b"us_plugin_(.*)")
@@ -164,3 +278,10 @@ def paginate_help(page_number, loaded_plugins, prefix):
                      custom.Button.inline("Next ⏭️", data="{}_next({})".format(prefix, modulo_page)))
                 ]
     return pairs
+
+async def userinfo(event):
+    target = await event.client(GetFullUserRequest(event.query.user_id))
+    first_name = html.escape(target.user.first_name)
+    if first_name is not None:               
+        first_name = first_name.replace("\u2060", "")
+    return first_name

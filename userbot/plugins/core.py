@@ -20,11 +20,33 @@ import asyncio
 import os
 import userbot.utils
 from datetime import datetime
-from userbot.utils import admin_cmd, sudo_cmd
 from telethon.tl.types import InputMessagesFilterDocument
+from .. import ALIVE_NAME
 
 DELETE_TIMEOUT = 5
 thumb_image_path = "./TeleBot.png"
+DEFAULTUSER = str(ALIVE_NAME) if ALIVE_NAME else "TeleBot User"
+
+@telebot.on(admin_cmd(pattern="send (?P<shortname>\w+)", outgoing=True))
+@telebot.on(sudo_cmd(pattern="send (?P<shortname>\w+)", allow_sudo=True))
+async def send(event):
+    if event.fwd_from:
+        return
+    hmm = bot.uid
+    message_id = event.message.id
+    thumb = thumb_image_path
+    input_str = event.pattern_match.group(1)
+    the_plugin_file = "./userbot/plugins/{}.py".format(input_str)
+    if os.path.exists(the_plugin_file):
+    	start = datetime.now()
+    	pro = await event.client.send_file(event.chat_id, the_plugin_file, force_document=True, allow_cache=False, thumb=thumb, reply_to=message_id)
+    	end = datetime.now()
+    	time_taken_in_ms = (end - start).seconds
+    	await pro.edit(f"**► Plugin Name:** `{input_str}`\n**► Uploaded in {time_taken_in_ms} seconds.**\n**► Uploaded by:** [{DEFAULTUSER}](tg://user?id={hmm})\n\n© @TeleBotSupport")
+    	await asyncio.sleep(DELETE_TIMEOUT)
+    	await event.delete()
+    else:
+    	await edit_or_reply(event, "**404**: __File Not Found__")
 
 @telebot.on(admin_cmd(pattern="install"))
 async def install(event):
@@ -43,7 +65,7 @@ async def install(event):
                 await event.edit("TeleBot Succesfully Installed The Plugin `{}`".format(os.path.basename(downloaded_file_name)))
             else:
                 os.remove(downloaded_file_name)
-                await event.edit("TeleBot returned an error! Plugin cannot be installed.")
+                await event.edit("**Error!**\nPlugin cannot be installed!\nMight have been pre-installed.")
         except Exception as e:  # pylint:disable=C0103,W0703
             await event.edit(str(e))
             os.remove(downloaded_file_name)

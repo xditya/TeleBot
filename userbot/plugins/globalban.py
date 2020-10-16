@@ -85,7 +85,7 @@ async def gspider(rk):
         rkp = await lazy.reply("`processing...`")
    else:
     	rkp = await lazy.edit("`processing...`")      
-   me = await rk.client.get_me() ; await rkp.edit(f"**Global Banning User - **") ; my_mention = "[{}](tg://user?id={})".format(me.first_name, me.id) ; my_username = f"@{me.username}" if me.username else my_mention ; chat = await rk.get_chat() ; a = b = 0
+   me = await rk.client.get_me() ; await rkp.edit(f"**Global Banning User!!**") ; my_mention = "[{}](tg://user?id={})".format(me.first_name, me.id) ; my_username = f"@{me.username}" if me.username else my_mention ; chat = await rk.get_chat() ; a = b = 0
    if rk.is_private:       
    	user = rk.chat ; reason = rk.pattern_match.group(1) ; chat_title = 'PM'  
    else:

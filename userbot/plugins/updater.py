@@ -13,12 +13,9 @@ from os import remove, execle, path, makedirs, getenv, environ
 from shutil import rmtree
 import asyncio
 import sys
-
 from git import Repo
 from git.exc import GitCommandError, InvalidGitRepositoryError, NoSuchPathError
-
-from userbot import CMD_HELP, bot 
-from userbot.events import admin_cmd
+from userbot import CMD_HELP, bot, CMD_HNDLR
 
 requirements_path = path.join(
     path.dirname(path.dirname(path.dirname(__file__))), 'requirements.txt')
@@ -74,7 +71,7 @@ async def upstream(ups):
             await ups.edit(
                 f"**Unfortunately, the directory {error} does not seem to be a git repository.\
                 \nOr Maybe it just needs a sync verification with {GIT_REPO_NAME}\
-            \nBut we can fix that by force updating the userbot using** `.update now`."
+            \nBut we can fix that by force updating the userbot using** `{CMD_HNDLR}update now`."
             )
             return
         repo = Repo.init()
@@ -126,7 +123,7 @@ async def upstream(ups):
             remove("output.txt")
         else:
             await ups.edit(changelog_str)
-        await ups.respond(f'Do `.update now` to update')
+        await ups.respond(f'Do `{CMD_HNDLR}update now` to update')
         return
 
     if force_updateme:
