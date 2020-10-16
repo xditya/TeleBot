@@ -11,13 +11,10 @@ import asyncio
 import os
 import requests
 import math
-from userbot.utils import register
-from userbot.utils import admin_cmd
-
+from userbot import CMD_HNDLR
 
 Heroku = heroku3.from_key(Var.HEROKU_API_KEY)
 heroku_api = "https://api.heroku.com"
-
 
 @telebot.on(admin_cmd(pattern=r"(set|get|del) var (.*)", outgoing=True))
 async def variable(var):
@@ -75,27 +72,27 @@ async def variable(var):
         value = "".join(variable.split(maxsplit=1)[1:])
         variable = "".join(variable.split(maxsplit=1)[0])
         if not value:
-            return await toput.edit("`.set var <ConfigVars-name> <value>`")
+            return await toput.edit(f"`{CMD_HNDLR}set var <ConfigVars-name> <value>`")
         await asyncio.sleep(1.5)
         if variable in heroku_var:
-            await toput.edit(f"`{variable}` **successfully changed to  ->  **`{value}`")
+            await toput.edit(f"`{variable}` **successfully changed to **`{value}`")
         else:
             await toput.edit(
-                f"`{variable}`**  successfully added with value`  ->  **{value}`"
+                f"`{variable}`** successfully added with value` **{value}`"
             )
         heroku_var[variable] = value
     elif exe == "del":
-        toput = await edit_or_reply(var, "`Getting information to deleting variable...`")
+        toput = await edit_or_reply(var, "`Getting information to delete variable...`")
         try:
             variable = var.pattern_match.group(2).split()[0]
         except IndexError:
             return await toput.edit("`Please specify ConfigVars you want to delete`")
         await asyncio.sleep(1.5)
         if variable in heroku_var:
-            await toput.edit(f"`{variable}`  **successfully deleted**")
+            await toput.edit(f"`{variable}` **has been successfully deleted**")
             del heroku_var[variable]
         else:
-            return await toput.edit(f"`{variable}`**  is not exists**")
+            return await toput.edit(f"`{variable}`** doesn't exist**")
 
 
 @telebot.on(admin_cmd(outgoing=True, pattern=r"usage(?: |$)"))
