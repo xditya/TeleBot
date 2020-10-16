@@ -42,7 +42,7 @@ async def send(event):
     	pro = await event.client.send_file(event.chat_id, the_plugin_file, force_document=True, allow_cache=False, thumb=thumb, reply_to=message_id)
     	end = datetime.now()
     	time_taken_in_ms = (end - start).seconds
-    	await pro.edit(f"**► Plugin Name: `{input_str}`\n**► Uploaded in {time_taken_in_ms} seconds.**\n**► Uploaded by: **[{DEFAULTUSER}](tg://user?id={hmm})\n\n© @TeleBotSupport")
+    	await pro.edit(f"**► Plugin Name:** `{input_str}`\n**► Uploaded in {time_taken_in_ms} seconds.**\n**► Uploaded by:** [{DEFAULTUSER}](tg://user?id={hmm})\n\n© @TeleBotSupport")
     	await asyncio.sleep(DELETE_TIMEOUT)
     	await event.delete()
     else:
