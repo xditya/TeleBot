@@ -27,7 +27,7 @@ async def _(event):
     else:
         _o = o.split("\n")
         o = "`\n".join(_o)
-    OUTPUT = f"**QUERY**\n\n__►__ Command\n`{cmd}`\n\n__►__ PID\n`{process.pid}`\n\n**__►__ stderr** \n`{e}`\n\n**__►__Output:**\n{o}"
+    OUTPUT = f"**QUERY**\n\n__►__ Command\n`{cmd}`\n\n__►__ PID\n`{process.pid}`\n\n**__►__ stderr** \n`{e}`\n\n**__►__Output:**\n`{o}`"
     if len(OUTPUT) > 4095:
         with io.BytesIO(str.encode(OUTPUT)) as out_file:
             out_file.name = "exec.text"
