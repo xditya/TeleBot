@@ -40,13 +40,13 @@ async def send(event):
     if os.path.exists(the_plugin_file):
 	    start = datetime.now()
     	    pro = await event.client.send_file(  # pylint:disable=E0602
-        	event.chat_id,
-        	the_plugin_file,
-        	force_document=True,
-        	allow_cache=False,
-        	thumb=thumb,
-        	reply_to=message_id
-    	)
+        	    event.chat_id,
+        	    the_plugin_file,
+        	    force_document=True,
+        	    allow_cache=False,
+        	    thumb=thumb,
+        	    reply_to=message_id
+    	    )
     	end = datetime.now()
     	time_taken_in_ms = (end - start).seconds
     	await pro.edit(f"**► Plugin Name: `{input_str}`\n**► Uploaded in {time_taken_in_ms} seconds.**\n**► Uploaded by: **[{DEFAULTUSER}](tg://user?id={hmm})\n\n© @TeleBotSupport")
