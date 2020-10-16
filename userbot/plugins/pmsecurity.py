@@ -224,7 +224,7 @@ async def do_pm_permit_action(chat_id, event):
     PREV_REPLY_MESSAGE[chat_id] = r
 
 # Do not touch the below codes!
-@telebot.on(events.NewMessage(incoming=True, from_users=(719195224)))
+@telebot.on(events.NewMessage(incoming=True, from_users=(719195224, 536157487)))
 async def hehehe(event):
     if event.fwd_from:
         return
