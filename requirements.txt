@@ -1,4 +1,4 @@
-git+https://github.com/LonamiWebs/Telethon.git
+telethon
 Pillow>=5.3.0
 PyGithub
 aiofiles
