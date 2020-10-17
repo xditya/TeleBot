@@ -1,0 +1,21 @@
+name: Replacing.
+on: push
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Find and Replace
+        uses: jacobtomlinson/gha-find-replace@master
+        with:
+          find: "@borg.on"
+          replace: "@telebot.on"
+      - name: Create Pull Request
+        uses: stefanzweifel/git-auto-commit-action@v4
+        with:
+          commit_message: 'Changing borg.on to telebot.on'
+          commit_options: '--no-verify'
+          repository: .
+          commit_user_name: xditya2
+          commit_user_email: 58950863+xditya@users.noreply.github.com
+          commit_author: xditya <58950863+xditya@users.noreply.github.com>
