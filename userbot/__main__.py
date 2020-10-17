@@ -54,7 +54,7 @@ for name in files:
         shortname = path1.stem
         start_mybot(shortname.replace(".py", ""))
 print("TGBot has been set up!")      
-await telebot.send_message(TELE, f"@{MYBOT} has been set up. Send ```/start``` to the bot 😁")")
+await telebot.send_message(TELE, f"@{MYBOT} has been set up. Send ```/start``` to the bot 😁")
 print("TeleBot has been fully deployed! Do Visit @TeleBotSupport")
 await telebot.send_message(TELE, f"TeleBot has been fully deployed. {MYBOT} has been set-up completely.")
 await telebot.send_message(TELE, f"Send ```{CMD_HNDLR}alive``` to see if the bot is working.\n\nDo add @{MYBOT} to this group and make it admin, else some features won't work")
