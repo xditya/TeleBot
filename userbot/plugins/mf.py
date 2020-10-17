@@ -3,7 +3,7 @@ from telethon import events, functions, __version__
 from userbot.utils import admin_cmd
 
 
-@borg.on(admin_cmd(pattern="mf ?(.*)", allow_sudo=True))  # pylint:disable=E0602
+@telebot.on(admin_cmd(pattern="mf ?(.*)", allow_sudo=True))  # pylint:disable=E0602
 async def _(event):
     if event.fwd_from:
         return
@@ -59,7 +59,7 @@ async def _(event):
         await event.delete()
 
 
-@borg.on(admin_cmd(pattern="dc"))  # pylint:disable=E0602
+@telebot.on(admin_cmd(pattern="dc"))  # pylint:disable=E0602
 async def _(event):
     if event.fwd_from:
         return
@@ -67,7 +67,7 @@ async def _(event):
     await event.edit(result.stringify())
 
 
-@borg.on(admin_cmd(pattern="config"))  # pylint:disable=E0602
+@telebot.on(admin_cmd(pattern="config"))  # pylint:disable=E0602
 async def _(event):
     if event.fwd_from:
         return

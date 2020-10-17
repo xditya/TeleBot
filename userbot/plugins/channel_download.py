@@ -8,7 +8,7 @@ import os
 import subprocess
 from uniborg.util import admin_cmd
 
-@borg.on(admin_cmd(pattern=r"getc"))
+@telebot.on(admin_cmd(pattern=r"getc"))
 async def get_media(event):
     if event.fwd_from:
         return
@@ -44,7 +44,7 @@ async def get_media(event):
              
              
              
-@borg.on(admin_cmd(pattern=r"geta"))
+@telebot.on(admin_cmd(pattern=r"geta"))
 async def get_media(event):
     if event.fwd_from:
         return

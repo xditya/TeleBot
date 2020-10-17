@@ -4,7 +4,7 @@
 
 from userbot.utils import admin_cmd
 
-@borg.on(admin_cmd(pattern="pmto ?(.*)"))
+@telebot.on(admin_cmd(pattern="pmto ?(.*)"))
 async def pmto(event):
     a = event.pattern_match.group(1)
     b = a.split(" ")

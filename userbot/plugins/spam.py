@@ -10,7 +10,7 @@ from telethon import events
 
 from userbot.utils import admin_cmd
 
-@borg.on(admin_cmd(pattern=r"spam", outgoing=True))
+@telebot.on(admin_cmd(pattern=r"spam", outgoing=True))
 async def spammer(e):
     if not e.text[0].isalpha() and e.text[0] not in ("/", "#", "@", "!"):
         message = e.text

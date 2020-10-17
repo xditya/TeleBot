@@ -3,7 +3,7 @@ import time
 from asyncio import wait
 from userbot.utils import admin_cmd
 
-@borg.on(admin_cmd(pattern="tspam"))
+@telebot.on(admin_cmd(pattern="tspam"))
 async def tmeme(e):
      tspam = str(e.text[7:])
      message = tspam.replace(" ", "")

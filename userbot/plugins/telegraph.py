@@ -19,7 +19,7 @@ else:
     BOTLOG = True
     BOTLOG_CHATID = Config.PRIVATE_GROUP_BOT_API_ID
     
-@borg.on(admin_cmd(pattern="telegraph (media|text) ?(.*)"))
+@telebot.on(admin_cmd(pattern="telegraph (media|text) ?(.*)"))
 async def _(event):
     if event.fwd_from:
         return

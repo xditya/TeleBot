@@ -8,7 +8,7 @@ from userbot.plugins.sql_helper.locks_sql import update_lock, is_locked, get_loc
 from userbot.utils import admin_cmd
 
 
-@borg.on(admin_cmd(pattern="lock( (?P<target>\S+)|$)"))
+@telebot.on(admin_cmd(pattern="lock( (?P<target>\S+)|$)"))
 async def _(event):
      # Space weirdness in regex required because argument is optional and other
      # commands start with ".lock"
@@ -82,7 +82,7 @@ async def _(event):
             )
 
 
-@borg.on(admin_cmd(pattern="unlock ?(.*)"))
+@telebot.on(admin_cmd(pattern="unlock ?(.*)"))
 async def _(event):
     if event.fwd_from:
         return
@@ -99,7 +99,7 @@ async def _(event):
         )
 
 
-@borg.on(admin_cmd(pattern="curenabledlocks"))
+@telebot.on(admin_cmd(pattern="curenabledlocks"))
 async def _(event):
     if event.fwd_from:
         return
@@ -134,8 +134,8 @@ async def _(event):
     await event.edit(res)
 
 
-@borg.on(events.MessageEdited())  # pylint:disable=E0602
-@borg.on(events.NewMessage())  # pylint:disable=E0602
+@telebot.on(events.MessageEdited())  # pylint:disable=E0602
+@telebot.on(events.NewMessage())  # pylint:disable=E0602
 async def check_incoming_messages(event):
     # TODO: exempt admins from locks
     peer_id = event.chat_id
@@ -195,7 +195,7 @@ async def check_incoming_messages(event):
                 update_lock(peer_id, "url", False)
 
 
-@borg.on(events.ChatAction())  # pylint:disable=E0602
+@telebot.on(events.ChatAction())  # pylint:disable=E0602
 async def _(event):
     # TODO: exempt admins from locks
     # check for "lock" "bots"

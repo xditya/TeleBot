@@ -26,7 +26,7 @@ from uniborg.util import admin_cmd
 
 # RegEx by https://t.me/c/1220993104/500653 ( @SnapDragon7410 )
 
-@borg.on(admin_cmd(pattern="sn ?(?:(.*?) \| )?(.*)"))
+@telebot.on(admin_cmd(pattern="sn ?(?:(.*?) \| )?(.*)"))
 
 async def sticklet(event):
 

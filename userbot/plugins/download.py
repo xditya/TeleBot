@@ -12,7 +12,7 @@ from pySmartDL import SmartDL
 from uniborg.util import admin_cmd, humanbytes, progress
 
 
-@borg.on(admin_cmd(pattern="download ?(.*)"))
+@telebot.on(admin_cmd(pattern="download ?(.*)"))
 async def _(event):
     if event.fwd_from:
         return

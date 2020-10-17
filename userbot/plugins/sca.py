@@ -17,7 +17,7 @@ import asyncio
 from uniborg.util import admin_cmd
  
  
-@borg.on(admin_cmd(pattern="scha ?(.*)"))
+@telebot.on(admin_cmd(pattern="scha ?(.*)"))
 async def _(event):
     if event.fwd_from:
         return

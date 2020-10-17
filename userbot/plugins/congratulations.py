@@ -14,7 +14,7 @@ RUNSREACTS = [
     "`Feeling so much joy for you today. What an impressive achievement!`",
 ]
 
-@borg.on(admin_cmd(pattern="congo"))
+@telebot.on(admin_cmd(pattern="congo"))
 async def _(event):
     if event.fwd_from:
          return

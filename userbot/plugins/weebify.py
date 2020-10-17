@@ -12,7 +12,7 @@ normiefont = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', '
 weebyfont = ['卂', '乃', '匚', '刀', '乇', '下', '厶', '卄', '工', '丁', '长', '乚', '从', '𠘨', '口', '尸', '㔿', '尺', '丂', '丅', '凵',
              'リ', '山', '乂', '丫', '乙']
 
-@borg.on(admin_cmd(pattern="weeb ?(.*)"))
+@telebot.on(admin_cmd(pattern="weeb ?(.*)"))
 async def weebify(event):
 
     args = event.pattern_match.group(1)

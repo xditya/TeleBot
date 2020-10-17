@@ -8,7 +8,7 @@ from telethon.tl.functions.account import UpdateNotifySettingsRequest
 from userbot.utils import admin_cmd
 import asyncio
 
-@borg.on(admin_cmd(pattern=("sg ?(.*)")))
+@telebot.on(admin_cmd(pattern=("sg ?(.*)")))
 async def _(event):
    if event.fwd_from:
       return 
@@ -38,7 +38,7 @@ async def _(event):
          else: 
             await event.edit(f"{response.message.message}")
 
-@borg.on(admin_cmd(pattern=("fakemail ?(.*)")))
+@telebot.on(admin_cmd(pattern=("fakemail ?(.*)")))
 async def _(event):
    if event.fwd_from:
       return 
@@ -57,7 +57,7 @@ async def _(event):
          return
       await event.edit(mail)
 
-@borg.on(admin_cmd(pattern=("mailid ?(.*)")))
+@telebot.on(admin_cmd(pattern=("mailid ?(.*)")))
 async def _(event):
    if event.fwd_from:
       return 
@@ -77,7 +77,7 @@ async def _(event):
         await event.edit(mail)
 
 
-@borg.on(admin_cmd(pattern=("ub ?(.*)")))
+@telebot.on(admin_cmd(pattern=("ub ?(.*)")))
 async def _(event):
     if event.fwd_from:
         return 
@@ -109,7 +109,7 @@ async def _(event):
 
 
 
-@borg.on(admin_cmd(pattern=("gid ?(.*)")))
+@telebot.on(admin_cmd(pattern=("gid ?(.*)")))
 async def _(event):
     if event.fwd_from:
         return 

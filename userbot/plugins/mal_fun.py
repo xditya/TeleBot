@@ -148,7 +148,7 @@ HATE_STRINGS = [
 
 DEFAULTUSER = str(ALIVE_NAME) if ALIVE_NAME else "@Sur_vivor"
 
-@borg.on(admin_cmd(pattern="mslap ?(.*)"))
+@telebot.on(admin_cmd(pattern="mslap ?(.*)"))
 async def who(event):
     if event.fwd_from:
         return
@@ -211,37 +211,37 @@ async def slap(replied_user, event):
 
     return caption
 
-@borg.on(admin_cmd(outgoing=True, pattern="mrape"))
+@telebot.on(admin_cmd(outgoing=True, pattern="mrape"))
 async def raping (raped):
         index = random.randint(0, len(RAPE_STRINGS) - 1)
         reply_text = RAPE_STRINGS[index]
         await raped.edit(reply_text)
 
-@borg.on(admin_cmd(outgoing=True, pattern="mshe"))
+@telebot.on(admin_cmd(outgoing=True, pattern="mshe"))
 async def thanos (thanos):
         index = random.randint(0, len(THANOS_STRINGS) - 1)
         reply_text = THANOS_STRINGS[index]
         await thanos.edit(reply_text)
 
-@borg.on(admin_cmd(outgoing=True, pattern="mabuse"))
+@telebot.on(admin_cmd(outgoing=True, pattern="mabuse"))
 async def fuckedd (abusehard):
         index = random.randint(0, len(ABUSEHARD_STRING) - 1)
         reply_text = ABUSEHARD_STRING[index]
         await abusehard.edit(reply_text)
 
-@borg.on(admin_cmd(outgoing=True, pattern="mruns"))
+@telebot.on(admin_cmd(outgoing=True, pattern="mruns"))
 async def fuckedd (abusehard):
         index = random.randint(0, len(RUNSREACTS) - 1)
         reply_text = RUNSREACTS[index]
         await abusehard.edit(reply_text)        
         
-@borg.on(admin_cmd(outgoing=True, pattern="minsult$"))
+@telebot.on(admin_cmd(outgoing=True, pattern="minsult$"))
 async def proo (pros):
         index = random.randint(0, len(PRO_STRINGS) - 1)
         reply_text = PRO_STRINGS[index]
         await pros.edit(reply_text)        
 
-@borg.on(admin_cmd(pattern=r"foryou$", outgoing=True))
+@telebot.on(admin_cmd(pattern=r"foryou$", outgoing=True))
 async def _(event):
     if event.fwd_from:
         return
@@ -380,7 +380,7 @@ async def _(event):
         
         await event.edit("എന്റെ ഹൃദയത്തിൽ ചുവന്ന റോസാപുഷ്പ്പങ്ങൾ വളരുന്നുണ്ട്. പക്ഷെ, അവ ഒരിക്കലും കൊഴിയാറില്ല. കാരണം, ഞാൻ നിന്റെ പുഞ്ചിരി കാണുമ്പോഴും നിന്നെ കുറിച്ച് ചിന്തിക്കുമ്പോഴുമെല്ലാം അവ വിടരുന്നു☺️☺️..")
 
-@borg.on(admin_cmd(outgoing=True, pattern="kozhi"))
+@telebot.on(admin_cmd(outgoing=True, pattern="kozhi"))
 async def hating (hated):
         index = random.randint(0, len(HATE_STRINGS) - 1)
         reply_text = HATE_STRINGS[index]

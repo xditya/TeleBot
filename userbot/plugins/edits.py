@@ -18,7 +18,7 @@ from userbot.utils import register
 
 DEFAULTUSER = str(ALIVE_NAME) if ALIVE_NAME else "TeleBot"
 
-@borg.on(admin_cmd(pattern=r"candy"))
+@telebot.on(admin_cmd(pattern=r"candy"))
 async def _(event):
 	if event.fwd_from:
 		return
@@ -28,7 +28,7 @@ async def _(event):
 		await event.edit("".join(deq))
 		deq.rotate(1)
 # By @xditya. Kangers keep credits xD    
-@borg.on(admin_cmd(pattern=r"nothappy"))
+@telebot.on(admin_cmd(pattern=r"nothappy"))
 async def _(event):
 	if event.fwd_from:
 		return
@@ -38,7 +38,7 @@ async def _(event):
 		await event.edit("".join(deq))
 		deq.rotate(1)
 # By @xditya. Kangers keep credits xD
-@borg.on(admin_cmd(pattern=r"heart"))
+@telebot.on(admin_cmd(pattern=r"heart"))
 async def _(event):
 	if event.fwd_from:
 		return
@@ -48,7 +48,7 @@ async def _(event):
 		await event.edit("".join(deq))
 		deq.rotate(1)
 # By @xditya. Kangers keep credits xD   
-@borg.on(admin_cmd(pattern=r"tlol"))
+@telebot.on(admin_cmd(pattern=r"tlol"))
 async def _(event):
 	if event.fwd_from:
 		return
@@ -58,7 +58,7 @@ async def _(event):
 		await event.edit("".join(deq))
 		deq.rotate(1)
 # By @xditya. Kangers keep credits xD    
-@borg.on(admin_cmd(pattern=r"lol"))
+@telebot.on(admin_cmd(pattern=r"lol"))
 async def _(event):
 	if event.fwd_from:
 		return
@@ -68,7 +68,7 @@ async def _(event):
 		await event.edit("".join(deq))
 		deq.rotate(1)
 # By @xditya. Kangers keep credits xD    
-@borg.on(admin_cmd(pattern=r"police"))
+@telebot.on(admin_cmd(pattern=r"police"))
 
 async def _(event):
 
@@ -105,7 +105,7 @@ async def _(event):
 
         await event.edit(animation_chars[i % 12])
 # By @xditya. Kangers keep credits xD
-@borg.on(admin_cmd(pattern=f"smoon", outgoing=True))
+@telebot.on(admin_cmd(pattern=f"smoon", outgoing=True))
 
 async def _(event):
 
@@ -145,7 +145,7 @@ async def _(event):
 
 
 # By @xditya. Kangers keep credits xD
-@borg.on(admin_cmd(pattern=f"tmoon", outgoing=True))
+@telebot.on(admin_cmd(pattern=f"tmoon", outgoing=True))
 
 async def _(event):
 
@@ -206,7 +206,7 @@ async def _(event):
             await event.edit(animation_chars[i % 117])
 
 # By @xditya. Kangers keep credits xD
-@borg.on(admin_cmd(pattern="loveu", outgoing=True))
+@telebot.on(admin_cmd(pattern="loveu", outgoing=True))
 async def _(event):
 
     if event.fwd_from:
@@ -270,7 +270,7 @@ async def _(event):
 
             await event.edit(animation_chars[i % 117])
             
-@borg.on(admin_cmd(pattern=f"plane", outgoing=True))
+@telebot.on(admin_cmd(pattern=f"plane", outgoing=True))
 async def _(event):
     if event.fwd_from:
         return
@@ -294,7 +294,7 @@ async def _(event):
     await event.delete()           
     
 # By @xditya. Kangers keep credits xD    
-@borg.on(admin_cmd(pattern=r"police"))
+@telebot.on(admin_cmd(pattern=r"police"))
 
 async def _(event):
 
@@ -332,7 +332,7 @@ async def _(event):
         await event.edit(animation_chars[i % 12])    
 
 # By @xditya. Kangers keep credits xD        
-@borg.on(admin_cmd(pattern=f"rain", outgoing=True))
+@telebot.on(admin_cmd(pattern=f"rain", outgoing=True))
 async def _(event):
 	if event.fwd_from:
 		return
@@ -342,7 +342,7 @@ async def _(event):
 		await event.edit("".join(deq))
 		deq.rotate(1)        
 # By @xditya. Kangers keep credits xD        
-@borg.on(admin_cmd(pattern=f"snake", outgoing=True))
+@telebot.on(admin_cmd(pattern=f"snake", outgoing=True))
 
 async def _(event):
 
@@ -419,7 +419,7 @@ async def _(event):
             await event.edit(animation_chars[i % 27])  
             
             
-@borg.on(admin_cmd(pattern=f"solarsystem", outgoing=True))
+@telebot.on(admin_cmd(pattern=f"solarsystem", outgoing=True))
 async def _(event):
     if event.fwd_from:
         return
@@ -578,7 +578,7 @@ async def _(event):
             await event.edit(animation_chars[i % 549755813888])    
             
             
-@borg.on(admin_cmd(pattern=r"bfly", outgoing=True))
+@telebot.on(admin_cmd(pattern=r"bfly", outgoing=True))
 async def _(event):
 	if event.fwd_from:
 		return
@@ -589,7 +589,7 @@ async def _(event):
 		deq.rotate(1)
         
 # By @xditya. Kangers keep credits xD       
-@borg.on(admin_cmd(pattern=f"virus", outgoing=True))
+@telebot.on(admin_cmd(pattern=f"virus", outgoing=True))
 
 async def _(event):
 
@@ -745,7 +745,7 @@ async def _(event):
 from telethon import events
 import asyncio
 
-@borg.on(events.NewMessage(pattern=r"\.(.*)", outgoing=True))
+@telebot.on(events.NewMessage(pattern=r"\.(.*)", outgoing=True))
 
 async def _(event):
 
@@ -802,7 +802,7 @@ from userbot.utils import admin_cmd
 
 
 
-@borg.on(admin_cmd("(.*)"))
+@telebot.on(admin_cmd("(.*)"))
 
 async def _(event):
 
@@ -839,7 +839,7 @@ async def _(event):
             await event.edit(animation_chars[i % 9])
             await asyncio.sleep(animation_interval)
             
-@borg.on(admin_cmd("(.*)"))
+@telebot.on(admin_cmd("(.*)"))
 
 async def _(event):
 
@@ -876,7 +876,7 @@ async def _(event):
             await event.edit(animation_chars[i % 9])
             await asyncio.sleep(animation_interval) 
             
-@borg.on(admin_cmd("(.*)"))
+@telebot.on(admin_cmd("(.*)"))
 
 async def _(event):
 
@@ -912,7 +912,7 @@ async def _(event):
             await event.edit(animation_chars[i % 8])
             await asyncio.sleep(animation_interval)  
             
-@borg.on(admin_cmd("(.*)"))
+@telebot.on(admin_cmd("(.*)"))
 
 async def _(event):
 
@@ -954,7 +954,7 @@ import asyncio
 from collections import deque
 
 
-@borg.on(admin_cmd(pattern=r"km_rain2", outgoing=True))
+@telebot.on(admin_cmd(pattern=r"km_rain2", outgoing=True))
 async def _(event):
 	if event.fwd_from:
 		return
@@ -1120,7 +1120,7 @@ for art in ascii:
     unpacked_ascii += f"{art}\n"
 
 
-@borg.on(admin_cmd(pattern="oof ?(.*)"))
+@telebot.on(admin_cmd(pattern="oof ?(.*)"))
 async def _(event):
     if event.fwd_from:
         return
@@ -1140,7 +1140,7 @@ async def _(event):
     await event.edit(output)
 
 
-@borg.on(admin_cmd(pattern="hek ?(.*)"))
+@telebot.on(admin_cmd(pattern="hek ?(.*)"))
 async def _(event):
     if event.fwd_from:
         return
@@ -1151,7 +1151,7 @@ async def _(event):
     await event.edit(";_;")
 
 
-@borg.on(admin_cmd(pattern="sed ?(.*)"))
+@telebot.on(admin_cmd(pattern="sed ?(.*)"))
 async def _(event):
     if event.fwd_from:
         return
@@ -1163,7 +1163,7 @@ async def _(event):
     await event.edit(":/")
 
 
-@borg.on(admin_cmd(pattern="emoji ?(.*)"))
+@telebot.on(admin_cmd(pattern="emoji ?(.*)"))
 async def _(event):
     if event.fwd_from:
         return
@@ -1179,7 +1179,7 @@ from asyncio import wait
 from userbot.utils import admin_cmd
 
 
-@borg.on(admin_cmd(pattern="repeat ?(.*)"))
+@telebot.on(admin_cmd(pattern="repeat ?(.*)"))
 async def _(event):
     message = event.text[10:]
     count = int(event.text[8:10])

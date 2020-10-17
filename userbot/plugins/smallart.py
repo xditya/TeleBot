@@ -107,7 +107,7 @@ I = ("⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿\n"
 "⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿\n")
 
 n = str(ALIVE_NAME) if ALIVE_NAME else "Set ALIVE_NAME in config vars in Heroku"
-@borg.on(admin_cmd(pattern="sthink (.*)"))
+@telebot.on(admin_cmd(pattern="sthink (.*)"))
 async def kakashi(think):
     name = think.pattern_match.group(1)
     A = (f"**  ➥ {name} .\n\n**"
@@ -130,7 +130,7 @@ async def kakashi(think):
     
     
 n = str(ALIVE_NAME) if ALIVE_NAME else "Set ALIVE_NAME in config vars in Heroku"        
-@borg.on(admin_cmd(pattern="sdick (.*)"))
+@telebot.on(admin_cmd(pattern="sdick (.*)"))
 async def kakashi(dicksay):
     name = dicksay.pattern_match.group(1)
     B = (f"**  ➥ {name} .\n**"
@@ -155,7 +155,7 @@ async def kakashi(dicksay):
 
 
 n = str(ALIVE_NAME) if ALIVE_NAME else "Set ALIVE_NAME in config vars in Heroku"        
-@borg.on(admin_cmd(pattern="sfrog (.*)"))
+@telebot.on(admin_cmd(pattern="sfrog (.*)"))
 async def kakashi(frogsay):
     name = frogsay.pattern_match.group(1)
     C = (f"**  ➥ {name} .\n\n**"
@@ -177,7 +177,7 @@ async def kakashi(frogsay):
     await frogsay.edit(n + C)
     
     
-@borg.on(admin_cmd(pattern="sputin (.*)"))
+@telebot.on(admin_cmd(pattern="sputin (.*)"))
 async def kakashi(putinsay):
     name = putinsay.pattern_match.group(1)
     D = (f"**Vladimir Putin ➥ {name} .\n\n**"
@@ -201,7 +201,7 @@ async def kakashi(putinsay):
 
 
 
-@borg.on(admin_cmd(pattern="sdead (.*)"))
+@telebot.on(admin_cmd(pattern="sdead (.*)"))
 async def kakashi(deadfrog):
     name = deadfrog.pattern_match.group(1)
     E = (f"**Froggy ➥ {name} .\n\n**"
@@ -223,7 +223,7 @@ async def kakashi(deadfrog):
     await deadfrog.edit(E)
     
   
-@borg.on(admin_cmd(pattern="strump (.*)"))
+@telebot.on(admin_cmd(pattern="strump (.*)"))
 async def kakashi(trumpsay):
     name = trumpsay.pattern_match.group(1)
     J = (f"**Donald Trump ➥ {name} .\n\n**"
@@ -245,7 +245,7 @@ async def kakashi(trumpsay):
     await trumpsay.edit(J)
 
 
-@borg.on(admin_cmd(pattern="schina (.*)"))
+@telebot.on(admin_cmd(pattern="schina (.*)"))
 async def kakashi(ckmkb):
     name = ckmkb.pattern_match.group(1)
     K = (f"**🅲🅺🅼🅺🅱 ➥ {name} .\n\n**"
@@ -268,18 +268,18 @@ async def kakashi(ckmkb):
     await ckmkb.edit(K)
  
  
-@borg.on(admin_cmd(pattern=r"spika"))
+@telebot.on(admin_cmd(pattern=r"spika"))
 async def kakashi(pikachu):
     await pikachu.edit(F)
     
-@borg.on(admin_cmd(pattern=r"sshit"))
+@telebot.on(admin_cmd(pattern=r"sshit"))
 async def kakashi(shit):
     await shit.edit(G)
     
-@borg.on(admin_cmd(pattern=r"sxx"))
+@telebot.on(admin_cmd(pattern=r"sxx"))
 async def kakashi(saxy):
     await saxy.edit(H)
     
-@borg.on(admin_cmd(pattern=r"sporn"))
+@telebot.on(admin_cmd(pattern=r"sporn"))
 async def kakashi(pornhub):
     await pornhub.edit(I)

@@ -9,7 +9,7 @@ from uniborg.util import admin_cmd
 
 
 
-@borg.on(admin_cmd(pattern=r"jio"))
+@telebot.on(admin_cmd(pattern=r"jio"))
 
 async def _(event):
 

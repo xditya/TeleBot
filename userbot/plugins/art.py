@@ -8,7 +8,7 @@ from userbot.utils import admin_cmd
 n = str(ALIVE_NAME) if ALIVE_NAME else "Set ALIVE_NAME in config vars in Heroku"
 
 #@command(outgoing=True, pattern="^.ded$")
-@borg.on(admin_cmd(pattern=r"ded"))
+@telebot.on(admin_cmd(pattern=r"ded"))
 async def bluedevilded(ded):
     await ded.edit(n + " ==             |\n　　　　　|" "\n　　　　　| \n"
 "　　　　　| \n"
@@ -72,21 +72,21 @@ H = ("▬▬▬.◙.▬▬▬ \n"
 "╬═╬/▌ \n"
 "╬═╬/ \\n")
 
-@borg.on(admin_cmd(pattern=r"monster"))
+@telebot.on(admin_cmd(pattern=r"monster"))
 async def bluedevilmonster(monster):
     await monster.edit(M)
-@borg.on(admin_cmd(pattern=r"pig"))
+@telebot.on(admin_cmd(pattern=r"pig"))
 async def bluedevipig(pig):
     await pig.edit(P)
-@borg.on(admin_cmd(pattern=r"kiler"))
+@telebot.on(admin_cmd(pattern=r"kiler"))
 async def bluedevikiller(kiler):
     await kiler.edit(K)
-@borg.on(admin_cmd(pattern=r"gun"))
+@telebot.on(admin_cmd(pattern=r"gun"))
 async def bluedevigun(gun):
     await gun.edit(G)
-@borg.on(admin_cmd(pattern=r"dog"))
+@telebot.on(admin_cmd(pattern=r"dog"))
 async def bluedevidog(dog):
     await dog.edit(D)
-@borg.on(admin_cmd(pattern=r"hmf"))
+@telebot.on(admin_cmd(pattern=r"hmf"))
 async def bluedevihmf(hmf):
     await hmf.edit(H)

@@ -14,7 +14,7 @@ from telethon.tl.functions.channels import LeaveChannelRequest
 from userbot.utils import admin_cmd
 import time
 
-@borg.on(admin_cmd(pattern="bye", outgoing=True))
+@telebot.on(admin_cmd(pattern="bye", outgoing=True))
 
 async def leave(e):
 

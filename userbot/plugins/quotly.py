@@ -6,7 +6,7 @@ from telethon.errors.rpcerrorlist import YouBlockedUserError
 from telethon.tl.functions.account import UpdateNotifySettingsRequest
 from uniborg.util import admin_cmd
 
-@borg.on(admin_cmd(pattern="qbot ?(.*)"))
+@telebot.on(admin_cmd(pattern="qbot ?(.*)"))
 async def _(event):
     if event.fwd_from:
         return 

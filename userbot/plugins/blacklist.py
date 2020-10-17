@@ -12,7 +12,7 @@ from telethon import events
 from userbot.utils import admin_cmd
 
 
-@borg.on(events.NewMessage(incoming=True))
+@telebot.on(events.NewMessage(incoming=True))
 async def on_new_message(event):
     # TODO: exempt admins from locks
     name = event.raw_text
@@ -28,7 +28,7 @@ async def on_new_message(event):
             break
 
 
-@borg.on(admin_cmd(pattern="addblacklist ((.|\n)*)"))
+@telebot.on(admin_cmd(pattern="addblacklist ((.|\n)*)"))
 async def on_add_black_list(event):
     text = event.pattern_match.group(1)
     to_blacklist = list(set(trigger.strip() for trigger in text.split("\n") if trigger.strip()))
@@ -37,7 +37,7 @@ async def on_add_black_list(event):
     await event.edit("Added {} triggers to the blacklist in the current chat".format(len(to_blacklist)))
 
 
-@borg.on(admin_cmd(pattern="listblacklist"))
+@telebot.on(admin_cmd(pattern="listblacklist"))
 async def on_view_blacklist(event):
     all_blacklisted = sql.get_chat_blacklist(event.chat_id)
     OUT_STR = "Blacklists in the Current Chat:\n"
@@ -62,7 +62,7 @@ async def on_view_blacklist(event):
         await event.edit(OUT_STR)
 
 
-@borg.on(admin_cmd(pattern="rmblacklist ((.|\n)*)"))
+@telebot.on(admin_cmd(pattern="rmblacklist ((.|\n)*)"))
 async def on_delete_blacklist(event):
     text = event.pattern_match.group(1)
     to_unblacklist = list(set(trigger.strip() for trigger in text.split("\n") if trigger.strip()))

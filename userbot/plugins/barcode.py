@@ -11,7 +11,7 @@ from datetime import datetime
 from uniborg.util import admin_cmd
 
 
-@borg.on(admin_cmd(pattern="barcode ?(.*)"))
+@telebot.on(admin_cmd(pattern="barcode ?(.*)"))
 async def _(event):
     if event.fwd_from:
         return

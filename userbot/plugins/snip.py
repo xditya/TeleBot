@@ -17,7 +17,7 @@ TYPE_PHOTO = 1
 TYPE_DOCUMENT = 2
 
 
-@borg.on(events.NewMessage(pattern=r'\#(\S+)', outgoing=True))
+@telebot.on(events.NewMessage(pattern=r'\#(\S+)', outgoing=True))
 async def on_snip(event):
     name = event.pattern_match.group(1)
     snip = get_snips(name)
@@ -48,7 +48,7 @@ async def on_snip(event):
         await event.delete()
 
 
-@borg.on(admin_cmd(pattern="snips (.*)"))
+@telebot.on(admin_cmd(pattern="snips (.*)"))
 async def on_snip_save(event):
     name = event.pattern_match.group(1)
     msg = await event.get_reply_message()
@@ -72,7 +72,7 @@ async def on_snip_save(event):
         await event.edit("Reply to a message with `snips keyword` to save the snip")
 
 
-@borg.on(admin_cmd(pattern="snipl"))
+@telebot.on(admin_cmd(pattern="snipl"))
 async def on_snip_list(event):
     all_snips = get_all_snips()
     OUT_STR = "Available Snips:\n"
@@ -97,7 +97,7 @@ async def on_snip_list(event):
         await event.edit(OUT_STR)
 
 
-@borg.on(admin_cmd(pattern="snipd (\S+)"))
+@telebot.on(admin_cmd(pattern="snipd (\S+)"))
 async def on_snip_delete(event):
     name = event.pattern_match.group(1)
     remove_snip(name)

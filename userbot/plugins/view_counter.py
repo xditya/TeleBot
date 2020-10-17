@@ -6,7 +6,7 @@ from telethon import sync
 from telethon.tl import types, functions
 from userbot.utils import admin_cmd
 
-@borg.on(admin_cmd(pattern="frwd"))
+@telebot.on(admin_cmd(pattern="frwd"))
 async def _(event):
     if event.fwd_from:
         return

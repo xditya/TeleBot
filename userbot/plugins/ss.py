@@ -3,7 +3,7 @@
 from telethon import events, errors, functions, types
 from uniborg.util import admin_cmd
 
-@borg.on(admin_cmd(pattern="ss"))
+@telebot.on(admin_cmd(pattern="ss"))
 async def _(event):
     if event.fwd_from:
         return

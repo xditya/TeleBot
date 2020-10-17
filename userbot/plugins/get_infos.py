@@ -6,7 +6,7 @@ from telethon.tl.types import ChannelParticipantsAdmins, ChannelParticipantAdmin
 from userbot.utils import admin_cmd
 
 
-@borg.on(admin_cmd(pattern="get_ad?(m)in ?(.*)"))
+@telebot.on(admin_cmd(pattern="get_ad?(m)in ?(.*)"))
 async def _(event):
     if event.fwd_from:
         return
@@ -59,7 +59,7 @@ from telethon.utils import pack_bot_file_id
 from userbot.utils import admin_cmd
 
 
-@borg.on(admin_cmd(pattern="get_id"))
+@telebot.on(admin_cmd(pattern="get_id"))
 async def _(event):
     if event.fwd_from:
         return
@@ -80,7 +80,7 @@ from telethon.tl.types import ChannelParticipantAdmin, ChannelParticipantsBots
 from userbot.utils import admin_cmd
 
 
-@borg.on(admin_cmd(pattern="get_bot ?(.*)"))
+@telebot.on(admin_cmd(pattern="get_bot ?(.*)"))
 async def _(event):
     if event.fwd_from:
         return

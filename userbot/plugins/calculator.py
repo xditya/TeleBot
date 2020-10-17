@@ -10,7 +10,7 @@ import io
 from userbot.utils import admin_cmd
 from userbot import CMD_HELP
 
-@borg.on(admin_cmd(pattern="calc"))
+@telebot.on(admin_cmd(pattern="calc"))
 async def _(event):
     if event.fwd_from or event.via_bot_id:
         return

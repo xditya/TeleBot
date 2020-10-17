@@ -111,7 +111,7 @@ async def _(event):
           await event.delete()
           await event.client.send_message(event.chat_id, response.message, reply_to=reply_message)
 
-@borg.on(admin_cmd(pattern="stats$"))
+@telebot.on(admin_cmd(pattern="stats$"))
 async def stats(event):
     if event.fwd_from:
         return
@@ -123,7 +123,7 @@ async def stats(event):
     await tap[0].click(event.chat_id)
     await event.delete()
 
-@borg.on(admin_cmd(pattern="xogame$"))
+@telebot.on(admin_cmd(pattern="xogame$"))
 async def gamez(event):
     if event.fwd_from:
         return
@@ -135,7 +135,7 @@ async def gamez(event):
     await tap[0].click(event.chat_id)
     await event.delete()
 
-@borg.on(admin_cmd(pattern="whisper ?(.*)"))
+@telebot.on(admin_cmd(pattern="whisper ?(.*)"))
 async def wspr(event):
     if event.fwd_from:
         return
@@ -147,7 +147,7 @@ async def wspr(event):
     await tap[0].click(event.chat_id)
     await event.delete()
 
-@borg.on(admin_cmd(pattern="mod ?(.*)"))
+@telebot.on(admin_cmd(pattern="mod ?(.*)"))
 async def mod(event):
     if event.fwd_from:
         return
@@ -161,8 +161,8 @@ async def mod(event):
     await tap[0].click(event.chat_id)
     await event.delete()
 
-@borg.on(admin_cmd(pattern="checkspam ?(.*)"))
-@borg.on(sudo_cmd(pattern="checkspam ?(.*)", allow_sudo=True))
+@telebot.on(admin_cmd(pattern="checkspam ?(.*)"))
+@telebot.on(sudo_cmd(pattern="checkspam ?(.*)", allow_sudo=True))
 async def _(event):
     bot = "@SpamBot"
     if event.fwd_from:

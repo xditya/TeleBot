@@ -9,8 +9,8 @@ from time import sleep
 import os
 import random
 from userbot.utils import admin_cmd
-#@borg.on(events.NewMessage(pattern=r"\.karb ", outgoing=True))
-@borg.on(admin_cmd(pattern="karb"))
+#@telebot.on(events.NewMessage(pattern=r"\.karb ", outgoing=True))
+@telebot.on(admin_cmd(pattern="karb"))
 async def carbon_api(e):
  RED = random.randint(0,256)
  GREEN = random.randint(0,256)

@@ -52,7 +52,7 @@ async def animepp():
 
     urllib.request.urlretrieve(fy,"donottouch.jpg")
 
-@borg.on(admin_cmd(pattern="gamerpfp ?(.*)"))
+@telebot.on(admin_cmd(pattern="gamerpfp ?(.*)"))
 
 async def main(event):
 

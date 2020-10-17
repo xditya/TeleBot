@@ -4,7 +4,7 @@ import requests
 from uniborg.util import admin_cmd
 
 
-@borg.on(admin_cmd(pattern="currency (.*)"))
+@telebot.on(admin_cmd(pattern="currency (.*)"))
 async def _(event):
     if event.fwd_from:
         return
@@ -32,7 +32,7 @@ async def _(event):
     ms = (end - start).seconds
 
  
-@borg.on(admin_cmd(pattern="currencies (.*)"))
+@telebot.on(admin_cmd(pattern="currencies (.*)"))
 async def list(ups):
     if ups.fwd_from:
         return

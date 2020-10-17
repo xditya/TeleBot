@@ -11,7 +11,7 @@ from telethon.tl.types import InputMessagesFilterDocument
 from uniborg.util import admin_cmd
 
 
-@borg.on(admin_cmd(pattern="srgb (.*)"))
+@telebot.on(admin_cmd(pattern="srgb (.*)"))
 async def sticklet(event):
     R = random.randint(0,256)
     G = random.randint(0,256)

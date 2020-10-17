@@ -5,7 +5,7 @@ from bs4 import BeautifulSoup
 from uniborg.util import admin_cmd
 
 
-@borg.on(admin_cmd(pattern="filext (.*)"))
+@telebot.on(admin_cmd(pattern="filext (.*)"))
 async def _(event):
     if event.fwd_from:
         return

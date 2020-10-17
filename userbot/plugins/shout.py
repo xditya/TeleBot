@@ -9,7 +9,7 @@ from userbot.utils import admin_cmd
 import random
 
 
-@borg.on(admin_cmd(pattern=r"shout", outgoing=True))
+@telebot.on(admin_cmd(pattern=r"shout", outgoing=True))
 async def shout(args):
     if args.fwd_from:
         return

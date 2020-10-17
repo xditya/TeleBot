@@ -35,7 +35,7 @@ def get_readable_time(seconds: int) -> str:
     return ping_time
 
 #@command(pattern="^.ping$")
-@borg.on(admin_cmd(pattern="ping$"))
+@telebot.on(admin_cmd(pattern="ping$"))
 @telebot.on(sudo_cmd(pattern="ping$", allow_sudo=True, incoming=True))
 async def _(event):
     if event.fwd_from:

@@ -19,7 +19,7 @@ from uniborg.util import admin_cmd
 
 langi = "en"
 
-@borg.on(admin_cmd(pattern="imdb (.*)")) 
+@telebot.on(admin_cmd(pattern="imdb (.*)")) 
 async def imdb(e):
  try:
     movie_name = e.pattern_match.group(1)

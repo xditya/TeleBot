@@ -29,7 +29,7 @@ if Config.TAG_LOG:
     NEEDTOLOG = int(Config.TAG_LOG)
 
 if Config.TAG_LOG:
-    @borg.on(events.NewMessage(
+    @telebot.on(events.NewMessage(
         incoming=True,
         blacklist_chats=Config.UB_BLACK_LIST_CHAT,
         func=lambda e: (

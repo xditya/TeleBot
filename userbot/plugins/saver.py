@@ -29,7 +29,7 @@ BOTLOG = True
 BOTLOG_CHATID = Config.PRIVATE_GROUP_BOT_API_ID
 
 
-@borg.on(admin_cmd(outgoing=True, pattern=r"save(?: |$)([\s\S]*)"))
+@telebot.on(admin_cmd(outgoing=True, pattern=r"save(?: |$)([\s\S]*)"))
 async def log(log_text):
     """ For .log command, forwards a message or the command argument to the bot logs group """
     if BOTLOG:
@@ -49,7 +49,7 @@ async def log(log_text):
     await sleep(2)
     await log_text.delete()
     
-@borg.on(events.NewMessage(incoming=True, func=lambda e: e.is_private))
+@telebot.on(events.NewMessage(incoming=True, func=lambda e: e.is_private))
 async def monito_p_m_s(event):
     sender = await event.get_sender()
     if Config.NC_LOG_P_M_S and not sender.bot:

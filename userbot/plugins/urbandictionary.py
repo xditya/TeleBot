@@ -8,7 +8,7 @@ import asyncurban
 from userbot.utils import admin_cmd
 
 
-@borg.on(admin_cmd(pattern="ud (.*)"))
+@telebot.on(admin_cmd(pattern="ud (.*)"))
 async def _(event):
     if event.fwd_from:
         return

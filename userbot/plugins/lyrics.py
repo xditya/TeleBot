@@ -15,7 +15,7 @@ import asyncio
 import time
 GENIUS = os.environ.get("GENIUS_API_TOKEN", None)
 
-@borg.on(admin_cmd(outgoing=True, pattern="lyrics ?(.*)"))
+@telebot.on(admin_cmd(outgoing=True, pattern="lyrics ?(.*)"))
 async def _(event):
     await event.edit("wi8..! I am searching your lyrics....`")
     reply_to_id = event.message.id
@@ -53,7 +53,7 @@ async def _(event):
     else:
         await event.edit(reply)       
 
-@borg.on(admin_cmd(outgoing=True, pattern="glyrics ?(.*)"))
+@telebot.on(admin_cmd(outgoing=True, pattern="glyrics ?(.*)"))
 async def lyrics(lyric):
     if lyric.pattern_match.group(1):
         query = lyric.pattern_match.group(1)

@@ -78,7 +78,7 @@ async def get_file_name(content):
     print("File Name: "+str(file_name))
     return file_name                 
 
-@borg.on(admin_cmd(pattern=f"gdl", outgoing=True))
+@telebot.on(admin_cmd(pattern=f"gdl", outgoing=True))
 async def g_download(event):
     if event.fwd_from:
         return   
@@ -147,7 +147,7 @@ async def subprocess_run(megadl, cmd):
         return exitCode
     return stdout.decode().strip(), stderr.decode().strip(), exitCode
 
-@borg.on(admin_cmd(outgoing=True, pattern=r"mega(?: |$)(.*)"))
+@telebot.on(admin_cmd(outgoing=True, pattern=r"mega(?: |$)(.*)"))
 async def mega_downloader(megadl):
     await megadl.edit("`Collecting information...`")
     if not os.path.isdir(TEMP_DOWNLOAD_DIRECTORY):

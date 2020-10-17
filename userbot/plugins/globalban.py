@@ -52,7 +52,7 @@ async def get_user_from_id(user, event):
         return None
     return user_obj
 
-@borg.on(ChatAction)
+@telebot.on(ChatAction)
 async def handler(tele): 
    if tele.user_joined or tele.user_added:      
        try:       	
@@ -77,8 +77,8 @@ async def handler(tele):
                  except:                          
                     return 
 
-@borg.on(admin_cmd(pattern="gban(?: |$)(.*)"))
-@borg.on(sudo_cmd(pattern="gban(?: |$)(.*)", allow_sudo=True))
+@telebot.on(admin_cmd(pattern="gban(?: |$)(.*)"))
+@telebot.on(sudo_cmd(pattern="gban(?: |$)(.*)", allow_sudo=True))
 async def gspider(rk): 
    lazy = rk ; sender = await lazy.get_sender() ; me = await lazy.client.get_me()
    if not sender.id == me.id:
@@ -129,8 +129,8 @@ async def gspider(rk):
    return await rkp.edit(f"**Gbanned** [{user.first_name}](tg://user?id={user.id}) **in {a} chat(s) , Blocked user and added to Gban watch **") 
         
 
-@borg.on(admin_cmd(pattern="ungban(?: |$)(.*)"))
-@borg.on(sudo_cmd(pattern="ungban(?: |$)(.*)", allow_sudo=True))
+@telebot.on(admin_cmd(pattern="ungban(?: |$)(.*)"))
+@telebot.on(sudo_cmd(pattern="ungban(?: |$)(.*)", allow_sudo=True))
 async def gspider(rk):
    lazy = rk ; sender = await lazy.get_sender() ; me = await lazy.client.get_me()
    if not sender.id == me.id:
