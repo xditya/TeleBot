@@ -25,10 +25,10 @@ async def startup_log_telebot_done(bot_name):
     await bot.send_message(TELE, "TeleBot has been deployed...")
         
 async def startup_log_tgbot_done(bot_name):
-    await bot.send_message(TELE, f"@{BOTNAME} has been set up! Send `/start' to it 😁.")
+    await bot.send_message(TELE, f"@{BOTNAME} has been set up! Send /start to it 😁.")
 
 async def startup_log_all_done(bot_name):
-    await bot.send_message(TELE, f"TeleBot has been deployed, @{BOTNAME} has been set up.\nSend `{CMD_HNDLR}alive` to see if the bot is working.\nDo add @{BOTNAME} to this group and make it adim for enabling all the features of **TeleBot**")
+    await bot.send_message(TELE, f"TeleBot has been deployed, @{BOTNAME} has been set up.\nSend `{CMD_HNDLR}alive` to see if the bot is working.\n\n__Do add @{BOTNAME} to this group and make it adim for enabling all the features of **TeleBot**__")
     
 if len(argv) not in (1, 3, 4):
     bot.disconnect()
