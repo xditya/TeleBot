@@ -60,4 +60,4 @@ WORKDIR /root/userbot/
 RUN chmod +x /usr/local/bin/*
 RUN pip3 install -r requirements.txt
 # (c) 2020 TeleBot, by @vishnu175, @its_xditya
-CMD ["bash","startup.sh"]
+CMD ["bash","./resources/startup.sh"]
