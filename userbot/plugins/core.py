@@ -24,7 +24,7 @@ from telethon.tl.types import InputMessagesFilterDocument
 from .. import ALIVE_NAME
 
 DELETE_TIMEOUT = 5
-thumb_image_path = "./TeleBot.png"
+thumb_image_path = "./resources/TeleBot.png"
 DEFAULTUSER = str(ALIVE_NAME) if ALIVE_NAME else "TeleBot User"
 
 @telebot.on(admin_cmd(pattern="send (?P<shortname>\w+)", outgoing=True))
