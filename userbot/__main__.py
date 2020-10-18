@@ -36,7 +36,6 @@ else:
     bot.tgbot = None
     if Var.TG_BOT_USER_NAME_BF_HER is not None:
         print("Initiating Inline Bot")
-        bot.loop.run_until_complete(startup_log_telebot_start(Var.TG_BOT_USER_NAME_BF_HER))
         # ForTheGreatrerGood of beautification
         bot.tgbot = TelegramClient(
             "TG_BOT_TOKEN",
@@ -47,11 +46,12 @@ else:
         print("Starting Userbot")
         bot.loop.run_until_complete(add_bot(Var.TG_BOT_USER_NAME_BF_HER))
         print("Startup Completed")
-        bot.loop.run_until_complete(startup_log_telebot_done(Var.TG_BOT_USER_NAME_BF_HER))
     else:
         bot.start()
-    
+        
+bot.loop.run_until_complete(startup_log_telebot_start(Var.TG_BOT_USER_NAME_BF_HER))
 import glob
+bot.loop.run_until_complete(startup_log_telebot_done(Var.TG_BOT_USER_NAME_BF_HER))
 path = 'userbot/plugins/*.py'
 files = glob.glob(path)
 for name in files:
