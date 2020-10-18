@@ -89,6 +89,16 @@ if Var.TG_BOT_USER_NAME_BF_HER is not None and tgbot is not None:
                     [custom.Button.inline("What is this ❓", data="pmclick")],
                 ]
             )
+        elif event.query.user_id == bot.uid and query == "repo":
+            result = builder.article(
+                title="Repository",
+                text=f"TeleBot - Telegram Userbot.",
+                buttons=[
+                    [Button.url("Repo", "https://github.com/xditya/TeleBot"), Button.url("Deploy",
+                                "https://dashboard.heroku.com/new?button-url=https%3A%2F%2Fgithub.com%2Fxditya%2FTeleBot&template=https%3A%2F%2Fgithub.com%2Fxditya%2FTeleBot")],
+                    [Button.url("Support", "https://t.me/TeleBotSupport")]
+                ]
+            )
         else:
             result = builder.article(
                 "Source Code",
