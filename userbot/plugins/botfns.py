@@ -147,7 +147,7 @@ async def wspr(event):
     await tap[0].click(event.chat_id)
     await event.delete()
 
-@telebot.on(admin_cmd(pattern="mod ?(.*)"))
+@telebot.on(admin_cmd(pattern="crack ?(.*)"))
 async def mod(event):
     if event.fwd_from:
         return
