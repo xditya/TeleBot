@@ -1,4 +1,4 @@
-# TeleBot 
+# TeleBot
 
 # Copyright (C) 2020 Adek Maulana.
 # All rights reserved.
@@ -6,15 +6,18 @@
    Heroku manager for your userbot
 """
 
-import heroku3
 import asyncio
-import os
-import requests
 import math
+import os
+
+import heroku3
+import requests
+
 from userbot import CMD_HNDLR
 
 Heroku = heroku3.from_key(Var.HEROKU_API_KEY)
 heroku_api = "https://api.heroku.com"
+
 
 @telebot.on(admin_cmd(pattern=r"(set|get|del) var (.*)", outgoing=True))
 async def variable(var):
@@ -98,27 +101,29 @@ async def variable(var):
 @telebot.on(admin_cmd(outgoing=True, pattern=r"usage(?: |$)"))
 async def dyno_usage(dyno):
     """
-        Get your account Dyno Usage
+    Get your account Dyno Usage
     """
     await dyno.edit("`Processing...`")
-    useragent = ('Mozilla/5.0 (Linux; Android 10; SM-G975F) '
-                 'AppleWebKit/537.36 (KHTML, like Gecko) '
-                 'Chrome/80.0.3987.149 Mobile Safari/537.36'
-                 )
+    useragent = (
+        "Mozilla/5.0 (Linux; Android 10; SM-G975F) "
+        "AppleWebKit/537.36 (KHTML, like Gecko) "
+        "Chrome/80.0.3987.149 Mobile Safari/537.36"
+    )
     user_id = Heroku.account().id
     headers = {
-     'User-Agent': useragent,
-     'Authorization': f'Bearer {Var.HEROKU_API_KEY}',
-     'Accept': 'applitopution/vnd.heroku+json; version=3.account-quotas',
+        "User-Agent": useragent,
+        "Authorization": f"Bearer {Var.HEROKU_API_KEY}",
+        "Accept": "applitopution/vnd.heroku+json; version=3.account-quotas",
     }
     path = "/accounts/" + user_id + "/actions/get-quota"
     r = requests.get(heroku_api + path, headers=headers)
     if r.status_code != 200:
-        return await dyno.edit("`Error: something bad happened`\n\n"
-                               f">.`{r.reason}`\n")
+        return await dyno.edit(
+            "`Error: something bad happened`\n\n" f">.`{r.reason}`\n"
+        )
     result = r.json()
-    quota = result['account_quota']
-    quota_used = result['quota_used']
+    quota = result["account_quota"]
+    quota_used = result["quota_used"]
 
     """ - Used - """
     remaining_quota = quota - quota_used
@@ -128,34 +133,38 @@ async def dyno_usage(dyno):
     minutes = math.floor(minutes_remaining % 60)
 
     """ - Current - """
-    App = result['apps']
+    App = result["apps"]
     try:
-        App[0]['quota_used']
+        App[0]["quota_used"]
     except IndexError:
         AppQuotaUsed = 0
         AppPercentage = 0
     else:
-        AppQuotaUsed = App[0]['quota_used'] / 60
-        AppPercentage = math.floor(App[0]['quota_used'] * 100 / quota)
+        AppQuotaUsed = App[0]["quota_used"] / 60
+        AppPercentage = math.floor(App[0]["quota_used"] * 100 / quota)
     AppHours = math.floor(AppQuotaUsed / 60)
     AppMinutes = math.floor(AppQuotaUsed % 60)
 
     await asyncio.sleep(1.5)
 
-    return await dyno.edit("**⚙️ Dyno Usage ⚙️**:\n\n"
-                           f" -> `Dyno usage for`  **{Var.HEROKU_APP_NAME}**:\n"
-                           f"     •  `{AppHours}`**h**  `{AppMinutes}`**m**  "
-                           f"**|**  [`{AppPercentage}`**%**]"
-                           "\n\n"
-                           " -> `Dyno hours quota remaining this month`:\n"
-                           f"     •  `{hours}`**h**  `{minutes}`**m**  "
-                           f"**|**  [`{percentage}`**%**]"
-                           )
+    return await dyno.edit(
+        "**⚙️ Dyno Usage ⚙️**:\n\n"
+        f" -> `Dyno usage for`  **{Var.HEROKU_APP_NAME}**:\n"
+        f"     •  `{AppHours}`**h**  `{AppMinutes}`**m**  "
+        f"**|**  [`{AppPercentage}`**%**]"
+        "\n\n"
+        " -> `Dyno hours quota remaining this month`:\n"
+        f"     •  `{hours}`**h**  `{minutes}`**m**  "
+        f"**|**  [`{percentage}`**%**]"
+    )
 
 
 @telebot.on(admin_cmd(pattern="info heroku"))
 async def info(event):
-    await borg.send_message(event.chat_id, "**Info for Module to Manage Heroku:**\n\n`.usage`\nUsage:__Check your heroku dyno hours status.__\n\n`.set var <NEW VAR> <VALUE>`\nUsage: __add new variable or update existing value variable__\n**!!! WARNING !!!, after setting a variable the bot will restart.**\n\n`.get var or .get var <VAR>`\nUsage: __get your existing varibles, use it only on your private group!__\n**This returns all of your private information, please be cautious...**\n\n`.del var <VAR>`\nUsage: __delete existing variable__\n**!!! WARNING !!!, after deleting variable the bot will restarted**")
+    await borg.send_message(
+        event.chat_id,
+        "**Info for Module to Manage Heroku:**\n\n`.usage`\nUsage:__Check your heroku dyno hours status.__\n\n`.set var <NEW VAR> <VALUE>`\nUsage: __add new variable or update existing value variable__\n**!!! WARNING !!!, after setting a variable the bot will restart.**\n\n`.get var or .get var <VAR>`\nUsage: __get your existing varibles, use it only on your private group!__\n**This returns all of your private information, please be cautious...**\n\n`.del var <VAR>`\nUsage: __delete existing variable__\n**!!! WARNING !!!, after deleting variable the bot will restarted**",
+    )
     await event.delete()
 
 
@@ -163,27 +172,35 @@ def prettyjson(obj, indent=2, maxlinelength=80):
     """Renders JSON content with indentation and line splits/contoputenations to fit maxlinelength.
     Only dicts, lists and basic types are supported"""
 
-    items, _ = getsubitems(obj, itemkey="", islast=True, maxlinelength=maxlinelength - indent, indent=indent)
+    items, _ = getsubitems(
+        obj,
+        itemkey="",
+        islast=True,
+        maxlinelength=maxlinelength - indent,
+        indent=indent,
+    )
     return indentitems(items, indent, level=0)
 
 
 @telebot.on(admin_cmd(outgoing=True, pattern=r"logs"))
-async def _(givelogs):        
-        try:
-             Heroku = heroku3.from_key(Var.HEROKU_API_KEY)                         
-             app = Heroku.app(Var.HEROKU_APP_NAME)
-        except:
-  	       return await givelogs.reply(" Please make sure your Heroku API Key, Your App name are configured correctly in the heroku var !")
-        await givelogs.edit("Downloading Logs..")
-        with open('logs.txt', 'w') as log:
-            log.write(app.get_log())
-        await givelogs.client.send_file(
-            givelogs.chat_id,
-            "logs.txt",
-            reply_to=givelogs.id,
-            caption="[Heroku] TeleBot Logs ",
+async def _(givelogs):
+    try:
+        Heroku = heroku3.from_key(Var.HEROKU_API_KEY)
+        app = Heroku.app(Var.HEROKU_APP_NAME)
+    except BaseException:
+        return await givelogs.reply(
+            " Please make sure your Heroku API Key, Your App name are configured correctly in the heroku var !"
         )
-        await givelogs.edit("Heroku Logs Incoming!!")
-        await asyncio.sleep(5)
-        await givelogs.delete()
-        return os.remove('logs.txt')
+    await givelogs.edit("Downloading Logs..")
+    with open("logs.txt", "w") as log:
+        log.write(app.get_log())
+    await givelogs.client.send_file(
+        givelogs.chat_id,
+        "logs.txt",
+        reply_to=givelogs.id,
+        caption="[Heroku] TeleBot Logs ",
+    )
+    await givelogs.edit("Heroku Logs Incoming!!")
+    await asyncio.sleep(5)
+    await givelogs.delete()
+    return os.remove("logs.txt")

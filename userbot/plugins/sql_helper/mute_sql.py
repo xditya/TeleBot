@@ -3,7 +3,7 @@ try:
 except ImportError:
     raise Exception("Hello!")
 
-from sqlalchemy import Column, String, UnicodeText
+from sqlalchemy import Column, String
 
 
 class Mute(BASE):

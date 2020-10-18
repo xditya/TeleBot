@@ -1,3 +1,5 @@
+import sys
+import math
 from userbot import bot
 from telethon import events
 from var import Var
@@ -9,8 +11,9 @@ import re
 import logging
 import inspect
 
-handler = Config.CMD_HNDLR if Config.CMD_HNDLR else "\."
+handler = Config.CMD_HNDLR if Config.CMD_HNDLR else r"\."
 sudo_hndlr = Config.SUDO_HNDLR if Config.SUDO_HNDLR else "!"
+
 
 def command(**args):
     args["func"] = lambda e: e.via_bot_id is None
@@ -33,23 +36,29 @@ def command(**args):
         try:
             if pattern is not None and not pattern.startswith('(?i)'):
                 args['pattern'] = '(?i)' + pattern
-        except:
+        except BaseException:
             pass
 
         reg = re.compile('(.*)')
-        if not pattern == None:
+        if pattern is not None:
             try:
                 cmd = re.search(reg, pattern)
                 try:
-                    cmd = cmd.group(1).replace("$", "").replace("\\", "").replace("^", "")
-                except:
+                    cmd = cmd.group(1).replace(
+                        "$",
+                        "").replace(
+                        "\\",
+                        "").replace(
+                        "^",
+                        "")
+                except BaseException:
                     pass
 
                 try:
                     CMD_LIST[file_test].append(cmd)
-                except:
+                except BaseException:
                     CMD_LIST.update({file_test: [cmd]})
-            except:
+            except BaseException:
                 pass
 
         if allow_sudo:
@@ -59,7 +68,7 @@ def command(**args):
         del allow_sudo
         try:
             del args["allow_sudo"]
-        except:
+        except BaseException:
             pass
 
         if "allow_edited_updates" in args:
@@ -71,7 +80,7 @@ def command(**args):
             bot.add_event_handler(func, events.NewMessage(**args))
             try:
                 LOAD_PLUG[file_test].append(func)
-            except:
+            except BaseException:
                 LOAD_PLUG.update({file_test: [func]})
             return func
 
@@ -89,7 +98,7 @@ def load_module(shortname):
         spec = importlib.util.spec_from_file_location(name, path)
         mod = importlib.util.module_from_spec(spec)
         spec.loader.exec_module(mod)
-        print("Successfully (re)imported "+shortname)
+        print("Successfully (re)imported " + shortname)
     else:
         import userbot.utils
         import importlib
@@ -115,8 +124,9 @@ def load_module(shortname):
         sys.modules["userbot.events"] = userbot.utils
         spec.loader.exec_module(mod)
         # for imports
-        sys.modules["userbot.plugins."+shortname] = mod
-        print("Successfully (re)imported "+shortname)
+        sys.modules["userbot.plugins." + shortname] = mod
+        print("Successfully (re)imported " + shortname)
+
 
 def remove_plugin(shortname):
     try:
@@ -125,15 +135,16 @@ def remove_plugin(shortname):
                 bot.remove_event_handler(i)
             del LOAD_PLUG[shortname]
 
-        except:
+        except BaseException:
             name = f"userbot.plugins.{shortname}"
 
             for i in reversed(range(len(bot._event_builders))):
                 ev, cb = bot._event_builders[i]
                 if cb.__module__ == name:
                     del bot._event_builders[i]
-    except:
+    except BaseException:
         raise ValueError
+
 
 def admin_cmd(pattern=None, **args):
     args["func"] = lambda e: e.via_bot_id is None
@@ -146,7 +157,7 @@ def admin_cmd(pattern=None, **args):
 
     # get the pattern from the decorator
     if pattern is not None:
-        if pattern.startswith("\#"):
+        if pattern.startswith(r"\#"):
             # special fix for snip.py
             args["pattern"] = re.compile(pattern)
         else:
@@ -154,7 +165,7 @@ def admin_cmd(pattern=None, **args):
             cmd = handler + pattern
             try:
                 CMD_LIST[file_test].append(cmd)
-            except:
+            except BaseException:
                 CMD_LIST.update({file_test: [cmd]})
 
     args["outgoing"] = True
@@ -170,26 +181,17 @@ def admin_cmd(pattern=None, **args):
         args["outgoing"] = True
 
     # add blacklist chats, UB should not respond in these chats
-    allow_edited_updates = False
     if "allow_edited_updates" in args and args["allow_edited_updates"]:
-        allow_edited_updates = args["allow_edited_updates"]
+        args["allow_edited_updates"]
         del args["allow_edited_updates"]
 
     # check if the plugin should listen for outgoing 'messages'
-    is_message_enabled = True
 
     return events.NewMessage(**args)
 
+
 """ Userbot module for managing events.
  One of the main components of the userbot. """
-import asyncio
-from traceback import format_exc
-from time import gmtime, strftime
-import math
-import subprocess
-import sys
-import traceback
-import datetime
 
 
 def register(**args):
@@ -208,21 +210,27 @@ def register(**args):
 
     if "disable_edited" in args:
         del args['disable_edited']
-    
+
     reg = re.compile('(.*)')
-    if not pattern == None:
+    if pattern is not None:
         try:
             cmd = re.search(reg, pattern)
             try:
-                cmd = cmd.group(1).replace("$", "").replace("\\", "").replace("^", "")
-            except:
+                cmd = cmd.group(1).replace(
+                    "$",
+                    "").replace(
+                    "\\",
+                    "").replace(
+                    "^",
+                    "")
+            except BaseException:
                 pass
 
             try:
                 CMD_LIST[file_test].append(cmd)
-            except:
+            except BaseException:
                 CMD_LIST.update({file_test: [cmd]})
-        except:
+        except BaseException:
             pass
 
     def decorator(func):
@@ -231,7 +239,7 @@ def register(**args):
         bot.add_event_handler(func, events.NewMessage(**args))
         try:
             LOAD_PLUG[file_test].append(func)
-        except Exception as e:
+        except Exception:
             LOAD_PLUG.update({file_test: [func]})
 
         return func
@@ -246,6 +254,7 @@ def errors_handler(func):
         except Exception:
             pass
     return wrapper
+
 
 async def progress(current, total, event, start, type_of_ps, file_name=None):
     """Generic progress_callback for both
@@ -305,6 +314,7 @@ def time_formatter(milliseconds: int) -> str:
         ((str(milliseconds) + " millisecond(s), ") if milliseconds else "")
     return tmp[:-2]
 
+
 class Loader():
     def __init__(self, func=None, **args):
         self.Var = Var
@@ -322,7 +332,7 @@ def sudo_cmd(pattern=None, **args):
 
     # get the pattern from the decorator
     if pattern is not None:
-        if pattern.startswith("\#"):
+        if pattern.startswith(r"\#"):
             # special fix for snip.py
             args["pattern"] = re.compile(pattern)
         else:
@@ -330,7 +340,7 @@ def sudo_cmd(pattern=None, **args):
             cmd = sudo_hndlr + pattern
             try:
                 CMD_LIST[file_test].append(cmd)
-            except:
+            except BaseException:
                 CMD_LIST.update({file_test: [cmd]})
 
     args["outgoing"] = True
@@ -346,15 +356,14 @@ def sudo_cmd(pattern=None, **args):
         args["outgoing"] = True
 
     # add blacklist chats, UB should not respond in these chats
-    allow_edited_updates = False
     if "allow_edited_updates" in args and args["allow_edited_updates"]:
-        allow_edited_updates = args["allow_edited_updates"]
+        args["allow_edited_updates"]
         del args["allow_edited_updates"]
 
     # check if the plugin should listen for outgoing 'messages'
-    is_message_enabled = True
 
     return events.NewMessage(**args)
+
 
 async def edit_or_reply(event, text):
     if event.from_id in Config.SUDO_USERS:
@@ -365,6 +374,8 @@ async def edit_or_reply(event, text):
     return await event.edit(text)
 
 # TGBot
+
+
 def start_mybot(shortname):
     if shortname.startswith("__"):
         pass
@@ -373,7 +384,6 @@ def start_mybot(shortname):
         import sys
         from pathlib import Path
 
-        import userbot.utils
 
         path = Path(f"userbot/plugins/mybot/{shortname}.py")
         name = "userbot.plugins.mybot.{}".format(shortname)
@@ -387,7 +397,6 @@ def start_mybot(shortname):
         import sys
         from pathlib import Path
 
-        import userbot.utils
 
         path = Path(f"userbot/plugins/mybot/{shortname}.py")
         name = "userbot.plugins.mybot.{}".format(shortname)

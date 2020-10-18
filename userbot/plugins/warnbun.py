@@ -1,7 +1,6 @@
 """.admin Plugin for @UniBorg"""
-import asyncio
-from telethon import events
 from telethon.tl.types import ChannelParticipantsAdmins
+
 from userbot.utils import admin_cmd
 
 
@@ -9,7 +8,9 @@ from userbot.utils import admin_cmd
 async def _(event):
     if event.fwd_from:
         return
-    mentions = "`You Have  1/3  warnings...\nWatch out!....\nReason for warn: Porn Demand`"
+    mentions = (
+        "`You Have  1/3  warnings...\nWatch out!....\nReason for warn: Porn Demand`"
+    )
     chat = await event.get_input_chat()
     async for x in borg.iter_participants(chat, filter=ChannelParticipantsAdmins):
         mentions += f""
@@ -20,6 +21,7 @@ async def _(event):
     else:
         await event.reply(mentions)
     await event.delete()
+
 
 """.admin Plugin for @UniBorg"""
 
@@ -40,6 +42,7 @@ async def _(event):
         await event.reply(mentions)
     await event.delete()
 
+
 """.admin Plugin for @UniBorg"""
 
 
@@ -47,7 +50,9 @@ async def _(event):
 async def _(event):
     if event.fwd_from:
         return
-    mentions = "`You Have  3/3  warnings...\nBanned!!!....\nReason for ban: Porn Demand`"
+    mentions = (
+        "`You Have  3/3  warnings...\nBanned!!!....\nReason for ban: Porn Demand`"
+    )
     chat = await event.get_input_chat()
     async for x in borg.iter_participants(chat, filter=ChannelParticipantsAdmins):
         mentions += f""
@@ -58,6 +63,7 @@ async def _(event):
     else:
         await event.reply(mentions)
     await event.delete()
+
 
 """.admin Plugin for @UniBorg"""
 
@@ -94,6 +100,7 @@ async def _(event):
     else:
         await event.reply(mentions)
     await event.delete()
+
 
 @telebot.on(admin_cmd(pattern="fw"))
 async def _(event):

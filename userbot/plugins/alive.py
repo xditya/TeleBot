@@ -1,23 +1,26 @@
 # For @TeleBotHelp
 """Check if your userbot is working."""
 import os
-import requests
 import time
-from PIL import Image
-from io import BytesIO
-from userbot import ALIVE_NAME, telever
-from userbot.utils import admin_cmd, sudo_cmd
-from userbot.__init__ import StartTime
 from datetime import datetime
-from userbot.uniborgConfig import Config
+from io import BytesIO
 
-ALV_PIC = os.environ.get("ALIVE_PIC" , None)
+import requests
+from PIL import Image
+
+from userbot import ALIVE_NAME, telever
+from userbot.__init__ import StartTime
+from userbot.uniborgConfig import Config
+from userbot.utils import admin_cmd, sudo_cmd
+
+ALV_PIC = os.environ.get("ALIVE_PIC", None)
 
 if Config.SUDO_USERS:
     sudo = "Enabled"
 else:
     sudo = "Disabled"
-    
+
+
 def get_readable_time(seconds: int) -> str:
     count = 0
     ping_time = ""
@@ -45,7 +48,9 @@ def get_readable_time(seconds: int) -> str:
 
     return ping_time
 
+
 DEFAULTUSER = str(ALIVE_NAME) if ALIVE_NAME else "@TeleBotSupport"
+
 
 @telebot.on(admin_cmd(outgoing=True, pattern="alive"))
 @telebot.on(sudo_cmd(outgoing=True, pattern="alive", allow_sudo=True))
@@ -54,7 +59,7 @@ async def amireallyalive(alive):
     myid = bot.uid
     """ For .alive command, check if the bot is running.  """
     end = datetime.now()
-    ms = (end - start).microseconds / 1000
+    (end - start).microseconds / 1000
     uptime = get_readable_time((time.time() - StartTime))
     if ALV_PIC:
         tele = f"**Welcome To TeleBot **\n\n"
@@ -68,10 +73,10 @@ async def amireallyalive(alive):
         tele += f"` 🔹 My pro owner` : **[{DEFAULTUSER}](tg://user?id={myid})**\n\n"
         tele += "    [✨ GitHub Repository ✨](https://github.com/xditya/TeleBot)"
 
-        chat = await alive.get_chat()
+        await alive.get_chat()
         await alive.delete()
         """ For .alive command, check if the bot is running.  """
-        await borg.send_file(alive.chat_id, ALV_PIC,caption=tele, link_preview = False)
+        await borg.send_file(alive.chat_id, ALV_PIC, caption=tele, link_preview=False)
         await alive.delete()
         return
     req = requests.get("https://telegra.ph/file/0670190de8e3bddea6d95.png")
@@ -83,15 +88,19 @@ async def amireallyalive(alive):
         img.save(sticker, "webp")
         sticker.name = "sticker.webp"
         sticker.seek(0)
-        await borg.send_message(alive.chat_id, f"**Welcome To TeleBot **\n\n"
-                "`Hey! I'm alive. All systems online and functioning normally!`\n\n"
-                "` 🔸 Telethon version:` **1.16.4**\n` 🔹 Python:` **3.8.3**\n"
-                f"` 🔸 TeleBot Version:` **{telever}**\n"
-                "` 🔹 More Info:` **@TeleBotSupport**\n"
-                f"` 🔸 Sudo :` **{sudo}**\n"
-                f"` 🔹 TeleBot Uptime:` **{uptime}**\n"
-                "` 🔸 Database Status:` **All OK 👌!**\n"
-                f"` 🔹 My pro owner` : **[{DEFAULTUSER}](tg://user?id={myid})**\n\n"
-                "    [✨ GitHub Repository ✨](https://github.com/xditya/TeleBot)", link_preview = False)
-        await borg.send_file(alive.chat_id, file=sticker) 
+        await borg.send_message(
+            alive.chat_id,
+            f"**Welcome To TeleBot **\n\n"
+            "`Hey! I'm alive. All systems online and functioning normally!`\n\n"
+            "` 🔸 Telethon version:` **1.16.4**\n` 🔹 Python:` **3.8.3**\n"
+            f"` 🔸 TeleBot Version:` **{telever}**\n"
+            "` 🔹 More Info:` **@TeleBotSupport**\n"
+            f"` 🔸 Sudo :` **{sudo}**\n"
+            f"` 🔹 TeleBot Uptime:` **{uptime}**\n"
+            "` 🔸 Database Status:` **All OK 👌!**\n"
+            f"` 🔹 My pro owner` : **[{DEFAULTUSER}](tg://user?id={myid})**\n\n"
+            "    [✨ GitHub Repository ✨](https://github.com/xditya/TeleBot)",
+            link_preview=False,
+        )
+        await borg.send_file(alive.chat_id, file=sticker)
         await alive.delete()

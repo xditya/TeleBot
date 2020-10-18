@@ -3,7 +3,9 @@
 # file, You can obtain one at http://mozilla.org/MPL/2.0/.
 
 from telethon.tl.functions.messages import SaveDraftRequest
+
 from userbot.utils import admin_cmd
+
 
 @telebot.on(admin_cmd(pattern="chain"))
 async def _(event):
@@ -13,11 +15,11 @@ async def _(event):
     while message:
         reply = await message.get_reply_message()
         if reply is None:
-            await borg(SaveDraftRequest(
-                await event.get_input_chat(),
-                "",
-                reply_to_msg_id=message.id
-            ))
+            await borg(
+                SaveDraftRequest(
+                    await event.get_input_chat(), "", reply_to_msg_id=message.id
+                )
+            )
         message = reply
         count += 1
     await event.edit(f"Chain length: {count}")

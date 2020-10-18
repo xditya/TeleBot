@@ -4,11 +4,11 @@ Available Commands:
 
 .wtf"""
 
-from telethon import events
 
 import asyncio
 
 from userbot.utils import admin_cmd
+
 
 @telebot.on(admin_cmd(pattern="(.*)"))
 async def _(event):
@@ -24,10 +24,10 @@ async def _(event):
             "What The",
             "What The F",
             "What The F Brah",
-            "[What The F Brah](https://telegra.ph//file/f3b760e4a99340d331f9b.jpg)"
+            "[What The F Brah](https://telegra.ph//file/f3b760e4a99340d331f9b.jpg)",
         ]
 
         for i in animation_ttl:
-        	
+
             await asyncio.sleep(animation_interval)
-            await event.edit(animation_chars[i %5 ])
+            await event.edit(animation_chars[i % 5])

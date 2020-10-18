@@ -8,13 +8,13 @@ Available Commands:
 
 .kiss"""
 
-from telethon import events
 
 import asyncio
+
 from userbot.utils import admin_cmd
 
-@telebot.on(admin_cmd(pattern=r"\.(.*)", outgoing=True))
 
+@telebot.on(admin_cmd(pattern=r"\.(.*)", outgoing=True))
 async def _(event):
 
     if event.fwd_from:
@@ -31,17 +31,7 @@ async def _(event):
 
         await event.edit(input_str)
 
-        animation_chars = [
-
-            "👉       ✊️",
-
-            "👉     ✊️",
-
-            "👉  ✊️",
-
-            "👉✊️💦"
-
-        ]
+        animation_chars = ["👉       ✊️", "👉     ✊️", "👉  ✊️", "👉✊️💦"]
 
         for i in animation_ttl:
 
@@ -51,7 +41,6 @@ async def _(event):
 
 
 @telebot.on(admin_cmd(pattern=r"(.*)", outgoing=True))
-
 async def _(event):
 
     if event.fwd_from:
@@ -68,17 +57,7 @@ async def _(event):
 
         await event.edit(input_str)
 
-        animation_chars = [
-
-            "🤵       👰",
-
-            "🤵     👰",
-
-            "🤵  👰",
-
-            "🤵👼👰"
-
-        ]
+        animation_chars = ["🤵       👰", "🤵     👰", "🤵  👰", "🤵👼👰"]
 
         for i in animation_ttl:
 
@@ -90,11 +69,7 @@ async def _(event):
 ""
 
 
-
-
-
 @telebot.on(admin_cmd(pattern=r"(.*)", outgoing=True))
-
 async def _(event):
 
     if event.fwd_from:
@@ -111,17 +86,7 @@ async def _(event):
 
         await event.edit(input_str)
 
-        animation_chars = [
-
-            "🤵       👰",
-
-            "🤵     👰",
-
-            "🤵  👰",
-
-            "🤵💋👰"
-
-        ]
+        animation_chars = ["🤵       👰", "🤵     👰", "🤵  👰", "🤵💋👰"]
 
         for i in animation_ttl:
 

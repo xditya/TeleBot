@@ -4,23 +4,22 @@ API Options: msg, media, sticker, gif, gamee, ainline, gpoll, adduser, cpin, cha
 DB Options: bots, commands, email, forward, url"""
 
 from telethon import events, functions, types
-from userbot.plugins.sql_helper.locks_sql import update_lock, is_locked, get_locks
+
+from userbot.plugins.sql_helper.locks_sql import get_locks, is_locked, update_lock
 from userbot.utils import admin_cmd
 
 
-@telebot.on(admin_cmd(pattern="lock( (?P<target>\S+)|$)"))
+@telebot.on(admin_cmd(pattern=r"lock( (?P<target>\S+)|$)"))
 async def _(event):
-     # Space weirdness in regex required because argument is optional and other
-     # commands start with ".lock"
+    # Space weirdness in regex required because argument is optional and other
+    # commands start with ".lock"
     if event.fwd_from:
         return
     input_str = event.pattern_match.group("target")
     peer_id = event.chat_id
     if input_str in (("bots", "commands", "email", "forward", "url")):
         update_lock(peer_id, input_str, True)
-        await event.edit(
-            "Locked {}".format(input_str)
-        )
+        await event.edit("Locked {}".format(input_str))
     else:
         msg = None
         media = None
@@ -70,8 +69,7 @@ async def _(event):
         try:
             result = await borg(  # pylint:disable=E0602
                 functions.messages.EditChatDefaultBannedRightsRequest(
-                    peer=peer_id,
-                    banned_rights=banned_rights
+                    peer=peer_id, banned_rights=banned_rights
                 )
             )
         except Exception as e:  # pylint:disable=C0103,W0703
@@ -90,13 +88,9 @@ async def _(event):
     peer_id = event.chat_id
     if input_str in (("bots", "commands", "email", "forward", "url")):
         update_lock(peer_id, input_str, False)
-        await event.edit(
-            "UnLocked {}".format(input_str)
-        )
+        await event.edit("UnLocked {}".format(input_str))
     else:
-        await event.edit(
-            "Use `.lock` without any parameters to unlock API locks"
-        )
+        await event.edit("Use `.lock` without any parameters to unlock API locks")
 
 
 @telebot.on(admin_cmd(pattern="curenabledlocks"))
@@ -183,7 +177,9 @@ async def check_incoming_messages(event):
         is_url = False
         if entities:
             for entity in entities:
-                if isinstance(entity, (types.MessageEntityTextUrl, types.MessageEntityUrl)):
+                if isinstance(
+                    entity, (types.MessageEntityTextUrl, types.MessageEntityUrl)
+                ):
                     is_url = True
         if is_url:
             try:
@@ -205,28 +201,29 @@ async def _(event):
         if event.user_added:
             users_added_by = event.action_message.from_id
             is_ban_able = False
-            rights = types.ChatBannedRights(
-                until_date=None,
-                view_messages=True
-            )
+            rights = types.ChatBannedRights(until_date=None, view_messages=True)
             added_users = event.action_message.action.users
             for user_id in added_users:
                 user_obj = await borg.get_entity(user_id)
                 if user_obj.bot:
                     is_ban_able = True
                     try:
-                        await borg(functions.channels.EditBannedRequest(
-                            event.chat_id,
-                            user_obj,
-                            rights
-                        ))
+                        await borg(
+                            functions.channels.EditBannedRequest(
+                                event.chat_id, user_obj, rights
+                            )
+                        )
                     except Exception as e:
                         await event.reply(
-                            "I don't seem to have ADMIN permission here. \n`{}`".format(str(e))
+                            "I don't seem to have ADMIN permission here. \n`{}`".format(
+                                str(e)
+                            )
                         )
                         update_lock(event.chat_id, "bots", False)
                         break
             if Config.G_BAN_LOGGER_GROUP is not None and is_ban_able:
                 ban_reason_msg = await event.reply(
-                    "!warn [user](tg://user?id={}) Please Do Not Add BOTs to this chat.".format(users_added_by)
+                    "!warn [user](tg://user?id={}) Please Do Not Add BOTs to this chat.".format(
+                        users_added_by
+                    )
                 )

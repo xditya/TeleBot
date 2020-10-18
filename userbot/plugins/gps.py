@@ -3,13 +3,13 @@ Syntax : .gps <location name>
 credits :@mrconfused
 """
 
-#help from @sunda005 and @SpEcHIDe
-# don't edit credits 
+# help from @sunda005 and @SpEcHIDe
+# don't edit credits
 # Plugin for TeleBot
 from geopy.geocoders import Nominatim
-from userbot.utils import admin_cmd
 from telethon.tl import types
 
+from userbot.utils import admin_cmd
 
 
 @telebot.on(admin_cmd(pattern="gps ?(.*)"))
@@ -33,15 +33,8 @@ async def gps(event):
         lon = geoloc.longitude
         lat = geoloc.latitude
         await reply_to_id.reply(
-            input_str,
-            file=types.InputMediaGeoPoint(
-                types.InputGeoPoint(
-                    lat, lon
-                )
-            )
+            input_str, file=types.InputMediaGeoPoint(types.InputGeoPoint(lat, lon))
         )
         await event.delete()
     else:
         await event.edit("Sorry, I coudn't find it")
-        
-        

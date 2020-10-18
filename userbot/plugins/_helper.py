@@ -1,12 +1,12 @@
 # Ported from other Telegram UserBots for TeleBot
-# Kangers, don't remove this line 
+# Kangers, don't remove this line
 # @its_xditya
 
-from userbot import CMD_LIST
-from userbot import ALIVE_NAME
+from userbot import ALIVE_NAME, CMD_LIST
 from userbot.utils import admin_cmd
 
 DEFAULTUSER = str(ALIVE_NAME) if ALIVE_NAME else "TeleBot User"
+
 
 @telebot.on(admin_cmd(pattern="help ?(.*)"))
 async def cmd_list(event):
@@ -30,7 +30,7 @@ async def cmd_list(event):
                         force_document=True,
                         allow_cache=False,
                         caption="**COMMANDS**",
-                        reply_to=reply_to_id
+                        reply_to=reply_to_id,
                     )
                     await event.delete()
             else:
@@ -41,19 +41,16 @@ async def cmd_list(event):
                 for i in CMD_LIST[input_str]:
                     string += "    " + i
                     string += "\n"
-                string +="\n**© @TeleBotSupport**"
+                string += "\n**© @TeleBotSupport**"
                 await event.edit(string)
             else:
                 await event.edit(input_str + " is not a valid plugin!")
         else:
             help_string = f"""`Userbot Helper for {DEFAULTUSER} to reveal all the commands of `**[TeleBot](https://xditya.gitbook.io/telebot/)**\n\n"""
             results = await bot.inline_query(  # pylint:disable=E0602
-                tgbotusername,
-                help_string
+                tgbotusername, help_string
             )
             await results[0].click(
-                event.chat_id,
-                reply_to=event.reply_to_msg_id,
-                hide_via=True
+                event.chat_id, reply_to=event.reply_to_msg_id, hide_via=True
             )
             await event.delete()

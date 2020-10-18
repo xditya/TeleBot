@@ -4,6 +4,7 @@
 
 from userbot.utils import admin_cmd
 
+
 @telebot.on(admin_cmd(pattern="pmto ?(.*)"))
 async def pmto(event):
     a = event.pattern_match.group(1)
@@ -11,15 +12,15 @@ async def pmto(event):
     chat_id = b[0]
     try:
         chat_id = int(chat_id)
-    except:
+    except BaseException:
         pass
     msg = ""
     for i in b[1:]:
-        msg += (i + " ") 
+        msg += i + " "
     if msg == "":
         return
     try:
         await borg.send_message(chat_id, msg)
         await event.edit("Message sent!")
-    except:
+    except BaseException:
         await event.edit("Something went wrong.")

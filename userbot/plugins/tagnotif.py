@@ -16,28 +16,27 @@
 #
 """-_-
 """
-from telethon import events, custom
-from telethon.tl.types import (
-    Channel,
-    Chat,
-    User
-)
+from telethon import custom, events
+from telethon.tl.types import Channel
 from telethon.utils import get_display_name
+
 from userbot.uniborgConfig import Config
 
 if Config.TAG_LOG:
     NEEDTOLOG = int(Config.TAG_LOG)
 
 if Config.TAG_LOG:
-    @telebot.on(events.NewMessage(
-        incoming=True,
-        blacklist_chats=Config.UB_BLACK_LIST_CHAT,
-        func=lambda e: (
-            e.mentioned
+
+    @telebot.on(
+        events.NewMessage(
+            incoming=True,
+            blacklist_chats=Config.UB_BLACK_LIST_CHAT,
+            func=lambda e: (e.mentioned),
         )
-    ))
+    )
     async def all_messages_catcher(event):
-        # the bot might not have the required access_hash to mention the appropriate PM
+        # the bot might not have the required access_hash to mention the
+        # appropriate PM
         await event.forward_to(Var.TG_BOT_USER_NAME_BF_HER)
 
         # construct message
@@ -45,11 +44,7 @@ if Config.TAG_LOG:
         ammoca_message = ""
 
         who_ = await event.client.get_entity(event.from_id)
-        if (
-            who_.bot or
-            who_.verified or
-            who_.support
-        ):
+        if who_.bot or who_.verified or who_.support:
             return
 
         who_m = f"[{get_display_name(who_)}](tg://user?id={who_.id})"
@@ -69,18 +64,17 @@ if Config.TAG_LOG:
             # Telegram is weird :\
 
         ammoca_message += f"{who_m} tagged you in [{where_m}]({message_link})"
-        if NEEDTOLOG != None:
+        if NEEDTOLOG is not None:
             await tgbot.send_message(
                 entity=NEEDTOLOG,
                 message=ammoca_message,
                 link_preview=False,
-                buttons=[
-                    [custom.Button.url(button_text, message_link)]
-                ],
-                silent=True
+                buttons=[[custom.Button.url(button_text, message_link)]],
+                silent=True,
             )
         else:
             return
 
-# Tag notifier plugin, to get notifications if someone tags you. 
+
+# Tag notifier plugin, to get notifications if someone tags you.
 # Set TAG_LOG if you want this plugin to work.

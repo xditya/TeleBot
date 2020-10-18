@@ -1,5 +1,6 @@
 """.admin Plugin for @UniBorg"""
 from telethon.tl.types import ChannelParticipantsAdmins
+
 from userbot.utils import admin_cmd
 
 
@@ -18,6 +19,7 @@ async def _(event):
     else:
         await event.reply(mentions)
     await event.delete()
+
 
 @telebot.on(admin_cmd(pattern="pay"))
 async def _(event):

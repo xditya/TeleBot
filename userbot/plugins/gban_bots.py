@@ -7,14 +7,15 @@ Available Commands:
 .gban REASON
 .ungban"""
 
-from telethon import events
-import asyncio
 from userbot.utils import admin_cmd
+
 
 @telebot.on(admin_cmd(pattern="botgban ?(.*)"))
 async def _(event):
     if Config.G_BAN_LOGGER_GROUP is None:
-        await event.edit("Make a group, add all your sudo bots and paste it's id in ENV VAR (G_BAN_LOGGER_GROUP) for this module to work.")
+        await event.edit(
+            "Make a group, add all your sudo bots and paste it's id in ENV VAR (G_BAN_LOGGER_GROUP) for this module to work."
+        )
         return
     if event.fwd_from:
         return
@@ -27,7 +28,7 @@ async def _(event):
             r_from_id = r.from_id
         await borg.send_message(
             Config.G_BAN_LOGGER_GROUP,
-            "/gban [user](tg://user?id={}) {}".format(r_from_id, reason)
+            "/gban [user](tg://user?id={}) {}".format(r_from_id, reason),
         )
     await event.delete()
 
@@ -35,7 +36,9 @@ async def _(event):
 @telebot.on(admin_cmd(pattern="botungban ?(.*)"))
 async def _(event):
     if Config.G_BAN_LOGGER_GROUP is None:
-        await event.edit("Make a group, add all your sudo bots and paste it's id in ENV VAR (G_BAN_LOGGER_GROUP) for this module to work.")
+        await event.edit(
+            "Make a group, add all your sudo bots and paste it's id in ENV VAR (G_BAN_LOGGER_GROUP) for this module to work."
+        )
         return
     if event.fwd_from:
         return
@@ -45,6 +48,6 @@ async def _(event):
         r_from_id = r.from_id
         await borg.send_message(
             Config.G_BAN_LOGGER_GROUP,
-            "/ungban [user](tg://user?id={}) {}".format(r_from_id, reason)
+            "/ungban [user](tg://user?id={}) {}".format(r_from_id, reason),
         )
     await event.delete()

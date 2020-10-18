@@ -2,11 +2,12 @@
 .autoname"""
 import asyncio
 import time
-from telethon.tl import functions
-from telethon.errors import FloodWaitError
-from uniborg.util import admin_cmd
-from userbot import ALIVE_NAME
 
+from telethon.errors import FloodWaitError
+from telethon.tl import functions
+from uniborg.util import admin_cmd
+
+from userbot import ALIVE_NAME
 
 DEL_TIME_OUT = 60
 DEFAULTUSER = str(ALIVE_NAME) if ALIVE_NAME else "TeleBot"
@@ -22,18 +23,20 @@ async def _(event):
         name = f"🕒{HM} ⚡{DEFAULTUSER}⚡ {DM} 🗓️"
         logger.info(name)
         try:
-            await borg(functions.account.UpdateProfileRequest(  # pylint:disable=E0602
-                first_name=name
-            ))
+            await borg(
+                functions.account.UpdateProfileRequest(  # pylint:disable=E0602
+                    first_name=name
+                )
+            )
         except FloodWaitError as ex:
             logger.warning(str(e))
             await asyncio.sleep(ex.seconds)
-    
+
         # else:
-            # logger.info(r.stringify())
-            # await borg.send_message(  # pylint:disable=E0602
-            #     Config.PRIVATE_GROUP_BOT_API_ID,  # pylint:disable=E0602
-            #     "Successfully Changed Profile Name"
-            # )
+        # logger.info(r.stringify())
+        # await borg.send_message(  # pylint:disable=E0602
+        #     Config.PRIVATE_GROUP_BOT_API_ID,  # pylint:disable=E0602
+        #     "Successfully Changed Profile Name"
+        # )
         await asyncio.sleep(DEL_TIME_OUT)
-    await event.edit(f"Auto Name has been started...") 
+    await event.edit(f"Auto Name has been started...")

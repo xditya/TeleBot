@@ -6,9 +6,8 @@
 
 from asyncio import wait
 
-from telethon import events
-
 from userbot.utils import admin_cmd
+
 
 @telebot.on(admin_cmd(pattern=r"spam", outgoing=True))
 async def spammer(e):
@@ -17,14 +16,10 @@ async def spammer(e):
         counter = int(message[6:8])
         spam_message = str(e.text[8:])
 
-        await wait(
-            [e.respond(spam_message) for i in range(counter)]
-            )
+        await wait([e.respond(spam_message) for i in range(counter)])
 
         await e.delete()
         if LOGGER:
             await e.client.send_message(
-                LOGGER_GROUP,
-                "#SPAM \n\n"
-                "Spam was executed successfully"
-                )
+                LOGGER_GROUP, "#SPAM \n\n" "Spam was executed successfully"
+            )

@@ -12,7 +12,6 @@ class Locks(BASE):
     forward = Column(Boolean, default=False)
     url = Column(Boolean, default=False)
 
-
     def __init__(self, chat_id):
         self.chat_id = str(chat_id)  # ensure string
         self.bots = False

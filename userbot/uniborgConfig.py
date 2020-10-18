@@ -7,31 +7,45 @@ if ENV:
         # Get this value from my.telegram.org! Please do not steal
         LOCATION = os.environ.get("LOCATION", None)
         OPEN_WEATHER_MAP_APPID = os.environ.get("OPEN_WEATHER_MAP_APPID", None)
-        # Get your own ACCESS_KEY from http://api.screenshotlayer.com/api/capture
-        SCREEN_SHOT_LAYER_ACCESS_KEY = os.environ.get("SCREEN_SHOT_LAYER_ACCESS_KEY", None)
+        # Get your own ACCESS_KEY from
+        # http://api.screenshotlayer.com/api/capture
+        SCREEN_SHOT_LAYER_ACCESS_KEY = os.environ.get(
+            "SCREEN_SHOT_LAYER_ACCESS_KEY", None)
         # Send .get_id in any group to fill this value.
-        PRIVATE_GROUP_BOT_API_ID = int(os.environ.get("PRIVATE_GROUP_BOT_API_ID", -100123456789))
-        # Send .get_id in any channel to fill this value. ReQuired for @Manuel15 inspiration to work!
-        PRIVATE_CHANNEL_BOT_API_ID = int(os.environ.get("PRIVATE_CHANNEL_BOT_API_ID", -100123456789))
+        PRIVATE_GROUP_BOT_API_ID = int(os.environ.get(
+            "PRIVATE_GROUP_BOT_API_ID", -100123456789))
+        # Send .get_id in any channel to fill this value. ReQuired for
+        # @Manuel15 inspiration to work!
+        PRIVATE_CHANNEL_BOT_API_ID = int(os.environ.get(
+            "PRIVATE_CHANNEL_BOT_API_ID", -100123456789))
         # This is required for the plugins involving the file system.
-        TMP_DOWNLOAD_DIRECTORY = os.environ.get("TMP_DOWNLOAD_DIRECTORY", "./DOWNLOADS/")
-        # This is required for the speech to text module. Get your USERNAME from https://console.bluemix.net/docs/services/speech-to-text/getting-started.html
+        TMP_DOWNLOAD_DIRECTORY = os.environ.get(
+            "TMP_DOWNLOAD_DIRECTORY", "./DOWNLOADS/")
+        # This is required for the speech to text module. Get your USERNAME
+        # from
+        # https://console.bluemix.net/docs/services/speech-to-text/getting-started.html
         IBM_WATSON_CRED_URL = os.environ.get("IBM_WATSON_CRED_URL", None)
-        IBM_WATSON_CRED_PASSWORD = os.environ.get("IBM_WATSON_CRED_PASSWORD", None)
+        IBM_WATSON_CRED_PASSWORD = os.environ.get(
+            "IBM_WATSON_CRED_PASSWORD", None)
         # This is required for the hash to torrent file functionality to work.
-        HASH_TO_TORRENT_API = os.environ.get("HASH_TO_TORRENT_API", "https://example.com/torrent/{}");
+        HASH_TO_TORRENT_API = os.environ.get(
+            "HASH_TO_TORRENT_API", "https://example.com/torrent/{}")
         # This is required for the @telegraph functionality.
-        TELEGRAPH_SHORT_NAME = os.environ.get("TELEGRAPH_SHORT_NAME", "TeleBot")
+        TELEGRAPH_SHORT_NAME = os.environ.get(
+            "TELEGRAPH_SHORT_NAME", "TeleBot")
         # Get a Free API Key from OCR.Space
         OCR_SPACE_API_KEY = os.environ.get("OCR_SPACE_API_KEY", None)
         # Send .get_id in any group with all your administration bots (added)
-        G_BAN_LOGGER_GROUP = int(os.environ.get("G_BAN_LOGGER_GROUP", -100123456789))
+        G_BAN_LOGGER_GROUP = int(os.environ.get(
+            "G_BAN_LOGGER_GROUP", -100123456789))
         # TG API limit. An album can have atmost 10 media!
-        GOOGLE_SEARCH_COUNT_LIMIT = int(os.environ.get("GOOGLE_SEARCH_COUNT_LIMIT", 9))
+        GOOGLE_SEARCH_COUNT_LIMIT = int(
+            os.environ.get("GOOGLE_SEARCH_COUNT_LIMIT", 9))
         TG_GLOBAL_ALBUM_LIMIT = int(os.environ.get("TG_GLOBAL_ALBUM_LIMIT", 9))
         # Telegram BOT Token from @BotFather
         TG_BOT_TOKEN_BF_HER = os.environ.get("TG_BOT_TOKEN_BF_HER", None)
-        TG_BOT_USER_NAME_BF_HER = os.environ.get("TG_BOT_USER_NAME_BF_HER", None)
+        TG_BOT_USER_NAME_BF_HER = os.environ.get(
+            "TG_BOT_USER_NAME_BF_HER", None)
         #
         NO_SONGS = bool(os.environ.get("NO_SONGS", False))
         #
@@ -39,7 +53,9 @@ if ENV:
         # TG API limit. A message can have maximum 4096 characters!
         MAX_MESSAGE_SIZE_LIMIT = 4095
         # set blacklist_chats where you do not want userbot's features
-        UB_BLACK_LIST_CHAT = set(int(x) for x in os.environ.get("UB_BLACK_LIST_CHAT", "").split())
+        UB_BLACK_LIST_CHAT = set(
+            int(x) for x in os.environ.get(
+                "UB_BLACK_LIST_CHAT", "").split())
         # maximum number of messages for antiflood
         MAX_ANTI_FLOOD_MESSAGES = 10
         # warn mode for anti flood
@@ -72,32 +88,38 @@ if ENV:
         # DataBase would not work
         DB_URI = os.environ.get("DATABASE_URL", None)
         # number of rows of buttons to be displayed in .helpme command
-        NO_OF_BUTTONS_DISPLAYED_IN_H_ME_CMD = int(os.environ.get("NO_OF_BUTTONS_DISPLAYED_IN_H_ME_CMD", 5))
+        NO_OF_BUTTONS_DISPLAYED_IN_H_ME_CMD = int(
+            os.environ.get("NO_OF_BUTTONS_DISPLAYED_IN_H_ME_CMD", 5))
         # specify command handler that should be used for the plugins
         # this should be a valid "regex" pattern
-        CMD_HNDLR = os.environ.get("CMD_HNDLR", "\.")
-        SUDO_HNDLR = os.environ.get("SUDO_HNDLR", "\!")
+        CMD_HNDLR = os.environ.get("CMD_HNDLR", r"\.")
+        SUDO_HNDLR = os.environ.get("SUDO_HNDLR", r"\!")
         # specify list of users allowed to use bot
         # WARNING: be careful who you grant access to your bot.
         # malicious users could do ".exec rm -rf /*"
-        SUDO_USERS = set(int(x) for x in os.environ.get("SUDO_USERS", "").split())
+        SUDO_USERS = set(
+            int(x) for x in os.environ.get(
+                "SUDO_USERS", "").split())
         # VeryStream only supports video formats
         VERY_STREAM_LOGIN = os.environ.get("VERY_STREAM_LOGIN", None)
         VERY_STREAM_KEY = os.environ.get("VERY_STREAM_KEY", None)
-        GROUP_REG_SED_EX_BOT_S = os.environ.get("GROUP_REG_SED_EX_BOT_S", r"(regex|moku|BananaButler_|rgx|l4mR)bot")
+        GROUP_REG_SED_EX_BOT_S = os.environ.get(
+            "GROUP_REG_SED_EX_BOT_S",
+            r"(regex|moku|BananaButler_|rgx|l4mR)bot")
         TEMP_DIR = os.environ.get("TEMP_DIR", None)
         CHANNEL_ID = int(os.environ.get("CHANNEL_ID", -100))
-        #Google Chrome Stuff
+        # Google Chrome Stuff
         CHROME_BIN = os.environ.get("CHROME_BIN", "/usr/bin/google-chrome")
-        CHROME_DRIVER = os.environ.get("CHROME_DRIVER", "/usr/bin/chromedriver")
+        CHROME_DRIVER = os.environ.get(
+            "CHROME_DRIVER", "/usr/bin/chromedriver")
         # Google Drive ()
         G_DRIVE_CLIENT_ID = os.environ.get("G_DRIVE_CLIENT_ID", None)
         G_DRIVE_CLIENT_SECRET = os.environ.get("G_DRIVE_CLIENT_SECRET", None)
         GDRIVE_FOLDER_ID = os.environ.get("GDRIVE_FOLDER_ID", None)
         AUTH_TOKEN_DATA = os.environ.get("AUTH_TOKEN_DATA", None)
-        if AUTH_TOKEN_DATA != None:
+        if AUTH_TOKEN_DATA is not None:
             os.makedirs(TMP_DOWNLOAD_DIRECTORY)
-            t_file = open(TMP_DOWNLOAD_DIRECTORY+"auth_token.txt","w")
+            t_file = open(TMP_DOWNLOAD_DIRECTORY + "auth_token.txt", "w")
             t_file.write(AUTH_TOKEN_DATA)
             t_file.close()
         YOUTUBE_API_KEY = os.environ.get("YOUTUBE_API_KEY", None)
@@ -109,7 +131,7 @@ if ENV:
         # PMSECURITY
         MAX_SPAM = int(os.environ.get("MAX_SPAM", 3))
         # Lydia API
-        LYDIA_API = os.environ.get("LYDIA_API",None)
+        LYDIA_API = os.environ.get("LYDIA_API", None)
         FBAN_GROUP_ID = os.environ.get("FBAN_GROUP_ID", None)
         if FBAN_GROUP_ID:
             FBAN_GROUP_ID = int(FBAN_GROUP_ID)

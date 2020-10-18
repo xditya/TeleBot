@@ -1,32 +1,28 @@
-#Made By @TeleBotComms Keep Credits If You Are Goanna Kang This Lol
+# Made By @TeleBotComms Keep Credits If You Are Goanna Kang This Lol
 
-#And Thanks To The Creator Of Autopic This Script Was Made from Snippets From That Script
+# And Thanks To The Creator Of Autopic This Script Was Made from Snippets
+# From That Script
 
-#Usage .gamerpfp  Im Not Responsible For Any Ban caused By This
-
-import requests , re , random 
-
-import urllib , os 
-
-from telethon.tl import functions
-
-from uniborg.util import admin_cmd
+# Usage .gamerpfp  Im Not Responsible For Any Ban caused By This
 
 import asyncio
+import os
+import random
+import re
+import urllib
+
+import requests
+from telethon.tl import functions
+from uniborg.util import admin_cmd
 
 COLLECTION_STRING = [
-
-  "star-wars-wallpaper-1080p",
-
-  "4k-sci-fi-wallpaper",
-
-  "star-wars-iphone-6-wallpaper",
-
-  "kylo-ren-wallpaper",
-
-  "darth-vader-wallpaper"
-
+    "star-wars-wallpaper-1080p",
+    "4k-sci-fi-wallpaper",
+    "star-wars-iphone-6-wallpaper",
+    "kylo-ren-wallpaper",
+    "darth-vader-wallpaper",
 ]
+
 
 async def animepp():
 
@@ -38,35 +34,40 @@ async def animepp():
 
     pc = requests.get("http://getwallpapers.com/collection/" + pack).text
 
-    f = re.compile('/\w+/full.+.jpg')
+    f = re.compile(r"/\w+/full.+.jpg")
 
     f = f.findall(pc)
 
-    fy = "http://getwallpapers.com"+random.choice(f)
+    fy = "http://getwallpapers.com" + random.choice(f)
 
     print(fy)
 
     if not os.path.exists("f.ttf"):
 
-        urllib.request.urlretrieve("https://github.com/rebel6969/mym/raw/master/Rebel-robot-Regular.ttf","f.ttf")
+        urllib.request.urlretrieve(
+            "https://github.com/rebel6969/mym/raw/master/Rebel-robot-Regular.ttf",
+            "f.ttf",
+        )
 
-    urllib.request.urlretrieve(fy,"donottouch.jpg")
+    urllib.request.urlretrieve(fy, "donottouch.jpg")
+
 
 @telebot.on(admin_cmd(pattern="gamerpfp ?(.*)"))
-
 async def main(event):
 
-    await event.edit("**Starting Gamer Profile Pic.\n\nModded by[TeleBot](https://github.com/xditya/TeleBot)") #Owner @NihiNivi
+    # Owner @NihiNivi
+    await event.edit(
+        "**Starting Gamer Profile Pic.\n\nModded by[TeleBot](https://github.com/xditya/TeleBot)"
+    )
 
     while True:
 
         await animepp()
 
-        file = await event.client.upload_file("donottouch.jpg")  
+        file = await event.client.upload_file("donottouch.jpg")
 
-        await event.client(functions.photos.UploadProfilePhotoRequest( file))
+        await event.client(functions.photos.UploadProfilePhotoRequest(file))
 
         os.system("rm -rf donottouch.jpg")
 
-        await asyncio.sleep(3600) #Edit this to your required needs
-
+        await asyncio.sleep(3600)  # Edit this to your required needs

@@ -32,9 +32,8 @@ async def _(event):
     start = datetime.now()
     await lool.edit("`Trying To Connect...`")
     # SHOW_DESCRIPTION = False
-    input_str = event.pattern_match.group(
-        1
-    )  # + " -inurl:(htm|html|php|pls|txt) intitle:index.of \"last modified\" (mkv|mp4|avi|epub|pdf|mp3)"
+    # + " -inurl:(htm|html|php|pls|txt) intitle:index.of \"last modified\" (mkv|mp4|avi|epub|pdf|mp3)"
+    input_str = event.pattern_match.group(1)
     input_url = "https://bots.shrimadhavuk.me/search/?q={}".format(input_str)
     headers = {"USER-AGENT": "UniBorg"}
     response = requests.get(input_url, headers=headers).json()

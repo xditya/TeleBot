@@ -1,7 +1,9 @@
-#Join @TeleBotHelp for custom plugins
+# Join @TeleBotHelp for custom plugins
 
 import asyncio
+
 from userbot.utils import admin_cmd, sudo_cmd
+
 
 @telebot.on(admin_cmd(pattern="cmds", outgoing=True))
 @telebot.on(sudo_cmd(pattern="cmds", incoming=True, allow_sudo=True))

