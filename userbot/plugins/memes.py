@@ -1,29 +1,17 @@
-# Copyright (C) 2019 The Raphielscape Company LLC.
-#
-# Licensed under the Raphielscape Public License, Version 1.b (the "License");
-# you may not use this file except in compliance with the License.
-#
-#
-
-""" Userbot module for having some fun with people. """
-
 import asyncio
 import random
 import re
 import time
-
 from userbot.utils import admin_cmd
 from collections import deque
-
 import requests
 from userbot.utils import admin_cmd
 from telethon.tl.functions.users import GetFullUserRequest
 from telethon.tl.types import MessageEntityMentionName
-
 from cowpy import cow
-
 from userbot import CMD_HELP,YOUTUBE_API_KEY
 from userbot.utils import register
+from var import Var
 
 # ================= CONSTANT =================
 RENDISTR = [
@@ -881,10 +869,15 @@ async def vapor(vpr):
 
 			  
 @telebot.on(admin_cmd(outgoing=True, pattern="repo"))
-async def source(e):
-    if not e.text[0].isalpha() and e.text[0] not in ("/", "#", "@", "!"):
-        await e.edit("Click [here](https://github.com/xditya/TeleBot) to get my source code :)\n\nDo check @TeleBotSupport ")
-			  
+async def repo(event):
+    if event.fwd_from:
+        return
+    tgbotname = Var.TG_BOT_USER_NAME_BF_HER
+    if event.reply_to_msg_id:
+        reply_to_id = await event.get_reply_message()
+    response = await bot.inline_query(tgbotname, "repo") 
+    await response[0].click(event.chat_id)
+    await event.delete()			  
 			  
 @telebot.on(admin_cmd(outgoing=True, pattern="str(?: |$)(.*)"))
 async def stretch(stret):
