@@ -15,19 +15,19 @@ async def add_bot(bot_token):
     bot.me = await bot.get_me() 
     bot.uid = telethon.utils.get_peer_id(bot.me)
 
-async def startup_log_telebot_start(bot_name)
+async def startup_log_telebot_start(bot_name):
     await telebot.send_message(TELE, "Deploying TeleBot...")
 
-async def startup_log_tgbot_start(bot_name)
+async def startup_log_tgbot_start(bot_name):
     await telebot.send_message(TELE, f"Setting up @{BOTNAME}...")
     
-async def startup_log_telebot_done(bot_name)
+async def startup_log_telebot_done(bot_name):
     await telebot.send_message(TELE, "TeleBot has been deployed...")
         
-async def startup_log_tgbot_done(bot_name)
+async def startup_log_tgbot_done(bot_name):
     await telebot.send_message(TELE, f"@{BOTNAME} has been set up! Send `/start' to it 😁.")
 
-async def startup_log_all_done(bot_name)
+async def startup_log_all_done(bot_name):
     await telebot.send_message(TELE, f"TeleBot has been deployed, @{BOTNAME} has been set up.\nSend `{CMD_HNDLR}alive` to see if the bot is working.\nDo add @{BOTNAME} to this group and make it adim for enabling all the features of **TeleBot**")
     
 if len(argv) not in (1, 3, 4):
