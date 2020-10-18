@@ -31,7 +31,7 @@ jobs:
       - uses: stefanzweifel/git-auto-commit-action@v4
         with:
           commit_message: 'pylint: auto fixes'
-          commit_options: '--no-verify --signoff'
+          commit_options: '--no-verify'
           repository: .
           commit_user_name: xditya
           commit_user_email: 58950863+xditya@users.noreply.github.com
