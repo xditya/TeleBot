@@ -384,7 +384,6 @@ def start_mybot(shortname):
         import sys
         from pathlib import Path
 
-
         path = Path(f"userbot/plugins/mybot/{shortname}.py")
         name = "userbot.plugins.mybot.{}".format(shortname)
         spec = importlib.util.spec_from_file_location(name, path)
@@ -396,7 +395,6 @@ def start_mybot(shortname):
         import importlib
         import sys
         from pathlib import Path
-
 
         path = Path(f"userbot/plugins/mybot/{shortname}.py")
         name = "userbot.plugins.mybot.{}".format(shortname)
