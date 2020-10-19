@@ -349,7 +349,6 @@ def sudo_cmd(pattern=None, **args):
         args["from_users"] = list(Var.SUDO_USERS)
         # Mutually exclusive with outgoing (can only set one of either).
         args["incoming"] = True
-        del args["allow_sudo"]
 
     # error handling condition check
     elif "incoming" in args and not args["incoming"]:
