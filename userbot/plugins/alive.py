@@ -64,7 +64,7 @@ async def amireallyalive(alive):
     if ALV_PIC:
         tele = f"**Welcome To TeleBot **\n\n"
         tele += "`Hey! I'm alive. All systems online and functioning normally!`\n\n"
-        tele += "` 🔸 Telethon version:` **1.16.4**\n` 🔹 Python:` **3.8.3**\n"
+        tele += "` 🔸 Telethon version:` **1.17**\n` 🔹 Python:` **3.8.3**\n"
         tele += f"` 🔸 TeleBot Version:` **{telever}**\n"
         tele += "` 🔹 More Info:` **@TeleBotSupport**\n"
         tele += f"` 🔸 Sudo :` **{sudo}**\n"
@@ -92,7 +92,7 @@ async def amireallyalive(alive):
             alive.chat_id,
             f"**Welcome To TeleBot **\n\n"
             "`Hey! I'm alive. All systems online and functioning normally!`\n\n"
-            "` 🔸 Telethon version:` **1.16.4**\n` 🔹 Python:` **3.8.3**\n"
+            "` 🔸 Telethon version:` **1.17**\n` 🔹 Python:` **3.8.3**\n"
             f"` 🔸 TeleBot Version:` **{telever}**\n"
             "` 🔹 More Info:` **@TeleBotSupport**\n"
             f"` 🔸 Sudo :` **{sudo}**\n"
