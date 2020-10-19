@@ -13,7 +13,7 @@ from asyncio import sleep
 from telethon.errors import ChatAdminRequiredError, UserAdminInvalidError
 from telethon.tl.functions.channels import EditBannedRequest
 from telethon.tl.types import ChatBannedRights
-
+from var import Var
 from userbot.utils import admin_cmd
 
 # =================== CONSTANT ===================
@@ -46,9 +46,8 @@ MUTE_RIGHTS = ChatBannedRights(until_date=None, send_messages=True)
 UNMUTE_RIGHTS = ChatBannedRights(until_date=None, send_messages=False)
 # ================================================
 
-
-# @telebot.on(admin_cmd(pattern=f"zombies", allow_sudo=True))
 @telebot.on(admin_cmd(pattern="zombies(?: |$)(.*)", outgoing=True))
+@telebot.on(sudo_cmd(pattern=f"zombies", allow_sudo=True))
 async def rm_deletedacc(show):
     """ For .zombies command, list all the ghost/deleted/zombie accounts in a chat. """
 
@@ -109,9 +108,9 @@ async def rm_deletedacc(show):
     await sleep(2)
     await show.delete()
 
-    if Config.G_BAN_LOGGER_GROUP is not None:
+    if Var.PRIVATE_GROUP_ID is not None:
         await show.client.send_message(
-            Config.G_BAN_LOGGER_GROUP,
+            Var.PRIVATE_GROUP_ID,
             "#CLEANUP\n"
             f"Cleaned **{del_u}** deleted account(s) !!\
             \nCHAT: {show.chat.title}(`{show.chat_id}`)",
