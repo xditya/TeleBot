@@ -67,6 +67,10 @@ class Var(object):
     GDRIVE_FOLDER_ID = os.environ.get("GDRIVE_FOLDER_ID", "root")
     AUTH_TOKEN_DATA = os.environ.get("AUTH_TOKEN_DATA", None)
     PMSECURITY = os.environ.get("PMSECURITY", "ON")
+    # for autopic
+    AUTOPIC_TEXT = os.environ.get("AUTOPIC_TEXT", "Life Is too Short.\n And so is your TG account.")
+    AUTO_PIC_FONT = os.environ.get("AUTOPIC_FONT", "rosemary.ttf")
+    AUTOPIC_FONT_COLOUR = os.environ.get("AUTOPIC_FONT_COLOUR", None)
     if AUTH_TOKEN_DATA is not None:
         os.makedirs(TEMP_DOWNLOAD_DIRECTORY)
         t_file = open(TEMP_DOWNLOAD_DIRECTORY + "auth_token.txt", "w")
