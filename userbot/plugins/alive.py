@@ -10,7 +10,7 @@ from PIL import Image
 
 from userbot import ALIVE_NAME, telever
 from userbot.__init__ import StartTime
-from userbot.uniborgConfig import Config
+from userbot.telebotConfig import Config
 from userbot.utils import admin_cmd, sudo_cmd
 
 ALV_PIC = os.environ.get("ALIVE_PIC", None)
