@@ -120,6 +120,7 @@ def load_module(shortname):
         mod.admin_cmd = admin_cmd
         mod.sudo_cmd = sudo_cmd
         mod.edit_or_reply = edit_or_reply
+        mod.eor = edit_or_reply
         # support for paperplaneextended
         sys.modules["userbot.events"] = userbot.utils
         spec.loader.exec_module(mod)
