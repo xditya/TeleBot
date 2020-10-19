@@ -9,9 +9,9 @@ from cowpy import cow
 from telethon import events
 from telethon.tl.functions.users import GetFullUserRequest
 from telethon.tl.types import MessageEntityMentionName
-from userbot.telebotConfig import Var
 
 from userbot import CMD_HELP
+from userbot.telebotConfig import Var
 from userbot.utils import admin_cmd, register
 
 # ================= CONSTANT =================
