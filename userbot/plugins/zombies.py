@@ -13,7 +13,7 @@ from asyncio import sleep
 from telethon.errors import ChatAdminRequiredError, UserAdminInvalidError
 from telethon.tl.functions.channels import EditBannedRequest
 from telethon.tl.types import ChatBannedRights
-from var import Var
+from userbot.telebotConfig import Var
 
 from userbot.utils import admin_cmd
 
