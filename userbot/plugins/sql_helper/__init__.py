@@ -5,7 +5,7 @@ from sqlalchemy.orm import sessionmaker, scoped_session
 
 
 # the secret configuration specific things
-from telebotConfig import Var
+from userbot.telebotConfig import Var
 
 
 def start() -> scoped_session:
