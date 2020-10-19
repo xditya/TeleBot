@@ -53,7 +53,7 @@ DEFAULTUSER = str(ALIVE_NAME) if ALIVE_NAME else "@TeleBotSupport"
 
 
 @telebot.on(admin_cmd(outgoing=True, pattern="alive"))
-@telebot.on(sudo_cmd(outgoing=True, pattern="alive", allow_sudo=True))
+@telebot.on(sudo_cmd(outgoing=True, pattern="alive"))
 async def amireallyalive(alive):
     start = datetime.now()
     myid = bot.uid

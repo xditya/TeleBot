@@ -6,6 +6,7 @@ from userbot.utils import admin_cmd
 
 
 @telebot.on(admin_cmd(pattern="scan ?(.*)"))
+@telebot.on(sudo_cmd(pattern="scan ?(.*)"))
 async def _(event):
     if event.fwd_from:
         return
