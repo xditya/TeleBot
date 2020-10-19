@@ -6,7 +6,7 @@ from userbot.utils import admin_cmd, sudo_cmd
 
 
 @telebot.on(admin_cmd(pattern="cmds", outgoing=True))
-@telebot.on(sudo_cmd(pattern="cmds", incoming=True, allow_sudo=True))
+@telebot.on(sudo_cmd(pattern="cmds", incoming=True))
 async def install(event):
     if event.fwd_from:
         return

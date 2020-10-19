@@ -14,7 +14,7 @@ from userbot.utils import admin_cmd, sudo_cmd
 
 
 @telebot.on(admin_cmd(pattern=r"ncode$"))
-@telebot.on(sudo_cmd(pattern=r"ncode", allow_sudo=True))
+@telebot.on(sudo_cmd(pattern=r"ncode"))
 async def coder_print(event):
     a = await event.client.download_media(
         await event.get_reply_message(), Var.TEMP_DOWNLOAD_DIRECTORY

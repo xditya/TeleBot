@@ -24,7 +24,7 @@ def progress(current, total):
 
 
 @telebot.on(admin_cmd(pattern="go (.*)"))
-@telebot.on(sudo_cmd(pattern="go (.*)", allow_sudo=True))
+@telebot.on(sudo_cmd(pattern="go (.*)"))
 async def _(event):
     lool = await edit_or_reply(event, "`Processing Your Request`")
     if event.fwd_from:

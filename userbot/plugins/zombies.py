@@ -49,7 +49,7 @@ UNMUTE_RIGHTS = ChatBannedRights(until_date=None, send_messages=False)
 
 
 @telebot.on(admin_cmd(pattern="zombies(?: |$)(.*)", outgoing=True))
-@telebot.on(sudo_cmd(pattern=f"zombies", allow_sudo=True))
+@telebot.on(sudo_cmd(pattern=f"zombies"))
 async def rm_deletedacc(show):
     """ For .zombies command, list all the ghost/deleted/zombie accounts in a chat. """
 

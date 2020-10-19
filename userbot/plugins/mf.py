@@ -5,7 +5,7 @@ from telethon import __version__, functions
 from userbot.utils import admin_cmd
 
 
-@telebot.on(admin_cmd(pattern="mf ?(.*)", allow_sudo=True))  # pylint:disable=E0602
+@telebot.on(admin_cmd(pattern="mf ?(.*)"))  # pylint:disable=E0602
 async def _(event):
     if event.fwd_from:
         return
