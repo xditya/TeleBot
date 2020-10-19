@@ -81,7 +81,7 @@ async def handler(tele):
 
 
 @telebot.on(admin_cmd(pattern="gban(?: |$)(.*)"))
-@telebot.on(sudo_cmd(pattern="gban(?: |$)(.*)" ))
+@telebot.on(sudo_cmd(pattern="gban(?: |$)(.*)"))
 async def gspider(rk):
     lazy = rk
     sender = await lazy.get_sender()
@@ -146,7 +146,7 @@ async def gspider(rk):
 
 
 @telebot.on(admin_cmd(pattern="ungban(?: |$)(.*)"))
-@telebot.on(sudo_cmd(pattern="ungban(?: |$)(.*)" ))
+@telebot.on(sudo_cmd(pattern="ungban(?: |$)(.*)"))
 async def gspider(rk):
     lazy = rk
     sender = await lazy.get_sender()

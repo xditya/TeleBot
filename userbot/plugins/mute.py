@@ -4,7 +4,7 @@ from userbot.plugins.sql_helper.mute_sql import is_muted, mute, unmute
 from userbot.utils import admin_cmd
 
 
-@telebot.on(admin_cmd(outgoing=True, pattern=r"mute ?(\d+)?" ))
+@telebot.on(admin_cmd(outgoing=True, pattern=r"mute ?(\d+)?"))
 async def startmute(event):
     private = False
     if event.fwd_from:
@@ -49,7 +49,7 @@ async def startmute(event):
         await event.edit("Successfully muted that person")
 
 
-@telebot.on(admin_cmd(outgoing=True, pattern=r"unmute ?(\d+)?" ))
+@telebot.on(admin_cmd(outgoing=True, pattern=r"unmute ?(\d+)?"))
 async def endmute(event):
     private = False
     if event.fwd_from:
