@@ -372,6 +372,7 @@ async def edit_or_reply(event, text):
         return await event.reply(text)
     return await event.edit(text)
 
+
 async def eor(event, text):
     if event.sender_id in Config.SUDO_USERS:
         reply_to = await event.get_reply_message()
