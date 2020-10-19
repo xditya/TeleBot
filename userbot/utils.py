@@ -119,7 +119,7 @@ def load_module(shortname):
         mod.admin_cmd = admin_cmd
         mod.sudo_cmd = sudo_cmd
         mod.edit_or_reply = edit_or_reply
-        mod.edit_or_reply = eor
+        mod.eor = eor
         # support for paperplaneextended
         sys.modules["userbot.events"] = userbot.utils
         spec.loader.exec_module(mod)
@@ -365,6 +365,14 @@ def sudo_cmd(pattern=None, **args):
 
 
 async def edit_or_reply(event, text):
+    if event.sender_id in Config.SUDO_USERS:
+        reply_to = await event.get_reply_message()
+        if reply_to:
+            return await reply_to.reply(text)
+        return await event.reply(text)
+    return await event.edit(text)
+
+async def eor(event, text):
     if event.sender_id in Config.SUDO_USERS:
         reply_to = await event.get_reply_message()
         if reply_to:
