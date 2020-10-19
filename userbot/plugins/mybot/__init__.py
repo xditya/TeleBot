@@ -14,7 +14,8 @@
 #    You should have received a copy of the GNU Affero General Public License
 #    along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-import html, time
+import html
+import time
 from telethon.tl.functions.photos import GetUserPhotosRequest
 from telethon.tl.functions.users import GetFullUserRequest
 from telethon.tl.types import MessageEntityMentionName
@@ -30,6 +31,8 @@ started = f"**Welcome To TeleBot**\nHi, this is the assistant bot of {ALIVE_NAME
 helpmefast = "Here are the things that you can do with this bot!\n\n`/info @username` - get information about the user.\n`/ping` - Ping stats\n`/tr <lang_code>` - Use as reply to the text to translate, language codes can be foung [here](https://t.me/TeleBotHelpChat/22678)!\n`/id` - To get user/sender id.\n`/help` - This menu.\n\n__Set-up your own TeleBot via @TeleBotSupport to get such amazing features and more!__"
 
 # /ping
+
+
 def get_readable_time(seconds: int) -> str:
     count = 0
     ping_time = ""
@@ -54,6 +57,7 @@ def get_readable_time(seconds: int) -> str:
     time_list.reverse()
     ping_time += ":".join(time_list)
     return ping_time
+
 
 start = datetime.now()
 end = datetime.now()

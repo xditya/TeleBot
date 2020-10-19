@@ -14,11 +14,11 @@ from telethon.tl.types import InputMessagesFilterDocument
 from uniborg.util import admin_cmd
 
 
-@borg.on(admin_cmd(pattern="st (.*)"))
+@telebot.on(admin_cmd(pattern="st (.*)"))
 async def sticklet(event):
-    R = random.randint(0,256)
-    G = random.randint(0,256)
-    B = random.randint(0,256)
+    R = random.randint(0, 256)
+    G = random.randint(0, 256)
+    B = random.randint(0, 256)
 
     # get the input text
     # the text on which we would like to do the magic on
@@ -30,7 +30,7 @@ async def sticklet(event):
     # https://docs.python.org/3/library/textwrap.html#textwrap.wrap
     sticktext = textwrap.wrap(sticktext, width=10)
     # converts back the list to a string
-    sticktext = '\n'.join(sticktext)
+    sticktext = "\n".join(sticktext)
 
     image = Image.new("RGBA", (512, 512), (255, 255, 255, 0))
     draw = ImageDraw.Draw(image)
@@ -45,7 +45,9 @@ async def sticklet(event):
         font = ImageFont.truetype(FONT_FILE, size=fontsize)
 
     width, height = draw.multiline_textsize(sticktext, font=font)
-    draw.multiline_text(((512-width)/2,(512-height)/2), sticktext, font=font, fill=(R, G, B))
+    draw.multiline_text(
+        ((512 - width) / 2, (512 - height) / 2), sticktext, font=font, fill=(R, G, B)
+    )
 
     image_stream = io.BytesIO()
     image_stream.name = "@ViperAdnan.webp"
@@ -58,7 +60,7 @@ async def sticklet(event):
     # cleanup
     try:
         os.remove(FONT_FILE)
-    except:
+    except BaseException:
         pass
 
 
@@ -69,7 +71,7 @@ async def get_font_file(client, channel_id):
         filter=InputMessagesFilterDocument,
         # this might cause FLOOD WAIT,
         # if used too many times
-        limit=None
+        limit=None,
     )
     # get a random font from the list of fonts
     # https://docs.python.org/3/library/random.html#random.choice

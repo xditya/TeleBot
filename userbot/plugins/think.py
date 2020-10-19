@@ -4,13 +4,13 @@ Available Commands:
 
 .think"""
 
-from telethon import events
 
 import asyncio
 
 from userbot.utils import admin_cmd
 
-@borg.on(admin_cmd(pattern="(.*)"))
+
+@telebot.on(admin_cmd(pattern="(.*)"))
 async def _(event):
     if event.fwd_from:
         return
@@ -55,10 +55,10 @@ async def _(event):
             "¶H×NK&N*",
             "NGITHKIN",
             "T+I#K@₹G",
-            "THINKING... 🤔"
+            "THINKING... 🤔",
         ]
 
         for i in animation_ttl:
-        	
+
             await asyncio.sleep(animation_interval)
             await event.edit(animation_chars[i % 72])

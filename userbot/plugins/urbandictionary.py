@@ -3,12 +3,12 @@
 # file, You can obtain one at http://mozilla.org/MPL/2.0/.
 """Urban Dictionary
 Syntax: .ud Query"""
-from telethon import events
 import asyncurban
+
 from userbot.utils import admin_cmd
 
 
-@borg.on(admin_cmd(pattern="ud (.*)"))
+@telebot.on(admin_cmd(pattern="ud (.*)"))
 async def _(event):
     if event.fwd_from:
         return
@@ -17,6 +17,10 @@ async def _(event):
     urban = asyncurban.UrbanDictionary()
     try:
         mean = await urban.get_word(word)
-        await event.edit("Text: **{}**\n\nMeaning: **{}**\n\nExample: __{}__".format(mean.word, mean.definition, mean.example))
+        await event.edit(
+            "Text: **{}**\n\nMeaning: **{}**\n\nExample: __{}__".format(
+                mean.word, mean.definition, mean.example
+            )
+        )
     except asyncurban.WordNotFoundError:
         await event.edit("No result found for **" + word + "**")

@@ -4,15 +4,13 @@ Available Commands:
 
 .ding"""
 
-from telethon import events
 
 import asyncio
 
 from userbot.utils import admin_cmd
 
 
-@borg.on(admin_cmd(pattern=r"(.*)", outgoing=True))
-
+@telebot.on(admin_cmd(pattern=r"(.*)", outgoing=True))
 async def _(event):
 
     if event.fwd_from:
@@ -30,19 +28,17 @@ async def _(event):
         await event.edit(input_str)
 
         animation_chars = [
-        
             "🔴⬛⬛⬜⬜\n⬜⬜⬜⬜⬜\n⬜⬜⬜⬜⬜",
             "⬜⬜⬛⬜⬜\n⬜⬛⬜⬜⬜\n🔴⬜⬜⬜⬜",
             "⬜⬜⬛⬜⬜\n⬜⬜⬛⬜⬜\n⬜⬜🔴⬜⬜",
             "⬜⬜⬛⬜⬜\n⬜⬜⬜⬛⬜\n⬜⬜⬜⬜🔴",
-            "⬜⬜⬛⬛🔴\n⬜⬜⬜⬜⬜\n⬜⬜⬜⬜⬜",    
+            "⬜⬜⬛⬛🔴\n⬜⬜⬜⬜⬜\n⬜⬜⬜⬜⬜",
             "⬜⬜⬛⬜⬜\n⬜⬜⬜⬛⬜\n⬜⬜⬜⬜🔴",
             "⬜⬜⬛⬜⬜\n⬜⬜⬛⬜⬜\n⬜⬜🔴⬜⬜",
             "⬜⬜⬛⬜⬜\n⬜⬛⬜⬜⬜\n🔴⬜⬜⬜⬜",
             "🔴⬛⬛⬜⬜\n⬜⬜⬜⬜⬜\n⬜⬜⬜⬜⬜",
-            "⬜⬜⬜⬜⬜\n⬜ [BECOME A VIDHAYAK](https://github.com/Dark-Princ3/X-tra-Telegram/) ⬜\n⬜⬜⬜⬜⬜"
-
- ]
+            "⬜⬜⬜⬜⬜\n⬜ [BECOME A VIDHAYAK](https://github.com/Dark-Princ3/X-tra-Telegram/) ⬜\n⬜⬜⬜⬜⬜",
+        ]
 
         for i in animation_ttl:
 

@@ -1,3 +1,9 @@
+from requests import get
+from pySmartDL import SmartDL
+import pylast
+import asyncio
+from distutils.util import strtobool as sb
+from logging import basicConfig, getLogger, INFO, DEBUG
 import os
 import sys
 from telethon.sessions import StringSession
@@ -25,16 +31,13 @@ LOAD_PLUG = {}
 ENV = os.environ.get("ENV", False)
 """ PPE initialization. """
 
-from logging import basicConfig, getLogger, INFO, DEBUG
-from distutils.util import strtobool as sb
-import asyncio
 
-import pylast
-from pySmartDL import SmartDL
-from requests import get
 # Bot Logs setup:
 if bool(ENV):
-    CONSOLE_LOGGER_VERBOSE = sb(os.environ.get("CONSOLE_LOGGER_VERBOSE", "False"))
+    CONSOLE_LOGGER_VERBOSE = sb(
+        os.environ.get(
+            "CONSOLE_LOGGER_VERBOSE",
+            "False"))
 
     if CONSOLE_LOGGER_VERBOSE:
         basicConfig(
@@ -42,8 +45,9 @@ if bool(ENV):
             level=DEBUG,
         )
     else:
-        basicConfig(format="%(asctime)s - %(name)s - %(levelname)s - %(message)s",
-                    level=INFO)
+        basicConfig(
+            format="%(asctime)s - %(name)s - %(levelname)s - %(message)s",
+            level=INFO)
     LOGS = getLogger(__name__)
 
     # Check if the config was edited by using the already used variable.
@@ -61,7 +65,7 @@ if bool(ENV):
     BOTLOG_CHATID = os.environ.get("BOTLOG_CHATID", None)
     try:
         BOTLOG_CHATID = int(BOTLOG_CHATID)
-    except:
+    except BaseException:
         pass
 
     # Userbot logging feature switch.
@@ -71,7 +75,10 @@ if bool(ENV):
     PM_AUTO_BAN = sb(os.environ.get("PM_AUTO_BAN", "False"))
 
     # Console verbose logging
-    CONSOLE_LOGGER_VERBOSE = sb(os.environ.get("CONSOLE_LOGGER_VERBOSE", "False"))
+    CONSOLE_LOGGER_VERBOSE = sb(
+        os.environ.get(
+            "CONSOLE_LOGGER_VERBOSE",
+            "False"))
 
     # SQL Database URI
     DB_URI = os.environ.get("DATABASE_URL", None)
@@ -102,8 +109,8 @@ if bool(ENV):
 
     # Default .alive name
     ALIVE_NAME = os.environ.get("ALIVE_NAME", None)
-    
-    CMD_HNDLR = os.environ.get("CMD_HNDLR", "\.")
+
+    CMD_HNDLR = os.environ.get("CMD_HNDLR", r"\.")
 
     LESS_SPAMMY = os.environ.get("LESS_SPAMMY", True)
 
@@ -114,14 +121,14 @@ if bool(ENV):
 
     # Clean Welcome
     CLEAN_WELCOME = sb(os.environ.get("CLEAN_WELCOME", "True"))
-    
+
     # CUSTOM PMPERMIT
     CUSTOM_PMPERMIT = os.environ.get("CUSTOM_PMPERMIT", None)
-      
+
     # PMPERMIT
     COUNT_MSG = 0
     COUNT_PM = {}
-    
+
     # Last.fm Module
     BIO_PREFIX = os.environ.get("BIO_PREFIX", None)
     DEFAULT_BIO = os.environ.get("DEFAULT_BIO", None)
@@ -145,7 +152,7 @@ if bool(ENV):
     G_DRIVE_AUTH_TOKEN_DATA = os.environ.get("G_DRIVE_AUTH_TOKEN_DATA", None)
     GDRIVE_FOLDER_ID = os.environ.get("GDRIVE_FOLDER_ID", None)
     TEMP_DOWNLOAD_DIRECTORY = os.environ.get("TEMP_DOWNLOAD_DIRECTORY",
-                                         "./downloads")
+                                             "./downloads")
 else:
     # Put your ppe vars here if you are using local hosting
     PLACEHOLDER = None
@@ -176,4 +183,3 @@ CMD_HELP = {}
 ISAFK = False
 AFKREASON = None
 # End of PaperPlaneExtended Support Vars
-

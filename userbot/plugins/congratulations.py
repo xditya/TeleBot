@@ -1,4 +1,5 @@
 import random
+
 from uniborg.util import admin_cmd
 
 RUNSREACTS = [
@@ -14,10 +15,11 @@ RUNSREACTS = [
     "`Feeling so much joy for you today. What an impressive achievement!`",
 ]
 
-@borg.on(admin_cmd(pattern="congo"))
+
+@telebot.on(admin_cmd(pattern="congo"))
 async def _(event):
     if event.fwd_from:
-         return
-    bro = random.randint(0, len(RUNSREACTS) - 1)    
+        return
+    bro = random.randint(0, len(RUNSREACTS) - 1)
     reply_text = RUNSREACTS[bro]
     await event.edit(reply_text)

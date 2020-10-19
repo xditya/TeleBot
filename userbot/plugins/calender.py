@@ -1,12 +1,13 @@
-"""Malayalam Calendar plugin for Indian Bot 
+"""Malayalam Calendar plugin for Indian Bot
 SYNTAX: .calendar YYYY-MM-DD"""
-from datetime import datetime
-import requests
 import json
+from datetime import datetime
+
+import requests
 from uniborg.util import admin_cmd
 
 
-@borg.on(admin_cmd(pattern="calendar (.*)"))
+@telebot.on(admin_cmd(pattern="calendar (.*)"))
 async def _(event):
     if event.fwd_from:
         return
@@ -17,7 +18,9 @@ async def _(event):
         yyyy = input_sgra[0]
         mm = input_sgra[1]
         dd = input_sgra[2]
-        required_url = "https://calendar.kollavarsham.org/api/years/{}/months/{}/days/{}?lang={}".format(yyyy, mm, dd, "en")
+        required_url = "https://calendar.kollavarsham.org/api/years/{}/months/{}/days/{}?lang={}".format(
+            yyyy, mm, dd, "en"
+        )
         headers = {"Accept": "application/json"}
         response_content = requests.get(required_url, headers=headers).json()
         a = ""
@@ -30,4 +33,4 @@ async def _(event):
     else:
         await event.edit("SYNTAX: .calendar YYYY-MM-DD")
     end = datetime.now()
-    ms = (end - start).seconds
+    (end - start).seconds

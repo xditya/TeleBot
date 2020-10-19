@@ -1,18 +1,15 @@
-#python 3.7.1
+# python 3.7.1
 
-import time
-import os,sys
 """Available Commands:
 .wtf"""
 
-from telethon import events
 
 import asyncio
 
 from userbot.utils import admin_cmd
 
-@borg.on(admin_cmd(pattern="(.*)"))
 
+@telebot.on(admin_cmd(pattern="(.*)"))
 async def _(event):
     if event.fwd_from:
         return
@@ -26,10 +23,10 @@ async def _(event):
             "HI USER , WAIT",
             "HI USER , WAIT ARE YOU....",
             "HI USER , WAIT ARE YOU UMH...",
-            "HI USRR , WAIT ARE YOU A GAY??😬"
+            "HI USRR , WAIT ARE YOU A GAY??😬",
         ]
 
         for i in animation_ttl:
-        	
+
             await asyncio.sleep(animation_interval)
-            await event.edit(animation_chars[i %5 ])
+            await event.edit(animation_chars[i % 5])

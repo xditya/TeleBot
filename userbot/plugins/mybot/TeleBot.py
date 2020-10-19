@@ -35,36 +35,40 @@ from userbot import bot
 
 DEF = str(ALIVE_NAME) if ALIVE_NAME else "TeleBot"
 
+
 @tgbot.on(events.NewMessage(pattern="^/start"))
 async def thisfn(event):
     await tgbot.send_message(
-           event.chat_id,
-           message=started,
-           buttons = [
-           [Button.url("Repository", "https://github.com/xditya/TeleBot/")]
-            ]
-      )
-     
+        event.chat_id,
+        message=started,
+        buttons=[
+            [Button.url("Repository", "https://github.com/xditya/TeleBot/")]
+        ]
+    )
+
+
 @tgbot.on(events.NewMessage(pattern="^/help"))
 async def thisfn(event):
     await tgbot.send_message(
-           event.chat_id,
-           message=helpmefast,
-           link_preview = False,
-           buttons = [
-           [Button.url("TeleBot", "https://t.me/TeleBotSupport")]
-            ]
-      )
-      
+        event.chat_id,
+        message=helpmefast,
+        link_preview=False,
+        buttons=[
+            [Button.url("TeleBot", "https://t.me/TeleBotSupport")]
+        ]
+    )
+
+
 @tgbot.on(events.NewMessage(pattern="^/ping"))
 async def thisfn(event):
     await tgbot.send_message(
-           event.chat_id,
-           message=forping,
-           buttons = [
-           [Button.url("Deploy", "https://dashboard.heroku.com/new?button-url=https%3A%2F%2Fgithub.com%2Fxditya%2FTeleBot&template=https%3A%2F%2Fgithub.com%2Fxditya%2FTeleBot")]
-            ]
-      )
+        event.chat_id,
+        message=forping,
+        buttons=[
+            [Button.url("Deploy", "https://dashboard.heroku.com/new?button-url=https%3A%2F%2Fgithub.com%2Fxditya%2FTeleBot&template=https%3A%2F%2Fgithub.com%2Fxditya%2FTeleBot")]
+        ]
+    )
+
 
 @tgbot.on(events.NewMessage(pattern="^/info ?(.*)"))
 async def _(event):
@@ -83,7 +87,7 @@ async def _(event):
     replied_user_profile_photos_count = "NaN"
     try:
         replied_user_profile_photos_count = replied_user_profile_photos.count
-    except AttributeError as e:
+    except AttributeError:
         pass
     user_id = replied_user.user.id
     # some people have weird HTML in their names
@@ -91,7 +95,8 @@ async def _(event):
     # https://stackoverflow.com/a/5072031/4723940
     # some Deleted Accounts do not have first_name
     if first_name is not None:
-        # some weird people (like me) have more than 4096 characters in their names
+        # some weird people (like me) have more than 4096 characters in their
+        # names
         first_name = first_name.replace("\u2060", "")
     # inspired by https://telegram.dog/afsaI181
     user_bio = replied_user.about
@@ -102,7 +107,7 @@ async def _(event):
         dc_id, location = get_input_location(replied_user.profile_photo)
     except Exception as e:
         dc_id = "Need a Profile Picture to check **this**"
-        location = str(e)
+        str(e)
     caption = """Extracted Userdata From TeleBot's DATABASE
 ID: <code>{}</code>
 Target's Name: <a href='tg://user?id={}'>{}</a>
@@ -136,10 +141,11 @@ No. of Common Groups : {}
         file=replied_user.profile_photo,
         force_document=False,
         silent=True,
-        buttons = [
-           [Button.url("More", "https://t.me/TeleBotSupport")]
-            ]
+        buttons=[
+            [Button.url("More", "https://t.me/TeleBotSupport")]
+        ]
     )
+
 
 async def get_full_user(event):
     if event.reply_to_msg_id:
@@ -167,7 +173,9 @@ async def get_full_user(event):
         if event.message.entities is not None:
             mention_entity = event.message.entities
             probable_user_mention_entity = mention_entity[0]
-            if isinstance(probable_user_mention_entity, MessageEntityMentionName):
+            if isinstance(
+                    probable_user_mention_entity,
+                    MessageEntityMentionName):
                 user_id = probable_user_mention_entity.user_id
                 replied_user = await event.client(GetFullUserRequest(user_id))
                 return replied_user, None
@@ -194,7 +202,8 @@ async def get_full_user(event):
                 return replied_user, None
             except Exception as e:
                 return None, e
-            
+
+
 @tgbot.on(events.NewMessage(pattern="^/tr ?(.*)"))
 async def _(event):
     if event.fwd_from:
@@ -222,62 +231,66 @@ async def _(event):
             translated.src,
             lan,
             after_tr_text
-        )    
+        )
         await tgbot.send_message(
-        event.chat_id,
-        message=output_str,
-        buttons = [
-           [Button.url("More", "https://t.me/TeleBotSupport")]
+            event.chat_id,
+            message=output_str,
+            buttons=[
+                [Button.url("More", "https://t.me/TeleBotSupport")]
             ]
         )
     except Exception as exc:
         xx = str(exc)
         await tgbot.send_message(
-        event.chat_id,
-        message=xx,
-        buttons = [
-           [Button.url("More", "https://t.me/TeleBotSupport")]
+            event.chat_id,
+            message=xx,
+            buttons=[
+                [Button.url("More", "https://t.me/TeleBotSupport")]
             ]
         )
+
 
 @tgbot.on(events.NewMessage(pattern="^/id"))
 async def _(event):
     if event.fwd_from:
         return
     if event.reply_to_msg_id:
-        chat = await event.get_input_chat()
+        await event.get_input_chat()
         r_msg = await event.get_reply_message()
         if r_msg.media:
             bot_api_file_id = pack_bot_file_id(r_msg.media)
-            tosend = "Current Chat ID: `{}`\nFrom User ID: `{}`\nBot API File ID: `{}`".format(str(event.chat_id), str(r_msg.from_id), bot_api_file_id)
+            tosend = "Current Chat ID: `{}`\nFrom User ID: `{}`\nBot API File ID: `{}`".format(
+                str(event.chat_id), str(r_msg.from_id), bot_api_file_id)
             await tgbot.send_message(
-            event.chat_id,
-            message=tosend,
-            buttons = [
-                [Button.url("More", "https://t.me/TeleBotSupport")]
-            ]
-        )
+                event.chat_id,
+                message=tosend,
+                buttons=[
+                    [Button.url("More", "https://t.me/TeleBotSupport")]
+                ]
+            )
         else:
-            sendit = "Current Chat ID: `{}`\nFrom User ID: `{}`".format(str(event.chat_id), str(r_msg.from_id))
+            sendit = "Current Chat ID: `{}`\nFrom User ID: `{}`".format(
+                str(event.chat_id), str(r_msg.from_id))
             await tgbot.send_message(
-            event.chat_id,
-            message=sendit,
-            buttons = [
-                [Button.url("More", "https://t.me/TeleBotSupport")]
-            ]
-        )
+                event.chat_id,
+                message=sendit,
+                buttons=[
+                    [Button.url("More", "https://t.me/TeleBotSupport")]
+                ]
+            )
     else:
         kek = "Current Chat ID: `{}`".format(str(event.chat_id))
         await tgbot.send_message(
             event.chat_id,
             message=kek,
-            buttons = [
+            buttons=[
                 [Button.url("More", "https://t.me/TeleBotSupport")]
             ]
         )
 
 Heroku = heroku3.from_key(Var.HEROKU_API_KEY)
 heroku_api = "https://api.heroku.com"
+
 
 @tgbot.on(events.NewMessage(pattern=r"^/usage(?: |$)"))
 async def dyno_usage(dyno):
@@ -287,20 +300,20 @@ async def dyno_usage(dyno):
     if dyno.from_id == bot.uid:
         await dyno.edit("`Processing...`")
         useragent = ('Mozilla/5.0 (Linux; Android 10; SM-G975F) '
-                    'AppleWebKit/537.36 (KHTML, like Gecko) '
-                    'Chrome/80.0.3987.149 Mobile Safari/537.36'
-                    )
+                     'AppleWebKit/537.36 (KHTML, like Gecko) '
+                     'Chrome/80.0.3987.149 Mobile Safari/537.36'
+                     )
         user_id = Heroku.account().id
         headers = {
-        'User-Agent': useragent,
-        'Authorization': f'Bearer {Var.HEROKU_API_KEY}',
-        'Accept': 'application/vnd.heroku+json; version=3.account-quotas',
+            'User-Agent': useragent,
+            'Authorization': f'Bearer {Var.HEROKU_API_KEY}',
+            'Accept': 'application/vnd.heroku+json; version=3.account-quotas',
         }
         path = "/accounts/" + user_id + "/actions/get-quota"
         r = requests.get(heroku_api + path, headers=headers)
         if r.status_code != 200:
             return await dyno.edit("`Error: something bad happened`\n\n"
-                                f">.`{r.reason}`\n")
+                                   f">.`{r.reason}`\n")
         result = r.json()
         quota = result['account_quota']
         quota_used = result['quota_used']
@@ -326,42 +339,42 @@ async def dyno_usage(dyno):
         AppMinutes = math.floor(AppQuotaUsed % 60)
 
         await asyncio.sleep(1.5)
-    
+
         return await tgbot.send_message(dyno.chat_id, "**⚙️ Dyno Usage ⚙️**:\n\n"
-                           f" -> `Dyno usage for`  **{Var.HEROKU_APP_NAME}**:\n"
-                           f"     •  `{AppHours}`**h**  `{AppMinutes}`**m**  "
-                           f"**|**  [`{AppPercentage}`**%**]"
-                           "\n\n"
-                           " -> `Dyno hours quota remaining this month`:\n"
-                           f"     •  `{hours}`**h**  `{minutes}`**m**  "
-                           f"**|**  [`{percentage}`**%**]"
-                           )
+                                        f" -> `Dyno usage for`  **{Var.HEROKU_APP_NAME}**:\n"
+                                        f"     •  `{AppHours}`**h**  `{AppMinutes}`**m**  "
+                                        f"**|**  [`{AppPercentage}`**%**]"
+                                        "\n\n"
+                                        " -> `Dyno hours quota remaining this month`:\n"
+                                        f"     •  `{hours}`**h**  `{minutes}`**m**  "
+                                        f"**|**  [`{percentage}`**%**]"
+                                        )
     else:
         resp = f"This option is available only for my master, {DEF}!"
-        return await tgbot.send_message(dyno.chat_id, message=resp, buttons = [
-           [Button.url("Deploy Your TeleBot", "https://dashboard.heroku.com/new?button-url=https%3A%2F%2Fgithub.com%2Fxditya%2FTeleBot&template=https%3A%2F%2Fgithub.com%2Fxditya%2FTeleBot")]
-            ])
+        return await tgbot.send_message(dyno.chat_id, message=resp, buttons=[
+            [Button.url("Deploy Your TeleBot", "https://dashboard.heroku.com/new?button-url=https%3A%2F%2Fgithub.com%2Fxditya%2FTeleBot&template=https%3A%2F%2Fgithub.com%2Fxditya%2FTeleBot")]
+        ])
+
 
 @tgbot.on(events.NewMessage(pattern=r"^/logs"))
 async def _(givelogs):
-        Heroku = heroku3.from_key(Var.HEROKU_API_KEY)                         
-        app = Heroku.app(Var.HEROKU_APP_NAME)
-        with open('logs.txt', 'w') as log:
-            log.write(app.get_log())
-        if givelogs.from_id == bot.uid:
-            await tgbot.send_file(
-                givelogs.chat_id,
-                "logs.txt",
-                reply_to=givelogs.id,
-                caption="[Heroku] TeleBot Logs",
-                buttons = [
-           [Button.url("Crashed?", "t.me/TeleBotHelpChat")]
-                ])
-        else:
-            resp = f"This option is available only for my master, {DEF}!"
-            await tgbot.send_message(givelogs.chat_id, message=resp, buttons = [
-           [Button.url("Deploy Your TeleBot", "https://dashboard.heroku.com/new?button-url=https%3A%2F%2Fgithub.com%2Fxditya%2FTeleBot&template=https%3A%2F%2Fgithub.com%2Fxditya%2FTeleBot")]
+    Heroku = heroku3.from_key(Var.HEROKU_API_KEY)
+    app = Heroku.app(Var.HEROKU_APP_NAME)
+    with open('logs.txt', 'w') as log:
+        log.write(app.get_log())
+    if givelogs.from_id == bot.uid:
+        await tgbot.send_file(
+            givelogs.chat_id,
+            "logs.txt",
+            reply_to=givelogs.id,
+            caption="[Heroku] TeleBot Logs",
+            buttons=[
+                [Button.url("Crashed?", "t.me/TeleBotHelpChat")]
             ])
-        await asyncio.sleep(5)
-        return os.remove('logs.txt')
-        
+    else:
+        resp = f"This option is available only for my master, {DEF}!"
+        await tgbot.send_message(givelogs.chat_id, message=resp, buttons=[
+            [Button.url("Deploy Your TeleBot", "https://dashboard.heroku.com/new?button-url=https%3A%2F%2Fgithub.com%2Fxditya%2FTeleBot&template=https%3A%2F%2Fgithub.com%2Fxditya%2FTeleBot")]
+        ])
+    await asyncio.sleep(5)
+    return os.remove('logs.txt')

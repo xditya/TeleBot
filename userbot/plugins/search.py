@@ -9,21 +9,13 @@ Available commands:
 .go - search on google
 """
 
-from telethon import events
-import os
-import requests
-import json
-import time
-import asyncio
-import shutil
-from bs4 import BeautifulSoup
-import re
 from re import findall
+
+import requests
 from search_engine_parser import GoogleSearch
-from asyncio import sleep
-from userbot.utils import register
-from telethon.tl.types import DocumentAttributeAudio
+
 from userbot.utils import admin_cmd
+
 
 @telebot.on(admin_cmd(outgoing=True, pattern=r"gs (.*)"))
 async def gsearch(q_event):
@@ -48,30 +40,38 @@ async def gsearch(q_event):
             msg += f"[{title}]({link})\n`{desc}`\n\n"
         except IndexError:
             break
-    await q_event.edit("**Search Query:**\n`" + match + "`\n\n**Results:**\n" +
-                       msg,
-                       link_preview=False)
-                       
+    await q_event.edit(
+        "**Search Query:**\n`" + match + "`\n\n**Results:**\n" + msg, link_preview=False
+    )
+
+
 @telebot.on(admin_cmd("duckduckgo (.*)"))
 async def _(event):
     if event.fwd_from:
         return
     input_str = event.pattern_match.group(1)
-    sample_url = "https://duckduckgo.com/?q={}".format(input_str.replace(" ","+"))
+    sample_url = "https://duckduckgo.com/?q={}".format(input_str.replace(" ", "+"))
     if sample_url:
         link = sample_url.rstrip()
-        await event.edit("Let me 🦆 DuckDuckGo that for you:\n🔎 [{}]({})".format(input_str, link))
+        await event.edit(
+            "Let me 🦆 DuckDuckGo that for you:\n🔎 [{}]({})".format(input_str, link)
+        )
     else:
         await event.edit("something is wrong. please try again later.")
-        
+
+
 @telebot.on(admin_cmd(pattern="ggl (.*)"))
 async def _(event):
     if event.fwd_from:
         return
     input_str = event.pattern_match.group(1)
-    sample_url = "https://da.gd/s?url=https://lmgtfy.com/?q={}%26iie=1".format(input_str.replace(" ","+"))
+    sample_url = "https://da.gd/s?url=https://lmgtfy.com/?q={}%26iie=1".format(
+        input_str.replace(" ", "+")
+    )
     response_api = requests.get(sample_url).text
     if response_api:
-        await event.edit("[{}]({})\n`Thank me Later 🙃` ".format(input_str,response_api.rstrip()))
+        await event.edit(
+            "[{}]({})\n`Thank me Later 🙃` ".format(input_str, response_api.rstrip())
+        )
     else:
         await event.edit("something is wrong. please try again later.")

@@ -1,9 +1,11 @@
 import sys
-from telethon import events, functions, __version__
+
+from telethon import __version__, functions
+
 from userbot.utils import admin_cmd
 
 
-@borg.on(admin_cmd(pattern="mf ?(.*)", allow_sudo=True))  # pylint:disable=E0602
+@telebot.on(admin_cmd(pattern="mf ?(.*)", allow_sudo=True))  # pylint:disable=E0602
 async def _(event):
     if event.fwd_from:
         return
@@ -13,45 +15,41 @@ async def _(event):
     else:
         s_help_string = ""
     help_string = """
-......................................../´¯/) 
-......................................,/¯../ 
-...................................../..../ 
+......................................../´¯/)
+......................................,/¯../
+...................................../..../
 ..................................../´.¯/
 ..................................../´¯/
-..................................,/¯../ 
-................................../..../ 
+..................................,/¯../
+................................../..../
 ................................./´¯./
 ................................/´¯./
-..............................,/¯../ 
-............................./..../ 
+..............................,/¯../
+............................./..../
 ............................/´¯/
 ........................../´¯./
-........................,/¯../ 
-......................./..../ 
+........................,/¯../
+......................./..../
 ....................../´¯/
-....................,/¯../ 
-.................../..../ 
-............./´¯/'...'/´¯¯`·¸ 
-........../'/.../..../......./¨¯\ 
-........('(...´...´.... ¯~/'...') 
-.........\.................'...../ 
-..........''...\.......... _.·´ 
-............\..............( 
+....................,/¯../
+.................../..../
+............./´¯/'...'/´¯¯`·¸
+........../'/.../..../......./¨¯\
+........('(...´...´.... ¯~/'...')
+.........\.................'...../
+..........''...\.......... _.·´
+............\..............(
 ..............\.............\...
     """.format(
-        sys.version,
-        __version__
+        sys.version, __version__
     )
     tgbotusername = Config.TG_BOT_USER_NAME_BF_HER  # pylint:disable=E0602
     if tgbotusername is not None:
         results = await borg.inline_query(  # pylint:disable=E0602
-            tgbotusername,
-            help_string + "\n\n" + s_help_string
+            tgbotusername, help_string + "\n\n" + s_help_string
         )
         await results[0].click(
-            event.chat_id,
-            reply_to=event.reply_to_msg_id,
-            hide_via=True
+            event.chat_id, reply_to=event.reply_to_msg_id, hide_via=True
         )
         await event.delete()
     else:
@@ -59,7 +57,7 @@ async def _(event):
         await event.delete()
 
 
-@borg.on(admin_cmd(pattern="dc"))  # pylint:disable=E0602
+@telebot.on(admin_cmd(pattern="dc"))  # pylint:disable=E0602
 async def _(event):
     if event.fwd_from:
         return
@@ -67,7 +65,7 @@ async def _(event):
     await event.edit(result.stringify())
 
 
-@borg.on(admin_cmd(pattern="config"))  # pylint:disable=E0602
+@telebot.on(admin_cmd(pattern="config"))  # pylint:disable=E0602
 async def _(event):
     if event.fwd_from:
         return

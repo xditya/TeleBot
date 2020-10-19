@@ -15,7 +15,7 @@
 #    along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 import re
-import random
+
 from userbot import bot
 from userbot.utils import admin_cmd
 
@@ -31,18 +31,19 @@ IF_EMOJI = re.compile(
     "\U0001F900-\U0001F9FF"  # Supplemental Symbols and Pictographs
     "\U0001FA00-\U0001FA6F"  # Chess Symbols
     "\U0001FA70-\U0001FAFF"  # Symbols and Pictographs Extended-A
-    "\U00002702-\U000027B0"  # Dingbats 
-    "]+")
+    "\U00002702-\U000027B0"  # Dingbats
+    "]+"
+)
+
 
 def deEmojify(inputString: str) -> str:
     """Remove emojis and other non-safe characters from string"""
-    return re.sub(IF_EMOJI, '', inputString)
+    return re.sub(IF_EMOJI, "", inputString)
 
 
 @telebot.on(admin_cmd(pattern="tweet(?: |$)(.*)"))
-
 async def teletweet(telebot):
-#"""Creates random anime sticker!"""
+    # """Creates random anime sticker!"""
     what = telebot.pattern_match.group(1)
     if not what:
         if telebot.is_reply:
@@ -50,10 +51,11 @@ async def teletweet(telebot):
         else:
             await telebot.edit("`Tweets must contain some text, pero!`")
             return
-    sticcers = await bot.inline_query(
-        "TwitterStatusBot", f"{(deEmojify(what))}")
-    await sticcers[0].click(telebot.chat_id,
-                            reply_to=telebot.reply_to_msg_id,
-                            silent=True if telebot.is_reply else False,
-                            hide_via=True)
+    sticcers = await bot.inline_query("TwitterStatusBot", f"{(deEmojify(what))}")
+    await sticcers[0].click(
+        telebot.chat_id,
+        reply_to=telebot.reply_to_msg_id,
+        silent=True if telebot.is_reply else False,
+        hide_via=True,
+    )
     await telebot.delete()

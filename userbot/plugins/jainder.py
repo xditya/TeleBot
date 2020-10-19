@@ -1,12 +1,12 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
-from telethon import events
 import random
-import asyncio
+
 from userbot.utils import admin_cmd
 
-@borg.on(admin_cmd(pattern=r"jainder(.*)", outgoing=True))
+
+@telebot.on(admin_cmd(pattern=r"jainder(.*)", outgoing=True))
 async def _(event):
     if event.fwd_from:
         return
@@ -86,10 +86,10 @@ async def _(event):
             "-ᄒᴥᄒ-",
             "◖⚆ᴥ⚆◗",
         ]
-    else:    
+    else:
         emoticons = [
             "( ͡° ͜ʖ ͡°)",
-            "¯\_(ツ)_/¯",
+            r"¯\_(ツ)_/¯",
             "( ͡°( ͡° ͜ʖ( ͡° ͜ʖ ͡°)ʖ ͡°) ͡°)",
             "ʕ•ᴥ•ʔ",
             "(▀ Ĺ̯▀   )",
@@ -97,7 +97,7 @@ async def _(event):
             "༼ つ ◕_◕ ༽つ",
             "ಠ_ಠ",
             "(☞ ͡° ͜ʖ ͡°)☞",
-            "¯\_༼ ି ~ ି ༽_/¯",
+            r"¯\_༼ ି ~ ି ༽_/¯",
             "c༼ ͡° ͜ʖ ͡° ༽⊃",
         ]
     index = random.randint(0, len(emoticons))

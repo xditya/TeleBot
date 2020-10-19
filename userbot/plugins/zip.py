@@ -1,16 +1,13 @@
 """ command: .compress """
 
-from telethon import events
 import asyncio
-from time import time
-import zipfile
-from pySmartDL import SmartDL
-from datetime import datetime
 import os
-from uniborg.util import admin_cmd, humanbytes, progress, time_formatter
+import zipfile
+
+from uniborg.util import admin_cmd
 
 
-@borg.on(admin_cmd(pattern="compress"))
+@telebot.on(admin_cmd(pattern="compress"))
 async def _(event):
     if event.fwd_from:
         return
@@ -24,14 +21,15 @@ async def _(event):
         reply_message = await event.get_reply_message()
         try:
             downloaded_file_name = await borg.download_media(
-                reply_message,
-                Config.TMP_DOWNLOAD_DIRECTORY
-                )
+                reply_message, Config.TMP_DOWNLOAD_DIRECTORY
+            )
             directory_name = downloaded_file_name
             await event.edit(downloaded_file_name)
         except Exception as e:  # pylint:disable=C0103,W0703
             await mone.edit(str(e))
-    zipfile.ZipFile(directory_name + '.zip', 'w', zipfile.ZIP_DEFLATED).write(directory_name)
+    zipfile.ZipFile(directory_name + ".zip", "w", zipfile.ZIP_DEFLATED).write(
+        directory_name
+    )
     await borg.send_file(
         event.chat_id,
         directory_name + ".zip",

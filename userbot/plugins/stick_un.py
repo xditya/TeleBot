@@ -3,40 +3,26 @@
 # modified by @UniBorg
 
 
-
 import io
-
 import os
-
 import random
-
 import textwrap
 
-
-
 from PIL import Image, ImageDraw, ImageFont
-
 from telethon.tl.types import InputMessagesFilterDocument
-
 from uniborg.util import admin_cmd
-
-
-
-
 
 # RegEx by https://t.me/c/1220993104/500653 ( @SnapDragon7410 )
 
-@borg.on(admin_cmd(pattern="sn ?(?:(.*?) \| )?(.*)"))
 
+@telebot.on(admin_cmd(pattern=r"sn ?(?:(.*?) \| )?(.*)"))
 async def sticklet(event):
 
-    R = random.randint(0,256)
+    R = random.randint(0, 256)
 
-    G = random.randint(0,256)
+    G = random.randint(0, 256)
 
-    B = random.randint(0,256)
-
-
+    B = random.randint(0, 256)
 
     reply_message = event.message
 
@@ -49,8 +35,6 @@ async def sticklet(event):
     if not font_file_name:
 
         font_file_name = ""
-
-
 
     sticktext = event.pattern_match.group(2)
 
@@ -66,8 +50,6 @@ async def sticklet(event):
 
         return
 
-
-
     if event.reply_to_msg_id:
 
         reply_message = await event.get_reply_message()
@@ -78,17 +60,13 @@ async def sticklet(event):
 
     await event.delete()
 
-
-
     # https://docs.python.org/3/library/textwrap.html#textwrap.wrap
 
     sticktext = textwrap.wrap(sticktext, width=10)
 
     # converts back the list to a string
 
-    sticktext = '\n'.join(sticktext)
-
-
+    sticktext = "\n".join(sticktext)
 
     image = Image.new("RGBA", (512, 512), (255, 255, 255, 0))
 
@@ -96,15 +74,9 @@ async def sticklet(event):
 
     fontsize = 230
 
-
-
     FONT_FILE = await get_font_file(event.client, "@xtrafonts", font_file_name)
 
-
-
     font = ImageFont.truetype(FONT_FILE, size=fontsize)
-
-
 
     while draw.multiline_textsize(sticktext, font=font) > (512, 512):
 
@@ -112,13 +84,11 @@ async def sticklet(event):
 
         font = ImageFont.truetype(FONT_FILE, size=fontsize)
 
-
-
     width, height = draw.multiline_textsize(sticktext, font=font)
 
-    draw.multiline_text(((512-width)/2,(512-height)/2), sticktext, font=font, fill=(R, G, B))
-
-
+    draw.multiline_text(
+        ((512 - width) / 2, (512 - height) / 2), sticktext, font=font, fill=(R, G, B)
+    )
 
     image_stream = io.BytesIO()
 
@@ -128,13 +98,14 @@ async def sticklet(event):
 
     image_stream.seek(0)
 
-
-
     # finally, reply the sticker
 
-    await event.client.send_file(event.chat_id, image_stream, caption="TeleBot Sticklet", reply_to=event.message.reply_to_msg_id)
-
-
+    await event.client.send_file(
+        event.chat_id,
+        image_stream,
+        caption="TeleBot Sticklet",
+        reply_to=event.message.reply_to_msg_id,
+    )
 
     # cleanup
 
@@ -142,12 +113,9 @@ async def sticklet(event):
 
         os.remove(FONT_FILE)
 
-    except:
+    except BaseException:
 
         pass
-
-
-
 
 
 async def get_font_file(client, channel_id, search_kw=""):
@@ -155,19 +123,12 @@ async def get_font_file(client, channel_id, search_kw=""):
     # first get the font messages
 
     font_file_message_s = await client.get_messages(
-
         entity=channel_id,
-
         filter=InputMessagesFilterDocument,
-
         # this might cause FLOOD WAIT,
-
         # if used too many times
-
         limit=None,
-
-        search=search_kw
-
+        search=search_kw,
     )
 
     # get a random font from the list of fonts

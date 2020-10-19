@@ -1,12 +1,18 @@
 """Get Administrators of any Chat*
 Syntax: .get_admin, .get_bot, .get_id"""
 
-from telethon import events
-from telethon.tl.types import ChannelParticipantsAdmins, ChannelParticipantAdmin, ChannelParticipantCreator
+from telethon.tl.types import (
+    ChannelParticipantAdmin,
+    ChannelParticipantCreator,
+    ChannelParticipantsAdmins,
+    ChannelParticipantsBots,
+)
+from telethon.utils import pack_bot_file_id
+
 from userbot.utils import admin_cmd
 
 
-@borg.on(admin_cmd(pattern="get_ad?(m)in ?(.*)"))
+@telebot.on(admin_cmd(pattern="get_ad?(m)in ?(.*)"))
 async def _(event):
     if event.fwd_from:
         return
@@ -35,12 +41,16 @@ async def _(event):
         async for x in borg.iter_participants(chat, filter=ChannelParticipantsAdmins):
             if not x.deleted:
                 if isinstance(x.participant, ChannelParticipantCreator):
-                    mentions += "\n 👑 [{}](tg://user?id={}) `{}`".format(x.first_name, x.id, x.id)
+                    mentions += "\n 👑 [{}](tg://user?id={}) `{}`".format(
+                        x.first_name, x.id, x.id
+                    )
         mentions += "\n"
         async for x in borg.iter_participants(chat, filter=ChannelParticipantsAdmins):
             if not x.deleted:
                 if isinstance(x.participant, ChannelParticipantAdmin):
-                    mentions += "\n ⚜️ [{}](tg://user?id={}) `{}`".format(x.first_name, x.id, x.id)
+                    mentions += "\n ⚜️ [{}](tg://user?id={}) `{}`".format(
+                        x.first_name, x.id, x.id
+                    )
             else:
                 mentions += "\n `{}`".format(x.id)
     except Exception as e:
@@ -54,33 +64,32 @@ async def _(event):
     else:
         await event.edit(mentions)
 
-from telethon import events
-from telethon.utils import pack_bot_file_id
-from userbot.utils import admin_cmd
 
-
-@borg.on(admin_cmd(pattern="get_id"))
+@telebot.on(admin_cmd(pattern="get_id"))
 async def _(event):
     if event.fwd_from:
         return
     if event.reply_to_msg_id:
-        chat = await event.get_input_chat()
+        await event.get_input_chat()
         r_msg = await event.get_reply_message()
         if r_msg.media:
             bot_api_file_id = pack_bot_file_id(r_msg.media)
-            await event.edit("Current Chat ID: `{}`\nFrom User ID: `{}`\nBot API File ID: `{}`".format(str(event.chat_id), str(r_msg.from_id), bot_api_file_id))
+            await event.edit(
+                "Current Chat ID: `{}`\nFrom User ID: `{}`\nBot API File ID: `{}`".format(
+                    str(event.chat_id), str(r_msg.from_id), bot_api_file_id
+                )
+            )
         else:
-            await event.edit("Current Chat ID: `{}`\nFrom User ID: `{}`".format(str(event.chat_id), str(r_msg.from_id)))
+            await event.edit(
+                "Current Chat ID: `{}`\nFrom User ID: `{}`".format(
+                    str(event.chat_id), str(r_msg.from_id)
+                )
+            )
     else:
         await event.edit("Current Chat ID: `{}`".format(str(event.chat_id)))
 
 
-from telethon import events
-from telethon.tl.types import ChannelParticipantAdmin, ChannelParticipantsBots
-from userbot.utils import admin_cmd
-
-
-@borg.on(admin_cmd(pattern="get_bot ?(.*)"))
+@telebot.on(admin_cmd(pattern="get_bot ?(.*)"))
 async def _(event):
     if event.fwd_from:
         return
@@ -100,9 +109,13 @@ async def _(event):
     try:
         async for x in borg.iter_participants(chat, filter=ChannelParticipantsBots):
             if isinstance(x.participant, ChannelParticipantAdmin):
-                mentions += "\n ⚜️ [{}](tg://user?id={}) `{}`".format(x.first_name, x.id, x.id)
+                mentions += "\n ⚜️ [{}](tg://user?id={}) `{}`".format(
+                    x.first_name, x.id, x.id
+                )
             else:
-                mentions += "\n [{}](tg://user?id={}) `{}`".format(x.first_name, x.id, x.id)
+                mentions += "\n [{}](tg://user?id={}) `{}`".format(
+                    x.first_name, x.id, x.id
+                )
     except Exception as e:
         mentions += " " + str(e) + "\n"
     await event.edit(mentions)

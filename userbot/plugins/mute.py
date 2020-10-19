@@ -1,7 +1,8 @@
-from userbot.plugins.sql_helper.mute_sql import is_muted, mute, unmute
-from telethon import events
 import asyncio
+
+from userbot.plugins.sql_helper.mute_sql import is_muted, mute, unmute
 from userbot.utils import admin_cmd
+
 
 @telebot.on(admin_cmd(outgoing=True, pattern=r"mute ?(\d+)?", allow_sudo=True))
 async def startmute(event):
@@ -20,17 +21,21 @@ async def startmute(event):
     elif private is True:
         userid = event.chat_id
     else:
-        return await event.edit("Please reply to a user or add their into the command to mute them.")
+        return await event.edit(
+            "Please reply to a user or add their into the command to mute them."
+        )
     chat_id = event.chat_id
     chat = await event.get_chat()
-    if "admin_rights" in vars(chat) and vars(chat)["admin_rights"] is not None: 
+    if "admin_rights" in vars(chat) and vars(chat)["admin_rights"] is not None:
         if chat.admin_rights.delete_messages is True:
             pass
         else:
-            return await event.edit("You can't mute a person if you dont have delete messages permission")
+            return await event.edit(
+                "You can't mute a person if you dont have delete messages permission"
+            )
     elif "creator" in vars(chat):
         pass
-    elif private == True:
+    elif private:
         pass
     else:
         return await event.edit("You can't mute a person without admin rights")
@@ -42,6 +47,7 @@ async def startmute(event):
         await event.edit("Error occured!\nError is " + str(e))
     else:
         await event.edit("Successfully muted that person")
+
 
 @telebot.on(admin_cmd(outgoing=True, pattern=r"unmute ?(\d+)?", allow_sudo=True))
 async def endmute(event):
@@ -60,7 +66,9 @@ async def endmute(event):
     elif private is True:
         userid = event.chat_id
     else:
-        return await event.edit("Please reply to a user or add their into the command to unmute them.")
+        return await event.edit(
+            "Please reply to a user or add their into the command to unmute them."
+        )
     chat_id = event.chat_id
     if not is_muted(userid, chat_id):
         return await event.edit("This user is not muted in this chat")
@@ -71,10 +79,12 @@ async def endmute(event):
     else:
         await event.edit("Successfully unmuted that person")
 
+
 @telebot.on(admin_cmd(incoming=True))
 async def watcher(event):
     if is_muted(event.sender_id, event.chat_id):
         await event.delete()
+
 
 @telebot.on(admin_cmd(outgoing=True, pattern=r"mute ?(\d+)?"))
 async def startmute(event):
@@ -93,17 +103,21 @@ async def startmute(event):
     elif private is True:
         userid = event.chat_id
     else:
-        return await event.edit("Please reply to a user or add their into the command to mute them.")
+        return await event.edit(
+            "Please reply to a user or add their into the command to mute them."
+        )
     chat_id = event.chat_id
     chat = await event.get_chat()
-    if "admin_rights" in vars(chat) and vars(chat)["admin_rights"] is not None: 
+    if "admin_rights" in vars(chat) and vars(chat)["admin_rights"] is not None:
         if chat.admin_rights.delete_messages is True:
             pass
         else:
-            return await event.edit("You can't mute a person if you dont have delete messages permission")
+            return await event.edit(
+                "You can't mute a person if you dont have delete messages permission"
+            )
     elif "creator" in vars(chat):
         pass
-    elif private == True:
+    elif private:
         pass
     else:
         return await event.edit("You can't mute a person without admin rights")
@@ -115,6 +129,7 @@ async def startmute(event):
         await event.edit("Error occured!\nError is " + str(e))
     else:
         await event.edit("Successfully muted that person")
+
 
 @telebot.on(admin_cmd(outgoing=True, pattern=r"unmute ?(\d+)?"))
 async def endmute(event):
@@ -133,7 +148,9 @@ async def endmute(event):
     elif private is True:
         userid = event.chat_id
     else:
-        return await event.edit("Please reply to a user or add their into the command to unmute them.")
+        return await event.edit(
+            "Please reply to a user or add their into the command to unmute them."
+        )
     chat_id = event.chat_id
     if not is_muted(userid, chat_id):
         return await event.edit("This user is not muted in this chat")
@@ -143,6 +160,7 @@ async def endmute(event):
         await event.edit("Error occured!\nError is " + str(e))
     else:
         await event.edit("Successfully unmuted that person")
+
 
 @telebot.on(admin_cmd(incoming=True))
 async def watcher(event):

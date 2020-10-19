@@ -7,10 +7,10 @@ credit: @r4v4n4"""
 
 import string
 
-from telethon import events
 from userbot.utils import admin_cmd
 
 msg_cache = {}
+
 
 @telebot.on(admin_cmd(pattern=r"fpost\s+(.*)", outgoing=True))
 async def _(event):

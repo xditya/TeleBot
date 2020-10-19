@@ -23,8 +23,8 @@ def progress(current, total):
     )
 
 
-@borg.on(admin_cmd(pattern="go (.*)"))
-@borg.on(sudo_cmd(pattern="go (.*)", allow_sudo=True))
+@telebot.on(admin_cmd(pattern="go (.*)"))
+@telebot.on(sudo_cmd(pattern="go (.*)", allow_sudo=True))
 async def _(event):
     lool = await edit_or_reply(event, "`Processing Your Request`")
     if event.fwd_from:
@@ -32,9 +32,8 @@ async def _(event):
     start = datetime.now()
     await lool.edit("`Trying To Connect...`")
     # SHOW_DESCRIPTION = False
-    input_str = event.pattern_match.group(
-        1
-    )  # + " -inurl:(htm|html|php|pls|txt) intitle:index.of \"last modified\" (mkv|mp4|avi|epub|pdf|mp3)"
+    # + " -inurl:(htm|html|php|pls|txt) intitle:index.of \"last modified\" (mkv|mp4|avi|epub|pdf|mp3)"
+    input_str = event.pattern_match.group(1)
     input_url = "https://bots.shrimadhavuk.me/search/?q={}".format(input_str)
     headers = {"USER-AGENT": "UniBorg"}
     response = requests.get(input_url, headers=headers).json()
@@ -55,7 +54,7 @@ async def _(event):
     await lool.edit("Google: {}\n{}".format(input_str, output_str), link_preview=False)
 
 
-@borg.on(admin_cmd(pattern="image (.*)"))
+@telebot.on(admin_cmd(pattern="image (.*)"))
 async def _(event):
     if event.fwd_from:
         return
@@ -99,7 +98,7 @@ async def _(event):
     await event.delete()
 
 
-@borg.on(admin_cmd(pattern="grs"))
+@telebot.on(admin_cmd(pattern="grs"))
 async def _(event):
     if event.fwd_from:
         return

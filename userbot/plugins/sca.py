@@ -1,6 +1,6 @@
 """Send Chat Actions
 Syntax: .scha <option> <time in sec>
-        scha options: Options for sca 
+        scha options: Options for sca
 
 typing
 contact
@@ -14,10 +14,11 @@ document
 cancel"""
 
 import asyncio
+
 from uniborg.util import admin_cmd
- 
- 
-@borg.on(admin_cmd(pattern="scha ?(.*)"))
+
+
+@telebot.on(admin_cmd(pattern="scha ?(.*)"))
 async def _(event):
     if event.fwd_from:
         return

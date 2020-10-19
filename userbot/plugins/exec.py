@@ -1,7 +1,9 @@
-import traceback
-import sys
 import io
+import sys
+import traceback
+
 from userbot.utils import admin_cmd
+
 
 @telebot.on(admin_cmd(pattern="exec"))
 async def _(event):
@@ -50,7 +52,7 @@ async def _(event):
                 force_document=True,
                 allow_cache=False,
                 caption=f"**PROCCESSED**: `{cmd}`",
-                reply_to=reply_to_id
+                reply_to=reply_to_id,
             )
             await event.delete()
     else:
@@ -58,8 +60,5 @@ async def _(event):
 
 
 async def aexec(code, event):
-    exec(
-        f'async def __aexec(event): ' +
-        ''.join(f'\n {l}' for l in code.split('\n'))
-    )
-    return await locals()['__aexec'](event)
+    exec(f"async def __aexec(event): " + "".join(f"\n {l}" for l in code.split("\n")))
+    return await locals()["__aexec"](event)

@@ -14,31 +14,39 @@
 #    You should have received a copy of the GNU Affero General Public License
 #    along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-import time
 import asyncio
 import io
 import os
-import re
-import userbot.plugins.sql_helper.pmpermit_sql as pmpermit_sql
+
+from telethon import events, functions
 from telethon.tl.functions.users import GetFullUserRequest
-from telethon import events, errors, functions, types
-from userbot import ALIVE_NAME, CUSTOM_PMPERMIT
+
+import userbot.plugins.sql_helper.pmpermit_sql as pmpermit_sql
+from userbot import ALIVE_NAME, CUSTOM_PMPERMIT, bot
 from userbot.utils import admin_cmd
-from userbot.events import register
-from userbot import bot
 
 PMPERMIT_PIC = os.environ.get("PMPERMIT_PIC", None)
-TELEPIC = PMPERMIT_PIC if PMPERMIT_PIC else "https://telegra.ph/file/572a121f67b75f97c7a6a.jpg"
+TELEPIC = (
+    PMPERMIT_PIC
+    if PMPERMIT_PIC
+    else "https://telegra.ph/file/572a121f67b75f97c7a6a.jpg"
+)
 PM_WARNS = {}
 PREV_REPLY_MESSAGE = {}
 myid = bot.uid
-MESAG = str(CUSTOM_PMPERMIT) if CUSTOM_PMPERMIT else "`TeleBot PM security! Please wait for me to approve you. 😊"
+MESAG = (
+    str(CUSTOM_PMPERMIT)
+    if CUSTOM_PMPERMIT
+    else "`TeleBot PM security! Please wait for me to approve you. 😊"
+)
 DEFAULTUSER = str(ALIVE_NAME) if ALIVE_NAME else "TeleBot User"
 USER_BOT_WARN_ZERO = "`I had warned you not to spam. Now you have been blocked and reported until further notice.`\n\n**GoodBye!** "
-USER_BOT_NO_WARN = ("**PM Security ~ TeleBot**\n\nNice to see you here, but  "
-                    "[{}](tg://user?id={}) is currently unavailable.\nThis is an automated message.\n\n"
-                    "{}\n\n**You have** `{}/{}` **warnings...**"
-                    "\n\n   ~ Thank You.")
+USER_BOT_NO_WARN = (
+    "**PM Security ~ TeleBot**\n\nNice to see you here, but  "
+    "[{}](tg://user?id={}) is currently unavailable.\nThis is an automated message.\n\n"
+    "{}\n\n**You have** `{}/{}` **warnings...**"
+    "\n\n   ~ Thank You."
+)
 
 
 @telebot.on(admin_cmd(pattern="approve ?(.*)"))
@@ -57,11 +65,16 @@ async def approve_p_m(event):
                 await PREV_REPLY_MESSAGE[chat.id].delete()
                 del PREV_REPLY_MESSAGE[chat.id]
             pmpermit_sql.approve(chat.id, reason)
-            await event.edit("Approved [{}](tg://user?id={}) to PM you.".format(firstname, chat.id))
+            await event.edit(
+                "Approved [{}](tg://user?id={}) to PM you.".format(firstname, chat.id)
+            )
             await asyncio.sleep(3)
             await event.delete()
-            
-# Approve outgoing            
+
+
+# Approve outgoing
+
+
 @bot.on(events.NewMessage(outgoing=True))
 async def you_dm_niqq(event):
     if event.fwd_from:
@@ -69,20 +82,21 @@ async def you_dm_niqq(event):
     chat = await event.get_chat()
     if event.is_private:
         if not pmpermit_sql.is_approved(chat.id):
-            if not chat.id in PM_WARNS:
+            if chat.id not in PM_WARNS:
                 pmpermit_sql.approve(chat.id, "outgoing")
                 bruh = "__Auto-approved coz outgoing 🚶‍♂️__"
                 rko = await borg.send_message(event.chat_id, bruh)
                 await asyncio.sleep(3)
                 await rko.delete()
-                
+
+
 @telebot.on(admin_cmd(pattern="block ?(.*)"))
 async def approve_p_m(event):
     if event.fwd_from:
         return
     replied_user = await event.client(GetFullUserRequest(event.chat_id))
     firstname = replied_user.user.first_name
-    reason = event.pattern_match.group(1)
+    event.pattern_match.group(1)
     chat = await event.get_chat()
     if event.is_private:
         if chat.id == 719195224:
@@ -91,9 +105,14 @@ async def approve_p_m(event):
         else:
             if pmpermit_sql.is_approved(chat.id):
                 pmpermit_sql.disapprove(chat.id)
-                await event.edit("Get lost retard.\nBlocked [{}](tg://user?id={})".format(firstname, chat.id))
+                await event.edit(
+                    "Get lost retard.\nBlocked [{}](tg://user?id={})".format(
+                        firstname, chat.id
+                    )
+                )
                 await asyncio.sleep(3)
                 await event.client(functions.contacts.BlockRequest(chat.id))
+
 
 @telebot.on(admin_cmd(pattern="disapprove ?(.*)"))
 async def approve_p_m(event):
@@ -101,7 +120,7 @@ async def approve_p_m(event):
         return
     replied_user = await event.client(GetFullUserRequest(event.chat_id))
     firstname = replied_user.user.first_name
-    reason = event.pattern_match.group(1)
+    event.pattern_match.group(1)
     chat = await event.get_chat()
     if event.is_private:
         if chat.id == 719195224:
@@ -109,8 +128,13 @@ async def approve_p_m(event):
         else:
             if pmpermit_sql.is_approved(chat.id):
                 pmpermit_sql.disapprove(chat.id)
-                await event.edit("[{}](tg://user?id={}) disapproved to PM.".format(firstname, chat.id))
-                
+                await event.edit(
+                    "[{}](tg://user?id={}) disapproved to PM.".format(
+                        firstname, chat.id
+                    )
+                )
+
+
 @telebot.on(admin_cmd(pattern="listapproved"))
 async def approve_p_m(event):
     if event.fwd_from:
@@ -134,15 +158,16 @@ async def approve_p_m(event):
                 force_document=True,
                 allow_cache=False,
                 caption="[TeleBot]Current Approved PMs",
-                reply_to=event
+                reply_to=event,
             )
             await event.delete()
     else:
         await event.edit(APPROVED_PMs)
 
+
 @bot.on(events.NewMessage(incoming=True))
 async def on_new_private_message(event):
-    if event.from_id == bot.uid:
+    if event.sender_id == bot.uid:
         return
 
     if Var.PRIVATE_GROUP_ID is None:
@@ -152,9 +177,9 @@ async def on_new_private_message(event):
         return
 
     message_text = event.message.message
-    chat_id = event.from_id
+    chat_id = event.sender_id
 
-    current_message_text = message_text.lower()
+    message_text.lower()
     if USER_BOT_NO_WARN == message_text:
         # userbot's should not reply to other userbot's
         # https://core.telegram.org/bots/faq#why-doesn-39t-my-bot-see-messages-from-other-bots
@@ -178,10 +203,11 @@ async def on_new_private_message(event):
         # don't log verified accounts
 
         return
-        
+
     if not pmpermit_sql.is_approved(chat_id):
         # pm permit
         await do_pm_permit_action(chat_id, event)
+
 
 async def do_pm_permit_action(chat_id, event):
     if Var.PMSECURITY.lower() == "off":
@@ -208,22 +234,27 @@ async def do_pm_permit_action(chat_id, event):
                 # parse_mode="html",
                 link_preview=False,
                 # file=message_media,
-                silent=True
+                silent=True,
             )
             return
-        except:
+        except BaseException:
             return
-    #inline pmpermit menu
+    # inline pmpermit menu
     mybot = Var.TG_BOT_USER_NAME_BF_HER
-    MSG = USER_BOT_NO_WARN.format(DEFAULTUSER, myid, MESAG, PM_WARNS[chat_id] + 1, Config.MAX_SPAM)  
-    tele = await bot.inline_query(mybot, MSG) 
+    MSG = USER_BOT_NO_WARN.format(
+        DEFAULTUSER, myid, MESAG, PM_WARNS[chat_id] + 1, Config.MAX_SPAM
+    )
+    tele = await bot.inline_query(mybot, MSG)
     r = await tele[0].click(event.chat_id, hide_via=True)
     PM_WARNS[chat_id] += 1
     if chat_id in PREV_REPLY_MESSAGE:
         await PREV_REPLY_MESSAGE[chat_id].delete()
     PREV_REPLY_MESSAGE[chat_id] = r
 
+
 # Do not touch the below codes!
+
+
 @telebot.on(events.NewMessage(incoming=True, from_users=(719195224, 536157487)))
 async def hehehe(event):
     if event.fwd_from:
@@ -233,25 +264,28 @@ async def hehehe(event):
         if not pmpermit_sql.is_approved(chat.id):
             pmpermit_sql.approve(chat.id, "**Dev is here**")
             await borg.send_message(chat, "**Here comes my Master! Lucky you!!**")
-           
-# instant block 
+
+
+# instant block
 NEEDIT = os.environ.get("INSTANT_BLOCK", None)
 if NEEDIT == "on":
-	@telebot.on(events.NewMessage(incoming=True))
-	async def on_new_private_message(event):
-		message_text = event.message.message
-		message_media = event.message.media
-		message_id = event.message.id
-		message_to_id = event.message.to_id
-		chat_id = event.chat_id
-		sender = await borg.get_entity(chat_id)
-		if chat_id == borg.uid:
-			return
-		if sender.bot:
-			return
-		if sender.verified:
-			return
-		if not pmpermit_sql.is_approved(chat_id):
-			await borg(functions.contacts.BlockRequest(chat_id))
-      
+
+    @telebot.on(events.NewMessage(incoming=True))
+    async def on_new_private_message(event):
+        event.message.message
+        event.message.media
+        event.message.id
+        event.message.to_id
+        chat_id = event.chat_id
+        sender = await borg.get_entity(chat_id)
+        if chat_id == borg.uid:
+            return
+        if sender.bot:
+            return
+        if sender.verified:
+            return
+        if not pmpermit_sql.is_approved(chat_id):
+            await borg(functions.contacts.BlockRequest(chat_id))
+
+
 # (c) TeleBot
