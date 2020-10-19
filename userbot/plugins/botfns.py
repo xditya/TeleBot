@@ -4,8 +4,8 @@
 #
 from telethon import events
 from telethon.errors.rpcerrorlist import YouBlockedUserError
-from userbot.telebotConfig import Var
 
+from userbot.telebotConfig import Var
 from userbot.utils import admin_cmd, sudo_cmd
 
 
