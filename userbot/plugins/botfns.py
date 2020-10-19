@@ -4,9 +4,9 @@
 #
 from telethon import events
 from telethon.errors.rpcerrorlist import YouBlockedUserError
+from var import Var
 
 from userbot.utils import admin_cmd, sudo_cmd
-from var import Var
 
 
 @telebot.on(admin_cmd(pattern="purl ?(.*)"))
