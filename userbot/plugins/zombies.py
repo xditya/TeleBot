@@ -13,8 +13,9 @@ from asyncio import sleep
 from telethon.errors import ChatAdminRequiredError, UserAdminInvalidError
 from telethon.tl.functions.channels import EditBannedRequest
 from telethon.tl.types import ChatBannedRights
-from var import Var
+
 from userbot.utils import admin_cmd
+from var import Var
 
 # =================== CONSTANT ===================
 
@@ -45,6 +46,7 @@ MUTE_RIGHTS = ChatBannedRights(until_date=None, send_messages=True)
 
 UNMUTE_RIGHTS = ChatBannedRights(until_date=None, send_messages=False)
 # ================================================
+
 
 @telebot.on(admin_cmd(pattern="zombies(?: |$)(.*)", outgoing=True))
 @telebot.on(sudo_cmd(pattern=f"zombies", allow_sudo=True))

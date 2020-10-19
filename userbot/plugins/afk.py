@@ -79,7 +79,7 @@ async def _(event):
     last_afk_message = {}
     reason = event.pattern_match.group(1)
     me = await borg.get_me()
-    telname = me.first_name
+    me.first_name
     (me.last_name)
     if not USER_AFK:  # pylint:disable=E0602
         last_seen_status = await borg(  # pylint:disable=E0602
