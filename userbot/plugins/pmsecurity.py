@@ -142,7 +142,7 @@ async def approve_p_m(event):
 
 @bot.on(events.NewMessage(incoming=True))
 async def on_new_private_message(event):
-    if event.from_id == bot.uid:
+    if event.sender_id == bot.uid:
         return
 
     if Var.PRIVATE_GROUP_ID is None:

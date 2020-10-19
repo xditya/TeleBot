@@ -43,7 +43,7 @@ if Config.TAG_LOG:
         # the message format is stolen from @MasterTagAlertBot
         ammoca_message = ""
 
-        who_ = await event.client.get_entity(event.from_id)
+        who_ = await event.client.get_entity(event.sender_id)
         if who_.bot or who_.verified or who_.support:
             return
 
