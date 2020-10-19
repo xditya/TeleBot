@@ -35,7 +35,7 @@ async def startup_log_tgbot_done(bot_name):
 
 
 async def startup_log_all_done(bot_name):
-    await bot.send_message(TELE, f"TeleBot has been deployed, @{BOTNAME} has been set up.\nSend `{CMD_HNDLR}alive` to see if the bot is working.\n\n__Do add @{BOTNAME} to this group and make it adim for enabling all the features of **TeleBot**__")
+    await bot.send_message(TELE, f"TeleBot has been deployed, @{BOTNAME} has been set up.\nSend `{CMD_HNDLR}alive` to see if the bot is working.\n\n__Do add @{BOTNAME} to this group and make it admin for enabling all the features of **TeleBot**__")
 
 if len(argv) not in (1, 3, 4):
     bot.disconnect()
