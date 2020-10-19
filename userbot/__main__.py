@@ -1,3 +1,4 @@
+import glob
 from userbot import bot
 from sys import argv
 from telethon import TelegramClient
@@ -5,11 +6,36 @@ from var import Var
 from userbot.utils import load_module, start_mybot
 from pathlib import Path
 import telethon.utils
+from userbot import CMD_HNDLR
+
+TELE = Var.PRIVATE_GROUP_ID
+BOTNAME = Var.TG_BOT_USER_NAME_BF_HER
+
 
 async def add_bot(bot_token):
     await bot.start(bot_token)
-    bot.me = await bot.get_me() 
+    bot.me = await bot.get_me()
     bot.uid = telethon.utils.get_peer_id(bot.me)
+
+
+async def startup_log_telebot_start(bot_name):
+    await bot.send_message(TELE, "Deploying TeleBot...")
+
+
+async def startup_log_tgbot_start(bot_name):
+    await bot.send_message(TELE, f"Setting up @{BOTNAME}...")
+
+
+async def startup_log_telebot_done(bot_name):
+    await bot.send_message(TELE, "TeleBot has been deployed...")
+
+
+async def startup_log_tgbot_done(bot_name):
+    await bot.send_message(TELE, f"@{BOTNAME} has been set up! Send /start to it 😁.")
+
+
+async def startup_log_all_done(bot_name):
+    await bot.send_message(TELE, f"TeleBot has been deployed, @{BOTNAME} has been set up.\nSend `{CMD_HNDLR}alive` to see if the bot is working.\n\n__Do add @{BOTNAME} to this group and make it admin for enabling all the features of **TeleBot**__")
 
 if len(argv) not in (1, 3, 4):
     bot.disconnect()
@@ -29,8 +55,13 @@ else:
         print("Startup Completed")
     else:
         bot.start()
-    
-import glob
+
+bot.loop.run_until_complete(
+    startup_log_telebot_start(
+        Var.TG_BOT_USER_NAME_BF_HER))
+bot.loop.run_until_complete(
+    startup_log_telebot_done(
+        Var.TG_BOT_USER_NAME_BF_HER))
 path = 'userbot/plugins/*.py'
 files = glob.glob(path)
 for name in files:
@@ -38,9 +69,13 @@ for name in files:
         path1 = Path(f.name)
         shortname = path1.stem
         load_module(shortname.replace(".py", ""))
-print("TeleBot has been deployed! ")
 
+print("TeleBot has been deployed! ")
+bot.loop.run_until_complete(
+    startup_log_tgbot_start(
+        Var.TG_BOT_USER_NAME_BF_HER))
 print("Setting up TGBot")
+
 path = "userbot/plugins/mybot/*.py"
 files = glob.glob(path)
 for name in files:
@@ -48,13 +83,15 @@ for name in files:
         path1 = Path(f.name)
         shortname = path1.stem
         start_mybot(shortname.replace(".py", ""))
-print("TGBot has been set up!")      
 
+print("TGBot has been set up!")
+bot.loop.run_until_complete(
+    startup_log_tgbot_done(
+        Var.TG_BOT_USER_NAME_BF_HER))
 print("TeleBot has been fully deployed! Do Visit @TeleBotSupport")
+bot.loop.run_until_complete(startup_log_all_done(Var.TG_BOT_USER_NAME_BF_HER))
 
 if len(argv) not in (1, 3, 4):
     bot.disconnect()
 else:
     bot.run_until_disconnected()
-
-
