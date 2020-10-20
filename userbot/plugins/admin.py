@@ -84,7 +84,7 @@ UNMUTE_RIGHTS = ChatBannedRights(until_date=None, send_messages=False)
 async def set_group_photo(gpic):
     """ For .setgpic command, changes the picture of a group """
     if not gpic.is_group:
-        await gpic.edit("`I don't think this is a group.`")
+        event = await gpic.eor(event, "`I don't think this is a group.`")
         return
     replymsg = await gpic.get_reply_message()
     chat = await gpic.get_chat()
@@ -93,7 +93,7 @@ async def set_group_photo(gpic):
     photo = None
 
     if not admin and not creator:
-        await gpic.edit(NO_ADMIN)
+        x = await gpic.eor(x, NO_ADMIN)
         return
 
     if replymsg and replymsg.media:
@@ -102,19 +102,19 @@ async def set_group_photo(gpic):
         elif "image" in replymsg.media.document.mime_type.split("/"):
             photo = await gpic.client.download_file(replymsg.media.document)
         else:
-            await gpic.edit(INVALID_MEDIA)
+            x= await gpic.eor(x, INVALID_MEDIA)
 
     if photo:
         try:
             await gpic.client(
                 EditPhotoRequest(gpic.chat_id, await gpic.client.upload_file(photo))
             )
-            await gpic.edit(CHAT_PP_CHANGED)
+            x = await gpic.eor(x, CHAT_PP_CHANGED)
 
         except PhotoCropSizeSmallError:
-            await gpic.edit(PP_TOO_SMOL)
+            x = await gpic.eor(x, PP_TOO_SMOL)
         except ImageProcessFailedError:
-            await gpic.edit(PP_ERROR)
+            x = await gpic.eor(x, PP_ERROR)
 
 
 @telebot.on(admin_cmd(outgoing=True, pattern="promote(?: |$)(.*)"))
@@ -130,7 +130,7 @@ async def promote(promt):
 
     # If not admin and not creator, also return
     if not admin and not creator:
-        await promt.edit(NO_ADMIN)
+        event = await promt.eor(event, NO_ADMIN)
         return
 
     new_rights = ChatAdminRights(
@@ -142,7 +142,7 @@ async def promote(promt):
         pin_messages=True,
     )
 
-    await promt.edit("`Promoting...`")
+    event = await promt.eor(event, "`Promoting...`")
     user, rank = await get_user_from_event(promt)
     if not rank:
         rank = "pro-admin"  # Just in case.
@@ -154,12 +154,12 @@ async def promote(promt):
     # Try to promote if current user is admin or creator
     try:
         await promt.client(EditAdminRequest(promt.chat_id, user.id, new_rights, rank))
-        await promt.edit("`Promoted Successfully! Enjoy!!`")
+        event await promt.eor(event, "`Promoted Successfully! Enjoy!!`")
 
     # If Telethon spit BadRequestError, assume
     # we don't have Promote permission
     except BadRequestError:
-        await promt.edit(NO_PERM)
+        event = await promt.eor(NO_PERM)
         return
 
     # Announce to the logging group if we have promoted successfully
@@ -212,9 +212,9 @@ async def demote(dmod):
     # If we catch BadRequestError from Telethon
     # Assume we don't have permission to demote
     except BadRequestError:
-        await dmod.edit(NO_PERM)
+        xx = await dmod.eor(xx, NO_PERM)
         return
-    await dmod.edit("`Demoted this retard!!`")
+    xx = await dmod.eor(xx, "`Demoted this retard!!`")
 
     # Announce to the logging group if we have demoted successfully
     if BOTLOG:
@@ -253,9 +253,9 @@ async def _(event):
     try:
         await borg(EditBannedRequest(event.chat_id, to_ban_id, rights))
     except (Exception) as exc:
-        await event.edit(str(exc))
+        xx = await event.edit(xx, str(exc))
     else:
-        await event.edit(f"{input_cmd}ned Successfully!")
+        xx = await event.edit(xx f"{input_cmd}ned Successfully!")
 
 
 @telebot.on(admin_cmd(pattern="pgs ?(.*)"))
@@ -284,7 +284,7 @@ async def _(event):
             msgs = []
             await event.delete()
         else:
-            await event.edit("**PURGE** Failed!")
+            xx = await event.edit(xx, "**PURGE** Failed!")
 
 
 @telebot.on(admin_cmd(pattern="(ban|unban) ?(.*)"))
@@ -314,9 +314,9 @@ async def _(event):
     try:
         await borg(EditBannedRequest(event.chat_id, to_ban_id, rights))
     except (Exception) as exc:
-        await event.edit(str(exc))
+        xx = await event.eor(xx, str(exc))
     else:
-        await event.edit(f"{input_cmd}ned Successfully!")
+        xx = await event.edit(xx, f"{input_cmd}ned Successfully!")
 
 
 @register(incoming=True)
@@ -372,7 +372,7 @@ async def promote(promt):
         pin_messages=True,
     )
 
-    await promt.edit("`Promoting...`")
+    xx = await promt.eor(xx, "`Promoting...`")
     user, rank = await get_user_from_event(promt)
     if not rank:
         rank = "pero"  # Just in case.
@@ -384,12 +384,12 @@ async def promote(promt):
     # Try to promote if current user is admin or creator
     try:
         await promt.client(EditAdminRequest(promt.chat_id, user.id, new_rights, rank))
-        await promt.edit("`Promoted User Successfully! Enjoy!!`")
+        xx = await promt.eor(xx, "`Promoted User Successfully! Enjoy!!`")
 
     # If Telethon spit BadRequestError, assume
     # we don't have Promote permission
     except BadRequestError:
-        await promt.edit(NO_PERM)
+        xx = await promt.eor(xx, NO_PERM)
         return
 
     # Announce to the logging group if we have promoted successfully
@@ -414,7 +414,7 @@ async def gspider(gspdr):
 
     # If not admin and not creator, return
     if not admin and not creator:
-        await gspdr.edit(NO_ADMIN)
+        xx = await gspdr.eor(xx, NO_ADMIN)
         return
 
     # Check if the function running under SQL mode
@@ -431,14 +431,14 @@ async def gspider(gspdr):
         return
 
     # If pass, inform and start gmuting
-    await gspdr.edit("`Grabs a huge, sticky duct tape!`")
+    xx = await gspdr.eor(xx, "`Grabs a huge, sticky duct tape!`")
     if gmute(user.id) is False:
         await gspdr.edit("`Error! User probably already gmuted.\nRe-rolls the tape.`")
     else:
         if reason:
-            await gspdr.edit(f"`Globally taped!`Reason: {reason}")
+            xx = await gspdr.eor(xx, f"`Globally taped!`Reason: {reason}")
         else:
-            await gspdr.edit("`Globally taped!`")
+            xx = await gspdr.eor(xx, "`Globally taped!`")
 
         if BOTLOG:
             await gspdr.client.send_message(
@@ -483,13 +483,13 @@ async def pin(msg):
 
     # If not admin and not creator, return
     if not admin and not creator:
-        await msg.edit(NO_ADMIN)
+        xx = await msg.eor(xx, NO_ADMIN)
         return
 
     to_pin = msg.reply_to_msg_id
 
     if not to_pin:
-        await msg.edit("`Reply to a message to pin it.`")
+        xx = await msg.eor(xx, "`Reply to a message to pin it.`")
         return
 
     options = msg.pattern_match.group(1)
@@ -502,10 +502,10 @@ async def pin(msg):
     try:
         await msg.client(UpdatePinnedMessageRequest(msg.to_id, to_pin, is_silent))
     except BadRequestError:
-        await msg.edit(NO_PERM)
+        xx = await msg.eor(xx, NO_PERM)
         return
 
-    await msg.edit("`Pinned Successfully!`")
+    xx = await msg.eor(xx, "`Pinned Successfully!`")
 
     user = await get_user_from_id(msg.from_id, msg)
 
@@ -531,29 +531,29 @@ async def kick(usr):
 
     # If not admin and not creator, return
     if not admin and not creator:
-        await usr.edit(NO_ADMIN)
+        xx = await usr.eor(xx, NO_ADMIN)
         return
 
     user, reason = await get_user_from_event(usr)
     if not user:
-        await usr.edit("`Couldn't fetch user.`")
+        xx = await usr.eor(xx, "`Couldn't fetch user.`")
         return
 
-    await usr.edit("`Kicking...`")
+    xx = await usr.eor(eor, "`Kicking...`")
 
     try:
         await usr.client.kick_participant(usr.chat_id, user.id)
         await sleep(0.5)
     except Exception as e:
-        await usr.edit(NO_PERM + f"\n{str(e)}")
+        xx = await usr.eor(xx, NO_PERM + f"\n{str(e)}")
         return
 
     if reason:
-        await usr.edit(
+        xx = await usr.eor(xx, 
             f"`Kicked` [{user.first_name}](tg://user?id={user.id})`!`\nReason: {reason}"
         )
     else:
-        await usr.edit(f"`Kicked` [{user.first_name}](tg://user?id={user.id})`!`")
+        xx = await usr.eor(xx, f"`Kicked` [{user.first_name}](tg://user?id={user.id})`!`")
 
     if BOTLOG:
         await usr.client.send_message(
@@ -594,9 +594,9 @@ async def get_users(show):
     except ChatAdminRequiredError as err:
         mentions += " " + str(err) + "\n"
     try:
-        await show.edit(mentions)
+        xx = await show.eor(xx, mentions)
     except MessageTooLongError:
-        await show.edit("Damn, this is a huge group. Uploading users lists as file.")
+        xx = await show.eor(xx, "Damn, this is a huge group. Uploading users lists as file.")
         file = open("userslist.txt", "w+")
         file.write(mentions)
         file.close()
@@ -626,7 +626,7 @@ async def get_user_from_event(event):
             user = int(user)
 
         if not user:
-            await event.edit("`Pass the user's username, id or reply!`")
+            xx = await event.eor(xx, "`Pass the user's username, id or reply!`")
             return
 
         if event.message.entities is not None:
@@ -639,7 +639,7 @@ async def get_user_from_event(event):
         try:
             user_obj = await event.client.get_entity(user)
         except (TypeError, ValueError) as err:
-            await event.edit(str(err))
+            xx = await event.eor(xx, str(err))
             return None
 
     return user_obj, extra
@@ -652,7 +652,7 @@ async def get_user_from_id(user, event):
     try:
         user_obj = await event.client.get_entity(user)
     except (TypeError, ValueError) as err:
-        await event.edit(str(err))
+        xx = await event.eor(xx, str(err))
         return None
 
     return user_obj

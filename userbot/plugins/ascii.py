@@ -11,18 +11,18 @@ async def _(event):
     if event.fwd_from:
         return
     if not event.reply_to_msg_id:
-        await event.eor("```Reply to any user message.```")
+        xx = await event.eor(xx, "```Reply to any user message.```")
         return
     reply_message = await event.get_reply_message()
     if not reply_message.media:
-        await event.eor("```reply to media message```")
+        xx = await event.eor(xx, "```reply to media message```")
         return
     chat = "@asciiart_bot"
     reply_message.sender
     if reply_message.sender.bot:
-        await event.eor("```Reply to actual users message.```")
+        xx = await event.eor(xx, "```Reply to actual users message.```")
         return
-    await event.eor("```Wait making ASCII...```")
+    xx = await event.eor(xx, "```Wait making ASCII...```")
     # For TeleBot
     async with borg.conversation(chat) as conv:
         try:
@@ -35,7 +35,7 @@ async def _(event):
             await event.reply("```Please unblock @asciiart_bot and try again```")
             return
         if response.text.startswith("Forward"):
-            await event.eor(
+            xx = await event.eor(xx, 
                 "```can you kindly disable your forward privacy settings for good?```"
             )
         else:

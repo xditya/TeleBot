@@ -1,9 +1,3 @@
-# Copyright (C) 2020 azrim.
-# All rights reserved.
-#
-# Licensed under the Raphielscape Public License, Version 1.d (the "License");
-# you may not use this file except in compliance with the License.
-
 import os
 from re import match
 
@@ -30,11 +24,11 @@ async def shortener(short):
         elif reply:
             message = reply.text
         else:
-            await short.eor("`Error! No URL given!`")
+            xx = await short.eor(xx, "`Error! No URL given!`")
             return
         link_match = match(r"\bhttps?://.*\.\S+", message)
         if not link_match:
-            await short.eor(
+            xx = await short.eor(xx, 
                 "`Error! Please provide valid url!`\nExample: https://google.com"
             )
             return
@@ -43,7 +37,7 @@ async def shortener(short):
         raw_output = bitly.shorten_urls(urls)
         string_output = f"{raw_output}"
         output = string_output.replace("['", "").replace("']", "")
-        await short.eor(
+        xx = await short.eor(xx, 
             f"`Your link shortened successfully!`\nHere is your link {output}"
         )
         if BOTLOG:
@@ -51,6 +45,6 @@ async def shortener(short):
                 PRIVATE_GROUP_ID, f"`#SHORTLINK \nThis Your Link!`\n {output}"
             )
     else:
-        await short.eor(
+        xx = await short.eor(xx, 
             "Set bit.ly API token first\nGet it from [here](https://bitly.com/a/sign_up)"
         )

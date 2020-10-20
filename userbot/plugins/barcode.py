@@ -17,7 +17,7 @@ from uniborg.util import admin_cmd
 async def _(event):
     if event.fwd_from:
         return
-    await event.eor("...")
+    xx = await event.eor(xx, "...")
     start = datetime.now()
     input_str = event.pattern_match.group(1)
     message = "SYNTAX: `.barcode <long text to include>`"
@@ -55,10 +55,10 @@ async def _(event):
         )
         os.remove(filename)
     except Exception as e:
-        await event.eor(str(e))
+        xx = await event.eor(xx, str(e))
         return
     end = datetime.now()
     ms = (end - start).seconds
-    await event.eor("Created BarCode in {} seconds".format(ms))
+    xx = await event.eor(xx, "Created BarCode in {} seconds".format(ms))
     await asyncio.sleep(5)
     await event.delete()

@@ -42,4 +42,4 @@ async def _(event):
                 reply_to=reply_to_id,
             )
             await event.delete()
-    await event.eor(OUTPUT)
+    xx = await event.eor(xx, OUTPUT)

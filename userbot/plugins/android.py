@@ -38,7 +38,7 @@ async def magisk(request):
             f'[APK v{data["app"]["version"]}]({data["app"]["link"]}) | '
             f'[Uninstaller]({data["uninstaller"]["link"]})\n'
         )
-    await request.edit(releases)
+    xx = await request.eor(xx, releases)
 
 
 @telebot.on(admin_cmd(outgoing=True, pattern=r"device(?: |$)(\S*)"))
@@ -52,7 +52,7 @@ async def device_info(request):
     elif textx:
         device = textx.text
     else:
-        await request.edit("`Usage: .device <codename> / <model>`")
+        xx = await request.eor(xx, "`Usage: .device <codename> / <model>`")
         return
     found = [
         i
@@ -73,7 +73,7 @@ async def device_info(request):
             )
     else:
         reply = f"`Couldn't find info about {device}!`\n"
-    await request.edit(reply)
+    xx = await request.eor(xx, reply)
 
 
 @telebot.on(admin_cmd(outgoing=True, pattern=r"codename(?: |)([\S]*)(?: |)([\s\S]*)"))
@@ -89,7 +89,7 @@ async def codename_info(request):
         brand = textx.text.split(" ")[0]
         device = " ".join(textx.text.split(" ")[1:])
     else:
-        await request.edit("`Usage: .codename <brand> <device>`")
+        xx = await request.eor(xx, "`Usage: .codename <brand> <device>`")
         return
     found = [
         i
@@ -112,7 +112,7 @@ async def codename_info(request):
             )
     else:
         reply = f"`Couldn't find {device} codename!`\n"
-    await request.edit(reply)
+    xx = await request.eor(xx, reply)
 
 
 @telebot.on(admin_cmd(outgoing=True, pattern=r"specs(?: |)([\S]*)(?: |)([\s\S]*)"))
@@ -128,7 +128,7 @@ async def devices_specifications(request):
         brand = textx.text.split(" ")[0]
         device = " ".join(textx.text.split(" ")[1:])
     else:
-        await request.edit("`Usage: .specs <brand> <device>`")
+        xx = await request.eor(xx, "`Usage: .specs <brand> <device>`")
         return
     all_brands = (
         BeautifulSoup(
@@ -143,7 +143,7 @@ async def devices_specifications(request):
             i["href"] for i in all_brands if brand == i.text.strip().lower()
         ][0]
     except IndexError:
-        await request.edit(f"`{brand} is unknown brand!`")
+        xx = await request.eor(xx, f"`{brand} is unknown brand!`")
     devices = BeautifulSoup(get(brand_page_url).content, "lxml").findAll(
         "div", {"class": "model-listing-container-80"}
     )
@@ -155,7 +155,7 @@ async def devices_specifications(request):
             if device in i.text.strip().lower()
         ]
     except IndexError:
-        await request.edit(f"`can't find {device}!`")
+        xx = await request.eor(xx, f"`can't find {device}!`")
     if len(device_page_url) > 2:
         device_page_url = device_page_url[:2]
     reply = ""
@@ -173,7 +173,7 @@ async def devices_specifications(request):
                 .strip()
             )
             reply += f"**{title}**: {data}\n"
-    await request.edit(reply)
+    xx = await request.eor(xx, reply)
 
 
 @telebot.on(admin_cmd(outgoing=True, pattern=r"twrp(?: |$)(\S*)"))
@@ -187,12 +187,12 @@ async def twrp(request):
     elif textx:
         device = textx.text.split(" ")[0]
     else:
-        await request.edit("`Usage: .twrp <codename>`")
+        xx = await request.eor(xx, "`Usage: .twrp <codename>`")
         return
     url = get(f"https://dl.twrp.me/{device}/")
     if url.status_code == 404:
         reply = f"`Couldn't find twrp downloads for {device}!`\n"
-        await request.edit(reply)
+        xx = await request.eor(xx, reply)
         return
     page = BeautifulSoup(url.content, "lxml")
     download = page.find("table").find("tr").find("a")
@@ -205,7 +205,7 @@ async def twrp(request):
         f"[{dl_file}]({dl_link}) - __{size}__\n"
         f"**Updated:** __{date}__\n"
     )
-    await request.edit(reply)
+    xx = await request.eor(xx, reply)
 
 
 CMD_HELP.update(
