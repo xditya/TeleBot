@@ -1,7 +1,3 @@
-# Copyright (C) 2019 The Raphielscape Company LLC.
-#
-# Licensed under the Raphielscape Public License, Version 1.c (the "License");
-# you may not use this file except in compliance with the License.
 """
 Userbot module to help you manage a group
 """
@@ -255,7 +251,7 @@ async def _(event):
     except (Exception) as exc:
         xx = await event.edit(xx, str(exc))
     else:
-        xx = await event.edit(xx f"{input_cmd}ned Successfully!")
+        xx = await event.edit(xx, f"{input_cmd}ned Successfully!")
 
 
 @telebot.on(admin_cmd(pattern="pgs ?(.*)"))
