@@ -80,7 +80,7 @@ UNMUTE_RIGHTS = ChatBannedRights(until_date=None, send_messages=False)
 async def set_group_photo(gpic):
     """ For .setgpic command, changes the picture of a group """
     if not gpic.is_group:
-        event = await gpic.eor(event, "`I don't think this is a group.`")
+        await gpic.eor(event, "`I don't think this is a group.`")
         return
     replymsg = await gpic.get_reply_message()
     chat = await gpic.get_chat()
@@ -98,7 +98,7 @@ async def set_group_photo(gpic):
         elif "image" in replymsg.media.document.mime_type.split("/"):
             photo = await gpic.client.download_file(replymsg.media.document)
         else:
-            x= await gpic.eor(x, INVALID_MEDIA)
+            x = await gpic.eor(x, INVALID_MEDIA)
 
     if photo:
         try:
@@ -280,7 +280,7 @@ async def _(event):
             msgs = []
             await event.delete()
         else:
-            xx = await event.edit(xx, "**PURGE** Failed!")
+            await event.edit(xx, "**PURGE** Failed!")
 
 
 @telebot.on(admin_cmd(pattern="(ban|unban) ?(.*)"))
@@ -545,11 +545,14 @@ async def kick(usr):
         return
 
     if reason:
-        xx = await usr.eor(xx, 
-            f"`Kicked` [{user.first_name}](tg://user?id={user.id})`!`\nReason: {reason}"
+        xx = await usr.eor(
+            xx,
+            f"`Kicked` [{user.first_name}](tg://user?id={user.id})`!`\nReason: {reason}",
         )
     else:
-        xx = await usr.eor(xx, f"`Kicked` [{user.first_name}](tg://user?id={user.id})`!`")
+        xx = await usr.eor(
+            xx, f"`Kicked` [{user.first_name}](tg://user?id={user.id})`!`"
+        )
 
     if BOTLOG:
         await usr.client.send_message(
@@ -592,7 +595,9 @@ async def get_users(show):
     try:
         xx = await show.eor(xx, mentions)
     except MessageTooLongError:
-        xx = await show.eor(xx, "Damn, this is a huge group. Uploading users lists as file.")
+        xx = await show.eor(
+            xx, "Damn, this is a huge group. Uploading users lists as file."
+        )
         file = open("userslist.txt", "w+")
         file.write(mentions)
         file.close()
@@ -648,7 +653,7 @@ async def get_user_from_id(user, event):
     try:
         user_obj = await event.client.get_entity(user)
     except (TypeError, ValueError) as err:
-        xx = await event.eor(xx, str(err))
+        await event.eor(xx, str(err))
         return None
 
     return user_obj

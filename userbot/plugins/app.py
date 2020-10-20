@@ -102,7 +102,9 @@ async def apk(e):
 
     except IndexError:
 
-        xx = await e.eor(xx, "No result found in search. Please enter **Valid app name**")
+        xx = await e.eor(
+            xx, "No result found in search. Please enter **Valid app name**"
+        )
 
     except Exception as err:
 
@@ -198,7 +200,9 @@ async def apkr(e):
 
     except IndexError:
 
-        xx = await e.eor(xx, "No result found in search. Please enter **Valid app name**")
+        xx = await e.eor(
+            xx, "No result found in search. Please enter **Valid app name**"
+        )
 
     except Exception as err:
 

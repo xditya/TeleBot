@@ -28,8 +28,8 @@ async def shortener(short):
             return
         link_match = match(r"\bhttps?://.*\.\S+", message)
         if not link_match:
-            xx = await short.eor(xx, 
-                "`Error! Please provide valid url!`\nExample: https://google.com"
+            xx = await short.eor(
+                xx, "`Error! Please provide valid url!`\nExample: https://google.com"
             )
             return
         urls = [f"{message}"]
@@ -37,14 +37,15 @@ async def shortener(short):
         raw_output = bitly.shorten_urls(urls)
         string_output = f"{raw_output}"
         output = string_output.replace("['", "").replace("']", "")
-        xx = await short.eor(xx, 
-            f"`Your link shortened successfully!`\nHere is your link {output}"
+        xx = await short.eor(
+            xx, f"`Your link shortened successfully!`\nHere is your link {output}"
         )
         if BOTLOG:
             await short.client.send_message(
                 PRIVATE_GROUP_ID, f"`#SHORTLINK \nThis Your Link!`\n {output}"
             )
     else:
-        xx = await short.eor(xx, 
-            "Set bit.ly API token first\nGet it from [here](https://bitly.com/a/sign_up)"
+        xx = await short.eor(
+            xx,
+            "Set bit.ly API token first\nGet it from [here](https://bitly.com/a/sign_up)",
         )

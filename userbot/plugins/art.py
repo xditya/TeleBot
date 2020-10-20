@@ -12,7 +12,8 @@ n = str(ALIVE_NAME) if ALIVE_NAME else "Set ALIVE_NAME in config vars in Heroku"
 @telebot.on(admin_cmd(pattern=r"ded"))
 @telebot.on(sudo_cmd(pattern=r"ded"))
 async def bluedevilded(ded):
-    xx = await ded.eor(xx, 
+    xx = await ded.eor(
+        xx,
         n + " ==             |\n　　　　　|"
         "\n　　　　　| \n"
         "　　　　　| \n"
@@ -26,7 +27,7 @@ async def bluedevilded(ded):
         "　|　３　 | 丶＼ \n"
         "＜ 、･　　|　　＼ \n"
         "　＼＿＿／∪ _ ∪) \n"
-        "　　　　　 Ｕ Ｕ\n"
+        "　　　　　 Ｕ Ｕ\n",
     )
 
 
@@ -90,34 +91,34 @@ H = (
 @telebot.on(admin_cmd(pattern=r"monster"))
 @telebot.on(sudo_cmd(pattern=r"monster"))
 async def bluedevilmonster(monster):
-    xx = await monster.eor(xx, M)
+    await monster.eor(xx, M)
 
 
 @telebot.on(admin_cmd(pattern=r"pig"))
 @telebot.on(sudo_cmd(pattern=r"pig"))
 async def bluedevipig(pig):
-    xx = await pig.eor(xx, P)
+    await pig.eor(xx, P)
 
 
 @telebot.on(admin_cmd(pattern=r"kiler"))
 @telebot.on(sudo_cmd(pattern=r"kiler"))
 async def bluedevikiller(kiler):
-    xx = await kiler.eor(xx, K)
+    await kiler.eor(xx, K)
 
 
 @telebot.on(admin_cmd(pattern=r"gun"))
 @telebot.on(sudo_cmd(pattern=r"gun"))
 async def bluedevigun(gun):
-    xx = await gun.eor(xx, G)
+    await gun.eor(xx, G)
 
 
 @telebot.on(admin_cmd(pattern=r"dog"))
 @telebot.on(sudo_cmd(pattern=r"dog"))
 async def bluedevidog(dog):
-    xx = await dog.eor(xx, D)
+    await dog.eor(xx, D)
 
 
 @telebot.on(admin_cmd(pattern=r"hmf"))
 @telebot.on(sudo_cmd(pattern=r"hmf"))
 async def bluedevihmf(hmf):
-    xx = await hmf.eor(xx, H)
+    await hmf.eor(xx, H)

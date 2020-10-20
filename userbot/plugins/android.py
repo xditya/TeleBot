@@ -38,7 +38,7 @@ async def magisk(request):
             f'[APK v{data["app"]["version"]}]({data["app"]["link"]}) | '
             f'[Uninstaller]({data["uninstaller"]["link"]})\n'
         )
-    xx = await request.eor(xx, releases)
+    await request.eor(xx, releases)
 
 
 @telebot.on(admin_cmd(outgoing=True, pattern=r"device(?: |$)(\S*)"))

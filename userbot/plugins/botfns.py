@@ -29,7 +29,9 @@ async def _(event):
             await event.client.forward_messages(chat, reply_message)
             response = await response
         except YouBlockedUserError:
-            xx = await event.eor(xx, "```Please unblock me (@FiletolinkTGbot) u Nigga```")
+            xx = await event.eor(
+                xx, "```Please unblock me (@FiletolinkTGbot) u Nigga```"
+            )
             return
         await event.delete()
         await event.client.send_message(
@@ -60,7 +62,9 @@ async def _(event):
             await event.client.forward_messages(chat, reply_message)
             response = await response
         except YouBlockedUserError:
-            xx = await event.eor(xx, "```Please unblock me (@chotamreaderbot) u Nigga```")
+            xx = await event.eor(
+                xx, "```Please unblock me (@chotamreaderbot) u Nigga```"
+            )
             return
         await event.delete()
         await event.client.send_message(
@@ -85,7 +89,7 @@ async def _(event):
     if reply_message.sender.bot:
         xx = await event.eor(xx, "```Reply to actual users message.```")
         return
-    a = await event.reply("```Processing```")
+    await event.reply("```Processing```")
     async with event.client.conversation(chat) as conv:
         try:
             response = conv.wait_event(
@@ -120,7 +124,9 @@ async def _(event):
             await event.client.forward_messages(chat, reply_message)
             response = await response
         except YouBlockedUserError:
-            xx = await event.eor(xx, "```Please unblock me (@instadownloadingbot) u Nigga```")
+            xx = await event.eor(
+                xx, "```Please unblock me (@instadownloadingbot) u Nigga```"
+            )
             return
         await event.delete()
         await event.client.send_message(
@@ -221,7 +227,9 @@ async def _(event):
             await event.client.forward_messages(chat, reply_message)
             response = await response
         except YouBlockedUserError:
-            xx = await event.eor(xx, "```Please unblock me (@gitdownloadbot) u Nigga```")
+            xx = await event.eor(
+                xx, "```Please unblock me (@gitdownloadbot) u Nigga```"
+            )
             return
         await event.delete()
         x = await event.client.send_message(
