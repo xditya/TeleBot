@@ -109,11 +109,6 @@
    "value": "",
    "required": true
   },
-  "DOWNLOAD_PFP_URL_CLOCK": {
-   "description": "Needed for autopic module. A url that is a preview link of your Profile Pic",
-   "value": "",
-   "required": false
-  },
   "ALIVE_NAME": {
    "description": "Your Telegram Username. ",
    "value": "",

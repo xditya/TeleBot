@@ -4,13 +4,13 @@
 #
 from telethon import events
 from telethon.errors.rpcerrorlist import YouBlockedUserError
-from var import Var
 
+from userbot.telebotConfig import Var
 from userbot.utils import admin_cmd, sudo_cmd
 
 
 @telebot.on(admin_cmd(pattern="purl ?(.*)"))
-@telebot.on(sudo_cmd(pattern="purl ?(.*)" ))
+@telebot.on(sudo_cmd(pattern="purl ?(.*)"))
 async def _(event):
     if event.fwd_from:
         return
@@ -101,7 +101,7 @@ async def _(event):
 
 
 @telebot.on(admin_cmd(pattern="instadl ?(.*)"))
-@telebot.on(sudo_cmd(pattern="instadl ?(.*)" ))
+@telebot.on(sudo_cmd(pattern="instadl ?(.*)"))
 async def _(event):
     if event.fwd_from:
         return
@@ -181,7 +181,7 @@ async def mod(event):
 
 
 @telebot.on(admin_cmd(pattern="checkspam ?(.*)"))
-@telebot.on(sudo_cmd(pattern="checkspam ?(.*)" ))
+@telebot.on(sudo_cmd(pattern="checkspam ?(.*)"))
 async def _(event):
     bot = "@SpamBot"
     if event.fwd_from:
@@ -202,7 +202,7 @@ async def _(event):
 
 
 @telebot.on(admin_cmd(pattern="gitdl ?(.*)"))
-@telebot.on(sudo_cmd(pattern="gitdl ?(.*)" ))
+@telebot.on(sudo_cmd(pattern="gitdl ?(.*)"))
 async def _(event):
     if event.fwd_from:
         return

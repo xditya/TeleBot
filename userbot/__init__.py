@@ -8,8 +8,9 @@ import os
 import sys
 from telethon.sessions import StringSession
 from telethon import TelegramClient
-from var import Var
+from userbot.telebotConfig import Var
 import time
+from userbot import bot
 
 if Var.STRING_SESSION:
     session_name = str(Var.STRING_SESSION)
@@ -17,6 +18,9 @@ if Var.STRING_SESSION:
 else:
     session_name = "startup"
     bot = TelegramClient(session_name, Var.APP_ID, Var.API_HASH)
+
+temp = bot.me
+ALIVE = temp.first_name
 
 StartTime = time.time()
 telever = "4.6"
@@ -108,7 +112,14 @@ if bool(ENV):
     YOUTUBE_API_KEY = os.environ.get("YOUTUBE_API_KEY", None)
 
     # Default .alive name
-    ALIVE_NAME = os.environ.get("ALIVE_NAME", None)
+    ALIVE_NAME = os.environ.get("ALIVE_NAME", ALIVE)
+
+    # for autopic
+    AUTOPIC_TEXT = os.environ.get(
+        "AUTOPIC_TEXT",
+        "Life Is too Short.\n And so is your TG account.")
+    AUTO_PIC_FONT = os.environ.get("AUTOPIC_FONT", "DejaVuSans.ttf")
+    AUTOPIC_FONT_COLOUR = os.environ.get("AUTOPIC_FONT_COLOUR", None)
 
     CMD_HNDLR = os.environ.get("CMD_HNDLR", r"\.")
 
