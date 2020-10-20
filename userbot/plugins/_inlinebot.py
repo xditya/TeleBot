@@ -176,9 +176,10 @@ if Var.TG_BOT_USER_NAME_BF_HER is not None and tgbot is not None:
             )
             target = await event.client(GetFullUserRequest(event.query.user_id))
             first_name = html.escape(target.user.first_name)
+            ok = event.query.user_id
             if first_name is not None:
                 first_name = first_name.replace("\u2060", "")
-            tosend = f"Hey {DEFAULTUSER}, {first_name} is requesting something in PM!"
+            tosend = f"Hey {DEFAULTUSER}, [{first_name}](tg://user?id={ok}) is requesting something in PM!"
             await tgbot.send_message(LOG_GP, tosend)
 
     @tgbot.on(events.callbackquery.CallbackQuery(data=re.compile(b"chat")))
