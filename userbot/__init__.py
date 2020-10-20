@@ -10,7 +10,6 @@ from telethon.sessions import StringSession
 from telethon import TelegramClient
 from userbot.telebotConfig import Var
 import time
-from userbot import bot
 
 if Var.STRING_SESSION:
     session_name = str(Var.STRING_SESSION)
