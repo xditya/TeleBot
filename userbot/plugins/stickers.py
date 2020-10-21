@@ -38,7 +38,7 @@ KANGING_STR = [
 
 
 @telebot.on(admin_cmd(outgoing=True, pattern="kang"))
-@telebot.on(sudo_cmd(allow_sudo=True, pattern="kang", allow_sudo=True))
+@telebot.on(sudo_cmd(pattern="kang", allow_sudo=True))
 async def kang(args):
     """ For .kang command, kangs stickers or creates new ones. """
     user = await bot.get_me()
@@ -285,7 +285,7 @@ async def resize_photo(photo):
 
 
 @telebot.on(admin_cmd(outgoing=True, pattern="stkrinfo"))
-@telebot.on(sudo_cmd(allow_sudo=True, pattern="stkrinfo", allow_sudo=True))
+@telebot.on(sudo_cmd(pattern="stkrinfo", allow_sudo=True))
 # @register(outgoing=True, pattern="^.stkrinfo$")
 async def get_pack_info(event):
     if not event.is_reply:
