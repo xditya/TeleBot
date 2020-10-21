@@ -2,9 +2,8 @@ import sys
 import math
 from userbot import bot
 from telethon import events
-from var import Var
 from pathlib import Path
-from userbot.uniborgConfig import Config
+from userbot.telebotConfig import Var, Config
 from userbot import LOAD_PLUG
 from userbot import CMD_LIST
 import re
