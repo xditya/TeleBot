@@ -34,13 +34,17 @@ async def _(event):
             await event.reply("```Please unblock @sangmatainfo_bot and try again```")
             return
         if response.text.startswith("Forward"):
-            xx = await event.eor(xx, 
-                "```can you kindly disable your forward privacy settings for good?```"
+            xx = await event.eor(
+                xx,
+                "```can you kindly disable your forward privacy settings for good?```",
             )
         else:
             if response.text.startswith("Select"):
-                xx = await event.eor(xx, "`Please go to` @DrWebBot `and select your language.`")
+                xx = await event.eor(
+                    xx, "`Please go to` @DrWebBot `and select your language.`"
+                )
             else:
-                xx = await event.eor(xx, 
-                    f"**Antivirus scan was completed. I got dem final results.**\n {response.message.message}"
+                xx = await event.eor(
+                    xx,
+                    f"**Antivirus scan was completed. I got dem final results.**\n {response.message.message}",
                 )

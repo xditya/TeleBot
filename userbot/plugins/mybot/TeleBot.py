@@ -153,14 +153,14 @@ async def get_full_user(event):
         if previous_message.forward:
             replied_user = await event.client(
                 GetFullUserRequest(
-                    previous_message.forward.from_id or previous_message.forward.channel_id
+                    previous_message.forward.sender_id or previous_message.forward.channel_id
                 )
             )
             return replied_user, None
         else:
             replied_user = await event.client(
                 GetFullUserRequest(
-                    previous_message.from_id
+                    previous_message.sender_id
                 )
             )
             return replied_user, None
@@ -260,7 +260,7 @@ async def _(event):
         if r_msg.media:
             bot_api_file_id = pack_bot_file_id(r_msg.media)
             tosend = "Current Chat ID: `{}`\nFrom User ID: `{}`\nBot API File ID: `{}`".format(
-                str(event.chat_id), str(r_msg.from_id), bot_api_file_id)
+                str(event.chat_id), str(r_msg.sender_id), bot_api_file_id)
             await tgbot.send_message(
                 event.chat_id,
                 message=tosend,
@@ -270,7 +270,7 @@ async def _(event):
             )
         else:
             sendit = "Current Chat ID: `{}`\nFrom User ID: `{}`".format(
-                str(event.chat_id), str(r_msg.from_id))
+                str(event.chat_id), str(r_msg.sender_id))
             await tgbot.send_message(
                 event.chat_id,
                 message=sendit,
@@ -297,7 +297,7 @@ async def dyno_usage(dyno):
     """
         Get your account Dyno Usage
     """
-    if dyno.from_id == bot.uid:
+    if dyno.sender_id == bot.uid:
         await dyno.edit("`Processing...`")
         useragent = ('Mozilla/5.0 (Linux; Android 10; SM-G975F) '
                      'AppleWebKit/537.36 (KHTML, like Gecko) '
@@ -362,7 +362,7 @@ async def _(givelogs):
     app = Heroku.app(Var.HEROKU_APP_NAME)
     with open('logs.txt', 'w') as log:
         log.write(app.get_log())
-    if givelogs.from_id == bot.uid:
+    if givelogs.sender_id == bot.uid:
         await tgbot.send_file(
             givelogs.chat_id,
             "logs.txt",

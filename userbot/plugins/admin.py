@@ -1,7 +1,3 @@
-# Copyright (C) 2019 The Raphielscape Company LLC.
-#
-# Licensed under the Raphielscape Public License, Version 1.c (the "License");
-# you may not use this file except in compliance with the License.
 """
 Userbot module to help you manage a group
 """
@@ -84,7 +80,7 @@ UNMUTE_RIGHTS = ChatBannedRights(until_date=None, send_messages=False)
 async def set_group_photo(gpic):
     """ For .setgpic command, changes the picture of a group """
     if not gpic.is_group:
-        event = await gpic.eor(event, "`I don't think this is a group.`")
+        await gpic.eor(event, "`I don't think this is a group.`")
         return
     replymsg = await gpic.get_reply_message()
     chat = await gpic.get_chat()
@@ -102,7 +98,7 @@ async def set_group_photo(gpic):
         elif "image" in replymsg.media.document.mime_type.split("/"):
             photo = await gpic.client.download_file(replymsg.media.document)
         else:
-            x= await gpic.eor(x, INVALID_MEDIA)
+            x = await gpic.eor(x, INVALID_MEDIA)
 
     if photo:
         try:
@@ -154,7 +150,7 @@ async def promote(promt):
     # Try to promote if current user is admin or creator
     try:
         await promt.client(EditAdminRequest(promt.chat_id, user.id, new_rights, rank))
-        event await promt.eor(event, "`Promoted Successfully! Enjoy!!`")
+        event = await promt.eor(event, "`Promoted Successfully! Enjoy!!`")
 
     # If Telethon spit BadRequestError, assume
     # we don't have Promote permission

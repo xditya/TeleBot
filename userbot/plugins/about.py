@@ -24,6 +24,6 @@ async def _(event):
     animation_chars = ["**TeleBot**", "[More Info](https://telegra.ph/TeleBot-07-08)"]
 
     for i in animation_ttl:
-
         await asyncio.sleep(animation_interval)
         await eor(event, animation_chars[i % 18])
+

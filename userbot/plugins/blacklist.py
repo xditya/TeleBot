@@ -42,7 +42,7 @@ async def on_add_black_list(event):
     await eor(event,  
         "Added {} triggers to the blacklist in the current chat".format(
             len(to_blacklist)
-        )
+        ),
     )
 
 

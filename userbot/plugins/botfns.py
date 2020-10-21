@@ -85,7 +85,7 @@ async def _(event):
     if reply_message.sender.bot:
         await eor(event,  "```Reply to actual users message.```")
         return
-    a = await event.reply("```Processing```")
+    await event.reply("```Processing```")
     async with event.client.conversation(chat) as conv:
         try:
             response = conv.wait_event(
