@@ -45,8 +45,8 @@ async def _(event):
     if event.fwd_from:
         return
     start = datetime.now()
-    await eor(event, "🏓 Pong!")
+    x = await eor(event, "🏓 Pong!")
     end = datetime.now()
     ms = (end - start).microseconds / 1000
     uptime = get_readable_time((time.time() - StartTime))
-    await eor(event, f"🏓Ping speed: {ms}\n🤖TeleBot Uptime: {uptime}")
+    await x.edit (f"🏓Ping speed: {ms}\n🤖TeleBot Uptime: {uptime}")
