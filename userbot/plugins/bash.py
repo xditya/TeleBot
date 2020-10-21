@@ -6,7 +6,7 @@ from userbot.utils import admin_cmd
 
 
 @telebot.on(admin_cmd(pattern="bash ?(.*)"))
-@telebot.on(sudo_cmd(pattern="bash ?(.*)"))
+@telebot.on(sudo_cmd(pattern="bash ?(.*)", allow_sudo=True))
 async def _(event):
     if event.fwd_from:
         return
