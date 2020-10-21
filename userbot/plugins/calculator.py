@@ -14,7 +14,7 @@ from userbot.utils import admin_cmd
 async def _(event):
     if event.fwd_from or event.via_bot_id:
         return
-    await eor(event,  "Processing ...")
+    await eor(event, "Processing ...")
     cmd = event.text.split(" ", maxsplit=1)[1]
     event.message.id
     if event.reply_to_msg_id:
@@ -48,7 +48,7 @@ async def _(event):
     final_output = "**EQUATION**: `{}` \n\n **SOLUTION**: \n`{}` \n".format(
         cmd, evaluation
     )
-    await eor(event,  final_output)
+    await eor(event, final_output)
 
 
 async def aexec(code, event):

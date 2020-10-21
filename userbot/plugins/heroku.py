@@ -119,8 +119,8 @@ async def dyno_usage(dyno):
     path = "/accounts/" + user_id + "/actions/get-quota"
     r = requests.get(heroku_api + path, headers=headers)
     if r.status_code != 200:
-        return await eor(dyno,
-            "`Error: something bad happened`\n\n" f">.`{r.reason}`\n"
+        return await eor(
+            dyno, "`Error: something bad happened`\n\n" f">.`{r.reason}`\n"
         )
     result = r.json()
     quota = result["account_quota"]
@@ -148,7 +148,8 @@ async def dyno_usage(dyno):
 
     await asyncio.sleep(1.5)
 
-    return await eor(dyno, 
+    return await eor(
+        dyno,
         "**⚙️ Dyno Usage ⚙️**:\n\n"
         f" -> `Dyno usage for`  **{Var.HEROKU_APP_NAME}**:\n"
         f"     •  `{AppHours}`**h**  `{AppMinutes}`**m**  "
@@ -156,7 +157,7 @@ async def dyno_usage(dyno):
         "\n\n"
         " -> `Dyno hours quota remaining this month`:\n"
         f"     •  `{hours}`**h**  `{minutes}`**m**  "
-        f"**|**  [`{percentage}`**%**]"
+        f"**|**  [`{percentage}`**%**]",
     )
 
 
@@ -191,8 +192,9 @@ async def _(givelogs):
         Heroku = heroku3.from_key(Var.HEROKU_API_KEY)
         app = Heroku.app(Var.HEROKU_APP_NAME)
     except BaseException:
-        return await eor(givelogs,
-            " Please make sure your Heroku API Key, Your App name are configured correctly in the heroku var !"
+        return await eor(
+            givelogs,
+            " Please make sure your Heroku API Key, Your App name are configured correctly in the heroku var !",
         )
     await eor(givelogs, "Downloading Logs..")
     with open("logs-telebot.txt", "w") as log:

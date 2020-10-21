@@ -29,7 +29,8 @@ async def _(event):
         country_time_zone = int(response_api["timezone"])
         sun_rise_time = int(response_api["sys"]["sunrise"]) + country_time_zone
         sun_set_time = int(response_api["sys"]["sunset"]) + country_time_zone
-        await eor(event, 
+        await eor(
+            event,
             """{}
 **Temperature**: {}°С
     __minimium__: {}°С
@@ -51,7 +52,7 @@ async def _(event):
                 country_code,
                 time.strftime("%Y-%m-%d %H:%M:%S", time.gmtime(sun_set_time)),
                 country_code,
-            )
+            ),
         )
     else:
         await eor(event, response_api["message"])

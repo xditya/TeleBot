@@ -34,14 +34,18 @@ async def ff_mpeg_trim_cmd(event):
             else:
                 end = datetime.now()
                 ms = (end - start).seconds
-                await eor(event, 
-                    "Downloaded to `{}` in {} seconds.".format(downloaded_file_name, ms)
+                await eor(
+                    event,
+                    "Downloaded to `{}` in {} seconds.".format(
+                        downloaded_file_name, ms
+                    ),
                 )
         else:
             await eor(event, "Reply to a Telegram media file")
     else:
-        await eor(event, 
-            f"a media file already exists in path. Please remove the media and try again!\n`.exec rm {FF_MPEG_DOWN_LOAD_MEDIA_PATH}`"
+        await eor(
+            event,
+            f"a media file already exists in path. Please remove the media and try again!\n`.exec rm {FF_MPEG_DOWN_LOAD_MEDIA_PATH}`",
         )
 
 
@@ -51,8 +55,9 @@ async def ff_mpeg_trim_cmd(event):
     if event.fwd_from:
         return
     if not os.path.exists(FF_MPEG_DOWN_LOAD_MEDIA_PATH):
-        await eor(event, 
-            f"a media file needs to be downloaded, and saved to the following path: `{FF_MPEG_DOWN_LOAD_MEDIA_PATH}`"
+        await eor(
+            event,
+            f"a media file needs to be downloaded, and saved to the following path: `{FF_MPEG_DOWN_LOAD_MEDIA_PATH}`",
         )
         return
     current_message_text = event.raw_text

@@ -32,6 +32,6 @@ async def _(event):
             a = response_content["error"]
         await eor(event, str(a))
     else:
-        await eor(event,  "SYNTAX: .calendar YYYY-MM-DD")
+        await eor(event, "SYNTAX: .calendar YYYY-MM-DD")
     end = datetime.now()
     (end - start).seconds

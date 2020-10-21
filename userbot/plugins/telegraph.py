@@ -46,8 +46,9 @@ async def _(event):
             )
             end = datetime.now()
             ms = (end - start).seconds
-            await eor(event, 
-                "Downloaded to {} in {} seconds.".format(downloaded_file_name, ms)
+            await eor(
+                event,
+                "Downloaded to {} in {} seconds.".format(downloaded_file_name, ms),
             )
             if downloaded_file_name.endswith((".webp")):
                 resize_image(downloaded_file_name)
@@ -61,7 +62,8 @@ async def _(event):
                 end = datetime.now()
                 ms_two = (end - start).seconds
                 os.remove(downloaded_file_name)
-                await eor(event, 
+                await eor(
+                    event,
                     "Uploaded to https://telegra.ph{} in {} seconds.".format(
                         media_urls[0], (ms + ms_two)
                     ),
@@ -90,15 +92,17 @@ async def _(event):
             response = telegraph.create_page(title_of_page, html_content=page_content)
             end = datetime.now()
             ms = (end - start).seconds
-            await eor(event, 
+            await eor(
+                event,
                 "Pasted to https://telegra.ph/{} in {} seconds.".format(
                     response["path"], ms
                 ),
                 link_preview=True,
             )
     else:
-        await eor(event, 
-            "Reply to a message to get a permanent telegra.ph link. (Inspired by @ControllerBot)"
+        await eor(
+            event,
+            "Reply to a message to get a permanent telegra.ph link. (Inspired by @ControllerBot)",
         )
 
 

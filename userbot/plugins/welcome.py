@@ -87,22 +87,24 @@ async def _(event):
         return
     cws = get_current_welcome_settings(event.chat_id)
     rm_welcome_setting(event.chat_id)
-    await eor(event, 
+    await eor(
+        event,
         "Welcome note cleared. "
-        + "The previous welcome message was `{}`.".format(cws.custom_welcome_message)
+        + "The previous welcome message was `{}`.".format(cws.custom_welcome_message),
     )
 
 
 @telebot.on(admin_cmd(pattern="listwelcome"))  # pylint:disable=E0602
-@telebot.on(sudo_cmd(pattern="listwelcome", allow_sudo=True)) 
+@telebot.on(sudo_cmd(pattern="listwelcome", allow_sudo=True))
 async def _(event):
     if event.fwd_from:
         return
     cws = get_current_welcome_settings(event.chat_id)
     if hasattr(cws, "custom_welcome_message"):
-        await eor(event, 
+        await eor(
+            event,
             "Welcome note found. "
-            + "Your welcome message is\n\n`{}`.".format(cws.custom_welcome_message)
+            + "Your welcome message is\n\n`{}`.".format(cws.custom_welcome_message),
         )
     else:
         await eor(event, "No Welcome Message found")

@@ -6,8 +6,9 @@ Available Commands:
 import emoji
 from googletrans import Translator
 
-from userbot.utils import admin_cmd
 from userbot import CMD_HNDLR
+from userbot.utils import admin_cmd
+
 
 @telebot.on(admin_cmd(pattern="tr ?(.*)"))
 @telebot.on(sudo_cmd(pattern="tr ?(.*)", allow_sudo=True))
@@ -25,7 +26,10 @@ async def _(event):
     elif "|" in input_str:
         lan, text = input_str.split("|")
     else:
-        await eor(event, f"`{CMD_HNDLR}tr LanguageCode` as reply to a message.\nLanguage codes can be found [here](https://t.me/TeleBotHelpChat/22678)")
+        await eor(
+            event,
+            f"`{CMD_HNDLR}tr LanguageCode` as reply to a message.\nLanguage codes can be found [here](https://t.me/TeleBotHelpChat/22678)",
+        )
         return
     text = emoji.demojize(text.strip())
     lan = lan.strip()

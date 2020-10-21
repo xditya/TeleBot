@@ -12,7 +12,8 @@ from userbot.utils import admin_cmd
 )
 @telebot.on(
     sudo_cmd(
-        pattern="webupload ?(.+?|) (?:--)(anonfiles|transfer|filebin|anonymousfiles|megaupload|bayfiles)", allow_sudo=True
+        pattern="webupload ?(.+?|) (?:--)(anonfiles|transfer|filebin|anonymousfiles|megaupload|bayfiles)",
+        allow_sudo=True,
     )
 )
 async def _(event):

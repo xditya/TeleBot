@@ -55,10 +55,11 @@ async def _(event):
     ms = (end - start).seconds
     if r["isUrl"]:
         nurl = f"https://iffuci.tk/v/{r['key']}"
-        await eor(event, 
+        await eor(
+            event,
             "code is pasted to {} in {} seconds. GoTo Original URL: {}".format(
                 url, ms, nurl
-            )
+            ),
         )
     else:
         await eor(event, "code is pasted to {} in {} seconds".format(url, ms))

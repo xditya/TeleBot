@@ -27,8 +27,9 @@ async def lst(event):
     else:
         path = os.getcwd()
     if not exists(path):
-        await eor(event, 
-            f"There is no such directory or file with the name `{tele}` check again!"
+        await eor(
+            event,
+            f"There is no such directory or file with the name `{tele}` check again!",
         )
         return
     if isdir(path):

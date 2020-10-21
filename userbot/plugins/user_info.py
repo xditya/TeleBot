@@ -117,7 +117,9 @@ async def get_user_from_event(event: NewMessage.Event, **kwargs):
     # Check for a replied to message
     elif event.reply_to_msg_id:
         previous_message = await event.get_reply_message()
-        replied_user = await event.client(GetFullUserRequest(previous_message.sender_id))
+        replied_user = await event.client(
+            GetFullUserRequest(previous_message.sender_id)
+        )
 
     # Last case scenario is to get the current user
     else:

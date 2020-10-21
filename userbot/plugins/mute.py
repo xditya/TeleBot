@@ -22,8 +22,8 @@ async def startmute(event):
     elif private is True:
         userid = event.chat_id
     else:
-        return await eor(event, 
-            "Please reply to a user or add their into the command to mute them."
+        return await eor(
+            event, "Please reply to a user or add their into the command to mute them."
         )
     chat_id = event.chat_id
     chat = await event.get_chat()
@@ -31,8 +31,9 @@ async def startmute(event):
         if chat.admin_rights.delete_messages is True:
             pass
         else:
-            return await eor(event, 
-                "You can't mute a person if you dont have delete messages permission"
+            return await eor(
+                event,
+                "You can't mute a person if you dont have delete messages permission",
             )
     elif "creator" in vars(chat):
         pass
@@ -68,8 +69,9 @@ async def endmute(event):
     elif private is True:
         userid = event.chat_id
     else:
-        return await eor(event, 
-            "Please reply to a user or add their into the command to unmute them."
+        return await eor(
+            event,
+            "Please reply to a user or add their into the command to unmute them.",
         )
     chat_id = event.chat_id
     if not is_muted(userid, chat_id):

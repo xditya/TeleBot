@@ -34,8 +34,9 @@ async def _(event):
             await event.reply("```Please unblock me (@QuotLyBot) u Nigga```")
             return
         if response.text.startswith("Hi!"):
-            await eor(event, 
-                "```Can you kindly disable your forward privacy settings for good?```"
+            await eor(
+                event,
+                "```Can you kindly disable your forward privacy settings for good?```",
             )
         else:
             await event.delete()

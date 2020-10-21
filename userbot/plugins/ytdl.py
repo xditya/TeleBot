@@ -45,8 +45,8 @@ async def progress(current, total, event, start, type_of_ps, file_name=None):
             humanbytes(current), humanbytes(total), time_formatter(estimated_total_time)
         )
         if file_name:
-            await eor(event, 
-                "{}\nFile Name: `{}`\n{}".format(type_of_ps, file_name, tmp)
+            await eor(
+                event, "{}\nFile Name: `{}`\n{}".format(type_of_ps, file_name, tmp)
             )
         else:
             await eor(event, "{}\n{}".format(type_of_ps, tmp))
@@ -146,8 +146,9 @@ async def download_video(v_url):
         await eor(v_url, "`The download content was too short.`")
         return
     except GeoRestrictedError:
-        await eor(v_url, 
-            "`Video is not available from your geographic location due to geographic restrictions imposed by a website.`"
+        await eor(
+            v_url,
+            "`Video is not available from your geographic location due to geographic restrictions imposed by a website.`",
         )
         return
     except MaxDownloadsReached:
@@ -170,10 +171,11 @@ async def download_video(v_url):
         return
     c_time = time.time()
     if song:
-        await eor(v_url, 
+        await eor(
+            v_url,
             f"`Preparing to upload song:`\
         \n**{ytdl_data['title']}**\
-        \nby *{ytdl_data['uploader']}*"
+        \nby *{ytdl_data['uploader']}*",
         )
         await v_url.client.send_file(
             v_url.chat_id,
@@ -195,10 +197,11 @@ async def download_video(v_url):
         os.remove(f"{ytdl_data['id']}.mp3")
         await v_url.delete()
     elif video:
-        await eor(v_url, 
+        await eor(
+            v_url,
             f"`Preparing to upload video:`\
         \n**{ytdl_data['title']}**\
-        \nby *{ytdl_data['uploader']}*"
+        \nby *{ytdl_data['uploader']}*",
         )
         await v_url.client.send_file(
             v_url.chat_id,

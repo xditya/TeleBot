@@ -26,4 +26,3 @@ async def _(event):
     for i in animation_ttl:
         await asyncio.sleep(animation_interval)
         await eor(event, animation_chars[i % 18])
-

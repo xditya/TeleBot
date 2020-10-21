@@ -61,8 +61,8 @@ async def get_chatinfo(event):
             await eor(event, "`Invalid channel/group`")
             return None
         except ChannelPrivateError:
-            await eor(event, 
-                "`This is a private channel/group or I am banned from there`"
+            await eor(
+                event, "`This is a private channel/group or I am banned from there`"
             )
             return None
         except ChannelPublicGroupNaError:

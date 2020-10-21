@@ -47,10 +47,14 @@ async def _(event):
         input_str = "http://" + input_str
     r = requests.get(input_str, allow_redirects=False)
     if str(r.status_code).startswith("3"):
-        await eor(event, 
-            "Input URL: {}\nReDirected URL: {}".format(input_str, r.headers["Location"])
+        await eor(
+            event,
+            "Input URL: {}\nReDirected URL: {}".format(
+                input_str, r.headers["Location"]
+            ),
         )
     else:
-        await eor(event, 
-            "Input URL {} returned status_code {}".format(input_str, r.status_code)
+        await eor(
+            event,
+            "Input URL {} returned status_code {}".format(input_str, r.status_code),
         )

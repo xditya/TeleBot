@@ -39,7 +39,8 @@ async def on_add_black_list(event):
     )
     for trigger in to_blacklist:
         sql.add_to_blacklist(event.chat_id, trigger.lower())
-    await eor(event,  
+    await eor(
+        event,
         "Added {} triggers to the blacklist in the current chat".format(
             len(to_blacklist)
         ),
@@ -69,7 +70,7 @@ async def on_view_blacklist(event):
             )
             await event.delete()
     else:
-        await eor(event,  OUT_STR)
+        await eor(event, OUT_STR)
 
 
 @telebot.on(admin_cmd(pattern="rmblacklist ((.|\n)*)"))
@@ -83,4 +84,4 @@ async def on_delete_blacklist(event):
     for trigger in to_unblacklist:
         if sql.rm_from_blacklist(event.chat_id, trigger.lower()):
             successful += 1
-    await eor(event,  f"Removed {successful} / {len(to_unblacklist)} from the blacklist")
+    await eor(event, f"Removed {successful} / {len(to_unblacklist)} from the blacklist")

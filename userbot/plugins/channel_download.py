@@ -25,7 +25,7 @@ async def get_media(event):
     print(limit)
     channel_username = channel_username[11:]
     print(channel_username)
-    await eor(event,  "Downloading Media From this Channel.")
+    await eor(event, "Downloading Media From this Channel.")
     msgs = await borg.get_messages(channel_username, limit=int(limit))
     with open("log.txt", "w") as f:
         f.write(str(msgs))
@@ -38,7 +38,7 @@ async def get_media(event):
     output = str(output)
     output = output.replace("b'", "")
     output = output.replace("\n'", "")
-    await eor(event,  "Downloaded " + output + " files.")
+    await eor(event, "Downloaded " + output + " files.")
 
 
 @telebot.on(admin_cmd(pattern=r"geta"))
@@ -54,7 +54,7 @@ async def get_media(event):
     channel_username = channel_username[7:]
 
     print(channel_username)
-    await eor(event,  "Downloading All Media From this Channel.")
+    await eor(event, "Downloading All Media From this Channel.")
     msgs = await borg.get_messages(channel_username, limit=3000)
     with open("log.txt", "w") as f:
         f.write(str(msgs))
@@ -67,4 +67,4 @@ async def get_media(event):
     output = str(output)
     output = output.replace("b'", "")
     output = output.replace("\n'", "")
-    await eor(event,  "Downloaded " + output + " files.")
+    await eor(event, "Downloaded " + output + " files.")

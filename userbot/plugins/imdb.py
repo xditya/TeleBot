@@ -84,7 +84,8 @@ async def imdb(e):
                 mov_rating = r.strong["title"]
         else:
             mov_rating = "Not available"
-        await eor(event, 
+        await eor(
+            event,
             "<a href=" + poster + ">&#8203;</a>"
             "<b>🎗️Title : </b><code>"
             + mov_title

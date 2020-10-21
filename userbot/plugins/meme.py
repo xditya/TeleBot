@@ -56,13 +56,15 @@ async def meme(event):
     await eor(event, flower + flower + flower + "      ")
     await eor(event, flower + flower + flower + flower + "     ")
     await eor(event, flower + flower + flower + flower + flower + "    ")
-    await eor(event, 
-        flower + flower + flower + flower + flower + flower + flower + "   "
+    await eor(
+        event, flower + flower + flower + flower + flower + flower + flower + "   "
     )
-    await eor(event, 
-        flower + flower + flower + flower + flower + flower + flower + flower + "  "
+    await eor(
+        event,
+        flower + flower + flower + flower + flower + flower + flower + flower + "  ",
     )
-    await eor(event, 
+    await eor(
+        event,
         flower
         + flower
         + flower
@@ -72,9 +74,10 @@ async def meme(event):
         + flower
         + flower
         + flower
-        + " "
+        + " ",
     )
-    await eor(event, 
+    await eor(
+        event,
         flower
         + flower
         + flower
@@ -84,6 +87,6 @@ async def meme(event):
         + flower
         + flower
         + flower
-        + flower
+        + flower,
     )
     await asyncio.sleep(sleepValue)

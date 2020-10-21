@@ -38,8 +38,9 @@ async def forw(event):
         try:
             await borg.forward_messages(int(channel.chat_id), previous_message)
             sent_count += 1
-            await eor(event, 
-                f"Sent : {sent_count}\nError : {error_count}\nTotal : {len(channels)}"
+            await eor(
+                event,
+                f"Sent : {sent_count}\nError : {error_count}\nTotal : {len(channels)}",
             )
         except Exception as error:
             try:
@@ -55,8 +56,9 @@ async def forw(event):
             except BaseException:
                 pass
             error_count += 1
-            await eor(event, 
-                f"Sent : {sent_count}\nError : {error_count}\nTotal : {len(channels)}"
+            await eor(
+                event,
+                f"Sent : {sent_count}\nError : {error_count}\nTotal : {len(channels)}",
             )
     await eor(event, f"{sent_count} messages sent with {error_count} errors.")
     if error_count > 0:
@@ -112,8 +114,9 @@ async def _(event):
                         )
 
                     sent_count += 1
-                    await eor(event, 
-                        f"Sent : {sent_count}\nError : {error_count}\nTotal : {len(channels)}"
+                    await eor(
+                        event,
+                        f"Sent : {sent_count}\nError : {error_count}\nTotal : {len(channels)}",
                     )
                 except Exception as error:
                     try:
@@ -132,8 +135,9 @@ async def _(event):
                     except BaseException:
                         pass
                     error_count += 1
-                    await eor(event, 
-                        f"Sent : {sent_count}\nError : {error_count}\nTotal : {len(channels)}"
+                    await eor(
+                        event,
+                        f"Sent : {sent_count}\nError : {error_count}\nTotal : {len(channels)}",
                     )
             await eor(event, f"{sent_count} messages sent with {error_count} errors.")
             if error_count > 0:
@@ -149,8 +153,9 @@ async def _(event):
                         int(channel.chat_id), raw_text, link_preview=False
                     )
                     sent_count += 1
-                    await eor(event, 
-                        f"Sent : {sent_count}\nError : {error_count}\nTotal : {len(channels)}"
+                    await eor(
+                        event,
+                        f"Sent : {sent_count}\nError : {error_count}\nTotal : {len(channels)}",
                     )
                 except Exception as error:
                     try:
@@ -169,8 +174,9 @@ async def _(event):
                     except BaseException:
                         pass
                     error_count += 1
-                    await eor(event, 
-                        f"Sent : {sent_count}\nError : {error_count}\nTotal : {len(channels)}"
+                    await eor(
+                        event,
+                        f"Sent : {sent_count}\nError : {error_count}\nTotal : {len(channels)}",
                     )
             await eor(event, f"{sent_count} messages sent with {error_count} errors.")
             if error_count > 0:

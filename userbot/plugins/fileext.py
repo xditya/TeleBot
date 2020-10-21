@@ -19,14 +19,16 @@ async def _(event):
         raw_html = response_api.content
         soup = BeautifulSoup(raw_html, "html.parser")
         ext_details = soup.find_all("td", {"colspan": "3"})[-1].text
-        await eor(event, 
+        await eor(
+            event,
             "**File Extension**: `{}`\n**Description**: `{}`".format(
                 input_str, ext_details
-            )
+            ),
         )
     else:
-        await eor(event, 
+        await eor(
+            event,
             "https://www.fileext.com/ responded with {} for query: {}".format(
                 status_code, input_str
-            )
+            ),
         )

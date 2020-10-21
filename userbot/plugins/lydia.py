@@ -47,10 +47,11 @@ async def addcf(event):
         if reply_msg.from_id is None:
             return await eor(event, "Invalid user type.")
         ACC_LYDIA.update({(event.chat_id & reply_msg.from_id): session})
-        await eor(event, 
+        await eor(
+            event,
             "Lydia successfully (re)enabled for user: {} in chat: {}".format(
                 str(reply_msg.from_id), str(event.chat_id)
-            )
+            ),
         )
     else:
         await eor(event, "Reply to a user to activate Lydia AI on them")
@@ -67,10 +68,11 @@ async def remcf(event):
     reply_msg = await event.get_reply_message()
     try:
         del ACC_LYDIA[event.chat_id & reply_msg.from_id]
-        await eor(event, 
+        await eor(
+            event,
             "Lydia successfully disabled for user: {} in chat: {}".format(
                 str(reply_msg.from_id), str(event.chat_id)
-            )
+            ),
         )
     except Exception:
         await eor(event, "This person does not have Lydia activated on him/her.")

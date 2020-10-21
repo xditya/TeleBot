@@ -55,7 +55,7 @@ async def _(event):
 
 
 @telebot.on(admin_cmd(pattern="gtime (.*)"))  # pylint:disable=E0602
-@telebot.on(sudo_cmd(pattern="gtime (.*)", allow_sudo=True)) 
+@telebot.on(sudo_cmd(pattern="gtime (.*)", allow_sudo=True))
 async def _(event):
     if event.fwd_from:
         return

@@ -40,8 +40,9 @@ async def _(event):
             await event.reply("```Please unblock @sangmatainfo_bot and try again```")
             return
         if response.text.startswith("Forward"):
-            await eor(event, 
-                "```can you kindly disable your forward privacy settings for good?```"
+            await eor(
+                event,
+                "```can you kindly disable your forward privacy settings for good?```",
             )
         else:
             await eor(event, f"{response.message.message}")
@@ -120,8 +121,9 @@ async def _(event):
             await event.reply("```Please unblock @uploadbot and try again```")
             return
         if response.text.startswith("Hi!,"):
-            await eor(event, 
-                "```can you kindly disable your forward privacy settings for good?```"
+            await eor(
+                event,
+                "```can you kindly disable your forward privacy settings for good?```",
             )
         else:
             await eor(event, f"{response.message.message}")
@@ -156,8 +158,9 @@ async def _(event):
             await event.reply("```you blocked bot```")
             return
         if response.text.startswith("Hello,"):
-            await eor(event, 
-                "```can you kindly disable your forward privacy settings for good?```"
+            await eor(
+                event,
+                "```can you kindly disable your forward privacy settings for good?```",
             )
         else:
             await eor(event, f"{response.message.message}")

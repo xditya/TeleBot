@@ -14,8 +14,9 @@ async def _(event):
     output_text = ""
     for name, value in country_data.items():
         output_text += "`{}`: `{}`\n".format(str(name), str(value))
-    await eor(event, 
-        "**CoronaVirus Info in {}**:\n\n{}".format(country.capitalize(), output_text)
+    await eor(
+        event,
+        "**CoronaVirus Info in {}**:\n\n{}".format(country.capitalize(), output_text),
     )
 
 

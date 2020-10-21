@@ -22,8 +22,9 @@ async def labstack(event):
             reply.media, Var.TEMP_DOWNLOAD_DIRECTORY
         )
     else:
-        await eor(event, 
-            "Reply to a media file or provide a directory to upload the file to labstack"
+        await eor(
+            event,
+            "Reply to a media file or provide a directory to upload the file to labstack",
         )
         return
     filesize = os.path.getsize(filebase)
@@ -62,6 +63,6 @@ async def labstack(event):
         t_response_arry = "https://up.labstack.com/api/v1/links/{}/receive".format(
             r2json["code"]
         )
-    await eor(event, 
-        t_response_arry + "\nMax Days:" + str(max_days), link_preview=False
+    await eor(
+        event, t_response_arry + "\nMax Days:" + str(max_days), link_preview=False
     )

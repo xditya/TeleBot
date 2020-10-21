@@ -44,7 +44,8 @@ async def _(event):
         response = s.results.share()
         speedtest_image = response
         if as_text:
-            await eor(event, 
+            await eor(
+                event,
                 """`SpeedTest completed in {} seconds`
 
 `Download: {}`
@@ -58,7 +59,7 @@ async def _(event):
                     ping_time,
                     i_s_p,
                     i_s_p_rating,
-                )
+                ),
             )
         else:
             await borg.send_file(
@@ -71,7 +72,8 @@ async def _(event):
             )
             await event.delete()
     except Exception as exc:
-        await eor(event, 
+        await eor(
+            event,
             """**SpeedTest** completed in {} seconds
 Download: {}
 Upload: {}
@@ -84,7 +86,7 @@ __With the Following ERRORs__
                 convert_from_bytes(upload_speed),
                 ping_time,
                 str(exc),
-            )
+            ),
         )
 
 

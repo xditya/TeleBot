@@ -76,8 +76,8 @@ async def _(event):
         except Exception as e:  # pylint:disable=C0103,W0703
             await eor(event, str(e))
         else:
-            await eor(event, 
-                "Current Chat Default Permissions Changed Successfully, in API"
+            await eor(
+                event, "Current Chat Default Permissions Changed Successfully, in API"
             )
 
 

@@ -99,8 +99,8 @@ async def on_snip_save(event):
         )
         await eor(event, f"filter {name} saved successfully. Get it with {name}")
     else:
-        await eor(event, 
-            "Reply to a message with `savefilter keyword` to save the filter"
+        await eor(
+            event, "Reply to a message with `savefilter keyword` to save the filter"
         )
 
 

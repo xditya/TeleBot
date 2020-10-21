@@ -57,9 +57,10 @@ async def okgoogle(img):
         fetchUrl = response.headers["Location"]
 
         if response != 400:
-            await eor(img, 
+            await eor(
+                img,
                 "`Image successfully uploaded to Google. Maybe.`"
-                "\n`Parsing source now. Maybe.`"
+                "\n`Parsing source now. Maybe.`",
             )
         else:
             await eor(img, "`Google told me to fuck off.`")
@@ -93,8 +94,8 @@ async def okgoogle(img):
             )
         except TypeError:
             pass
-        await eor(img, 
-            f"[{guess}]({fetchUrl})\n\n[Visually similar images]({imgspage})"
+        await eor(
+            img, f"[{guess}]({fetchUrl})\n\n[Visually similar images]({imgspage})"
         )
 
 

@@ -479,13 +479,13 @@ async def pin(msg):
 
     # If not admin and not creator, return
     if not admin and not creator:
-        await eor(msg,NO_ADMIN)
+        await eor(msg, NO_ADMIN)
         return
 
     to_pin = msg.reply_to_msg_id
 
     if not to_pin:
-        await eor(msg,"`Reply to a message to pin it.`")
+        await eor(msg, "`Reply to a message to pin it.`")
         return
 
     options = msg.pattern_match.group(1)
@@ -498,10 +498,10 @@ async def pin(msg):
     try:
         await msg.client(UpdatePinnedMessageRequest(msg.to_id, to_pin, is_silent))
     except BadRequestError:
-        await eor(msg,NO_PERM)
+        await eor(msg, NO_PERM)
         return
 
-    await eor(msg,"`Pinned Successfully!`")
+    await eor(msg, "`Pinned Successfully!`")
 
     user = await get_user_from_id(msg.from_id, msg)
 
@@ -545,8 +545,9 @@ async def kick(usr):
         return
 
     if reason:
-        await eor(usr, 
-            f"`Kicked` [{user.first_name}](tg://user?id={user.id})`!`\nReason: {reason}"
+        await eor(
+            usr,
+            f"`Kicked` [{user.first_name}](tg://user?id={user.id})`!`\nReason: {reason}",
         )
     else:
         await eor(usr, f"`Kicked` [{user.first_name}](tg://user?id={user.id})`!`")

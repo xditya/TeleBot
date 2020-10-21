@@ -10,8 +10,9 @@ async def _(event):
     if event.fwd_from:
         return
     if Config.CHANNEL_ID is None:
-        await eor(event, 
-            "Please set the required environment variable `CHANNEL_ID` for this plugin to work"
+        await eor(
+            event,
+            "Please set the required environment variable `CHANNEL_ID` for this plugin to work",
         )
         return
     try:

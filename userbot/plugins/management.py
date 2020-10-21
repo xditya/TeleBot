@@ -189,7 +189,8 @@ UserStatusOnline: {}
 UserStatusRecently: {}
 Bots: {}
 None: {}"""
-        await eor(event, 
+        await eor(
+            event,
             required_string.format(
                 c,
                 p,
@@ -202,10 +203,11 @@ None: {}"""
                 recent,
                 bots,
                 n,
-            )
+            ),
         )
         await asyncio.sleep(5)
-    await eor(event, 
+    await eor(
+        event,
         """Total: {} users
 Deleted Accounts: {}
 UserStatusEmpty: {}
@@ -217,7 +219,7 @@ UserStatusRecently: {}
 Bots: {}
 None: {}""".format(
             p, d, y, m, w, o, q, r, b, n
-        )
+        ),
     )
 
 

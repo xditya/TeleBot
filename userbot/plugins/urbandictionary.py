@@ -18,10 +18,11 @@ async def _(event):
     urban = asyncurban.UrbanDictionary()
     try:
         mean = await urban.get_word(word)
-        await eor(event, 
+        await eor(
+            event,
             "Text: **{}**\n\nMeaning: **{}**\n\nExample: __{}__".format(
                 mean.word, mean.definition, mean.example
-            )
+            ),
         )
     except asyncurban.WordNotFoundError:
         await eor(event, "No result found for **" + word + "**")

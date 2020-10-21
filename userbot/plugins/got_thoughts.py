@@ -32,8 +32,9 @@ async def _(event):
 
     if x == 2:
 
-        await eor(event, 
-            '`"When the snows fall and the white winds blow, the lone wolf dies but the pack survives!"`'
+        await eor(
+            event,
+            '`"When the snows fall and the white winds blow, the lone wolf dies but the pack survives!"`',
         )
 
     if x == 3:
@@ -42,20 +43,23 @@ async def _(event):
 
     if x == 4:
 
-        await eor(event, 
-            '`"I have a tender spot in my heart for cripples, bastards and broken things."`'
+        await eor(
+            event,
+            '`"I have a tender spot in my heart for cripples, bastards and broken things."`',
         )
 
     if x == 5:
 
-        await eor(event, 
-            '`"Death is so terribly final, while life is full of possibilities."`'
+        await eor(
+            event,
+            '`"Death is so terribly final, while life is full of possibilities."`',
         )
 
     if x == 6:
 
-        await eor(event, 
-            '`"Once you’ve accepted your flaws, no one can use them against you."`'
+        await eor(
+            event,
+            '`"Once you’ve accepted your flaws, no one can use them against you."`',
         )
 
     if x == 7:
@@ -68,8 +72,8 @@ async def _(event):
 
     if x == 9:
 
-        await eor(event, 
-            '`"I grew up with soldiers. I learned how to die a long time ago."`'
+        await eor(
+            event, '`"I grew up with soldiers. I learned how to die a long time ago."`'
         )
 
     if x == 10:
@@ -86,14 +90,16 @@ async def _(event):
 
     if x == 13:
 
-        await eor(event, 
-            '`"Never forget what you are. The rest of the world will not. Wear it like armour, and it can never be used to hurt you."`'
+        await eor(
+            event,
+            '`"Never forget what you are. The rest of the world will not. Wear it like armour, and it can never be used to hurt you."`',
         )
 
     if x == 14:
 
-        await eor(event, 
-            '`"The day will come when you think you are safe and happy, and your joy will turn to ashes in your mouth."`'
+        await eor(
+            event,
+            '`"The day will come when you think you are safe and happy, and your joy will turn to ashes in your mouth."`',
         )
 
     if x == 15:
@@ -134,14 +140,15 @@ async def _(event):
 
     if x == 24:
 
-        await eor(event, 
-            '`"I am the dragon\'s daughter, and I swear to you that those who would harm you will die screaming."`'
+        await eor(
+            event,
+            '`"I am the dragon\'s daughter, and I swear to you that those who would harm you will die screaming."`',
         )
 
     if x == 25:
 
-        await eor(event, 
-            '`"A lion does not concern himself with the opinion of sheep."`'
+        await eor(
+            event, '`"A lion does not concern himself with the opinion of sheep."`'
         )
 
     if x == 26:
@@ -150,20 +157,23 @@ async def _(event):
 
     if x == 27:
 
-        await eor(event, 
-            '`"I understand that if any more words come pouring out your c*nt mouth, I\'m gonna have to eat every f*cking chicken in this room."`'
+        await eor(
+            event,
+            '`"I understand that if any more words come pouring out your c*nt mouth, I\'m gonna have to eat every f*cking chicken in this room."`',
         )
 
     if x == 28:
 
-        await eor(event, 
-            '`"If you think this has a happy ending, you haven\'t been paying attention."`'
+        await eor(
+            event,
+            '`"If you think this has a happy ending, you haven\'t been paying attention."`',
         )
 
     if x == 29:
 
-        await eor(event, 
-            '`"If you ever call me sister again, I\'ll have you strangled in your sleep."`'
+        await eor(
+            event,
+            '`"If you ever call me sister again, I\'ll have you strangled in your sleep."`',
         )
 
     if x == 30:
@@ -180,8 +190,9 @@ async def _(event):
 
     if x == 33:
 
-        await eor(event, 
-            "`\"Lannister, Targaryen, Baratheon, Stark, Tyrell... they're all just spokes on a wheel. This one's on top, then that one's on top, and on and on it spins, crushing those on the ground.\"`"
+        await eor(
+            event,
+            "`\"Lannister, Targaryen, Baratheon, Stark, Tyrell... they're all just spokes on a wheel. This one's on top, then that one's on top, and on and on it spins, crushing those on the ground.\"`",
         )
 
     if x == 34:
@@ -190,8 +201,9 @@ async def _(event):
 
     if x == 35:
 
-        await eor(event, 
-            '`"When people ask you what happened here, tell them the North remembers. Tell them winter came for House Frey."`'
+        await eor(
+            event,
+            '`"When people ask you what happened here, tell them the North remembers. Tell them winter came for House Frey."`',
         )
 
     if x == 36:
@@ -200,8 +212,9 @@ async def _(event):
 
     if x == 37:
 
-        await eor(event, 
-            '`"There is only one war that matters. The Great War. And it is here."`'
+        await eor(
+            event,
+            '`"There is only one war that matters. The Great War. And it is here."`',
         )
 
     if x == 38:

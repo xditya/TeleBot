@@ -14,8 +14,9 @@ async def _(event):
     if event.fwd_from:
         return
     if Config.SCREEN_SHOT_LAYER_ACCESS_KEY is None:
-        await eor(event, 
-            "Need to get an API key from https://screenshotlayer.com/product \nModule stopping!"
+        await eor(
+            event,
+            "Need to get an API key from https://screenshotlayer.com/product \nModule stopping!",
         )
         return
     await eor(event, "Processing ...")

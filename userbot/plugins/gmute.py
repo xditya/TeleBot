@@ -22,8 +22,8 @@ async def startgmute(event):
     elif private is True:
         userid = event.chat_id
     else:
-        return await eor(event, 
-            "Please reply to a user or add their into the command to gmute them."
+        return await eor(
+            event, "Please reply to a user or add their into the command to gmute them."
         )
     event.chat_id
     await event.get_chat()
@@ -55,8 +55,9 @@ async def endgmute(event):
     elif private is True:
         userid = event.chat_id
     else:
-        return await eor(event, 
-            "Please reply to a user or add their into the command to ungmute them."
+        return await eor(
+            event,
+            "Please reply to a user or add their into the command to ungmute them.",
         )
     event.chat_id
     if not is_muted(userid, "gmute"):
@@ -67,6 +68,7 @@ async def endgmute(event):
         await eor(event, "Error occured!\nError is " + str(e))
     else:
         await eor(event, "Successfully ungmuted that person")
+
 
 @command(incoming=True)
 async def watcher(event):

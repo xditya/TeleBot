@@ -12,7 +12,8 @@ n = str(ALIVE_NAME) if ALIVE_NAME else "Set ALIVE_NAME in config vars in Heroku"
 @telebot.on(admin_cmd(pattern=r"ded"))
 @telebot.on(sudo_cmd(pattern=r"ded"))
 async def bluedevilded(ded):
-    await eor(ded,
+    await eor(
+        ded,
         n + " ==             |\n　　　　　|"
         "\n　　　　　| \n"
         "　　　　　| \n"

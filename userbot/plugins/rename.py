@@ -53,14 +53,16 @@ async def _(event):
             end_two = datetime.now()
             os.remove(downloaded_file_name)
             ms_two = (end_two - end).seconds
-            await eor(event, 
+            await eor(
+                event,
                 "Downloaded in {} seconds 😎. Uploaded in {} seconds 🥳.".format(
                     ms_one, ms_two
-                )
+                ),
             )
         else:
             await eor(event, "File Not Found {}".format(input_str))
     else:
-        await eor(event, 
-            f"Syntax ~ `{xyz}rename file_name.extension` as reply to a Telegram media"
+        await eor(
+            event,
+            f"Syntax ~ `{xyz}rename file_name.extension` as reply to a Telegram media",
         )

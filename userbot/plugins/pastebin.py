@@ -54,10 +54,11 @@ async def _(event):
     ms = (end - start).seconds
     if r["isUrl"]:
         nurl = f"https://del.dog/v/{r['key']}"
-        await eor(event, 
+        await eor(
+            event,
             "Dogged to [dogbin]({}) in {} seconds. GoTo Original URL: {}".format(
                 url, ms, nurl
-            )
+            ),
         )
     else:
         await eor(event, "Dogged to [dogbin]({}) in {} seconds".format(url, ms))
