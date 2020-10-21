@@ -49,4 +49,4 @@ async def _(event):
     end = datetime.now()
     ms = (end - start).microseconds / 1000
     uptime = get_readable_time((time.time() - StartTime))
-    await x.edit (f"🏓Ping speed: {ms}\n🤖TeleBot Uptime: {uptime}")
+    await x.edit(f"🏓Ping speed: {ms}\n🤖TeleBot Uptime: {uptime}")
