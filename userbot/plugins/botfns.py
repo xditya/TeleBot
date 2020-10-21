@@ -10,7 +10,7 @@ from userbot.utils import admin_cmd, sudo_cmd
 
 
 @telebot.on(admin_cmd(pattern="purl ?(.*)"))
-@telebot.on(sudo_cmd(pattern="purl ?(.*)"))
+@telebot.on(sudo_cmd(pattern="purl ?(.*)", allow_sudo=True))
 async def _(event):
     if event.fwd_from:
         return
@@ -38,7 +38,7 @@ async def _(event):
 
 
 @telebot.on(admin_cmd(pattern="reader ?(.*)"))
-@telebot.on(sudo_cmd(pattern="reader ?(.*)"))
+@telebot.on(sudo_cmd(pattern="reader ?(.*)", allow_sudo=True))
 async def _(event):
     if event.fwd_from:
         return
@@ -69,7 +69,7 @@ async def _(event):
 
 
 @telebot.on(admin_cmd(pattern="aud ?(.*)"))
-@telebot.on(sudo_cmd(pattern="aud ?(.*)"))
+@telebot.on(sudo_cmd(pattern="aud ?(.*)", allow_sudo=True))
 async def _(event):
     if event.fwd_from:
         return
@@ -101,7 +101,7 @@ async def _(event):
 
 
 @telebot.on(admin_cmd(pattern="instadl ?(.*)"))
-@telebot.on(sudo_cmd(pattern="instadl ?(.*)"))
+@telebot.on(sudo_cmd(pattern="instadl ?(.*)", allow_sudo=True))
 async def _(event):
     if event.fwd_from:
         return
@@ -129,6 +129,7 @@ async def _(event):
 
 
 @telebot.on(admin_cmd(pattern="stats$"))
+@telebot.on(sudo_cmd(pattern="stats$", allow_sudo=True))
 async def stats(event):
     if event.fwd_from:
         return
@@ -142,6 +143,7 @@ async def stats(event):
 
 
 @telebot.on(admin_cmd(pattern="xogame$"))
+@telebot.on(sudo_cmd(pattern="xogame$", allow_sudo=True))
 async def gamez(event):
     if event.fwd_from:
         return
@@ -155,6 +157,7 @@ async def gamez(event):
 
 
 @telebot.on(admin_cmd(pattern="whisper ?(.*)"))
+@telebot.on(sudo_cmd(pattern="whisper ?(.*)", allow_sudo=True))
 async def wspr(event):
     if event.fwd_from:
         return
@@ -168,6 +171,7 @@ async def wspr(event):
 
 
 @telebot.on(admin_cmd(pattern="crack ?(.*)"))
+@telebot.on(sudo_cmd(pattern="crack ?(.*)", allow_sudo=True))
 async def mod(event):
     if event.fwd_from:
         return
@@ -181,7 +185,7 @@ async def mod(event):
 
 
 @telebot.on(admin_cmd(pattern="checkspam ?(.*)"))
-@telebot.on(sudo_cmd(pattern="checkspam ?(.*)"))
+@telebot.on(sudo_cmd(pattern="checkspam ?(.*), allow_sudo=True"))
 async def _(event):
     bot = "@SpamBot"
     if event.fwd_from:
@@ -202,7 +206,7 @@ async def _(event):
 
 
 @telebot.on(admin_cmd(pattern="gitdl ?(.*)"))
-@telebot.on(sudo_cmd(pattern="gitdl ?(.*)"))
+@telebot.on(sudo_cmd(pattern="gitdl ?(.*), allow_sudo=True"))
 async def _(event):
     if event.fwd_from:
         return
@@ -230,3 +234,16 @@ async def _(event):
         await x.edit(
             "Downloaded by [TeleBot](t.me/TeleBotSupport), via @gitdownloadbot"
         )
+
+@telebot.on(admin_cmd(pattern="imusic ?(.*)"))
+@telebot.on(sudo_cmd(pattern="imusic ?(.*)", allow_sudo=True))
+async def tel(event):
+    if event.fwd_from:
+        return
+    botusername = "@vkmusic_bot"
+    tele = event.pattern_match.group(1)
+    if event.reply_to_msg_id:
+        await event.get_reply_message()
+    tap = await bot.inline_query(botusername, tele)
+    await tap[0].click(event.chat_id)
+    await event.delete()
