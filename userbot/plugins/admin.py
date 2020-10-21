@@ -75,7 +75,7 @@ UNMUTE_RIGHTS = ChatBannedRights(until_date=None, send_messages=False)
 
 
 @telebot.on(admin_cmd(outgoing=True, pattern="setgpic"))
-@telebot.on(sudo_cmd(outgoing=True, pattern="setgpic"))
+@telebot.on(sudo_cmd(outgoing=True, pattern="setgpic", allow_sudo=True))
 @errors_handler
 async def set_group_photo(gpic):
     """ For .setgpic command, changes the picture of a group """
@@ -114,7 +114,7 @@ async def set_group_photo(gpic):
 
 
 @telebot.on(admin_cmd(outgoing=True, pattern="promote(?: |$)(.*)"))
-@telebot.on(sudo_cmd(outgoing=True, pattern="promote(?: |$)(.*)"))
+@telebot.on(sudo_cmd(outgoing=True, pattern="promote(?: |$)(.*)", allow_sudo=True))
 @errors_handler
 async def promote(promt):
     """ For .promote command, promotes the replied/tagged person """
@@ -169,7 +169,7 @@ async def promote(promt):
 
 
 @telebot.on(admin_cmd(outgoing=True, pattern="demote(?: |$)(.*)"))
-@telebot.on(sudo_cmd(outgoing=True, pattern="demote(?: |$)(.*)"))
+@telebot.on(sudo_cmd(outgoing=True, pattern="demote(?: |$)(.*)", allow_sudo=True))
 @errors_handler
 async def demote(dmod):
     """ For .demote command, demotes the replied/tagged person """
@@ -223,7 +223,7 @@ async def demote(dmod):
 
 
 @telebot.on(admin_cmd(pattern="(ban|unban) ?(.*)"))
-@telebot.on(sudo_cmd(pattern="(ban|unban) ?(.*)"))
+@telebot.on(sudo_cmd(pattern="(ban|unban) ?(.*)", allow_sudo=True))
 async def _(event):
     # Space weirdness in regex required because argument is optional and other
     # commands start with ".unban"
@@ -255,7 +255,7 @@ async def _(event):
 
 
 @telebot.on(admin_cmd(pattern="pgs ?(.*)"))
-@telebot.on(sudo_cmd(pattern="pgs ?(.*)"))
+@telebot.on(sudo_cmd(pattern="pgs ?(.*)", allow_sudo=True))
 async def _(event):
     if event.fwd_from:
         return
@@ -284,7 +284,7 @@ async def _(event):
 
 
 @telebot.on(admin_cmd(pattern="(ban|unban) ?(.*)"))
-@telebot.on(sudo_cmd(pattern="(ban|unban) ?(.*)"))
+@telebot.on(sudo_cmd(pattern="(ban|unban) ?(.*)", allow_sudo=True))
 async def _(event):
     # Space weirdness in regex required because argument is optional and other
     # commands start with ".unban"
@@ -349,7 +349,7 @@ async def muter(moot):
 
 
 @telebot.on(admin_cmd(pattern="affk(?: |$)(.*)"))
-@telebot.on(sudo_cmd(pattern="affk(?: |$)(.*)"))
+@telebot.on(sudo_cmd(pattern="affk(?: |$)(.*)", allow_sudo=True))
 @errors_handler
 async def promote(promt):
     """ For .promote command, promotes the replied/tagged person """
@@ -399,7 +399,7 @@ async def promote(promt):
 
 
 @telebot.on(admin_cmd(outgoing=True, pattern="gmute(?: |$)(.*)"))
-@telebot.on(sudo_cmd(outgoing=True, pattern="gmute(?: |$)(.*)"))
+@telebot.on(sudo_cmd(outgoing=True, pattern="gmute(?: |$)(.*)", allow_sudo=True))
 @errors_handler
 async def gspider(gspdr):
     """ For .gmute command, globally mutes the replied/tagged person """
@@ -516,7 +516,7 @@ async def pin(msg):
 
 
 @telebot.on(admin_cmd(outgoing=True, pattern="kick(?: |$)(.*)"))
-@telebot.on(sudo_cmd(outgoing=True, pattern="kick(?: |$)(.*)"))
+@telebot.on(sudo_cmd(outgoing=True, pattern="kick(?: |$)(.*)", allow_sudo=True))
 @errors_handler
 async def kick(usr):
     """ For .kick command, kicks the replied/tagged person from the group. """
