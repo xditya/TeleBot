@@ -11,8 +11,8 @@ logging.basicConfig(
 )
 
 
-@telebot.on(admin_cmd(pattern=("sg ?(.*)")))
-@telebot.on(sudo_cmd(pattern=("sg ?(.*)", allow_sudo=True)))
+@telebot.on(admin_cmd(pattern="sg ?(.*)"))
+@telebot.on(sudo_cmd(pattern="sg ?(.*)", allow_sudo=True))
 async def _(event):
     if event.fwd_from:
         return
@@ -47,8 +47,8 @@ async def _(event):
             await eor(event, f"{response.message.message}")
 
 
-@telebot.on(admin_cmd(pattern=("fakemail ?(.*)")))
-@telebot.on(sudo_cmd(pattern=("fakemail ?(.*)", allow_sudo=True)))
+@telebot.on(admin_cmd(pattern="fakemail ?(.*)"))
+@telebot.on(sudo_cmd(pattern="fakemail ?(.*)", allow_sudo=True))
 async def _(event):
     if event.fwd_from:
         return
@@ -69,8 +69,8 @@ async def _(event):
         await eor(event, mail)
 
 
-@telebot.on(admin_cmd(pattern=("mailid ?(.*)")))
-@telebot.on(sudo_cmd(pattern=("mailid ?(.*)", allow_sudo=True)))
+@telebot.on(admin_cmd(pattern="mailid ?(.*)"))
+@telebot.on(sudo_cmd(pattern="mailid ?(.*)", allow_sudo=True))
 async def _(event):
     if event.fwd_from:
         return
@@ -91,8 +91,8 @@ async def _(event):
         await eor(event, mail)
 
 
-@telebot.on(admin_cmd(pattern=("ub ?(.*)")))
-@telebot.on(sudo_cmd(pattern=("ub ?(.*)", allow_sudo=True)))
+@telebot.on(admin_cmd(pattern="ub ?(.*)"))
+@telebot.on(sudo_cmd(pattern="ub ?(.*)", allow_sudo=True))
 async def _(event):
     if event.fwd_from:
         return
@@ -127,8 +127,8 @@ async def _(event):
             await eor(event, f"{response.message.message}")
 
 
-@telebot.on(admin_cmd(pattern=("gid ?(.*)")))
-@telebot.on(sudo_cmd(pattern=("gid ?(.*)", allow_sudo=True)))
+@telebot.on(admin_cmd(pattern="gid ?(.*)"))
+@telebot.on(sudo_cmd(pattern="gid ?(.*)", allow_sudo=True))
 async def _(event):
     if event.fwd_from:
         return
