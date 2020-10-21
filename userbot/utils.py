@@ -2,8 +2,9 @@ import sys
 import math
 from userbot import bot
 from telethon import events
-from userbot.telebotConfig import Var, Config
+from var import Var
 from pathlib import Path
+from userbot.uniborgConfig import Config
 from userbot import LOAD_PLUG
 from userbot import CMD_LIST
 import re
@@ -328,7 +329,7 @@ def sudo_cmd(pattern=None, **args):
     previous_stack_frame = stack[1]
     file_test = Path(previous_stack_frame.filename)
     file_test = file_test.stem.replace(".py", "")
-    allow_sudo = args.get("allow_sudo", True)
+    allow_sudo = args.get("allow_sudo", False)
 
     # get the pattern from the decorator
     if pattern is not None:
@@ -349,6 +350,7 @@ def sudo_cmd(pattern=None, **args):
         args["from_users"] = list(Var.SUDO_USERS)
         # Mutually exclusive with outgoing (can only set one of either).
         args["incoming"] = True
+        del args["allow_sudo"]
 
     # error handling condition check
     elif "incoming" in args and not args["incoming"]:
@@ -371,7 +373,6 @@ async def edit_or_reply(event, text):
             return await reply_to.reply(text)
         return await event.reply(text)
     return await event.edit(text)
-
 
 async def eor(event, text):
     if event.sender_id in Config.SUDO_USERS:
