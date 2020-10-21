@@ -10,6 +10,7 @@ from userbot.utils import admin_cmd
 
 
 @telebot.on(admin_cmd(pattern=r"meme", outgoing=True))
+@telebot.on(sudo_cmd(pattern=r"meme", allow_sudo=True))
 async def meme(event):
     if event.fwd_from:
         return
@@ -17,21 +18,21 @@ async def meme(event):
     sleepValue = 3
     memeVar = memeVar[6:]
 
-    await event.edit("-------------" + memeVar)
-    await event.edit("------------" + memeVar + "-")
-    await event.edit("-----------" + memeVar + "--")
-    await event.edit("----------" + memeVar + "---")
-    await event.edit("---------" + memeVar + "----")
-    await event.edit("--------" + memeVar + "-----")
-    await event.edit("-------" + memeVar + "------")
-    await event.edit("------" + memeVar + "-------")
-    await event.edit("-----" + memeVar + "--------")
-    await event.edit("----" + memeVar + "---------")
-    await event.edit("---" + memeVar + "----------")
-    await event.edit("--" + memeVar + "-----------")
-    await event.edit("-" + memeVar + "------------")
-    await event.edit(memeVar + "-------------")
-    await event.edit(memeVar)
+    await eor(event, "-------------" + memeVar)
+    await eor(event, "------------" + memeVar + "-")
+    await eor(event, "-----------" + memeVar + "--")
+    await eor(event, "----------" + memeVar + "---")
+    await eor(event, "---------" + memeVar + "----")
+    await eor(event, "--------" + memeVar + "-----")
+    await eor(event, "-------" + memeVar + "------")
+    await eor(event, "------" + memeVar + "-------")
+    await eor(event, "-----" + memeVar + "--------")
+    await eor(event, "----" + memeVar + "---------")
+    await eor(event, "---" + memeVar + "----------")
+    await eor(event, "--" + memeVar + "-----------")
+    await eor(event, "-" + memeVar + "------------")
+    await eor(event, memeVar + "-------------")
+    await eor(event, memeVar)
     await asyncio.sleep(sleepValue)
 
 
@@ -43,24 +44,25 @@ usage:- .flower
 
 
 @telebot.on(admin_cmd(pattern=r"flower", outgoing=True))
+@telebot.on(sudo_cmd(pattern=r"flower", allow_sudo=True))
 async def meme(event):
     if event.fwd_from:
         return
     flower = " 🌹"
     sleepValue = 5
 
-    await event.edit(flower + "        ")
-    await event.edit(flower + flower + "       ")
-    await event.edit(flower + flower + flower + "      ")
-    await event.edit(flower + flower + flower + flower + "     ")
-    await event.edit(flower + flower + flower + flower + flower + "    ")
-    await event.edit(
+    await eor(event, flower + "        ")
+    await eor(event, flower + flower + "       ")
+    await eor(event, flower + flower + flower + "      ")
+    await eor(event, flower + flower + flower + flower + "     ")
+    await eor(event, flower + flower + flower + flower + flower + "    ")
+    await eor(event, 
         flower + flower + flower + flower + flower + flower + flower + "   "
     )
-    await event.edit(
+    await eor(event, 
         flower + flower + flower + flower + flower + flower + flower + flower + "  "
     )
-    await event.edit(
+    await eor(event, 
         flower
         + flower
         + flower
@@ -72,7 +74,7 @@ async def meme(event):
         + flower
         + " "
     )
-    await event.edit(
+    await eor(event, 
         flower
         + flower
         + flower

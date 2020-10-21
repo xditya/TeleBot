@@ -15,15 +15,16 @@ from userbot.google_images_download import googleimagesdownload
 
 
 @telebot.on(admin_cmd(pattern="img ?(.*)"))
+@telebot.on(sudo_cmd(pattern="img ?(.*)", allow_sudo=True))
 async def img_sampler(event):
-    await event.edit("`Processing ...`")
+    await eor(event, "`Processing ...`")
     reply = await event.get_reply_message()
     if event.pattern_match.group(1):
         query = event.pattern_match.group(1)
     elif reply:
         query = reply.message
     else:
-        await event.edit("`What I am Supposed to Search u Dumb Ass(Donkey)`")
+        await eor(event, "`What I am Supposed to Search u Dumb Ass(Donkey)`")
         return
 
     lim = findall(r"lim=\d+", query)

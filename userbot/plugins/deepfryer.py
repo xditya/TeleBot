@@ -39,6 +39,7 @@ from uniborg.util import admin_cmd
 
 
 @telebot.on(admin_cmd(pattern="deepfry(?: |$)(.*)", outgoing=True))
+@telebot.on(sudo_cmd(pattern="deepfry(?: |$)(.*)", allow_sudo=True))
 async def deepfryer(event):
     try:
         frycount = int(event.pattern_match.group(1))
@@ -52,20 +53,20 @@ async def deepfryer(event):
         data = await check_media(reply_message)
 
         if isinstance(data, bool):
-            await event.edit("`I can't deep fry that!`")
+            await eor(event, "`I can't deep fry that!`")
             return
     else:
-        await event.edit("`Reply to an image or sticker to deep fry it!`")
+        await eor(event, "`Reply to an image or sticker to deep fry it!`")
         return
 
     # download last photo (highres) as byte array
-    await event.edit("`Downloading media…`")
+    await eor(event, "`Downloading media…`")
     image = io.BytesIO()
     await event.client.download_media(data, image)
     image = Image.open(image)
 
     # fry the image
-    await event.edit("`Deep frying media…`")
+    await eor(event, "`Deep frying media…`")
     for _ in range(frycount):
         image = await deepfry(image)
 

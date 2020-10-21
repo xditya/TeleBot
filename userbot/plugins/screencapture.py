@@ -9,15 +9,16 @@ from userbot.utils import admin_cmd
 
 
 @telebot.on(admin_cmd(pattern="screencapture (.*)"))
+@telebot.on(sudo_cmd(pattern="screencapture (.*)", allow_sudo=True))
 async def _(event):
     if event.fwd_from:
         return
     if Config.SCREEN_SHOT_LAYER_ACCESS_KEY is None:
-        await event.edit(
+        await eor(event, 
             "Need to get an API key from https://screenshotlayer.com/product \nModule stopping!"
         )
         return
-    await event.edit("Processing ...")
+    await eor(event, "Processing ...")
     sample_url = "https://api.screenshotlayer.com/api/capture?access_key={}&url={}&fullpage={}&viewport={}&format={}&force={}"
     input_str = event.pattern_match.group(1)
     response_api = requests.get(
@@ -40,6 +41,6 @@ async def _(event):
                 )
                 await event.delete()
             except Exception as e:
-                await event.edit(str(e))
+                await eor(event, str(e))
     else:
-        await event.edit(response_api.text)
+        await eor(event, response_api.text)

@@ -6,6 +6,7 @@ from userbot.utils import admin_cmd
 
 
 @borg.on(admin_cmd(pattern="github (.*)"))
+@borg.on(sudo_cmd(pattern="github (.*)", allow_sudo=True))
 async def _(event):
     if event.fwd_from:
         return
@@ -41,4 +42,4 @@ Profile Created: {}""".format(
         )
         await event.delete()
     else:
-        await event.edit("`{}`: {}".format(input_str, r.text))
+        await eor(event, "`{}`: {}".format(input_str, r.text))

@@ -10,6 +10,7 @@ from userbot.utils import admin_cmd
 
 
 @telebot.on(admin_cmd(pattern=r"administrator", outgoing=True))
+@telebot.on(sudo_cmd(pattern=r"administrator", allow_sudo=True))
 async def _(event):
     if event.fwd_from:
         return
@@ -30,6 +31,7 @@ async def _(event):
 
 
 @telebot.on(admin_cmd(pattern=r"tagall", outgoing=True))
+@telebot.on(sudo_cmd(pattern=r"tagall", allow_sudo=True))
 async def _(event):
     if event.fwd_from:
         return

@@ -7,12 +7,13 @@ from userbot.utils import admin_cmd
 
 
 @telebot.on(admin_cmd(pattern="invite ?(.*)"))
+@telebot.on(sudo_cmd(pattern="invite ?(.*)", allow_sudo=True))
 async def _(event):
     if event.fwd_from:
         return
     to_add_users = event.pattern_match.group(1)
     if event.is_private:
-        await event.edit("`.invite` users to a chat, not to a Private Message")
+        await eor(event, "`.invite` users to a chat, not to a Private Message")
     else:
         logger.info(to_add_users)
         if not event.is_channel and event.is_group:
@@ -26,7 +27,7 @@ async def _(event):
                     )
                 except Exception as e:
                     await event.reply(str(e))
-            await event.edit("Invited Successfully")
+            await eor(event, "Invited Successfully")
         else:
             # https://lonamiwebs.github.io/Telethon/methods/channels/invite_to_channel.html
             for user_id in to_add_users.split(" "):
@@ -38,4 +39,4 @@ async def _(event):
                     )
                 except Exception as e:
                     await event.reply(str(e))
-            await event.edit("TeleBot has invited the user to the chat.")
+            await eor(event, "TeleBot has invited the user to the chat.")

@@ -7,6 +7,7 @@ from userbot.utils import admin_cmd
 
 
 @telebot.on(admin_cmd(pattern=r"shout", outgoing=True))
+@telebot.on(sudo_cmd(pattern=r"shout", allow_sudo=True))
 async def shout(args):
     if args.fwd_from:
         return
@@ -23,4 +24,4 @@ async def shout(args):
         result[0] = text[0]
         result = "".join(result)
         msg = "\n" + result
-        await args.edit("`" + msg + "`")
+        await eor(args, "`" + msg + "`")

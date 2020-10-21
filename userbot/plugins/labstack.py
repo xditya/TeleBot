@@ -8,10 +8,11 @@ from userbot.utils import admin_cmd
 
 
 @telebot.on(admin_cmd(pattern="labstack ?(.*)"))
+@telebot.on(sudo_cmd(pattern="labstack ?(.*)", allow_sudo=True))
 async def labstack(event):
     if event.fwd_from:
         return
-    await event.edit("Processing...")
+    await eor(event, "Processing...")
     input_str = event.pattern_match.group(1)
     reply = await event.get_reply_message()
     if input_str:
@@ -21,7 +22,7 @@ async def labstack(event):
             reply.media, Var.TEMP_DOWNLOAD_DIRECTORY
         )
     else:
-        await event.edit(
+        await eor(event, 
             "Reply to a media file or provide a directory to upload the file to labstack"
         )
         return
@@ -54,13 +55,13 @@ async def labstack(event):
         t_response = subprocess.check_output(command_to_exec, stderr=subprocess.STDOUT)
     except subprocess.CalledProcessError as exc:
         logger.info("Status : FAIL", exc.returncode, exc.output)
-        await event.edit(exc.output.decode("UTF-8"))
+        await eor(event, exc.output.decode("UTF-8"))
         return
     else:
         logger.info(t_response)
         t_response_arry = "https://up.labstack.com/api/v1/links/{}/receive".format(
             r2json["code"]
         )
-    await event.edit(
+    await eor(event, 
         t_response_arry + "\nMax Days:" + str(max_days), link_preview=False
     )

@@ -6,6 +6,7 @@ credits :@mrconfused
 # help from @sunda005 and @SpEcHIDe
 # don't edit credits
 # Plugin for TeleBot
+
 from geopy.geocoders import Nominatim
 from telethon.tl import types
 
@@ -13,6 +14,7 @@ from userbot.utils import admin_cmd
 
 
 @telebot.on(admin_cmd(pattern="gps ?(.*)"))
+@telebot.on(sudo_cmd(pattern="gps ?(.*)", allow_sudo=True))
 async def gps(event):
     if event.fwd_from:
         return
@@ -22,11 +24,11 @@ async def gps(event):
     input_str = event.pattern_match.group(1)
 
     if not input_str:
-        return await event.edit("What should I find? Give me a location.")
+        return await eor(event, "What should I find? Give me a location.")
 
-    await event.edit("Finding...")
+    await eor(event, "Finding...")
 
-    geolocator = Nominatim(user_agent="catuserbot")
+    geolocator = Nominatim(user_agent="telebot")
     geoloc = geolocator.geocode(input_str)
 
     if geoloc:
@@ -37,4 +39,4 @@ async def gps(event):
         )
         await event.delete()
     else:
-        await event.edit("Sorry, I coudn't find it")
+        await eor(event, "Sorry, I coudn't find it")

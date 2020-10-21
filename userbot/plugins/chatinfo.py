@@ -26,14 +26,14 @@ from userbot.utils import admin_cmd, sudo_cmd
 @telebot.on(admin_cmd(pattern="chatinfo(?: |$)(.*)", outgoing=True))
 @telebot.on(sudo_cmd(pattern="chatinfo(?: |$)(.*)"))
 async def info(event):
-    await event.edit("`Analysing the chat...`")
+    await eor(event, "`Analysing the chat...`")
     chat = await get_chatinfo(event)
     caption = await fetch_info(chat, event)
     try:
-        await event.edit(caption, parse_mode="html")
+        await eor(event, caption, parse_mode="html")
     except Exception as e:
         print("Exception:", e)
-        await event.edit("`An unexpected error has occurred.`")
+        await eor(event, "`An unexpected error has occurred.`")
     return
 
 
@@ -58,18 +58,18 @@ async def get_chatinfo(event):
         try:
             chat_info = await event.client(GetFullChannelRequest(chat))
         except ChannelInvalidError:
-            await event.edit("`Invalid channel/group`")
+            await eor(event, "`Invalid channel/group`")
             return None
         except ChannelPrivateError:
-            await event.edit(
+            await eor(event, 
                 "`This is a private channel/group or I am banned from there`"
             )
             return None
         except ChannelPublicGroupNaError:
-            await event.edit("`Channel or supergroup doesn't exist`")
+            await eor(event, "`Channel or supergroup doesn't exist`")
             return None
         except (TypeError, ValueError) as err:
-            await event.edit(str(err))
+            await eor(event, str(err))
             return None
     return chat_info
 

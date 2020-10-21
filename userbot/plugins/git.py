@@ -18,7 +18,7 @@ async def _(event):
 
     if input_str == "guthub":
 
-        await event.edit(input_str)
+        await eor(event, input_str)
 
         animation_chars = [
             "https://github.com/xditya/TeleBot",
@@ -29,4 +29,4 @@ async def _(event):
 
             await asyncio.sleep(animation_interval)
 
-            await event.edit(animation_chars[i % 2])
+            await eor(event, animation_chars[i % 2])

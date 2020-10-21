@@ -17,21 +17,22 @@ MAX_MESSAGE_SIZE_LIMIT = 4095
 
 
 @telebot.on(admin_cmd(outgoing=True, pattern=r"ls ?(.*)"))
+@telebot.on(sudo_cmd(allow_sudo=True, pattern=r"ls ?(.*)"))
 async def lst(event):
     if event.fwd_from:
         return
-    cat = event.pattern_match.group(1)
-    if cat:
-        path = cat
+    tele = event.pattern_match.group(1)
+    if tele:
+        path = tele
     else:
         path = os.getcwd()
     if not exists(path):
-        await event.edit(
-            f"There is no such directory or file with the name `{cat}` check again!"
+        await eor(event, 
+            f"There is no such directory or file with the name `{tele}` check again!"
         )
         return
     if isdir(path):
-        if cat:
+        if tele:
             msg = "Folders and Files in `{}` :\n\n".format(path)
             lists = os.listdir(path)
         else:
@@ -40,9 +41,9 @@ async def lst(event):
         files = ""
         folders = ""
         for contents in sorted(lists):
-            catpath = path + "/" + contents
-            if not isdir(catpath):
-                size = os.stat(catpath).st_size
+            telepath = path + "/" + contents
+            if not isdir(telepath):
+                size = os.stat(telepath).st_size
                 if contents.endswith((".mp3", ".flac", ".wav", ".m4a")):
                     files += "🎵 " + f"`{contents}`\n"
                 if contents.endswith((".opus")):
@@ -119,7 +120,7 @@ async def lst(event):
             )
             await event.delete()
     else:
-        await event.edit(msg)
+        await eor(event, msg)
 
 
 CMD_HELP.update({"file": ".ls <directory>" "\nUsage: File Manager plugin for TeleBot."})

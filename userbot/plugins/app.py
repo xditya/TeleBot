@@ -98,15 +98,15 @@ async def apk(e):
 
         app_details += "\n\n===> @TeleBotHelp <==="
 
-        xx = await e.eor(xx, app_details, link_preview=True, parse_mode="HTML")
+        await eor(e, app_details, link_preview=True, parse_mode="HTML")
 
     except IndexError:
 
-        xx = await e.eor(xx, "No result found in search. Please enter **Valid app name**")
+        await eor(e, "No result found in search. Please enter **Valid app name**")
 
     except Exception as err:
 
-        xx = await e.eor(xx, "Exception Occured:- " + str(err))
+        await eor(e, "Exception Occured:- " + str(err))
 
 
 @telebot.on(admin_cmd(pattern="appr (.*)"))
@@ -194,12 +194,12 @@ async def apkr(e):
 
         app_details += "\n\n===> @TeleBotHelp <==="
 
-        xx = await e.eor(xx, app_details, link_preview=True, parse_mode="HTML")
+        await eor(e, app_details, link_preview=True, parse_mode="HTML")
 
     except IndexError:
 
-        xx = await e.eor(xx, "No result found in search. Please enter **Valid app name**")
+        await eor(e, "No result found in search. Please enter **Valid app name**")
 
     except Exception as err:
 
-        xx = await e.eor(xx, "Exception Occured:- " + str(err))
+        await eor(e, "Exception Occured:- " + str(err))

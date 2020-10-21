@@ -5,18 +5,19 @@ from userbot.utils import admin_cmd
 
 
 @telebot.on(admin_cmd(pattern="frwd"))
+@telebot.on(sudo_cmd(pattern="frwd", allow_sudo=True))
 async def _(event):
     if event.fwd_from:
         return
     if Config.CHANNEL_ID is None:
-        await event.edit(
+        await eor(event, 
             "Please set the required environment variable `CHANNEL_ID` for this plugin to work"
         )
         return
     try:
         e = await borg.get_entity(Config.CHANNEL_ID)
     except Exception as e:
-        await event.edit(str(e))
+        await eor(event, str(e))
     else:
         re_message = await event.get_reply_message()
         # https://t.me/telethonofftopic/78166

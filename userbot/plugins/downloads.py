@@ -95,15 +95,16 @@ async def get_file_name(content):
 
 
 @telebot.on(admin_cmd(pattern=f"gdl", outgoing=True))
+@telebot.on(sudo_cmd(pattern=f"gdl", allow_sudo=True))
 async def g_download(event):
     if event.fwd_from:
         return
     drive_link = event.text[4:]
     print("Drive Link: " + drive_link)
     file_id = await get_id(drive_link)
-    await event.edit("Downloading Requested File from G-Drive...")
+    await eor(event, "Downloading Requested File from G-Drive...")
     file_name = await download_file_from_google_drive(file_id)
-    await event.edit("File Downloaded.\nName: `" + str(file_name) + "`")
+    await eor(event, "File Downloaded.\nName: `" + str(file_name) + "`")
 
 
 CMD_HELP.update(

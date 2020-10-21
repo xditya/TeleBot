@@ -36,6 +36,7 @@ BOTLOG_CHATID = Config.PRIVATE_GROUP_BOT_API_ID
 
 
 @telebot.on(admin_cmd(outgoing=True, pattern=r"save(?: |$)([\s\S]*)"))
+@telebot.on(sudo_cmd(allow_sudo=True, pattern=r"save(?: |$)([\s\S]*)"))
 async def log(log_text):
     """ For .log command, forwards a message or the command argument to the bot logs group """
     if BOTLOG:
@@ -49,9 +50,9 @@ async def log(log_text):
         else:
             await log_text.edit("`What am I supposed to log?`")
             return
-        await log_text.edit("`Message saved 😁`")
+        await eor(log_text, "`Message saved 😁`")
     else:
-        await log_text.edit("`This feature requires Logging to be enabled!`")
+        await eor(log_text, "`This feature requires Logging to be enabled!`")
     await sleep(2)
     await log_text.delete()
 

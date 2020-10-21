@@ -7,14 +7,14 @@ from userbot.utils import admin_cmd, sudo_cmd
 
 
 @telebot.on(admin_cmd(pattern="stickerize(?: |)(.*)"))
-@telebot.on(sudo_cmd(outgoing=True, pattern="stickerize(?: |$)(.*)"))
+@telebot.on(sudo_cmd(allow_sudo=True, pattern="stickerize(?: |$)(.*)"))
 async def _(event):
     sender = await event.get_sender()
     me = await event.client.get_me()
     if not sender.id == me.id:
         teletemp = await event.reply("`Processing...`")
     else:
-        teletemp = await event.edit("`Processing...`")
+        teletemp = await eor(event, "`Processing...`")
     try:
         reply_message = await event.get_reply_message()
         if reply_message:

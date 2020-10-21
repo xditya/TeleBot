@@ -13,6 +13,7 @@ from userbot.utils import admin_cmd
 
 
 @telebot.on(admin_cmd(pattern="get_ad?(m)in ?(.*)"))
+@telebot.on(sudo_cmd(pattern="get_ad?(m)in ?(.*)", allow_sudo=True))
 async def _(event):
     if event.fwd_from:
         return
@@ -35,7 +36,7 @@ async def _(event):
         try:
             chat = await borg.get_entity(input_str)
         except Exception as e:
-            await event.edit(str(e))
+            await eor(event, str(e))
             return None
     try:
         async for x in borg.iter_participants(chat, filter=ChannelParticipantsAdmins):
@@ -62,10 +63,11 @@ async def _(event):
             await event.reply(mentions)
         await event.delete()
     else:
-        await event.edit(mentions)
+        await eor(event, mentions)
 
 
 @telebot.on(admin_cmd(pattern="get_id"))
+@telebot.on(sudo_cmd(pattern="get_id", allow_sudo=True))
 async def _(event):
     if event.fwd_from:
         return
@@ -74,22 +76,23 @@ async def _(event):
         r_msg = await event.get_reply_message()
         if r_msg.media:
             bot_api_file_id = pack_bot_file_id(r_msg.media)
-            await event.edit(
+            await eor(event, 
                 "Current Chat ID: `{}`\nFrom User ID: `{}`\nBot API File ID: `{}`".format(
                     str(event.chat_id), str(r_msg.from_id), bot_api_file_id
                 )
             )
         else:
-            await event.edit(
+            await eor(event, 
                 "Current Chat ID: `{}`\nFrom User ID: `{}`".format(
                     str(event.chat_id), str(r_msg.from_id)
                 )
             )
     else:
-        await event.edit("Current Chat ID: `{}`".format(str(event.chat_id)))
+        await eor(event, "Current Chat ID: `{}`".format(str(event.chat_id)))
 
 
 @telebot.on(admin_cmd(pattern="get_bot ?(.*)"))
+@telebot.on(sudo_cmd(pattern="get_bot ?(.*)", allow_sudo=True))
 async def _(event):
     if event.fwd_from:
         return
@@ -104,7 +107,7 @@ async def _(event):
         try:
             chat = await borg.get_entity(input_str)
         except Exception as e:
-            await event.edit(str(e))
+            await eor(event, str(e))
             return None
     try:
         async for x in borg.iter_participants(chat, filter=ChannelParticipantsBots):
@@ -118,4 +121,4 @@ async def _(event):
                 )
     except Exception as e:
         mentions += " " + str(e) + "\n"
-    await event.edit(mentions)
+    await eor(event, mentions)

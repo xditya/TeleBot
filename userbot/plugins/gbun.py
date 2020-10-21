@@ -8,6 +8,7 @@ from userbot.utils import admin_cmd
 
 
 @telebot.on(admin_cmd(pattern="gbun"))
+@telebot.on(sudo_cmd(pattern="gbun", allow_sudo=True))
 async def gbun(event):
     if event.fwd_from:
         return
@@ -15,7 +16,7 @@ async def gbun(event):
     gbunVar = gbunVar[6:]
     mentions = "`Warning!! User 𝙂𝘽𝘼𝙉𝙉𝙀𝘿 By Admin...\n`"
     no_reason = "__Reason: Retarded Dumb af Spammer. __"
-    await event.edit("**Summoning out le Gungnir ❗️⚜️☠️**")
+    await eor(event, "**Summoning out le Gungnir ❗️⚜️☠️**")
     asyncio.sleep(3.5)
     chat = await event.get_input_chat()
     async for x in borg.iter_participants(chat, filter=ChannelParticipantsAdmins):

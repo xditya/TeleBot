@@ -22,6 +22,7 @@ else:
 
 
 @telebot.on(admin_cmd(pattern="telegraph (media|text) ?(.*)"))
+@telebot.on(sudo_cmd(pattern="telegraph (media|text) ?(.*)", allow_sudo=True))
 async def _(event):
     if event.fwd_from:
         return
@@ -45,7 +46,7 @@ async def _(event):
             )
             end = datetime.now()
             ms = (end - start).seconds
-            await event.edit(
+            await eor(event, 
                 "Downloaded to {} in {} seconds.".format(downloaded_file_name, ms)
             )
             if downloaded_file_name.endswith((".webp")):
@@ -54,13 +55,13 @@ async def _(event):
                 start = datetime.now()
                 media_urls = upload_file(downloaded_file_name)
             except exceptions.TelegraphException as exc:
-                await event.edit("ERROR: " + str(exc))
+                await eor(event, "ERROR: " + str(exc))
                 os.remove(downloaded_file_name)
             else:
                 end = datetime.now()
                 ms_two = (end - start).seconds
                 os.remove(downloaded_file_name)
-                await event.edit(
+                await eor(event, 
                     "Uploaded to https://telegra.ph{} in {} seconds.".format(
                         media_urls[0], (ms + ms_two)
                     ),
@@ -89,14 +90,14 @@ async def _(event):
             response = telegraph.create_page(title_of_page, html_content=page_content)
             end = datetime.now()
             ms = (end - start).seconds
-            await event.edit(
+            await eor(event, 
                 "Pasted to https://telegra.ph/{} in {} seconds.".format(
                     response["path"], ms
                 ),
                 link_preview=True,
             )
     else:
-        await event.edit(
+        await eor(event, 
             "Reply to a message to get a permanent telegra.ph link. (Inspired by @ControllerBot)"
         )
 

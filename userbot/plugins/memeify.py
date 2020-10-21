@@ -12,7 +12,7 @@ from userbot.utils import admin_cmd, sudo_cmd
 
 
 @telebot.on(admin_cmd(pattern="mmf ?(.*)"))
-@telebot.on(sudo_cmd(pattern="mmf ?(.*)", incoming=True))
+@telebot.on(sudo_cmd(pattern="mmf ?(.*)", allow_sudo=True))
 async def handler(event):
     if event.fwd_from:
         return
@@ -21,7 +21,7 @@ async def handler(event):
         return
     reply_message = await event.get_reply_message()
     if not reply_message.media:
-        await event.editreply("Reply to a image/sticker.")
+        await eor(event, "Reply to a image/sticker.")
         return
     file = await borg.download_media(reply_message, Var.TEMP_DOWNLOAD_DIRECTORY)
     a = await event.reply("Memifying this image! (」ﾟﾛﾟ)｣ ")

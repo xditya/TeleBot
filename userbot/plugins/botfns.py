@@ -20,7 +20,7 @@ async def _(event):
     reply_message = await event.get_reply_message()
     chat = "@FiletolinkTGbot"
     reply_message.sender
-    xx = await event.eor(xx, "**Making public url...**")
+    await eor(event,  "**Making public url...**")
     async with event.client.conversation(chat) as conv:
         try:
             response = conv.wait_event(
@@ -29,7 +29,7 @@ async def _(event):
             await event.client.forward_messages(chat, reply_message)
             response = await response
         except YouBlockedUserError:
-            xx = await event.eor(xx, "```Please unblock me (@FiletolinkTGbot) u Nigga```")
+            await eor(event,  "```Please unblock me (@FiletolinkTGbot) u Nigga```")
             return
         await event.delete()
         await event.client.send_message(
@@ -43,15 +43,15 @@ async def _(event):
     if event.fwd_from:
         return
     if not event.reply_to_msg_id:
-        xx = await event.eor(xx, "**Reply to a URL.**")
+        await eor(event,  "**Reply to a URL.**")
         return
     reply_message = await event.get_reply_message()
     if not reply_message.text:
-        xx = await event.eor(xx, "**Reply to a url message.**")
+        await eor(event,  "**Reply to a url message.**")
         return
     chat = "@chotamreaderbot"
     reply_message.sender
-    xx = await event.eor(xx, "**Making instant view...**")
+    await eor(event,  "**Making instant view...**")
     async with event.client.conversation(chat) as conv:
         try:
             response = conv.wait_event(
@@ -60,7 +60,7 @@ async def _(event):
             await event.client.forward_messages(chat, reply_message)
             response = await response
         except YouBlockedUserError:
-            xx = await event.eor(xx, "```Please unblock me (@chotamreaderbot) u Nigga```")
+            await eor(event,  "```Please unblock me (@chotamreaderbot) u Nigga```")
             return
         await event.delete()
         await event.client.send_message(
@@ -74,16 +74,16 @@ async def _(event):
     if event.fwd_from:
         return
     if not event.reply_to_msg_id:
-        xx = await event.eor(xx, "```Reply to any user message.```")
+        await eor(event,  "```Reply to any user message.```")
         return
     reply_message = await event.get_reply_message()
     if not reply_message.media:
-        xx = await event.eor(xx, "```reply to media message```")
+        await eor(event,  "```reply to media message```")
         return
     chat = "@audiotubebot"
     reply_message.sender
     if reply_message.sender.bot:
-        xx = await event.eor(xx, "```Reply to actual users message.```")
+        await eor(event,  "```Reply to actual users message.```")
         return
     a = await event.reply("```Processing```")
     async with event.client.conversation(chat) as conv:
@@ -94,7 +94,7 @@ async def _(event):
             await event.client.send_message(chat, reply_message)
             response = await response
         except YouBlockedUserError:
-            xx = await event.eor(xx, "```Please unblock @AudioTubeBot and try again```")
+            await eor(event,  "```Please unblock @AudioTubeBot and try again```")
             return
         await event.delete()
         await event.client.send_file(event.chat_id, response.message.media)
@@ -111,7 +111,7 @@ async def _(event):
     reply_message = await event.get_reply_message()
     chat = "@instadownloadingbot"
     reply_message.sender
-    xx = await event.eor(xx, "**Downloading the post...**")
+    await eor(event,  "**Downloading the post...**")
     async with event.client.conversation(chat) as conv:
         try:
             response = conv.wait_event(
@@ -120,7 +120,7 @@ async def _(event):
             await event.client.forward_messages(chat, reply_message)
             response = await response
         except YouBlockedUserError:
-            xx = await event.eor(xx, "```Please unblock me (@instadownloadingbot) u Nigga```")
+            await eor(event,  "```Please unblock me (@instadownloadingbot) u Nigga```")
             return
         await event.delete()
         await event.client.send_message(
@@ -198,7 +198,7 @@ async def _(event):
                 await borg.send_message(event.chat_id, audio.text)
                 await event.delete()
             except YouBlockedUserError:
-                xx = await event.eor(xx, "**Error:** `unblock` @spambot `and retry!")
+                await eor(event,  "**Error:** `unblock` @spambot `and retry!")
 
 
 @telebot.on(admin_cmd(pattern="gitdl ?(.*)"))
@@ -212,7 +212,7 @@ async def _(event):
     reply_message = await event.get_reply_message()
     chat = "@gitdownloadbot"
     reply_message.sender
-    xx = await event.eor(xx, "**Downloading the repository...**")
+    await eor(event,  "**Downloading the repository...**")
     async with event.client.conversation(chat) as conv:
         try:
             response = conv.wait_event(
@@ -221,7 +221,7 @@ async def _(event):
             await event.client.forward_messages(chat, reply_message)
             response = await response
         except YouBlockedUserError:
-            xx = await event.eor(xx, "```Please unblock me (@gitdownloadbot) u Nigga```")
+            await eor(event,  "```Please unblock me (@gitdownloadbot) u Nigga```")
             return
         await event.delete()
         x = await event.client.send_message(

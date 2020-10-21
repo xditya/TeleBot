@@ -14,6 +14,7 @@ if 1 == 1:
     client = borg
 
     @telebot.on(admin_cmd(pattern="poto(.*)"))
+    @telebot.on(sudo_cmd(pattern="poto(.*)", allow_sudo=True))
     async def potocmd(event):
         """Gets the profile photos of replied users, channels or chats"""
         id = "".join(event.raw_text.split(maxsplit=2)[1:])
@@ -33,14 +34,14 @@ if 1 == 1:
             try:
                 id = int(id)
                 if id <= 0:
-                    await event.edit("`ID number you entered is invalid`")
+                    await eor(event, "`ID number you entered is invalid`")
                     return
             except BaseException:
-                await event.edit("`Are you Comedy Me ?`")
+                await eor(event, "`Are you Comedy Me ?`")
                 return
             if int(id) <= (len(photos)):
                 send_photos = await event.client.download_media(photos[id - 1])
                 await borg.send_file(event.chat_id, send_photos)
             else:
-                await event.edit("`No photo found of that Nigga , now u Die`")
+                await eor(event, "`No photo found of that Nigga , now u Die`")
                 return

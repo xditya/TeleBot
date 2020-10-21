@@ -10,6 +10,7 @@ FF_MPEG_DOWN_LOAD_MEDIA_PATH = "uniborg.media.ffmpeg"
 
 
 @telebot.on(admin_cmd(pattern="ffmpegsave"))
+@telebot.on(sudo_cmd(pattern="ffmpegsave", allow_sudo=True))
 async def ff_mpeg_trim_cmd(event):
     if event.fwd_from:
         return
@@ -29,27 +30,28 @@ async def ff_mpeg_trim_cmd(event):
                     ),
                 )
             except Exception as e:  # pylint:disable=C0103,W0703
-                await event.edit(str(e))
+                await eor(event, str(e))
             else:
                 end = datetime.now()
                 ms = (end - start).seconds
-                await event.edit(
+                await eor(event, 
                     "Downloaded to `{}` in {} seconds.".format(downloaded_file_name, ms)
                 )
         else:
-            await event.edit("Reply to a Telegram media file")
+            await eor(event, "Reply to a Telegram media file")
     else:
-        await event.edit(
+        await eor(event, 
             f"a media file already exists in path. Please remove the media and try again!\n`.exec rm {FF_MPEG_DOWN_LOAD_MEDIA_PATH}`"
         )
 
 
 @telebot.on(admin_cmd(pattern="ffmpegtrim"))
+@telebot.on(sudo_cmd(pattern="ffmpegtrim", allow_sudo=True))
 async def ff_mpeg_trim_cmd(event):
     if event.fwd_from:
         return
     if not os.path.exists(FF_MPEG_DOWN_LOAD_MEDIA_PATH):
-        await event.edit(
+        await eor(event, 
             f"a media file needs to be downloaded, and saved to the following path: `{FF_MPEG_DOWN_LOAD_MEDIA_PATH}`"
         )
         return
@@ -109,11 +111,11 @@ async def ff_mpeg_trim_cmd(event):
         except Exception as e:
             logger.info(str(e))
     else:
-        await event.edit("RTFM")
+        await eor(event, "RTFM")
         return
     end = datetime.now()
     ms = (end - start).seconds
-    await event.edit(f"Completed Process in {ms} seconds")
+    await eor(event, f"Completed Process in {ms} seconds")
 
 
 async def take_screen_shot(video_file, output_directory, ttl):

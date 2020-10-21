@@ -24,15 +24,16 @@ def bruh(name):
 
 
 @telebot.on(admin_cmd(outgoing=True, pattern="spd(?: |$)(.*)"))
+@telebot.on(sudo_cmd(allow_sudo=True, pattern="spd(?: |$)(.*)"))
 async def _(event):
     if event.fwd_from:
         return
     link = event.pattern_match.group(1)
     chat = "@SpotifyMusicDownloaderBot"
-    await event.edit(f"```Searching for Song - ``` __{link}__")
+    await eor(event, f"```Searching for Song - ``` __{link}__")
     async with bot.conversation(chat) as conv:
         await asyncio.sleep(2)
-        await event.edit("`Downloading music, this might take some time...`")
+        await eor(event, "`Downloading music, this might take some time...`")
         try:
             response = conv.wait_event(
                 events.NewMessage(incoming=True, from_users=752979930)
@@ -52,6 +53,7 @@ async def _(event):
 
 
 @telebot.on(admin_cmd(outgoing=True, pattern="netease(?: |$)(.*)"))
+@telebot.on(sudo_cmd(allow_sudo=True, pattern="netease(?: |$)(.*)"))
 async def WooMai(netase):
     if netase.fwd_from:
         return
@@ -84,6 +86,7 @@ async def WooMai(netase):
 
 
 @telebot.on(admin_cmd(outgoing=True, pattern="dzd(?: |$)(.*)"))
+@telebot.on(sudo_cmd(allow_sudo=True, pattern="dzd(?: |$)(.*)"))
 async def DeezLoader(Deezlod):
     if Deezlod.fwd_from:
         return

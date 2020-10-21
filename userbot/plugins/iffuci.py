@@ -18,6 +18,7 @@ def progress(current, total):
 
 
 @telebot.on(admin_cmd(pattern="iffuci ?(.*)"))
+@telebot.on(sudo_cmd(pattern="iffuci ?(.*)", allow_sudo=True))
 async def _(event):
     if event.fwd_from:
         return
@@ -54,10 +55,10 @@ async def _(event):
     ms = (end - start).seconds
     if r["isUrl"]:
         nurl = f"https://iffuci.tk/v/{r['key']}"
-        await event.edit(
+        await eor(event, 
             "code is pasted to {} in {} seconds. GoTo Original URL: {}".format(
                 url, ms, nurl
             )
         )
     else:
-        await event.edit("code is pasted to {} in {} seconds".format(url, ms))
+        await eor(event, "code is pasted to {} in {} seconds".format(url, ms))

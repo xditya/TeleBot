@@ -25,6 +25,7 @@ opener.addheaders = [("User-agent", useragent)]
 
 
 @telebot.on(admin_cmd(outgoing=True, pattern=r"reverse(?: |)(\d*)"))
+@telebot.on(sudo_cmd(allow_sudo=True, pattern=r"reverse(?: |)(\d*)"))
 @errors_handler
 async def okgoogle(img):
     """ For .reverse command, Google search images and stickers. """
@@ -36,15 +37,15 @@ async def okgoogle(img):
         photo = io.BytesIO()
         await bot.download_media(message, photo)
     else:
-        await img.edit("`Reply to photo or sticker nigger.`")
+        await eor(img, "`Reply to photo or sticker nigger.`")
         return
 
     if photo:
-        await img.edit("`Processing...`")
+        await eor(img, "`Processing...`")
         try:
             image = Image.open(photo)
         except OSError:
-            await img.edit("`Unsupported sexuality, most likely.`")
+            await eor(img, "`Unsupported sexuality, most likely.`")
             return
         name = "okgoogle.png"
         image.save(name, "PNG")
@@ -56,12 +57,12 @@ async def okgoogle(img):
         fetchUrl = response.headers["Location"]
 
         if response != 400:
-            await img.edit(
+            await eor(img, 
                 "`Image successfully uploaded to Google. Maybe.`"
                 "\n`Parsing source now. Maybe.`"
             )
         else:
-            await img.edit("`Google told me to fuck off.`")
+            await eor(img, "`Google told me to fuck off.`")
             return
 
         os.remove(name)
@@ -70,9 +71,9 @@ async def okgoogle(img):
         imgspage = match["similar_images"]
 
         if guess and imgspage:
-            await img.edit(f"[{guess}]({fetchUrl})\n\n`Looking for this Image...`")
+            await eor(img, f"[{guess}]({fetchUrl})\n\n`Looking for this Image...`")
         else:
-            await img.edit("`Can't find this piece of shit.`")
+            await eor(img, "`Can't find this piece of shit.`")
             return
 
         if img.pattern_match.group(1):
@@ -92,7 +93,7 @@ async def okgoogle(img):
             )
         except TypeError:
             pass
-        await img.edit(
+        await eor(img, 
             f"[{guess}]({fetchUrl})\n\n[Visually similar images]({imgspage})"
         )
 

@@ -212,9 +212,9 @@ async def demote(dmod):
     # If we catch BadRequestError from Telethon
     # Assume we don't have permission to demote
     except BadRequestError:
-        xx = await dmod.eor(xx, NO_PERM)
+        await eor(dmod, NO_PERM)
         return
-    xx = await dmod.eor(xx, "`Demoted this retard!!`")
+    await eor(dmod, "`Demoted this retard!!`")
 
     # Announce to the logging group if we have demoted successfully
     if BOTLOG:
@@ -253,9 +253,9 @@ async def _(event):
     try:
         await borg(EditBannedRequest(event.chat_id, to_ban_id, rights))
     except (Exception) as exc:
-        xx = await event.edit(xx, str(exc))
+        await eor(event, str(exc))
     else:
-        xx = await event.edit(xx f"{input_cmd}ned Successfully!")
+        await eor(event, f"{input_cmd}ned Successfully!")
 
 
 @telebot.on(admin_cmd(pattern="pgs ?(.*)"))
@@ -284,7 +284,7 @@ async def _(event):
             msgs = []
             await event.delete()
         else:
-            xx = await event.edit(xx, "**PURGE** Failed!")
+            await eor(event, "**PURGE** Failed!")
 
 
 @telebot.on(admin_cmd(pattern="(ban|unban) ?(.*)"))
@@ -314,9 +314,9 @@ async def _(event):
     try:
         await borg(EditBannedRequest(event.chat_id, to_ban_id, rights))
     except (Exception) as exc:
-        xx = await event.eor(xx, str(exc))
+        await eor(event, str(exc))
     else:
-        xx = await event.edit(xx, f"{input_cmd}ned Successfully!")
+        await eor(event, f"{input_cmd}ned Successfully!")
 
 
 @register(incoming=True)
@@ -372,7 +372,7 @@ async def promote(promt):
         pin_messages=True,
     )
 
-    xx = await promt.eor(xx, "`Promoting...`")
+    await eor(promt, "`Promoting...`")
     user, rank = await get_user_from_event(promt)
     if not rank:
         rank = "pero"  # Just in case.
@@ -384,12 +384,12 @@ async def promote(promt):
     # Try to promote if current user is admin or creator
     try:
         await promt.client(EditAdminRequest(promt.chat_id, user.id, new_rights, rank))
-        xx = await promt.eor(xx, "`Promoted User Successfully! Enjoy!!`")
+        await eor(promt, "`Promoted User Successfully! Enjoy!!`")
 
     # If Telethon spit BadRequestError, assume
     # we don't have Promote permission
     except BadRequestError:
-        xx = await promt.eor(xx, NO_PERM)
+        await eor(promt, NO_PERM)
         return
 
     # Announce to the logging group if we have promoted successfully
@@ -414,7 +414,7 @@ async def gspider(gspdr):
 
     # If not admin and not creator, return
     if not admin and not creator:
-        xx = await gspdr.eor(xx, NO_ADMIN)
+        await eor(gspdr, NO_ADMIN)
         return
 
     # Check if the function running under SQL mode
@@ -431,14 +431,14 @@ async def gspider(gspdr):
         return
 
     # If pass, inform and start gmuting
-    xx = await gspdr.eor(xx, "`Grabs a huge, sticky duct tape!`")
+    await eor(gspdr, "`Grabs a huge, sticky duct tape!`")
     if gmute(user.id) is False:
         await gspdr.edit("`Error! User probably already gmuted.\nRe-rolls the tape.`")
     else:
         if reason:
-            xx = await gspdr.eor(xx, f"`Globally taped!`Reason: {reason}")
+            await eor(gspdr, f"`Globally taped!`Reason: {reason}")
         else:
-            xx = await gspdr.eor(xx, "`Globally taped!`")
+            await eor(gspdr, "`Globally taped!`")
 
         if BOTLOG:
             await gspdr.client.send_message(
@@ -483,13 +483,13 @@ async def pin(msg):
 
     # If not admin and not creator, return
     if not admin and not creator:
-        xx = await msg.eor(xx, NO_ADMIN)
+        await eor(msg,NO_ADMIN)
         return
 
     to_pin = msg.reply_to_msg_id
 
     if not to_pin:
-        xx = await msg.eor(xx, "`Reply to a message to pin it.`")
+        await eor(msg,"`Reply to a message to pin it.`")
         return
 
     options = msg.pattern_match.group(1)
@@ -502,10 +502,10 @@ async def pin(msg):
     try:
         await msg.client(UpdatePinnedMessageRequest(msg.to_id, to_pin, is_silent))
     except BadRequestError:
-        xx = await msg.eor(xx, NO_PERM)
+        await eor(msg,NO_PERM)
         return
 
-    xx = await msg.eor(xx, "`Pinned Successfully!`")
+    await eor(msg,"`Pinned Successfully!`")
 
     user = await get_user_from_id(msg.from_id, msg)
 
@@ -531,29 +531,29 @@ async def kick(usr):
 
     # If not admin and not creator, return
     if not admin and not creator:
-        xx = await usr.eor(xx, NO_ADMIN)
+        await eor(usr, NO_ADMIN)
         return
 
     user, reason = await get_user_from_event(usr)
     if not user:
-        xx = await usr.eor(xx, "`Couldn't fetch user.`")
+        await eor(usr, "`Couldn't fetch user.`")
         return
 
-    xx = await usr.eor(eor, "`Kicking...`")
+    await eor(usr, "`Kicking...`")
 
     try:
         await usr.client.kick_participant(usr.chat_id, user.id)
         await sleep(0.5)
     except Exception as e:
-        xx = await usr.eor(xx, NO_PERM + f"\n{str(e)}")
+        await eor(usr, NO_PERM + f"\n{str(e)}")
         return
 
     if reason:
-        xx = await usr.eor(xx, 
+        await eor(usr, 
             f"`Kicked` [{user.first_name}](tg://user?id={user.id})`!`\nReason: {reason}"
         )
     else:
-        xx = await usr.eor(xx, f"`Kicked` [{user.first_name}](tg://user?id={user.id})`!`")
+        await eor(usr, f"`Kicked` [{user.first_name}](tg://user?id={user.id})`!`")
 
     if BOTLOG:
         await usr.client.send_message(
@@ -594,9 +594,9 @@ async def get_users(show):
     except ChatAdminRequiredError as err:
         mentions += " " + str(err) + "\n"
     try:
-        xx = await show.eor(xx, mentions)
+        await eor(show, mentions)
     except MessageTooLongError:
-        xx = await show.eor(xx, "Damn, this is a huge group. Uploading users lists as file.")
+        await eor(show, "Damn, this is a huge group. Uploading users lists as file.")
         file = open("userslist.txt", "w+")
         file.write(mentions)
         file.close()
@@ -626,7 +626,7 @@ async def get_user_from_event(event):
             user = int(user)
 
         if not user:
-            xx = await event.eor(xx, "`Pass the user's username, id or reply!`")
+            await eor(event, "`Pass the user's username, id or reply!`")
             return
 
         if event.message.entities is not None:
@@ -639,7 +639,7 @@ async def get_user_from_event(event):
         try:
             user_obj = await event.client.get_entity(user)
         except (TypeError, ValueError) as err:
-            xx = await event.eor(xx, str(err))
+            await eor(event, str(err))
             return None
 
     return user_obj, extra
@@ -652,7 +652,7 @@ async def get_user_from_id(user, event):
     try:
         user_obj = await event.client.get_entity(user)
     except (TypeError, ValueError) as err:
-        xx = await event.eor(xx, str(err))
+        await eor(event, str(err))
         return None
 
     return user_obj

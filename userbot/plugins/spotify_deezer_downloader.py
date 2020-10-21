@@ -13,6 +13,7 @@ from userbot.utils import admin_cmd
 
 
 @telebot.on(admin_cmd(pattern="sdd ?(.*)"))
+@telebot.on(sudo_cmd(pattern="sdd ?(.*)", allow_sudo=True))
 async def _(event):
 
     if event.fwd_from:
@@ -23,11 +24,11 @@ async def _(event):
 
     if ".com" not in d_link:
 
-        await event.edit("` I need a link to download something pro.`**(._.)**")
+        await eor(event, "` I need a link to download something pro.`**(._.)**")
 
     else:
 
-        await event.edit("🎶**Initiating Download!**🎶")
+        await eor(event, "🎶**Initiating Download!**🎶")
 
     async with borg.conversation("@DeezLoadBot") as conv:
 
@@ -65,4 +66,4 @@ async def _(event):
 
         except YouBlockedUserError:
 
-            await event.edit("**Error:** `unblock` @DeezLoadBot `and retry!`")
+            await eor(event, "**Error:** `unblock` @DeezLoadBot `and retry!`")

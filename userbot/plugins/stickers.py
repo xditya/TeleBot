@@ -38,7 +38,7 @@ KANGING_STR = [
 
 
 @telebot.on(admin_cmd(outgoing=True, pattern="kang"))
-@telebot.on(sudo_cmd(outgoing=True, pattern="kang"))
+@telebot.on(sudo_cmd(allow_sudo=True, pattern="kang"))
 async def kang(args):
     """ For .kang command, kangs stickers or creates new ones. """
     user = await bot.get_me()
@@ -285,27 +285,27 @@ async def resize_photo(photo):
 
 
 @telebot.on(admin_cmd(outgoing=True, pattern="stkrinfo"))
-@telebot.on(sudo_cmd(outgoing=True, pattern="stkrinfo"))
+@telebot.on(sudo_cmd(allow_sudo=True, pattern="stkrinfo"))
 # @register(outgoing=True, pattern="^.stkrinfo$")
 async def get_pack_info(event):
     if not event.is_reply:
-        await event.edit("`I can't fetch info from nothing, can I ?!`")
+        await eor(event, "`I can't fetch info from nothing, can I ?!`")
         return
 
     rep_msg = await event.get_reply_message()
     if not rep_msg.document:
-        await event.edit("`Reply to a sticker to get the pack details`")
+        await eor(event, "`Reply to a sticker to get the pack details`")
         return
 
     try:
         stickerset_attr = rep_msg.document.attributes[1]
-        await event.edit("`Fetching details of the sticker pack, please wait..`")
+        await eor(event, "`Fetching details of the sticker pack, please wait..`")
     except BaseException:
-        await event.edit("`This is not a sticker. Reply to a sticker.`")
+        await eor(event, "`This is not a sticker. Reply to a sticker.`")
         return
 
     if not isinstance(stickerset_attr, DocumentAttributeSticker):
-        await event.edit("`This is not a sticker. Reply to a sticker.`")
+        await eor(event, "`This is not a sticker. Reply to a sticker.`")
         return
 
     get_stickerset = await bot(
@@ -330,7 +330,7 @@ async def get_pack_info(event):
         f"**Emojis In Pack:**\n{' '.join(pack_emojis)}"
     )
 
-    await event.edit(OUTPUT)
+    await eor(event, OUTPUT)
 
 
 CMD_HELP.update(

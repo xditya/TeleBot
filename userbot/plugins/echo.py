@@ -22,7 +22,7 @@ from userbot.utils import admin_cmd, sudo_cmd
 
 
 @telebot.on(admin_cmd(pattern=r"echo (.*)"))
-@telebot.on(sudo_cmd(pattern=r"echo ( .*)"))
+@telebot.on(sudo_cmd(pattern=r"echo ( .*)", allow_sudo=True))
 async def _(event):
     bxt = Var.TG_BOT_USER_NAME_BF_HER
     try:

@@ -5,6 +5,7 @@ from uniborg.util import admin_cmd
 
 
 @telebot.on(admin_cmd(pattern="coronavirus (.*)"))
+@telebot.on(sudo_cmd(pattern="coronavirus (.*)", allow_sudo=True))
 async def _(event):
     covid = Covid()
     data = covid.get_data()
@@ -13,7 +14,7 @@ async def _(event):
     output_text = ""
     for name, value in country_data.items():
         output_text += "`{}`: `{}`\n".format(str(name), str(value))
-    await event.edit(
+    await eor(event, 
         "**CoronaVirus Info in {}**:\n\n{}".format(country.capitalize(), output_text)
     )
 

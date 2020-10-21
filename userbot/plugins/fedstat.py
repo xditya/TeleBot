@@ -14,6 +14,7 @@ bot = "@MissRose_bot"
 
 
 @telebot.on(admin_cmd(pattern="fstat ?(.*)"))
+@telebot.on(sudo_cmd(pattern="fstat ?(.*)", allow_sudo=True))
 async def _(event):
     if event.fwd_from:
         return
@@ -32,7 +33,7 @@ async def _(event):
                 await borg.send_message(event.chat_id, audio.text)
                 await event.delete()
             except YouBlockedUserError:
-                await event.edit("**Error:** `unblock` @MissRose_Bot `and retry!")
+                await eor(event, "**Error:** `unblock` @MissRose_Bot `and retry!")
     elif "@" in sysarg:
         async with borg.conversation(bot) as conv:
             try:
@@ -47,4 +48,4 @@ async def _(event):
                 await borg.send_message(event.chat_id, audio.text)
                 await event.delete()
             except YouBlockedUserError:
-                await event.edit("**Error:** `unblock` @MissRose_Bot `and try again!")
+                await eor(event, "**Error:** `unblock` @MissRose_Bot `and try again!")

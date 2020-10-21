@@ -5,6 +5,7 @@ from userbot.utils import admin_cmd
 
 
 @telebot.on(admin_cmd(pattern="warn1"))
+@telebot.on(sudo_cmd(pattern="warn1", allow_sudo=True))
 async def _(event):
     if event.fwd_from:
         return
@@ -27,6 +28,7 @@ async def _(event):
 
 
 @telebot.on(admin_cmd(pattern="warn2"))
+@telebot.on(sudo_cmd(pattern="warn2", allow_sudo=True))
 async def _(event):
     if event.fwd_from:
         return
@@ -47,6 +49,7 @@ async def _(event):
 
 
 @telebot.on(admin_cmd(pattern="warn3"))
+@telebot.on(admin_cmd(pattern="warn3", allow_sudo=True))
 async def _(event):
     if event.fwd_from:
         return
@@ -69,6 +72,7 @@ async def _(event):
 
 
 @telebot.on(admin_cmd(pattern="warn0"))
+@telebot.on(admin_cmd(pattern="warn0", allow_sudo=True))
 async def _(event):
     if event.fwd_from:
         return
@@ -86,6 +90,7 @@ async def _(event):
 
 
 @telebot.on(admin_cmd(pattern="ocb"))
+@telebot.on(sudo_cmd(pattern="ocb", allow_sudo=True))
 async def _(event):
     if event.fwd_from:
         return

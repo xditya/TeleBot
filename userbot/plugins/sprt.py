@@ -10,6 +10,7 @@ from userbot.utils import admin_cmd
 
 
 @telebot.on(admin_cmd(pattern="(.*)"))
+@telebot.on(sudo_cmd(pattern="(.*)", allow_sudo=True))
 async def _(event):
     if event.fwd_from:
         return
@@ -17,7 +18,7 @@ async def _(event):
     animation_ttl = range(0, 5)
     input_str = event.pattern_match.group(1)
     if input_str == "support":
-        await event.edit(input_str)
+        await eor(event, input_str)
         animation_chars = [
             "Hello,",
             "Hello, do you need support?",
@@ -29,4 +30,4 @@ async def _(event):
         for i in animation_ttl:
 
             await asyncio.sleep(animation_interval)
-            await event.edit(animation_chars[i % 5])
+            await eor(event, animation_chars[i % 5])

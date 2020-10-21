@@ -14,8 +14,9 @@ GENIUS = os.environ.get("GENIUS_API_TOKEN", None)
 
 
 @telebot.on(admin_cmd(outgoing=True, pattern="lyrics ?(.*)"))
+@telebot.on(sudo_cmd(allow_sudo=True, pattern="lyrics ?(.*)"))
 async def _(event):
-    await event.edit("wi8..! I am searching your lyrics....`")
+    await eor(event, "wi8..! I am searching your lyrics....`")
     reply_to_id = event.message.id
     if event.reply_to_msg_id:
         reply_to_id = event.reply_to_msg_id
@@ -25,7 +26,7 @@ async def _(event):
     elif reply.text:
         query = reply.message
     else:
-        await event.edit("`What I am Supposed to find `")
+        await eor(event, "`What I am Supposed to find `")
         return
     song = ""
     song = Song.find_song(query)
@@ -35,7 +36,7 @@ async def _(event):
         else:
             reply = "Couldn't find any lyrics for that song! try with artist name along with song if still doesnt work try `.glyrics`"
     else:
-        reply = "lyrics not found! try with artist name along with song if still doesnt work try `.glyrics`"
+        reply = "lyrics not found! try with artist name along with song!"
     if len(reply) > Config.MAX_MESSAGE_SIZE_LIMIT:
         with io.BytesIO(str.encode(reply)) as out_file:
             out_file.name = "lyrics.text"
@@ -49,10 +50,11 @@ async def _(event):
             )
             await event.delete()
     else:
-        await event.edit(reply)
+        await eor(event, reply)
 
 
 @telebot.on(admin_cmd(outgoing=True, pattern="glyrics ?(.*)"))
+@telebot.on(sudo_cmd(outgoing=True, pattern="glyrics ?(.*)", allow_sudo=True))
 async def lyrics(lyric):
     if lyric.pattern_match.group(1):
         query = lyric.pattern_match.group(1)

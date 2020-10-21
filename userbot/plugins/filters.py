@@ -70,6 +70,7 @@ async def on_snip(event):
 
 
 @telebot.on(admin_cmd(pattern="savefilter (.*)"))
+@telebot.on(sudo_cmd(pattern="savefilter (.*)", allow_sudo=True))
 async def on_snip_save(event):
     name = event.pattern_match.group(1)
     msg = await event.get_reply_message()
@@ -96,14 +97,15 @@ async def on_snip_save(event):
             snip.get("hash"),
             snip.get("fr"),
         )
-        await event.edit(f"filter {name} saved successfully. Get it with {name}")
+        await eor(event, f"filter {name} saved successfully. Get it with {name}")
     else:
-        await event.edit(
+        await eor(event, 
             "Reply to a message with `savefilter keyword` to save the filter"
         )
 
 
 @telebot.on(admin_cmd(pattern="listfilters"))
+@telebot.on(sudo_cmd(pattern="listfilters", allow_sudo=True))
 async def on_snip_list(event):
     all_snips = get_all_filters(event.chat_id)
     OUT_STR = "Available Filters in the Current Chat:\n"
@@ -125,17 +127,19 @@ async def on_snip_list(event):
             )
             await event.delete()
     else:
-        await event.edit(OUT_STR)
+        await eor(event, OUT_STR)
 
 
 @telebot.on(admin_cmd(pattern="clearfilter (.*)"))
+@telebot.on(sudo_cmd(pattern="clearfilter (.*)", allow_sudo=True))
 async def on_snip_delete(event):
     name = event.pattern_match.group(1)
     remove_filter(event.chat_id, name)
-    await event.edit(f"filter {name} deleted successfully")
+    await eor(event, f"filter {name} deleted successfully")
 
 
 @telebot.on(admin_cmd(pattern="clearallfilters"))
+@telebot.on(sudo_cmd(pattern="clearallfilters", allow_sudo=True))
 async def on_all_snip_delete(event):
     remove_all_filters(event.chat_id)
-    await event.edit(f"filters **in current chat** deleted successfully")
+    await eor(event, f"filters **in current chat** deleted successfully")

@@ -37,8 +37,9 @@ async def ocr_space_file(
 
 
 @telebot.on(admin_cmd(pattern="ocr(?: |$)(.*)", outgoing=True))
+@telebot.on(sudo_cmd(pattern="ocr(?: |$)(.*)", allow_sudo=True))
 async def ocr(event):
-    await event.edit("`Reading...`")
+    await eor(event, "`Reading...`")
     if not os.path.isdir(TEMP_DOWNLOAD_DIRECTORY):
         os.makedirs(TEMP_DOWNLOAD_DIRECTORY)
     lang_code = event.pattern_match.group(1)
@@ -49,9 +50,9 @@ async def ocr(event):
     try:
         ParsedText = test_file["ParsedResults"][0]["ParsedText"]
     except BaseException:
-        await event.edit("`Couldn't read it.`\n`I guess I need new glasses.`")
+        await eor(event, "`Couldn't read it.`\nTry using `.ocr eng`")
     else:
-        await event.edit(f"`Here's what I could read from it:`\n\n{ParsedText}")
+        await eor(event, f"`Here's what I could read from it:`\n\n{ParsedText}")
     os.remove(downloaded_file_name)
 
 

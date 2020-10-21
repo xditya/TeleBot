@@ -4,6 +4,7 @@ from userbot.utils import admin_cmd
 
 
 @telebot.on(admin_cmd(pattern="figlet ?(.*)", outgoing=True))
+@telebot.on(sudo_cmd(pattern="figlet ?(.*)", allow_sudo=True))
 async def figlet(event):
     if event.fwd_from:
         return
@@ -29,13 +30,13 @@ async def figlet(event):
         cmd = None
         text = input_str
     else:
-        await event.edit("Please add some text to figlet")
+        await eor(event, "Please add some text to figlet")
         return
     if cmd is not None:
         try:
             font = CMD_FIG[cmd]
         except KeyError:
-            await event.edit("Invalid selected font.")
+            await eor(event, "Invalid selected font.")
             return
         result = pyfiglet.figlet_format(text, font=font)
     else:
