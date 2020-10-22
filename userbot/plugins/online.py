@@ -19,7 +19,8 @@ ONLINESTR = [
 
 
 @telebot.on(admin_cmd(outgoing=True, pattern="online"))
+@telebot.on(sudo_cmd(allow_sudo=True, pattern="online"))
 async def online(event):
     """ Greet everyone! """
     if not event.text[0].isalpha() and event.text[0] not in ("/", "#", "@", "!"):
-        await event.edit(random.choice(ONLINESTR))
+        await eor(event, random.choice(ONLINESTR))

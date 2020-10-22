@@ -6,6 +6,7 @@ from userbot.utils import admin_cmd
 
 
 @telebot.on(admin_cmd(pattern="cpin ?(.*)"))
+@telebot.on(sudo_cmd(pattern="cpin ?(.*)", allow_sudo=True))
 async def _(event):
     if event.fwd_from:
         return
@@ -22,8 +23,8 @@ async def _(event):
                 )
             )
         except Exception as e:
-            await event.edit(str(e))
+            await eor(event, str(e))
         else:
             await event.delete()
     else:
-        await event.edit("Reply to a message to pin the message in this Channel.")
+        await eor(event, "Reply to a message to pin the message in this Channel.")

@@ -23,10 +23,9 @@ from telethon.tl.functions.users import GetFullUserRequest
 from telethon.tl.types import MessageEntityMentionName
 from telethon.utils import get_input_location
 
-from heroku_config import Var
 from userbot import ALIVE_NAME, telever
 from userbot.__init__ import StartTime
-from userbot.uniborgConfig import Config
+from userbot.telebotConfig import Config, Var
 from userbot.utils import admin_cmd, sudo_cmd
 
 # stats

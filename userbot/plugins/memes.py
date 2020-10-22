@@ -11,8 +11,8 @@ from telethon.tl.functions.users import GetFullUserRequest
 from telethon.tl.types import MessageEntityMentionName
 
 from userbot import CMD_HELP
+from userbot.telebotConfig import Var
 from userbot.utils import admin_cmd, register
-from var import Var
 
 # ================= CONSTANT =================
 RENDISTR = [

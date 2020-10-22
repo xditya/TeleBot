@@ -40,13 +40,13 @@ def get_readable_time(seconds: int) -> str:
 
 
 @telebot.on(admin_cmd(pattern="ping$"))
-@telebot.on(sudo_cmd(pattern="ping$", allow_sudo=True, incoming=True))
+@telebot.on(sudo_cmd(pattern="ping$", allow_sudo=True))
 async def _(event):
     if event.fwd_from:
         return
     start = datetime.now()
-    await event.edit("🏓 Pong!")
+    x = await eor(event, "🏓 Pong!")
     end = datetime.now()
     ms = (end - start).microseconds / 1000
     uptime = get_readable_time((time.time() - StartTime))
-    await event.edit(f"🏓Ping speed: {ms}\n🤖TeleBot Uptime: {uptime}")
+    await x.edit(f"🏓Ping speed: {ms}\n🤖TeleBot Uptime: {uptime}")

@@ -12,6 +12,7 @@ from uniborg.util import admin_cmd
 
 
 @telebot.on(admin_cmd(pattern="srgb (.*)"))
+@telebot.on(sudo_cmd(pattern="srgb (.*)", allow_sudo=True))
 async def sticklet(event):
     R = random.randint(0, 256)
     G = random.randint(0, 256)
@@ -53,7 +54,7 @@ async def sticklet(event):
     image_stream.seek(0)
 
     # finally, reply the sticker
-    await event.reply("https://t.me/UniBorg/95", file=image_stream)
+    await eor(event, "https://t.me/UniBorg/95", file=image_stream)
 
     # cleanup
     try:

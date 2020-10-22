@@ -12,12 +12,13 @@ from userbot.utils import admin_cmd
 
 
 @telebot.on(admin_cmd(pattern="whois ?(.*)"))
+@telebot.on(sudo_cmd(pattern="whois ?(.*)", allow_sudo=True))
 async def _(event):
     if event.fwd_from:
         return
     replied_user, error_i_a = await get_full_user(event)
     if replied_user is None:
-        await event.edit(str(error_i_a))
+        await eor(event, str(error_i_a))
         return False
     replied_user_profile_photos = await borg(
         GetUserPhotosRequest(
@@ -91,14 +92,14 @@ async def get_full_user(event):
         if previous_message.forward:
             replied_user = await event.client(
                 GetFullUserRequest(
-                    previous_message.forward.from_id
+                    previous_message.forward.sender_id
                     or previous_message.forward.channel_id
                 )
             )
             return replied_user, None
         else:
             replied_user = await event.client(
-                GetFullUserRequest(previous_message.from_id)
+                GetFullUserRequest(previous_message.sender_id)
             )
             return replied_user, None
     else:

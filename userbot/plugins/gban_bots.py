@@ -11,10 +11,12 @@ from userbot.utils import admin_cmd
 
 
 @telebot.on(admin_cmd(pattern="botgban ?(.*)"))
+@telebot.on(sudo_cmd(pattern="botgban ?(.*)", allow_sudo=True))
 async def _(event):
     if Config.G_BAN_LOGGER_GROUP is None:
-        await event.edit(
-            "Make a group, add all your sudo bots and paste it's id in ENV VAR (G_BAN_LOGGER_GROUP) for this module to work."
+        await eor(
+            event,
+            "Make a group, add all your sudo bots and paste it's id in ENV VAR (G_BAN_LOGGER_GROUP) for this module to work.",
         )
         return
     if event.fwd_from:
@@ -34,10 +36,12 @@ async def _(event):
 
 
 @telebot.on(admin_cmd(pattern="botungban ?(.*)"))
+@telebot.on(sudo_cmd(pattern="botungban ?(.*)", allow_sudo=True))
 async def _(event):
     if Config.G_BAN_LOGGER_GROUP is None:
-        await event.edit(
-            "Make a group, add all your sudo bots and paste it's id in ENV VAR (G_BAN_LOGGER_GROUP) for this module to work."
+        await eor(
+            event,
+            "Make a group, add all your sudo bots and paste it's id in ENV VAR (G_BAN_LOGGER_GROUP) for this module to work.",
         )
         return
     if event.fwd_from:

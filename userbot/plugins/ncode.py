@@ -13,7 +13,7 @@ from pygments.lexers import Python3Lexer
 from userbot.utils import admin_cmd, sudo_cmd
 
 
-@telebot.on(admin_cmd(pattern=r"ncode$"))
+@telebot.on(admin_cmd(pattern=r"ncode"))
 @telebot.on(sudo_cmd(pattern=r"ncode", allow_sudo=True))
 async def coder_print(event):
     a = await event.client.download_media(

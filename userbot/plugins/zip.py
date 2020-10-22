@@ -8,13 +8,14 @@ from uniborg.util import admin_cmd
 
 
 @telebot.on(admin_cmd(pattern="compress"))
+@telebot.on(sudo_cmd(pattern="compress", allow_sudo=True))
 async def _(event):
     if event.fwd_from:
         return
     if not event.is_reply:
-        await event.edit("Reply to a file pro saar.")
+        await eor(event, "Reply to a file pro saar.")
         return
-    mone = await event.edit("Processing ...")
+    mone = await eor(event, "Processing ...")
     if not os.path.isdir(Config.TMP_DOWNLOAD_DIRECTORY):
         os.makedirs(Config.TMP_DOWNLOAD_DIRECTORY)
     if event.reply_to_msg_id:
@@ -24,7 +25,7 @@ async def _(event):
                 reply_message, Config.TMP_DOWNLOAD_DIRECTORY
             )
             directory_name = downloaded_file_name
-            await event.edit(downloaded_file_name)
+            await eor(event, downloaded_file_name)
         except Exception as e:  # pylint:disable=C0103,W0703
             await mone.edit(str(e))
     zipfile.ZipFile(directory_name + ".zip", "w", zipfile.ZIP_DEFLATED).write(
@@ -38,7 +39,7 @@ async def _(event):
         allow_cache=False,
         reply_to=event.message.id,
     )
-    await event.edit("DONE!!!")
+    await eor(event, "DONE!!!")
     await asyncio.sleep(7)
     await event.delete()
 

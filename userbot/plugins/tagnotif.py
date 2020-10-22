@@ -20,7 +20,7 @@ from telethon import custom, events
 from telethon.tl.types import Channel
 from telethon.utils import get_display_name
 
-from userbot.uniborgConfig import Config
+from userbot.telebotConfig import Config
 
 if Config.TAG_LOG:
     NEEDTOLOG = int(Config.TAG_LOG)
@@ -52,7 +52,7 @@ if Config.TAG_LOG:
         where_ = await event.client.get_entity(event.chat_id)
 
         where_m = get_display_name(where_)
-        button_text = "📃 Go to original Msg "
+        button_text = "📃 Go to Message  "
 
         if isinstance(where_, Channel):
             message_link = f"https://t.me/c/{where_.id}/{event.id}"

@@ -10,6 +10,7 @@ from userbot.utils import admin_cmd
 
 
 @telebot.on(admin_cmd(pattern=r"lock( (?P<target>\S+)|$)"))
+@telebot.on(sudo_cmd(pattern=r"lock( (?P<target>\S+)|$)", allow_sudo=True))
 async def _(event):
     # Space weirdness in regex required because argument is optional and other
     # commands start with ".lock"
@@ -19,7 +20,7 @@ async def _(event):
     peer_id = event.chat_id
     if input_str in (("bots", "commands", "email", "forward", "url")):
         update_lock(peer_id, input_str, True)
-        await event.edit("Locked {}".format(input_str))
+        await eor(event, "Locked {}".format(input_str))
     else:
         msg = None
         media = None
@@ -73,14 +74,15 @@ async def _(event):
                 )
             )
         except Exception as e:  # pylint:disable=C0103,W0703
-            await event.edit(str(e))
+            await eor(event, str(e))
         else:
-            await event.edit(
-                "Current Chat Default Permissions Changed Successfully, in API"
+            await eor(
+                event, "Current Chat Default Permissions Changed Successfully, in API"
             )
 
 
 @telebot.on(admin_cmd(pattern="unlock ?(.*)"))
+@telebot.on(sudo_cmd(pattern="unlock ?(.*)", allow_sudo=True))
 async def _(event):
     if event.fwd_from:
         return
@@ -88,12 +90,13 @@ async def _(event):
     peer_id = event.chat_id
     if input_str in (("bots", "commands", "email", "forward", "url")):
         update_lock(peer_id, input_str, False)
-        await event.edit("UnLocked {}".format(input_str))
+        await eor(event, "UnLocked {}".format(input_str))
     else:
-        await event.edit("Use `.lock` without any parameters to unlock API locks")
+        await eor(event, "Use `.lock` without any parameters to unlock API locks")
 
 
 @telebot.on(admin_cmd(pattern="curenabledlocks"))
+@telebot.on(sudo_cmd(pattern="curenabledlocks", allow_sudo=True))
 async def _(event):
     if event.fwd_from:
         return
@@ -125,7 +128,7 @@ async def _(event):
         res += "👉 `adduser`: `{}`\n".format(current_api_locks.invite_users)
         res += "👉 `cpin`: `{}`\n".format(current_api_locks.pin_messages)
         res += "👉 `changeinfo`: `{}`\n".format(current_api_locks.change_info)
-    await event.edit(res)
+    await eor(event, res)
 
 
 @telebot.on(events.MessageEdited())  # pylint:disable=E0602

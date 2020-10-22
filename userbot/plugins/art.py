@@ -1,6 +1,6 @@
 # For TeleBot
 # By @AKASH_AM1 and @xditya
-# Kangers keep credits
+# Kangers keep cr eors
 from userbot import ALIVE_NAME
 from userbot.utils import admin_cmd
 
@@ -10,8 +10,10 @@ n = str(ALIVE_NAME) if ALIVE_NAME else "Set ALIVE_NAME in config vars in Heroku"
 
 
 @telebot.on(admin_cmd(pattern=r"ded"))
+@telebot.on(sudo_cmd(pattern=r"ded"))
 async def bluedevilded(ded):
-    await ded.edit(
+    await eor(
+        ded,
         n + " ==             |\n　　　　　|"
         "\n　　　　　| \n"
         "　　　　　| \n"
@@ -25,7 +27,7 @@ async def bluedevilded(ded):
         "　|　３　 | 丶＼ \n"
         "＜ 、･　　|　　＼ \n"
         "　＼＿＿／∪ _ ∪) \n"
-        "　　　　　 Ｕ Ｕ\n"
+        "　　　　　 Ｕ Ｕ\n",
     )
 
 
@@ -87,30 +89,36 @@ H = (
 
 
 @telebot.on(admin_cmd(pattern=r"monster"))
+@telebot.on(sudo_cmd(pattern=r"monster"))
 async def bluedevilmonster(monster):
-    await monster.edit(M)
+    await eor(monster, M)
 
 
 @telebot.on(admin_cmd(pattern=r"pig"))
+@telebot.on(sudo_cmd(pattern=r"pig"))
 async def bluedevipig(pig):
-    await pig.edit(P)
+    await eor(pig, P)
 
 
 @telebot.on(admin_cmd(pattern=r"kiler"))
+@telebot.on(sudo_cmd(pattern=r"kiler"))
 async def bluedevikiller(kiler):
-    await kiler.edit(K)
+    await eor(killer, K)
 
 
 @telebot.on(admin_cmd(pattern=r"gun"))
+@telebot.on(sudo_cmd(pattern=r"gun"))
 async def bluedevigun(gun):
-    await gun.edit(G)
+    await eor(gun, G)
 
 
 @telebot.on(admin_cmd(pattern=r"dog"))
+@telebot.on(sudo_cmd(pattern=r"dog"))
 async def bluedevidog(dog):
-    await dog.edit(D)
+    await eor(dog, D)
 
 
 @telebot.on(admin_cmd(pattern=r"hmf"))
+@telebot.on(sudo_cmd(pattern=r"hmf"))
 async def bluedevihmf(hmf):
-    await hmf.edit(H)
+    await eor(hmf, H)

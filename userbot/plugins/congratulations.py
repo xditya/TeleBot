@@ -17,9 +17,10 @@ RUNSREACTS = [
 
 
 @telebot.on(admin_cmd(pattern="congo"))
+@telebot.on(sudo_cmd(pattern="congo", allow_sudo=True))
 async def _(event):
     if event.fwd_from:
         return
     bro = random.randint(0, len(RUNSREACTS) - 1)
     reply_text = RUNSREACTS[bro]
-    await event.edit(reply_text)
+    await eor(event, reply_text)

@@ -24,13 +24,13 @@ def progress(current, total):
 
 
 @telebot.on(admin_cmd(pattern="go (.*)"))
-@telebot.on(sudo_cmd(pattern="go (.*)", allow_sudo=True))
+@telebot.on(sudo_cmd(pattern="go (.*)"))
 async def _(event):
     lool = await edit_or_reply(event, "`Processing Your Request`")
     if event.fwd_from:
         return
     start = datetime.now()
-    await lool.edit("`Trying To Connect...`")
+    await eor(lool, "`Connecting...`")
     # SHOW_DESCRIPTION = False
     # + " -inurl:(htm|html|php|pls|txt) intitle:index.of \"last modified\" (mkv|mp4|avi|epub|pdf|mp3)"
     input_str = event.pattern_match.group(1)
@@ -46,20 +46,22 @@ async def _(event):
         output_str += "📃  [{}]({}) \n\n".format(text, url)
     end = datetime.now()
     ms = (end - start).seconds
-    await lool.edit(
+    await eor(
+        lool,
         "searched Google for {} in {} seconds. \n{}".format(input_str, ms, output_str),
         link_preview=False,
     )
     await asyncio.sleep(5)
-    await lool.edit("Google: {}\n{}".format(input_str, output_str), link_preview=False)
+    await eor(lool, "Google: {}\n{}".format(input_str, output_str), link_preview=False)
 
 
 @telebot.on(admin_cmd(pattern="image (.*)"))
+@telebot.on(sudo_cmd(pattern="image (.*)", allow_sudo=True))
 async def _(event):
     if event.fwd_from:
         return
     start = datetime.now()
-    await event.edit("Processing ...")
+    await eor(event, "Processing ...")
     input_str = event.pattern_match.group(1)
     response = google_images_download.googleimagesdownload()
     if not os.path.isdir(Config.TMP_DOWNLOAD_DIRECTORY):
@@ -90,8 +92,9 @@ async def _(event):
         os.remove(each_file)
     end = datetime.now()
     ms = (end - start).seconds
-    await event.edit(
-        "searched Google for {} in {} seconds.".format(input_str, ms),
+    await eor(
+        event,
+        "Searched Google for {} in {} seconds.".format(input_str, ms),
         link_preview=False,
     )
     await asyncio.sleep(5)
@@ -99,6 +102,7 @@ async def _(event):
 
 
 @telebot.on(admin_cmd(pattern="grs"))
+@telebot.on(sudo_cmd(pattern="grs", allow_sudo=True))
 async def _(event):
     if event.fwd_from:
         return
@@ -106,7 +110,7 @@ async def _(event):
     BASE_URL = "http://www.google.com"
     OUTPUT_STR = "Reply to an image to do Google Reverse Search"
     if event.reply_to_msg_id:
-        await event.edit("Pre Processing Media")
+        await eor(event, "Pre Processing Media")
         previous_message = await event.get_reply_message()
         previous_message_text = previous_message.message
         if previous_message.media:
@@ -133,7 +137,7 @@ async def _(event):
             request_url = SEARCH_URL.format(BASE_URL, previous_message_text)
             google_rs_response = requests.get(request_url, allow_redirects=False)
             the_location = google_rs_response.headers.get("Location")
-        await event.edit("Found Google Result. Pouring some soup on it!")
+        await eor(event, "Found Google Result. Pouring some soup on it!")
         headers = {
             "User-Agent": "Mozilla/5.0 (X11; Linux x86_64; rv:58.0) Gecko/20100101 Firefox/58.0"
         }
@@ -155,4 +159,4 @@ async def _(event):
 More Info: Open this <a href="{the_location}">Link</a> in {ms} seconds""".format(
             **locals()
         )
-    await event.edit(OUTPUT_STR, parse_mode="HTML", link_preview=False)
+    await eor(event, OUTPUT_STR, parse_mode="HTML", link_preview=False)

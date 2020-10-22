@@ -1,7 +1,19 @@
-# Log chats.
-# (c) @TeleBotSupport
-# By @its_xditya, @MrConfused
+#    TeleBot - UserBot
+#    Copyright (C) 2020 TeleBot
 
+#    This program is free software: you can redistribute it and/or modify
+#    it under the terms of the GNU Affero General Public License as published by
+#    the Free Software Foundation, either version 3 of the License, or
+#    (at your option) any later version.
+
+#    This program is distributed in the hope that it will be useful,
+#    but WITHOUT ANY WARRANTY; without even the implied warranty of
+#    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+#    GNU Affero General Public License for more details.
+
+#    You should have received a copy of the GNU Affero General Public License
+#    along with this program.  If not, see <https://www.gnu.org/licenses/>.
+#
 import logging
 import os
 import sys
@@ -10,7 +22,7 @@ from asyncio import sleep
 from telethon import events
 
 from userbot import CMD_HELP
-from userbot.uniborgConfig import Config
+from userbot.telebotConfig import Config
 from userbot.utils import admin_cmd
 
 logging.basicConfig(
@@ -24,6 +36,7 @@ BOTLOG_CHATID = Config.PRIVATE_GROUP_BOT_API_ID
 
 
 @telebot.on(admin_cmd(outgoing=True, pattern=r"save(?: |$)([\s\S]*)"))
+@telebot.on(sudo_cmd(allow_sudo=True, pattern=r"save(?: |$)([\s\S]*)"))
 async def log(log_text):
     """ For .log command, forwards a message or the command argument to the bot logs group """
     if BOTLOG:
@@ -37,9 +50,9 @@ async def log(log_text):
         else:
             await log_text.edit("`What am I supposed to log?`")
             return
-        await log_text.edit("`Message saved 😁`")
+        await eor(log_text, "`Message saved 😁`")
     else:
-        await log_text.edit("`This feature requires Logging to be enabled!`")
+        await eor(log_text, "`This feature requires Logging to be enabled!`")
     await sleep(2)
     await log_text.delete()
 

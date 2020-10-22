@@ -13,6 +13,7 @@ msg_cache = {}
 
 
 @telebot.on(admin_cmd(pattern=r"fpost\s+(.*)", outgoing=True))
+@telebot.on(sudo_cmd(pattern=r"fpost\s+(.*)", allow_sudo=True))
 async def _(event):
     await event.delete()
     text = event.pattern_match.group(1)

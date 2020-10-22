@@ -20,6 +20,7 @@ def progress(current, total):
 
 
 @telebot.on(admin_cmd(pattern="getqr"))
+@telebot.on(sudo_cmd(pattern="getqr", allow_sudo=True))
 async def _(event):
     if event.fwd_from:
         return
@@ -54,20 +55,21 @@ async def _(event):
     if not t_response:
         logger.info(e_response)
         logger.info(t_response)
-        await event.edit("@oo0pps .. something wrongings. Failed to decode QRCode")
+        await eor(event, "@oo0pps .. something wrongings. Failed to decode QRCode")
         return
     soup = BeautifulSoup(t_response, "html.parser")
     qr_contents = soup.find_all("pre")[0].text
     end = datetime.now()
     ms = (end - start).seconds
-    await event.edit(
-        "Obtained QRCode contents in {} seconds.\n{}".format(ms, qr_contents)
+    await eor(
+        event, "Obtained QRCode contents in {} seconds.\n{}".format(ms, qr_contents)
     )
     await asyncio.sleep(5)
-    await event.edit(qr_contents)
+    await eor(event, qr_contents)
 
 
 @telebot.on(admin_cmd(pattern="makeqr ?(.*)"))
+@telebot.on(sudo_cmd(pattern="makeqr ?(.*)", allow_sudo=True))
 async def _(event):
     if event.fwd_from:
         return
@@ -117,6 +119,6 @@ async def _(event):
     os.remove("img_file.webp")
     end = datetime.now()
     ms = (end - start).seconds
-    await event.edit("Created QRCode in {} seconds".format(ms))
+    await eor(event, "Created QRCode in {} seconds".format(ms))
     await asyncio.sleep(5)
     await event.delete()

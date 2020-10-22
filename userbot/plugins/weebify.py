@@ -65,6 +65,7 @@ weebyfont = [
 
 
 @telebot.on(admin_cmd(pattern="weeb ?(.*)"))
+@telebot.on(sudo_cmd(pattern="weeb ?(.*)", allow_sudo=True))
 async def weebify(event):
 
     args = event.pattern_match.group(1)
@@ -72,11 +73,11 @@ async def weebify(event):
         get = await event.get_reply_message()
         args = get.text
     if not args:
-        await event.edit("`What I am Supposed to Weebify U Dumb`")
+        await eor(event, "`What I am Supposed to Weebify U Dumb`")
         return
     string = "  ".join(args).lower()
     for normiecharacter in string:
         if normiecharacter in normiefont:
             weebycharacter = weebyfont[normiefont.index(normiecharacter)]
             string = string.replace(normiecharacter, weebycharacter)
-    await event.edit(string)
+    await eor(event, string)

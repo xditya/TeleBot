@@ -8,8 +8,9 @@ from userbot.utils import admin_cmd
 
 
 @telebot.on(admin_cmd(pattern="chain"))
+@telebot.on(sudo_cmd(pattern="chain", allow_sudo=True))
 async def _(event):
-    await event.edit("Counting...")
+    await eor(event, "Counting...")
     count = -1
     message = event.message
     while message:
@@ -22,4 +23,4 @@ async def _(event):
             )
         message = reply
         count += 1
-    await event.edit(f"Chain length: {count}")
+    await eor(event, f"Chain length: {count}")

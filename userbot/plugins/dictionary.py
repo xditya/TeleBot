@@ -6,6 +6,7 @@ from uniborg.util import admin_cmd
 
 
 @telebot.on(admin_cmd(pattern="meaning (.*)"))
+@telebot.on(sudo_cmd(pattern="meaning (.*)", allow_sudo=True))
 async def _(event):
     if event.fwd_from:
         return
@@ -42,4 +43,4 @@ async def _(event):
         )
     except BaseException:
         pass
-    await event.edit(caption_str)
+    await eor(event, caption_str)

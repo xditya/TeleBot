@@ -5,8 +5,8 @@
 from telethon import events
 from telethon.errors.rpcerrorlist import YouBlockedUserError
 
+from userbot.telebotConfig import Var
 from userbot.utils import admin_cmd, sudo_cmd
-from var import Var
 
 
 @telebot.on(admin_cmd(pattern="purl ?(.*)"))
@@ -20,7 +20,7 @@ async def _(event):
     reply_message = await event.get_reply_message()
     chat = "@FiletolinkTGbot"
     reply_message.sender
-    await event.edit("**Making public url...**")
+    await eor(event, "**Making public url...**")
     async with event.client.conversation(chat) as conv:
         try:
             response = conv.wait_event(
@@ -29,7 +29,7 @@ async def _(event):
             await event.client.forward_messages(chat, reply_message)
             response = await response
         except YouBlockedUserError:
-            await a.edit("```Please unblock me (@FiletolinkTGbot) u Nigga```")
+            await eor(event, "```Please unblock me (@FiletolinkTGbot) u Nigga```")
             return
         await event.delete()
         await event.client.send_message(
@@ -38,20 +38,20 @@ async def _(event):
 
 
 @telebot.on(admin_cmd(pattern="reader ?(.*)"))
-@telebot.on(sudo_cmd(pattern="reader ?(.*)"))
+@telebot.on(sudo_cmd(pattern="reader ?(.*)", allow_sudo=True))
 async def _(event):
     if event.fwd_from:
         return
     if not event.reply_to_msg_id:
-        await event.edit("**Reply to a URL.**")
+        await eor(event, "**Reply to a URL.**")
         return
     reply_message = await event.get_reply_message()
     if not reply_message.text:
-        await event.edit("**Reply to a url message.**")
+        await eor(event, "**Reply to a url message.**")
         return
     chat = "@chotamreaderbot"
     reply_message.sender
-    await event.edit("**Making instant view...**")
+    await eor(event, "**Making instant view...**")
     async with event.client.conversation(chat) as conv:
         try:
             response = conv.wait_event(
@@ -60,7 +60,7 @@ async def _(event):
             await event.client.forward_messages(chat, reply_message)
             response = await response
         except YouBlockedUserError:
-            await a.edit("```Please unblock me (@chotamreaderbot) u Nigga```")
+            await eor(event, "```Please unblock me (@chotamreaderbot) u Nigga```")
             return
         await event.delete()
         await event.client.send_message(
@@ -69,23 +69,23 @@ async def _(event):
 
 
 @telebot.on(admin_cmd(pattern="aud ?(.*)"))
-@telebot.on(sudo_cmd(pattern="aud ?(.*)"))
+@telebot.on(sudo_cmd(pattern="aud ?(.*)", allow_sudo=True))
 async def _(event):
     if event.fwd_from:
         return
     if not event.reply_to_msg_id:
-        await event.edit("```Reply to any user message.```")
+        await eor(event, "```Reply to any user message.```")
         return
     reply_message = await event.get_reply_message()
     if not reply_message.media:
-        await event.edit("```reply to media message```")
+        await eor(event, "```reply to media message```")
         return
     chat = "@audiotubebot"
     reply_message.sender
     if reply_message.sender.bot:
-        await event.edit("```Reply to actual users message.```")
+        await eor(event, "```Reply to actual users message.```")
         return
-    a = await event.reply("```Processing```")
+    await event.reply("```Processing```")
     async with event.client.conversation(chat) as conv:
         try:
             response = conv.wait_event(
@@ -94,7 +94,7 @@ async def _(event):
             await event.client.send_message(chat, reply_message)
             response = await response
         except YouBlockedUserError:
-            await a.edit("```Please unblock @AudioTubeBot and try again```")
+            await eor(event, "```Please unblock @AudioTubeBot and try again```")
             return
         await event.delete()
         await event.client.send_file(event.chat_id, response.message.media)
@@ -111,7 +111,7 @@ async def _(event):
     reply_message = await event.get_reply_message()
     chat = "@instadownloadingbot"
     reply_message.sender
-    await event.edit("**Downloading the post...**")
+    await eor(event, "**Downloading the post...**")
     async with event.client.conversation(chat) as conv:
         try:
             response = conv.wait_event(
@@ -120,7 +120,7 @@ async def _(event):
             await event.client.forward_messages(chat, reply_message)
             response = await response
         except YouBlockedUserError:
-            await a.edit("```Please unblock me (@instadownloadingbot) u Nigga```")
+            await eor(event, "```Please unblock me (@instadownloadingbot) u Nigga```")
             return
         await event.delete()
         await event.client.send_message(
@@ -129,6 +129,7 @@ async def _(event):
 
 
 @telebot.on(admin_cmd(pattern="stats$"))
+@telebot.on(sudo_cmd(pattern="stats$", allow_sudo=True))
 async def stats(event):
     if event.fwd_from:
         return
@@ -142,6 +143,7 @@ async def stats(event):
 
 
 @telebot.on(admin_cmd(pattern="xogame$"))
+@telebot.on(sudo_cmd(pattern="xogame$", allow_sudo=True))
 async def gamez(event):
     if event.fwd_from:
         return
@@ -155,6 +157,7 @@ async def gamez(event):
 
 
 @telebot.on(admin_cmd(pattern="whisper ?(.*)"))
+@telebot.on(sudo_cmd(pattern="whisper ?(.*)", allow_sudo=True))
 async def wspr(event):
     if event.fwd_from:
         return
@@ -168,12 +171,11 @@ async def wspr(event):
 
 
 @telebot.on(admin_cmd(pattern="crack ?(.*)"))
+@telebot.on(sudo_cmd(pattern="crack ?(.*)", allow_sudo=True))
 async def mod(event):
     if event.fwd_from:
         return
     modr = event.pattern_match.group(1)
-    if "modi" in borg.text:
-        return
     botusername = "@PremiumAppBot"
     if event.reply_to_msg_id:
         await event.get_reply_message()
@@ -183,7 +185,7 @@ async def mod(event):
 
 
 @telebot.on(admin_cmd(pattern="checkspam ?(.*)"))
-@telebot.on(sudo_cmd(pattern="checkspam ?(.*)", allow_sudo=True))
+@telebot.on(sudo_cmd(pattern="checkspam ?(.*), allow_sudo=True"))
 async def _(event):
     bot = "@SpamBot"
     if event.fwd_from:
@@ -200,11 +202,11 @@ async def _(event):
                 await borg.send_message(event.chat_id, audio.text)
                 await event.delete()
             except YouBlockedUserError:
-                await event.edit_or_reply("**Error:** `unblock` @spambot `and retry!")
+                await eor(event, "**Error:** `unblock` @spambot `and retry!")
 
 
 @telebot.on(admin_cmd(pattern="gitdl ?(.*)"))
-@telebot.on(sudo_cmd(pattern="gitdl ?(.*)", allow_sudo=True))
+@telebot.on(sudo_cmd(pattern="gitdl ?(.*), allow_sudo=True"))
 async def _(event):
     if event.fwd_from:
         return
@@ -214,7 +216,7 @@ async def _(event):
     reply_message = await event.get_reply_message()
     chat = "@gitdownloadbot"
     reply_message.sender
-    await event.edit("**Downloading the repository...**")
+    await eor(event, "**Downloading the repository...**")
     async with event.client.conversation(chat) as conv:
         try:
             response = conv.wait_event(
@@ -223,7 +225,7 @@ async def _(event):
             await event.client.forward_messages(chat, reply_message)
             response = await response
         except YouBlockedUserError:
-            await a.edit("```Please unblock me (@gitdownloadbot) u Nigga```")
+            await eor(event, "```Please unblock me (@gitdownloadbot) u Nigga```")
             return
         await event.delete()
         x = await event.client.send_message(
@@ -232,3 +234,17 @@ async def _(event):
         await x.edit(
             "Downloaded by [TeleBot](t.me/TeleBotSupport), via @gitdownloadbot"
         )
+
+
+@telebot.on(admin_cmd(pattern="imusic ?(.*)"))
+@telebot.on(sudo_cmd(pattern="imusic ?(.*)", allow_sudo=True))
+async def tel(event):
+    if event.fwd_from:
+        return
+    botusername = "@vkmusic_bot"
+    tele = event.pattern_match.group(1)
+    if event.reply_to_msg_id:
+        await event.get_reply_message()
+    tap = await bot.inline_query(botusername, tele)
+    await tap[0].click(event.chat_id)
+    await event.delete()

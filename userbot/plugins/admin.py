@@ -1,7 +1,3 @@
-# Copyright (C) 2019 The Raphielscape Company LLC.
-#
-# Licensed under the Raphielscape Public License, Version 1.c (the "License");
-# you may not use this file except in compliance with the License.
 """
 Userbot module to help you manage a group
 """
@@ -84,7 +80,7 @@ UNMUTE_RIGHTS = ChatBannedRights(until_date=None, send_messages=False)
 async def set_group_photo(gpic):
     """ For .setgpic command, changes the picture of a group """
     if not gpic.is_group:
-        await gpic.edit("`I don't think this is a group.`")
+        await gpic.eor(event, "`I don't think this is a group.`")
         return
     replymsg = await gpic.get_reply_message()
     chat = await gpic.get_chat()
@@ -93,7 +89,7 @@ async def set_group_photo(gpic):
     photo = None
 
     if not admin and not creator:
-        await gpic.edit(NO_ADMIN)
+        x = await gpic.eor(x, NO_ADMIN)
         return
 
     if replymsg and replymsg.media:
@@ -102,23 +98,23 @@ async def set_group_photo(gpic):
         elif "image" in replymsg.media.document.mime_type.split("/"):
             photo = await gpic.client.download_file(replymsg.media.document)
         else:
-            await gpic.edit(INVALID_MEDIA)
+            x = await gpic.eor(x, INVALID_MEDIA)
 
     if photo:
         try:
             await gpic.client(
                 EditPhotoRequest(gpic.chat_id, await gpic.client.upload_file(photo))
             )
-            await gpic.edit(CHAT_PP_CHANGED)
+            x = await gpic.eor(x, CHAT_PP_CHANGED)
 
         except PhotoCropSizeSmallError:
-            await gpic.edit(PP_TOO_SMOL)
+            x = await gpic.eor(x, PP_TOO_SMOL)
         except ImageProcessFailedError:
-            await gpic.edit(PP_ERROR)
+            x = await gpic.eor(x, PP_ERROR)
 
 
 @telebot.on(admin_cmd(outgoing=True, pattern="promote(?: |$)(.*)"))
-@telebot.on(sudo_cmd(outgoing=True, pattern="promote(?: |$)(.*)", allow_sudo=True))
+@telebot.on(sudo_cmd(pattern="promote(?: |$)(.*)", allow_sudo=True))
 @errors_handler
 async def promote(promt):
     """ For .promote command, promotes the replied/tagged person """
@@ -130,7 +126,7 @@ async def promote(promt):
 
     # If not admin and not creator, also return
     if not admin and not creator:
-        await promt.edit(NO_ADMIN)
+        event = await promt.eor(event, NO_ADMIN)
         return
 
     new_rights = ChatAdminRights(
@@ -142,7 +138,7 @@ async def promote(promt):
         pin_messages=True,
     )
 
-    await promt.edit("`Promoting...`")
+    event = await promt.eor(event, "`Promoting...`")
     user, rank = await get_user_from_event(promt)
     if not rank:
         rank = "pro-admin"  # Just in case.
@@ -154,12 +150,12 @@ async def promote(promt):
     # Try to promote if current user is admin or creator
     try:
         await promt.client(EditAdminRequest(promt.chat_id, user.id, new_rights, rank))
-        await promt.edit("`Promoted Successfully! Enjoy!!`")
+        event = await promt.eor(event, "`Promoted Successfully! Enjoy!!`")
 
     # If Telethon spit BadRequestError, assume
     # we don't have Promote permission
     except BadRequestError:
-        await promt.edit(NO_PERM)
+        event = await promt.eor(NO_PERM)
         return
 
     # Announce to the logging group if we have promoted successfully
@@ -173,7 +169,7 @@ async def promote(promt):
 
 
 @telebot.on(admin_cmd(outgoing=True, pattern="demote(?: |$)(.*)"))
-@telebot.on(sudo_cmd(outgoing=True, pattern="demote(?: |$)(.*)", allow_sudo=True))
+@telebot.on(sudo_cmd(pattern="demote(?: |$)(.*)", allow_sudo=True))
 @errors_handler
 async def demote(dmod):
     """ For .demote command, demotes the replied/tagged person """
@@ -212,9 +208,9 @@ async def demote(dmod):
     # If we catch BadRequestError from Telethon
     # Assume we don't have permission to demote
     except BadRequestError:
-        await dmod.edit(NO_PERM)
+        await eor(dmod, NO_PERM)
         return
-    await dmod.edit("`Demoted this retard!!`")
+    await eor(dmod, "`Demoted this retard!!`")
 
     # Announce to the logging group if we have demoted successfully
     if BOTLOG:
@@ -245,7 +241,7 @@ async def _(event):
     reply_msg_id = event.reply_to_msg_id
     if reply_msg_id:
         r_mesg = await event.get_reply_message()
-        to_ban_id = r_mesg.from_id
+        to_ban_id = r_mesg.sender_id
     elif input_str and "all" not in input_str:
         to_ban_id = int(input_str)
     else:
@@ -253,9 +249,9 @@ async def _(event):
     try:
         await borg(EditBannedRequest(event.chat_id, to_ban_id, rights))
     except (Exception) as exc:
-        await event.edit(str(exc))
+        await eor(event, str(exc))
     else:
-        await event.edit(f"{input_cmd}ned Successfully!")
+        await eor(event, f"{input_cmd}ned Successfully!")
 
 
 @telebot.on(admin_cmd(pattern="pgs ?(.*)"))
@@ -284,7 +280,7 @@ async def _(event):
             msgs = []
             await event.delete()
         else:
-            await event.edit("**PURGE** Failed!")
+            await eor(event, "**PURGE** Failed!")
 
 
 @telebot.on(admin_cmd(pattern="(ban|unban) ?(.*)"))
@@ -306,7 +302,7 @@ async def _(event):
     reply_msg_id = event.reply_to_msg_id
     if reply_msg_id:
         r_mesg = await event.get_reply_message()
-        to_ban_id = r_mesg.from_id
+        to_ban_id = r_mesg.sender_id
     elif input_str and "all" not in input_str:
         to_ban_id = int(input_str)
     else:
@@ -314,9 +310,9 @@ async def _(event):
     try:
         await borg(EditBannedRequest(event.chat_id, to_ban_id, rights))
     except (Exception) as exc:
-        await event.edit(str(exc))
+        await eor(event, str(exc))
     else:
-        await event.edit(f"{input_cmd}ned Successfully!")
+        await eor(event, f"{input_cmd}ned Successfully!")
 
 
 @register(incoming=True)
@@ -372,7 +368,7 @@ async def promote(promt):
         pin_messages=True,
     )
 
-    await promt.edit("`Promoting...`")
+    await eor(promt, "`Promoting...`")
     user, rank = await get_user_from_event(promt)
     if not rank:
         rank = "pero"  # Just in case.
@@ -384,12 +380,12 @@ async def promote(promt):
     # Try to promote if current user is admin or creator
     try:
         await promt.client(EditAdminRequest(promt.chat_id, user.id, new_rights, rank))
-        await promt.edit("`Promoted User Successfully! Enjoy!!`")
+        await eor(promt, "`Promoted User Successfully! Enjoy!!`")
 
     # If Telethon spit BadRequestError, assume
     # we don't have Promote permission
     except BadRequestError:
-        await promt.edit(NO_PERM)
+        await eor(promt, NO_PERM)
         return
 
     # Announce to the logging group if we have promoted successfully
@@ -414,7 +410,7 @@ async def gspider(gspdr):
 
     # If not admin and not creator, return
     if not admin and not creator:
-        await gspdr.edit(NO_ADMIN)
+        await eor(gspdr, NO_ADMIN)
         return
 
     # Check if the function running under SQL mode
@@ -431,14 +427,14 @@ async def gspider(gspdr):
         return
 
     # If pass, inform and start gmuting
-    await gspdr.edit("`Grabs a huge, sticky duct tape!`")
+    await eor(gspdr, "`Grabs a huge, sticky duct tape!`")
     if gmute(user.id) is False:
         await gspdr.edit("`Error! User probably already gmuted.\nRe-rolls the tape.`")
     else:
         if reason:
-            await gspdr.edit(f"`Globally taped!`Reason: {reason}")
+            await eor(gspdr, f"`Globally taped!`Reason: {reason}")
         else:
-            await gspdr.edit("`Globally taped!`")
+            await eor(gspdr, "`Globally taped!`")
 
         if BOTLOG:
             await gspdr.client.send_message(
@@ -472,7 +468,7 @@ async def get_admin(show):
 
 
 @telebot.on(admin_cmd(outgoing=True, pattern="pin(?: |$)(.*)"))
-@telebot.on(sudo_cmd(outgoing=True, pattern="pin(?: |$)(.*)", allow_sudo=True))
+@telebot.on(sudo_cmd(outgoing=True, pattern="pin(?: |$)(.*)"))
 @errors_handler
 async def pin(msg):
     """ For .pin command, pins the replied/tagged message on the top the chat. """
@@ -483,13 +479,13 @@ async def pin(msg):
 
     # If not admin and not creator, return
     if not admin and not creator:
-        await msg.edit(NO_ADMIN)
+        await eor(msg, NO_ADMIN)
         return
 
     to_pin = msg.reply_to_msg_id
 
     if not to_pin:
-        await msg.edit("`Reply to a message to pin it.`")
+        await eor(msg, "`Reply to a message to pin it.`")
         return
 
     options = msg.pattern_match.group(1)
@@ -502,12 +498,12 @@ async def pin(msg):
     try:
         await msg.client(UpdatePinnedMessageRequest(msg.to_id, to_pin, is_silent))
     except BadRequestError:
-        await msg.edit(NO_PERM)
+        await eor(msg, NO_PERM)
         return
 
-    await msg.edit("`Pinned Successfully!`")
+    await eor(msg, "`Pinned Successfully!`")
 
-    user = await get_user_from_id(msg.from_id, msg)
+    user = await get_user_from_id(msg.sender_id, msg)
 
     if BOTLOG:
         await msg.client.send_message(
@@ -531,29 +527,30 @@ async def kick(usr):
 
     # If not admin and not creator, return
     if not admin and not creator:
-        await usr.edit(NO_ADMIN)
+        await eor(usr, NO_ADMIN)
         return
 
     user, reason = await get_user_from_event(usr)
     if not user:
-        await usr.edit("`Couldn't fetch user.`")
+        await eor(usr, "`Couldn't fetch user.`")
         return
 
-    await usr.edit("`Kicking...`")
+    await eor(usr, "`Kicking...`")
 
     try:
         await usr.client.kick_participant(usr.chat_id, user.id)
         await sleep(0.5)
     except Exception as e:
-        await usr.edit(NO_PERM + f"\n{str(e)}")
+        await eor(usr, NO_PERM + f"\n{str(e)}")
         return
 
     if reason:
-        await usr.edit(
-            f"`Kicked` [{user.first_name}](tg://user?id={user.id})`!`\nReason: {reason}"
+        await eor(
+            usr,
+            f"`Kicked` [{user.first_name}](tg://user?id={user.id})`!`\nReason: {reason}",
         )
     else:
-        await usr.edit(f"`Kicked` [{user.first_name}](tg://user?id={user.id})`!`")
+        await eor(usr, f"`Kicked` [{user.first_name}](tg://user?id={user.id})`!`")
 
     if BOTLOG:
         await usr.client.send_message(
@@ -594,9 +591,9 @@ async def get_users(show):
     except ChatAdminRequiredError as err:
         mentions += " " + str(err) + "\n"
     try:
-        await show.edit(mentions)
+        await eor(show, mentions)
     except MessageTooLongError:
-        await show.edit("Damn, this is a huge group. Uploading users lists as file.")
+        await eor(show, "Damn, this is a huge group. Uploading users lists as file.")
         file = open("userslist.txt", "w+")
         file.write(mentions)
         file.close()
@@ -615,7 +612,7 @@ async def get_user_from_event(event):
     extra = None
     if event.reply_to_msg_id:
         previous_message = await event.get_reply_message()
-        user_obj = await event.client.get_entity(previous_message.from_id)
+        user_obj = await event.client.get_entity(previous_message.sender_id)
         extra = event.pattern_match.group(1)
     elif args:
         user = args[0]
@@ -626,7 +623,7 @@ async def get_user_from_event(event):
             user = int(user)
 
         if not user:
-            await event.edit("`Pass the user's username, id or reply!`")
+            await eor(event, "`Pass the user's username, id or reply!`")
             return
 
         if event.message.entities is not None:
@@ -639,7 +636,7 @@ async def get_user_from_event(event):
         try:
             user_obj = await event.client.get_entity(user)
         except (TypeError, ValueError) as err:
-            await event.edit(str(err))
+            await eor(event, str(err))
             return None
 
     return user_obj, extra
@@ -652,7 +649,7 @@ async def get_user_from_id(user, event):
     try:
         user_obj = await event.client.get_entity(user)
     except (TypeError, ValueError) as err:
-        await event.edit(str(err))
+        await eor(event, str(err))
         return None
 
     return user_obj

@@ -9,12 +9,13 @@ from datetime import datetime
 
 from uniborg.util import admin_cmd
 
-from userbot.uniborgConfig import Config
+from userbot.telebotConfig import Config
 
 thumb_image_path = Config.TMP_DOWNLOAD_DIRECTORY + "/thumb_image.jpg"
 
 
 @telebot.on(admin_cmd(pattern="rename (.*)"))
+@telebot.on(sudo_cmd(pattern="rename (.*)", allow_sudo=True))
 async def _(event):
     if event.fwd_from:
         return
@@ -22,7 +23,7 @@ async def _(event):
     xyz = Config.CMD_HNDLR
     if os.path.exists(thumb_image_path):
         thumb = thumb_image_path
-    await event.edit("**Downloading, renaming and uploading...**")
+    await eor(event, "**Downloading, renaming and uploading...**")
     input_str = event.pattern_match.group(1)
     if not os.path.isdir(Config.TMP_DOWNLOAD_DIRECTORY):
         os.makedirs(Config.TMP_DOWNLOAD_DIRECTORY)
@@ -43,7 +44,7 @@ async def _(event):
             await borg.send_file(
                 event.chat_id,
                 downloaded_file_name,
-                force_document=True,
+                force_document=False,
                 supports_streaming=False,
                 allow_cache=False,
                 reply_to=event.message.id,
@@ -52,14 +53,16 @@ async def _(event):
             end_two = datetime.now()
             os.remove(downloaded_file_name)
             ms_two = (end_two - end).seconds
-            await event.edit(
+            await eor(
+                event,
                 "Downloaded in {} seconds 😎. Uploaded in {} seconds 🥳.".format(
                     ms_one, ms_two
-                )
+                ),
             )
         else:
-            await event.edit("File Not Found {}".format(input_str))
+            await eor(event, "File Not Found {}".format(input_str))
     else:
-        await event.edit(
-            f"Syntax ~ `{xyz}rename file_name.extension` as reply to a Telegram media"
+        await eor(
+            event,
+            f"Syntax ~ `{xyz}rename file_name.extension` as reply to a Telegram media",
         )

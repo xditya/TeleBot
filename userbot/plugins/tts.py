@@ -15,6 +15,7 @@ from userbot.utils import admin_cmd
 
 
 @telebot.on(admin_cmd(pattern="tts (.*)"))
+@telebot.on(sudo_cmd(pattern="tts (.*)", allow_sudo=True))
 async def _(event):
 
     if event.fwd_from:
@@ -39,7 +40,7 @@ async def _(event):
 
     else:
 
-        await event.edit("Invalid Syntax. Module stopping.")
+        await eor(event, "Invalid Syntax. Module stopping.")
 
         return
 
@@ -82,7 +83,7 @@ async def _(event):
 
         except (subprocess.CalledProcessError, NameError, FileNotFoundError) as exc:
 
-            await event.edit(str(exc))
+            await eor(event, str(exc))
 
             # continue sending required_file_name
 
@@ -107,7 +108,7 @@ async def _(event):
 
         os.remove(required_file_name)
 
-        await event.edit("Processed {} ({}) in {} seconds!".format(text[0:97], lan, ms))
+        await eor(event, "Processed {} ({}) in {} seconds!".format(text[0:97], lan, ms))
 
         await asyncio.sleep(5)
 
@@ -115,4 +116,4 @@ async def _(event):
 
     except Exception as e:
 
-        await event.edit(str(e))
+        await eor(event, str(e))

@@ -10,10 +10,11 @@ from userbot.utils import admin_cmd
 
 
 @telebot.on(admin_cmd(pattern="calc"))
+@telebot.on(sudo_cmd(pattern="calc", allow_sudo=True))
 async def _(event):
     if event.fwd_from or event.via_bot_id:
         return
-    await event.edit("Processing ...")
+    x = await eor(event, "Processing ...")
     cmd = event.text.split(" ", maxsplit=1)[1]
     event.message.id
     if event.reply_to_msg_id:
@@ -47,7 +48,7 @@ async def _(event):
     final_output = "**EQUATION**: `{}` \n\n **SOLUTION**: \n`{}` \n".format(
         cmd, evaluation
     )
-    await event.edit(final_output)
+    await x.edit(final_output)
 
 
 async def aexec(code, event):

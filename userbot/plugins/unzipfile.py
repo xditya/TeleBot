@@ -21,10 +21,11 @@ if not os.path.isdir(extracted):
 
 
 @telebot.on(admin_cmd(pattern="unzip"))
+@telebot.on(sudo_cmd(pattern="unzip", allow_sudo=True))
 async def _(event):
     if event.fwd_from:
         return
-    mone = await event.edit("Processing ...")
+    mone = await eor(event, "Processing ...")
     if not os.path.isdir(Config.TMP_DOWNLOAD_DIRECTORY):
         os.makedirs(Config.TMP_DOWNLOAD_DIRECTORY)
     if event.reply_to_msg_id:
@@ -49,7 +50,7 @@ async def _(event):
             zip_ref.extractall(extracted)
         filename = sorted(get_lst_of_files(extracted, []))
         # filename = filename + "/"
-        await event.edit("Unzipping now")
+        await eor(event, "Unzipping now")
         # r=root, d=directories, f = files
         for single_file in filename:
             if os.path.exists(single_file):

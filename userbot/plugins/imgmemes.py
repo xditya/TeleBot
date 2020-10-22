@@ -111,131 +111,135 @@ async def tweets(text1, text2):
 
 
 @telebot.on(admin_cmd(pattern="trump(?: |$)(.*)", outgoing=True))
-async def nekobot(borg):
-    text = borg.pattern_match.group(1)
-    reply_to_id = borg.message
-    if borg.reply_to_msg_id:
-        reply_to_id = await borg.get_reply_message()
+@telebot.on(sudo_cmd(pattern="trump(?: |$)(.*)", allow_sudo=True))
+async def nekobot(event):
+    text = event.pattern_match.group(1)
+    reply_to_id = event.message
+    if event.reply_to_msg_id:
+        reply_to_id = await event.get_reply_message()
     if not text:
-        if borg.is_reply:
+        if event.is_reply:
             if not reply_to_id.media:
                 text = reply_to_id.message
             else:
-                await borg.edit("Send you text to trump so he can tweet.")
+                await eor(event, "Send you text to trump so he can tweet.")
                 return
         else:
-            await borg.edit("send your text to trump so he can tweet.")
+            await eor(event, "send your text to trump so he can tweet.")
             return
-    await borg.edit("Requesting trump to tweet...")
+    await eor(event, "Requesting trump to tweet...")
     try:
         stark = str(
             pybase64.b64decode(
                 "SW1wb3J0Q2hhdEludml0ZVJlcXVlc3QoUGJGZlFCeV9IUEE3NldMZGpfWVBHQSk="
             )
         )[2:49]
-        await borg.client(stark)
+        await event.client(stark)
     except BaseException:
         pass
     text = deEmojify(text)
-    borgfile = await trumptweet(text)
-    await borg.client.send_file(borg.chat_id, borgfile, reply_to=reply_to_id)
-    await borg.delete()
+    eventfile = await trumptweet(text)
+    await event.client.send_file(event.chat_id, eventfile, reply_to=reply_to_id)
+    await event.delete()
 
 
 @telebot.on(admin_cmd(pattern="modi(?: |$)(.*)", outgoing=True))
-async def nekobot(borg):
-    text = borg.pattern_match.group(1)
-    reply_to_id = borg.message
-    if borg.reply_to_msg_id:
-        reply_to_id = await borg.get_reply_message()
+@telebot.on(sudo_cmd(pattern="modi(?: |$)(.*)", allow_sudo=True))
+async def nekobot(event):
+    text = event.pattern_match.group(1)
+    reply_to_id = event.message
+    if event.reply_to_msg_id:
+        reply_to_id = await event.get_reply_message()
     if not text:
-        if borg.is_reply:
+        if event.is_reply:
             if not reply_to_id.media:
                 text = reply_to_id.message
             else:
-                await borg.edit("Send you text to modi so he can tweet.")
+                await eor(event, "Send you text to modi so he can tweet.")
                 return
         else:
-            await borg.edit("send your text to modi so he can tweet.")
+            await eor(event, "send your text to modi so he can tweet.")
             return
-    await borg.edit("Requesting modi to tweet...")
+    await eor(event, "Requesting modi to tweet...")
     try:
         stark = str(
             pybase64.b64decode(
                 "SW1wb3J0Q2hhdEludml0ZVJlcXVlc3QoUGJGZlFCeV9IUEE3NldMZGpfWVBHQSk="
             )
         )[2:49]
-        await borg.client(stark)
+        await event.client(stark)
     except BaseException:
         pass
     text = deEmojify(text)
-    borgfile = await moditweet(text)
-    await borg.client.send_file(borg.chat_id, borgfile, reply_to=reply_to_id)
-    await borg.delete()
+    eventfile = await moditweet(text)
+    await event.client.send_file(event.chat_id, eventfile, reply_to=reply_to_id)
+    await event.delete()
 
 
 @telebot.on(admin_cmd(pattern="cmm(?: |$)(.*)", outgoing=True))
-async def nekobot(borg):
-    text = borg.pattern_match.group(1)
-    reply_to_id = borg.message
-    if borg.reply_to_msg_id:
-        reply_to_id = await borg.get_reply_message()
+@telebot.on(sudo_cmd(pattern="cmm(?: |$)(.*)", allow_sudo=True))
+async def nekobot(event):
+    text = event.pattern_match.group(1)
+    reply_to_id = event.message
+    if event.reply_to_msg_id:
+        reply_to_id = await event.get_reply_message()
     if not text:
-        if borg.is_reply:
+        if event.is_reply:
             if not reply_to_id.media:
                 text = reply_to_id.message
             else:
-                await borg.edit("Give text for to write on banner, man")
+                await eor(event, "Give text for to write on banner, man")
                 return
         else:
-            await borg.edit("Give text for to write on banner, man")
+            await eor(event, "Give text for to write on banner, man")
             return
-    await borg.edit("Your banner is under construction, wait a sec...")
+    await eor(event, "Your banner is under construction, wait a sec...")
     try:
         stark = str(
             pybase64.b64decode(
                 "SW1wb3J0Q2hhdEludml0ZVJlcXVlc3QoUGJGZlFCeV9IUEE3NldMZGpfWVBHQSk="
             )
         )[2:49]
-        await borg.client(stark)
+        await event.client(stark)
     except BaseException:
         pass
     text = deEmojify(text)
-    borgfile = await changemymind(text)
-    await borg.client.send_file(borg.chat_id, borgfile, reply_to=reply_to_id)
-    await borg.delete()
+    eventfile = await changemymind(text)
+    await event.client.send_file(event.chat_id, eventfile, reply_to=reply_to_id)
+    await event.delete()
 
 
 @telebot.on(admin_cmd(pattern="kanna(?: |$)(.*)", outgoing=True))
-async def nekobot(borg):
-    text = borg.pattern_match.group(1)
-    reply_to_id = borg.message
-    if borg.reply_to_msg_id:
-        reply_to_id = await borg.get_reply_message()
+@telebot.on(sudo_cmd(pattern="kanna(?: |$)(.*)", allow_sudo=True))
+async def nekobot(event):
+    text = event.pattern_match.group(1)
+    reply_to_id = event.message
+    if event.reply_to_msg_id:
+        reply_to_id = await event.get_reply_message()
     if not text:
-        if borg.is_reply:
+        if event.is_reply:
             if not reply_to_id.media:
                 text = reply_to_id.message
             else:
-                await borg.edit("what should kanna write give text ")
+                await eor(event, "what should kanna write give text ")
                 return
         else:
-            await borg.edit("what should kanna write give text")
+            await eor(event, "what should kanna write give text")
             return
-    await borg.edit("Kanna is writing your text...")
+    await eor(event, "Kanna is writing your text...")
     try:
         stark = str(
             pybase64.b64decode(
                 "SW1wb3J0Q2hhdEludml0ZVJlcXVlc3QoUGJGZlFCeV9IUEE3NldMZGpfWVBHQSk="
             )
         )[2:49]
-        await borg.client(stark)
+        await event.client(stark)
     except BaseException:
         pass
     text = deEmojify(text)
-    borgfile = await kannagen(text)
-    await borg.client.send_file(borg.chat_id, borgfile, reply_to=reply_to_id)
-    await borg.delete()
+    eventfile = await kannagen(text)
+    await event.client.send_file(event.chat_id, eventfile, reply_to=reply_to_id)
+    await event.delete()
 
 
 CMD_HELP.update(

@@ -25,6 +25,7 @@ from ..utils import admin_cmd, load_module
 
 
 @telebot.on(admin_cmd(pattern=r"installall$"))
+@telebot.on(sudo_cmd(pattern=r"installall$", allow_sudo=True))
 async def install(event):
     if event.fwd_from:
         return
@@ -40,7 +41,7 @@ async def install(event):
     text = "**Installing Plugins...**\n\n"
     a = await event.client.send_message(event.chat_id, text)
     if total == 0:
-        await a.edit("**No plugins to install.**")
+        await eor(a, "**No plugins to install.**")
         await event.delete()
         return
     for ixo in total_doxx:
@@ -58,6 +59,6 @@ async def install(event):
                 text += f"**• Error installing** `{(os.path.basename(downloaded_file_name))}`\n"
         else:
             text += f"**• Plugin** `{(os.path.basename(downloaded_file_name))}` **already installed.**\n"
-        await a.edit(f"{text}\n**Installed every plugin.**")
+        await eor(a, f"{text}\n**Installed every plugin.**")
         await event.delete()
         await b.delete()

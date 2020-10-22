@@ -22,9 +22,9 @@ from math import ceil
 from telethon import Button, custom, events, functions
 from telethon.tl.functions.users import GetFullUserRequest
 
-from heroku_config import Var
 from userbot import ALIVE_NAME, CMD_LIST, CUSTOM_PMPERMIT, bot
 from userbot.plugins import telestats
+from userbot.telebotConfig import Var
 
 PMPERMIT_PIC = os.environ.get("PMPERMIT_PIC", None)
 TELEPIC = (
@@ -176,9 +176,10 @@ if Var.TG_BOT_USER_NAME_BF_HER is not None and tgbot is not None:
             )
             target = await event.client(GetFullUserRequest(event.query.user_id))
             first_name = html.escape(target.user.first_name)
+            ok = event.query.user_id
             if first_name is not None:
                 first_name = first_name.replace("\u2060", "")
-            tosend = f"Hey {DEFAULTUSER}, {first_name} is requesting something in PM!"
+            tosend = f"Hey {DEFAULTUSER}, [{first_name}](tg://user?id={ok}) is **requesting** something in PM!"
             await tgbot.send_message(LOG_GP, tosend)
 
     @tgbot.on(events.callbackquery.CallbackQuery(data=re.compile(b"chat")))
@@ -192,12 +193,11 @@ if Var.TG_BOT_USER_NAME_BF_HER is not None and tgbot is not None:
                 f"Oho, you want to chat...\nPlease wait and see if {DEFAULTUSER} is in a mood to chat, if yes, he will be replying soon!\nTill then, **do not spam.**"
             )
             target = await event.client(GetFullUserRequest(event.query.user_id))
+            ok = event.query.user_id
             first_name = html.escape(target.user.first_name)
             if first_name is not None:
                 first_name = first_name.replace("\u2060", "")
-            tosend = (
-                f"Hey {DEFAULTUSER}, {first_name} wants to PM you for Random Chatting!"
-            )
+            tosend = f"Hey {DEFAULTUSER}, [{first_name}](tg://user?id={ok}) wants to PM you for **Random Chatting**!"
             await tgbot.send_message(LOG_GP, tosend)
 
     @tgbot.on(events.callbackquery.CallbackQuery(data=re.compile(b"plshelpme")))
@@ -211,9 +211,10 @@ if Var.TG_BOT_USER_NAME_BF_HER is not None and tgbot is not None:
             )
             target = await event.client(GetFullUserRequest(event.query.user_id))
             first_name = html.escape(target.user.first_name)
+            ok = event.query.user_id
             if first_name is not None:
                 first_name = first_name.replace("\u2060", "")
-            tosend = f"Hey {DEFAULTUSER}, {first_name} wants to PM you for help!"
+            tosend = f"Hey {DEFAULTUSER}, [{first_name}](tg://user?id={ok}) wants to PM you for **help**!"
             await tgbot.send_message(LOG_GP, tosend)
 
     @tgbot.on(events.callbackquery.CallbackQuery(data=re.compile(b"heheboi")))
@@ -227,13 +228,14 @@ if Var.TG_BOT_USER_NAME_BF_HER is not None and tgbot is not None:
             )
             await borg(functions.contacts.BlockRequest(event.query.user_id))
             target = await event.client(GetFullUserRequest(event.query.user_id))
+            ok = event.query.user_id
             first_name = html.escape(target.user.first_name)
             if first_name is not None:
                 first_name = first_name.replace("\u2060", "")
             first_name = html.escape(target.user.first_name)
             await tgbot.send_message(
                 LOG_GP,
-                f"{first_name} tried to spam your inbox.\nHenceforth, **blocked**",
+                f"[{first_name}](tg://user?id={ok}) tried to **spam** your inbox.\nHenceforth, **blocked**",
             )
 
     @tgbot.on(events.callbackquery.CallbackQuery(data=re.compile(b"close")))

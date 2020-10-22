@@ -18,6 +18,7 @@ from userbot.utils import admin_cmd
 
 
 @telebot.on(admin_cmd(outgoing=True, pattern=r"gs (.*)"))
+@telebot.on(sudo_cmd(allow_sudo=True, pattern=r"gs (.*)"))
 async def gsearch(q_event):
     """ For .google command, do a Google search from @TeleBotHelp. """
     match = q_event.pattern_match.group(1)
@@ -40,12 +41,15 @@ async def gsearch(q_event):
             msg += f"[{title}]({link})\n`{desc}`\n\n"
         except IndexError:
             break
-    await q_event.edit(
-        "**Search Query:**\n`" + match + "`\n\n**Results:**\n" + msg, link_preview=False
+    await eor(
+        q_event,
+        "**Search Query:**\n`" + match + "`\n\n**Results:**\n" + msg,
+        link_preview=False,
     )
 
 
 @telebot.on(admin_cmd("duckduckgo (.*)"))
+@telebot.on(sudo_cmd("duckduckgo (.*)", allow_sudo=True))
 async def _(event):
     if event.fwd_from:
         return
@@ -53,14 +57,16 @@ async def _(event):
     sample_url = "https://duckduckgo.com/?q={}".format(input_str.replace(" ", "+"))
     if sample_url:
         link = sample_url.rstrip()
-        await event.edit(
-            "Let me 🦆 DuckDuckGo that for you:\n🔎 [{}]({})".format(input_str, link)
+        await eor(
+            event,
+            "Let me 🦆 DuckDuckGo that for you:\n🔎 [{}]({})".format(input_str, link),
         )
     else:
-        await event.edit("something is wrong. please try again later.")
+        await eor(event, "something is wrong. please try again later.")
 
 
 @telebot.on(admin_cmd(pattern="ggl (.*)"))
+@telebot.on(sudo_cmd(pattern="ggl (.*)", allow_sudo=True))
 async def _(event):
     if event.fwd_from:
         return
@@ -70,8 +76,9 @@ async def _(event):
     )
     response_api = requests.get(sample_url).text
     if response_api:
-        await event.edit(
-            "[{}]({})\n`Thank me Later 🙃` ".format(input_str, response_api.rstrip())
+        await eor(
+            event,
+            "[{}]({})\n`Thank me Later 🙃` ".format(input_str, response_api.rstrip()),
         )
     else:
-        await event.edit("something is wrong. please try again later.")
+        await eor(event, "something is wrong. please try again later.")

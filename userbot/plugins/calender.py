@@ -8,6 +8,7 @@ from uniborg.util import admin_cmd
 
 
 @telebot.on(admin_cmd(pattern="calendar (.*)"))
+@telebot.on(sudo_cmd(pattern="calendar (.*)", allow_sudo=True))
 async def _(event):
     if event.fwd_from:
         return
@@ -29,8 +30,8 @@ async def _(event):
             a = json.dumps(current_date_detail_arraays, sort_keys=True, indent=4)
         else:
             a = response_content["error"]
-        await event.edit(str(a))
+        await eor(event, str(a))
     else:
-        await event.edit("SYNTAX: .calendar YYYY-MM-DD")
+        await eor(event, "SYNTAX: .calendar YYYY-MM-DD")
     end = datetime.now()
     (end - start).seconds

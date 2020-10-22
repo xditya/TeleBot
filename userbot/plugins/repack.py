@@ -11,7 +11,7 @@ from userbot.utils import admin_cmd, sudo_cmd
 
 
 @telebot.on(admin_cmd(pattern="repack ?(.*)", outgoing=True))
-@telebot.on(sudo_cmd(pattern="repack ?(.*)", incoming=True, allow_sudo=True))
+@telebot.on(sudo_cmd(pattern="repack ?(.*)", incoming=True))
 async def _(event):
     a = await event.get_reply_message()
     input_str = event.pattern_match.group(1)

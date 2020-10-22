@@ -10,7 +10,7 @@ from userbot.utils import admin_cmd, sudo_cmd
 
 
 @telebot.on(admin_cmd(pattern=r"reveal", outgoing=True))
-@telebot.on(sudo_cmd(pattern=r"reveal", incoming=True, allow_sudo=True))
+@telebot.on(sudo_cmd(pattern=r"reveal"))
 async def _(event):
     b = await event.client.download_media(await event.get_reply_message())
     a = open(b, "r")

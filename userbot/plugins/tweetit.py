@@ -42,6 +42,7 @@ def deEmojify(inputString: str) -> str:
 
 
 @telebot.on(admin_cmd(pattern="tweet(?: |$)(.*)"))
+@telebot.on(sudo_cmd(pattern="tweet(?: |$)(.*)", allow_sudo=True))
 async def teletweet(telebot):
     # """Creates random anime sticker!"""
     what = telebot.pattern_match.group(1)
@@ -49,7 +50,7 @@ async def teletweet(telebot):
         if telebot.is_reply:
             what = (await telebot.get_reply_message()).message
         else:
-            await telebot.edit("`Tweets must contain some text, pero!`")
+            await eor(telebot, "`Tweets must contain some text, pero!`")
             return
     sticcers = await bot.inline_query("TwitterStatusBot", f"{(deEmojify(what))}")
     await sticcers[0].click(

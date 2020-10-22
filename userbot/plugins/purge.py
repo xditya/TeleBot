@@ -5,10 +5,14 @@ from asyncio import sleep
 from telethon.errors import rpcbaseerrors
 
 from userbot import BOTLOG, BOTLOG_CHATID, CMD_HELP
+from userbot.telebotConfig import Var
 from userbot.utils import admin_cmd, errors_handler
+
+BOTLOG_CHATID = Var.PRIVATE_GROUP_ID
 
 
 @telebot.on(admin_cmd(outgoing=True, pattern="purge"))
+@telebot.on(sudo_cmd(allow_sudo=True, pattern="purge"))
 @errors_handler
 async def fastpurger(purg):
     """ For .purge command, purge all messages starting from the reply. """

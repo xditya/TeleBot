@@ -16,6 +16,7 @@ from userbot.utils import admin_cmd
 
 
 @telebot.on(admin_cmd(pattern="app (.*)"))
+@telebot.on(sudo_cmd(pattern="app (.*)"))
 async def apk(e):
 
     try:
@@ -97,18 +98,19 @@ async def apk(e):
 
         app_details += "\n\n===> @TeleBotHelp <==="
 
-        await e.edit(app_details, link_preview=True, parse_mode="HTML")
+        await eor(e, app_details, link_preview=True, parse_mode="HTML")
 
     except IndexError:
 
-        await e.edit("No result found in search. Please enter **Valid app name**")
+        await eor(e, "No result found in search. Please enter **Valid app name**")
 
     except Exception as err:
 
-        await e.edit("Exception Occured:- " + str(err))
+        await eor(e, "Exception Occured:- " + str(err))
 
 
 @telebot.on(admin_cmd(pattern="appr (.*)"))
+@telebot.on(sudo_cmd(pattern="appr (.*)"))
 async def apkr(e):
 
     try:
@@ -192,12 +194,12 @@ async def apkr(e):
 
         app_details += "\n\n===> @TeleBotHelp <==="
 
-        await e.edit(app_details, link_preview=True, parse_mode="HTML")
+        await eor(e, app_details, link_preview=True, parse_mode="HTML")
 
     except IndexError:
 
-        await e.edit("No result found in search. Please enter **Valid app name**")
+        await eor(e, "No result found in search. Please enter **Valid app name**")
 
     except Exception as err:
 
-        await e.edit("Exception Occured:- " + str(err))
+        await eor(e, "Exception Occured:- " + str(err))

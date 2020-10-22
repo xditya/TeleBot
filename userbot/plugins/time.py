@@ -13,6 +13,7 @@ FONT_FILE_TO_USE = "/usr/share/fonts/truetype/dejavu/DejaVuSansMono.ttf"
 
 
 @telebot.on(admin_cmd(pattern="time ?(.*)"))  # pylint:disable=E0602
+@telebot.on(sudo_cmd(pattern="time ?(.*)", allow_sudo=True))
 async def _(event):
     if event.fwd_from:
         return
@@ -48,12 +49,13 @@ async def _(event):
     os.remove(required_file_name)
     end = datetime.now()
     time_taken_ms = (end - start).seconds
-    await event.edit("Created sticker in {} seconds".format(time_taken_ms))
+    await eor(event, "Created sticker in {} seconds".format(time_taken_ms))
     await asyncio.sleep(5)
     await event.delete()
 
 
 @telebot.on(admin_cmd(pattern="gtime (.*)"))  # pylint:disable=E0602
+@telebot.on(sudo_cmd(pattern="gtime (.*)", allow_sudo=True))
 async def _(event):
     if event.fwd_from:
         return

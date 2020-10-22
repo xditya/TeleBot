@@ -99,11 +99,12 @@ async def variable(var):
 
 
 @telebot.on(admin_cmd(outgoing=True, pattern=r"usage(?: |$)"))
+@telebot.on(sudo_cmd(allow_sudo=True, pattern=r"usage(?: |$)"))
 async def dyno_usage(dyno):
     """
     Get your account Dyno Usage
     """
-    await dyno.edit("`Processing...`")
+    await eor(dyno, "`Processing...`")
     useragent = (
         "Mozilla/5.0 (Linux; Android 10; SM-G975F) "
         "AppleWebKit/537.36 (KHTML, like Gecko) "
@@ -118,8 +119,8 @@ async def dyno_usage(dyno):
     path = "/accounts/" + user_id + "/actions/get-quota"
     r = requests.get(heroku_api + path, headers=headers)
     if r.status_code != 200:
-        return await dyno.edit(
-            "`Error: something bad happened`\n\n" f">.`{r.reason}`\n"
+        return await eor(
+            dyno, "`Error: something bad happened`\n\n" f">.`{r.reason}`\n"
         )
     result = r.json()
     quota = result["account_quota"]
@@ -147,7 +148,8 @@ async def dyno_usage(dyno):
 
     await asyncio.sleep(1.5)
 
-    return await dyno.edit(
+    return await eor(
+        dyno,
         "**⚙️ Dyno Usage ⚙️**:\n\n"
         f" -> `Dyno usage for`  **{Var.HEROKU_APP_NAME}**:\n"
         f"     •  `{AppHours}`**h**  `{AppMinutes}`**m**  "
@@ -155,11 +157,12 @@ async def dyno_usage(dyno):
         "\n\n"
         " -> `Dyno hours quota remaining this month`:\n"
         f"     •  `{hours}`**h**  `{minutes}`**m**  "
-        f"**|**  [`{percentage}`**%**]"
+        f"**|**  [`{percentage}`**%**]",
     )
 
 
 @telebot.on(admin_cmd(pattern="info heroku"))
+@telebot.on(sudo_cmd(pattern="info heroku", allow_sudo=True))
 async def info(event):
     await borg.send_message(
         event.chat_id,
@@ -183,24 +186,26 @@ def prettyjson(obj, indent=2, maxlinelength=80):
 
 
 @telebot.on(admin_cmd(outgoing=True, pattern=r"logs"))
+@telebot.on(sudo_cmd(allow_sudo=True, pattern=r"logs"))
 async def _(givelogs):
     try:
         Heroku = heroku3.from_key(Var.HEROKU_API_KEY)
         app = Heroku.app(Var.HEROKU_APP_NAME)
     except BaseException:
-        return await givelogs.reply(
-            " Please make sure your Heroku API Key, Your App name are configured correctly in the heroku var !"
+        return await eor(
+            givelogs,
+            " Please make sure your Heroku API Key, Your App name are configured correctly in the heroku var !",
         )
-    await givelogs.edit("Downloading Logs..")
-    with open("logs.txt", "w") as log:
+    await eor(givelogs, "Downloading Logs..")
+    with open("logs-telebot.txt", "w") as log:
         log.write(app.get_log())
     await givelogs.client.send_file(
         givelogs.chat_id,
-        "logs.txt",
+        "logs-telebot.txt",
         reply_to=givelogs.id,
         caption="[Heroku] TeleBot Logs ",
     )
-    await givelogs.edit("Heroku Logs Incoming!!")
+    await eor(givelogs, "Heroku Logs Incoming!!")
     await asyncio.sleep(5)
     await givelogs.delete()
-    return os.remove("logs.txt")
+    return os.remove("logs-telebot.txt")

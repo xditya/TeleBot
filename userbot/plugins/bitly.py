@@ -1,9 +1,3 @@
-# Copyright (C) 2020 azrim.
-# All rights reserved.
-#
-# Licensed under the Raphielscape Public License, Version 1.d (the "License");
-# you may not use this file except in compliance with the License.
-
 import os
 from re import match
 
@@ -16,6 +10,7 @@ BOTLOG = True
 
 
 @telebot.on(admin_cmd(outgoing=True, pattern=r"bitly(?: |$)(.*)"))
+@telebot.on(sudo_cmd(pattern=r"bitly(?: |$)(.*)"))
 async def shortener(short):
     """
     Shorten link using bit.ly API
@@ -29,12 +24,12 @@ async def shortener(short):
         elif reply:
             message = reply.text
         else:
-            await short.edit("`Error! No URL given!`")
+            await eor(short, "`Error! No URL given!`")
             return
         link_match = match(r"\bhttps?://.*\.\S+", message)
         if not link_match:
-            await short.edit(
-                "`Error! Please provide valid url!`\nExample: https://google.com"
+            await eor(
+                short, "`Error! Please provide valid url!`\nExample: https://google.com"
             )
             return
         urls = [f"{message}"]
@@ -42,14 +37,15 @@ async def shortener(short):
         raw_output = bitly.shorten_urls(urls)
         string_output = f"{raw_output}"
         output = string_output.replace("['", "").replace("']", "")
-        await short.edit(
-            f"`Your link shortened successfully!`\nHere is your link {output}"
+        await eor(
+            short, f"`Your link shortened successfully!`\nHere is your link {output}"
         )
         if BOTLOG:
             await short.client.send_message(
                 PRIVATE_GROUP_ID, f"`#SHORTLINK \nThis Your Link!`\n {output}"
             )
     else:
-        await short.edit(
-            "Set bit.ly API token first\nGet it from [here](https://bitly.com/a/sign_up)"
+        await eor(
+            short,
+            "Set bit.ly API token first\nGet it from [here](https://bitly.com/a/sign_up)",
         )

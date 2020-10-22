@@ -73,7 +73,7 @@ async def get_user_from_id(user, event):
     try:
         user_obj = await event.client.get_entity(user)
     except (TypeError, ValueError) as err:
-        await event.edit(str(err))
+        await eor(event, str(err))
         return None
 
     return user_obj
@@ -117,7 +117,9 @@ async def get_user_from_event(event: NewMessage.Event, **kwargs):
     # Check for a replied to message
     elif event.reply_to_msg_id:
         previous_message = await event.get_reply_message()
-        replied_user = await event.client(GetFullUserRequest(previous_message.from_id))
+        replied_user = await event.client(
+            GetFullUserRequest(previous_message.sender_id)
+        )
 
     # Last case scenario is to get the current user
     else:
@@ -286,6 +288,7 @@ class TGDoc:
 
 
 @telebot.on(admin_cmd(pattern=r"u(?:ser)?(\s+[\S\s]+|$)", outgoing=True))
+@telebot.on(sudo_cmd(pattern=r"u(?:ser)?(\s+[\S\s]+|$)", allow_sudo=True))
 async def who(event: NewMessage.Event):
     """ For .user command, get info about a user. """
     if event.fwd_from:
@@ -302,7 +305,7 @@ async def who(event: NewMessage.Event):
     replied_user = await get_user_from_event(event, **args)
 
     if not replied_user:
-        await event.edit("**Failed to get information for user**")
+        await eor(event, "**Failed to get information for user**")
         return
 
     user_info = await fetch_info(replied_user, **args)
@@ -312,7 +315,7 @@ async def who(event: NewMessage.Event):
     if not message_id_to_reply:
         pass
 
-    await event.edit(str(user_info), parse_mode="markdown")
+    await eor(event, str(user_info), parse_mode="markdown")
 
 
 async def fetch_info(replied_user, **kwargs):

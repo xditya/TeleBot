@@ -9,6 +9,7 @@ from userbot.utils import admin_cmd
 
 
 @telebot.on(admin_cmd(pattern="speedtest ?(.*)"))
+@telebot.on(sudo_cmd(pattern="speedtest ?(.*)", allow_sudo=True))
 async def _(event):
     if event.fwd_from:
         return
@@ -21,7 +22,7 @@ async def _(event):
         as_document = True
     elif input_str == "text":
         as_text = True
-    await event.edit("`Calculating my internet speed. Please wait!`")
+    await eor(event, "`Calculating my internet speed. Please wait!`")
     start = datetime.now()
     s = speedtest.Speedtest()
     s.get_best_server()
@@ -43,7 +44,8 @@ async def _(event):
         response = s.results.share()
         speedtest_image = response
         if as_text:
-            await event.edit(
+            await eor(
+                event,
                 """`SpeedTest completed in {} seconds`
 
 `Download: {}`
@@ -57,7 +59,7 @@ async def _(event):
                     ping_time,
                     i_s_p,
                     i_s_p_rating,
-                )
+                ),
             )
         else:
             await borg.send_file(
@@ -70,7 +72,8 @@ async def _(event):
             )
             await event.delete()
     except Exception as exc:
-        await event.edit(
+        await eor(
+            event,
             """**SpeedTest** completed in {} seconds
 Download: {}
 Upload: {}
@@ -83,7 +86,7 @@ __With the Following ERRORs__
                 convert_from_bytes(upload_speed),
                 ping_time,
                 str(exc),
-            )
+            ),
         )
 
 

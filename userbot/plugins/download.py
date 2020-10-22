@@ -14,10 +14,11 @@ from uniborg.util import admin_cmd, humanbytes, progress
 
 
 @telebot.on(admin_cmd(pattern="download ?(.*)"))
+@telebot.on(sudo_cmd(pattern="download ?(.*)", allow_sudo=True))
 async def _(event):
     if event.fwd_from:
         return
-    mone = await event.reply("Processing ...")
+    mone = await eor(event, "Processing ...")
     input_str = event.pattern_match.group(1)
     if not os.path.isdir(Config.TMP_DOWNLOAD_DIRECTORY):
         os.makedirs(Config.TMP_DOWNLOAD_DIRECTORY)
