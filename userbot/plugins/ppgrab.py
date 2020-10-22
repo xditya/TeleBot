@@ -43,5 +43,5 @@ if 1 == 1:
                 send_photos = await event.client.download_media(photos[id - 1])
                 await borg.send_file(event.chat_id, send_photos)
             else:
-                await eor(event, "`No photo found of that Nigga , now u Die`")
+                await eor(event, "`That user has no photos 🙄`")
                 return
