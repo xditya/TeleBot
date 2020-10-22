@@ -17,25 +17,8 @@ async def add_bot(bot_token):
     bot.me = await bot.get_me()
     bot.uid = telethon.utils.get_peer_id(bot.me)
 
-
-async def startup_log_telebot_start(bot_name):
-    await bot.send_message(TELE, "Deploying TeleBot...")
-
-
-async def startup_log_tgbot_start(bot_name):
-    await bot.send_message(TELE, f"Setting up @{BOTNAME}...")
-
-
-async def startup_log_telebot_done(bot_name):
-    await bot.send_message(TELE, "TeleBot has been deployed...")
-
-
-async def startup_log_tgbot_done(bot_name):
-    await bot.send_message(TELE, f"@{BOTNAME} has been set up! Send /start to it 😁.")
-
-
 async def startup_log_all_done(bot_name):
-    await bot.send_message(TELE, f"TeleBot has been deployed, @{BOTNAME} has been set up.\nSend `{CMD_HNDLR}alive` to see if the bot is working.\n\n__Do add @{BOTNAME} to this group and make it admin for enabling all the features of **TeleBot**__")
+    await bot.send_message(TELE, f"**TeleBot has been deployed,** @{BOTNAME} **has been set up.\nSend** `{CMD_HNDLR}alive` **to see if the bot is working.\n\n__Do add** @{BOTNAME} **to this group and make it admin for enabling all the features of TeleBot**__")
 
 if len(argv) not in (1, 3, 4):
     bot.disconnect()
@@ -57,9 +40,6 @@ else:
         bot.start()
 
 bot.loop.run_until_complete(
-    startup_log_telebot_start(
-        Var.TG_BOT_USER_NAME_BF_HER))
-bot.loop.run_until_complete(
     startup_log_telebot_done(
         Var.TG_BOT_USER_NAME_BF_HER))
 path = 'userbot/plugins/*.py'
@@ -71,9 +51,7 @@ for name in files:
         load_module(shortname.replace(".py", ""))
 
 print("TeleBot has been deployed! ")
-bot.loop.run_until_complete(
-    startup_log_tgbot_start(
-        Var.TG_BOT_USER_NAME_BF_HER))
+
 print("Setting up TGBot")
 
 path = "userbot/plugins/mybot/*.py"
@@ -85,9 +63,6 @@ for name in files:
         start_mybot(shortname.replace(".py", ""))
 
 print("TGBot has been set up!")
-bot.loop.run_until_complete(
-    startup_log_tgbot_done(
-        Var.TG_BOT_USER_NAME_BF_HER))
 print("TeleBot has been fully deployed! Do Visit @TeleBotSupport")
 bot.loop.run_until_complete(startup_log_all_done(Var.TG_BOT_USER_NAME_BF_HER))
 
