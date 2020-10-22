@@ -114,7 +114,7 @@ async def set_group_photo(gpic):
 
 
 @telebot.on(admin_cmd(outgoing=True, pattern="promote(?: |$)(.*)"))
-@telebot.on(sudo_cmd(outgoing=True, pattern="promote(?: |$)(.*)", allow_sudo=True))
+@telebot.on(sudo_cmd(pattern="promote(?: |$)(.*)", allow_sudo=True))
 @errors_handler
 async def promote(promt):
     """ For .promote command, promotes the replied/tagged person """
@@ -169,7 +169,7 @@ async def promote(promt):
 
 
 @telebot.on(admin_cmd(outgoing=True, pattern="demote(?: |$)(.*)"))
-@telebot.on(sudo_cmd(outgoing=True, pattern="demote(?: |$)(.*)", allow_sudo=True))
+@telebot.on(sudo_cmd(pattern="demote(?: |$)(.*)", allow_sudo=True))
 @errors_handler
 async def demote(dmod):
     """ For .demote command, demotes the replied/tagged person """
