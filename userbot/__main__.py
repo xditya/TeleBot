@@ -39,9 +39,6 @@ else:
     else:
         bot.start()
 
-bot.loop.run_until_complete(
-    startup_log_telebot_done(
-        Var.TG_BOT_USER_NAME_BF_HER))
 path = 'userbot/plugins/*.py'
 files = glob.glob(path)
 for name in files:
