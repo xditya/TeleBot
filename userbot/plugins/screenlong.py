@@ -4,7 +4,7 @@ Syntax: .screenlong <Website URL>"""
 import io
 import traceback
 from datetime import datetime
-
+from userbot.telebotConfig import Config
 from selenium import webdriver
 
 from userbot.utils import admin_cmd
@@ -15,7 +15,7 @@ from userbot.utils import admin_cmd
 async def _(event):
     if event.fwd_from:
         return
-    if Var.CHROME_BIN is None:
+    if Config.CHROME_BIN is None:
         await eor(event, "Need to install Chrome. Module Stopping.")
         return
     a = await eor(event, "Processing ...")
@@ -28,7 +28,7 @@ async def _(event):
         # https://stackoverflow.com/a/53073789/4723940
         chrome_options.add_argument("--no-sandbox")
         chrome_options.add_argument("--disable-dev-shm-usage")
-        chrome_options.binary_location = Var.CHROME_BIN
+        chrome_options.binary_location = Config.CHROME_BIN
         await a.edit("Starting Chrome BIN")
         driver = webdriver.Chrome(chrome_options=chrome_options)
         input_str = event.pattern_match.group(1)
