@@ -315,7 +315,7 @@ async def who(event: NewMessage.Event):
     if not message_id_to_reply:
         pass
 
-    await eor(event, str(user_info), parse_mode="markdown")
+    await eor(event, str(user_info))
 
 
 async def fetch_info(replied_user, **kwargs):
