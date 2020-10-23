@@ -102,14 +102,3 @@ def resize_image(image):
     im = Image.open(image)
     im.save(image, "PNG")
 
-
-CMD_HELP.update(
-    {
-        "telegraph": "**Plugin :**`telegraph`\
-     \n\n**Syntax :** `.telegraph media`\
-     \n**Usage :** Reply to any image or video to upload it to telgraph(video must be less than 5mb)\
-     \n\n**Syntax :** `.telegraph text`\
-     \n**Usage :** reply to any text file or any message to paste it to telegraph\
-    "
-    }
-)
