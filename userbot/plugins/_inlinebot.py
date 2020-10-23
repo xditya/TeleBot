@@ -25,7 +25,6 @@ from telethon.tl.functions.users import GetFullUserRequest
 from userbot import ALIVE_NAME, CMD_LIST, CUSTOM_PMPERMIT, bot
 from userbot.plugins import telestats
 from userbot.telebotConfig import Var
-from userbot import ALIVE_NAME
 
 DEFAULTUSER = str(ALIVE_NAME) if ALIVE_NAME else "TeleBot User"
 PMPERMIT_PIC = os.environ.get("PMPERMIT_PIC", None)
@@ -54,6 +53,7 @@ USER_BOT_NO_WARN = (
 
 if Var.TG_BOT_USER_NAME_BF_HER is not None and tgbot is not None:
     yourbot = Var.TG_BOT_USER_NAME_BF_HER
+
     @tgbot.on(events.InlineQuery)  # pylint:disable=E0602
     async def inline_handler(event):
         builder = event.builder
@@ -63,14 +63,18 @@ if Var.TG_BOT_USER_NAME_BF_HER is not None and tgbot is not None:
             thelink = f"https://t.me/{yourbot}?start=logs"
             result = builder.article(
                 title="Help-Menu",
-                text = f"This is the help menu for {DEFAULTUSER}\n\nProvided by [TeleBot](https://github.com/xditya/TeleBot)",
+                text=f"This is the help menu for {DEFAULTUSER}\n\nProvided by [TeleBot](https://github.com/xditya/TeleBot)",
                 buttons=[
                     [custom.Button.inline("All commands", data="helpmenu")],
-                    [Button.url("Logs", f"https://t.me/{yourbot}?start=logs"), custom.Button.inline("Close", data="close"), custom.Button.inline("Stats", data="statcheck")],
-                    [Button.url("Support", "t.me/TeleBotSupport")],
+                    [
+                        Button.url("Logs", f"https://t.me/{yourbot}?start=logs"),
+                        custom.Button.inline("Close", data="close"),
+                        custom.Button.inline("Stats", data="statcheck"),
                     ],
-                    link_preview=False,
-                )
+                    [Button.url("Support", "t.me/TeleBotSupport")],
+                ],
+                link_preview=False,
+            )
         elif event.query.user_id == bot.uid and query == "clicked":
             rev_text = query[::-1]
             buttons = paginate_help(0, CMD_LIST, "helpme")
@@ -88,7 +92,13 @@ if Var.TG_BOT_USER_NAME_BF_HER is not None and tgbot is not None:
                 buttons=[
                     [custom.Button.inline("Stats", data="statcheck")],
                     [Button.url("Repo", "https://github.com/xditya/TeleBot")],
-                    [Button.url("Deploy Now!","https://dashboard.heroku.com/new?button-url=https%3A%2F%2Fgithub.com%2Fxditya%2FTeleBot&template=https%3A%2F%2Fgithub.com%2Fxditya%2FTeleBot"), custom.Button.inline("Close", data="close")],
+                    [
+                        Button.url(
+                            "Deploy Now!",
+                            "https://dashboard.heroku.com/new?button-url=https%3A%2F%2Fgithub.com%2Fxditya%2FTeleBot&template=https%3A%2F%2Fgithub.com%2Fxditya%2FTeleBot",
+                        ),
+                        custom.Button.inline("Close", data="close"),
+                    ],
                 ],
             )
         elif event.query.user_id == bot.uid and query.startswith("**PM"):
@@ -167,16 +177,20 @@ if Var.TG_BOT_USER_NAME_BF_HER is not None and tgbot is not None:
 
     @tgbot.on(events.callbackquery.CallbackQuery(data=re.compile(b"helpmenu")))
     async def telemenu(event):
-        if event.query.user_id==bot.uid:
-            await event.edit("**Help menu opened!**\n__Check saved messages, if you don't find a menu here...__")
+        if event.query.user_id == bot.uid:
+            await event.edit(
+                "**Help menu opened!**\n__Check saved messages, if you don't find a menu here...__"
+            )
             mybot = Var.TG_BOT_USER_NAME_BF_HER
             q = "clicked"
             helpermenu = await bot.inline_query(mybot, q)
             await helpermenu[0].click(event.chat_id)
         else:
-            reply_pop_up_alert = ("Please get your own Userbot from @TeleBotHelp , and don't use mine!")
+            reply_pop_up_alert = (
+                "Please get your own Userbot from @TeleBotHelp , and don't use mine!"
+            )
             await event.answer(reply_pop_up_alert, cache_time=0, alert=True)
-        
+
     @tgbot.on(events.callbackquery.CallbackQuery(data=re.compile(b"pmclick")))
     async def on_pm_click(event):
         if event.query.user_id == bot.uid:

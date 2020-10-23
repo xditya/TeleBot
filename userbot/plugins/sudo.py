@@ -15,7 +15,9 @@
 #    along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 import os
-from ..telebotConfig import Config, Var
+
+from ..telebotConfig import Config
+
 
 @telebot.on(admin_cmd(pattern="sudo"))
 async def sudo(event):
@@ -26,13 +28,14 @@ async def sudo(event):
     else:
         await eor(event, f"**TeleBot**\nSudo - `Disabled`")
 
+
 @telebot.on(admin_cmd(pattern="prefix"))
 async def handler(event):
     hndlr = Config.CMD_HNDLR
-    if hndlr == "\.":
+    if hndlr == r"\.":
         x = "."
     else:
         x = Config.CMD_HNDLR
-    
+
     sudohndlr = Config.SUDO_HNDLR
     await eor(event, f"Command Handler - {x}\nSudo Handler - {sudohndlr}")

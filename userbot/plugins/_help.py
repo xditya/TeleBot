@@ -15,12 +15,11 @@
 #    along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 import asyncio
-import requests
-from telethon import functions
-from userbot import ALIVE_NAME, CMD_HELP, CMD_LIST
-from userbot.helpers.utils import yaml_format
+
+from userbot import ALIVE_NAME, CMD_LIST
 
 DEFAULTUSER = str(ALIVE_NAME) if ALIVE_NAME else "TeleBot User"
+
 
 @telebot.on(admin_cmd(outgoing=True, pattern="help ?(.*)"))
 async def cmd_list(event):
@@ -29,7 +28,7 @@ async def cmd_list(event):
         reply_to_id = event.reply_to_msg_id
     input_str = event.pattern_match.group(1)
     if input_str == "text":
-        string = ("{count} commands in {plugincount} plugins\n\n")
+        string = "{count} commands in {plugincount} plugins\n\n"
         count = 0
         plugincount = 0
         for i in sorted(CMD_LIST):
@@ -38,8 +37,8 @@ async def cmd_list(event):
             for iter_list in CMD_LIST[i]:
                 string += "    " + str(iter_list)
                 string += "\n"
-                count += 1   
-            string += "\n\n© @TeleBotSupport" 
+                count += 1
+            string += "\n\n© @TeleBotSupport"
         if len(string) > 4095:
             with io.BytesIO(str.encode(string)) as out_file:
                 out_file.name = "cmd.txt"
@@ -50,7 +49,7 @@ async def cmd_list(event):
                     allow_cache=False,
                     caption="**Commands found in the plugin.**",
                     reply_to=reply_to_id,
-                    )
+                )
                 await event.delete()
         else:
             await event.edit(string.format(count=count, plugincount=plugincount))
@@ -63,7 +62,7 @@ async def cmd_list(event):
                 string += f" <code>{i}</code>"
                 string += "\n"
                 count += 1
-            string += "\n\n <bold>© @TeleBotSupport</bold>" 
+            string += "\n\n <bold>© @TeleBotSupport</bold>"
             await event.edit(
                 string.format(count=count, input_str=input_str), parse_mode="HTML"
             )
