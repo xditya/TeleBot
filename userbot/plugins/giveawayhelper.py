@@ -290,6 +290,9 @@ async def search(event):
         channel = await borg.get_entity(int(channel_id))
     except ValueError:
         await eor(event, "Invalid id.")
+        return
+    except:
+        return
     name = channel.title
     username = channel.username
     if username:
