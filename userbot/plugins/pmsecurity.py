@@ -49,6 +49,7 @@ USER_BOT_NO_WARN = (
 )
 
 
+@telebot.on(admin_cmd(pattern="a ?(.*)"))
 @telebot.on(admin_cmd(pattern="approve ?(.*)"))
 async def approve_p_m(event):
     if event.fwd_from:
@@ -114,6 +115,7 @@ async def approve_p_m(event):
                 await event.client(functions.contacts.BlockRequest(chat.id))
 
 
+@telebot.on(admin_cmd(pattern="da ?(.*)"))
 @telebot.on(admin_cmd(pattern="disapprove ?(.*)"))
 async def approve_p_m(event):
     if event.fwd_from:

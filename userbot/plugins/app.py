@@ -98,7 +98,7 @@ async def apk(e):
 
         app_details += "\n\n===> @TeleBotHelp <==="
 
-        await eor(e, app_details, link_preview=True, parse_mode="HTML")
+        await eor(e, app_details)
 
     except IndexError:
 
@@ -194,7 +194,7 @@ async def apkr(e):
 
         app_details += "\n\n===> @TeleBotHelp <==="
 
-        await eor(e, app_details, link_preview=True, parse_mode="HTML")
+        await eor(e, app_details)
 
     except IndexError:
 

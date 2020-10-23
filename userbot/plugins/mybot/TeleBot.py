@@ -356,6 +356,7 @@ async def dyno_usage(dyno):
         ])
 
 
+@tgbot.on(events.NewMessage(pattern=r"^/start logs"))
 @tgbot.on(events.NewMessage(pattern=r"^/logs"))
 async def _(givelogs):
     Heroku = heroku3.from_key(Var.HEROKU_API_KEY)

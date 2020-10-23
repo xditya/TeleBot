@@ -49,12 +49,12 @@ async def sticklet(event):
     )
 
     image_stream = io.BytesIO()
-    image_stream.name = "@UniBorg.webp"
+    image_stream.name = "TeleBot-Sticklet.webp"
     image.save(image_stream, "WebP")
     image_stream.seek(0)
 
     # finally, reply the sticker
-    await eor(event, "https://t.me/UniBorg/95", file=image_stream)
+    await event.reply("https://t.me/UniBorg/95", file=image_stream)
 
     # cleanup
     try:
