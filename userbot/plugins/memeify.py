@@ -12,7 +12,6 @@ from userbot.utils import admin_cmd, sudo_cmd
 
 
 @telebot.on(admin_cmd(pattern="mmf ?(.*)"))
-@telebot.on(sudo_cmd(pattern="mmf ?(.*)", allow_sudo=True))
 async def handler(event):
     if event.fwd_from:
         return
