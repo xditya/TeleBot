@@ -13,7 +13,8 @@ from userbot.telebotConfig import Var
 
 telegraph = Telegraph()
 r = telegraph.create_account(short_name=Config.TELEGRAPH_SHORT_NAME)
-auth_url = r["auth_url"] 
+auth_url = r["auth_url"]
+
 
 @telebot.on(admin_cmd(pattern="telegraph (media|text) ?(.*)"))
 @telebot.on(sudo_cmd(pattern="telegraph (media|text) ?(.*)", allow_sudo=True))
@@ -56,7 +57,12 @@ async def _(event):
                 end = datetime.now()
                 ms_two = (end - start).seconds
                 os.remove(downloaded_file_name)
-                await okey.edit("Uploaded to this [Telegraph Page](https://telegra.ph{}) in {} seconds.".format(media_urls[0], (ms + ms_two)),link_preview=False)
+                await okey.edit(
+                    "Uploaded to this [Telegraph Page](https://telegra.ph{}) in {} seconds.".format(
+                        media_urls[0], (ms + ms_two)
+                    ),
+                    link_preview=False,
+                )
         elif input_str == "text":
             user_object = await borg.get_entity(r_message.from_id)
             title_of_page = user_object.first_name  # + " " + user_object.last_name
