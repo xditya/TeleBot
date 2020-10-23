@@ -17,6 +17,7 @@ async def add_bot(bot_token):
     bot.me = await bot.get_me()
     bot.uid = telethon.utils.get_peer_id(bot.me)
 
+
 async def startup_log_all_done(bot_name):
     await bot.send_message(TELE, f"**TeleBot has been deployed,** @{BOTNAME} **has been set up.\nSend** `{CMD_HNDLR}alive` **to see if the bot is working.\n\n__Do add** @{BOTNAME} **to this group and make it admin for enabling all the features of TeleBot**__")
 

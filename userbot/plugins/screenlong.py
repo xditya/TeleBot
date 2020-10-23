@@ -4,9 +4,10 @@ Syntax: .screenlong <Website URL>"""
 import io
 import traceback
 from datetime import datetime
-from userbot.telebotConfig import Config
+
 from selenium import webdriver
 
+from userbot.telebotConfig import Config
 from userbot.utils import admin_cmd
 
 
