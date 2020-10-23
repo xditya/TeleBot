@@ -22,7 +22,6 @@ StartTime = time.time()
 telever = "4.7"
 
 CMD_LIST = {}
-# for later purposes
 CMD_HELP = {}
 INT_PLUG = ""
 LOAD_PLUG = {}
