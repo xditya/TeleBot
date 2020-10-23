@@ -291,7 +291,7 @@ async def search(event):
     except ValueError:
         await eor(event, "Invalid id.")
         return
-    except:
+    except BaseException:
         return
     name = channel.title
     username = channel.username
