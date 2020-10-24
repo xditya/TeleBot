@@ -1,5 +1,4 @@
 from requests import get
-from pySmartDL import SmartDL
 import pylast
 import asyncio
 from distutils.util import strtobool as sb
@@ -163,22 +162,6 @@ else:
     # Put your ppe vars here if you are using local hosting
     PLACEHOLDER = None
 
-# Setting Up CloudMail.ru and MEGA.nz extractor binaries,
-# and giving them correct perms to work properly.
-if not os.path.exists('bin'):
-    os.mkdir('bin')
-
-binaries = {
-    "https://raw.githubusercontent.com/yshalsager/megadown/master/megadown":
-    "bin/megadown",
-    "https://raw.githubusercontent.com/yshalsager/cmrudl.py/master/cmrudl.py":
-    "bin/cmrudl"
-}
-
-for binary, path in binaries.items():
-    downloader = SmartDL(binary, path, progress_bar=False)
-    downloader.start()
-    os.chmod(path, 0o755)
 
 # Global Variables
 COUNT_MSG = 0
