@@ -30,7 +30,7 @@ async def _(event):
     if event.fwd_from:
         return
     start = datetime.now()
-    await eor(lool, "`Connecting...`")
+    x = await eor(lool, "`Connecting...`")
     # SHOW_DESCRIPTION = False
     # + " -inurl:(htm|html|php|pls|txt) intitle:index.of \"last modified\" (mkv|mp4|avi|epub|pdf|mp3)"
     input_str = event.pattern_match.group(1)
@@ -46,13 +46,13 @@ async def _(event):
         output_str += "📃  [{}]({}) \n\n".format(text, url)
     end = datetime.now()
     ms = (end - start).seconds
-    await eor(
+    await x.edit(
         lool,
         "searched Google for {} in {} seconds. \n{}".format(input_str, ms, output_str),
         link_preview=False,
     )
     await asyncio.sleep(5)
-    await eor(lool, "Google: {}\n{}".format(input_str, output_str), link_preview=False)
+    await x.edit(lool, "Google: {}\n{}".format(input_str, output_str), link_preview=False)
 
 
 @telebot.on(admin_cmd(pattern="image (.*)"))
