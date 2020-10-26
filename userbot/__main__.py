@@ -18,7 +18,7 @@ async def add_bot(bot_token):
     bot.uid = telethon.utils.get_peer_id(bot.me)
 
 
-async def startup_log_all_done(bot_name):
+async def startup_log_all_done():
     await bot.send_message(TELE, f"**TeleBot has been deployed,** @{BOTNAME} **has been set up.\nSend** `{CMD_HNDLR}alive` **to see if the bot is working.\n\n__Do add** @{BOTNAME} **to this group and make it admin for enabling all the features of TeleBot**__")
 
 if len(argv) not in (1, 3, 4):
@@ -62,7 +62,7 @@ for name in files:
 
 print("TGBot has been set up!")
 print("TeleBot has been fully deployed! Do Visit @TeleBotSupport")
-bot.loop.run_until_complete(startup_log_all_done(Var.TG_BOT_USER_NAME_BF_HER))
+bot.loop.run_until_complete(startup_log_all_done())
 
 if len(argv) not in (1, 3, 4):
     bot.disconnect()
