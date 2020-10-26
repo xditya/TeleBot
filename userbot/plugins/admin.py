@@ -76,6 +76,7 @@ UNMUTE_RIGHTS = ChatBannedRights(until_date=None, send_messages=False)
 
 BOTLOG_CHATID = Var.PRIVATE_GROUP_ID
 
+
 @telebot.on(admin_cmd(outgoing=True, pattern="setgpic"))
 @telebot.on(sudo_cmd(outgoing=True, pattern="setgpic", allow_sudo=True))
 @errors_handler
@@ -136,7 +137,7 @@ async def promote(promt):
     x = await edit_or_reply(promt, "`Promoting...`")
     user, rank = await get_user_from_event(promt)
     if not rank:
-        rank = "pro-admin" # just in case
+        rank = "pro-admin"  # just in case
     if not user:
         return
     try:
