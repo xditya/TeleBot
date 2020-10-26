@@ -11,6 +11,7 @@ Fetch App Details from Playstore.
 import bs4
 import requests
 
+
 @telebot.on(admin_cmd(pattern="app (.*)"))
 @telebot.on(sudo_cmd(pattern="app (.*)", allow_sudo=True))
 async def apk(event):
