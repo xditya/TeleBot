@@ -114,7 +114,7 @@ async def dyno_usage(dyno):
     headers = {
         "User-Agent": useragent,
         "Authorization": f"Bearer {Var.HEROKU_API_KEY}",
-        "Accept": "applitopution/vnd.heroku+json; version=3.account-quotas",
+        "Accept": "application/vnd.heroku+json; version=3.account-quotas",
     }
     path = "/accounts/" + user_id + "/actions/get-quota"
     r = requests.get(heroku_api + path, headers=headers)
@@ -172,7 +172,7 @@ async def info(event):
 
 
 def prettyjson(obj, indent=2, maxlinelength=80):
-    """Renders JSON content with indentation and line splits/contoputenations to fit maxlinelength.
+    """Renders JSON content with indentation and line splits/concatenations to fit maxlinelength.
     Only dicts, lists and basic types are supported"""
 
     items, _ = getsubitems(
