@@ -52,7 +52,9 @@ async def _(event):
         link_preview=False,
     )
     await asyncio.sleep(5)
-    await x.edit(lool, "Google: {}\n{}".format(input_str, output_str), link_preview=False)
+    await x.edit(
+        lool, "Google: {}\n{}".format(input_str, output_str), link_preview=False
+    )
 
 
 @telebot.on(admin_cmd(pattern="image (.*)"))
