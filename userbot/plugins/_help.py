@@ -14,8 +14,8 @@
 #    You should have received a copy of the GNU Affero General Public License
 #    along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-from userbot import ALIVE_NAME, CMD_LIST
-from userbot.utils import admin_cmd
+from telebot import ALIVE_NAME, CMD_LIST
+from telebot.utils import admin_cmd
 
 DEFAULTUSER = str(ALIVE_NAME) if ALIVE_NAME else "TeleBot User"
 

@@ -7,7 +7,7 @@
 import asyncio
 import os
 
-from userbot.utils import admin_cmd, sudo_cmd
+from telebot.utils import admin_cmd, sudo_cmd
 
 
 @telebot.on(admin_cmd(pattern="repack ?(.*)", outgoing=True))

@@ -16,8 +16,8 @@
 
 import re
 
-from userbot import bot
-from userbot.utils import admin_cmd
+from telebot import bot
+from telebot.utils import admin_cmd
 
 IF_EMOJI = re.compile(
     "["

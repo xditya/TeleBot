@@ -10,8 +10,8 @@ import re
 from bs4 import BeautifulSoup
 from requests import get
 
-from userbot import CMD_HELP
-from userbot.utils import admin_cmd
+from telebot import CMD_HELP
+from telebot.utils import admin_cmd
 
 GITHUB = "https://github.com"
 DEVICES_DATA = (

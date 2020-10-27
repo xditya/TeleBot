@@ -1,11 +1,11 @@
 import sys
 import math
-from userbot import bot
+from telebot import bot
 from telethon import events
 from pathlib import Path
-from userbot.telebotConfig import Var, Config
-from userbot import LOAD_PLUG
-from userbot import CMD_LIST
+from telebot.telebotConfig import Var, Config
+from telebot import LOAD_PLUG
+from telebot import CMD_LIST
 import re
 import logging
 import inspect

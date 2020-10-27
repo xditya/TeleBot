@@ -4,7 +4,7 @@ from coffeehouse.api import API
 from coffeehouse.lydia import LydiaAI
 from telethon import events
 
-from userbot.utils import admin_cmd
+from telebot.utils import admin_cmd
 
 # Non-SQL Mode
 ACC_LYDIA = {}

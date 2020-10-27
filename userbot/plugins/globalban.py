@@ -4,8 +4,8 @@ from telethon.events import ChatAction
 from telethon.tl.functions.contacts import BlockRequest, UnblockRequest
 from telethon.tl.types import MessageEntityMentionName
 
-from userbot import CMD_HELP, bot
-from userbot.utils import admin_cmd, sudo_cmd
+from telebot import CMD_HELP, bot
+from telebot.utils import admin_cmd, sudo_cmd
 
 client = bot
 
@@ -54,7 +54,7 @@ async def get_user_from_id(user, event):
 async def handler(tele):
     if tele.user_joined or tele.user_added:
         try:
-            from userbot.plugins.sql_helper.gmute_sql import is_gmuted
+            from telebot.plugins.sql_helper.gmute_sql import is_gmuted
 
             guser = await tele.get_user()
             gmuted = is_gmuted(guser.id)
@@ -114,7 +114,7 @@ async def gspider(rk):
         if user.id == 719195224:
             return await rkp.edit("**Error! cant gban this user.**")
         try:
-            from userbot.plugins.sql_helper.gmute_sql import gmute
+            from telebot.plugins.sql_helper.gmute_sql import gmute
         except BaseException:
             pass
         try:
@@ -179,7 +179,7 @@ async def gspider(rk):
         if user.id == 719195224:
             return await rkp.edit(f"**Error! cant ungban this user.**")
         try:
-            from userbot.plugins.sql_helper.gmute_sql import ungmute
+            from telebot.plugins.sql_helper.gmute_sql import ungmute
         except BaseException:
             pass
         try:

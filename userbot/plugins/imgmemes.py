@@ -10,8 +10,8 @@ import requests
 from PIL import Image
 from validators.url import url
 
-from userbot import CMD_HELP
-from userbot.utils import admin_cmd
+from telebot import CMD_HELP
+from telebot.utils import admin_cmd
 
 EMOJI_PATTERN = re.compile(
     "["

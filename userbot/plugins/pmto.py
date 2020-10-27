@@ -2,7 +2,7 @@
 # @its_xditya
 # Kangers keep credits
 
-from userbot.utils import admin_cmd
+from telebot.utils import admin_cmd
 
 
 @telebot.on(admin_cmd(pattern="pmto ?(.*)"))

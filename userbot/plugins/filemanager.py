@@ -10,8 +10,8 @@ import os.path
 import time
 from os.path import exists, isdir
 
-from userbot import CMD_HELP
-from userbot.utils import admin_cmd, humanbytes
+from telebot import CMD_HELP
+from telebot.utils import admin_cmd, humanbytes
 
 MAX_MESSAGE_SIZE_LIMIT = 4095
 

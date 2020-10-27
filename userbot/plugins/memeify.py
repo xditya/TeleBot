@@ -8,7 +8,7 @@ import textwrap
 
 from PIL import Image, ImageDraw, ImageFont
 
-from userbot.utils import admin_cmd
+from telebot.utils import admin_cmd
 
 
 @telebot.on(admin_cmd(pattern="mmf ?(.*)"))

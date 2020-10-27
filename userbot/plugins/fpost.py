@@ -7,7 +7,7 @@ credit: @r4v4n4"""
 
 import string
 
-from userbot.utils import admin_cmd
+from telebot.utils import admin_cmd
 
 msg_cache = {}
 

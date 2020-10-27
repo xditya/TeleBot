@@ -3,8 +3,8 @@
 
 from telethon.tl.types import InputMediaDice
 
-from userbot import CMD_HELP
-from userbot.utils import admin_cmd
+from telebot import CMD_HELP
+from telebot.utils import admin_cmd
 
 
 @telebot.on(admin_cmd(outgoing=True, pattern="dice(?: |$)(.*)"))

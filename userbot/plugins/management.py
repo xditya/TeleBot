@@ -31,7 +31,7 @@ from telethon.tl.types import (
 )
 from uniborg.util import admin_cmd
 
-from userbot import CMD_HELP
+from telebot import CMD_HELP
 
 
 @telebot.on(admin_cmd(pattern="unbanall ?(.*)"))

@@ -1,7 +1,7 @@
 import asyncio
 
-from userbot.plugins.sql_helper.mute_sql import is_muted, mute, unmute
-from userbot.utils import admin_cmd
+from telebot.plugins.sql_helper.mute_sql import is_muted, mute, unmute
+from telebot.utils import admin_cmd
 
 
 @telebot.on(admin_cmd(outgoing=True, pattern=r"mute ?(\d+)?"))

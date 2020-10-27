@@ -7,8 +7,8 @@ from datetime import datetime
 
 from selenium import webdriver
 
-from userbot.telebotConfig import Config
-from userbot.utils import admin_cmd
+from telebot.telebotConfig import Config
+from telebot.utils import admin_cmd
 
 
 @telebot.on(admin_cmd(pattern="screenlong (.*)"))

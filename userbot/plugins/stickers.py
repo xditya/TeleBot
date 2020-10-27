@@ -20,8 +20,8 @@ from telethon.tl.types import (
     MessageMediaPhoto,
 )
 
-from userbot import CMD_HELP, bot
-from userbot.utils import admin_cmd, sudo_cmd
+from telebot import CMD_HELP, bot
+from telebot.utils import admin_cmd, sudo_cmd
 
 KANGING_STR = [
     "Using Witchery to kang this sticker...",

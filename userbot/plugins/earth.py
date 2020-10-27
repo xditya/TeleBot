@@ -4,7 +4,7 @@
 import asyncio
 from collections import deque
 
-from userbot.utils import admin_cmd
+from telebot.utils import admin_cmd
 
 
 @telebot.on(admin_cmd(pattern=r"earth", outgoing=True))

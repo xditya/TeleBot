@@ -4,8 +4,8 @@
 import time
 from datetime import datetime
 
-from userbot.__init__ import StartTime
-from userbot.utils import admin_cmd, sudo_cmd
+from telebot.__init__ import StartTime
+from telebot.utils import admin_cmd, sudo_cmd
 
 
 def get_readable_time(seconds: int) -> str:

@@ -23,10 +23,10 @@ from telethon.tl.functions.users import GetFullUserRequest
 from telethon.tl.types import MessageEntityMentionName
 from telethon.utils import get_input_location
 
-from userbot import ALIVE_NAME, telever
-from userbot.__init__ import StartTime
-from userbot.telebotConfig import Config, Var
-from userbot.utils import admin_cmd, sudo_cmd
+from telebot import ALIVE_NAME, telever
+from telebot.__init__ import StartTime
+from telebot.telebotConfig import Config, Var
+from telebot.utils import admin_cmd, sudo_cmd
 
 # stats
 if Config.PRIVATE_GROUP_BOT_API_ID:

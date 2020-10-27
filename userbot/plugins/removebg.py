@@ -21,7 +21,7 @@ from datetime import datetime
 
 import requests
 
-from userbot.utils import admin_cmd
+from telebot.utils import admin_cmd
 
 
 @telebot.on(admin_cmd(pattern=r"remove\.bg ?(.*)"))

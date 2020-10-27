@@ -7,7 +7,7 @@ Available Commands:
 .gban REASON
 .ungban"""
 
-from userbot.utils import admin_cmd
+from telebot.utils import admin_cmd
 
 
 @telebot.on(admin_cmd(pattern="botgban ?(.*)"))

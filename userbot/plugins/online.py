@@ -7,8 +7,8 @@ import sys
 
 from telethon import version
 
-from userbot import ALIVE_NAME
-from userbot.utils import admin_cmd
+from telebot import ALIVE_NAME
+from telebot.utils import admin_cmd
 
 DEFAULTUSER = str(ALIVE_NAME) if ALIVE_NAME else "TeleBot User"
 

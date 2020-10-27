@@ -5,8 +5,8 @@ import io
 import sys
 import traceback
 
-from userbot import CMD_HELP
-from userbot.utils import admin_cmd
+from telebot import CMD_HELP
+from telebot.utils import admin_cmd
 
 
 @telebot.on(admin_cmd(pattern="calc"))

@@ -17,8 +17,8 @@ from urllib.error import HTTPError
 import requests
 from pySmartDL import SmartDL
 
-from userbot import CMD_HELP, LOGS
-from userbot.utils import admin_cmd, humanbytes, time_formatter
+from telebot import CMD_HELP, LOGS
+from telebot.utils import admin_cmd, humanbytes, time_formatter
 
 
 async def download_file_from_google_drive(id):

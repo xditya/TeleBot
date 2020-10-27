@@ -1,8 +1,8 @@
 # For TeleBot
 # By @AKASH_AM1 and @xditya
 # Kangers keep cr eors
-from userbot import ALIVE_NAME
-from userbot.utils import admin_cmd
+from telebot import ALIVE_NAME
+from telebot.utils import admin_cmd
 
 n = str(ALIVE_NAME) if ALIVE_NAME else "Set ALIVE_NAME in config vars in Heroku"
 

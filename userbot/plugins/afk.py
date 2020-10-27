@@ -25,8 +25,8 @@ import datetime
 from telethon import events
 from telethon.tl import functions, types
 
-from userbot import ALIVE_NAME
-from userbot.utils import admin_cmd
+from telebot import ALIVE_NAME
+from telebot.utils import admin_cmd
 
 ALIVE_NAME = str(ALIVE_NAME) if ALIVE_NAME else "TeleBot User"
 global USER_AFK  # pylint:disable=E0602

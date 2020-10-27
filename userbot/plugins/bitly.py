@@ -3,7 +3,7 @@ from re import match
 
 from bitlyshortener import Shortener
 
-from userbot.utils import admin_cmd
+from telebot.utils import admin_cmd
 
 BIT_TOKEN = os.environ.get("BITLY_TOKEN", None)
 BOTLOG = True

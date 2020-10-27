@@ -1,7 +1,7 @@
 """Enable Seen Counter in any message to know how many users have seen your message
 Syntax: .fwd as reply to any message"""
 
-from userbot.utils import admin_cmd
+from telebot.utils import admin_cmd
 
 
 @telebot.on(admin_cmd(pattern="frwd"))

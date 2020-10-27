@@ -15,7 +15,7 @@
 #    along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 from telethon import events, Button
-from userbot.plugins.mybot import started, helpmefast, forping
+from telebot.plugins.mybot import started, helpmefast, forping
 import html
 from telethon.tl.functions.photos import GetUserPhotosRequest
 from telethon.tl.functions.users import GetFullUserRequest
@@ -29,9 +29,9 @@ import os
 import requests
 import math
 from telethon import events, Button
-from userbot import ALIVE_NAME
-from userbot.telebotConfig import Var
-from userbot import bot
+from telebot import ALIVE_NAME
+from telebot.telebotConfig import Var
+from telebot import bot
 
 DEF = str(ALIVE_NAME) if ALIVE_NAME else "TeleBot"
 

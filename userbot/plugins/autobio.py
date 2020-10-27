@@ -8,7 +8,7 @@ import time
 from telethon.errors import FloodWaitError
 from telethon.tl import functions
 
-from userbot.utils import admin_cmd
+from telebot.utils import admin_cmd
 
 DEL_TIME_OUT = 60
 

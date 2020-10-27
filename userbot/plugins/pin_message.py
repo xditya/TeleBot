@@ -2,7 +2,7 @@
 Syntax: .cpin [LOUD]"""
 from telethon.tl import functions
 
-from userbot.utils import admin_cmd
+from telebot.utils import admin_cmd
 
 
 @telebot.on(admin_cmd(pattern="cpin ?(.*)"))

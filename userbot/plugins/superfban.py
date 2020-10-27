@@ -5,7 +5,7 @@
 
 import asyncio
 
-from userbot.utils import admin_cmd
+from telebot.utils import admin_cmd
 
 # By @HeisenbergTheDanger, @its_xditya
 

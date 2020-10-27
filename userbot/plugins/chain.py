@@ -4,7 +4,7 @@
 
 from telethon.tl.functions.messages import SaveDraftRequest
 
-from userbot.utils import admin_cmd
+from telebot.utils import admin_cmd
 
 
 @telebot.on(admin_cmd(pattern="chain"))

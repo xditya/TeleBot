@@ -21,7 +21,7 @@ from pathlib import Path
 
 from telethon.tl.types import InputMessagesFilterDocument
 
-from userbot.utils import admin_cmd, load_module, remove_plugin
+from telebot.utils import admin_cmd, load_module, remove_plugin
 
 from .. import ALIVE_NAME
 

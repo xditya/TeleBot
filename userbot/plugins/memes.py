@@ -10,9 +10,9 @@ from telethon import events
 from telethon.tl.functions.users import GetFullUserRequest
 from telethon.tl.types import MessageEntityMentionName
 
-from userbot import CMD_HELP
-from userbot.telebotConfig import Var
-from userbot.utils import admin_cmd, register
+from telebot import CMD_HELP
+from telebot.telebotConfig import Var
+from telebot.utils import admin_cmd, register
 
 # ================= CONSTANT =================
 RENDISTR = [

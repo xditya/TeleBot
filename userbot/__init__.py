@@ -7,7 +7,7 @@ import os
 import sys
 from telethon.sessions import StringSession
 from telethon import TelegramClient
-from userbot.telebotConfig import Var
+from telebot.telebotConfig import Var
 import time
 
 if Var.STRING_SESSION:

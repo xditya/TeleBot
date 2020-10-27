@@ -4,7 +4,7 @@ import asyncio
 import os
 import time
 
-from userbot.utils import admin_cmd, progress
+from telebot.utils import admin_cmd, progress
 
 FF_MPEG_DOWN_LOAD_MEDIA_PATH = "uniborg.media.ffmpeg"
 

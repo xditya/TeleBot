@@ -4,7 +4,7 @@ By :- @PhycoNinja13b
 Modified by :- @kirito6969
 .weeb <text> """
 
-from userbot.utils import admin_cmd
+from telebot.utils import admin_cmd
 
 normiefont = [
     "a",

@@ -27,9 +27,9 @@ from telethon.tl.types import (
     MessageMediaPhoto,
 )
 
-from userbot import BOTLOG, BOTLOG_CHATID, CMD_HELP
-from userbot.telebotConfig import Var
-from userbot.utils import admin_cmd, errors_handler, register, sudo_cmd
+from telebot import BOTLOG, BOTLOG_CHATID, CMD_HELP
+from telebot.telebotConfig import Var
+from telebot.utils import admin_cmd, errors_handler, register, sudo_cmd
 
 # =================== CONSTANT ===================
 PP_TOO_SMOL = "`The image is too small`"
@@ -307,8 +307,8 @@ async def _(event):
 async def muter(moot):
     """ Used for deleting the messages of muted people """
     try:
-        from userbot.modules.sql_helper.gmute_sql import is_gmuted
-        from userbot.modules.sql_helper.spam_mute_sql import is_muted
+        from telebot.modules.sql_helper.gmute_sql import is_gmuted
+        from telebot.modules.sql_helper.spam_mute_sql import is_muted
     except AttributeError:
         return
     muted = is_muted(moot.chat_id)
@@ -402,7 +402,7 @@ async def gspider(gspdr):
 
     # Check if the function running under SQL mode
     try:
-        from userbot.modules.sql_helper.gmute_sql import gmute
+        from telebot.modules.sql_helper.gmute_sql import gmute
     except AttributeError:
         await gspdr.edit(NO_SQL)
         return

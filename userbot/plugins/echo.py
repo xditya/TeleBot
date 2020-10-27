@@ -18,7 +18,7 @@
 Echoes the message via your bot
 """
 
-from userbot.utils import admin_cmd, sudo_cmd
+from telebot.utils import admin_cmd, sudo_cmd
 
 
 @telebot.on(admin_cmd(pattern=r"echo (.*)"))

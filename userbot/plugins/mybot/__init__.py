@@ -20,8 +20,8 @@ from telethon.tl.functions.photos import GetUserPhotosRequest
 from telethon.tl.functions.users import GetFullUserRequest
 from telethon.tl.types import MessageEntityMentionName
 from telethon.utils import get_input_location
-from userbot import ALIVE_NAME
-from userbot.__init__ import StartTime
+from telebot import ALIVE_NAME
+from telebot.__init__ import StartTime
 from datetime import datetime
 
 # /start

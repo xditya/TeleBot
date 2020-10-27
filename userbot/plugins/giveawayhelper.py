@@ -5,7 +5,7 @@ import asyncio
 from telethon.tl.types import InputMediaUploadedPhoto
 from uniborg.util import admin_cmd
 
-from userbot.plugins.sql_helper.ghdb_sql import (
+from telebot.plugins.sql_helper.ghdb_sql import (
     add_channel,
     get_all_channels,
     in_channels,

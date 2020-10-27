@@ -1,12 +1,12 @@
 import glob
-from userbot import bot
+from telebot import bot
 from sys import argv
 from telethon import TelegramClient
-from userbot.telebotConfig import Var
-from userbot.utils import load_module, start_mybot
+from telebot.telebotConfig import Var
+from telebot.utils import load_module, start_mybot
 from pathlib import Path
 import telethon.utils
-from userbot import CMD_HNDLR
+from telebot import CMD_HNDLR
 
 TELE = Var.PRIVATE_GROUP_ID
 BOTNAME = Var.TG_BOT_USER_NAME_BF_HER

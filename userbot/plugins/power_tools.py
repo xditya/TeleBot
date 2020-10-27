@@ -9,8 +9,8 @@ import asyncio
 import os
 import sys
 
-from userbot import CMD_HNDLR
-from userbot.utils import admin_cmd
+from telebot import CMD_HNDLR
+from telebot.utils import admin_cmd
 
 
 @telebot.on(admin_cmd(pattern="restart"))

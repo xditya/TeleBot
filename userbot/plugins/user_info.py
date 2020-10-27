@@ -22,8 +22,8 @@ from telethon.tl.types import (
     MessageEntityMentionName,
 )
 
-from userbot import CMD_HELP
-from userbot.utils import admin_cmd
+from telebot import CMD_HELP
+from telebot.utils import admin_cmd
 
 
 def parse_arguments(message: str, valid: List[str]) -> (dict, str):

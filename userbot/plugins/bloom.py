@@ -27,7 +27,7 @@ from pySmartDL import SmartDL
 from telethon.tl import functions
 from uniborg.util import admin_cmd
 
-from userbot import ALIVE_NAME
+from telebot import ALIVE_NAME
 
 FONT_FILE_TO_USE = "/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf"
 

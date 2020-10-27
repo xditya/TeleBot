@@ -5,7 +5,7 @@ from datetime import datetime
 
 import speedtest
 
-from userbot.utils import admin_cmd
+from telebot.utils import admin_cmd
 
 
 @telebot.on(admin_cmd(pattern="speedtest ?(.*)"))

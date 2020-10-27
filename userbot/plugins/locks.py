@@ -5,8 +5,8 @@ DB Options: bots, commands, email, forward, url"""
 
 from telethon import events, functions, types
 
-from userbot.plugins.sql_helper.locks_sql import get_locks, is_locked, update_lock
-from userbot.utils import admin_cmd
+from telebot.plugins.sql_helper.locks_sql import get_locks, is_locked, update_lock
+from telebot.utils import admin_cmd
 
 
 @telebot.on(admin_cmd(pattern=r"lock( (?P<target>\S+)|$)"))

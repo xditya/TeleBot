@@ -11,7 +11,7 @@ from datetime import datetime
 
 from gtts import gTTS
 
-from userbot.utils import admin_cmd
+from telebot.utils import admin_cmd
 
 
 @telebot.on(admin_cmd(pattern="tts (.*)"))

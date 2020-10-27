@@ -19,8 +19,8 @@ from telethon.tl.functions.messages import GetFullChatRequest, GetHistoryRequest
 from telethon.tl.types import ChannelParticipantsAdmins, MessageActionChannelMigrateFrom
 from telethon.utils import get_input_location
 
-from userbot import CMD_HELP
-from userbot.utils import admin_cmd, sudo_cmd
+from telebot import CMD_HELP
+from telebot.utils import admin_cmd, sudo_cmd
 
 
 @telebot.on(admin_cmd(pattern="chatinfo(?: |$)(.*)", outgoing=True))

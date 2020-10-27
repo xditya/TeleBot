@@ -3,8 +3,8 @@
 import random
 import re
 
-from userbot import CMD_HELP, bot
-from userbot.utils import admin_cmd
+from telebot import CMD_HELP, bot
+from telebot.utils import admin_cmd
 
 EMOJI_PATTERN = re.compile(
     "["

@@ -6,7 +6,7 @@
 
 from asyncio import wait
 
-from userbot.utils import admin_cmd
+from telebot.utils import admin_cmd
 
 
 @telebot.on(admin_cmd(pattern=r"spam", outgoing=True))

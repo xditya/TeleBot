@@ -10,7 +10,7 @@ import random
 
 from telethon import functions, types, utils
 
-from userbot.utils import admin_cmd
+from telebot.utils import admin_cmd
 
 
 def choser(cmd, pack, blacklist=None):

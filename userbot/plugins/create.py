@@ -5,8 +5,8 @@ For TeleBot, credits to @pureindialover
 
 from telethon.tl import functions
 
-from userbot import CMD_HELP
-from userbot.utils import admin_cmd
+from telebot import CMD_HELP
+from telebot.utils import admin_cmd
 
 
 @telebot.on(admin_cmd(outgoing=True, pattern="create (b|g|c)(?: |$)(.*)"))

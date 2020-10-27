@@ -13,8 +13,8 @@ from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.common.keys import Keys
 
-from userbot import CHROME_DRIVER, GOOGLE_CHROME_BIN
-from userbot.utils import admin_cmd, sudo_cmd
+from telebot import CHROME_DRIVER, GOOGLE_CHROME_BIN
+from telebot.utils import admin_cmd, sudo_cmd
 
 CARBONLANG = "auto"
 LANG = "en"

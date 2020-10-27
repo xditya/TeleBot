@@ -7,9 +7,9 @@ import os
 from telethon import events
 from telethon.errors.rpcerrorlist import YouBlockedUserError
 
-# from userbot.utils import admin_cmd
-from userbot import CMD_HELP, bot
-from userbot.utils import admin_cmd
+# from telebot.utils import admin_cmd
+from telebot import CMD_HELP, bot
+from telebot.utils import admin_cmd
 
 try:
     pass

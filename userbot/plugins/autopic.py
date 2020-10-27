@@ -24,8 +24,8 @@ from datetime import datetime
 from PIL import Image, ImageDraw, ImageFont
 from telethon.tl import functions
 
-from userbot import *
-from userbot import AUTO_PIC_FONT, AUTOPIC_FONT_COLOUR, AUTOPIC_TEXT
+from telebot import *
+from telebot import AUTO_PIC_FONT, AUTOPIC_FONT_COLOUR, AUTOPIC_TEXT
 
 fntz = str(AUTO_PIC_FONT) if AUTO_PIC_FONT else "DejaVuSans.ttf"
 FONT_FILE_TO_USE = f"fonts/{fntz}"

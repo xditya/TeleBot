@@ -1,7 +1,7 @@
 """Plugin to get the video tutorial to deploy TeleBot
 .tut"""
 
-from userbot.utils import admin_cmd
+from telebot.utils import admin_cmd
 
 
 @telebot.on(admin_cmd(outgoing=True, pattern="tut"))

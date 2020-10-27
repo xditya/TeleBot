@@ -1,7 +1,7 @@
 # Created by  Md Jisan.  tg @jisan7509
 
-from userbot import ALIVE_NAME
-from userbot.utils import admin_cmd
+from telebot import ALIVE_NAME
+from telebot.utils import admin_cmd
 
 F = (
     "⢀⣠⣾⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⠀⠀⠀⠀⣠⣤⣶⣶\n"

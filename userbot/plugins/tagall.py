@@ -4,7 +4,7 @@
 
 from telethon.tl.types import ChannelParticipantsAdmins
 
-from userbot.utils import admin_cmd
+from telebot.utils import admin_cmd
 
 # Added to TeleBot by @its_xditya
 
