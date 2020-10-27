@@ -28,7 +28,6 @@ from telethon.tl.types import (
 )
 
 from userbot import BOTLOG, BOTLOG_CHATID, CMD_HELP
-from userbot.telebotConfig import Var
 from userbot.utils import admin_cmd, errors_handler, register, sudo_cmd
 
 # =================== CONSTANT ===================
@@ -74,8 +73,6 @@ MUTE_RIGHTS = ChatBannedRights(until_date=None, send_messages=True)
 UNMUTE_RIGHTS = ChatBannedRights(until_date=None, send_messages=False)
 # ================================================
 
-BOTLOG_CHATID = Var.PRIVATE_GROUP_ID
-
 
 @telebot.on(admin_cmd(outgoing=True, pattern="setgpic"))
 @telebot.on(sudo_cmd(outgoing=True, pattern="setgpic", allow_sudo=True))
@@ -116,16 +113,22 @@ async def set_group_photo(gpic):
             x = await gpic.eor(x, PP_ERROR)
 
 
-@telebot.on(admin_cmd("promote(?: |$)(.*)"))
+@telebot.on(admin_cmd(outgoing=True, pattern="promote(?: |$)(.*)"))
 @telebot.on(sudo_cmd(pattern="promote(?: |$)(.*)", allow_sudo=True))
 @errors_handler
 async def promote(promt):
+    """ For .promote command, promotes the replied/tagged person """
+    # Get targeted chat
     chat = await promt.get_chat()
+    # Grab admin status or creator in a chat
     admin = chat.admin_rights
     creator = chat.creator
+
+    # If not admin and not creator, also return
     if not admin and not creator:
-        await edit_or_reply(promt, NO_ADMIN)
+        event = await promt.eor(event, NO_ADMIN)
         return
+
     new_rights = ChatAdminRights(
         add_admins=False,
         invite_users=True,
@@ -134,18 +137,28 @@ async def promote(promt):
         delete_messages=True,
         pin_messages=True,
     )
-    x = await edit_or_reply(promt, "`Promoting...`")
+
+    event = await promt.eor(event, "`Promoting...`")
     user, rank = await get_user_from_event(promt)
     if not rank:
-        rank = "pro-admin"  # just in case
-    if not user:
+        rank = "pro-admin"  # Just in case.
+    if user:
+        pass
+    else:
         return
+
+    # Try to promote if current user is admin or creator
     try:
         await promt.client(EditAdminRequest(promt.chat_id, user.id, new_rights, rank))
-        await catevent.edit("`Promoted Successfully! Enjoy!!`")
+        event = await promt.eor(event, "`Promoted Successfully! Enjoy!!`")
+
+    # If Telethon spit BadRequestError, assume
+    # we don't have Promote permission
     except BadRequestError:
-        await x.edit(NO_PERM)
+        event = await promt.eor(NO_PERM)
         return
+
+    # Announce to the logging group if we have promoted successfully
     if BOTLOG:
         await promt.client.send_message(
             BOTLOG_CHATID,
