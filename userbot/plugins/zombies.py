@@ -10,12 +10,11 @@ Use .zombies clean to remove deleted accounts from the groups and channels.
 #
 from asyncio import sleep
 
+from telebot.telebotConfig import Var
+from telebot.utils import admin_cmd
 from telethon.errors import ChatAdminRequiredError, UserAdminInvalidError
 from telethon.tl.functions.channels import EditBannedRequest
 from telethon.tl.types import ChatBannedRights
-
-from telebot.telebotConfig import Var
-from telebot.utils import admin_cmd
 
 # =================== CONSTANT ===================
 

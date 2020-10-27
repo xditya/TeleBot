@@ -12,7 +12,6 @@ from urllib.parse import quote_plus
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.common.keys import Keys
-
 from telebot import CHROME_DRIVER, GOOGLE_CHROME_BIN
 from telebot.utils import admin_cmd, sudo_cmd
 

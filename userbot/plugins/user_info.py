@@ -9,6 +9,8 @@
 from re import findall, match
 from typing import List, Union
 
+from telebot import CMD_HELP
+from telebot.utils import admin_cmd
 from telethon.events import NewMessage
 from telethon.tl.custom import Message
 from telethon.tl.functions.channels import GetFullChannelRequest
@@ -21,9 +23,6 @@ from telethon.tl.types import (
     InputPeerChat,
     MessageEntityMentionName,
 )
-
-from telebot import CMD_HELP
-from telebot.utils import admin_cmd
 
 
 def parse_arguments(message: str, valid: List[str]) -> (dict, str):

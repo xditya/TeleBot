@@ -1,8 +1,7 @@
 """Pins the replied message
 Syntax: .cpin [LOUD]"""
-from telethon.tl import functions
-
 from telebot.utils import admin_cmd
+from telethon.tl import functions
 
 
 @telebot.on(admin_cmd(pattern="cpin ?(.*)"))

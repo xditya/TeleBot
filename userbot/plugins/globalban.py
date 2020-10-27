@@ -1,11 +1,10 @@
 # Imported by @its_xditya
 
+from telebot import CMD_HELP, bot
+from telebot.utils import admin_cmd, sudo_cmd
 from telethon.events import ChatAction
 from telethon.tl.functions.contacts import BlockRequest, UnblockRequest
 from telethon.tl.types import MessageEntityMentionName
-
-from telebot import CMD_HELP, bot
-from telebot.utils import admin_cmd, sudo_cmd
 
 client = bot
 

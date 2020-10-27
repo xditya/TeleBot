@@ -8,10 +8,10 @@ Available Commands:
 .rmblacklist"""
 import re
 
+from telebot.utils import admin_cmd
 from telethon import events
 
 import userbot.plugins.sql_helper.blacklist_sql as sql
-from telebot.utils import admin_cmd
 
 
 @telebot.on(events.NewMessage(incoming=True))

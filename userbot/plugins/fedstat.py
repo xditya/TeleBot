@@ -3,10 +3,9 @@
 # Kangers keep credits
 # By @Akash_AM1 and @xditya
 
-from telethon.errors.rpcerrorlist import YouBlockedUserError
-
 from telebot import ALIVE_NAME
 from telebot.utils import admin_cmd
+from telethon.errors.rpcerrorlist import YouBlockedUserError
 
 naam = str(ALIVE_NAME)
 

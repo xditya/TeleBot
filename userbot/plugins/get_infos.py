@@ -1,6 +1,7 @@
 """Get Administrators of any Chat*
 Syntax: .get_admin, .get_bot, .get_id"""
 
+from telebot.utils import admin_cmd
 from telethon.tl.types import (
     ChannelParticipantAdmin,
     ChannelParticipantCreator,
@@ -8,8 +9,6 @@ from telethon.tl.types import (
     ChannelParticipantsBots,
 )
 from telethon.utils import pack_bot_file_id
-
-from telebot.utils import admin_cmd
 
 
 @telebot.on(admin_cmd(pattern="get_ad?(m)in ?(.*)"))

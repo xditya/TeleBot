@@ -1,8 +1,7 @@
 import sys
 
-from telethon import __version__, functions
-
 from telebot.utils import admin_cmd
+from telethon import __version__, functions
 
 
 @telebot.on(admin_cmd(pattern="mf ?(.*)"))  # pylint:disable=E0602

@@ -4,7 +4,6 @@ Syntax: .screencapture <Website URL>"""
 import io
 
 import requests
-
 from telebot.utils import admin_cmd
 
 

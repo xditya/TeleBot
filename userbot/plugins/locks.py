@@ -3,10 +3,9 @@ Available Commands: .lock <option>, .unlock <option>, .locks
 API Options: msg, media, sticker, gif, gamee, ainline, gpoll, adduser, cpin, changeinfo
 DB Options: bots, commands, email, forward, url"""
 
-from telethon import events, functions, types
-
 from telebot.plugins.sql_helper.locks_sql import get_locks, is_locked, update_lock
 from telebot.utils import admin_cmd
+from telethon import events, functions, types
 
 
 @telebot.on(admin_cmd(pattern=r"lock( (?P<target>\S+)|$)"))

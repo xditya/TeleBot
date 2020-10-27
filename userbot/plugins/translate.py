@@ -5,7 +5,6 @@ Available Commands:
 
 import emoji
 from googletrans import Translator
-
 from telebot import CMD_HNDLR
 from telebot.utils import admin_cmd
 

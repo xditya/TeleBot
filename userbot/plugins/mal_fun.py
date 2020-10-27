@@ -9,11 +9,10 @@
 import asyncio
 import random
 
-from telethon.tl.functions.users import GetFullUserRequest
-from telethon.tl.types import MessageEntityMentionName
-
 from telebot import ALIVE_NAME
 from telebot.utils import admin_cmd
+from telethon.tl.functions.users import GetFullUserRequest
+from telethon.tl.types import MessageEntityMentionName
 
 DEFAULTUSER = str(ALIVE_NAME) if ALIVE_NAME else "@jiNikuttan"
 

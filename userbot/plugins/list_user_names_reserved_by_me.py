@@ -1,9 +1,8 @@
 # For @UniBorg
 # (c) Shrimadhav U K
 
-from telethon import functions
-
 from telebot.utils import admin_cmd
+from telethon import functions
 
 
 @telebot.on(admin_cmd(pattern=r"listmyusernames", outgoing=True))

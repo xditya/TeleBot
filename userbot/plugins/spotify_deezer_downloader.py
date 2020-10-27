@@ -3,13 +3,12 @@
 
 import asyncio
 
+from telebot.utils import admin_cmd
 from telethon.errors.rpcerrorlist import (
     UserAlreadyParticipantError,
     YouBlockedUserError,
 )
 from telethon.tl.functions.messages import ImportChatInviteRequest
-
-from telebot.utils import admin_cmd
 
 
 @telebot.on(admin_cmd(pattern="sdd ?(.*)"))

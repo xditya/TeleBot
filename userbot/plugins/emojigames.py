@@ -1,10 +1,9 @@
 # fix by @heyworld for OUB
 # bug fixed by @d3athwarrior
 
-from telethon.tl.types import InputMediaDice
-
 from telebot import CMD_HELP
 from telebot.utils import admin_cmd
+from telethon.tl.types import InputMediaDice
 
 
 @telebot.on(admin_cmd(outgoing=True, pattern="dice(?: |$)(.*)"))

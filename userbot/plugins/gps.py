@@ -8,9 +8,8 @@ credits :@mrconfused
 # Plugin for TeleBot
 
 from geopy.geocoders import Nominatim
-from telethon.tl import types
-
 from telebot.utils import admin_cmd
+from telethon.tl import types
 
 
 @telebot.on(admin_cmd(pattern="gps ?(.*)"))

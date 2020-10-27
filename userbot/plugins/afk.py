@@ -22,11 +22,10 @@ Syntax: .afk REASON
 import asyncio
 import datetime
 
-from telethon import events
-from telethon.tl import functions, types
-
 from telebot import ALIVE_NAME
 from telebot.utils import admin_cmd
+from telethon import events
+from telethon.tl import functions, types
 
 ALIVE_NAME = str(ALIVE_NAME) if ALIVE_NAME else "TeleBot User"
 global USER_AFK  # pylint:disable=E0602

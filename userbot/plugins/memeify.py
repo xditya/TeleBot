@@ -7,7 +7,6 @@ import os
 import textwrap
 
 from PIL import Image, ImageDraw, ImageFont
-
 from telebot.utils import admin_cmd
 
 

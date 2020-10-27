@@ -3,12 +3,11 @@ Syntax: .whois @username"""
 
 import html
 
+from telebot.utils import admin_cmd
 from telethon.tl.functions.photos import GetUserPhotosRequest
 from telethon.tl.functions.users import GetFullUserRequest
 from telethon.tl.types import MessageEntityMentionName
 from telethon.utils import get_input_location
-
-from telebot.utils import admin_cmd
 
 
 @telebot.on(admin_cmd(pattern="whois ?(.*)"))

@@ -2,9 +2,8 @@ import asyncio
 
 from coffeehouse.api import API
 from coffeehouse.lydia import LydiaAI
-from telethon import events
-
 from telebot.utils import admin_cmd
+from telethon import events
 
 # Non-SQL Mode
 ACC_LYDIA = {}

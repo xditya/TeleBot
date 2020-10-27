@@ -15,7 +15,6 @@ import urllib
 import requests
 from bs4 import BeautifulSoup
 from PIL import Image
-
 from telebot import CMD_HELP, bot
 from telebot.utils import admin_cmd, errors_handler
 

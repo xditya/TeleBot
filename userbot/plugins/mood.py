@@ -2,10 +2,9 @@
 #
 # You may not use this plugin without proper authorship and consent from @TeleBotSupport
 #
-from telethon.tl import functions
-
 from telebot import ALIVE_NAME
 from telebot.utils import admin_cmd
+from telethon.tl import functions
 
 TELENAME = ALIVE_NAME if ALIVE_NAME else "TeleBot"
 

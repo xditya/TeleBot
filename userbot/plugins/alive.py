@@ -7,7 +7,6 @@ from io import BytesIO
 
 import requests
 from PIL import Image
-
 from telebot import telever
 from telebot.__init__ import StartTime
 from telebot.telebotConfig import Config

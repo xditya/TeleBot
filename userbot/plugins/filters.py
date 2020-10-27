@@ -9,9 +9,6 @@ Available Commands:
 import asyncio
 import re
 
-from telethon import utils
-from telethon.tl import types
-
 from telebot.plugins.sql_helper.filter_sql import (
     add_filter,
     get_all_filters,
@@ -19,6 +16,8 @@ from telebot.plugins.sql_helper.filter_sql import (
     remove_filter,
 )
 from telebot.utils import admin_cmd
+from telethon import utils
+from telethon.tl import types
 
 DELETE_TIMEOUT = 0
 TYPE_TEXT = 0
