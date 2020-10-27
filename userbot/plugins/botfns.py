@@ -1,12 +1,28 @@
-#  (c)2020 TeleBot
-#
-# You may not use this plugin without proper authorship and consent from @TeleBotSupport
-#
+#    TeleBot - UserBot
+#    Copyright (C) 2020 TeleBot
+
+#    This program is free software: you can redistribute it and/or modify
+#    it under the terms of the GNU Affero General Public License as published by
+#    the Free Software Foundation, either version 3 of the License, or
+#    (at your option) any later version.
+
+#    This program is distributed in the hope that it will be useful,
+#    but WITHOUT ANY WARRANTY; without even the implied warranty of
+#    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+#    GNU Affero General Public License for more details.
+
+#    You should have received a copy of the GNU Affero General Public License
+#    along with this program.  If not, see <https://www.gnu.org/licenses/>.
+
+from telegraph import Telegraph
 from telethon import events
 from telethon.errors.rpcerrorlist import YouBlockedUserError
 
 from userbot.telebotConfig import Var
 from userbot.utils import admin_cmd, sudo_cmd
+
+telegraph = Telegraph()
+mee = telegraph.create_account(short_name="telebot")
 
 
 @telebot.on(admin_cmd(pattern="purl ?(.*)"))
@@ -248,3 +264,33 @@ async def tel(event):
     tap = await bot.inline_query(botusername, tele)
     await tap[0].click(event.chat_id)
     await event.delete()
+
+
+@telebot.on(admin_cmd(pattern="font ?(.*)"))
+@telebot.on(sudo_cmd(pattern="font ?(.*)", allow_sudo=True))
+async def _(event):
+    bot = "@fontsgenbot"
+    if event.fwd_from:
+        return
+    sysarg = event.pattern_match.group(1)
+    if sysarg == "":
+        await event.edit("Give me a text to sylize pero")
+    else:
+        async with borg.conversation(bot) as conv:
+            try:
+                x = await eor(event, "`Making the text stylish..`")
+                await conv.send_message("/start")
+                await conv.get_response()
+                await conv.send_message(sysarg)
+                audio = await conv.get_response()
+                title = "Stylish Fonts"
+                topaste = audio.text
+                topaste = topaste.replace("\n", "<br>")
+                response = telegraph.create_page(title, html_content=topaste)
+                link = response["path"]
+                await x.edit(
+                    f"**Normal Text** - {sysarg}\n**Stylised text** - [here](https://telegra.ph/{link})",
+                    link_preview=False,
+                )
+            except YouBlockedUserError:
+                await x.edit("**Error:** `unblock` @fontsgenbot `and retry!")
