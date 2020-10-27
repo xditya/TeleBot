@@ -2,9 +2,6 @@
 Syntax: .github USERNAME"""
 import requests
 
-from userbot.utils import admin_cmd
-
-
 @borg.on(admin_cmd(pattern="github (.*)"))
 @borg.on(sudo_cmd(pattern="github (.*)", allow_sudo=True))
 async def _(event):
