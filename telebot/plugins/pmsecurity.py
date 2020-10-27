@@ -23,7 +23,7 @@ from telebot.utils import admin_cmd
 from telethon import events, functions
 from telethon.tl.functions.users import GetFullUserRequest
 
-import userbot.plugins.sql_helper.pmpermit_sql as pmpermit_sql
+import telebot.plugins.sql_helper.pmpermit_sql as pmpermit_sql
 
 PMPERMIT_PIC = os.environ.get("PMPERMIT_PIC", None)
 TELEPIC = (

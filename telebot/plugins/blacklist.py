@@ -11,7 +11,7 @@ import re
 from telebot.utils import admin_cmd
 from telethon import events
 
-import userbot.plugins.sql_helper.blacklist_sql as sql
+import telebot.plugins.sql_helper.blacklist_sql as sql
 
 
 @telebot.on(events.NewMessage(incoming=True))
