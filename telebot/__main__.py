@@ -40,7 +40,7 @@ else:
     else:
         bot.start()
 
-path = 'userbot/plugins/*.py'
+path = 'telebot/plugins/*.py'
 files = glob.glob(path)
 for name in files:
     with open(name) as f:
@@ -52,7 +52,7 @@ print("TeleBot has been deployed! ")
 
 print("Setting up TGBot")
 
-path = "userbot/plugins/mybot/*.py"
+path = "telebot/plugins/mybot/*.py"
 files = glob.glob(path)
 for name in files:
     with open(name) as f:
