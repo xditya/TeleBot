@@ -8,8 +8,8 @@ jobs:
       - name: Find and Replace
         uses: jacobtomlinson/gha-find-replace@master
         with:
-          find: "from userbot."
-          replace: "from telebot."
+          find: "from userbot.utils"
+          replace: "from telebot.utils"
       - name: Create Pull Request
         uses: stefanzweifel/git-auto-commit-action@v4
         with:
