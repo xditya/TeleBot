@@ -1,9 +1,10 @@
 import asyncio
 import logging
 
-from telebot.utils import admin_cmd
 from telethon import events
 from telethon.errors.rpcerrorlist import YouBlockedUserError
+
+from telebot.utils import admin_cmd
 
 logging.basicConfig(
     format="[%(levelname) 5s/%(asctime)s] %(name)s: %(message)s", level=logging.WARNING

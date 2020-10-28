@@ -5,9 +5,10 @@
 import random
 import sys
 
+from telethon import version
+
 from telebot import ALIVE_NAME
 from telebot.utils import admin_cmd
-from telethon import version
 
 DEFAULTUSER = str(ALIVE_NAME) if ALIVE_NAME else "TeleBot User"
 

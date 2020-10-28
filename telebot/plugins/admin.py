@@ -6,9 +6,6 @@ from asyncio import sleep
 from datetime import datetime
 from os import remove
 
-from telebot import BOTLOG, BOTLOG_CHATID, CMD_HELP
-from telebot.telebotConfig import Var
-from telebot.utils import admin_cmd, errors_handler, register, sudo_cmd
 from telethon.errors import (
     BadRequestError,
     ChatAdminRequiredError,
@@ -29,6 +26,10 @@ from telethon.tl.types import (
     MessageEntityMentionName,
     MessageMediaPhoto,
 )
+
+from telebot import BOTLOG, BOTLOG_CHATID, CMD_HELP
+from telebot.telebotConfig import Var
+from telebot.utils import admin_cmd, errors_handler, register, sudo_cmd
 
 # =================== CONSTANT ===================
 PP_TOO_SMOL = "`The image is too small`"

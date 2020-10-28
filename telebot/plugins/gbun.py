@@ -1,9 +1,10 @@
 # This is a troll indeed ffs *facepalm*
 import asyncio
 
-from telebot.utils import admin_cmd
 from telethon.tl.functions.users import GetFullUserRequest
 from telethon.tl.types import ChannelParticipantsAdmins
+
+from telebot.utils import admin_cmd
 
 
 @telebot.on(admin_cmd(pattern="gbun"))

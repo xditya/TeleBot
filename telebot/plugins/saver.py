@@ -19,10 +19,11 @@ import os
 import sys
 from asyncio import sleep
 
+from telethon import events
+
 from telebot import CMD_HELP
 from telebot.telebotConfig import Config
 from telebot.utils import admin_cmd
-from telethon import events
 
 logging.basicConfig(
     format="%(asctime)s - %(name)s - %(levelname)s - %(message)s", level=logging.WARN

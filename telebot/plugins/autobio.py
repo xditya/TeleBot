@@ -5,9 +5,10 @@
 import asyncio
 import time
 
-from telebot.utils import admin_cmd
 from telethon.errors import FloodWaitError
 from telethon.tl import functions
+
+from telebot.utils import admin_cmd
 
 DEL_TIME_OUT = 60
 

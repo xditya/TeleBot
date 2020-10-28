@@ -8,8 +8,9 @@ Generates a. random laughing sticker.
 """
 import random
 
-from telebot.utils import admin_cmd
 from telethon import functions, types, utils
+
+from telebot.utils import admin_cmd
 
 
 def choser(cmd, pack, blacklist=None):

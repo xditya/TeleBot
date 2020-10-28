@@ -2,6 +2,7 @@
 Syntax: .github USERNAME"""
 import requests
 
+
 @borg.on(admin_cmd(pattern="github (.*)"))
 @borg.on(sudo_cmd(pattern="github (.*)", allow_sudo=True))
 async def _(event):

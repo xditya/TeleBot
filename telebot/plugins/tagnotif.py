@@ -16,10 +16,11 @@
 #
 """-_-
 """
-from telebot.telebotConfig import Config
 from telethon import custom, events
 from telethon.tl.types import Channel
 from telethon.utils import get_display_name
+
+from telebot.telebotConfig import Config
 
 if Config.TAG_LOG:
     NEEDTOLOG = int(Config.TAG_LOG)

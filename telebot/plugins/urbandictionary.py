@@ -4,6 +4,7 @@
 """Urban Dictionary
 Syntax: .ud Query"""
 import asyncurban
+
 from telebot.utils import admin_cmd
 
 

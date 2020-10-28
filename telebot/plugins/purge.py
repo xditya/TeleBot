@@ -2,10 +2,11 @@
 
 from asyncio import sleep
 
+from telethon.errors import rpcbaseerrors
+
 from telebot import BOTLOG, BOTLOG_CHATID, CMD_HELP
 from telebot.telebotConfig import Var
 from telebot.utils import admin_cmd, errors_handler
-from telethon.errors import rpcbaseerrors
 
 BOTLOG_CHATID = Var.PRIVATE_GROUP_ID
 

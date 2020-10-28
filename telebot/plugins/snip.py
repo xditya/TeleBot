@@ -6,6 +6,9 @@ Available Commands:
 .snips
 .snipl
 .snipd"""
+from telethon import events, utils
+from telethon.tl import types
+
 from telebot.plugins.sql_helper.snips_sql import (
     add_snip,
     get_all_snips,
@@ -13,8 +16,6 @@ from telebot.plugins.sql_helper.snips_sql import (
     remove_snip,
 )
 from telebot.utils import admin_cmd
-from telethon import events, utils
-from telethon.tl import types
 
 TYPE_TEXT = 0
 TYPE_PHOTO = 1

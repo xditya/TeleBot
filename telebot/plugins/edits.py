@@ -15,9 +15,10 @@ import random
 from asyncio import wait
 from collections import deque
 
+from telethon import events
+
 from telebot import ALIVE_NAME
 from telebot.utils import admin_cmd
-from telethon import events
 
 DEFAULTUSER = str(ALIVE_NAME) if ALIVE_NAME else "TeleBot"
 

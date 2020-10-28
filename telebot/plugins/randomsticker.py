@@ -8,8 +8,9 @@ credit: lejend @r4v4n4"""
 
 import random
 
-from telebot.utils import admin_cmd
 from telethon import functions, types, utils
+
+from telebot.utils import admin_cmd
 
 
 def choser(cmd, pack, blacklist=None):

@@ -7,8 +7,9 @@ import os
 import time
 from datetime import datetime
 
-from telebot.telebotConfig import Config
 from uniborg.util import admin_cmd
+
+from telebot.telebotConfig import Config
 
 thumb_image_path = Config.TMP_DOWNLOAD_DIRECTORY + "/thumb_image.jpg"
 

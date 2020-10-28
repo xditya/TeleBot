@@ -2,14 +2,15 @@
 
 import asyncio
 
+from telethon.tl.types import InputMediaUploadedPhoto
+from uniborg.util import admin_cmd
+
 from telebot.plugins.sql_helper.ghdb_sql import (
     add_channel,
     get_all_channels,
     in_channels,
     rm_channel,
 )
-from telethon.tl.types import InputMediaUploadedPhoto
-from uniborg.util import admin_cmd
 
 logs_id = Var.PRIVATE_GROUP_ID
 

@@ -19,9 +19,10 @@ import time
 from hachoir.metadata import extractMetadata
 from hachoir.parser import createParser
 from pySmartDL import SmartDL
+from telethon.tl.types import DocumentAttributeVideo
+
 from telebot import CMD_HELP, LOGS, TEMP_DOWNLOAD_DIRECTORY
 from telebot.utils import admin_cmd
-from telethon.tl.types import DocumentAttributeVideo
 
 
 async def progress(current, total, event, start, type_of_ps, file_name=None):

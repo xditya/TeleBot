@@ -9,8 +9,9 @@ import re
 import urllib
 
 import requests
-from telebot.utils import admin_cmd
 from telethon.tl import functions
+
+from telebot.utils import admin_cmd
 
 COLLECTION_STRING = [
     "avengers-logo-wallpaper",

@@ -18,12 +18,12 @@ import asyncio
 import io
 import os
 
-from telebot import ALIVE_NAME, CUSTOM_PMPERMIT, bot
-from telebot.utils import admin_cmd
 from telethon import events, functions
 from telethon.tl.functions.users import GetFullUserRequest
 
 import telebot.plugins.sql_helper.pmpermit_sql as pmpermit_sql
+from telebot import ALIVE_NAME, CUSTOM_PMPERMIT, bot
+from telebot.utils import admin_cmd
 
 PMPERMIT_PIC = os.environ.get("PMPERMIT_PIC", None)
 TELEPIC = (

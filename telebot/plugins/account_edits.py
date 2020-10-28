@@ -6,10 +6,11 @@
 
 import os
 
-from telebot.utils import admin_cmd
 from telethon.tl import functions
 from telethon.tl.functions.photos import DeletePhotosRequest, GetUserPhotosRequest
 from telethon.tl.types import InputPhoto
+
+from telebot.utils import admin_cmd
 
 
 @telebot.on(admin_cmd(pattern="pbio (.*)"))  # pylint:disable=E0602

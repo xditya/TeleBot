@@ -18,7 +18,6 @@ delacc - deleted account"""
 import asyncio
 from time import sleep
 
-from telebot import CMD_HELP
 from telethon.tl import functions
 from telethon.tl.types import (
     ChannelParticipantsKicked,
@@ -31,6 +30,8 @@ from telethon.tl.types import (
     UserStatusRecently,
 )
 from uniborg.util import admin_cmd
+
+from telebot import CMD_HELP
 
 
 @telebot.on(admin_cmd(pattern="unbanall ?(.*)"))

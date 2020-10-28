@@ -7,8 +7,9 @@ import os
 from datetime import datetime
 
 from PIL import Image
-from telebot.telebotConfig import Var
 from telegraph import Telegraph, exceptions, upload_file
+
+from telebot.telebotConfig import Var
 
 telegraph = Telegraph()
 r = telegraph.create_account(short_name=Config.TELEGRAPH_SHORT_NAME)

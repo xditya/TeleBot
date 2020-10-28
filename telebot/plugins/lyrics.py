@@ -5,9 +5,10 @@ import io
 import os
 
 import lyricsgenius
+from tswift import Song
+
 from telebot import CMD_HELP
 from telebot.utils import admin_cmd
-from tswift import Song
 
 GENIUS = os.environ.get("GENIUS_API_TOKEN", None)
 

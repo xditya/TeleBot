@@ -1,6 +1,7 @@
 """.admin Plugin for @UniBorg"""
-from telebot.utils import admin_cmd
 from telethon.tl.types import ChannelParticipantsAdmins
+
+from telebot.utils import admin_cmd
 
 
 @telebot.on(admin_cmd(pattern="join"))

@@ -6,6 +6,7 @@ import os
 from datetime import datetime
 
 from PIL import Image, ImageDraw, ImageFont
+
 from telebot.utils import admin_cmd
 
 FONT_FILE_TO_USE = "/usr/share/fonts/truetype/dejavu/DejaVuSansMono.ttf"

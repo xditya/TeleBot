@@ -2,8 +2,9 @@
 # License, v. 2.0. If a copy of the MPL was not distributed with this
 # file, You can obtain one at http://mozilla.org/MPL/2
 
-from telebot.utils import admin_cmd
 from telethon.tl.types import ChannelParticipantsAdmins
+
+from telebot.utils import admin_cmd
 
 # Added to TeleBot by @its_xditya
 

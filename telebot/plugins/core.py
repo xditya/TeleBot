@@ -19,8 +19,9 @@ import os
 from datetime import datetime
 from pathlib import Path
 
-from telebot.utils import admin_cmd, load_module, remove_plugin
 from telethon.tl.types import InputMessagesFilterDocument
+
+from telebot.utils import admin_cmd, load_module, remove_plugin
 
 from .. import ALIVE_NAME
 
