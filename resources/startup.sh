@@ -30,4 +30,4 @@ echo "
                                                                                                                                                          
 "
 
-python -m userbot
+python -m telebot
