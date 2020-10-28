@@ -46,14 +46,11 @@ async def _(event):
     end = datetime.now()
     ms = (end - start).seconds
     await x.edit(
-        lool,
         "searched Google for {} in {} seconds. \n{}".format(input_str, ms, output_str),
         link_preview=False,
     )
     await asyncio.sleep(5)
-    await x.edit(
-        lool, "Google: {}\n{}".format(input_str, output_str), link_preview=False
-    )
+    await x.edit("Google: {}\n{}".format(input_str, output_str), link_preview=False)
 
 
 @telebot.on(admin_cmd(pattern="image (.*)"))
