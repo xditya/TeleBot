@@ -11,8 +11,6 @@ from datetime import datetime
 
 from github import Github
 
-from userbot.utils import admin_cmd
-
 GIT_TEMP_DIR = "./userbot/temp/"
 
 
