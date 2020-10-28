@@ -38,7 +38,7 @@ async def send(event):
     message_id = event.message.id
     thumb = thumb_image_path
     input_str = event.pattern_match.group(1)
-    the_plugin_file = "./userbot/plugins/{}.py".format(input_str)
+    the_plugin_file = "./telebot/plugins/{}.py".format(input_str)
     if os.path.exists(the_plugin_file):
         start = datetime.now()
         pro = await event.client.send_file(
@@ -69,7 +69,7 @@ async def install(event):
             downloaded_file_name = (
                 await event.client.download_media(  # pylint:disable=E0602
                     await event.get_reply_message(),
-                    "userbot/plugins/",  # pylint:disable=E0602
+                    "telebot/plugins/",  # pylint:disable=E0602
                 )
             )
             if "(" not in downloaded_file_name:
@@ -149,7 +149,7 @@ async def install(event):
     for ixo in total_doxx:
         mxo = documentss[ixo].id
         downloaded_file_name = await event.client.download_media(
-            await event.client.get_messages(event.chat_id, ids=mxo), "userbot/plugins/"
+            await event.client.get_messages(event.chat_id, ids=mxo), "telebot/plugins/"
         )
         if "(" not in downloaded_file_name:
             path1 = Path(downloaded_file_name)
