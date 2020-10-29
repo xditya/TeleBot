@@ -11,7 +11,7 @@ async def _(event):
     if event.fwd_from:
         return
     if not event.reply_to_msg_id:
-        xx = await eor(event, "```Reply to any user message.```")
+        await eor(event, "```Reply to any user message.```")
         return
     x = await eor(event, "scanning...")
     reply_message = await event.get_reply_message()
@@ -21,7 +21,7 @@ async def _(event):
     chat = "@DrWebBot"
     reply_message.sender
     if reply_message.sender.bot:
-        await x.edit ("```Reply to actual users message.```")
+        await x.edit("```Reply to actual users message.```")
         return
     await x.edit(" `Sliding my tip, of fingers over it`")
     async with borg.conversation(chat) as conv:
@@ -40,9 +40,7 @@ async def _(event):
             )
         else:
             if response.text.startswith("Select"):
-                await x.edit(
-                    "`Please go to` @DrWebBot `and select your language.`"
-                )
+                await x.edit("`Please go to` @DrWebBot `and select your language.`")
             else:
                 await x.edit(
                     f"**Antivirus scan was completed. I got dem final results.**\n {response.message.message}",
