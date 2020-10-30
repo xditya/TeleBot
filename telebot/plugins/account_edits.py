@@ -108,10 +108,10 @@ async def remove_profilepic(delpfp):
     await delpfp.client(DeletePhotosRequest(id=input_photos))
     await delpfp.edit(f"`Successfully deleted {len(input_photos)} profile picture(s).`")
 
+
 CMD_HELP.update(
     {
-        "account edits":
-        "➟ `.pbio` <text>\nUse - To change your profile bio to <text>.\
+        "account edits": "➟ `.pbio` <text>\nUse - To change your profile bio to <text>.\
          ➟ `.pname <name>\nUse - Change your profile name to <name>.\
          ➟ `.ppic (reply to pic)\nUse - To change your profile pic to the replied picture.\
          ➟ `.delpfp <number>(optional)\nUse - To delete 'n' number of profile pics, one if no number specified."

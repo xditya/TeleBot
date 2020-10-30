@@ -14,11 +14,12 @@
 #    You should have received a copy of the GNU Affero General Public License
 #    along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-from telebot import ALIVE_NAME, CMD_LIST, CMD_HELP
-from telebot.telebotConfig import Config 
+from telebot import ALIVE_NAME, CMD_HELP, CMD_LIST
+from telebot.telebotConfig import Config
 
 DEFAULTUSER = str(ALIVE_NAME) if ALIVE_NAME else "TeleBot User"
 CMD_HNDLR = Config.CMD_HNDLR
+
 
 @telebot.on(admin_cmd(pattern="help ?(.*)"))
 async def cmd_list(event):

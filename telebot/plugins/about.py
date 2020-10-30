@@ -7,7 +7,9 @@
 """
 
 import asyncio
+
 from telebot import CMD_HELP
+
 
 @telebot.on(admin_cmd(pattern="info"))
 @telebot.on(sudo_cmd(pattern="info", allow_sudo=True))
@@ -25,9 +27,5 @@ async def _(event):
         await asyncio.sleep(animation_interval)
         await eor(event, animation_chars[i % 18])
 
-CMD_HELP.update(
-    {
-        "info":
-        "➟ `.info`\nUse - Get to know about your bot."
-    }
-)
+
+CMD_HELP.update({"info": "➟ `.info`\nUse - Get to know about your bot."})
