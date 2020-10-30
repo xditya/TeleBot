@@ -256,9 +256,9 @@ def register(**args):
 
 
 def errors_handler(func):
-    async def wrapper(event):
+    async def wrapper(check):
         try:
-            return await func(event)
+            return await func(check)
         except Exception:
             date = strftime("%Y-%m-%d %H:%M:%S", gmtime())
             text = "**TeleBot Crash Report**\n"
