@@ -253,6 +253,8 @@ def register(**args):
     return decorator
 
 # logger credits out-remix
+
+
 def errors_handler(func):
     async def wrapper(event):
         try:
@@ -285,8 +287,8 @@ def errors_handler(func):
             command = "git log --pretty=format:\"%an: %s\" -10"
             ftext += "\n\n\nLast 10 commits:\n"
             process = await asyncsubshell(command,
-                                            stdout=asyncsub.PIPE,
-                                            stderr=asyncsub.PIPE)
+                                          stdout=asyncsub.PIPE,
+                                          stderr=asyncsub.PIPE)
             stdout, stderr = await process.communicate()
             result = str(stdout.decode().strip()) \
                 + str(stderr.decode().strip())
@@ -298,7 +300,7 @@ def errors_handler(func):
             await sorry_msg.delete()
             await check.client.send_file(Var.PRIVATE_GROUP_ID,
                                          "error.txt",
-                                        caption=text)
+                                         caption=text)
             remove("error.txt")
     return wrapper
 
