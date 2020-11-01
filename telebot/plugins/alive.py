@@ -4,7 +4,7 @@ import os
 import time
 from datetime import datetime
 from io import BytesIO
-
+from telebot import CMD_HELP
 import requests
 from PIL import Image
 
@@ -107,3 +107,9 @@ async def amireallyalive(alive):
         )
         await borg.send_file(alive.chat_id, file=sticker)
         await alive.delete()
+
+CMD_HELP.update(
+    {
+        "alive": ".alive\nUse - Check if your bot is working."
+    }
+)
