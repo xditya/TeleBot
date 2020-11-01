@@ -72,7 +72,7 @@ Permanent Link : <a href=\"tg://user?id={}\">{}</a>
         replied_user.user.bot,
         common_chats,
         user_id,
-        first_name
+        first_name,
     )
     message_id_to_reply = event.message.reply_to_msg_id
     if not message_id_to_reply:
