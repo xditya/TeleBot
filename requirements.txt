@@ -57,3 +57,4 @@ lyricsgenius
 tswift
 wheel
 bitlyshortener
+spamwatch
