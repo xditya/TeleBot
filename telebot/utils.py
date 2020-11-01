@@ -1,5 +1,4 @@
 import sys
-import asyncio
 import math
 from telebot import bot
 from telethon import events
@@ -10,11 +9,6 @@ from telebot import CMD_LIST
 import re
 import logging
 import inspect
-from asyncio import create_subprocess_shell as asyncsubshell
-from asyncio import subprocess as asyncsub
-from os import remove
-from time import gmtime, strftime
-from traceback import format_exc
 
 handler = Config.CMD_HNDLR if Config.CMD_HNDLR else r"\."
 sudo_hndlr = Config.SUDO_HNDLR if Config.SUDO_HNDLR else "!"
@@ -252,56 +246,13 @@ def register(**args):
 
     return decorator
 
-# logger credits out-remix
-
 
 def errors_handler(func):
-    async def wrapper(check):
+    async def wrapper(event):
         try:
-            return await func(check)
+            return await func(event)
         except Exception:
-            date = strftime("%Y-%m-%d %H:%M:%S", gmtime())
-            text = "**TeleBot Crash Report**\n"
-            link = "[Get help!](https://t.me/TeleBotHelpChat)"
-            text += "If you want to, you can report it"
-            text += f"- just forward this message to {link}.\n"
-            text += "Nothing is logged except the fact of error and date\n"
-            ftext = "========== DISCLAIMER =========="
-            ftext += "\nThis file uploaded ONLY here,"
-            ftext += "\nwe logged only fact of error and date,"
-            ftext += "\nwe respect your privacy,"
-            ftext += "\nyou may not report this error if you've"
-            ftext += "\nany confidential data here, no one will see your data\n"
-            ftext += "================================\n\n"
-            ftext += "--------BEGIN USERBOT TRACEBACK LOG--------\n"
-            ftext += "\nDate: " + date
-            ftext += "\nChat ID: " + str(check.chat_id)
-            ftext += "\nSender ID: " + str(check.sender_id)
-            ftext += "\n\nEvent Trigger:\n"
-            ftext += str(check.text)
-            ftext += "\n\nTraceback info:\n"
-            ftext += str(format_exc())
-            ftext += "\n\nError text:\n"
-            ftext += str(sys.exc_info()[1])
-            ftext += "\n\n--------END USERBOT TRACEBACK LOG--------"
-            command = "git log --pretty=format:\"%an: %s\" -10"
-            ftext += "\n\n\nLast 10 commits:\n"
-            process = await asyncsubshell(command,
-                                          stdout=asyncsub.PIPE,
-                                          stderr=asyncsub.PIPE)
-            stdout, stderr = await process.communicate()
-            result = str(stdout.decode().strip()) \
-                + str(stderr.decode().strip())
-            ftext += result
-            with open("error.txt", "w+") as file:
-                file.write(ftext)
-            sorry_msg = await check.respond("`Sorry, TeleBot has crashed.\nCheck your log group for error logs.`")
-            await asyncio.sleep(3.5)
-            await sorry_msg.delete()
-            await check.client.send_file(Var.PRIVATE_GROUP_ID,
-                                         "error.txt",
-                                         caption=text)
-            remove("error.txt")
+            pass
     return wrapper
 
 
