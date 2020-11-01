@@ -59,6 +59,7 @@ Restricted? : {}
 Verified : {}
 Bot : {}
 No. of Common Groups : {}
+Permanent Link : [Here](tg://user?id={})
 """.format(
         user_id,
         user_id,
@@ -70,6 +71,7 @@ No. of Common Groups : {}
         replied_user.user.verified,
         replied_user.user.bot,
         common_chats,
+        user_id,
     )
     message_id_to_reply = event.message.reply_to_msg_id
     if not message_id_to_reply:
