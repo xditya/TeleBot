@@ -28,4 +28,4 @@ async def _(event):
         await eor(event, animation_chars[i % 18])
 
 
-CMD_HELP.update({"info": "➟ `.info`\nUse - Get to know about your bot."})
+CMD_HELP.update({"info": "➟ .info\nUse - Get to know about your bot."})
