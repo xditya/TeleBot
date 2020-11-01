@@ -4,11 +4,11 @@ import os
 import time
 from datetime import datetime
 from io import BytesIO
-from telebot import CMD_HELP
+
 import requests
 from PIL import Image
 
-from telebot import telever
+from telebot import CMD_HELP, telever
 from telebot.__init__ import StartTime
 from telebot.telebotConfig import Config
 from telebot.utils import admin_cmd, sudo_cmd
@@ -108,8 +108,5 @@ async def amireallyalive(alive):
         await borg.send_file(alive.chat_id, file=sticker)
         await alive.delete()
 
-CMD_HELP.update(
-    {
-        "alive": ".alive\nUse - Check if your bot is working."
-    }
-)
+
+CMD_HELP.update({"alive": ".alive\nUse - Check if your bot is working."})
