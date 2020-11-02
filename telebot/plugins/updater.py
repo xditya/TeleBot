@@ -29,6 +29,7 @@ UPSTREAM_REPO_URL = "https://github.com/xditya/TeleBot"
 
 xxxx = CMD_HNDLR if CMD_HNDLR else "."
 
+
 async def gen_chlog(repo, diff):
     ch_log = ""
     d_form = "On " + "%d/%m/%y" + " at " + "%H:%M:%S"
