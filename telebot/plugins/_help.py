@@ -15,12 +15,14 @@
 #    along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 import os
+
 from telebot import ALIVE_NAME, CMD_HELP, CMD_LIST
 from telebot.telebotConfig import Config
 
 DEFAULTUSER = str(ALIVE_NAME) if ALIVE_NAME else "TeleBot User"
 CMD_HNDLR = Config.CMD_HNDLR
 CUSTOM_HELP_EMOJI = os.environ.get("CUSTOM_HELP_EMOJI", "⚡")
+
 
 @telebot.on(admin_cmd(pattern="help ?(.*)"))
 async def cmd_list(event):
@@ -30,7 +32,7 @@ async def cmd_list(event):
         if tgbotusername is None or input_str == "text":
             string = ""
             for i in CMD_HELP:
-                string += CUSTOM_HELP_EMOJI + " " + i + " "+ CUSTOM_HELP_EMOJI + "\n"
+                string += CUSTOM_HELP_EMOJI + " " + i + " " + CUSTOM_HELP_EMOJI + "\n"
                 for iter_list in CMD_HELP[i]:
                     string += "    `" + str(iter_list) + "`"
                     string += "\n"
