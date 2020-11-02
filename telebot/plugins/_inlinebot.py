@@ -21,9 +21,10 @@ from math import ceil
 
 from telethon import Button, custom, events, functions
 from telethon.tl.functions.users import GetFullUserRequest
-from userbot import ALIVE_NAME, CMD_LIST, CUSTOM_PMPERMIT, bot
-from userbot.plugins import telestats
-from userbot.telebotConfig import Var
+
+from telebot import ALIVE_NAME, CMD_LIST, CUSTOM_PMPERMIT, bot
+from telebot.plugins import telestats
+from telebot.telebotConfig import Var
 
 PMPERMIT_PIC = os.environ.get("PMPERMIT_PIC", None)
 TELEPIC = (
@@ -240,7 +241,7 @@ if Var.TG_BOT_USER_NAME_BF_HER is not None and tgbot is not None:
     @tgbot.on(events.callbackquery.CallbackQuery(data=re.compile(b"close")))
     async def on_plug_in_callback_query_handler(event):
         if event.query.user_id == bot.uid:
-            await event.edit("Help Menu Closed.")
+            await event.edit("Menu Closed!!")
         else:
             reply_pop_up_alert = "Please get your own userbot from @TeleBotSupport "
             await event.answer(reply_pop_up_alert, cache_time=0, alert=True)
