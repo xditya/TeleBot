@@ -281,13 +281,13 @@ if Var.TG_BOT_USER_NAME_BF_HER is not None and tgbot is not None:
         if event.query.user_id == bot.uid:
             plugin_name = event.data_match.group(1).decode("UTF-8")
             help_string = ""
+            help_string += f"Commands Available in {plugin_name}\n"
             try:
                 if plugin_name in CMD_HELP:
                     for i in CMD_HELP[plugin_name]:
                         help_string += i
                     help_string += "\n"
                 else:
-                    help_string += "Commands Available -\n\n"
                     for i in CMD_LIST[plugin_name]:
                         help_string += i
                         help_string += "\n"

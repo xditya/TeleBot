@@ -109,4 +109,4 @@ async def amireallyalive(alive):
         await alive.delete()
 
 
-CMD_HELP.update({"alive": ".alive\nUse - Check if your bot is working."})
+CMD_HELP.update({"alive": "➟ `.alive`\nUse - Check if your bot is working."})

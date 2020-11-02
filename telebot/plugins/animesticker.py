@@ -52,4 +52,4 @@ async def waifu(animu):
     )
     await animu.delete()
 
-    CMD_HELP.update({"waifu": ".waifu : Anime that makes your writing fun."})
+CMD_HELP.update({"waifu": "`.waifu` : Anime that makes your writing fun."})

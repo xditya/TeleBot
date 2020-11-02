@@ -210,15 +210,15 @@ async def twrp(request):
 
 CMD_HELP.update(
     {
-        "android": ".magisk\
+        "android": "➟ `.magisk`\
 \nGet latest Magisk releases\
-\n\n.device <codename>\
+\n\n➟ `.device <codename>`\
 \nUsage: Get info about android device codename or model.\
-\n\n.codename <brand> <device>\
+\n\n➟ `.codename <brand> <device>`\
 \nUsage: Search for android device codename.\
-\n\n.specs <brand> <device>\
+\n\n➟ `.specs <brand> <device>`\
 \nUsage: Get device specifications info.\
-\n\n.twrp <codename>\
+\n\n➟ `.twrp <codename>`\
 \nUsage: Get latest twrp download for android device."
     }
 )

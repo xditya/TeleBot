@@ -166,6 +166,6 @@ async def on_afk(event):
 
 CMD_HELP.update(
     {
-        "afk": ".afk <optional reason>\nUsage - Sets your status to AwayFromKeyboard. The bot will reply when you are tagged in groups."
+        "afk": "➟ `.afk` <optional reason>\nUse - Sets your status to AwayFromKeyboard. The bot will reply when you are tagged in groups."
     }
 )

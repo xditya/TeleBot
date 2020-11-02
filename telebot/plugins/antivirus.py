@@ -2,7 +2,7 @@
 from telethon import events
 from telethon.errors.rpcerrorlist import YouBlockedUserError
 
-from telebot.utils import admin_cmd
+from telebot import CMD_HELP
 
 
 @telebot.on(admin_cmd(pattern="scan ?(.*)"))
@@ -45,3 +45,9 @@ async def _(event):
                 await x.edit(
                     f"**Antivirus scan was completed. I got dem final results.**\n {response.message.message}",
                 )
+
+CMD_HELP.update(
+    {
+        "antivirus": "➟ `.scan <reply to pic/doc>`\nUse - Scan the pic/doc for viruses."
+    }
+)
