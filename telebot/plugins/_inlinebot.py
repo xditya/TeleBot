@@ -22,11 +22,10 @@ from math import ceil
 from telethon import Button, custom, events, functions
 from telethon.tl.functions.users import GetFullUserRequest
 
-from telebot import ALIVE_NAME, CMD_LIST, CUSTOM_PMPERMIT, bot
-from telebot.plugins import telestats
-from telebot.telebotConfig import Var
+from userbot import ALIVE_NAME, CMD_LIST, CUSTOM_PMPERMIT, bot
+from userbot.plugins import telestats
+from userbot.telebotConfig import Var
 
-DEFAULTUSER = str(ALIVE_NAME) if ALIVE_NAME else "TeleBot User"
 PMPERMIT_PIC = os.environ.get("PMPERMIT_PIC", None)
 TELEPIC = (
     PMPERMIT_PIC
@@ -52,36 +51,18 @@ USER_BOT_NO_WARN = (
 )
 
 if Var.TG_BOT_USER_NAME_BF_HER is not None and tgbot is not None:
-    yourbot = Var.TG_BOT_USER_NAME_BF_HER
 
     @tgbot.on(events.InlineQuery)  # pylint:disable=E0602
     async def inline_handler(event):
         builder = event.builder
         result = None
         query = event.text
-        if event.query.user_id == bot.uid and query.startswith("TeleBot"):
-            thelink = f"https://t.me/{yourbot}?start=logs"
-            result = builder.article(
-                title="Help-Menu",
-                text=f"This is the help menu for {DEFAULTUSER}\n\nProvided by [TeleBot](https://github.com/xditya/TeleBot)",
-                buttons=[
-                    [custom.Button.inline("All commands", data="helpmenu")],
-                    [
-                        Button.url("Logs", f"https://t.me/{yourbot}?start=logs"),
-                        custom.Button.inline("Close", data="close"),
-                        custom.Button.inline("Stats", data="statcheck"),
-                    ],
-                    [Button.url("Support", "t.me/TeleBotSupport")],
-                ],
-                link_preview=False,
-            )
-        elif event.query.user_id == bot.uid and query == "clicked":
+        if event.query.user_id == bot.uid and query.startswith("`Userbot"):
             rev_text = query[::-1]
             buttons = paginate_help(0, CMD_LIST, "helpme")
-            x = len(CMD_LIST)
             result = builder.article(
                 "© TeleBot Help",
-                text=f"`Userbot Helper for {DEFAULTUSER} to reveal all the commands of `**[TeleBot](https://xditya.gitbook.io/telebot/)**\n\nCurrently Loaded Plugins: {x}",
+                text="{}\nCurrently Loaded Plugins: {}".format(query, len(CMD_LIST)),
                 buttons=buttons,
                 link_preview=False,
             )
@@ -96,8 +77,7 @@ if Var.TG_BOT_USER_NAME_BF_HER is not None and tgbot is not None:
                         Button.url(
                             "Deploy Now!",
                             "https://dashboard.heroku.com/new?button-url=https%3A%2F%2Fgithub.com%2Fxditya%2FTeleBot&template=https%3A%2F%2Fgithub.com%2Fxditya%2FTeleBot",
-                        ),
-                        custom.Button.inline("Close", data="close"),
+                        )
                     ],
                 ],
             )
@@ -169,22 +149,6 @@ if Var.TG_BOT_USER_NAME_BF_HER is not None and tgbot is not None:
             buttons = paginate_help(current_page_number + 1, CMD_LIST, "helpme")
             # https://t.me/TelethonChat/115200
             await event.edit(buttons=buttons)
-        else:
-            reply_pop_up_alert = (
-                "Please get your own Userbot from @TeleBotHelp , and don't use mine!"
-            )
-            await event.answer(reply_pop_up_alert, cache_time=0, alert=True)
-
-    @tgbot.on(events.callbackquery.CallbackQuery(data=re.compile(b"helpmenu")))
-    async def telemenu(event):
-        if event.query.user_id == bot.uid:
-            await event.edit(
-                "**Help menu opened!**\n__Check saved messages, if you don't find a menu here...__"
-            )
-            mybot = Var.TG_BOT_USER_NAME_BF_HER
-            q = "clicked"
-            helpermenu = await bot.inline_query(mybot, q)
-            await helpermenu[0].click(event.chat_id)
         else:
             reply_pop_up_alert = (
                 "Please get your own Userbot from @TeleBotHelp , and don't use mine!"
@@ -277,7 +241,7 @@ if Var.TG_BOT_USER_NAME_BF_HER is not None and tgbot is not None:
     @tgbot.on(events.callbackquery.CallbackQuery(data=re.compile(b"close")))
     async def on_plug_in_callback_query_handler(event):
         if event.query.user_id == bot.uid:
-            await event.edit("Menu Closed!")
+            await event.edit("Help Menu Closed.")
         else:
             reply_pop_up_alert = "Please get your own userbot from @TeleBotSupport "
             await event.answer(reply_pop_up_alert, cache_time=0, alert=True)
