@@ -50,6 +50,10 @@ USER_BOT_NO_WARN = (
     "\nPlease choose why you are here, from the available options\n\n            ~ Thank You."
 )
 
+CUSTOM_HELP_EMOJI = os.environ.get("CUSTOM_HELP_EMOJI", "⚡")
+HELP_ROWS = os.environ.get("HELP_ROWS", 5)
+HELP_COLOUMNS = os.environ.get("HELP_COLOUMNS", 3)
+
 if Var.TG_BOT_USER_NAME_BF_HER is not None and tgbot is not None:
 
     @tgbot.on(events.InlineQuery)  # pylint:disable=E0602
@@ -278,13 +282,18 @@ if Var.TG_BOT_USER_NAME_BF_HER is not None and tgbot is not None:
             plugin_name = event.data_match.group(1).decode("UTF-8")
             help_string = ""
             try:
-                for i in CMD_LIST[plugin_name]:
-                    help_string += i
-                    help_string += "\n"
+                if plugin_name in CMD_HELP:
+                    for i in CMD_HELP[plugin_name]:
+                        help_string += i
+                        help_string += "\n"
+                else:
+                    for i in CMD_LIST[plugin_name]:
+                        help_string += i
+                        help_string += "\n"
             except BaseException:
                 pass
             if help_string == "":
-                reply_pop_up_alert = "{} is useless".format(plugin_name)
+                reply_pop_up_alert = "{} has no detailed info.\nUse .help {}".format(plugin_name, plugin_name)
             else:
                 reply_pop_up_alert = help_string
             reply_pop_up_alert += "\n Use .unload {} to remove this plugin\n\
@@ -298,18 +307,19 @@ if Var.TG_BOT_USER_NAME_BF_HER is not None and tgbot is not None:
                 await event.answer(halps, cache_time=0, alert=True)
         else:
             reply_pop_up_alert = "Please get your own Userbot, and don't use mine!"
-
+            await event.answer(reply_pop_up_alert, cache_time=0, alert=True)
 
 def paginate_help(page_number, loaded_plugins, prefix):
-    number_of_rows = 5
-    number_of_cols = 2
+    number_of_rows = HELP_ROWS
+    number_of_cols = HELP_COLOUMNS
+    tele = CUSTOM_HELP_EMOJI
     helpable_plugins = []
     for p in loaded_plugins:
         if not p.startswith("_"):
             helpable_plugins.append(p)
     helpable_plugins = sorted(helpable_plugins)
     modules = [
-        custom.Button.inline("{} {}".format("⚡", x, "⚡"), data="us_plugin_{}".format(x))
+        custom.Button.inline("{} {}".format(tele, x, tele), data="us_plugin_{}".format(x))
         for x in helpable_plugins
     ]
     pairs = list(zip(modules[::number_of_cols], modules[1::number_of_cols]))
