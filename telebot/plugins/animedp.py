@@ -69,8 +69,7 @@ async def main(event):
 
         await asyncio.sleep(600)  # Edit this to your required needs
 
+
 CMD_HELP.update(
-    {
-        "animedp": "➟ `.animedp`\nStart auto-changing anime profile pic for your account."
-    }
+    {"animedp": "➟ `.animedp`\nStart auto-changing anime profile pic for your account."}
 )

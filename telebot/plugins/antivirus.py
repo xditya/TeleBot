@@ -46,8 +46,7 @@ async def _(event):
                     f"**Antivirus scan was completed. I got dem final results.**\n {response.message.message}",
                 )
 
+
 CMD_HELP.update(
-    {
-        "antivirus": "➟ `.scan <reply to pic/doc>`\nUse - Scan the pic/doc for viruses."
-    }
+    {"antivirus": "➟ `.scan <reply to pic/doc>`\nUse - Scan the pic/doc for viruses."}
 )
