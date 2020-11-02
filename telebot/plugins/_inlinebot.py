@@ -285,8 +285,9 @@ if Var.TG_BOT_USER_NAME_BF_HER is not None and tgbot is not None:
                 if plugin_name in CMD_HELP:
                     for i in CMD_HELP[plugin_name]:
                         help_string += i
-                        help_string += "\n"
+                    help_string += "\n"
                 else:
+                    help_string "Commands Available -\n\n"
                     for i in CMD_LIST[plugin_name]:
                         help_string += i
                         help_string += "\n"
