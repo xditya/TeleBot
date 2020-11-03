@@ -64,6 +64,6 @@ async def autopic(event):
             return
 
 
-CMD_HELP(
+CMD_HELP.update(
     {"autopic": ".autopic <reply to pic>\nUse - Auto changing dp, with time and date."}
 )
