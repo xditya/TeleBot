@@ -5,9 +5,8 @@
 
 from telethon.errors.rpcerrorlist import YouBlockedUserError
 
-from telebot import ALIVE_NAME
+from telebot import ALIVE_NAME, CMD_HELP
 from telebot.utils import admin_cmd
-from telebot import CMD_HELP
 
 naam = str(ALIVE_NAME)
 
@@ -51,4 +50,9 @@ async def _(event):
             except YouBlockedUserError:
                 await eor(event, "**Error:** `unblock` @MissRose_Bot `and try again!")
 
-CMD_HELP.updae({"fedstat":".fstat <username/userid>\nUse - To check the persons fedban stat in @MissRose_Bot."})
+
+CMD_HELP.updae(
+    {
+        "fedstat": ".fstat <username/userid>\nUse - To check the persons fedban stat in @MissRose_Bot."
+    }
+)

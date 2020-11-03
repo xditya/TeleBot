@@ -8,9 +8,11 @@ import math
 import os
 import time
 from datetime import datetime
-from telebot import CMD_HELP
+
 from pySmartDL import SmartDL
 from uniborg.util import admin_cmd, humanbytes, progress
+
+from telebot import CMD_HELP
 
 
 @telebot.on(admin_cmd(pattern="download ?(.*)"))
@@ -92,8 +94,9 @@ async def _(event):
             "Reply to a message for TeleBot to download to your local server."
         )
 
+
 CMD_HELP.update(
     {
-        "download":".download <link/reply to file>\nUse - Download to local userbot server."
+        "download": ".download <link/reply to file>\nUse - Download to local userbot server."
     }
 )

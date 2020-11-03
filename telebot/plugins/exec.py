@@ -4,6 +4,7 @@ import traceback
 
 from telebot import CMD_HELP
 
+
 @telebot.on(admin_cmd(pattern="exec"))
 @telebot.on(sudo_cmd(pattern="exec", allow_sudo=True))
 async def _(event):
@@ -63,4 +64,5 @@ async def aexec(code, event):
     exec(f"async def __aexec(event): " + "".join(f"\n {l}" for l in code.split("\n")))
     return await locals()["__aexec"](event)
 
-CMD_HELP.update({"exec":".exec <code>\nUse - Execute the code."})
+
+CMD_HELP.update({"exec": ".exec <code>\nUse - Execute the code."})

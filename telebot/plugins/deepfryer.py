@@ -32,10 +32,12 @@
 
 import io
 from random import randint, uniform
-from telebot import CMD_HELP
+
 from PIL import Image, ImageEnhance, ImageOps
 from telethon.tl.types import DocumentAttributeFilename
 from uniborg.util import admin_cmd
+
+from telebot import CMD_HELP
 
 
 @telebot.on(admin_cmd(pattern="deepfry(?: |$)(.*)", outgoing=True))
@@ -146,8 +148,5 @@ async def check_media(reply_message):
     else:
         return data
 
-CMD_HELP.update(
-    {
-        "deepfryer":".deepfry <reply to pic>\nUse - Deepfry the picture."
-    }
-)
+
+CMD_HELP.update({"deepfryer": ".deepfry <reply to pic>\nUse - Deepfry the picture."})

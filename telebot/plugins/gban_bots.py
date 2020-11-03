@@ -7,8 +7,9 @@ Available Commands:
 .gban REASON
 .ungban"""
 
-from telebot.utils import admin_cmd
 from telebot import CMD_HELP
+from telebot.utils import admin_cmd
+
 
 @telebot.on(admin_cmd(pattern="botgban ?(.*)"))
 @telebot.on(sudo_cmd(pattern="botgban ?(.*)", allow_sudo=True))
@@ -56,9 +57,10 @@ async def _(event):
         )
     await event.delete()
 
+
 CMD_HELP.update(
     {
-        "gban_bots":".botgban <reply to user/userid/username> <reason>\nUse - Gban in all bots you are sudo.\
+        "gban_bots": ".botgban <reply to user/userid/username> <reason>\nUse - Gban in all bots you are sudo.\
         \n\n.botungban <reply to user/userid/username>\nUse - Ungban from all bots."
     }
 )

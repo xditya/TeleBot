@@ -1,7 +1,8 @@
 import asyncio
 
-from telebot.utils import admin_cmd
 from telebot import CMD_HELP
+from telebot.utils import admin_cmd
+
 
 @telebot.on(admin_cmd(pattern="dump ?(.*)"))
 async def _(message):
@@ -41,8 +42,5 @@ async def _(message):
             except errors.MessageIdInvalidError:
                 return
 
-CMD_HELP.update(
-    {
-        "dumpster":".dump\nUse - useless."
-    }
-)
+
+CMD_HELP.update({"dumpster": ".dump\nUse - useless."})

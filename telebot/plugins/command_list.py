@@ -1,8 +1,11 @@
 # Join @TeleBotHelp for custom plugins
 
 import asyncio
+
 import requests
+
 from telebot import CMD_HELP
+
 
 @telebot.on(admin_cmd(pattern="cmds", outgoing=True))
 @telebot.on(sudo_cmd(pattern="cmds", allow_sudo=True))
@@ -30,8 +33,7 @@ async def install(event):
         f"`All plugins available in` **TeleBot** `can be found` [here]({url})!!"
     )
 
+
 CMD_HELP.update(
-    {
-        "command_list":".cmds\nUse - Get the list of all plugins in the bot."
-    }
+    {"command_list": ".cmds\nUse - Get the list of all plugins in the bot."}
 )

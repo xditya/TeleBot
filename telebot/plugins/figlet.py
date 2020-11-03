@@ -1,7 +1,8 @@
 import pyfiglet
 
-from telebot.utils import admin_cmd
 from telebot import CMD_HELP
+from telebot.utils import admin_cmd
+
 
 @telebot.on(admin_cmd(pattern="figlet ?(.*)", outgoing=True))
 @telebot.on(sudo_cmd(pattern="figlet ?(.*)", allow_sudo=True))
@@ -44,4 +45,5 @@ async def figlet(event):
     await event.respond("‌‌‎`{}`".format(result))
     await event.delete()
 
-CMD_HELP.update({"figlet":".figlet <text>\nUse - Try it yourself."})
+
+CMD_HELP.update({"figlet": ".figlet <text>\nUse - Try it yourself."})

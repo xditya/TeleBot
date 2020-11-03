@@ -1,7 +1,8 @@
 import asyncio
 
-from telebot.utils import admin_cmd
 from telebot import CMD_HELP
+from telebot.utils import admin_cmd
+
 
 @telebot.on(admin_cmd(pattern="gangasta ?(.*)"))
 async def _(event):
@@ -21,4 +22,6 @@ async def _(event):
         await event.edit("🔥🔥🔥")
         await asyncio.sleep(0.3)
         await event.edit("EVERyBOdy iZ GangSTur UNtIL I ArRivE 🔥🔥🔥")
-CMD_HELP.update({"gangsta":".gangsta\nUse - Spam recents of a group lel."})
+
+
+CMD_HELP.update({"gangsta": ".gangsta\nUse - Spam recents of a group lel."})

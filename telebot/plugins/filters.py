@@ -8,10 +8,11 @@ Available Commands:
 .clearfilter"""
 import asyncio
 import re
-from telebot import CMD_HELP
+
 from telethon import utils
 from telethon.tl import types
 
+from telebot import CMD_HELP
 from telebot.plugins.sql_helper.filter_sql import (
     add_filter,
     get_all_filters,
@@ -143,6 +144,7 @@ async def on_snip_delete(event):
 async def on_all_snip_delete(event):
     remove_all_filters(event.chat_id)
     await eor(event, f"filters **in current chat** deleted successfully")
+
 
 CMD_HELP.update(
     {
