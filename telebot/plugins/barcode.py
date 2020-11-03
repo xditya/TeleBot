@@ -66,6 +66,6 @@ async def _(event):
     await event.delete()
 
 
-CMD_HELP.upate(
+CMD_HELP.update(
     {"barcode": ".barcode <text>\nUse - To make a barcode containing that text."}
 )
