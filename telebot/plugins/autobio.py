@@ -7,6 +7,7 @@ import time
 
 from telethon.errors import FloodWaitError
 from telethon.tl import functions
+
 from telebot import CMD_HELP
 from telebot.utils import admin_cmd
 
@@ -39,8 +40,5 @@ async def _(event):
         # )
         await asyncio.sleep(DEL_TIME_OUT)
 
-CMD_HELP.update(
-    {
-        "autobio":".autobio\nUse - Auto-changing profile bio, with time"
-    }
-)
+
+CMD_HELP.update({"autobio": ".autobio\nUse - Auto-changing profile bio, with time"})

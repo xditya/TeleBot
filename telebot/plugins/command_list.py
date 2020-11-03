@@ -1,10 +1,14 @@
 # Join @TeleBotHelp for custom plugins
 
 import asyncio
+
 from telegraph import Telegraph
+
 from telebot import CMD_HELP
+
 telegraph = Telegraph()
 mee = telegraph.create_account(short_name="telebot")
+
 
 @telebot.on(admin_cmd(pattern="cmds", outgoing=True))
 @telebot.on(sudo_cmd(pattern="cmds", allow_sudo=True))
@@ -30,8 +34,9 @@ async def install(event):
     tele = f"All the plugins of TeleBot can be found [here](telegra.ph/{link})"
     await x.edit(tele, link_preview=False)
 
+
 CMD_HELP.update(
     {
-        "command_list":".cmds\nUse - To get a list of all plugins installed in the userbot."
+        "command_list": ".cmds\nUse - To get a list of all plugins installed in the userbot."
     }
 )

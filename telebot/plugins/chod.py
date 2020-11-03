@@ -13,7 +13,9 @@ Available Commands:
 import asyncio
 
 from telethon import events
+
 from telebot import CMD_HELP
+
 
 @telebot.on(events.NewMessage(pattern=r"\.(.*)", outgoing=True))
 async def _(event):
@@ -128,8 +130,5 @@ async def _(event):
 
             await event.edit(animation_chars[i % 11])
 
-CMD_HELP.update(
-    {
-        "chod": "Random animation plugins.\n.chod\n.sqh\n.quickheal"
-    }
-)
+
+CMD_HELP.update({"chod": "Random animation plugins.\n.chod\n.sqh\n.quickheal"})

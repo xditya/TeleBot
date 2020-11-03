@@ -13,9 +13,8 @@ from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.common.keys import Keys
 
-from telebot import CHROME_DRIVER, GOOGLE_CHROME_BIN
+from telebot import CHROME_DRIVER, CMD_HELP, GOOGLE_CHROME_BIN
 from telebot.utils import admin_cmd, sudo_cmd
-from telebot import CMD_HELP
 
 CARBONLANG = "auto"
 LANG = "en"
@@ -106,8 +105,7 @@ async def carbon_api(e):
         # Removing carbon.png after uploading
         await e.delete()  # Deleting msg
 
+
 CMD_HELP.update(
-    {
-        "carbon":".carbon <text/reply to text>\nUse - Generate a carbon for the text."
-    }
+    {"carbon": ".carbon <text/reply to text>\nUse - Generate a carbon for the text."}
 )

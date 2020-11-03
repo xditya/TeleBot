@@ -12,6 +12,7 @@
 import time
 
 from telethon.tl.functions.channels import LeaveChannelRequest
+
 from telebot import CMD_HELP
 from telebot.utils import admin_cmd
 
@@ -33,8 +34,6 @@ async def leave(e):
         else:
 
             await e.edit("`This is Not A Chat. Please use this in groups :/`")
-CMD_HELP.update(
-    {
-        "bye":".bye\nUse - Leave the group."
-    }
-)
+
+
+CMD_HELP.update({"bye": ".bye\nUse - Leave the group."})

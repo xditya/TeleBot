@@ -25,8 +25,5 @@ async def _(event):
     reply_text = RUNSREACTS[bro]
     await eor(event, reply_text)
 
-CMD_HELP.update(
-    {
-        "congratulations": ".congo\nUse - Congratulate a person."
-    }
-)
+
+CMD_HELP.update({"congratulations": ".congo\nUse - Congratulate a person."})

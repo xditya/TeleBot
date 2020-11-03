@@ -8,7 +8,9 @@ import os
 import subprocess
 
 from uniborg.util import admin_cmd
+
 from telebot import CMD_HELP
+
 
 @telebot.on(admin_cmd(pattern=r"getc"))
 @telebot.on(sudo_cmd(pattern=r"getc", allow_sudo=True))
@@ -69,9 +71,10 @@ async def get_media(event):
     output = output.replace("\n'", "")
     await eor(event, "Downloaded " + output + " files.")
 
+
 CMD_HELP.update(
     {
-        "channel_download":".getc\nUse - Download all media from channel.\
+        "channel_download": ".getc\nUse - Download all media from channel.\
         \n\n.geta \nUse - Download all audio from channel."
     }
 )

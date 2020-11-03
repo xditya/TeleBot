@@ -18,9 +18,10 @@ from telegraph import Telegraph
 from telethon import events
 from telethon.errors.rpcerrorlist import YouBlockedUserError
 
+from telebot import CMD_HELP
 from telebot.telebotConfig import Var
 from telebot.utils import admin_cmd, sudo_cmd
-from telebot import CMD_HELP
+
 telegraph = Telegraph()
 mee = telegraph.create_account(short_name="telebot")
 
@@ -295,10 +296,10 @@ async def _(event):
             except YouBlockedUserError:
                 await x.edit("**Error:** `unblock` @fontsgenbot `and retry!")
 
+
 CMD_HELP.update(
     {
-        "botfns":
-        ".purl <reply to file>\nUse - Get a direct download link of that file/doc/pic/vid\
+        "botfns": ".purl <reply to file>\nUse - Get a direct download link of that file/doc/pic/vid\
         \n\n.reader <reply to url>\nUse - Get an instant view of that site.\
         \n\n.aud <reply to youtube link>\nUse - Get audo from that youtube video\
         \n\n.instadl <reply to instagram url>\\nUse - Download that instagram post.\

@@ -2,6 +2,7 @@ import os
 from re import match
 
 from bitlyshortener import Shortener
+
 from telebot import CMD_HELP
 from telebot.utils import admin_cmd
 
@@ -50,8 +51,7 @@ async def shortener(short):
             "Set bit.ly API token first\nGet it from [here](https://bitly.com/a/sign_up)",
         )
 
+
 CMD_HELP.update(
-    {
-        "bitly":".bitly <link> (as reply or with a link)\nUse - SHorten the link."
-    }
+    {"bitly": ".bitly <link> (as reply or with a link)\nUse - SHorten the link."}
 )

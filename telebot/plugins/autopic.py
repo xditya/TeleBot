@@ -20,13 +20,12 @@ import asyncio
 import os
 import shutil
 from datetime import datetime
-from telebot import CMD_HELP
 
 from PIL import Image, ImageDraw, ImageFont
 from telethon.tl import functions
 
 from telebot import *
-from telebot import AUTO_PIC_FONT, AUTOPIC_FONT_COLOUR, AUTOPIC_TEXT
+from telebot import AUTO_PIC_FONT, AUTOPIC_FONT_COLOUR, AUTOPIC_TEXT, CMD_HELP
 
 fntz = str(AUTO_PIC_FONT) if AUTO_PIC_FONT else "DejaVuSans.ttf"
 FONT_FILE_TO_USE = f"fonts/{fntz}"
@@ -64,8 +63,7 @@ async def autopic(event):
         except BaseException:
             return
 
+
 CMD_HELP(
-    {
-        "autopic":".autopic <reply to pic>\nUse - Auto changing dp, with time and date."
-    }
+    {"autopic": ".autopic <reply to pic>\nUse - Auto changing dp, with time and date."}
 )
