@@ -1,13 +1,13 @@
 # python 3.7.1
 
 """Available Commands:
-.wtf"""
+.gay"""
 
 
 import asyncio
 
 from telebot.utils import admin_cmd
-
+from telebot import CMD_HELP
 
 @telebot.on(admin_cmd(pattern="(.*)"))
 async def _(event):
@@ -30,3 +30,4 @@ async def _(event):
 
             await asyncio.sleep(animation_interval)
             await event.edit(animation_chars[i % 5])
+CMD_HELP.update({"gay":".gay\nUse - useless."})

@@ -3,7 +3,7 @@ from datetime import datetime
 
 import requests
 from uniborg.util import admin_cmd
-
+from telebot import CMD_HELP
 
 @telebot.on(admin_cmd(pattern="currency (.*)"))
 @telebot.on(sudo_cmd(pattern="currency (.*)", allow_sudo=True))
@@ -67,3 +67,10 @@ async def list(ups):
                 key
             ),
         )
+
+CMD_HELP.update(
+    {
+        "currency":".currency <value> <from> <to>\nUse - To convert currency.\
+        \n\n.currencies\nUSe -To get the list of currencies."
+    }
+)

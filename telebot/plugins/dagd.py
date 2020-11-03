@@ -5,7 +5,7 @@ Available Commands:
 .url <long url>
 .unshort <short url>"""
 import requests
-
+from telebot import CMD_HELP
 from telebot.utils import admin_cmd
 
 
@@ -58,3 +58,11 @@ async def _(event):
             event,
             "Input URL {} returned status_code {}".format(input_str, r.status_code),
         )
+
+CMD_HELP.update(
+    {
+        "dagd":".dns\nUse - Find DNS records.\
+        \n\n.url <link>\nUse - Shorten the link via da.gd\
+        \n\n.unshort <link>\nUse - UnShorten the URL."
+    }
+)

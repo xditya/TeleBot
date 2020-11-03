@@ -5,7 +5,7 @@ from telethon.tl.functions.users import GetFullUserRequest
 from telethon.tl.types import ChannelParticipantsAdmins
 
 from telebot.utils import admin_cmd
-
+from telebot import CMD_HELP
 
 @telebot.on(admin_cmd(pattern="gbun"))
 @telebot.on(sudo_cmd(pattern="gbun", allow_sudo=True))
@@ -58,3 +58,5 @@ async def gbun(event):
         )
         await event.reply(mention)
     await event.delete()
+
+CMD_HELP.update({"gbun":".gbun <reply to user>\nUse - Fake Gban."})

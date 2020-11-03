@@ -8,7 +8,7 @@ Available Commands:
 .clearfilter"""
 import asyncio
 import re
-
+from telebot import CMD_HELP
 from telethon import utils
 from telethon.tl import types
 
@@ -143,3 +143,11 @@ async def on_snip_delete(event):
 async def on_all_snip_delete(event):
     remove_all_filters(event.chat_id)
     await eor(event, f"filters **in current chat** deleted successfully")
+
+CMD_HELP.update(
+    {
+        "filters": ".savefilter <keyword> <response/reply to response>\nUse - Filter all instances of the word.\
+        \n\n.listfilters\nUse - List all filters in the chat.\
+        \n\n.clearfilter <filter name>\nUse - Stop replying to that word."
+    }
+)

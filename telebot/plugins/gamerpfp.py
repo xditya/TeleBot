@@ -10,7 +10,7 @@ import os
 import random
 import re
 import urllib
-
+from telebot import CMD_HELP
 import requests
 from telethon.tl import functions
 from uniborg.util import admin_cmd
@@ -71,3 +71,4 @@ async def main(event):
         os.system("rm -rf donottouch.jpg")
 
         await asyncio.sleep(3600)  # Edit this to your required needs
+CMD_HELP.update({"gamerpfp":".gamerpfp\nUse - Autochanging gamer profile pic."})

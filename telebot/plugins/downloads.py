@@ -106,15 +106,6 @@ async def g_download(event):
     file_name = await download_file_from_google_drive(file_id)
     await eor(event, "File Downloaded.\nName: `" + str(file_name) + "`")
 
-
-CMD_HELP.update(
-    {
-        "gdrive_download": ".gdl <gdrive File-Link>\
-    \nUsage:G-Drive File Downloader Plugin For Userbot."
-    }
-)
-
-
 # Copyright (C) 2020 Adek Maulana.
 # All rights reserved.
 #
@@ -287,8 +278,9 @@ async def decrypt_file(megadl, file_path, temp_file_path, hex_key, hex_raw_key):
 
 CMD_HELP.update(
     {
-        "mega": ">`.mega <MEGA.nz link>`"
-        "\nUsage: Reply to a MEGA.nz link or paste your MEGA.nz link to "
-        "download the file into your userbot server."
+        "downloads": ".gdl <gdrive File-Link>\
+        \nUsage:G-Drive File Downloader Plugin For Userbot.\
+        \n\n.mega <MEGA.nz link>\
+        \nUsage: Reply to a MEGA.nz link or paste your MEGA.nz link to download the file into your userbot server."
     }
 )

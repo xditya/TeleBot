@@ -86,9 +86,9 @@ async def _(event):
             response = telegraph.create_page(title_of_page, html_content=page_content)
             end = datetime.now()
             ms = (end - start).seconds
-            cat = f"https://telegra.ph/{response['path']}"
+            link = f"https://telegra.ph/{response['path']}"
             await okey.edit(
-                f"**link : ** [telegraph]({cat})\
+                f"**link : ** [telegraph]({link})\
                  \n**Time Taken : **`{ms} seconds.`",
                 link_preview=True,
             )

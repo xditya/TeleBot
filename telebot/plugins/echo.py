@@ -18,8 +18,7 @@
 Echoes the message via your bot
 """
 
-from telebot.utils import admin_cmd, sudo_cmd
-
+from telebot import CMD_HELP
 
 @telebot.on(admin_cmd(pattern=r"echo (.*)"))
 @telebot.on(sudo_cmd(pattern=r"echo ( .*)", allow_sudo=True))
@@ -32,3 +31,9 @@ async def _(event):
     except BaseException:
         await event.client.send_message(event.chat_id, f"Please add @{bxt} here first!")
         await event.delete()
+
+CMD_HELP.update(
+    {
+        "echo":".echo <mssg>\nUse - Echoes the message you send via your bot. You must add it to this chat first, ofc."
+    }
+)

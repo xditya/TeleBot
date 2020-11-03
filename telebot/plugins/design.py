@@ -1,6 +1,6 @@
 """.admin Plugin for @UniBorg"""
 from telethon.tl.types import ChannelParticipantsAdmins
-
+from telebot import CMD_HELP
 from telebot.utils import admin_cmd
 
 
@@ -36,3 +36,9 @@ async def _(event):
     else:
         await event.reply(mentions)
     await event.delete()
+
+CMD_HELP.update(
+    {
+        "design":"Random codes.\nCommands - .join\n.pay"
+    }
+)

@@ -3,7 +3,7 @@ Syntax: .filext EXTENSION"""
 import requests
 from bs4 import BeautifulSoup
 from uniborg.util import admin_cmd
-
+from telebot import CMD_HELP
 
 @telebot.on(admin_cmd(pattern="filext (.*)"))
 @telebot.on(admin_cmd(pattern="filext (.*)", allow_sudo=True))
@@ -32,3 +32,5 @@ async def _(event):
                 status_code, input_str
             ),
         )
+
+CMD_HELP.update({"fileext":".fileext <extension>\nUse - Get info on that file extension."})
