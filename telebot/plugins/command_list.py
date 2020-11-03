@@ -1,7 +1,9 @@
 # Join @TeleBotHelp for custom plugins
 
 import asyncio
+
 import requests
+
 
 @telebot.on(admin_cmd(pattern="cmds", outgoing=True))
 @telebot.on(sudo_cmd(pattern="cmds", allow_sudo=True))
@@ -17,10 +19,14 @@ async def install(event):
     o = stdout.decode()
     _o = o.split("\n")
     o = "\n".join(_o)
-    OUTPUT = OUTPUT = f"Here is the list of plugins found in 'master' branch of TeleBot.\n{o}\n\nUse .help <cmd_name> to learn how a paticular plugin works.\nConsider joining @TeleBotSupport for help!"
+    OUTPUT = (
+        OUTPUT
+    ) = f"Here is the list of plugins found in 'master' branch of TeleBot.\n{o}\n\nUse .help <cmd_name> to learn how a paticular plugin works.\nConsider joining @TeleBotSupport for help!"
     await tele.edit("`Plugins extracted, pasting it...`")
-    message=OUTPUT
+    message = OUTPUT
     url = "https://del.dog/documents"
     r = requests.post(url, data=message.encode("UTF-8")).json()
     url = f"https://del.dog/{r['key']}"
-    await tele.edit(f"`All plugins available in` **TeleBot** `can be found` [here]({url})!!")
+    await tele.edit(
+        f"`All plugins available in` **TeleBot** `can be found` [here]({url})!!"
+    )
