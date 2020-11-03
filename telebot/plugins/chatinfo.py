@@ -21,7 +21,7 @@ from telethon.utils import get_input_location
 
 from telebot import CMD_HELP
 from telebot.utils import admin_cmd, sudo_cmd
-
+from telebot import CMD_HELP
 
 @telebot.on(admin_cmd(pattern="chatinfo(?: |$)(.*)", outgoing=True))
 @telebot.on(sudo_cmd(pattern="chatinfo(?: |$)(.*)"))
@@ -33,7 +33,7 @@ async def info(event):
         await eor(event, caption, parse_mode="html")
     except Exception as e:
         print("Exception:", e)
-        await eor(event, "`An unexpected error has occurred.`")
+        await eor(event, f"`An unexpected error has occurred. {e}`")
     return
 
 

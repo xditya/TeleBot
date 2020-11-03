@@ -151,7 +151,7 @@ async def apkr(event):
         await event.edit("Exception Occured:- " + str(err))
 
 
-CMD_HELP.updae(
+CMD_HELP.update(
     {
         "app": ".app <name>\
         \nUse - Search for that app in the play store.\

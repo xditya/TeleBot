@@ -20,6 +20,7 @@ import asyncio
 import os
 import shutil
 from datetime import datetime
+from telebot import CMD_HELP
 
 from PIL import Image, ImageDraw, ImageFont
 from telethon.tl import functions
@@ -62,3 +63,9 @@ async def autopic(event):
             await asyncio.sleep(60)
         except BaseException:
             return
+
+CMD_HELP(
+    {
+        "autopic":".autopic <reply to pic>\nUse - Auto changing dp, with time and date."
+    }
+)

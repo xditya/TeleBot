@@ -13,7 +13,7 @@ from .. import ALIVE_NAME, CMD_HELP
 from ..utils import admin_cmd
 
 DEFAULTUSER = str(ALIVE_NAME) if ALIVE_NAME else "TeleBot"
-DEFAULTUSERBIO = "sıɥʇ ǝpoɔǝp uǝɥʇ llıʇu∩ ˙ ǝɔɐds ǝʇɐʌıɹd ǝɯos ǝɯ ǝʌı⅁˙"
+DEFAULTUSERBIO = "404: No bio found!˙"
 if Config.PRIVATE_GROUP_BOT_API_ID is None:
     BOTLOG = False
 else:
@@ -142,10 +142,10 @@ async def get_full_user(event):
 
 CMD_HELP.update(
     {
-        "clone": "**SYNTAX :** `.clone`<reply to user who you want to clone\
-    \n**USAGE : **clone the replied user account\
-    \n\n**SYNTAX : **`.revert`\
-    \n**USAGE : **Reverts back to your profile which you have set in heroku for  AUTONAME,DEFAULT_BIO\
+        "clone": ".clone <reply to user who you want to clone.\
+    \n**Use - clone the replied user account.\
+    \n\n.revert\
+    \nUse - Reverts back to your profile which you have set in heroku.\
     "
     }
 )

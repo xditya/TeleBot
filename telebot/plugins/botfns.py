@@ -20,7 +20,7 @@ from telethon.errors.rpcerrorlist import YouBlockedUserError
 
 from telebot.telebotConfig import Var
 from telebot.utils import admin_cmd, sudo_cmd
-
+from telebot import CMD_HELP
 telegraph = Telegraph()
 mee = telegraph.create_account(short_name="telebot")
 
@@ -294,3 +294,21 @@ async def _(event):
                 )
             except YouBlockedUserError:
                 await x.edit("**Error:** `unblock` @fontsgenbot `and retry!")
+
+CMD_HELP.update(
+    {
+        "botfns":
+        ".purl <reply to file>\nUse - Get a direct download link of that file/doc/pic/vid\
+        \n\n.reader <reply to url>\nUse - Get an instant view of that site.\
+        \n\n.aud <reply to youtube link>\nUse - Get audo from that youtube video\
+        \n\n.instadl <reply to instagram url>\\nUse - Download that instagram post.\
+        \n\n.stats\nUse - To see the stats of your bot.\
+        \n\n.xogame\nUse - Start an XO-Game\
+        \n\n.whisper <message> <target username/id>\nUse - Send a whisper message to that person.\
+        \n\n.crack <app name>\nUse - Get the crack/mod of an app.\
+        \n\n.checkspam\nUse - Check if you are limited.\
+        \n\n.gitdl <reply to github link>\nUse - Download the main branch of that git repo.\
+        \n\n.imusic <song name>\nUse - Get the song.\
+        \n\n.font <text>\nUse - Generate some stylish fonts."
+    }
+)

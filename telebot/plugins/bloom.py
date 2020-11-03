@@ -21,7 +21,7 @@ import os
 import random
 import shutil
 from datetime import datetime
-
+from telebot import CMD_HELP
 from PIL import Image, ImageDraw, ImageFont
 from pySmartDL import SmartDL
 from telethon.tl import functions
@@ -79,3 +79,9 @@ async def autopic(event):
             await asyncio.sleep(20)
         except BaseException:
             return
+
+CMD_HELP.update(
+    {
+        "bloom":".bloom\nUse - Auto-changing coulour dps, with time."
+    }
+)

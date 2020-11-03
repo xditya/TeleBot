@@ -7,7 +7,7 @@ Quotes credits: Being logical Channel
 
 import asyncio
 import random
-
+from telebot import CMD_HELP
 
 @telebot.on(admin_cmd(pattern=r"belo", outgoing=True))
 @telebot.on(sudo_cmd(pattern=r"belo"))
@@ -655,3 +655,9 @@ async def _(event):
             event,
             '`"If we put solar panels above parking lots, then our cars wouldn\'t get hot and we would have a lot of clean energy."`',
         )
+
+CMD_HELP.update(
+    {
+        "being_logical":".belo\nUse - Generate quotes that have some logic, lol!"
+    }
+)

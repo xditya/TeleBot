@@ -1,7 +1,7 @@
 import asyncio
 
 from telebot.utils import admin_cmd
-
+from telebot import CMD_HELP
 
 @telebot.on(admin_cmd(pattern="bigoof"))
 @telebot.on(sudo_cmd(pattern="bigoof"))
@@ -30,3 +30,9 @@ async def _(event):
 
         await asyncio.sleep(animation_interval)
         await event.eor(animation_chars[i % 40])
+
+CMD_HELP.update(
+    {
+        "bigoof":".bigoof\nTry it yourself!"
+    }
+)

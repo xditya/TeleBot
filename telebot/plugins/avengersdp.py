@@ -10,7 +10,7 @@ import urllib
 
 import requests
 from telethon.tl import functions
-
+from telebot import CMD_HELP
 from telebot.utils import admin_cmd
 
 COLLECTION_STRING = [
@@ -68,3 +68,9 @@ async def main(event):
         os.system("rm -rf donottouch.jpg")
 
         await asyncio.sleep(600)  # Edit this to your required needs
+
+CMD_HELP.update(
+    {
+        "avengersdp":".avengersdp\nUse - Auto-changing dp of avengers."
+    }
+)

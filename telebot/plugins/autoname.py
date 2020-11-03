@@ -6,7 +6,7 @@ import time
 from telethon.errors import FloodWaitError
 from telethon.tl import functions
 from uniborg.util import admin_cmd
-
+from telebot import CMD_HELP
 from telebot import ALIVE_NAME
 
 DEL_TIME_OUT = 60
@@ -40,3 +40,9 @@ async def _(event):
         # )
         await asyncio.sleep(DEL_TIME_OUT)
     await event.edit(f"Auto Name has been started...")
+
+CMD_HELP.update(
+    {
+        "autoname":".autoname\nUse - Auto changing profile name, with time."
+    }
+)
