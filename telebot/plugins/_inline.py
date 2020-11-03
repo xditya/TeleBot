@@ -51,8 +51,8 @@ USER_BOT_NO_WARN = (
 )
 
 CUSTOM_HELP_EMOJI = os.environ.get("CUSTOM_HELP_EMOJI", "⚡")
-HELP_ROWS = os.environ.get("HELP_ROWS", 5)
-HELP_COLOUMNS = os.environ.get("HELP_COLOUMNS", 3)
+HELP_ROWS = int(os.environ.get("HELP_ROWS", 5))
+HELP_COLOUMNS = int(os.environ.get("HELP_COLOUMNS", 3))
 
 if Var.TG_BOT_USER_NAME_BF_HER is not None and tgbot is not None:
 
