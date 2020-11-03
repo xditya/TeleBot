@@ -6,7 +6,9 @@ Fetch App Details from Playstore.
 
 import bs4
 import requests
+
 from telebot import CMD_HELP
+
 
 @telebot.on(admin_cmd(pattern="app (.*)"))
 @telebot.on(sudo_cmd(pattern="app (.*)", allow_sudo=True))
@@ -147,6 +149,7 @@ async def apkr(event):
         await event.edit("No result found in search. Please enter **Valid app name**")
     except Exception as err:
         await event.edit("Exception Occured:- " + str(err))
+
 
 CMD_HELP.updae(
     {
