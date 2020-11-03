@@ -324,7 +324,7 @@ def paginate_help(page_number, loaded_plugins, prefix):
     helpable_plugins = sorted(helpable_plugins)
     modules = [
         custom.Button.inline(
-            "{} {}".format(tele, x, tele), data="us_plugin_{}".format(x)
+            "{} {} {}".format(tele, x, tele), data="us_plugin_{}".format(x)
         )
         for x in helpable_plugins
     ]
