@@ -15,7 +15,7 @@ mee = telegraph.create_account(short_name="telebot")
 async def install(event):
     if event.fwd_from:
         return
-    x = await event.eor(event, "Making a list of all plugins...")
+    x = await eor(event, "Making a list of all plugins...")
     cmd = "ls telebot/plugins"
     process = await asyncio.create_subprocess_shell(
         cmd, stdout=asyncio.subprocess.PIPE, stderr=asyncio.subprocess.PIPE
