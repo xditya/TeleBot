@@ -51,7 +51,7 @@ async def _(event):
                 await eor(event, "**Error:** `unblock` @MissRose_Bot `and try again!")
 
 
-CMD_HELP.updae(
+CMD_HELP.update(
     {
         "fedstat": ".fstat <username/userid>\nUse - To check the persons fedban stat in @MissRose_Bot."
     }
