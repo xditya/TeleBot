@@ -19,4 +19,4 @@ pkg upgrade -y
 pkg install python wget -y
 wget https://raw.githubusercontent.com/xditya/TeleBot/master/telesetup.py
 pip install telethon
-python telesetup.py
+python ./resources/telebot-setup.py
