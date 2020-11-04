@@ -17,7 +17,7 @@ async def _(event):
     if event.fwd_from:
         return
     input_str = event.pattern_match.group("target")
-    if input_str = "":
+    if input_str == "":
         await eor(event, "LockTypes -\n➟ bots\n➟ commands\n➟ forward\n➟ url\n➟ msg\n➟ media\n ➟ sticker\n➟ gif\n➟ gamee\n➟ ainline\n ➟ gpoll\n➟ adduser\n➟ cpin\n➟ changeinfo\n\nUse `.lock <locktypes>` to lock it.")
     peer_id = event.chat_id
     if input_str in (("bots", "commands", "email", "forward", "url")):
