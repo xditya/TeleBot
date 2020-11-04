@@ -30,7 +30,6 @@ def get_country_data(country, world):
 
 CMD_HELP.update(
     {
-        "coronavirus":
-        ".coronavirus <country name>\nUse - Get covid status of that country"
+        "coronavirus": ".coronavirus <country name>\nUse - Get covid status of that country"
     }
 )
