@@ -5,8 +5,8 @@ from asyncio import create_subprocess_exec as asyncrunapp
 from asyncio.subprocess import PIPE as asyncPIPE
 from os import remove
 from shutil import which
-from telebot import telever
-from telebot import ALIVE_NAME, CMD_HELP
+
+from telebot import ALIVE_NAME, CMD_HELP, telever
 
 # ================= CONSTANT =================
 DEFAULTUSER = str(ALIVE_NAME) if ALIVE_NAME else "TeleBot"
