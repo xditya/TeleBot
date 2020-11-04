@@ -11,4 +11,4 @@ async def join(e):
         )
 
 CMD_HELP.update({"group":".group\nUse - None."})
-)
+
