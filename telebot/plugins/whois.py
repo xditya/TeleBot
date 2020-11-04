@@ -21,12 +21,14 @@ Get detailed info about any user
 """
 
 import os
+
+from telethon.tl.functions.photos import GetUserPhotosRequest
 from telethon.tl.functions.users import GetFullUserRequest
 from telethon.tl.types import MessageEntityMentionName
-from telethon.tl.functions.photos import GetUserPhotosRequest
 from userbot import CMD_HELP
 
 TMP_DOWNLOAD_DIRECTORY = "./"
+
 
 @telebot.on(admin_cmd(pattern="whois(?: |$)(.*)"))
 async def who(event):
@@ -64,9 +66,7 @@ async def get_user(event):
         previous_message = await event.get_reply_message()
         if previous_message.forward:
             replied_user = await event.client(
-                GetFullUserRequest(
-                    previous_message.forward.sender_id
-                )
+                GetFullUserRequest(previous_message.forward.sender_id)
             )
         else:
             replied_user = await event.client(
@@ -85,24 +85,22 @@ async def get_user(event):
         if event.message.entities is not None:
             probable_user_mention_entity = event.message.entities[0]
 
-            if isinstance(probable_user_mention_entity,
-                          MessageEntityMentionName):
+            if isinstance(probable_user_mention_entity, MessageEntityMentionName):
                 user_id = probable_user_mention_entity.user_id
                 replied_user = await event.client(GetFullUserRequest(user_id))
                 return replied_user
         try:
             user_object = await event.client.get_entity(user)
-            replied_user = await event.client(
-                GetFullUserRequest(user_object.id))
+            replied_user = await event.client(GetFullUserRequest(user_object.id))
         except (TypeError, ValueError) as err:
             await event.edit("**ERROR**\n" + str(err))
             return None
         replied_user_profile_photos = await borg(
-        GetUserPhotosRequest(
-            user_id=replied_user.user.id, offset=42, max_id=0, limit=80
+            GetUserPhotosRequest(
+                user_id=replied_user.user.id, offset=42, max_id=0, limit=80
+            )
         )
-    )
-    
+
     return replied_user
 
 
@@ -116,13 +114,10 @@ async def fetch_info(replied_user, event):
     is_bot = replied_user.user.bot
     restricted = replied_user.user.restricted
     verified = replied_user.user.verified
-    first_name = first_name.replace(
-        "\u2060", "") if first_name else (" ")
-    last_name = last_name.replace(
-        "\u2060", "") if last_name else (" ")
-        
-    username = "@{}".format(username) if username else (
-        "This User has no Username")
+    first_name = first_name.replace("\u2060", "") if first_name else (" ")
+    last_name = last_name.replace("\u2060", "") if last_name else (" ")
+
+    username = "@{}".format(username) if username else ("This User has no Username")
     user_bio = "This User has no About" if not user_bio else user_bio
 
     if user_id != (await event.client.get_me()).id:
@@ -141,11 +136,12 @@ async def fetch_info(replied_user, event):
     caption += f"<b>ID</b>: <code>{user_id}</code> \n"
     caption += f"<b>Bio</b>: \n<code>{user_bio}</code> \n\n"
     caption += f"<b>Permanent Link To Profile</b>: "
-    caption += f"<a href=\"tg://user?id={user_id}\">{first_name}</a>"
+    caption += f'<a href="tg://user?id={user_id}">{first_name}</a>'
     caption += f"\n\n<b>Common Chats with this user</b>: <code>{common_chat} </code>\n"
 
     return caption
 
-CMD_HELP.update({
-    "whois": ".whois <reply/username/userid>\nUse - Get detailed info on that user."
-})
+
+CMD_HELP.update(
+    {"whois": ".whois <reply/username/userid>\nUse - Get detailed info on that user."}
+)
