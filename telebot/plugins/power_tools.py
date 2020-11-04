@@ -5,13 +5,12 @@ Available Commands:
 # This Source Code Form is subject to the terms of the GNU
 # General Public License, v.3.0. If a copy of the GPL was not distributed with this
 # file, You can obtain one at https://www.gnu.org/licenses/gpl-3.0.en.html
-import asyncio
 import os
 import sys
 
-from telebot import CMD_HNDLR
+from telebot import CMD_HELP, CMD_HNDLR
 from telebot.utils import admin_cmd
-from telebot import CMD_HELP
+
 
 @telebot.on(admin_cmd(pattern="restart"))
 async def _(event):
@@ -45,9 +44,10 @@ async def _(event):
     )
     await borg.disconnect()
 
+
 CMD_HELP.update(
     {
-        "power_tools":".restart\nUse - Restart the bot.\
+        "power_tools": ".restart\nUse - Restart the bot.\
         \n\n.shutdown\nUse - shutdown the bot."
     }
 )

@@ -1,7 +1,9 @@
 from telethon import events
 from telethon.errors.rpcerrorlist import YouBlockedUserError
 from uniborg.util import admin_cmd
+
 from telebot import CMD_HELP
+
 
 @telebot.on(admin_cmd(pattern="mask ?(.*)"))
 @telebot.on(sudo_cmd(pattern="mask ?(.*)", allow_sudo=True))
@@ -39,4 +41,5 @@ async def _(event):
         else:
             await borg.send_file(event.chat_id, response.message.media)
 
-CMD_HELP.update({"mask":".mask <reply to pic>"})
+
+CMD_HELP.update({"mask": ".mask <reply to pic>"})

@@ -1,7 +1,9 @@
 """Get information about an user on GitHub
 Syntax: .github USERNAME"""
 import requests
+
 from telebot import CMD_HELP
+
 
 @borg.on(admin_cmd(pattern="github (.*)"))
 @borg.on(sudo_cmd(pattern="github (.*)", allow_sudo=True))
@@ -42,4 +44,7 @@ Profile Created: {}""".format(
     else:
         await eor(event, "`{}`: {}".format(input_str, r.text))
 
-CMD_HELP.update({"github":".github <username>\nUse - Get info of that user's github profile."})
+
+CMD_HELP.update(
+    {"github": ".github <username>\nUse - Get info of that user's github profile."}
+)

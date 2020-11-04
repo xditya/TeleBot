@@ -4,6 +4,7 @@ import os
 from datetime import datetime
 
 import requests
+
 from telebot import CMD_HELP
 from telebot.utils import admin_cmd
 
@@ -63,8 +64,7 @@ async def _(event):
     else:
         await eor(event, "Dogged to [dogbin]({}) in {} seconds".format(url, ms))
 
+
 CMD_HELP.update(
-    {
-        "pastebin":".paste <long text/file/reply>\nUse - Paste it to pastebin."
-    }
+    {"pastebin": ".paste <long text/file/reply>\nUse - Paste it to pastebin."}
 )

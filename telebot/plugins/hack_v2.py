@@ -5,8 +5,9 @@
 
 import asyncio
 
-from telebot.utils import admin_cmd
 from telebot import CMD_HELP
+from telebot.utils import admin_cmd
+
 
 @telebot.on(admin_cmd(pattern=r"(.*)", outgoing=True))
 async def _(event):
@@ -45,4 +46,5 @@ async def _(event):
 
             await event.edit(animation_chars[i % 12])
 
-CMD_HELP.update({"hack_v2":".heck\nUse - Animation plugin to spam recents of a chat."})
+
+CMD_HELP.update({"hack_v2": ".heck\nUse - Animation plugin to spam recents of a chat."})

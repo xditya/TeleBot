@@ -17,12 +17,12 @@
 import asyncio
 import io
 import os
-from telebot import CMD_HELP
+
 from telethon import events, functions
 from telethon.tl.functions.users import GetFullUserRequest
 
 import telebot.plugins.sql_helper.pmpermit_sql as pmpermit_sql
-from telebot import ALIVE_NAME, CUSTOM_PMPERMIT, bot
+from telebot import ALIVE_NAME, CMD_HELP, CUSTOM_PMPERMIT, bot
 from telebot.utils import admin_cmd
 
 PMPERMIT_PIC = os.environ.get("PMPERMIT_PIC", None)
@@ -291,10 +291,10 @@ if NEEDIT == "on":
         if not pmpermit_sql.is_approved(chat_id):
             await borg(functions.contacts.BlockRequest(chat_id))
 
+
 CMD_HELP.update(
     {
-        "pmsecurity":
-        ".approve/.a\nUse - Approve PM\
+        "pmsecurity": ".approve/.a\nUse - Approve PM\
         \n\n.disapprove/.da\nUse - DisApprove PM\
         \n\n.listapproved\nUse - Get all approved PMs.\
         \n\nSet var PMPERMIT_PIC for custom PMPic, CUSTOM_PMPERMIT for custom text, PMSECURITY <on/off> to enable/disable, INSTANT_BLOCK <on/off>.\

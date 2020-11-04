@@ -5,6 +5,7 @@ import os
 from datetime import datetime
 
 import requests
+
 from telebot import CMD_HELP
 from telebot.utils import admin_cmd
 
@@ -64,8 +65,5 @@ async def _(event):
     else:
         await eor(event, "code is pasted to {} in {} seconds".format(url, ms))
 
-CMD_HELP.update(
-    {
-        "iffuci":".iffuci <text>\nUse - Paste the text to iffuci.tk"
-    }
-)
+
+CMD_HELP.update({"iffuci": ".iffuci <text>\nUse - Paste the text to iffuci.tk"})

@@ -2,8 +2,9 @@
 Syntax: .json"""
 import io
 
-from telebot.utils import admin_cmd
 from telebot import CMD_HELP
+from telebot.utils import admin_cmd
+
 
 @telebot.on(admin_cmd(pattern="json"))
 @telebot.on(sudo_cmd(pattern="json", allow_sudo=True))
@@ -33,8 +34,5 @@ async def _(event):
     else:
         await eor(event, "`{}`".format(the_real_message))
 
-CMD_HELP.update(
-    {
-        "json":".json <reply>\nUse - Get json encoding of the mssg."
-    }
-)
+
+CMD_HELP.update({"json": ".json <reply>\nUse - Get json encoding of the mssg."})

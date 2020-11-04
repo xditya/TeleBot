@@ -19,7 +19,8 @@ API_HASH = input("Enter API HASH here: ")
 
 with TelegramClient(StringSession(), APP_ID, API_HASH) as client:
     tele = client.send_message("me", session_str)
-    tele.reply("The above is the `STRING_SESSION` for your current session.\n@TeleBotSupport")
+    tele.reply(
+        "The above is the `STRING_SESSION` for your current session.\n@TeleBotSupport")
     print("")
     print("")
     print("Below is the STRING_SESSION. You can also find it in your Telegram Saved Messages.")

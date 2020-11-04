@@ -8,8 +8,10 @@ usage:- .commit reply_to_any_plugin //can be any type of file too. but for plugi
 import os
 import time
 from datetime import datetime
-from telebot import CMD_HELP
+
 from github import Github
+
+from telebot import CMD_HELP
 
 GIT_TEMP_DIR = "./userbot/temp/"
 
@@ -87,8 +89,9 @@ async def git_commit(file_name, mone):
     else:
         return await mone.edit("`Committed Suicide`")
 
+
 CMD_HELP.update(
     {
-        "gitcommit":".commit <reply to file>\nUse - Commit the file directly to your git repo/fork.\n"
+        "gitcommit": ".commit <reply to file>\nUse - Commit the file directly to your git repo/fork.\n"
     }
 )

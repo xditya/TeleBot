@@ -5,9 +5,10 @@ DB Options: bots, commands, email, forward, url"""
 
 from telethon import events, functions, types
 
+from telebot import CMD_HELP
 from telebot.plugins.sql_helper.locks_sql import get_locks, is_locked, update_lock
 from telebot.utils import admin_cmd
-from telebot import CMD_HELP
+
 
 @telebot.on(admin_cmd(pattern=r"lock( (?P<target>\S+)|$)"))
 @telebot.on(sudo_cmd(pattern=r"lock( (?P<target>\S+)|$)", allow_sudo=True))
@@ -18,7 +19,10 @@ async def _(event):
         return
     input_str = event.pattern_match.group("target")
     if input_str == "":
-        await eor(event, "LockTypes -\n➟ bots\n➟ commands\n➟ forward\n➟ url\n➟ msg\n➟ media\n ➟ sticker\n➟ gif\n➟ gamee\n➟ ainline\n ➟ gpoll\n➟ adduser\n➟ cpin\n➟ changeinfo\n\nUse `.lock <locktypes>` to lock it.")
+        await eor(
+            event,
+            "LockTypes -\n➟ bots\n➟ commands\n➟ forward\n➟ url\n➟ msg\n➟ media\n ➟ sticker\n➟ gif\n➟ gamee\n➟ ainline\n ➟ gpoll\n➟ adduser\n➟ cpin\n➟ changeinfo\n\nUse `.lock <locktypes>` to lock it.",
+        )
     peer_id = event.chat_id
     if input_str in (("bots", "commands", "email", "forward", "url")):
         update_lock(peer_id, input_str, True)
@@ -233,9 +237,10 @@ async def _(event):
                     )
                 )
 
+
 CMD_HELP.update(
     {
-        "locks":".lock\nUse - Get all lock types.\
+        "locks": ".lock\nUse - Get all lock types.\
         \n\n.unlock\n Use - Unlock.\
         \n\n.currentenabledlocks\nUse - Active Locks."
     }

@@ -4,6 +4,7 @@ import asyncio
 
 from telethon.tl.types import InputMediaUploadedPhoto
 from uniborg.util import admin_cmd
+
 from telebot import CMD_HELP
 from telebot.plugins.sql_helper.ghdb_sql import (
     add_channel,
@@ -299,9 +300,10 @@ async def search(event):
         username = "@" + username
     await eor(event, f"Name : {name}\nUsername: {username}")
 
+
 CMD_HELP.update(
     {
-        "giveawayhelper":".add\nUse - Add the channel/group to your database.\
+        "giveawayhelper": ".add\nUse - Add the channel/group to your database.\
         \n\n.rm <channel/group id>\nUse - Remove the channel/group from database.\
         \n\n.broadcast <reply to message>\nUse - Send the message to all channels/groups in the db.\
         \n\n.forward <reply to polls/stickers>\nUse - Forwards the poll/sticker to all channels/groups in db."

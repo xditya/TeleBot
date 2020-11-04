@@ -1,8 +1,9 @@
 import asyncio
 
+from telebot import CMD_HELP
 from telebot.plugins.sql_helper.mute_sql import is_muted, mute, unmute
 from telebot.utils import admin_cmd
-from telebot import CMD_HELP
+
 
 @telebot.on(admin_cmd(outgoing=True, pattern=r"mute ?(\d+)?"))
 @telebot.on(sudo_cmd(allow_sudo=True, pattern=r"mute ?(\d+)?"))
@@ -89,9 +90,10 @@ async def watcher(event):
     if is_muted(event.sender_id, event.chat_id):
         await event.delete()
 
+
 CMD_HELP.update(
     {
-        "mute":".mute <reply to user>\nUse - Mute the user.\
+        "mute": ".mute <reply to user>\nUse - Mute the user.\
         \n\n.unmute <reply to user>\nUse - UnMute the user."
     }
 )

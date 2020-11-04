@@ -5,6 +5,7 @@
 import logging
 
 from uniborg.util import admin_cmd
+
 from telebot import CMD_HELP
 
 logger = logging.getLogger(__name__)
@@ -47,8 +48,9 @@ if 1 == 1:
                 await eor(event, "`That user has no photos 🙄`")
                 return
 
+
 CMD_HELP.update(
     {
-        "ppgrab":".poto <a number (optional)> <reply to user>\nUse - get the persons profile pic(s)."
+        "ppgrab": ".poto <a number (optional)> <reply to user>\nUse - get the persons profile pic(s)."
     }
 )

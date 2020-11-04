@@ -4,9 +4,8 @@
 #
 from telethon.tl import functions
 
-from telebot import ALIVE_NAME
+from telebot import ALIVE_NAME, CMD_HELP
 from telebot.utils import admin_cmd
-from telebot import CMD_HELP
 
 TELENAME = ALIVE_NAME if ALIVE_NAME else "TeleBot"
 
@@ -53,7 +52,7 @@ async def _(event):
 
 CMD_HELP.update(
     {
-        "mood":".mood <text>\nUse - Sets name to [text] ALIVE_NAME\
+        "mood": ".mood <text>\nUse - Sets name to [text] ALIVE_NAME\
         .resetmood - revert changes"
     }
 )

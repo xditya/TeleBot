@@ -9,11 +9,11 @@
 import asyncio
 import math
 import os
-import requests
+
 import heroku3
 import requests
-from telebot import CMD_HELP
-from telebot import CMD_HNDLR
+
+from telebot import CMD_HELP, CMD_HNDLR
 
 Heroku = heroku3.from_key(Var.HEROKU_API_KEY)
 heroku_api = "https://api.heroku.com"
@@ -215,10 +215,10 @@ async def _(givelogs):
     await givelogs.delete()
     return os.remove("logs-telebot.txt")
 
+
 CMD_HELP.update(
     {
-        "heroku":
-        ".set var <name> <value>\nUse - Set the variable with the value given.\
+        "heroku": ".set var <name> <value>\nUse - Set the variable with the value given.\
         \n\n.get var <name>\nUse - Get the value of that variable.\
         \n\n.usage\nUse - See your heroku dyno usage.\
         \n\n.logs\nUse - Get your heroku logs."

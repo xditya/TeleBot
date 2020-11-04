@@ -7,6 +7,7 @@
 
 import asyncio
 import random
+
 from telebot import CMD_HELP
 from telebot.utils import admin_cmd
 
@@ -264,8 +265,5 @@ async def _(event):
             link_preview=True,
         )
 
-CMD_HELP.update(
-    {
-        "got_memes":".gotm\nUse - Get random memes."
-    }
-)
+
+CMD_HELP.update({"got_memes": ".gotm\nUse - Get random memes."})
