@@ -1,5 +1,5 @@
 #!/bin/bash
-ls
+clear
 echo "
 
  _____    _      _           _   
