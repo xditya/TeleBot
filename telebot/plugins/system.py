@@ -5,7 +5,7 @@ from asyncio import create_subprocess_exec as asyncrunapp
 from asyncio.subprocess import PIPE as asyncPIPE
 from os import remove
 from shutil import which
-
+from telebot import telever
 from telebot import ALIVE_NAME, CMD_HELP
 
 # ================= CONSTANT =================
@@ -65,7 +65,7 @@ async def bot_ver(event):
             )
         else:
             await event.edit(
-                "Shame that you don't have git, you're running - 'v1.beta.4' anyway!"
+                f"Shame that you don't have git, you're running - {telever} anyway!"
             )
 
 
@@ -119,7 +119,7 @@ async def pipcheck(pip):
 
 CMD_HELP.update(
     {
-        "sysd": "➟ `.sysd`" "\nUsage: Shows system information using neofetch.",
+        "system": "➟ `.sysd`" "\nUsage: Shows system information using neofetch.",
         "version": "➟ `.version`" "\nUsage: Shows the userbot version.",
         "pip": "➟ `.pip <module(s)>`" "\nUsage: Does a search of pip modules(s).",
     }
