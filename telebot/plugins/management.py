@@ -233,7 +233,7 @@ async def ban_user(chat_id, i, rights):
 
 CMD_HELP.update(
     {
-        "TeleBot": ".unbanall\
+        "management": ".unbanall\
      \n.skick option\
      \nAvailable Options: \
      \nnostat - userstatusempty\

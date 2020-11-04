@@ -7,7 +7,7 @@ import os
 import textwrap
 
 from PIL import Image, ImageDraw, ImageFont
-
+from telebot import CMD_HELP
 from telebot.utils import admin_cmd
 
 
@@ -143,3 +143,9 @@ async def drawText(image_path, text):
     webp_file = os.path.join(Var.TEMP_DOWNLOAD_DIRECTORY, image_name)
     img.save(webp_file, "webp")
     return webp_file
+
+CMD_HELP.update(
+    {
+        "memeify":".mmf <text on top> ; <text on bottom> (reply to pic/sticker)\nUse - Memeify the pic/sticker."
+    }
+)

@@ -3,7 +3,7 @@ Syntax: .cpin [LOUD]"""
 from telethon.tl import functions
 
 from telebot.utils import admin_cmd
-
+from telebot import CMD_HELP
 
 @telebot.on(admin_cmd(pattern="cpin ?(.*)"))
 @telebot.on(sudo_cmd(pattern="cpin ?(.*)", allow_sudo=True))
@@ -28,3 +28,9 @@ async def _(event):
             await event.delete()
     else:
         await eor(event, "Reply to a message to pin the message in this Channel.")
+
+CMD_HELP.update(
+    {
+        "pin_message":".cpin <reply to mssg>\nUse - Pin the message."
+    }
+)

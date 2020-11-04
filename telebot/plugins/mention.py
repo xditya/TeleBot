@@ -3,7 +3,7 @@
 # (c) @INF1N17Y
 
 from uniborg.util import admin_cmd
-
+from telebot import CMD_HELP
 
 @telebot.on(admin_cmd(pattern=r"mention (.*)"))
 @telebot.on(sudo_cmd(pattern=r"mention (.*)", allow_sudo=True))
@@ -22,3 +22,9 @@ async def _(event):
     user_id = replied_user
     caption = """<a href='tg://user?id={}'>{}</a>""".format(user_id, input_str)
     await eor(event, caption, parse_mode="HTML")
+
+CMD_HELP.update(
+    {
+        "mention":".mention <word> (reply to user)\nUse - Mention that user by that word."
+    }
+)

@@ -3,7 +3,7 @@ import asyncio
 from coffeehouse.api import API
 from coffeehouse.lydia import LydiaAI
 from telethon import events
-
+from telebot import CMD_HELP
 from telebot.utils import admin_cmd
 
 # Non-SQL Mode
@@ -93,3 +93,11 @@ async def user(event):
             await event.reply(text_rep)
     except (KeyError, TypeError):
         return
+
+CMD_HELP.update(
+    {
+        "lydia":".repcf <reply to user>\nUse - Reply to that message with AI.\
+        \n\n.addcf <reply to user>\nUse - Activate AI on the user.\
+        \n\n.remcf <reply to user>\nUse - DeActivate AI on the user."
+    }
+)

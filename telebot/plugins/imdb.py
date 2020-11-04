@@ -11,6 +11,7 @@ import re
 import bs4
 import requests
 from uniborg.util import admin_cmd
+from telebot import CMD_HELP
 
 langi = "en"
 
@@ -112,3 +113,5 @@ async def imdb(e):
         )
     except IndexError:
         await eor(event, "Plox enter **Valid movie name** kthx")
+
+CMD_HELP.update({"imdb":"imdb <movie name>\nUse - Get imdb info about that movie."})

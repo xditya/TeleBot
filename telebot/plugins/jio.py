@@ -5,7 +5,7 @@
 import asyncio
 
 from uniborg.util import admin_cmd
-
+from telebot import CMD_HELP
 
 @telebot.on(admin_cmd(pattern=r"jio"))
 async def _(event):
@@ -51,3 +51,9 @@ async def _(event):
         await asyncio.sleep(animation_interval)
 
         await event.edit(animation_chars[i % 19])
+
+CMD_HELP.update(
+    {
+        "jio":".jio\nUse - Animation plugin."
+    }
+)

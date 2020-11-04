@@ -8,7 +8,7 @@ from telethon.tl.types import (
     ChannelParticipantsBots,
 )
 from telethon.utils import pack_bot_file_id
-
+from telebot import CMD_HELP
 from telebot.utils import admin_cmd
 
 
@@ -124,3 +124,12 @@ async def _(event):
     except Exception as e:
         mentions += " " + str(e) + "\n"
     await eor(event, mentions)
+
+CMD_HELP.update(
+    {
+        "get_infos":
+        ".get_admin\nUse - To get admins in a chat.\
+        \n\n.get_id\nUse - Get chat id.\
+        \n\n.get_bot\nUse - Get all bots in a chat."
+    }
+)

@@ -11,7 +11,7 @@ from geopy.geocoders import Nominatim
 from telethon.tl import types
 
 from telebot.utils import admin_cmd
-
+from telebot import CMD_HELP
 
 @telebot.on(admin_cmd(pattern="gps ?(.*)"))
 @telebot.on(sudo_cmd(pattern="gps ?(.*)", allow_sudo=True))
@@ -40,3 +40,5 @@ async def gps(event):
         await event.delete()
     else:
         await eor(event, "Sorry, I coudn't find it")
+
+CMD_HELP.update({"gps":".gps <location>\nUse - Locate the place in the map."})

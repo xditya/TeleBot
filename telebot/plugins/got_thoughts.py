@@ -9,7 +9,7 @@ command .gott
 
 import asyncio
 import random
-
+from telebot import CMD_HELP
 from telebot.utils import admin_cmd
 
 
@@ -228,3 +228,5 @@ async def _(event):
     if x == 40:
 
         await eor(event, '`"I wish I was the monster you think I am!"`')
+
+CMD_HELP.update({"got_thoughts":".gott\nUse - Get random thoughts."})
