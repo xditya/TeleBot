@@ -1,6 +1,16 @@
+#!/bin/bash
+ls
+echo "
+
+ _____    _      _           _   
+|_   _|__| | ___| |__   ___ | |_ 
+  | |/ _ \ |/ _ \ '_ \ / _ \| __|
+  | |  __/ |  __/ |_) | (_) | |_ 
+  |_|\___|_|\___|_.__/ \___/ \__|
+
+"
 # Termux session string generator for TeleBot
 echo Termux Session Genenrator - TeleBot
-#!/bin/bash
 echo Starting dependency installation in 5 seconds...
 sleep 5
 apt-get update
