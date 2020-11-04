@@ -39,4 +39,4 @@ async def _(event):
         else:
             await borg.send_file(event.chat_id, response.message.media)
 
-CMD_HELP.update("mask":".mask <reply to pic>")
+CMD_HELP.update({"mask":".mask <reply to pic>"})
