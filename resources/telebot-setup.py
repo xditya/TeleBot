@@ -18,8 +18,7 @@ APP_ID = int(input("Enter APP ID here: "))
 API_HASH = input("Enter API HASH here: ")
 
 with TelegramClient(StringSession(), APP_ID, API_HASH) as client:
-    session_str = client.session.save()
-    tele = client.send_message("me", session_str)
+    tele = client.send_message("me", client.session.save())
     tele.reply(
         "The above is the `STRING_SESSION` for your current session.\n@TeleBotSupport")
     print("")
