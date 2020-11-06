@@ -14,10 +14,10 @@
 #    You should have received a copy of the GNU Affero General Public License
 #    along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
+import asyncio
 import html
 import os
 import re
-import asyncio
 from math import ceil
 
 from telethon import Button, custom, events, functions
