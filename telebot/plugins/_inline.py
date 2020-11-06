@@ -352,8 +352,6 @@ def paginate_help(page_number, loaded_plugins, prefix):
                     ),
                 )
             ]
-            + [(custom.Button.inline("Stats", data="statcheck"))]
-        )
     return pairs
 
 
