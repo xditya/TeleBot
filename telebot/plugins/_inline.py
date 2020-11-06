@@ -282,7 +282,7 @@ if Var.TG_BOT_USER_NAME_BF_HER is not None and tgbot is not None:
         if event.query.user_id == bot.uid:
             plugin_name = event.data_match.group(1).decode("UTF-8")
             help_string = ""
-            help_string += f"Commands Available in {plugin_name}\n"
+            help_string += f"Commands Available in {plugin_name} - \n"
             try:
                 if plugin_name in CMD_HELP:
                     for i in CMD_HELP[plugin_name]:
@@ -304,12 +304,12 @@ if Var.TG_BOT_USER_NAME_BF_HER is not None and tgbot is not None:
                 © Telebot".format(
                 plugin_name
             )
-            if len(reply_pop_up_alert) >= 140:
+            if len(help_string) >= 140:
                 oops = "List too long!\nCheck your saved messages!"
                 await event.answer(oops, cache_time=0, alert=True)
-                reply_pop_up_alert += "\n\nThis will be auto-deleted in 1 minute!"
+                help_string += "\n\nThis will be auto-deleted in 1 minute!"
                 if bot is not None and event.query.user_id == bot.uid:
-                    ok = await bot.send_message("me", reply_pop_up_alert)
+                    ok = await bot.send_message("me", help_string)
                     await asyncio.sleep(60)
                     await ok.delete()
             else:
