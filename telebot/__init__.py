@@ -19,6 +19,8 @@ else:
 
 StartTime = time.time()
 telever = "4.7"
+ALIVE_NAME = telebot.me.first_name
+OWNER_ID = telebot.me.id
 
 CMD_LIST = {}
 CMD_HELP = {}
@@ -104,9 +106,6 @@ if bool(ENV):
 
     # Youtube API key
     YOUTUBE_API_KEY = os.environ.get("YOUTUBE_API_KEY", None)
-
-    # Default .alive name
-    ALIVE_NAME = os.environ.get("ALIVE_NAME", None)
 
     # for autopic
     AUTOPIC_TEXT = os.environ.get(
