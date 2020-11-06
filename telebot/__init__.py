@@ -130,7 +130,7 @@ if bool(ENV):
     # PMPERMIT
     COUNT_MSG = 0
     COUNT_PM = {}
-   
+
     # Last.fm Module
     BIO_PREFIX = os.environ.get("BIO_PREFIX", None)
     DEFAULT_BIO = os.environ.get("DEFAULT_BIO", None)
