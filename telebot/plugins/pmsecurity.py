@@ -88,9 +88,10 @@ async def you_dm_niqq(event):
                 chat = event.chat_id
                 logit = f"#Auto-Approved\n[User]({chat}): Approved"
                 try:
-                    rko = await borg.send_message(PRIVATE_GROUP_ID, logit)
-                except:
+                    await borg.send_message(PRIVATE_GROUP_ID, logit)
+                except BaseException:
                     return
+
 
 @telebot.on(admin_cmd(pattern="block ?(.*)"))
 async def approve_p_m(event):
