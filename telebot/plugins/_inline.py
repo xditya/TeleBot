@@ -306,7 +306,7 @@ if Var.TG_BOT_USER_NAME_BF_HER is not None and tgbot is not None:
             if len(reply_pop_up_alert) >= 140:
                 oops = "List too long!\nCheck your saved messages!"
                 await event.answer(oops, cache_time=0, alert=True)
-                reply_pop_up_alert += "\n\nThis will be auto-deleted in 1 minute!")
+                reply_pop_up_alert += "\n\nThis will be auto-deleted in 1 minute!"
                 if bot is not None and event.query.user_id == bot.uid:
                     ok = await bot.send_message("me", reply_pop_up_alert)
                     await asyncio.sleep(60)
