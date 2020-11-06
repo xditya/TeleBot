@@ -17,11 +17,8 @@ else:
     session_name = "startup"
     bot = TelegramClient(session_name, Var.APP_ID, Var.API_HASH)
 
-telebot = bot
 StartTime = time.time()
 telever = "4.7"
-ALIVE_NAME = telebot.me.first_name
-OWNER_ID = telebot.me.id
 
 CMD_LIST = {}
 CMD_HELP = {}
@@ -133,7 +130,7 @@ if bool(ENV):
     # PMPERMIT
     COUNT_MSG = 0
     COUNT_PM = {}
-
+   
     # Last.fm Module
     BIO_PREFIX = os.environ.get("BIO_PREFIX", None)
     DEFAULT_BIO = os.environ.get("DEFAULT_BIO", None)
