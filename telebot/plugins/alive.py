@@ -8,13 +8,10 @@ from io import BytesIO
 import requests
 from PIL import Image
 
-from telebot import CMD_HELP, telever
+from telebot import CMD_HELP, telever, ALIVE_NAME
 from telebot.__init__ import StartTime
 from telebot.telebotConfig import Config
 from telebot.utils import admin_cmd, sudo_cmd
-
-temp = telebot.me
-ALIVE_NAME = temp.first_name
 
 ALV_PIC = os.environ.get("ALIVE_PIC", None)
 
