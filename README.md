@@ -12,6 +12,7 @@ Click the below button to watch the video tutorial on deploying
 <a href="https://youtu.be/XmvdDHiIDb4"><img src="https://img.shields.io/badge/How%20To%20Deploy-OLD-blue.svg?logo=Youtube"></a>
 <a href="https://youtu.be/XmvdDHiIDb4"><img src="https://img.shields.io/youtube/views/XmvdDHiIDb4?style=social">
     
+    
 ## Documentation
 For passionate readers 😂 the documentation can be found [here](https://xditya.gitbook.io/telebot/)
 
