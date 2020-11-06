@@ -12,6 +12,9 @@ Click the below button to watch the video tutorial on deploying
 <a href="https://youtu.be/XmvdDHiIDb4"><img src="https://img.shields.io/badge/How%20To%20Deploy-OLD-blue.svg?logo=Youtube"></a>
 <a href="https://youtu.be/XmvdDHiIDb4"><img src="https://img.shields.io/youtube/views/XmvdDHiIDb4?style=social">
     
+## Documentation
+For passionate readers 😂 the documentation can be found [here](https://xditya.gitbook.io/telebot/)
+
 ## The Easier Way to install
 
 [![Deploy To Heroku](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/xditya/TeleBot)
