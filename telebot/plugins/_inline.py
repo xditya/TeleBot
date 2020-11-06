@@ -339,25 +339,21 @@ def paginate_help(page_number, loaded_plugins, prefix):
     max_num_pages = ceil(len(pairs) / number_of_rows)
     modulo_page = page_number % max_num_pages
     if len(pairs) > number_of_rows:
-        pairs = pairs[
-            modulo_page * number_of_rows : number_of_rows * (modulo_page + 1)
-        ] + [
-            (
-                custom.Button.inline(
-                    "⏮️ Previous", data="{}_prev({})".format(prefix, modulo_page)
-                ),
-                custom.Button.inline("Close", data="close"),
-                custom.Button.inline(
-                    "Next ⏭️", data="{}_next({})".format(prefix, modulo_page)
-                ),
-            )
-        ] + [
-            (
-                custom.Button.inline(
-                    "Stats", data="statcheck"
+        pairs = (
+            pairs[modulo_page * number_of_rows : number_of_rows * (modulo_page + 1)]
+            + [
+                (
+                    custom.Button.inline(
+                        "⏮️ Previous", data="{}_prev({})".format(prefix, modulo_page)
+                    ),
+                    custom.Button.inline("Close", data="close"),
+                    custom.Button.inline(
+                        "Next ⏭️", data="{}_next({})".format(prefix, modulo_page)
+                    ),
                 )
-            )
-        ]
+            ]
+            + [(custom.Button.inline("Stats", data="statcheck"))]
+        )
     return pairs
 
 

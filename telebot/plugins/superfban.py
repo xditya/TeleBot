@@ -239,8 +239,7 @@ async def _(event):
 
 CMD_HELP.update(
     {
-        "superban":
-        ".superfban <username/userid> <reason>\
+        "superban": ".superfban <username/userid> <reason>\
         \n**Usage**: Mass-Ban in all feds you are admin in.\
         \nSet `EXCLUDE_FED fedid1|fedid2` in heroku vars to exclude those feds.\
         \nSet var `FBAN_GROUP_ID` ti the group with rose, where you want FBan to take place.\
