@@ -16,7 +16,7 @@
 
 import asyncio
 
-from telebot.utils import admin_cmd
+from telebot import CMD_HELP
 
 # By @HeisenbergTheDanger, @its_xditya
 
