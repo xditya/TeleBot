@@ -92,8 +92,8 @@ if Var.TG_BOT_USER_NAME_BF_HER is not None and tgbot is not None:
                 text=TELEBT,
                 buttons=[
                     [
-                        custom.Button.inline("To Request Something 😁", data="req"),
-                        custom.Button.inline("To Get Help 🆘", data="plshelpme"),
+                        custom.Button.inline("Request Something 😁", data="req"),
+                        custom.Button.inline("Get Help 🆘", data="plshelpme"),
                     ],
                     [
                         custom.Button.inline("Random Chat 💭", data="chat"),
@@ -303,11 +303,16 @@ if Var.TG_BOT_USER_NAME_BF_HER is not None and tgbot is not None:
                 © Telebot".format(
                 plugin_name
             )
-            try:
+            if len(reply_pop_up_alert) >= 140:
+                oops = "List too long!\nCheck your saved messages!"
+                await event.answer(oops, cache_time=0, alert=True)
+                reply_pop_up_alert += "\n\nThis will be auto-deleted in 1 minute!")
+                if bot is not None and event.query.user_id == bot.uid:
+                    ok = await bot.send_message("me", reply_pop_up_alert)
+                    await asyncio.sleep(60)
+                    await ok.delete()
+            else:
                 await event.answer(reply_pop_up_alert, cache_time=0, alert=True)
-            except BaseException:
-                halps = "Do .help {} to get the list of commands.".format(plugin_name)
-                await event.answer(halps, cache_time=0, alert=True)
         else:
             reply_pop_up_alert = "Please get your own Userbot, and don't use mine!"
             await event.answer(reply_pop_up_alert, cache_time=0, alert=True)
@@ -346,7 +351,12 @@ def paginate_help(page_number, loaded_plugins, prefix):
                     "Next ⏭️", data="{}_next({})".format(prefix, modulo_page)
                 ),
             )
-        ]
+        ] + [
+            (
+                custom.Button.inline(
+                    "Stats", data="statcheck"
+            )
+                ]
     return pairs
 
 
