@@ -22,7 +22,7 @@ from telethon.tl.functions.photos import GetUserPhotosRequest
 from telethon.tl.functions.users import GetFullUserRequest
 from telethon.tl.types import MessageEntityMentionName
 from telethon.utils import get_input_location
-
+from telebot import bot
 from telebot import ALIVE_NAME, telever
 from telebot.__init__ import StartTime
 from telebot.telebotConfig import Config, Var
@@ -64,3 +64,6 @@ tele += f"Sudo: {sudo}\n"
 tele += f"PMSecurity: {pm}\n"
 tele += f"\nVisit @TeleBotSupport for assistance.\n"
 telestats = f"{tele}"
+
+ALIVE_NAME = bot.me.first_name
+OWNER_ID = bot.me.id
