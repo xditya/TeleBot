@@ -17,6 +17,7 @@
 import html
 import os
 import re
+import asyncio
 from math import ceil
 
 from telethon import Button, custom, events, functions
