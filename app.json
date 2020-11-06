@@ -109,11 +109,6 @@
    "value": "",
    "required": true
   },
-  "ALIVE_NAME": {
-   "description": "Your Telegram Username. ",
-   "value": "",
-   "required": false
-  },  
   "MAX_SPAM": {
    "description": "Number of messages one can send in your PM before being approved. By default, it is 3.",
    "value": "3",
