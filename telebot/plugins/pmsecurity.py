@@ -90,7 +90,7 @@ async def you_dm_niqq(event):
                 try:
                     await borg.send_message(PRIVATE_GROUP_ID, logit)
                 except BaseException:
-                    return
+                    pass
 
 
 @telebot.on(admin_cmd(pattern="block ?(.*)"))
