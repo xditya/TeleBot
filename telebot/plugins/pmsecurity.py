@@ -86,7 +86,7 @@ async def you_dm_niqq(event):
             if chat.id not in PM_WARNS:
                 pmpermit_sql.approve(chat.id, "outgoing")
                 chatx = event.chat_id
-                logit = f"#Auto-Approved\n[User]({chatx}): Approved"
+                logit = "#Auto-Approved\n[{}](tg://user?id={})".format(chat.first_name, chat.id)
                 try:
                     await borg.send_message(PRIVATE_GROUP_ID, logit)
                 except BaseException:
