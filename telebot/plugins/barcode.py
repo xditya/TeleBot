@@ -11,6 +11,8 @@ import barcode
 from barcode.writer import ImageWriter
 from uniborg.util import admin_cmd
 
+from telebot import CMD_HELP
+
 
 @telebot.on(admin_cmd(pattern="barcode ?(.*)"))
 @telebot.on(sudo_cmd(pattern="barcode ?(.*)"))
@@ -62,3 +64,8 @@ async def _(event):
     await eor(event, "Created BarCode in {} seconds".format(ms))
     await asyncio.sleep(5)
     await event.delete()
+
+
+CMD_HELP.update(
+    {"barcode": ".barcode <text>\nUse - To make a barcode containing that text."}
+)

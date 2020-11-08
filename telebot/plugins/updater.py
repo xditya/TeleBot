@@ -27,6 +27,8 @@ HEROKU_APP_NAME = Var.HEROKU_APP_NAME
 GIT_REPO_NAME = "TeleBot"
 UPSTREAM_REPO_URL = "https://github.com/xditya/TeleBot"
 
+xxxx = CMD_HNDLR if CMD_HNDLR else "."
+
 
 async def gen_chlog(repo, diff):
     ch_log = ""
@@ -75,7 +77,7 @@ async def upstream(ups):
             await ups.edit(
                 f"**Unfortunately, the directory {error} does not seem to be a git repository.\
                 \nOr Maybe it just needs a sync verification with {GIT_REPO_NAME}\
-            \nBut we can fix that by force updating the userbot using** `{CMD_HNDLR}update now`."
+            \nBut we can fix that by force updating the userbot using** `{xxxx}update now`."
             )
             return
         repo = Repo.init()
@@ -133,7 +135,7 @@ async def upstream(ups):
             remove("output.txt")
         else:
             await ups.edit(changelog_str)
-        await ups.respond(f"Do `{CMD_HNDLR}update now` to update")
+        await ups.respond(f"Do `{xxxx}update now` to update")
         return
 
     if force_updateme:

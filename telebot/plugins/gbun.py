@@ -4,6 +4,7 @@ import asyncio
 from telethon.tl.functions.users import GetFullUserRequest
 from telethon.tl.types import ChannelParticipantsAdmins
 
+from telebot import CMD_HELP
 from telebot.utils import admin_cmd
 
 
@@ -58,3 +59,6 @@ async def gbun(event):
         )
         await event.reply(mention)
     await event.delete()
+
+
+CMD_HELP.update({"gbun": ".gbun <reply to user>\nUse - Fake Gban."})

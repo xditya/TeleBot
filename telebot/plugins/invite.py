@@ -3,6 +3,7 @@ Syntax: .invite <User(s)>"""
 
 from telethon import functions
 
+from telebot import CMD_HELP
 from telebot.utils import admin_cmd
 
 
@@ -40,3 +41,6 @@ async def _(event):
                 except Exception as e:
                     await event.reply(str(e))
             await eor(event, "TeleBot has invited the user to the chat.")
+
+
+CMD_HELP.update({"invite": ".invite <username>\nUse - Add user to the chat."})

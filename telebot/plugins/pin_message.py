@@ -2,6 +2,7 @@
 Syntax: .cpin [LOUD]"""
 from telethon.tl import functions
 
+from telebot import CMD_HELP
 from telebot.utils import admin_cmd
 
 
@@ -28,3 +29,6 @@ async def _(event):
             await event.delete()
     else:
         await eor(event, "Reply to a message to pin the message in this Channel.")
+
+
+CMD_HELP.update({"pin_message": ".cpin <reply to mssg>\nUse - Pin the message."})

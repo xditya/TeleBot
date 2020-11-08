@@ -2,6 +2,7 @@
 # @its_xditya
 # Kangers keep credits
 
+from telebot import CMD_HELP
 from telebot.utils import admin_cmd
 
 
@@ -24,3 +25,6 @@ async def pmto(event):
         await event.edit("Message sent!")
     except BaseException:
         await event.edit("Something went wrong.")
+
+
+CMD_HELP.update({"pmto": ".pmto <username> <message>"})

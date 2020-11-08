@@ -14,10 +14,14 @@
 #    You should have received a copy of the GNU Affero General Public License
 #    along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-from telebot import ALIVE_NAME, CMD_LIST
-from telebot.utils import admin_cmd
+import os
+
+from telebot import ALIVE_NAME, CMD_HELP, CMD_LIST
+from telebot.telebotConfig import Config
 
 DEFAULTUSER = str(ALIVE_NAME) if ALIVE_NAME else "TeleBot User"
+CMD_HNDLR = Config.CMD_HNDLR
+CUSTOM_HELP_EMOJI = os.environ.get("CUSTOM_HELP_EMOJI", "⚡")
 
 
 @telebot.on(admin_cmd(pattern="help ?(.*)"))
@@ -27,9 +31,9 @@ async def cmd_list(event):
         input_str = event.pattern_match.group(1)
         if tgbotusername is None or input_str == "text":
             string = ""
-            for i in CMD_LIST:
-                string += "⚡ " + i + "\n"
-                for iter_list in CMD_LIST[i]:
+            for i in CMD_HELP:
+                string += CUSTOM_HELP_EMOJI + " " + i + " " + CUSTOM_HELP_EMOJI + "\n"
+                for iter_list in CMD_HELP[i]:
                     string += "    `" + str(iter_list) + "`"
                     string += "\n"
                 string += "\n"
@@ -37,7 +41,7 @@ async def cmd_list(event):
                 with io.BytesIO(str.encode(string)) as out_file:
                     out_file.name = "cmd.txt"
                     await tgbot.send_file(
-                        event.sender_id,
+                        event.chat_id,
                         out_file,
                         force_document=True,
                         allow_cache=False,
@@ -50,15 +54,21 @@ async def cmd_list(event):
         elif input_str:
             if input_str in CMD_LIST:
                 string = "**Commands available in {}** \n\n".format(input_str)
-                for i in CMD_LIST[input_str]:
-                    string += "    " + i
-                    string += "\n"
-                string += "\n**© @TeleBotSupport**"
-                await event.edit(string)
+                if input_str in CMD_HELP:
+                    for i in CMD_HELP[input_str]:
+                        string += i
+                    string += "\n\n**© @TeleBotSupport**"
+                    await event.edit(string)
+                else:
+                    for i in CMD_LIST[input_str]:
+                        string += "    " + i
+                        string += "\n"
+                    string += "\n**© @TeleBotSupport**"
+                    await event.edit(string)
             else:
                 await event.edit(input_str + " is not a valid plugin!")
         else:
-            help_string = f"TeleBot Help Menu"
+            help_string = f"""`Userbot Helper for {DEFAULTUSER} to reveal all the commands of `**[TeleBot](https://xditya.gitbook.io/telebot/)**\n\n"""
             results = await bot.inline_query(  # pylint:disable=E0602
                 tgbotusername, help_string
             )

@@ -11,6 +11,7 @@ import re
 from telethon import events
 
 import telebot.plugins.sql_helper.blacklist_sql as sql
+from telebot import CMD_HELP
 from telebot.utils import admin_cmd
 
 
@@ -85,3 +86,12 @@ async def on_delete_blacklist(event):
         if sql.rm_from_blacklist(event.chat_id, trigger.lower()):
             successful += 1
     await eor(event, f"Removed {successful} / {len(to_unblacklist)} from the blacklist")
+
+
+CMD_HELP.update(
+    {
+        "blacklist": ".addblacklist <word>\nUse - Add the word as a blacklist\
+            \n\n.listblacklist\nUse - To list all active blacklists of current chat.\
+            \n\n.rmblacklist <word>\nUse - Stop blacklisting (deleting occurances) of that word."
+    }
+)

@@ -3,6 +3,7 @@ syntax - .shout message
 
 """
 
+from telebot import CMD_HELP
 from telebot.utils import admin_cmd
 
 
@@ -25,3 +26,6 @@ async def shout(args):
         result = "".join(result)
         msg = "\n" + result
         await eor(args, "`" + msg + "`")
+
+
+CMD_HELP.update({"shout": ".shout <message>\nUse - Shout the message word-by-word."})

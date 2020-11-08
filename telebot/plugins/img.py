@@ -11,6 +11,7 @@ from re import findall
 
 from uniborg.util import admin_cmd
 
+from telebot import CMD_HELP
 from telebot.google_images_download import googleimagesdownload
 
 
@@ -53,3 +54,6 @@ async def img_sampler(event):
     )
     shutil.rmtree(os.path.dirname(os.path.abspath(lst[0])))
     await event.delete()
+
+
+CMD_HELP.update({"img": ".img <query>\nUse - Get images matching the query."})

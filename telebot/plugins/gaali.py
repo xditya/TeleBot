@@ -1,6 +1,8 @@
 from telethon.tl.types import ChannelParticipantsAdmins
 from uniborg.util import admin_cmd
 
+from telebot import CMD_HELP
+
 
 @telebot.on(admin_cmd(pattern="gaali"))
 async def _(event):
@@ -17,3 +19,6 @@ async def _(event):
     else:
         await event.reply(mentions)
     await event.delete()
+
+
+CMD_HELP.update({"gaali": ".gaali\nUse - Long abuse, in hindi."})

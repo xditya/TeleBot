@@ -7,6 +7,7 @@ from datetime import datetime
 
 from selenium import webdriver
 
+from telebot import CMD_HELP
 from telebot.telebotConfig import Config
 from telebot.utils import admin_cmd
 
@@ -68,3 +69,8 @@ async def _(event):
         await a.edit(f"Completed screencapture Process in {ms} seconds")
     except Exception:
         await a.edit(traceback.format_exc())
+
+
+CMD_HELP.update(
+    {"screenlong": ".screenlong <link>\nUse - Generate a  ss of the linked page."}
+)

@@ -1,5 +1,6 @@
 import asyncio
 
+from telebot import CMD_HELP
 from telebot.utils import admin_cmd
 
 
@@ -40,3 +41,6 @@ async def _(message):
                 await message.edit(something_else)
             except errors.MessageIdInvalidError:
                 return
+
+
+CMD_HELP.update({"dumpster": ".dump\nUse - useless."})

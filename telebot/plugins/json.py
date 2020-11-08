@@ -2,6 +2,7 @@
 Syntax: .json"""
 import io
 
+from telebot import CMD_HELP
 from telebot.utils import admin_cmd
 
 
@@ -32,3 +33,6 @@ async def _(event):
             await event.delete()
     else:
         await eor(event, "`{}`".format(the_real_message))
+
+
+CMD_HELP.update({"json": ".json <reply>\nUse - Get json encoding of the mssg."})

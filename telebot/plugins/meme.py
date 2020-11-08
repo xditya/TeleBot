@@ -6,6 +6,7 @@ By : - @Zero_cool7870
 """
 import asyncio
 
+from telebot import CMD_HELP
 from telebot.utils import admin_cmd
 
 
@@ -90,3 +91,6 @@ async def meme(event):
         + flower,
     )
     await asyncio.sleep(sleepValue)
+
+
+CMD_HELP.update({"meme": ".meme <x> (x = anyhting)\n.flower"})

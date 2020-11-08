@@ -4,6 +4,8 @@ Syntax: .meaning <word>"""
 import requests
 from uniborg.util import admin_cmd
 
+from telebot import CMD_HELP
+
 
 @telebot.on(admin_cmd(pattern="meaning (.*)"))
 @telebot.on(sudo_cmd(pattern="meaning (.*)", allow_sudo=True))
@@ -44,3 +46,6 @@ async def _(event):
     except BaseException:
         pass
     await eor(event, caption_str)
+
+
+CMD_HELP.update({"dictionary": ".meaning <word>\nUse - Get the meaning of that word."})

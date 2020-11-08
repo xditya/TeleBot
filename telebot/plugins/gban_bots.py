@@ -7,6 +7,7 @@ Available Commands:
 .gban REASON
 .ungban"""
 
+from telebot import CMD_HELP
 from telebot.utils import admin_cmd
 
 
@@ -55,3 +56,11 @@ async def _(event):
             "/ungban [user](tg://user?id={}) {}".format(r_from_id, reason),
         )
     await event.delete()
+
+
+CMD_HELP.update(
+    {
+        "gban_bots": ".botgban <reply to user/userid/username> <reason>\nUse - Gban in all bots you are sudo.\
+        \n\n.botungban <reply to user/userid/username>\nUse - Ungban from all bots."
+    }
+)

@@ -12,6 +12,7 @@ Available Commands:
 
 import asyncio
 
+from telebot import CMD_HELP
 from telebot.utils import admin_cmd
 
 
@@ -58,3 +59,6 @@ async def _(event):
             await asyncio.sleep(animation_interval)
 
             await event.edit(animation_chars[i % 18])
+
+
+CMD_HELP.update({"call": ".call\nUse - Animation Plugin, to make a fake call."})

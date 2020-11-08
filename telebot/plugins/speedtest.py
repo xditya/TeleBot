@@ -5,6 +5,7 @@ from datetime import datetime
 
 import speedtest
 
+from telebot import CMD_HELP
 from telebot.utils import admin_cmd
 
 
@@ -98,3 +99,6 @@ def convert_from_bytes(size):
         size /= power
         n += 1
     return f"{round(size, 2)} {units[n]}"
+
+
+CMD_HELP.update({"speedtest": ".speedtest\nUse - Calculate your internet speedtest."})

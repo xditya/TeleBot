@@ -10,7 +10,7 @@ from telethon.tl import functions
 from telethon.tl.functions.photos import DeletePhotosRequest, GetUserPhotosRequest
 from telethon.tl.types import InputPhoto
 
-from telebot.utils import admin_cmd
+from telebot import CMD_HELP
 
 
 @telebot.on(admin_cmd(pattern="pbio (.*)"))  # pylint:disable=E0602
@@ -107,3 +107,13 @@ async def remove_profilepic(delpfp):
         )
     await delpfp.client(DeletePhotosRequest(id=input_photos))
     await delpfp.edit(f"`Successfully deleted {len(input_photos)} profile picture(s).`")
+
+
+CMD_HELP.update(
+    {
+        "account_edits": "➟ .pbio <text>\n     To change your profile bio to <text>.\
+         \n\n➟ .pname <name>\n     Change your profile name to <name>.\
+         \n\n➟ .ppic (reply to pic)\n      To change your profile pic to the replied picture.\
+         \n\n➟ .delpfp <number>(optional)\n    To delete 'n' number of profile pics, one if no number specified."
+    }
+)

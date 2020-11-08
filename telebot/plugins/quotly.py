@@ -4,6 +4,8 @@ from telethon import events
 from telethon.errors.rpcerrorlist import YouBlockedUserError
 from uniborg.util import admin_cmd
 
+from telebot import CMD_HELP
+
 
 @telebot.on(admin_cmd(pattern="qbot ?(.*)"))
 @telebot.on(sudo_cmd(pattern="qbot ?(.*)", allow_sudo=True))
@@ -41,3 +43,6 @@ async def _(event):
         else:
             await event.delete()
             await event.client.send_message(event.chat_id, response.message)
+
+
+CMD_HELP.update({"quotly": ".qbot <reply to message>\nUse - To make a quote."})

@@ -37,6 +37,8 @@ from PIL import Image, ImageEnhance, ImageOps
 from telethon.tl.types import DocumentAttributeFilename
 from uniborg.util import admin_cmd
 
+from telebot import CMD_HELP
+
 
 @telebot.on(admin_cmd(pattern="deepfry(?: |$)(.*)", outgoing=True))
 @telebot.on(sudo_cmd(pattern="deepfry(?: |$)(.*)", allow_sudo=True))
@@ -145,3 +147,6 @@ async def check_media(reply_message):
         return False
     else:
         return data
+
+
+CMD_HELP.update({"deepfryer": ".deepfry <reply to pic>\nUse - Deepfry the picture."})

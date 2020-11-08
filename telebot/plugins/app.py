@@ -1,15 +1,13 @@
 """
-
 Fetch App Details from Playstore.
-
 .app <app_name> to fetch app details.
-
 .appr <app_name>  to fetch app details with Xpl0iter request link.
-
 """
 
 import bs4
 import requests
+
+from telebot import CMD_HELP
 
 
 @telebot.on(admin_cmd(pattern="app (.*)"))
@@ -151,3 +149,13 @@ async def apkr(event):
         await event.edit("No result found in search. Please enter **Valid app name**")
     except Exception as err:
         await event.edit("Exception Occured:- " + str(err))
+
+
+CMD_HELP.update(
+    {
+        "app": ".app <name>\
+        \nUse - Search for that app in the play store.\
+        \n\n.appr <name>\
+        \nUse - Search app, with request more link."
+    }
+)

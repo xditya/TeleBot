@@ -21,6 +21,7 @@ from pathlib import Path
 
 from telethon.tl.types import InputMessagesFilterDocument
 
+from telebot import CMD_HELP
 from telebot.utils import admin_cmd, load_module, remove_plugin
 
 from .. import ALIVE_NAME
@@ -165,3 +166,14 @@ async def install(event):
         await a.edit(f"{text}\n**Installed every plugin.**")
         await event.delete()
         await b.delete()
+
+
+CMD_HELP.update(
+    {
+        "core": ".load <plugin name>\nUse - Load the plugin.\
+        \n\n.unload <plugin name>\nUse - Unload the plugin.\
+        \n\n.install <reply to plugin file (.py)>\nUse - Install the plugin.\
+        \n\n.installall\nUse - Install all the plugins in the group/channel where it is used in.\
+        \n\n.send <plugin name>\nUse - Send the plugin."
+    }
+)

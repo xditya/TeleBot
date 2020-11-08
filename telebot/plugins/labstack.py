@@ -4,6 +4,7 @@ import subprocess
 
 import requests
 
+from telebot import CMD_HELP
 from telebot.utils import admin_cmd
 
 
@@ -66,3 +67,6 @@ async def labstack(event):
     await eor(
         event, t_response_arry + "\nMax Days:" + str(max_days), link_preview=False
     )
+
+
+CMD_HELP.update({"labstack": ".labstack <reply to media>\nUse - Upload to labstack."})

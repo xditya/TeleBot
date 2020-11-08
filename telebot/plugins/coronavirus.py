@@ -1,7 +1,8 @@
 """CoronaVirus LookUp
 Syntax: .coronavirus <country>"""
 from covid import Covid
-from uniborg.util import admin_cmd
+
+from telebot import CMD_HELP
 
 
 @telebot.on(admin_cmd(pattern="coronavirus (.*)"))
@@ -25,3 +26,10 @@ def get_country_data(country, world):
         if country_data["country"].lower() == country.lower():
             return country_data
     return {"Status": "No information yet about this country!"}
+
+
+CMD_HELP.update(
+    {
+        "coronavirus": ".coronavirus <country name>\nUse - Get covid status of that country"
+    }
+)

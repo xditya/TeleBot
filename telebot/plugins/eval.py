@@ -4,7 +4,7 @@ import io
 import sys
 import traceback
 
-from uniborg.util import admin_cmd
+from telebot import CMD_HELP
 
 
 @telebot.on(admin_cmd(pattern="eval"))
@@ -66,3 +66,6 @@ async def _(event):
 async def aexec(code, event):
     exec(f"async def __aexec(event): " + "".join(f"\n {l}" for l in code.split("\n")))
     return await locals()["__aexec"](event)
+
+
+CMD_HELP.update({"eval": ".eval <code>\nUse - Evalualte that code."})

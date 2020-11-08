@@ -6,6 +6,8 @@
 
 from asyncio import wait
 
+from telebot import CMD_HELP
+from telebot.telebotConfig import Var
 from telebot.utils import admin_cmd
 
 
@@ -19,7 +21,10 @@ async def spammer(e):
         await wait([e.respond(spam_message) for i in range(counter)])
 
         await e.delete()
-        if LOGGER:
+        if Var.PRIVATE_GROUP_ID:
             await e.client.send_message(
-                LOGGER_GROUP, "#SPAM \n\n" "Spam was executed successfully"
+                Var.PRIVATE_GROUP_ID, "#SPAM \n\n" "Spam was executed successfully"
             )
+
+
+CMD_HELP.update({"spam": ".spam <n> <text>\nUse -Spam the word/sentence 'n' times."})

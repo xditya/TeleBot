@@ -10,6 +10,7 @@ import random
 
 from telethon import functions, types, utils
 
+from telebot import CMD_HELP
 from telebot.utils import admin_cmd
 
 
@@ -60,3 +61,5 @@ choser(
         1653974154589768677,
     },
 )
+
+CMD_HELP.update({"randomsticker": ".brain\n.dab\nUse - Gen random stickers."})

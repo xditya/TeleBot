@@ -8,6 +8,7 @@
 import asyncio
 import random
 
+from telebot import CMD_HELP
 from telebot.utils import admin_cmd
 
 
@@ -263,3 +264,6 @@ async def _(event):
             "[For that friend of yours who does not like loud music and head banging...](https://telegra.ph/file/acbce070d3c52b921b2bd.jpg)",
             link_preview=True,
         )
+
+
+CMD_HELP.update({"got_memes": ".gotm\nUse - Get random memes."})

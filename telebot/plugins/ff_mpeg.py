@@ -4,6 +4,7 @@ import asyncio
 import os
 import time
 
+from telebot import CMD_HELP
 from telebot.utils import admin_cmd, progress
 
 FF_MPEG_DOWN_LOAD_MEDIA_PATH = "uniborg.media.ffmpeg"
@@ -191,3 +192,11 @@ async def cult_small_video(video_file, output_directory, start_time, end_time):
         logger.info(e_response)
         logger.info(t_response)
         return None
+
+
+CMD_HELP.update(
+    {
+        "ff_mpeg": ".ffmpregsave <reply to media>\nUse - Save the media\
+        \n\n.ffmpegtrim <reply to media>\nUse - Trim the media."
+    }
+)

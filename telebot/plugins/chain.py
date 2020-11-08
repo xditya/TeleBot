@@ -4,6 +4,7 @@
 
 from telethon.tl.functions.messages import SaveDraftRequest
 
+from telebot import CMD_HELP
 from telebot.utils import admin_cmd
 
 
@@ -24,3 +25,10 @@ async def _(event):
         message = reply
         count += 1
     await eor(event, f"Chain length: {count}")
+
+
+CMD_HELP.update(
+    {
+        "chain": ".chain\nUse- Find the total number of replies to a message and it's origin."
+    }
+)

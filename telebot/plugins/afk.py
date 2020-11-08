@@ -25,7 +25,7 @@ import datetime
 from telethon import events
 from telethon.tl import functions, types
 
-from telebot import ALIVE_NAME
+from telebot import ALIVE_NAME, CMD_HELP
 from telebot.utils import admin_cmd
 
 ALIVE_NAME = str(ALIVE_NAME) if ALIVE_NAME else "TeleBot User"
@@ -162,3 +162,10 @@ async def on_afk(event):
         if event.chat_id in last_afk_message:  # pylint:disable=E0602
             await last_afk_message[event.chat_id].delete()  # pylint:disable=E0602
         last_afk_message[event.chat_id] = msg  # pylint:disable=E0602
+
+
+CMD_HELP.update(
+    {
+        "afk": "➟ `.afk` <optional reason>\nUse - Sets your status to AwayFromKeyboard. The bot will reply when you are tagged in groups."
+    }
+)

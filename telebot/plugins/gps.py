@@ -10,6 +10,7 @@ credits :@mrconfused
 from geopy.geocoders import Nominatim
 from telethon.tl import types
 
+from telebot import CMD_HELP
 from telebot.utils import admin_cmd
 
 
@@ -40,3 +41,6 @@ async def gps(event):
         await event.delete()
     else:
         await eor(event, "Sorry, I coudn't find it")
+
+
+CMD_HELP.update({"gps": ".gps <location>\nUse - Locate the place in the map."})

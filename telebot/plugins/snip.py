@@ -9,6 +9,7 @@ Available Commands:
 from telethon import events, utils
 from telethon.tl import types
 
+from telebot import CMD_HELP
 from telebot.plugins.sql_helper.snips_sql import (
     add_snip,
     get_all_snips,
@@ -113,3 +114,13 @@ async def on_snip_delete(event):
     name = event.pattern_match.group(1)
     remove_snip(name)
     await event.edit("snip #{} deleted successfully".format(name))
+
+
+CMD_HELP.update(
+    {
+        "snip": "Saving personal notes.\
+        .snips <keyword> <reply to mssg>\nUse - Save the mssg to be invoked with #keyword.\
+        \n\n.snipl\nUse - See all available snips.\
+        \n\n.snipd <keyword>\nUse - Delete the snip."
+    }
+)

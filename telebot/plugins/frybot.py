@@ -2,6 +2,7 @@
 from telethon import events
 from telethon.errors.rpcerrorlist import YouBlockedUserError
 
+from telebot import CMD_HELP
 from telebot.utils import admin_cmd
 
 
@@ -40,3 +41,6 @@ async def _(event):
             )
         else:
             await borg.send_file(event.chat_id, response.message.media)
+
+
+CMD_HELP.update({"frybot": ".frybot <reply to pic>\nUse - Fry the pic xD"})

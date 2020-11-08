@@ -8,7 +8,7 @@
 
 import asyncio
 
-from telebot.utils import admin_cmd
+from telebot import CMD_HELP
 
 
 @telebot.on(admin_cmd(pattern="info"))
@@ -26,3 +26,6 @@ async def _(event):
     for i in animation_ttl:
         await asyncio.sleep(animation_interval)
         await eor(event, animation_chars[i % 18])
+
+
+CMD_HELP.update({"about": "➟ .info\nUse - Get to know about your bot."})

@@ -1,6 +1,6 @@
 import random
 
-from uniborg.util import admin_cmd
+from telebot import CMD_HELP
 
 RUNSREACTS = [
     "`Congratulations and BRAVO!`",
@@ -24,3 +24,6 @@ async def _(event):
     bro = random.randint(0, len(RUNSREACTS) - 1)
     reply_text = RUNSREACTS[bro]
     await eor(event, reply_text)
+
+
+CMD_HELP.update({"congratulations": ".congo\nUse - Congratulate a person."})

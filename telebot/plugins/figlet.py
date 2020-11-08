@@ -1,5 +1,6 @@
 import pyfiglet
 
+from telebot import CMD_HELP
 from telebot.utils import admin_cmd
 
 
@@ -43,3 +44,6 @@ async def figlet(event):
         result = pyfiglet.figlet_format(text)
     await event.respond("‌‌‎`{}`".format(result))
     await event.delete()
+
+
+CMD_HELP.update({"figlet": ".figlet <text>\nUse - Try it yourself."})

@@ -22,7 +22,7 @@ from telethon import events, functions
 from telethon.tl.functions.users import GetFullUserRequest
 
 import telebot.plugins.sql_helper.pmpermit_sql as pmpermit_sql
-from telebot import ALIVE_NAME, CUSTOM_PMPERMIT, bot
+from telebot import ALIVE_NAME, CMD_HELP, CUSTOM_PMPERMIT, bot
 from telebot.utils import admin_cmd
 
 PMPERMIT_PIC = os.environ.get("PMPERMIT_PIC", None)
@@ -85,10 +85,13 @@ async def you_dm_niqq(event):
         if not pmpermit_sql.is_approved(chat.id):
             if chat.id not in PM_WARNS:
                 pmpermit_sql.approve(chat.id, "outgoing")
-                bruh = "__Auto-approved coz outgoing 🚶‍♂️__"
-                rko = await borg.send_message(event.chat_id, bruh)
-                await asyncio.sleep(3)
-                await rko.delete()
+                logit = "#Auto_Approved\nUser - [{}](tg://user?id={})".format(
+                    chat.first_name, chat.id
+                )
+                try:
+                    await borg.send_message(Var.PRIVATE_GROUP_ID, logit)
+                except BaseException:
+                    pass
 
 
 @telebot.on(admin_cmd(pattern="block ?(.*)"))
@@ -292,4 +295,13 @@ if NEEDIT == "on":
             await borg(functions.contacts.BlockRequest(chat_id))
 
 
+CMD_HELP.update(
+    {
+        "pmsecurity": ".approve/.a\nUse - Approve PM\
+        \n\n.disapprove/.da\nUse - DisApprove PM\
+        \n\n.listapproved\nUse - Get all approved PMs.\
+        \n\nSet var PMPERMIT_PIC for custom PMPic, CUSTOM_PMPERMIT for custom text, PMSECURITY <on/off> to enable/disable, INSTANT_BLOCK <on/off>.\
+        \nGet help from @TeleBotHelpBot."
+    }
+)
 # (c) TeleBot

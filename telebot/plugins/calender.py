@@ -6,6 +6,8 @@ from datetime import datetime
 import requests
 from uniborg.util import admin_cmd
 
+from telebot import CMD_HELP
+
 
 @telebot.on(admin_cmd(pattern="calendar (.*)"))
 @telebot.on(sudo_cmd(pattern="calendar (.*)", allow_sudo=True))
@@ -35,3 +37,10 @@ async def _(event):
         await eor(event, "SYNTAX: .calendar YYYY-MM-DD")
     end = datetime.now()
     (end - start).seconds
+
+
+CMD_HELP.update(
+    {
+        "calender": ".calendar <YYYY-MM-DD>\nUse - To get the date in the malayalam calendar."
+    }
+)

@@ -10,6 +10,7 @@ import pygments
 from pygments.formatters import ImageFormatter
 from pygments.lexers import Python3Lexer
 
+from telebot import CMD_HELP
 from telebot.utils import admin_cmd, sudo_cmd
 
 
@@ -42,3 +43,8 @@ async def coder_print(event):
     await event.delete()
     os.remove(a)
     os.remove("result.png")
+
+
+CMD_HELP.update(
+    {"ncode": ".ncode <file>\nUse - Paste the contents of file and send as pic."}
+)

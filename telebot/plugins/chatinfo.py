@@ -33,7 +33,7 @@ async def info(event):
         await eor(event, caption, parse_mode="html")
     except Exception as e:
         print("Exception:", e)
-        await eor(event, "`An unexpected error has occurred.`")
+        await eor(event, f"`An unexpected error has occurred. {e}`")
     return
 
 

@@ -5,11 +5,10 @@ Available Commands:
 # This Source Code Form is subject to the terms of the GNU
 # General Public License, v.3.0. If a copy of the GPL was not distributed with this
 # file, You can obtain one at https://www.gnu.org/licenses/gpl-3.0.en.html
-import asyncio
 import os
 import sys
 
-from telebot import CMD_HNDLR
+from telebot import CMD_HELP, CMD_HNDLR
 from telebot.utils import admin_cmd
 
 
@@ -17,7 +16,7 @@ from telebot.utils import admin_cmd
 async def _(event):
     if event.fwd_from:
         return
-    await asyncio.sleep(2)
+    # await asyncio.sleep(2)
     # await event.edit("Restarting \n□□□□□□□□□□")
     # await asyncio.sleep(2)
     # await event.edit(f"Restarting \n■■■■□□□□□□  ")
@@ -27,7 +26,7 @@ async def _(event):
     # await event.edit(f"Done! \n■■■■■■■■■■  ")
     # await asyncio.sleep(2)
     await event.edit(
-        f"__Restarting__ Please give me **a minute or two** and then use `{CMD_HNDLR}alive`! "
+        f"__TeleBot is Restarting...__\nPlease give it **a minute or two** and then use `{CMD_HNDLR}alive`! "
     )
     await borg.disconnect()
     # https://archive.is/im3rt
@@ -44,3 +43,11 @@ async def _(event):
         "TeleBot is turning off... Manually turn me on later, from heroku."
     )
     await borg.disconnect()
+
+
+CMD_HELP.update(
+    {
+        "power_tools": ".restart\nUse - Restart the bot.\
+        \n\n.shutdown\nUse - shutdown the bot."
+    }
+)

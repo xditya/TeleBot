@@ -1,11 +1,22 @@
-#  (c)2020 TeleBot
-#
-# You may not use this plugin without proper authorship and consent from @TeleBotSupport
-#
+#    TeleBot - UserBot
+#    Copyright (C) 2020 TeleBot
+
+#    This program is free software: you can redistribute it and/or modify
+#    it under the terms of the GNU Affero General Public License as published by
+#    the Free Software Foundation, either version 3 of the License, or
+#    (at your option) any later version.
+
+#    This program is distributed in the hope that it will be useful,
+#    but WITHOUT ANY WARRANTY; without even the implied warranty of
+#    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+#    GNU Affero General Public License for more details.
+
+#    You should have received a copy of the GNU Affero General Public License
+#    along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 import asyncio
 
-from telebot.utils import admin_cmd
+from telebot import CMD_HELP
 
 # By @HeisenbergTheDanger, @its_xditya
 
@@ -41,7 +52,7 @@ async def _(event):
                 FBAN = arg
                 REASON = " #TBMassBanned "
         else:
-            FBAN = previous_message.from_id
+            FBAN = previous_message.sender_id
             REASON = event.pattern_match.group(1)
             if REASON.strip() == "":
                 REASON = " #TBMassBanned "
@@ -158,7 +169,7 @@ async def _(event):
     await event.edit("Starting a Mass-UnFedBan...")
     if event.reply_to_msg_id:
         previous_message = await event.get_reply_message()
-        FBAN = previous_message.from_id
+        FBAN = previous_message.sender_id
     else:
         FBAN = event.pattern_match.group(1)
 
@@ -226,10 +237,12 @@ async def _(event):
 
 # By @HeisenbergTheDanger, @its_xditya
 
-"""
-.superfban <username/userid> <reason>\
-\n**Usage**: Mass-Ban in all feds you are admin in.\
-\nSet `EXCLUDE_FED fedid1|fedid2` in heroku vars to exclude those feds.\
-\nSet var `FBAN_GROUP_ID` ti the group with rose, where you want FBan to take place.\
-\n\nGet help - @TeleBotSupport\
-"""
+CMD_HELP.update(
+    {
+        "superban": ".superfban <username/userid> <reason>\
+        \n**Usage**: Mass-Ban in all feds you are admin in.\
+        \nSet `EXCLUDE_FED fedid1|fedid2` in heroku vars to exclude those feds.\
+        \nSet var `FBAN_GROUP_ID` ti the group with rose, where you want FBan to take place.\
+        \n\nGet help - @TeleBotSupport."
+    }
+)

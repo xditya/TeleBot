@@ -4,6 +4,7 @@
 import time
 from datetime import datetime
 
+from telebot import CMD_HELP
 from telebot.__init__ import StartTime
 from telebot.utils import admin_cmd, sudo_cmd
 
@@ -50,3 +51,6 @@ async def _(event):
     ms = (end - start).microseconds / 1000
     uptime = get_readable_time((time.time() - StartTime))
     await x.edit(f"🏓Ping speed: {ms}\n🤖TeleBot Uptime: {uptime}")
+
+
+CMD_HELP.update({"ping": ".ping\nUse - See the ping stats and uptime of userbot."})
