@@ -14,6 +14,7 @@
 #    You should have received a copy of the GNU Affero General Public License
 #    along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
+import asyncio
 import html
 import os
 import re
@@ -92,8 +93,8 @@ if Var.TG_BOT_USER_NAME_BF_HER is not None and tgbot is not None:
                 text=TELEBT,
                 buttons=[
                     [
-                        custom.Button.inline("To Request Something 😁", data="req"),
-                        custom.Button.inline("To Get Help 🆘", data="plshelpme"),
+                        custom.Button.inline("Request Something 😁", data="req"),
+                        custom.Button.inline("Get Help 🆘", data="plshelpme"),
                     ],
                     [
                         custom.Button.inline("Random Chat 💭", data="chat"),
@@ -281,7 +282,7 @@ if Var.TG_BOT_USER_NAME_BF_HER is not None and tgbot is not None:
         if event.query.user_id == bot.uid:
             plugin_name = event.data_match.group(1).decode("UTF-8")
             help_string = ""
-            help_string += f"Commands Available in {plugin_name}\n"
+            help_string += f"Commands Available in {plugin_name} - \n"
             try:
                 if plugin_name in CMD_HELP:
                     for i in CMD_HELP[plugin_name]:
@@ -303,11 +304,16 @@ if Var.TG_BOT_USER_NAME_BF_HER is not None and tgbot is not None:
                 © Telebot".format(
                 plugin_name
             )
-            try:
+            if len(help_string) >= 140:
+                oops = "List too long!\nCheck your saved messages!"
+                await event.answer(oops, cache_time=0, alert=True)
+                help_string += "\n\nThis will be auto-deleted in 1 minute!"
+                if bot is not None and event.query.user_id == bot.uid:
+                    ok = await bot.send_message("me", help_string)
+                    await asyncio.sleep(60)
+                    await ok.delete()
+            else:
                 await event.answer(reply_pop_up_alert, cache_time=0, alert=True)
-            except BaseException:
-                halps = "Do .help {} to get the list of commands.".format(plugin_name)
-                await event.answer(halps, cache_time=0, alert=True)
         else:
             reply_pop_up_alert = "Please get your own Userbot, and don't use mine!"
             await event.answer(reply_pop_up_alert, cache_time=0, alert=True)

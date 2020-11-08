@@ -48,7 +48,7 @@ async def _(event):
         last_name = html.escape(last_name)
         last_name = last_name.replace("\u2060", "")
     if last_name is None:
-        last_name = "⁪⁬⁮⁮⁮⁮ ‌‌‌‌"
+        last_name = "⁪⁬⁮⁮⁮"
     # inspired by https://telegram.dog/afsaI181
     user_bio = replied_user.about
     if user_bio is not None:

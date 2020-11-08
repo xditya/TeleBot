@@ -85,10 +85,14 @@ async def you_dm_niqq(event):
         if not pmpermit_sql.is_approved(chat.id):
             if chat.id not in PM_WARNS:
                 pmpermit_sql.approve(chat.id, "outgoing")
-                bruh = "__Auto-approved coz outgoing 🚶‍♂️__"
-                rko = await borg.send_message(event.chat_id, bruh)
-                await asyncio.sleep(3)
-                await rko.delete()
+                event.chat_id
+                logit = "#Auto-Approved\n[{}](tg://user?id={})".format(
+                    chat.first_name, chat.id
+                )
+                try:
+                    await borg.send_message(PRIVATE_GROUP_ID, logit)
+                except BaseException:
+                    pass
 
 
 @telebot.on(admin_cmd(pattern="block ?(.*)"))
