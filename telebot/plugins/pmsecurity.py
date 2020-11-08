@@ -85,7 +85,7 @@ async def you_dm_niqq(event):
         if not pmpermit_sql.is_approved(chat.id):
             if chat.id not in PM_WARNS:
                 pmpermit_sql.approve(chat.id, "outgoing")
-                logit = "#Auto-Approved\nUser - [{}](tg://user?id={})".format(
+                logit = "#Auto_Approved\nUser - [{}](tg://user?id={})".format(
                     chat.first_name, chat.id
                 )
                 try:
