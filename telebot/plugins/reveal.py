@@ -5,7 +5,7 @@
 # By @buddhhu, @Itzsjdude
 #
 import os
-
+from telebot import CMD_HELP
 from telebot.utils import admin_cmd, sudo_cmd
 
 
@@ -23,3 +23,7 @@ async def _(event):
         await event.client.send_message(event.chat_id, f"```{c}```")
         await a.delete()
     os.remove(b)
+
+CMD_HELP.update(
+    "reveal":".reveal <reply to a file>\nUse - Read contents of file and send as a telegram message."
+)

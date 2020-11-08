@@ -6,7 +6,7 @@ import io
 import requests
 
 from telebot.utils import admin_cmd
-
+from telebot import CMD_HELP
 
 @telebot.on(admin_cmd(pattern="screencapture (.*)"))
 @telebot.on(sudo_cmd(pattern="screencapture (.*)", allow_sudo=True))
@@ -45,3 +45,9 @@ async def _(event):
                 await eor(event, str(e))
     else:
         await eor(event, response_api.text)
+
+CMD_HELP.update(
+    {
+        "screencapture":".screencapture <link>\nUse - Capture a screenshot of the site and send as a telegram media."
+    }
+)

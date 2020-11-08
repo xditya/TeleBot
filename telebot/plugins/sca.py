@@ -14,7 +14,7 @@ document
 cancel"""
 
 import asyncio
-
+from telebot import CMD_HELP
 from uniborg.util import admin_cmd
 
 
@@ -29,3 +29,5 @@ async def _(event):
         action = input_str
     async with borg.action(event.chat_id, action):
         await asyncio.sleep(86400)  # type for 10 seconds
+
+CMD_HELP.update({"sca":".scha <typing/contact/game/location/voice/round/video/photo/document/cancel> <time in sec>\nUse - Perform an action."})

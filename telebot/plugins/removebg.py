@@ -20,7 +20,7 @@ import os
 from datetime import datetime
 
 import requests
-
+from telebot import CMD_HELP
 from telebot.utils import admin_cmd
 
 
@@ -122,3 +122,9 @@ def ReTrieveURL(input_url):
         stream=True,
     )
     return r
+
+CMD_HELP.update(
+    {
+        "removebg":".remove.bg <reply to pic>\nUse - Remove the background of the pic."
+    }
+)

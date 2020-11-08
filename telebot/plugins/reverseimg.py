@@ -15,7 +15,7 @@ import urllib
 import requests
 from bs4 import BeautifulSoup
 from PIL import Image
-
+from telebot import CMD_HELP
 from telebot import CMD_HELP, bot
 from telebot.utils import admin_cmd, errors_handler
 
@@ -146,6 +146,6 @@ async def scam(results, lim):
 CMD_HELP.update(
     {
         "reverse": ".reverse\
-        \nUsage: Reply to a pic/sticker to revers-search it on Google Images !!"
+        \nUsage: Reply to a pic/sticker to reverse-search it on Google Images !!"
     }
 )

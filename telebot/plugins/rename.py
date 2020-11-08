@@ -6,7 +6,7 @@ Syntax:
 import os
 import time
 from datetime import datetime
-
+from telebot import CMD_HELP
 from uniborg.util import admin_cmd
 
 from telebot.telebotConfig import Config
@@ -66,3 +66,9 @@ async def _(event):
             event,
             f"Syntax ~ `{xyz}rename file_name.extension` as reply to a Telegram media",
         )
+
+CMD_HELP.update(
+    {
+        "rename":".rename <filename.extension> <reply to media>\nUse - Rename the media."
+    }
+)

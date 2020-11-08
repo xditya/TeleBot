@@ -3,7 +3,7 @@ Syntax: .schd <time_in_seconds> ;=; <message to send>"""
 import asyncio
 
 from telebot.utils import admin_cmd
-
+from telebot import CMD_HELP
 
 @telebot.on(admin_cmd(pattern="schd ?(.*)"))
 async def _(event):
@@ -24,3 +24,5 @@ async def _(event):
         await event.respond(message)
     else:
         await event.edit(message)
+
+CMD_HELP.update({"schd":".schd <time in sec> = <mssg to send>\nUse - Send a scheduled message."})
