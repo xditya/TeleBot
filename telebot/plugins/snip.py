@@ -114,7 +114,7 @@ async def on_snip_delete(event):
     remove_snip(name)
     await event.edit("snip #{} deleted successfully".format(name))
 
-CMD_HELP(
+CMD_HELP.update(
     {
         "snip":"Saving personal notes.\
         .snips <keyword> <reply to mssg>\nUse - Save the mssg to be invoked with #keyword.\
