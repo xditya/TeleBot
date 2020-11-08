@@ -24,6 +24,6 @@ async def _(event):
         await a.delete()
     os.remove(b)
 
-CMD_HELP.update(
+CMD_HELP.update({
     "reveal":".reveal <reply to a file>\nUse - Read contents of file and send as a telegram message."
-)
+})
