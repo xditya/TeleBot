@@ -3,8 +3,9 @@ syntax - .shout message
 
 """
 
-from telebot.utils import admin_cmd
 from telebot import CMD_HELP
+from telebot.utils import admin_cmd
+
 
 @telebot.on(admin_cmd(pattern=r"shout", outgoing=True))
 @telebot.on(sudo_cmd(pattern=r"shout", allow_sudo=True))
@@ -26,4 +27,5 @@ async def shout(args):
         msg = "\n" + result
         await eor(args, "`" + msg + "`")
 
-CMD_HELP.update({"shout" : ".shout <message>\nUse - Shout the message word-by-word."})
+
+CMD_HELP.update({"shout": ".shout <message>\nUse - Shout the message word-by-word."})

@@ -6,6 +6,7 @@
 #
 import asyncio
 import os
+
 from telebot import CMD_HELP
 from telebot.utils import admin_cmd, sudo_cmd
 
@@ -26,8 +27,9 @@ async def _(event):
     await a.delete()
     os.remove(input_str)
 
+
 CMD_HELP.update(
     {
-        "repack":".repack <filename.extension> <reply to text>\nUse - Pack the text and send as a file."
+        "repack": ".repack <filename.extension> <reply to text>\nUse - Pack the text and send as a file."
     }
 )

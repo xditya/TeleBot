@@ -8,6 +8,7 @@ from telethon.errors.rpcerrorlist import (
     YouBlockedUserError,
 )
 from telethon.tl.functions.messages import ImportChatInviteRequest
+
 from telebot import CMD_HELP
 from telebot.utils import admin_cmd
 
@@ -68,8 +69,7 @@ async def _(event):
 
             await eor(event, "**Error:** `unblock` @DeezLoadBot `and retry!`")
 
+
 CMD_HELP.update(
-    {
-        "spotif_deez_dl":".sdd <link>\nUse - Download song from spotify/deezer."
-    }
+    {"spotif_deez_dl": ".sdd <link>\nUse - Download song from spotify/deezer."}
 )

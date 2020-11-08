@@ -5,6 +5,7 @@
 # By @buddhhu, @Itzsjdude
 #
 import os
+
 from telebot import CMD_HELP
 from telebot.utils import admin_cmd, sudo_cmd
 
@@ -24,6 +25,9 @@ async def _(event):
         await a.delete()
     os.remove(b)
 
-CMD_HELP.update({
-    "reveal":".reveal <reply to a file>\nUse - Read contents of file and send as a telegram message."
-})
+
+CMD_HELP.update(
+    {
+        "reveal": ".reveal <reply to a file>\nUse - Read contents of file and send as a telegram message."
+    }
+)

@@ -10,8 +10,9 @@ import random
 
 from telethon import functions, types, utils
 
-from telebot.utils import admin_cmd
 from telebot import CMD_HELP
+from telebot.utils import admin_cmd
+
 
 def choser(cmd, pack, blacklist=None):
     if blacklist is None:
@@ -61,8 +62,4 @@ choser(
     },
 )
 
-CMD_HELP.update(
-    {
-        "randomsticker":".brain\n.dab\nUse - Gen random stickers."
-    }
-)
+CMD_HELP.update({"randomsticker": ".brain\n.dab\nUse - Gen random stickers."})

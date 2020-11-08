@@ -7,11 +7,12 @@ Available Commands:
 import asyncio
 import os
 from datetime import datetime
-from telebot import CMD_HELP
+
 import requests
 from bs4 import BeautifulSoup
 from google_images_download import google_images_download
 
+from telebot import CMD_HELP
 from telebot.utils import admin_cmd, edit_or_reply, sudo_cmd
 
 
@@ -160,9 +161,10 @@ More Info: Open this <a href="{the_location}">Link</a> in {ms} seconds""".format
         )
     await eor(event, OUTPUT_STR, parse_mode="HTML", link_preview=False)
 
+
 CMD_HELP.update(
     {
-        "search_it":".go <query>\nUse - Google for the query.\
+        "search_it": ".go <query>\nUse - Google for the query.\
         \n\n.image <query>\nUse - Google for images.\
         \n\n.grs <reply to pic>\nUse - Google reverse search for images."
     }

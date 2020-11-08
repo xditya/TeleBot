@@ -4,6 +4,7 @@ Available Options: image, file, text"""
 from datetime import datetime
 
 import speedtest
+
 from telebot import CMD_HELP
 from telebot.utils import admin_cmd
 
@@ -99,4 +100,5 @@ def convert_from_bytes(size):
         n += 1
     return f"{round(size, 2)} {units[n]}"
 
-CMD_HELP.update({"speedtest":".speedtest\nUse - Calculate your internet speedtest."})
+
+CMD_HELP.update({"speedtest": ".speedtest\nUse - Calculate your internet speedtest."})

@@ -10,10 +10,11 @@ Available commands:
 """
 
 from re import findall
-from telebot import CMD_HELP
+
 import requests
 from search_engine_parser import GoogleSearch
 
+from telebot import CMD_HELP
 from telebot.utils import admin_cmd
 
 
@@ -83,9 +84,10 @@ async def _(event):
     else:
         await eor(event, "something is wrong. please try again later.")
 
+
 CMD_HELP.update(
     {
-        "search":".gs <query>\nUse - Google the query.\
+        "search": ".gs <query>\nUse - Google the query.\
         \n\n.duckduckgo <query>\nUse - Search on DuckDuckGo\
         \n\n.ggl <query>\nUse - Learn to search, lol."
     }

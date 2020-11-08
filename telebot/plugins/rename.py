@@ -6,9 +6,10 @@ Syntax:
 import os
 import time
 from datetime import datetime
-from telebot import CMD_HELP
+
 from uniborg.util import admin_cmd
 
+from telebot import CMD_HELP
 from telebot.telebotConfig import Config
 
 thumb_image_path = Config.TMP_DOWNLOAD_DIRECTORY + "/thumb_image.jpg"
@@ -67,8 +68,7 @@ async def _(event):
             f"Syntax ~ `{xyz}rename file_name.extension` as reply to a Telegram media",
         )
 
+
 CMD_HELP.update(
-    {
-        "rename":".rename <filename.extension> <reply to media>\nUse - Rename the media."
-    }
+    {"rename": ".rename <filename.extension> <reply to media>\nUse - Rename the media."}
 )

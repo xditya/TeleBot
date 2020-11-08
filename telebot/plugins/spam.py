@@ -5,10 +5,11 @@
 #
 
 from asyncio import wait
-from telebot import CMD_HELP
-from telebot.utils import admin_cmd
+
 from telebot import CMD_HELP
 from telebot.telebotConfig import Var
+from telebot.utils import admin_cmd
+
 
 @telebot.on(admin_cmd(pattern=r"spam", outgoing=True))
 async def spammer(e):
@@ -25,8 +26,5 @@ async def spammer(e):
                 Var.PRIVATE_GROUP_ID, "#SPAM \n\n" "Spam was executed successfully"
             )
 
-CMD_HELP.update(
-    {
-        "spam":".spam <n> <text>\nUse -Spam the word/sentence 'n' times."
-    }
-)
+
+CMD_HELP.update({"spam": ".spam <n> <text>\nUse -Spam the word/sentence 'n' times."})
