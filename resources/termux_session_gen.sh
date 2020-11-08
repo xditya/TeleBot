@@ -1,7 +1,6 @@
 #!/bin/bash
 clear
 echo "
-
  _____    _      _           _   
 |_   _|__| | ___| |__   ___ | |_ 
   | |/ _ \ |/ _ \ '_ \ / _ \| __|
@@ -10,13 +9,12 @@ echo "
 
 "
 # Termux session string generator for TeleBot
-echo Termux Session Genenrator - TeleBot
 echo Starting dependency installation in 5 seconds...
 sleep 5
 apt-get update
 apt-get upgrade -y
 pkg upgrade -y
 pkg install python wget -y
-wget https://raw.githubusercontent.com/xditya/TeleBot/master/telesetup.py
+wget https://raw.githubusercontent.com/xditya/TeleBot/master/resources/telebot-setup.py
 pip install telethon
-python ./resources/telebot-setup.py
+python telebot-setup.py

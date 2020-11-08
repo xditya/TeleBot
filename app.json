@@ -20,7 +20,7 @@
   },
   "TEMP_DOWNLOAD_DIRECTORY": {
    "description": "Where downloaded files will go.",
-   "value": "./userbot/DOWNLOADS/",
+   "value": "./telebot/DOWNLOADS/",
    "required": false
   },
   "APP_ID": {
