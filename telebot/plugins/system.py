@@ -119,8 +119,8 @@ async def pipcheck(pip):
 
 CMD_HELP.update(
     {
-        "system": "➟ `.sysd`" "\nUsage: Shows system information using neofetch.",
-        "version": "➟ `.version`" "\nUsage: Shows the userbot version.",
-        "pip": "➟ `.pip <module(s)>`" "\nUsage: Does a search of pip modules(s).",
+        "system": "➟ .sysd\nUsage: Shows system information using neofetch.\
+        \n\n➟ .version\nUsage: Shows the userbot version.\
+        \n\n➟ .pip <module(s)>\nUsage: Does a search of pip modules(s)."
     }
 )
