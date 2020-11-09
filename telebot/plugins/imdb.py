@@ -20,6 +20,7 @@ langi = "en"
 @telebot.on(admin_cmd(pattern="imdb (.*)"))
 @telebot.on(sudo_cmd(pattern="imdb (.*)", allow_sudo=True))
 async def imdb(e):
+    abcd = await eor(e, "`Searching for the movie...`")
     try:
         movie_name = e.pattern_match.group(1)
         remove_space = movie_name.split(" ")
@@ -86,8 +87,7 @@ async def imdb(e):
                 mov_rating = r.strong["title"]
         else:
             mov_rating = "Not available"
-        await eor(
-            e,
+        await abcd.edit(
             "<a href=" + poster + ">&#8203;</a>"
             "<b>🎗️Title : </b><code>"
             + mov_title
@@ -113,7 +113,7 @@ async def imdb(e):
             parse_mode="HTML",
         )
     except IndexError:
-        await eor(e, "Plox enter **Valid movie name** kthx")
+        await abcd.edit( "Plox enter a **Valid movie name** kthx")
 
 
 CMD_HELP.update({"imdb": "imdb <movie name>\nUse - Get imdb info about that movie."})
