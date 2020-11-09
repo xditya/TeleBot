@@ -28,7 +28,7 @@ from telebot import *
 from telebot import AUTO_PIC_FONT, AUTOPIC_FONT_COLOUR, AUTOPIC_TEXT, CMD_HELP
 
 fntz = str(AUTO_PIC_FONT) if AUTO_PIC_FONT else "DejaVuSans.ttf"
-FONT_FILE_TO_USE = f"fonts/{fntz}"
+FONT_FILE_TO_USE = f"resources/fonts/{fntz}"
 AUTOPIC_TEXT = (
     str(AUTOPIC_TEXT)
     if AUTOPIC_TEXT
@@ -43,7 +43,7 @@ async def autopic(event):
     a = await event.get_reply_message()
     downloaded_file_name = "userbot/original_pic.png"
     await telebot.download_media(a, downloaded_file_name)
-    photo = "userbot/photo_pfp.png"
+    photo = "telebot/photo_pfp.png"
     while True:
         shutil.copy(downloaded_file_name, photo)
         current_time = datetime.now().strftime(
