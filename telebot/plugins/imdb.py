@@ -87,7 +87,7 @@ async def imdb(e):
         else:
             mov_rating = "Not available"
         await eor(
-            event,
+            e,
             "<a href=" + poster + ">&#8203;</a>"
             "<b>🎗️Title : </b><code>"
             + mov_title
@@ -113,7 +113,7 @@ async def imdb(e):
             parse_mode="HTML",
         )
     except IndexError:
-        await eor(event, "Plox enter **Valid movie name** kthx")
+        await eor(e, "Plox enter **Valid movie name** kthx")
 
 
 CMD_HELP.update({"imdb": "imdb <movie name>\nUse - Get imdb info about that movie."})
