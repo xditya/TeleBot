@@ -134,7 +134,7 @@ async def fetch_info(replied_user, event):
     caption += f"<b>Is Restricted</b>: <code>{restricted}</code> \n"
     caption += f"<b>Is Verified by Telegram</b>: <code>{verified}</code> \n"
     caption += f"<b>ID</b>: <code>{user_id}</code> \n"
-    caption += f"<b>Bio</b>: \n<code>{user_bio}</code> \n\n"
+    caption += f"<b>Bio</b>: <code>{user_bio}</code> \n\n"
     caption += f"<b>Permanent Link To Profile</b>: "
     caption += f'<a href="tg://user?id={user_id}">{first_name}</a>'
     caption += f"\n\n<b>Common Chats with this user</b>: <code>{common_chat} </code>\n"
