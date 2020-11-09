@@ -16,7 +16,7 @@
 
 import os
 
-from telebot import ALIVE_NAME, CMD_HELP, CMD_LIST, CMD_HNDLR
+from telebot import ALIVE_NAME, CMD_HELP, CMD_HNDLR, CMD_LIST
 from telebot.telebotConfig import Config
 
 DEFAULTUSER = str(ALIVE_NAME) if ALIVE_NAME else "TeleBot User"
@@ -25,6 +25,7 @@ CUSTOM_HELP_EMOJI = os.environ.get("CUSTOM_HELP_EMOJI", "⚡")
 
 if CMD_HNDLR is None:
     CMD_HNDLR = "."
+
 
 @telebot.on(admin_cmd(pattern="help ?(.*)"))
 async def cmd_list(event):
@@ -79,6 +80,7 @@ async def cmd_list(event):
                     event.chat_id, reply_to=event.reply_to_msg_id, hide_via=True
                 )
                 await event.delete()
-            except:
-                await event.edit(f"This bot has inline disabled. Please enable it to use `{CMD_HNDLR}help`.\nGet help from [here](t.me/TeleBotHelpChat)")
-            
+            except BaseException:
+                await event.edit(
+                    f"This bot has inline disabled. Please enable it to use `{CMD_HNDLR}help`.\nGet help from [here](t.me/TeleBotHelpChat)"
+                )

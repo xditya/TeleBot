@@ -15,13 +15,14 @@
 #    along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 import os
+
 import heroku3
-from telebot import telebotConfig
 from telethon.tl.functions.users import GetFullUserRequest
 
 Heroku = heroku3.from_key(Var.HEROKU_API_KEY)
 heroku_api = "https://api.heroku.com"
 sudousers = os.environ.get("SUDO_USERS", None)
+
 
 @telebot.on(admin_cmd(pattern="sudo"))
 async def sudo(event):
@@ -44,6 +45,7 @@ async def handler(event):
     sudohndlr = Config.SUDO_HNDLR
     await eor(event, f"Command Handler - {x}\nSudo Handler - {sudohndlr}")
 
+
 @telebot.on(admin_cmd(pattern="addsudo(?: |$)"))
 async def tb(event):
     ok = await eor(event, "Adding user as a sudo...")
@@ -58,7 +60,7 @@ async def tb(event):
         return
     try:
         target = await get_user(event)
-    except Exception as e:
+    except Exception:
         await ok.edit(f"Reply to a user.")
     if sudousers:
         newsudo = f"{sudousers} {target}"
@@ -67,12 +69,17 @@ async def tb(event):
     await ok.edit(f"Added `{target}` as a sudo user. Restarting.. Give me a minute...")
     heroku_var[telebot] = newsudo
 
+
 async def get_user(event):
     if event.reply_to_msg_id:
         previous_message = await event.get_reply_message()
         if previous_message.forward:
-            replied_user = await event.client(GetFullUserRequest(previous_message.forward.sender_id))   
+            replied_user = await event.client(
+                GetFullUserRequest(previous_message.forward.sender_id)
+            )
         else:
-            replied_user = await event.client(GetFullUserRequest(previous_message.sender_id))
+            replied_user = await event.client(
+                GetFullUserRequest(previous_message.sender_id)
+            )
     target = replied_user.user.id
     return target
