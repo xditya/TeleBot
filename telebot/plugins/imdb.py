@@ -113,7 +113,7 @@ async def imdb(e):
             parse_mode="HTML",
         )
     except IndexError:
-        await abcd.edit( "Plox enter a **Valid movie name** kthx")
+        await abcd.edit("Plox enter a **Valid movie name** kthx")
 
 
 CMD_HELP.update({"imdb": "imdb <movie name>\nUse - Get imdb info about that movie."})
