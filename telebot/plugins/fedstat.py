@@ -15,10 +15,13 @@
 #    along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 import asyncio
+
 from telethon.errors.rpcerrorlist import YouBlockedUserError
-from telebot import ALIVE_NAME, CMD_HELP
+
+from telebot import CMD_HELP
 
 bot = "@MissRose_bot"
+
 
 @telebot.on(admin_cmd(pattern="fstat ?(.*)"))
 @telebot.on(sudo_cmd(pattern="fstat ?(.*)", allow_sudo=True))
@@ -34,7 +37,9 @@ async def _(event):
         sysarg = event.pattern_match.group(1)
         user = sysarg
     if sysarg == "":
-        await ok.edit("`Give me someones id, or reply to somones message to check his/her fedstat.`")
+        await ok.edit(
+            "`Give me someones id, or reply to somones message to check his/her fedstat.`"
+        )
         return
     else:
         async with borg.conversation(bot) as conv:
@@ -46,13 +51,17 @@ async def _(event):
                 if "Looks like" in audio.text:
                     await audio.click(0)
                     await asyncio.sleep(2)
-                    audio = await conv.get_response()  
-                    await telebot.send_file(event.chat_id, audio, caption = f"List of feds {user} has been banned in.\n\nCollected using TeleBot.")
-                else:         
+                    audio = await conv.get_response()
+                    await telebot.send_file(
+                        event.chat_id,
+                        audio,
+                        caption=f"List of feds {user} has been banned in.\n\nCollected using TeleBot.",
+                    )
+                else:
                     await borg.send_message(event.chat_id, audio.text)
                 await event.delete()
             except YouBlockedUserError:
-                await ok.edit( "**Error**\n `Unblock` @MissRose_Bot `and try again!")
+                await ok.edit("**Error**\n `Unblock` @MissRose_Bot `and try again!")
 
 
 CMD_HELP.update(
