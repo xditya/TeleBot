@@ -191,9 +191,7 @@ async def gspider(rk):
             for d in await rk.client.get_dialogs()
             if (d.is_group or d.is_channel)
         ]
-        await rkp.edit(
-                    f"**Requesting  to ungban user!\nUnban in progress...**"
-                )
+        await rkp.edit(f"**Requesting  to ungban user!\nUnban in progress...**")
         for i in testrk:
             try:
                 await rk.client.edit_permissions(i, user, send_messages=True)
