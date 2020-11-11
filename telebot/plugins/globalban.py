@@ -126,11 +126,11 @@ async def gspider(rk):
             for d in await rk.client.get_dialogs()
             if (d.is_group or d.is_channel)
         ]
+        await rkp.edit(f"**Gbanning user!\nIn progress...**")
         for i in testrk:
             try:
                 await rk.client.edit_permissions(i, user, view_messages=False)
                 a += 1
-                await rkp.edit(f"**Gbanning user!\nDone in {a} chats.....**")
             except BaseException:
                 b += 1
     else:
@@ -141,7 +141,7 @@ async def gspider(rk):
     except BaseException:
         pass
     return await rkp.edit(
-        f"**Gbanned** [{user.first_name}](tg://user?id={user.id}) **in {a} chat(s) , Blocked user and added to Gban watch **"
+        f"**Gbanned** [{user.first_name}](tg://user?id={user.id}) **\nChats affected - {a}\nBlocked user and added to Gban watch **"
     )
 
 
@@ -191,13 +191,13 @@ async def gspider(rk):
             for d in await rk.client.get_dialogs()
             if (d.is_group or d.is_channel)
         ]
+        await rkp.edit(
+                    f"**Requesting  to ungban user!\nUnban in progress...**"
+                )
         for i in testrk:
             try:
                 await rk.client.edit_permissions(i, user, send_messages=True)
                 a += 1
-                await rkp.edit(
-                    f"**Requesting  to ungban user!\nUnGbanned in {a} chats.....**"
-                )
             except BaseException:
                 b += 1
     else:
@@ -208,14 +208,14 @@ async def gspider(rk):
     except BaseException:
         pass
     return await rkp.edit(
-        f"**UnGbanned** [{user.first_name}](tg://user?id={user.id}) **in {a} chat(s) , UnBlocked and removed user from Gban watch **"
+        f"**UnGbanned** [{user.first_name}](tg://user?id={user.id}) **\nChats affected - {a}\nUnBlocked and removed user from Gban watch **"
     )
 
 
 CMD_HELP.update(
     {
         "gban": ".gban <username> / <userid> / <reply to a user>\
-\n**Usage**: Globel ban the person in all groups, channels , block in pm , add gban watch (use with solution) \
+\n**Usage**: Global ban the person in all groups, channels , block in pm , add gban watch (use with solution) \
 \n\n.ungban <username> / <userid> / <reply to a user>\
 \n**Usage**: unban user from all groups, channels , remove user from gban watch.\
 "
