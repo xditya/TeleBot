@@ -253,20 +253,6 @@ def register(**args):
     return decorator
 
 
-import sys
-import math
-from telebot import bot
-from telethon import events
-from pathlib import Path
-from telebot.telebotConfig import Var, Config
-from telebot import LOAD_PLUG
-from telebot import CMD_LIST
-import re
-import logging
-import inspect
-from time import gmtime, strftime
-from asyncio import create_subprocess_exec as asyncsubshell
-
 handler = Config.CMD_HNDLR if Config.CMD_HNDLR else r"\."
 sudo_hndlr = Config.SUDO_HNDLR if Config.SUDO_HNDLR else "!"
 
@@ -507,13 +493,18 @@ def register(**args):
     return decorator
 
 # error logger
+
+
 def errors_handler(func):
     async def wrapper(tele):
         try:
             await func(tele)
         except BaseException:
             date = strftime("%Y-%m-%d %H:%M:%S", gmtime())
-            new = {"error": str(sys.exc_info()[1]), "date": datetime.datetime.now()}
+            new = {
+                "error": str(
+                    sys.exc_info()[1]),
+                "date": datetime.datetime.now()}
             text = "**TELEBOT CRASH REPORT**\n\n"
             link = "[this group](https://t.me/TeleBotHelpChat)"
             text += "You may report this, if needed."
@@ -539,13 +530,15 @@ def errors_handler(func):
             errlog += "\n\n\nLast 10 commits:\n"
             process = await asyncsubshell(command, stdout=asyncsub.PIPE, stderr=asyncsub.PIPE)
             stdout, stderr = await process.communicate()
-            result = str(stdout.decode().strip()) + str(stderr.decode().strip())
+            result = str(stdout.decode().strip()) + \
+                str(stderr.decode().strip())
             errlog += result
             file = open("error.log", "w+")
             file.write(errlog)
             file.close()
             await tele.client.send_file(Var.PRIVATE_GROUP_ID, "error.log", caption=text)
     return wrapper
+
 
 async def progress(current, total, event, start, type_of_ps, file_name=None):
     """Generic progress_callback for both
