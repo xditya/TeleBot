@@ -51,6 +51,7 @@ async def log(log_text):
             await log_text.edit("`What am I supposed to log?`")
             return
         await eor(log_text, "`Message saved 😁`")
+        await log_text.delete(10)
     else:
         await eor(log_text, "`This feature requires Logging to be enabled!`")
     await sleep(2)
