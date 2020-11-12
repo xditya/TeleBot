@@ -267,8 +267,9 @@ async def tel(event):
         x = await tap[0].click(event.chat_id)
         await x.edit("Song found!")
         await event.delete()
-    except:
-        await event.edit("`Sorry, the requested song is not available!`")  
+    except BaseException:
+        await event.edit("`Sorry, the requested song is not available!`")
+
 
 @telebot.on(admin_cmd(pattern="font ?(.*)"))
 @telebot.on(sudo_cmd(pattern="font ?(.*)", allow_sudo=True))
