@@ -84,11 +84,6 @@
    "value": "",
    "required": false
   },
-  "PRIVATE_GROUP_BOT_API_ID": {
-   "description": "Must read https://telegra.ph/TeleBot-Setup-06-06 for knowing how to get the value. Required for pmpermit.",
-   "value": "",
-   "required": true
-  },
   "PRIVATE_GROUP_ID": {
    "description": "Same value as PRIVATE_GROUP_BOT_API_ID. Must read https://telegra.ph/TeleBot-Setup-06-06 for knowing how to get the value. Required for pmpermit.",
    "value": "",
