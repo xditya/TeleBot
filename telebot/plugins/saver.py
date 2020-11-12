@@ -22,7 +22,7 @@ from asyncio import sleep
 from telethon import events
 
 from telebot import CMD_HELP
-from telebot.telebotConfig import Config
+from telebot.telebotConfig import Var
 from telebot.utils import admin_cmd
 
 logging.basicConfig(
@@ -32,7 +32,7 @@ logging.basicConfig(
 NO_PM_LOG_USERS = []
 
 BOTLOG = True
-BOTLOG_CHATID = Config.PRIVATE_GROUP_BOT_API_ID
+BOTLOG_CHATID = Var.PRIVATE_GROUP_ID
 
 
 @telebot.on(admin_cmd(outgoing=True, pattern=r"save(?: |$)([\s\S]*)"))
