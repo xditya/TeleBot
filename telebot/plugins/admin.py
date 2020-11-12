@@ -402,8 +402,7 @@ async def gspider(gspdr):
 
     # Check if the function running under SQL mode
     try:
-        from 
-        .sql_helper.gmute_sql import gmute
+        from telebot.plugins.sql_helper.gmute_sql import gmute
     except AttributeError:
         await gspdr.edit(NO_SQL)
         return
