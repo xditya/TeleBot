@@ -15,9 +15,11 @@
 #    along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 from googletrans import Translator
+
 from telebot import CMD_HELP
 
 translator = Translator()
+
 
 @telebot.on(admin_cmd(pattern="langdet ?(.*)"))
 async def tele(event):
@@ -25,7 +27,14 @@ async def tele(event):
     if event.reply_to_msg_id:
         previous_message = await event.get_reply_message()
         theword = previous_message.message
-    ok = translator.detect('theword')
-    await event.edit(f"**The given sentence/word** - `{theword}`\n\n**Detected language** - `{ok.lang}`\n\n**Detection Accuracy** - `{ok.confidence}`")
-    
-CMD_HELP.update({"langdetect": ".langdet <sentence/reply to sentence>\nUse - Find in which language the given message is."})
+    ok = translator.detect("theword")
+    await event.edit(
+        f"**The given sentence/word** - `{theword}`\n\n**Detected language** - `{ok.lang}`\n\n**Detection Accuracy** - `{ok.confidence}`"
+    )
+
+
+CMD_HELP.update(
+    {
+        "langdetect": ".langdet <sentence/reply to sentence>\nUse - Find in which language the given message is."
+    }
+)
