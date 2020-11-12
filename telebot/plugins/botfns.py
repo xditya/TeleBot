@@ -262,10 +262,13 @@ async def tel(event):
     tele = event.pattern_match.group(1)
     if event.reply_to_msg_id:
         await event.get_reply_message()
-    tap = await bot.inline_query(botusername, tele)
-    await tap[0].click(event.chat_id)
-    await event.delete()
-
+    try:
+        tap = await bot.inline_query(botusername, tele)
+        x = await tap[0].click(event.chat_id)
+        await x.edit("Song found!")
+        await event.delete()
+    except:
+        await event.edit("`Sorry, the requested song is not available!`")  
 
 @telebot.on(admin_cmd(pattern="font ?(.*)"))
 @telebot.on(sudo_cmd(pattern="font ?(.*)", allow_sudo=True))
