@@ -51,7 +51,7 @@ async def _(event):
     ms = (end - start).microseconds / 1000
     uptime = get_readable_time((time.time() - StartTime))
     await x.edit(
-        f" ⪼ **Ping speed** : `{ms}`\n ⪼ **Uptime** : `{uptime}`\n ⪼ **Owner** : [{TELE_NAME}](tg://user?id={OWNER_ID})"
+        f"⪼ **Ping speed** : `{ms}`\n⪼ **Uptime** : `{uptime}`\n⪼ **Owner** : [{TELE_NAME}](tg://user?id={OWNER_ID})"
     )
 
 
