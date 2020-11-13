@@ -22,7 +22,7 @@ async def _(event):
         await event.reply("You can't ban a banned user lol")
     elif not check_is_black_list(user_id):
         add_user_to_bl(user_id)
-        await event.reply(f"Blocked [user]({tg://user?id={event.sender_id})")
+        await event.reply(f"Banned [user](tg://user?id={event.sender_id})")
         await tgbot.send_message(user_id, f"Why are you still here? You've been **banned** by {TELE_NAME}.")
         await tgbot.send_message(Var.PRIVATE_GROUP_ID, f"#Banned_User\nUser - {user_id}\nLink - [here](tg://user?id={user_id})")
 
