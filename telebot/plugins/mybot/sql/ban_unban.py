@@ -5,7 +5,6 @@
 from telebot.plugins.mybot.sql.blacklist_sql import add_user_to_bl, check_is_black_list, rem_user_from_bl
 from telebot.plugins.mybot.sql.users_sql import get_user_id
 from telebot.plugins import OWNER_ID, TELE_NAME
-from telebot import telebotConfig
 from telethon import events
 
 
