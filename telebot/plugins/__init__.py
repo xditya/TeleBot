@@ -65,5 +65,5 @@ tele += f"PMSecurity: {pm}\n"
 tele += f"\nVisit @TeleBotSupport for assistance.\n"
 telestats = f"{tele}"
 
-ALIVE_NAME = bot.me.first_name
+TELE_NAME = bot.me.first_name
 OWNER_ID = bot.me.id
