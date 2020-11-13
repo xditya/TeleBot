@@ -8,6 +8,7 @@ from telebot.plugins import OWNER_ID, TELE_NAME
 from telebot import telebotConfig
 from telethon import events
 
+
 @tgbot.on(events.newMessage(pattern="^/ban"))
 async def _(event):
     if event.sender_id == OWNER_ID:
@@ -24,6 +25,7 @@ async def _(event):
         await event.reply(f"Blocked [user]({tg://user?id={event.sender_id})")
         await tgbot.send_message(user_id, f"Why are you still here? You've been **banned** by {TELE_NAME}.")
         await tgbot.send_message(Var.PRIVATE_GROUP_ID, f"#Banned_User\nUser - {user_id}\nLink - [here](tg://user?id={user_id})")
+
 
 @tgbot.on(events.NewMessage(patten="^/unblock"))
 async def _(event):

@@ -9,6 +9,7 @@ from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker, scoped_session
 from .. import DB_URI
 
+
 def start() -> scoped_session:
     """ returns SQLAlchemy ScopedSession """
     engine = create_engine(DB_URI)

@@ -2,8 +2,7 @@
 
 from sqlalchemy import (
     Column,
-    String,
-    Integer
+    String
 )
 from . import (
     SESSION,
@@ -20,7 +19,9 @@ class blacklist(BASE):
         self.chat_id = chat_id
         # self.reason = reason
 
+
 blacklist.__table__.create(checkfirst=True)
+
 
 def add_user_to_bl(chat_id: int):
     """Adding the user to the blacklist"""
@@ -28,14 +29,17 @@ def add_user_to_bl(chat_id: int):
     SESSION.add(__user)
     SESSION.commit()
 
+
 def check_is_black_list(chat_id):
     """check if blacklisted"""
     try:
-        return SESSION.query(blacklist).filter(blacklist.chat_id == str(chat_id)).one()
-    except:
+        return SESSION.query(blacklist).filter(
+            blacklist.chat_id == str(chat_id)).one()
+    except BaseException:
         return None
     finally:
         SESSION.close()
+
 
 def rem_user_from_bl(chat_id):
     """remove from bl"""
@@ -43,6 +47,7 @@ def rem_user_from_bl(chat_id):
     if __user:
         SESSION.delete(__user)
         SESSION.commit()
+
 
 def all_bl_users():
     """get all bl users"""
