@@ -307,8 +307,8 @@ async def _(event):
 async def muter(moot):
     """ Used for deleting the messages of muted people """
     try:
-        from telebot.modules.sql_helper.gmute_sql import is_gmuted
-        from telebot.modules.sql_helper.spam_mute_sql import is_muted
+        from telebot.plugins.sql_helper.gmute_sql import is_gmuted
+        from telebot.plugins.sql_helper.spam_mute_sql import is_muted
     except AttributeError:
         return
     muted = is_muted(moot.chat_id)
