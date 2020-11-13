@@ -2,6 +2,7 @@ import sys
 import math
 import datetime
 from telebot import bot
+import traceback
 from telethon import events
 from pathlib import Path
 from telebot.telebotConfig import Var, Config
