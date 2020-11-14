@@ -13,7 +13,7 @@ from .. import ALIVE_NAME, CMD_HELP
 from ..utils import admin_cmd
 
 DEFAULTUSER = str(ALIVE_NAME) if ALIVE_NAME else "TeleBot"
-DEFAULTUSERBIO = "404: No bio found!˙"
+DEFAULTUSERBIO = "404: No bio found!"
 if Var.PRIVATE_GROUP_ID is None:
     BOTLOG = False
 else:
