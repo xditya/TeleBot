@@ -9,6 +9,7 @@ from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker, scoped_session
 from telebot.telebotConfig import DB_URI
 
+
 def start() -> scoped_session:
     """ returns SQLAlchemy ScopedSession """
     engine = create_engine(DB_URI)
@@ -21,8 +22,9 @@ def start() -> scoped_session:
         )
     )
 
+
 try:
     BASE = declarative_base()
     SESSION = start()
-except:
+except BaseException:
     pass
