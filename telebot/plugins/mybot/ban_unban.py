@@ -27,7 +27,7 @@ async def _(event):
         await tgbot.send_message(Var.PRIVATE_GROUP_ID, f"#Banned_User\nUser - {user_id}\nLink - [here](tg://user?id={user_id})")
 
 
-@tgbot.on(events.NewMessage(patten="^/unblock"))
+@tgbot.on(events.NewMessage(pattern="^/unblock"))
 async def _(event):
     if event.sender_id == OWNER_ID:
         msg = await event.get_reply_message()
