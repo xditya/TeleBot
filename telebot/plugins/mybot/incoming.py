@@ -1,6 +1,6 @@
 # Incoming message checker.
 from telebot.plugins.mybot.sql.users_sql import add_user_to_db
-from chatrobot.plugins.sql.blacklist_sql import check_is_black_list
+from telebot.plugins.mybot.sql.blacklist_sql import check_is_black_list
 from telethon import events
 from telebot.plugins import OWNER_ID
 
