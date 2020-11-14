@@ -8,6 +8,7 @@ from telebot.plugins import OWNER_ID, TELE_NAME
 from telethon import events
 from telebot.telebotConfig import Var
 
+
 @tgbot.on(events.NewMessage(pattern="^/ban"))
 async def _(event):
     if event.sender_id == OWNER_ID:
