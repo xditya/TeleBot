@@ -42,7 +42,7 @@ async def owner(event):
 
 
 @tgbot.on(events.callbackquery.CallbackQuery(data=re.compile(b"settings")))
-async def settings(event): 
+async def settings(event):
     if event.sender_id == OWNER_ID:
         await event.delete()
         await tgbot.send_message(event.chat_id,
@@ -61,10 +61,10 @@ async def pmbot(event):
     if event.sender_id == OWNER_ID:
         await event.delete()
         await tgbot.send_message(event.chat_id,
-                             f"Here are the availabe settings for PM bot.\nCurrently active: {LOAD_MYBOT}",
-                             buttons=[
-                                 [custom.Button.inline("Enable", data="enable"), custom.Button.inline("Disable", data="disable")]
-                             ])
+                                 f"Here are the availabe settings for PM bot.\nCurrently active: {LOAD_MYBOT}",
+                                 buttons=[
+                                     [custom.Button.inline("Enable", data="enable"), custom.Button.inline("Disable", data="disable")]
+                                 ])
     else:
         await event.answer("You cant use this bot.", alert=True)
 
