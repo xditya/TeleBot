@@ -2,27 +2,51 @@ import re
 from telebot.plugins.mybot import *
 from telethon import events, custom, Button
 import heroku3
-from telebot.telebotConfig import Var
+from telebot import telebotConfig
+import asyncio 
+import os
+import requests
 
 LOAD_MYBOT = Var.LOAD_MYBOT
 Heroku = heroku3.from_key(Var.HEROKU_API_KEY)
 heroku_api = "https://api.heroku.com"
 
 # start-other-disabled
-
-
-@tgbot.on(events.NewMessage(pattern="^/start"))
+@tgbot.on(events.NewMessage(pattern="^/start (.*)"))
 async def start_all(event):
-    if event.sender_id == OWNER_ID:
+    if from_users = OWNER:
         return
     else:
         await tgbot.send_message(event.chat_id,
-                                 startotherdis,
-                                 buttons=[
-                                     (Button.url(
-                                         "TeleBot",
-                                         url="https://github.com/xditya/TeleBot"))]
-                                 )
+                                startotherdis,
+                                buttons = [(custom.Button.inline("What can I do here?", data="oof"))]
+        )
+    try:
+        hmm = event.pattern_match.group(1)
+    except:
+        pass
+    if hmm == "logs":
+        with open('logs.txt', 'w') as log:
+        log.write(app.get_log())
+        ok = app.get_log()
+        url = "https://del.dog/documents"
+        r = requests.post(url, data=ok.encode("UTF-8")).json()
+        url = f"https://del.dog/{r['key']}"
+        if event.sender_id == OWNER_ID:
+            await tgbot.send_file(
+                event.chat_id,
+                "logs.txt",
+                reply_to=event.id,
+                caption="**Heroku** TeleBot Logs",
+                buttons=[
+                    [Button.url("View Online", f"{url}")],
+                    [Button.url("Crashed?", "t.me/TeleBotHelpChat")]
+                ])
+        else:
+            await tgbot.send_message(event.chat_id, "This option is only for my owner!")
+        await asyncio.sleep(5)
+        return os.remove('logs.txt')
+
 
 # start-owner
 
