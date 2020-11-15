@@ -42,9 +42,9 @@ async def owner(event):
 
 
 @tgbot.on(events.callbackquery.CallbackQuery(data=re.compile(b"settings")))
-async def settings(event):
-    await event.delete()
+async def settings(event): 
     if event.sender_id == OWNER_ID:
+        await event.delete()
         await tgbot.send_message(event.chat_id,
                                  "Here are the available options.",
                                  buttons=[
@@ -52,45 +52,56 @@ async def settings(event):
                                      [Button.url(
                                          "Logs", url=f"https://t.me/{Var.TG_BOT_USER_NAME_BF_HER}?start=logs")]
                                  ])
+    else:
+        await event.answer("You cant use this bot.", alert=True)
 
 
 @tgbot.on(events.callbackquery.CallbackQuery(data=re.compile(b"pmbot")))
 async def pmbot(event):
-    await event.delete()
-    await tgbot.send_message(event.chat_id,
+    if event.sender_id == OWNER_ID:
+        await event.delete()
+        await tgbot.send_message(event.chat_id,
                              f"Here are the availabe settings for PM bot.\nCurrently active: {LOAD_MYBOT}",
                              buttons=[
                                  [custom.Button.inline("Enable", data="enable"), custom.Button.inline("Disable", data="disable")]
                              ])
+    else:
+        await event.answer("You cant use this bot.", alert=True)
 
 
 @tgbot.on(events.callbackquery.CallbackQuery(data=re.compile(b"enable"))
           )  # pylint: disable=oof
 async def enable(event):
-    telebot = "LOAD_MYBOT"
-    if Var.HEROKU_APP_NAME is not None:
-        app = Heroku.app(Var.HEROKU_APP_NAME)
+    if event.sender_id == OWNER_ID:
+        telebot = "LOAD_MYBOT"
+        if Var.HEROKU_APP_NAME is not None:
+            app = Heroku.app(Var.HEROKU_APP_NAME)
+        else:
+            mssg = "`**HEROKU**:" "\nPlease setup your` **HEROKU_APP_NAME**"
+            return
+        heroku_var = app.config()
+        heroku_var[telebot] = "True"
+        mssg = "Successfully turned on PM Bot. Restarting now, please give me a minute."
+        await event.delete()
+        await tgbot.send_message(event.chat_id, mssg)
     else:
-        mssg = "`**HEROKU**:" "\nPlease setup your` **HEROKU_APP_NAME**"
-        return
-    heroku_var = app.config()
-    heroku_var[telebot] = "True"
-    mssg = "Successfully turned on PM Bot. Restarting now, please give me a minute."
-    await event.delete()
-    await tgbot.send_message(event.chat_id, mssg)
+        await event.answer("You cant use this bot.", alert=True)
 
 
 @tgbot.on(events.callbackquery.CallbackQuery(data=re.compile(b"disable"))
           )  # pylint: disable=oof
 async def enable(event):
-    telebot = "LOAD_MYBOT"
-    if Var.HEROKU_APP_NAME is not None:
-        app = Heroku.app(Var.HEROKU_APP_NAME)
+    if event.sender_id == OWNER_ID:
+        telebot = "LOAD_MYBOT"
+        if Var.HEROKU_APP_NAME is not None:
+            app = Heroku.app(Var.HEROKU_APP_NAME)
+        else:
+            mssg = "`**HEROKU**:" "\nPlease setup your` **HEROKU_APP_NAME**"
+            return
+        heroku_var = app.config()
+        heroku_var[telebot] = "False"
+        mssg = "Successfully turned off PM Bot. Restarting now, please give me a minute."
+        await event.delete()
+        await tgbot.send_message(event.chat_id, mssg)
     else:
-        mssg = "`**HEROKU**:" "\nPlease setup your` **HEROKU_APP_NAME**"
-        return
-    heroku_var = app.config()
-    heroku_var[telebot] = "False"
-    mssg = "Successfully turned off PM Bot. Restarting now, please give me a minute."
-    await event.delete()
-    await tgbot.send_message(event.chat_id, mssg)
+        await event.answer("You cant use this bot.", alert=True)
