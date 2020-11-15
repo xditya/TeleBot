@@ -29,7 +29,7 @@ async def start_all(event):
         pass
     if hmm == "logs":
         with open('logs.txt', 'w') as log:
-        log.write(app.get_log())
+            log.write(app.get_log())
         ok = app.get_log()
         url = "https://del.dog/documents"
         r = requests.post(url, data=ok.encode("UTF-8")).json()
