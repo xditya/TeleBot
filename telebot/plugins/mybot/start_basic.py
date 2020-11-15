@@ -41,7 +41,7 @@ async def owner(event):
 # callbacks
 
 
-@tgbot.on(events.callbackquery.CallbackQuery(data=re.compile(b"settings")))
+@tgbot.on(events.callbackquery.CallbackQuery(data=re.compile(b"settings"), from_users=OWNER_ID))
 async def settings(event):
     await event.delete()
     await tgbot.send_message(event.chat_id,
@@ -53,7 +53,7 @@ async def settings(event):
                              ])
 
 
-@tgbot.on(events.callbackquery.CallbackQuery(data=re.compile(b"pmbot")))
+@tgbot.on(events.callbackquery.CallbackQuery(data=re.compile(b"pmbot"), from_users=OWNER_ID))
 async def pmbot(event):
     await event.delete()
     await tgbot.send_message(event.chat_id,
@@ -63,7 +63,7 @@ async def pmbot(event):
                              ])
 
 
-@tgbot.on(events.callbackquery.CallbackQuery(data=re.compile(b"enable"))
+@tgbot.on(events.callbackquery.CallbackQuery(data=re.compile(b"enable"), from_users=OWNER_ID)
           )  # pylint: disable=oof
 async def enable(event):
     telebot = "LOAD_MYBOT"
@@ -79,7 +79,7 @@ async def enable(event):
     await tgbot.send_message(event.chat_id, mssg)
 
 
-@tgbot.on(events.callbackquery.CallbackQuery(data=re.compile(b"disable"))
+@tgbot.on(events.callbackquery.CallbackQuery(data=re.compile(b"disable"), from_users=OWNER_ID)
           )  # pylint: disable=oof
 async def enable(event):
     telebot = "LOAD_MYBOT"
