@@ -2,6 +2,7 @@ import re
 from telebot.plugins.mybot import *
 from telethon import events, custom, Button
 import heroku3
+from telebot import telebotConfig
 import asyncio
 import os
 import requests
@@ -13,23 +14,45 @@ heroku_api = "https://api.heroku.com"
 # start-other-disabled
 
 
-@tgbot.on(events.NewMessage(pattern="^/start"))
+@tgbot.on(events.NewMessage(pattern="^/start (.*)")) # pylint: disable=oof
 async def start_all(event):
     if event.sender_id == OWNER_ID:
         return
     else:
         await tgbot.send_message(event.chat_id,
                                  startotherdis,
-                                 buttons=[
-    (custom.Button.inline(
-        "What can I do here?",
-         data="oof"))]
+                                 buttons=[(custom.Button.inline("What can I do here?", data="wew"))]
                                  )
+    try:
+        hmm = event.pattern_match.group(1)
+    except BaseException:
+        pass
+    if hmm == "logs":
+        with open('logs.txt', 'w') as log:
+            log.write(app.get_log())
+        ok = app.get_log()
+        url = "https://del.dog/documents"
+        r = requests.post(url, data=ok.encode("UTF-8")).json()
+        url = f"https://del.dog/{r['key']}"
+        if event.sender_id == OWNER_ID:
+            await tgbot.send_file(
+                event.chat_id,
+                "logs.txt",
+                reply_to=event.id,
+                caption="**Heroku** TeleBot Logs",
+                buttons=[
+                    [Button.url("View Online", f"{url}")],
+                    [Button.url("Crashed?", "t.me/TeleBotHelpChat")]
+                ])
+        else:
+            await tgbot.send_message(event.chat_id, "This option is only for my owner!")
+        await asyncio.sleep(5)
+        return os.remove('logs.txt')
 
 # start-owner
 
 
-@tgbot.on(events.NewMessage(pattern="^/start", from_users=OWNER_ID))
+@tgbot.on(events.NewMessage(pattern="^/start", from_users=OWNER_ID)) # pylint: disable=oof
 async def owner(event):
     await tgbot.send_message(event.chat_id,
                              startowner,
@@ -40,42 +63,21 @@ async def owner(event):
                                      "Settings ⚙️", data="settings")]
                              ])
 
-
-@tgbot.on(events.NewMessage(pattern="^/start logs"))
-async def _(givelogs):
-    try:
-        Heroku = heroku3.from_key(Var.HEROKU_API_KEY)
-        app = Heroku.app(Var.HEROKU_APP_NAME)
-    except BaseException:
-        return await tgbot.send_message(
-            givelogs,
-            " Please make sure your Heroku API Key, Your App name are configured correctly in the heroku var !",
-        )
-    x = await tgbot.send_message(givelogs, "Sending Logs..")
-    with open("logs-telebot.txt", "w") as log:
-        log.write(app.get_log())
-    ok = app.get_log()
-    message = ok
-    url = "https://del.dog/documents"
-    r = requests.post(url, data=message.encode("UTF-8")).json()
-    url = f"https://del.dog/{r['key']}"
-    await givelogs.client.send_file(
-        givelogs.chat_id,
-        "logs-telebot.txt",
-        reply_to=givelogs.id,
-        caption=f"**Heroku** TeleBot Logs.",
-        buttons=[
-            [Button.url("View Online", f"{url}")],
-            [Button.url("Crashed?", "https://t.me/TeleBotHelpChat")]
-    )
-    await asyncio.sleep(5)
-    await givelogs.delete()
-    return os.remove("logs-telebot.txt")
-
 # callbacks
 
-
-@ tgbot.on(events.callbackquery.CallbackQuery(data=re.compile(b"settings")))
+@tgbot.on(events.callbackquery.CallbackQuery(data=re.compile(b"wew"))) # pylint: disable=oof
+async def settings(event):
+    await event.delete()
+    await tgbot.send_message(event.chat_id,
+                                 "There isn't much that you can do over here rn.",
+                                 buttons=[
+                                     [Button.url(
+                                         "Repository", url="https://github.com/xditya/TeleBot")],
+                                     [Button.url(
+                                         "Support", url="https://t.me/TeleBotSupport")]
+                                 ])
+        
+@tgbot.on(events.callbackquery.CallbackQuery(data=re.compile(b"settings"))) # pylint: disable=oof
 async def settings(event):
     if event.sender_id == OWNER_ID:
         await event.delete()
@@ -91,7 +93,7 @@ async def settings(event):
         await event.answer("You cant use this bot.", alert=True)
 
 
-@ tgbot.on(events.callbackquery.CallbackQuery(data=re.compile(b"pmbot")))
+@tgbot.on(events.callbackquery.CallbackQuery(data=re.compile(b"pmbot"))) # pylint: disable=oof
 async def pmbot(event):
     if event.sender_id == OWNER_ID:
         await event.delete()
@@ -105,7 +107,7 @@ async def pmbot(event):
         await event.answer("You cant use this bot.", alert=True)
 
 
-@ tgbot.on(events.callbackquery.CallbackQuery(data=re.compile(b"enable"))
+@tgbot.on(events.callbackquery.CallbackQuery(data=re.compile(b"enable")) # pylint: disable=oof
           )  # pylint: disable=oof
 async def enable(event):
     if event.sender_id == OWNER_ID:
@@ -124,8 +126,7 @@ async def enable(event):
         await event.answer("You cant use this bot.", alert=True)
 
 
-@ tgbot.on(events.callbackquery.CallbackQuery(data=re.compile(b"disable"))
-          )  # pylint: disable=oof
+@tgbot.on(events.callbackquery.CallbackQuery(data=re.compile(b"disable")))  # pylint: disable=oof
 async def enable(event):
     if event.sender_id == OWNER_ID:
         telebot= "LOAD_MYBOT"
