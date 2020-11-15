@@ -58,7 +58,7 @@ async def pmbot(event):
     await tgbot.send_message(event.chat_id,
                         f"Here are the availabe settings for PM bot.\nCurrently active: {LOAD_MYBOT}",
                         buttons=[
-                            [(custom.Button.inline("Enable", data="enable"), (custom.Button.inline("Disable", data="disable")]
+                            [(custom.Button.inline("Enable", data="enable"), (custom.Button.inline("Disable", data="disable"))]
                         ])
 
 @ tgbot.on(events.callbackquery.CallbackQuery(data=re.compile(b"enable")))
