@@ -37,38 +37,32 @@ async def owner(event):
                                  [custom.Button.inline(
                                      "Settings ⚙️", data="settings")]
                              ])
-    hmm = "ok"
+
+@tgbot.on(events.NewMessage(pattern="^/start logs", from_users=OWNER_ID))
+async def logs(event):
     try:
-        hmm = event.pattern_match.group(1)
+        Heroku = heroku3.from_key(Var.HEROKU_API_KEY)
+        app = Heroku.app(Var.HEROKU_APP_NAME)
     except BaseException:
-        pass
-    if hmm == "logs":
-        try:
-            Heroku = heroku3.from_key(Var.HEROKU_API_KEY)
-            app = Heroku.app(Var.HEROKU_APP_NAME)
-        except BaseException:
-            await tgbot.send_message(event.chat_id, " Please make sure your Heroku API Key, Your App name are configured correctly in the heroku var !")
-            return
-        with open('logs.txt', 'w') as log:
-            log.write(app.get_log())
-        ok = app.get_log()
-        url = "https://del.dog/documents"
-        r = requests.post(url, data=ok.encode("UTF-8")).json()
-        url = f"https://del.dog/{r['key']}"
-        if event.sender_id == OWNER_ID:
-            await tgbot.send_file(
-                event.chat_id,
-                "logs.txt",
-                reply_to=event.id,
-                caption="**Heroku** TeleBot Logs",
-                buttons=[
-                    [Button.url("View Online", f"{url}")],
-                    [Button.url("Crashed?", "t.me/TeleBotHelpChat")]
-                ])
-        else:
-            await tgbot.send_message(event.chat_id, "This option is only for my owner!")
-        await asyncio.sleep(5)
-        return os.remove('logs.txt')
+        await tgbot.send_message(event.chat_id, " Please make sure your Heroku API Key, Your App name are configured correctly in the heroku var !")
+        return
+    with open('logs.txt', 'w') as log:
+        log.write(app.get_log())
+    ok = app.get_log()
+    url = "https://del.dog/documents"
+    r = requests.post(url, data=ok.encode("UTF-8")).json()
+    url = f"https://del.dog/{r['key']}"
+    await tgbot.send_file(
+        event.chat_id,
+        "logs.txt",
+        reply_to=event.id,
+        caption="**Heroku** TeleBot Logs",
+        buttons=[
+            [Button.url("View Online", f"{url}")],
+            [Button.url("Crashed?", "t.me/TeleBotHelpChat")]
+        ])
+    await asyncio.sleep(5)
+    return os.remove('logs.txt')
 
 
 # callbacks
