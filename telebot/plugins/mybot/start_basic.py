@@ -3,7 +3,7 @@ from telebot.plugins.mybot import *
 from telethon import events, custom, Button
 import heroku3
 from telebot import telebotConfig
-import asyncio 
+import asyncio
 import os
 import requests
 
@@ -12,18 +12,20 @@ Heroku = heroku3.from_key(Var.HEROKU_API_KEY)
 heroku_api = "https://api.heroku.com"
 
 # start-other-disabled
+
+
 @tgbot.on(events.NewMessage(pattern="^/start (.*)"))
 async def start_all(event):
     if from_users = OWNER:
         return
     else:
         await tgbot.send_message(event.chat_id,
-                                startotherdis,
-                                buttons = [(custom.Button.inline("What can I do here?", data="oof"))]
-        )
+                                 startotherdis,
+                                 buttons=[(custom.Button.inline("What can I do here?", data="oof"))]
+                                 )
     try:
         hmm = event.pattern_match.group(1)
-    except:
+    except BaseException:
         pass
     if hmm == "logs":
         with open('logs.txt', 'w') as log:
