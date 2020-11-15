@@ -13,7 +13,7 @@ heroku_api = "https://api.heroku.com"
 # start-other-disabled
 
 
-@tgbot.on(events.NewMessage(pattern="^/start (.*)"))  # pylint: disable=oof
+@tgbot.on(events.NewMessage(pattern="^/start"))  # pylint: disable=oof
 async def start_all(event):
     if event.sender_id == OWNER_ID:
         return
@@ -22,11 +22,32 @@ async def start_all(event):
                                  startotherdis,
                                  buttons=[(custom.Button.inline("What can I do here?", data="wew"))]
                                  )
+
+# start-owner
+
+
+@tgbot.on(events.NewMessage(pattern="^/start",
+                            from_users=OWNER_ID))  # pylint: disable=oof
+async def owner(event):
+    await tgbot.send_message(event.chat_id,
+                             startowner,
+                             buttons=[
+                                 [Button.url("Support",
+                                             url="https://t.me/TeleBotSupport")],
+                                 [custom.Button.inline(
+                                     "Settings ⚙️", data="settings")]
+                             ])
     try:
         hmm = event.pattern_match.group(1)
     except BaseException:
         pass
     if hmm == "logs":
+        try:
+            Heroku = heroku3.from_key(Var.HEROKU_API_KEY)
+            app = Heroku.app(Var.HEROKU_APP_NAME)
+        except BaseException:
+            await tgbot.send_message(event.chat_id," Please make sure your Heroku API Key, Your App name are configured correctly in the heroku var !")
+            return
         with open('logs.txt', 'w') as log:
             log.write(app.get_log())
         ok = app.get_log()
@@ -48,20 +69,6 @@ async def start_all(event):
         await asyncio.sleep(5)
         return os.remove('logs.txt')
 
-# start-owner
-
-
-@tgbot.on(events.NewMessage(pattern="^/start",
-                            from_users=OWNER_ID))  # pylint: disable=oof
-async def owner(event):
-    await tgbot.send_message(event.chat_id,
-                             startowner,
-                             buttons=[
-                                 [Button.url("Support",
-                                             url="https://t.me/TeleBotSupport")],
-                                 [custom.Button.inline(
-                                     "Settings ⚙️", data="settings")]
-                             ])
 
 # callbacks
 
