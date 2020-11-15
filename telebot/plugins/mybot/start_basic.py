@@ -67,6 +67,7 @@ async def _(givelogs):
         buttons=[
             [Button.url("View Online", f"{url}")],
             [Button.url("Crashed?", "https://t.me/TeleBotHelpChat")]
+        ]
     )
     await asyncio.sleep(5)
     await givelogs.delete()
