@@ -18,8 +18,6 @@ from telebot.plugins import OWNER_ID, TELE_NAME
 import time
 from datetime import datetime
 
-LOAD_MYBOT = True
-
 # start-other disabled
 startotherdis = """
 Hi there. I am {}'s bot. Nice to see you here.
