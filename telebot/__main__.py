@@ -10,7 +10,7 @@ from telebot import CMD_HNDLR
 
 TELE = Var.PRIVATE_GROUP_ID
 BOTNAME = Var.TG_BOT_USER_NAME_BF_HER
-
+LOAD_MYBOT = Var.LOAD_MYBOT
 
 async def add_bot(bot_token):
     await bot.start(bot_token)
@@ -55,15 +55,17 @@ print("TeleBot has been deployed! ")
 
 print("Setting up TGBot")
 
-path = "telebot/plugins/mybot/*.py"
-files = glob.glob(path)
-for name in files:
-    with open(name) as f:
-        path1 = Path(f.name)
-        shortname = path1.stem
-        start_mybot(shortname.replace(".py", ""))
-
-print("TGBot has been set up!")
+if LOAD_MYBOT == "True":
+    path = "telebot/plugins/mybot/*.py"
+    files = glob.glob(path)
+    for name in files:
+        with open(name) as f:
+            path1 = Path(f.name)
+            shortname = path1.stem
+            start_mybot(shortname.replace(".py", ""))
+    print("TGBot set up completely!")
+    
+print("TGBot set up - Level - Basic")
 print("TeleBot has been fully deployed! Do Visit @TeleBotSupport")
 bot.loop.run_until_complete(startup_log_all_done())
 
