@@ -3,7 +3,7 @@ from telebot import bot
 from sys import argv
 from telethon import TelegramClient
 from telebot.telebotConfig import Var
-from telebot.utils import load_module, start_mybot
+from telebot.utils import load_module, start_mybot, load_pmbot
 from pathlib import Path
 import telethon.utils
 from telebot import CMD_HNDLR
@@ -55,15 +55,22 @@ for name in files:
 print("TeleBot has been deployed! ")
 
 print("Setting up TGBot")
+path = "telebot/plugins/mybot/*.py"
+files = glob.glob(path)
+for name in files:
+    with open(name) as f:
+        path1 = Path(f.name)
+        shortname = path1.stem
+        start_mybot(shortname.replace(".py", ""))
 
 if LOAD_MYBOT == "True":
-    path = "telebot/plugins/mybot/*.py"
+    path = "telebot/plugins/mybot/pmbot/*.py"
     files = glob.glob(path)
     for name in files:
         with open(name) as f:
             path1 = Path(f.name)
             shortname = path1.stem
-            start_mybot(shortname.replace(".py", ""))
+            load_pmbot(shortname.replace(".py", ""))
     print("TGBot set up completely!")
 
 print("TGBot set up - Level - Basic")
