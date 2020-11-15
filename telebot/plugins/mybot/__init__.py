@@ -25,7 +25,7 @@ Hi there. I am {}'s bot. Nice to see you here.
 """.format(TELE_NAME)
 
 # start-other enabled
-if Var.PMBOT_START_MSSG == None:
+if Var.PMBOT_START_MSSG is None:
     MSSG = """
 Hi there, I am {}'s personal bot.
 You can contact my master via this bot.
@@ -35,7 +35,7 @@ Have a nice time!
 else:
     MSSG = Var.PMBOT_START_MSSG
 startotherena = MSSG
-    
+
 # start-owner
 startowner = """
 Welcome back {}. Choose the options available from below:
