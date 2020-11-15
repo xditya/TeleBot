@@ -17,6 +17,7 @@
 from telebot.plugins import OWNER_ID, TELE_NAME
 import time
 from datetime import datetime
+from telebot.telebotConfig import Var
 
 # start-other disabled
 startotherdis = """
@@ -24,13 +25,17 @@ Hi there. I am {}'s bot. Nice to see you here.
 """.format(TELE_NAME)
 
 # start-other enabled
-startotherena = """
+if Var.PMBOT_START_MSSG == None:
+    MSSG = """
 Hi there, I am {}'s personal bot.
 You can contact my master via this bot.
 
 Have a nice time!
 """.format(TELE_NAME)
-
+else:
+    MSSG = Var.PMBOT_START_MSSG
+startotherena = MSSG
+    
 # start-owner
 startowner = """
 Welcome back {}. Choose the options available from below:
