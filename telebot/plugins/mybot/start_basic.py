@@ -13,7 +13,7 @@ heroku_api = "https://api.heroku.com"
 # start-other-disabled
 
 
-@tgbot.on(events.NewMessage(pattern="^/start (.*)"))
+@tgbot.on(events.NewMessage(pattern="^/start"))
 async def start_all(event):
     if event.sender_id == OWNER_ID:
         return
@@ -22,32 +22,6 @@ async def start_all(event):
                                  startotherdis,
                                  buttons=[(custom.Button.inline("What can I do here?", data="oof"))]
                                  )
-    try:
-        hmm = event.pattern_match.group(1)
-    except BaseException:
-        pass
-    if hmm == "logs":
-        with open('logs.txt', 'w') as log:
-            log.write(app.get_log())
-        ok = app.get_log()
-        url = "https://del.dog/documents"
-        r = requests.post(url, data=ok.encode("UTF-8")).json()
-        url = f"https://del.dog/{r['key']}"
-        if event.sender_id == OWNER_ID:
-            await tgbot.send_file(
-                event.chat_id,
-                "logs.txt",
-                reply_to=event.id,
-                caption="**Heroku** TeleBot Logs",
-                buttons=[
-                    [Button.url("View Online", f"{url}")],
-                    [Button.url("Crashed?", "t.me/TeleBotHelpChat")]
-                ])
-        else:
-            await tgbot.send_message(event.chat_id, "This option is only for my owner!")
-        await asyncio.sleep(5)
-        return os.remove('logs.txt')
-
 
 # start-owner
 
@@ -62,6 +36,37 @@ async def owner(event):
                                  [custom.Button.inline(
                                      "Settings ⚙️", data="settings")]
                              ])
+
+@tgbot.on(events.NewMessage(pattern="^/start logs"))
+async def _(givelogs):
+    try:
+        Heroku = heroku3.from_key(Var.HEROKU_API_KEY)
+        app = Heroku.app(Var.HEROKU_APP_NAME)
+    except BaseException:
+        return await tgbot.send_message(
+            givelogs,
+            " Please make sure your Heroku API Key, Your App name are configured correctly in the heroku var !",
+        )
+    x = await tgbot.send_message(givelogs, "Sending Logs..")
+    with open("logs-telebot.txt", "w") as log:
+        log.write(app.get_log())
+    ok = app.get_log()
+    message = ok
+    url = "https://del.dog/documents"
+    r = requests.post(url, data=message.encode("UTF-8")).json()
+    url = f"https://del.dog/{r['key']}"
+    await givelogs.client.send_file(
+        givelogs.chat_id,
+        "logs-telebot.txt",
+        reply_to=givelogs.id,
+        caption=f"**Heroku** TeleBot Logs.",
+        buttons=[
+            [Button.url("View Online", f"{url}")],
+            [Button.url("Crashed?", "https://t.me/TeleBotHelpChat")]
+    )
+    await asyncio.sleep(5)
+    await givelogs.delete()
+    return os.remove("logs-telebot.txt")
 
 # callbacks
 
