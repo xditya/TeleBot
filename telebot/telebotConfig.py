@@ -54,6 +54,7 @@ class Var(object):
         int(x) for x in os.environ.get(
             "SUPPORT_USERS", "").split())
     LYDIA_API_KEY = os.environ.get("LYDIA_API_KEY", None)
+    PMBOT_START_MSSG = os.environ.get("PMBOT_START_MSSG", None)
     LESS_SPAMMY = os.environ.get("LESS_SPAMMY", None)
     HEROKU_API_KEY = os.environ.get("HEROKU_API_KEY", None)
     HEROKU_APP_NAME = os.environ.get("HEROKU_APP_NAME", None)
