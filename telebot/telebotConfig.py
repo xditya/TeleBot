@@ -78,6 +78,7 @@ class Var(object):
         t_file = open(TEMP_DOWNLOAD_DIRECTORY + "auth_token.txt", "w")
         t_file.write(AUTH_TOKEN_DATA)
         t_file.close()
+    LOAD_MYBOT = os.environ.get("LOAD_MYBOT", "True")
     PRIVATE_GROUP_ID = os.environ.get("PRIVATE_GROUP_ID", None)
     if PRIVATE_GROUP_ID is not None:
         try:
