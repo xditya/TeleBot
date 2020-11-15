@@ -2,7 +2,6 @@ import re
 from telebot.plugins.mybot import *
 from telethon import events, custom, Button
 import heroku3
-from telebot import telebotConfig
 import asyncio
 import os
 import requests
