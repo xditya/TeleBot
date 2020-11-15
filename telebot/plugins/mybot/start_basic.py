@@ -16,7 +16,7 @@ heroku_api = "https://api.heroku.com"
 
 @tgbot.on(events.NewMessage(pattern="^/start (.*)"))
 async def start_all(event):
-    if from_users = OWNER:
+    if event.sender_id == OWNER_ID:
         return
     else:
         await tgbot.send_message(event.chat_id,
