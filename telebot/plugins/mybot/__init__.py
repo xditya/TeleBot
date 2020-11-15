@@ -33,12 +33,14 @@ You can contact my master via this bot.
 Have a nice time!
 """.format(TELE_NAME)
 
-# start-owner 
+# start-owner
 startowner = """
 Welcome back {}. Choose the options available from below:
 """.format(TELE_NAME)
 
-#for ping
+# for ping
+
+
 def get_readable_time(seconds: int) -> str:
     count = 0
     ping_time = ""
@@ -63,6 +65,7 @@ def get_readable_time(seconds: int) -> str:
     time_list.reverse()
     ping_time += ":".join(time_list)
     return ping_time
+
 
 xstart = datetime.now()
 xend = datetime.now()
