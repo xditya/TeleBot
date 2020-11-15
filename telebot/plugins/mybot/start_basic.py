@@ -46,12 +46,12 @@ async def settings(event):
     await event.delete()
     if event.sender_id == OWNER_ID:
         await tgbot.send_message(event.chat_id,
-                             "Here are the available options.",
-                             buttons=[
-                                 [custom.Button.inline("PM Bot", data="pmbot")],
-                                 [Button.url(
-                                     "Logs", url=f"https://t.me/{Var.TG_BOT_USER_NAME_BF_HER}?start=logs")]
-                             ])
+                                 "Here are the available options.",
+                                 buttons=[
+                                     [custom.Button.inline("PM Bot", data="pmbot")],
+                                     [Button.url(
+                                         "Logs", url=f"https://t.me/{Var.TG_BOT_USER_NAME_BF_HER}?start=logs")]
+                                 ])
 
 
 @tgbot.on(events.callbackquery.CallbackQuery(data=re.compile(b"pmbot")))
@@ -64,7 +64,8 @@ async def pmbot(event):
                              ])
 
 
-@tgbot.on(events.callbackquery.CallbackQuery(data=re.compile(b"enable")))  # pylint: disable=oof
+@tgbot.on(events.callbackquery.CallbackQuery(data=re.compile(b"enable"))
+          )  # pylint: disable=oof
 async def enable(event):
     telebot = "LOAD_MYBOT"
     if Var.HEROKU_APP_NAME is not None:
@@ -79,7 +80,8 @@ async def enable(event):
     await tgbot.send_message(event.chat_id, mssg)
 
 
-@tgbot.on(events.callbackquery.CallbackQuery(data=re.compile(b"disable")))  # pylint: disable=oof
+@tgbot.on(events.callbackquery.CallbackQuery(data=re.compile(b"disable"))
+          )  # pylint: disable=oof
 async def enable(event):
     telebot = "LOAD_MYBOT"
     if Var.HEROKU_APP_NAME is not None:
