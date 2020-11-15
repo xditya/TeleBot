@@ -3,6 +3,7 @@ from telethon import events, Button
 
 # start-other-enabled
 
+
 @tgbot.on(events.NewMessage(pattern="^/start"))
 async def start_all(event):
     if event.sender_id == OWNER_ID:
