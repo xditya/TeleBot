@@ -46,7 +46,7 @@ async def owner(event):
             Heroku = heroku3.from_key(Var.HEROKU_API_KEY)
             app = Heroku.app(Var.HEROKU_APP_NAME)
         except BaseException:
-            await tgbot.send_message(event.chat_id," Please make sure your Heroku API Key, Your App name are configured correctly in the heroku var !")
+            await tgbot.send_message(event.chat_id, " Please make sure your Heroku API Key, Your App name are configured correctly in the heroku var !")
             return
         with open('logs.txt', 'w') as log:
             log.write(app.get_log())
