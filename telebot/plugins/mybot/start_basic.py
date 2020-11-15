@@ -58,10 +58,10 @@ async def pmbot(event):
     await tgbot.send_message(event.chat_id,
                         f"Here are the availabe settings for PM bot.\nCurrently active: {LOAD_MYBOT}",
                         buttons=[
-                            [(custom.Button.inline("Enable", data="enable"), (custom.Button.inline("Disable", data="disable"))]
+                            [custom.Button.inline("Enable", data="enable"), custom.Button.inline("Disable", data="disable")]
                         ])
 
-@ tgbot.on(events.callbackquery.CallbackQuery(data=re.compile(b"enable")))
+@tgbot.on(events.callbackquery.CallbackQuery(data=re.compile(b"enable"))) # pylint: disable=oof
 async def enable(event):
     telebot="LOAD_MYBOT"
     if Var.HEROKU_APP_NAME is not None:
@@ -75,7 +75,7 @@ async def enable(event):
     await event.delete()
     await tgbot.send_message(event.chat_id, mssg)
 
-@ tgbot.on(events.callbackquery.CallbackQuery(data=re.compile(b"disable")))
+@tgbot.on(events.callbackquery.CallbackQuery(data=re.compile(b"disable"))) # pylint: disable=oof
 async def enable(event):
     telebot="LOAD_MYBOT"
     if Var.HEROKU_APP_NAME is not None:
