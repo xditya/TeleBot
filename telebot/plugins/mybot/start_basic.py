@@ -1,7 +1,7 @@
 from telebot.plugins.mybot import *
 from telethon import events, custom, Button
 import heroku3
-
+from telebot.telebotConfig import Var
 LOAD_MYBOT = Var.LOAD_MYBOT
 Heroku = heroku3.from_key(Var.HEROKU_API_KEY)
 heroku_api = "https://api.heroku.com"
