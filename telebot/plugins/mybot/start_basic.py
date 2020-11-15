@@ -37,6 +37,7 @@ async def owner(event):
                                  [custom.Button.inline(
                                      "Settings ⚙️", data="settings")]
                              ])
+    hmm = "ok"
     try:
         hmm = event.pattern_match.group(1)
     except BaseException:
