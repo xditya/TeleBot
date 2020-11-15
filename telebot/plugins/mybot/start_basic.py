@@ -25,7 +25,7 @@ async def start_all(event):
 # start-owner
 
 
-@tgbot.on(events.NewMessage(pattern="^/start", from_users=OWNER))
+@tgbot.on(events.NewMessage(pattern="^/start", from_users=OWNER_ID))
 async def owner(event):
     await tgbot.send_message(event.chat_id,
                              startowner,
