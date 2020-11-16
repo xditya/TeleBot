@@ -104,12 +104,12 @@ async def settings(event):
         await event.answer("You cant use this bot.", alert=True)
 
 
-@tgbot.on(events.callbackquery.CallbackQuery(data=re.compile(b"settings"))
+@tgbot.on(events.callbackquery.CallbackQuery(data=re.compile(b"stats"))
           )  # pylint: disable=oof
 async def settings(event):
     if event.sender_id == OWNER_ID:
-        allu = all_users()
-        blu = all_bl_users()
+        allu = len(all_users())
+        blu = len(all_bl_users())
         pop = "Here is the stats for your bot:\nTotal Users = {}\nBlacklisted Users = {}".format(
             allu, blu)
         await event.answer(pop, alert=True)
