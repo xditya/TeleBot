@@ -107,9 +107,7 @@ async def settings(event):
 @tgbot.on(events.callbackquery.CallbackQuery(data=re.compile(b"deployme"))
           )  # pylint: disable=oof
 async def settings(event):
-    await event.delete()
-    await tgbot.send_message(event.chat_id,
-                             "Browse through the available options:",
+    await event.edit("Browse through the available options:",
                              buttons=[
                                      [(Button.url("Repository", url="https://github.com/xditya/TeleBot")),
                                       (Button.url("Deploy", url="https://dashboard.heroku.com/new?button-url=https%3A%2F%2Fgithub.com%2Fxditya%2FTeleBot%2F&template=https%3A%2F%2Fgithub.com%2Fxditya%2FTeleBot"))],
