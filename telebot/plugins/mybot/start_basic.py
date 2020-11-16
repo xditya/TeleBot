@@ -5,8 +5,8 @@ import heroku3
 import asyncio
 import os
 import requests
-from telebot.plugins.mybot.sql.blacklist_sql import all_bl_users()
-from telebot.plugins.mybot.sql.users_sql import all_users()
+from telebot.plugins.mybot.sql.blacklist_sql import all_bl_users
+from telebot.plugins.mybot.sql.users_sql import all_users
 
 LOAD_MYBOT = Var.LOAD_MYBOT
 Heroku = heroku3.from_key(Var.HEROKU_API_KEY)
