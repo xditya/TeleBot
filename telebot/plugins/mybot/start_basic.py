@@ -93,8 +93,7 @@ async def settings(event):
                              ])
 
 
-@tgbot.on(events.callbackquery.CallbackQuery(data=re.compile(b"telebot"))
-          )  # pylint: disable=oof
+@tgbot.on(events.callbackquery.CallbackQuery(data=re.compile(b"telebot")))  # pylint: disable=oof
 async def settings(event):
     await event.delete()
     await tgbot.send_message(event.chat_id,
@@ -104,12 +103,10 @@ async def settings(event):
                              ])
 
 
-@tgbot.on(events.callbackquery.CallbackQuery(data=re.compile(b"deployme"))
-          )  # pylint: disable=oof
+@tgbot.on(events.callbackquery.CallbackQuery(data=re.compile(b"deployme")))  # pylint: disable=oof
 async def settings(event):
-    if event.sender_id == OWNER_ID:
-        await event.delete()
-        await tgbot.send_message(event.chat_id,
+    await event.delete()
+    await tgbot.send_message(event.chat_id,
                                  "Browse through the available options:",
                                  buttons=[
                                      [(Button.url("Repository", url="https://github.com/xditya/TeleBot")),
