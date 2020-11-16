@@ -7,6 +7,7 @@ import os
 import requests
 from telebot.plugins.mybot.sql.blacklist_sql import all_bl_users
 from telebot.plugins.mybot.sql.users_sql import all_users
+from telebot.plugins import TELE_NAME
 
 LOAD_MYBOT = Var.LOAD_MYBOT
 Heroku = heroku3.from_key(Var.HEROKU_API_KEY)
@@ -17,12 +18,20 @@ heroku_api = "https://api.heroku.com"
 
 @tgbot.on(events.NewMessage(pattern="^/start"))  # pylint: disable=oof
 async def start_all(event):
-    if event.chat_id == OWNER_ID and LOAD_MYBOT == "True":
+    if event.chat_id == OWNER_ID:
         return
-    else:
+    if LOAD_MYBOT == "False":
         await tgbot.send_message(event.chat_id,
                                  startotherdis,
                                  buttons=[(custom.Button.inline("What can I do here?", data="wew"))]
+                                 )
+    elif LOAD_MYBOT == "True":
+        await tgbot.send_message(event.chat_id,
+                                 startotherena,
+                                 buttons=[
+                                     [Button.url("TeleBot", url="https://github.com/xditya/TeleBot")],
+                                     [custom.Button.inline("Whats this?", data="telebot")]
+                                 ]
                                  )
 
 # start-owner
@@ -80,13 +89,31 @@ async def settings(event):
     await tgbot.send_message(event.chat_id,
                              "There isn't much that you can do over here rn.",
                              buttons=[
-                                     [Button.url(
-                                         "Repository", url="https://github.com/xditya/TeleBot")],
-                                     [Button.url(
-                                         "Support", url="https://t.me/TeleBotSupport")]
+                                     [custom.Button.inline("Deploy me for yourself", data="deployme")]
+                             ])
+
+@tgbot.on(events.callbackquery.CallbackQuery(data=re.compile(b"telebot"))) # pylint: disable=oof
+async def settings(event):
+    await event.delete()
+    await tgbot.send_message(event.chat_id,
+                             f"This is the personal help bot of {TELE_NAME}. You can contact me using this bot if necessary, or if I missed out your PM.",
+                             buttons=[
+                                     [custom.Button.inline("Deploy me for yourself", data="deployme")]
                              ])
 
 
+@tgbot.on(events.callbackquery.CallbackQuery(data=re.compile(b"deployme")))  # pylint: disable=oof
+async def settings(event):
+    if event.sender_id == OWNER_ID:
+        await event.delete()
+        await tgbot.send_message(event.chat_id,
+                                 "Browse through the available options:",
+                                 buttons=[
+                                     [(Button.url("Repository", url="https://github.com/xditya/TeleBot")),
+                                     (Button.url("Deploy", url="https://dashboard.heroku.com/new?button-url=https%3A%2F%2Fgithub.com%2Fxditya%2FTeleBot%2F&template=https%3A%2F%2Fgithub.com%2Fxditya%2FTeleBot"))],
+                                     [Button.url("Support", url="https://t.me/TeleBotSupport")]
+                                 ])
+                                      
 @tgbot.on(events.callbackquery.CallbackQuery(data=re.compile(b"settings"))
           )  # pylint: disable=oof
 async def settings(event):
