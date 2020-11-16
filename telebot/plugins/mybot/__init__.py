@@ -28,7 +28,7 @@ Hi there. I am {}'s bot. Nice to see you here.
 if Var.PMBOT_START_MSSG is None:
     MSSG = """
 Hi there, I am {}'s personal bot.
-You can contact my master via this bot.
+You can contact him through me 😌.
 
 Have a nice time!
 """.format(TELE_NAME)
