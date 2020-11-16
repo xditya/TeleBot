@@ -48,3 +48,9 @@ def get_user_id(message_id: int):
         return int(s__.chat_id), s__.um_id
     finally:
         SESSION.close()
+
+def all_users():
+    """get all bot users"""
+    tele = SESSION.query(Users).all()
+    SESSION.close()
+    return tele
