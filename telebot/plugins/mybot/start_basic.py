@@ -5,6 +5,8 @@ import heroku3
 import asyncio
 import os
 import requests
+from telebot.plugins.mybot.sql.blacklist_sql import all_bl_users()
+from telebot.plugins.mybot.sql.users_sql import all_users()
 
 LOAD_MYBOT = Var.LOAD_MYBOT
 Heroku = heroku3.from_key(Var.HEROKU_API_KEY)
@@ -35,7 +37,9 @@ async def owner(event):
                                  [Button.url("Support",
                                              url="https://t.me/TeleBotSupport")],
                                  [custom.Button.inline(
-                                     "Settings ⚙️", data="settings")]
+                                     "Settings ⚙️", data="settings")],
+                                 [custom.Button.inline(
+                                     "Stats ⚙️", data="stats")]
                              ])
 
 
@@ -99,6 +103,16 @@ async def settings(event):
     else:
         await event.answer("You cant use this bot.", alert=True)
 
+@tgbot.on(events.callbackquery.CallbackQuery(data=re.compile(b"settings"))
+          )  # pylint: disable=oof
+async def settings(event):
+    if event.sender_id == OWNER_ID:
+        allu = all_users()
+        blu = all_bl_users()
+        pop = "Here is the stats for your bot:\nTotal Users = {}\nBlacklisted Users = {}".format(allu, blu)
+        await event.answer(pop, alert=True)
+    else:
+        await event.answer("You cant use this bot.", alert=True)
 
 @tgbot.on(events.callbackquery.CallbackQuery(data=re.compile(b"pmbot"))
           )  # pylint: disable=oof
