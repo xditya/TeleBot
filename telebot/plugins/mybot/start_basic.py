@@ -15,7 +15,7 @@ heroku_api = "https://api.heroku.com"
 
 @tgbot.on(events.NewMessage(pattern="^/start"))  # pylint: disable=oof
 async def start_all(event):
-    if event.sender_id == OWNER_ID and LOAD_MYBOT == "False":
+    if event.sender_id == OWNER_ID and LOAD_MYBOT == "True":
         return
     else:
         await tgbot.send_message(event.chat_id,
