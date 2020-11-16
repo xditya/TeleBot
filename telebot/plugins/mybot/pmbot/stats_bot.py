@@ -17,7 +17,7 @@
 from telebot.plugins.mybot.sql.blacklist_sql import all_bl_users
 from telebot.plugins.mybot.sql.users_sql import all_users
 from telethon import events
-
+from telebot.plugins import OWNER_ID
 
 @tgbot.on(events.NewMessage(pattern="^/stats", from_users=OWNER_ID))
 async def tele(event):
