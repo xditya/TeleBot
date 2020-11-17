@@ -9,6 +9,8 @@ from telebot.telebotConfig import Var, Config
 import re
 import logging
 import inspect
+from telebot import LOAD_PLUG
+from telebot import CMD_LIST
 from time import gmtime, strftime
 from asyncio import create_subprocess_exec as asyncsubshell
 from asyncio import subprocess as asyncsub
