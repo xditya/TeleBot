@@ -6,7 +6,8 @@ from telebot.plugins.mybot.sql.blacklist_sql import add_user_to_bl, check_is_bla
 from telebot.plugins import OWNER_ID, TELE_NAME
 from telethon import events
 from telebot.telebotConfig import Var
-from telebot.plugins.mybot.sql.users_sql import add_user_to_db, get_user_id
+from telebot.plugins.mybot.sql.users_sql import get_user_id
+
 
 @tgbot.on(events.NewMessage(pattern="^/ban"))
 async def _(event):
