@@ -16,14 +16,14 @@ class blacklist(BASE):
     # reason = Column(UnicodeText)
 
     def __init__(self, chat_id):
-        self.chat_id = chat_id
+        self.chat_id = int(chat_id)
         # self.reason = reason
 
 
 blacklist.__table__.create(checkfirst=True)
 
 
-def add_user_to_bl(chat_id: int):
+def add_user_to_bl(chat_id):
     """Adding the user to the blacklist"""
     __user = blacklist(str(chat_id))
     SESSION.add(__user)
