@@ -254,8 +254,6 @@ def register(**args):
 
 
 def errors_handler(func):
-    async def wrapper(tele):
-
     async def wrapper(event):
         try:
             await func(tele)
