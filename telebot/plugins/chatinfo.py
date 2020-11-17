@@ -26,14 +26,14 @@ from telebot.utils import admin_cmd, sudo_cmd
 @telebot.on(admin_cmd(pattern="chatinfo(?: |$)(.*)", outgoing=True))
 @telebot.on(sudo_cmd(pattern="chatinfo(?: |$)(.*)"))
 async def info(event):
-    await eor(event, "`Analysing the chat...`")
+    ok = await eor(event, "`Analysing the chat...`")
     chat = await get_chatinfo(event)
     caption = await fetch_info(chat, event)
     try:
-        await eor(event, caption, parse_mode="html")
+        await ok.edit(caption, parse_mode="html")
     except Exception as e:
         print("Exception:", e)
-        await eor(event, f"`An unexpected error has occurred. {e}`")
+        await ok.edit(f"`An unexpected error has occurred. {e}`")
     return
 
 
@@ -58,18 +58,17 @@ async def get_chatinfo(event):
         try:
             chat_info = await event.client(GetFullChannelRequest(chat))
         except ChannelInvalidError:
-            await eor(event, "`Invalid channel/group`")
+            await ok.edit("`Invalid channel/group`")
             return None
         except ChannelPrivateError:
-            await eor(
-                event, "`This is a private channel/group or I am banned from there`"
+            await ok.edit("`This is a private channel/group or I am banned from there`"
             )
             return None
         except ChannelPublicGroupNaError:
-            await eor(event, "`Channel or supergroup doesn't exist`")
+            await ok.edit("`Channel or supergroup doesn't exist`")
             return None
         except (TypeError, ValueError) as err:
-            await eor(event, str(err))
+            await ok.edit(str(err))
             return None
     return chat_info
 
