@@ -15,7 +15,7 @@ async def _(event):
         msg = await event.get_reply_message()
         if msg is None:
             await event.reply("Reply to a user's message to ban him!")
-        user_id, reply_message_id = get_user_id(msg.id)
+        user_id, reply_message_id = get_user_id(msg.reply_to_message.message_id)
     else:
         return
     if check_is_black_list(user_id):
