@@ -1,14 +1,17 @@
 import sys
 import math
+import datetime
 from telebot import bot
+import traceback
 from telethon import events
 from pathlib import Path
 from telebot.telebotConfig import Var, Config
-from telebot import LOAD_PLUG
-from telebot import CMD_LIST
 import re
 import logging
 import inspect
+from time import gmtime, strftime
+from asyncio import create_subprocess_exec as asyncsubshell
+from asyncio import subprocess as asyncsub
 
 handler = Config.CMD_HNDLR if Config.CMD_HNDLR else r"\."
 sudo_hndlr = Config.SUDO_HNDLR if Config.SUDO_HNDLR else "!"
@@ -251,8 +254,48 @@ def register(**args):
 
 
 def errors_handler(func):
+    async def wrapper(tele):
     async def wrapper(event):
         try:
+            await func(tele)
+        except BaseException:
+            date = strftime("%Y-%m-%d %H:%M:%S", gmtime())
+            new = {
+                "error": str(
+                    sys.exc_info()[1]),
+                "date": datetime.datetime.now()}
+            text = "**TELEBOT CRASH REPORT**\n\n"
+            link = "[this group](https://t.me/TeleBotHelpChat)"
+            text += "You may report this, if needed."
+            text += f"Forward this message to {link}.\n"
+            text += "Nothing except the fact of error and date is logged here.\n"
+            errlog = "\n\n**Disclaimer:**\n`Privacy comes first`"
+            errlog += "\n`This file is uploaded only` **here**"
+            errlog += "`and not anywhere else.`"
+            errlog += "\n`If needed, you may report this to the group,`"
+            errlog += "\n`No one will see your data!`\n\n"
+            errlog += "==========||--BEGIN USERBOT TRACEBACK LOG--||=========="
+            errlog += "\nDate: " + date
+            errlog += "\nGroup ID: " + str(tele.chat_id)
+            errlog += "\nSender ID: " + str(tele.sender_id)
+            errlog += "\n\nEvent Trigger:\n"
+            errlog += str(tele.text)
+            errlog += "\n\nTraceback info:\n"
+            errlog += str(traceback.format_exc())
+            errlog += "\n\nError text:\n"
+            errlog += str(sys.exc_info()[1])
+            errlog += "\n\n==========||--END USERBOT TRACEBACK LOG--||=========="
+            command = "git log --pretty=format:\"%an: %s\" -10"
+            errlog += "\n\n\nLast 10 commits:\n"
+            process = await asyncsubshell(command, stdout=asyncsub.PIPE, stderr=asyncsub.PIPE)
+            stdout, stderr = await process.communicate()
+            result = str(stdout.decode().strip()) + \
+                str(stderr.decode().strip())
+            errlog += result
+            file = open("error.log", "w+")
+            file.write(errlog)
+            file.close()
+            await tele.client.send_file(Var.PRIVATE_GROUP_ID, "error.log", caption=text)
             return await func(event)
         except Exception:
             pass
