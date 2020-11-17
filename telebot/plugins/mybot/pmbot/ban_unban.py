@@ -19,6 +19,7 @@ async def _(event):
     else:
         return
     user_id, reply_message_id = get_user_id(sed)
+    if check_is_black_list(user_id):
         await event.reply("You can't ban a banned user again lol")
     elif not check_is_black_list(user_id):
         add_user_to_bl(user_id)
