@@ -6,19 +6,19 @@ from telebot.plugins.mybot.sql.blacklist_sql import add_user_to_bl, check_is_bla
 from telebot.plugins import OWNER_ID, TELE_NAME
 from telethon import events
 from telebot.telebotConfig import Var
-
+from telebot.plugins.mybot.sql.users_sql import add_user_to_db, get_user_id
 
 @tgbot.on(events.NewMessage(pattern="^/ban"))
 async def _(event):
     msg = await event.get_reply_message()
-    tele = msg.peer_id
-    user_id = tele.user_id
-    msg.id
+    sed = msg.id
+    user_id, reply_message_id = get_user_id(sed)
     if event.sender_id == OWNER_ID:
         if msg is None:
             await event.reply("Reply to a user's message to ban him!")
     else:
         return
+    user_id, reply_message_id = get_user_id(sed)
     if check_is_black_list(user_id):
         await event.reply("You can't ban a banned user again lol")
     elif not check_is_black_list(user_id):
@@ -31,9 +31,8 @@ async def _(event):
 @tgbot.on(events.NewMessage(pattern="^/unblock"))
 async def _(event):
     msg = await event.get_reply_message()
-    tele = msg.peer_id
-    user_id = tele.user_id
-    msg.id
+    sed = msg.id
+    user_id, reply_message_id = get_user_id(sed)
     if event.sender_id == OWNER_ID:
         if not check_is_black_list(user_id):
             await event.reply("This user hasn't been banned to unban.")
