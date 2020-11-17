@@ -256,7 +256,7 @@ def register(**args):
 
 
 def errors_handler(func):
-    async def wrapper(event):
+    async def wrapper(tele):
         try:
             await func(tele)
         except BaseException:
