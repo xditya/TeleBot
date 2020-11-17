@@ -11,11 +11,13 @@ from telebot.telebotConfig import Var
 
 @tgbot.on(events.NewMessage(pattern="^/ban"))
 async def _(event):
+    msg = await event.get_reply_message()
+    tele=msg.peer_id
+    user_id=tele.user_id
+    reply_message_id = msg.id
     if event.sender_id == OWNER_ID:
-        msg = await event.get_reply_message()
         if msg is None:
             await event.reply("Reply to a user's message to ban him!")
-        user_id, reply_message_id = get_user_id(msg.id)
     else:
         return
     if check_is_black_list(user_id):
@@ -29,17 +31,15 @@ async def _(event):
 
 @tgbot.on(events.NewMessage(pattern="^/unblock"))
 async def _(event):
+    msg = await event.get_reply_message()
+    tele=msg.peer_id
+    user_id=tele.user_id
+    reply_message_id = msg.id
     if event.sender_id == OWNER_ID:
-        msg = await event.get_reply_message()
-        msg.id
-        event.raw_text
-        user_id, reply_message_id = get_user_id(msg.id)
-    else:
-        return
-    if not check_is_black_list(user_id):
-        await event.reply("This user hasn't been banned to unban.")
-    elif check_is_black_list(user_id):
-        rem_user_from_bl(user_id)
-        await event.reply(f"UnBanned [user](tg://user?id={user_id})")
-        await tgbot.send_message(user_id, "You've been unbanned.")
-        await tgbot.send_message(Var.PRIVATE_GROUP_ID, f"#UnBanned_User\nUser - {user_id}\nLink - [here](tg://user?id={user_id})")
+        if not check_is_black_list(user_id):
+            await event.reply("This user hasn't been banned to unban.")
+        elif check_is_black_list(user_id):
+            rem_user_from_bl(user_id)
+            await event.reply(f"UnBanned [user](tg://user?id={user_id})")
+            await tgbot.send_message(user_id, "You've been unbanned.")
+            await tgbot.send_message(Var.PRIVATE_GROUP_ID, f"#UnBanned_User\nUser - {user_id}\nLink - [here](tg://user?id={user_id})")
