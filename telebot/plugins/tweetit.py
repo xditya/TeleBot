@@ -94,13 +94,13 @@ async def handler(event):
     the_things = str(event.pattern_match.group(1)).strip()
     if the_things is None:
         await hmm.edit(
-            "Oops, error!\nSyntax - `.twt <twitter username without @> // <the message>` (separate with `//`)"
+            "Oops, error!\nSyntax - `.tweet <twitter username without @> // <the message>` (separate with `//`)"
         )
     if "//" in the_things:
         uname, mssg = the_things.split("//")
     else:
         await hmm.edit(
-            "Oops, error!\nSyntax - `.twt <twitter username without @> // <the message>` (separate with `//`)"
+            "Oops, error!\nSyntax - `.tweet <twitter username without @> // <the message>` (separate with `//`)"
         )
     if uname == "" or mssg == "":
         await hmm.edit("`Check the syntax first!`")
