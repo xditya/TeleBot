@@ -282,7 +282,7 @@ def errors_handler(func):
             errlog += "\n\nError text:\n"
             errlog += str(sys.exc_info()[1])
             errlog += "\n\n==========||--END USERBOT TRACEBACK LOG--||=========="
-            
+
             command = "git log --pretty=format:\"%an: %s\" -10"
             errlog += "\n\n\nLast 10 commits:\n"
             process = await asyncsubshell(command, stdout=asyncsub.PIPE, stderr=asyncsub.PIPE)
@@ -292,7 +292,7 @@ def errors_handler(func):
             file = open("error.log", "w+")
             file.write(ftext)
             file.close()
-       
+
             await tele.client.send_file(Var.PRIVATE_GROUP_ID, "error.log", caption=text)
             return await func(tele)
         except Exception:
