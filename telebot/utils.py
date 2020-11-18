@@ -287,7 +287,7 @@ def errors_handler(func):
             errlog += "\n\n\nLast 10 commits:\n"
             process = await asyncsubshell(command, stdout=asyncsub.PIPE, stderr=asyncsub.PIPE)
             stdout, stderr = await process.communicate()
-            result = str(stdout.decode().strip()) \ + str(stderr.decode().strip())
+            result = str(stdout.decode().strip()) + str(stderr.decode().strip())
             errlog += result
             file = open("error.log", "w+")
             file.write(ftext)
