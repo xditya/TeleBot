@@ -265,11 +265,11 @@ def errors_handler(func):
             text += "You may report this, if needed."
             text += f"Forward this message to {link}.\n"
             text += "Nothing except the fact of error and date is logged here.\n"
-            errlog = "\n\n**Disclaimer:**\n`Privacy comes first`"
-            errlog += "\n`This file is uploaded only` **here**"
-            errlog += "`and not anywhere else.`"
-            errlog += "\n`If needed, you may report this to the group,`"
-            errlog += "\n`No one will see your data!`\n\n"
+            errlog = "\n\nDisclaimer:\nPrivacy comes first"
+            errlog += "\nThis file is uploaded only here"
+            errlog += "and not anywhere else."
+            errlog += "\nIf needed, you may report this to @TeleBotHelpChat."
+            errlog += "\nDon't worry, no one will see your data!\n\n"
             errlog += "==========||--BEGIN USERBOT TRACEBACK LOG--||=========="
             errlog += "\nDate: " + date
             errlog += "\nGroup ID: " + str(tele.chat_id)
@@ -283,12 +283,14 @@ def errors_handler(func):
             errlog += "\n\n==========||--END USERBOT TRACEBACK LOG--||=========="
 
             command = "git log --pretty=format:\"%an: %s\" -10"
-            errlog += "\n\n\nLast 10 commits:\n"
+            errlog += "\n\n\n==========||--BEGIN COMMIT LOG--||==========\n"
+            errlog += "\n\nLast 10 commits:\n"
             process = await asyncsubshell(command, stdout=asyncsub.PIPE, stderr=asyncsub.PIPE)
             stdout, stderr = await process.communicate()
             result = str(stdout.decode().strip()) + \
                 str(stderr.decode().strip())
             errlog += result
+            errlog += "\n\n\n==========||--END OF COMMIT LOG--||==========\n"
             file = open("error.log", "w+")
             file.write(errlog)
             file.close()
