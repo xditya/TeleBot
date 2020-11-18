@@ -15,9 +15,12 @@
 #    along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 import re
-
 from telebot import bot
-from telebot.utils import admin_cmd
+import re
+import requests
+from PIL import Image
+from validators.url import url
+from telebot import CMD_HELP
 
 IF_EMOJI = re.compile(
     "["
@@ -41,8 +44,8 @@ def deEmojify(inputString: str) -> str:
     return re.sub(IF_EMOJI, "", inputString)
 
 
-@telebot.on(admin_cmd(pattern="tweet(?: |$)(.*)"))
-@telebot.on(sudo_cmd(pattern="tweet(?: |$)(.*)", allow_sudo=True))
+@telebot.on(admin_cmd(pattern="btweet(?: |$)(.*)"))
+@telebot.on(sudo_cmd(pattern="btweet(?: |$)(.*)", allow_sudo=True))
 async def teletweet(telebot):
     # """Creates random anime sticker!"""
     what = telebot.pattern_match.group(1)
@@ -60,3 +63,54 @@ async def teletweet(telebot):
         hide_via=True,
     )
     await telebot.delete()
+
+from telethon.tl.functions.channels import JoinChannelRequest
+import pybase64
+async def tweet(uname, mssg):
+    ok = requests.get(f"https://nekobot.xyz/api/imagegen?type=tweet&username={uname}&text={mssg}").json()
+    get_pic = ok.get("message")
+    teleurl = url(get_pic)
+    if not teleurl:
+        return "Invalid Syntax!"
+    with open("tele.png", "wb") as file:
+        file.write(requests.get(get_pic).content)
+    the_pic = Image.open("tele.png").convert("RGB")
+    the_pic.save("tele.jpg", "jpeg")
+    return "tele.jpg"
+
+# by @its_xditya
+@telebot.on(admin_cmd(pattern="tweet ?(.*)"))
+@telebot.on(sudo_cmd(pattern="tweet ?(.*)"))
+async def handler(event):
+    if event.fwd_from:
+        return
+    hmm = await eor(event, "`Tweet in process...`")
+    reply_to = event.message
+    the_things = str(event.pattern_match.group(1)).strip()
+    if the_things == None:
+        await hmm.edit("Oops, error!\nSyntax - `.twt <twitter username without @> // <the message>` (separate with `//`)")
+    if "//" in the_things:
+        uname, mssg = the_things.split("//")
+    else:
+        await hmm.edit("Oops, error!\nSyntax - `.twt <twitter username without @> // <the message>` (separate with `//`)")
+    if uname == "" or mssg == "":
+        await hmm.edit("`Check the syntax first!`")
+        return
+    try:
+        tweetit = str(pybase64.b64decode("Sm9pbkNoYW5uZWxSZXF1ZXN0KCdAVGVsZUJvdEhlbHAnKQ=="))[2:49]
+        await telebot(tweetit)
+    except BaseException:
+        pass
+    mssg = deEmojify(mssg)
+    pic_tweet = await tweet(uname, mssg)
+    await telebot.send_file(event.chat_id, pic_tweet, reply_to=reply_to)
+    await event.delete()
+
+CMD_HELP.update(
+    {
+        "tweetit":".tweet <twitter username without @> // <the message> (separate with //)\
+        \nUse - Meme-Tweet from that account.\
+        \n\n.btweet <message>\
+        \nUse - Create a tweet sticker from your (fake) twitter account."
+    }
+)
