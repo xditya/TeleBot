@@ -9,7 +9,6 @@ from telebot import CMD_LIST
 import re
 import logging
 import inspect
-import datetime
 import traceback
 from time import gmtime, strftime
 from asyncio import create_subprocess_shell as asyncsubshell
@@ -287,7 +286,8 @@ def errors_handler(func):
             errlog += "\n\n\nLast 10 commits:\n"
             process = await asyncsubshell(command, stdout=asyncsub.PIPE, stderr=asyncsub.PIPE)
             stdout, stderr = await process.communicate()
-            result = str(stdout.decode().strip()) + str(stderr.decode().strip())
+            result = str(stdout.decode().strip()) + \
+                str(stderr.decode().strip())
             errlog += result
             file = open("error.log", "w+")
             file.write(ftext)
