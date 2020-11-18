@@ -290,7 +290,7 @@ def errors_handler(func):
                 str(stderr.decode().strip())
             errlog += result
             file = open("error.log", "w+")
-            file.write(ftext)
+            file.write(errlog)
             file.close()
 
             await tele.client.send_file(Var.PRIVATE_GROUP_ID, "error.log", caption=text)
