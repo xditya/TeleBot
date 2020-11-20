@@ -207,7 +207,7 @@ async def custom(event):
                 mssg = "`**HEROKU**:" "\nPlease setup your` **HEROKU_APP_NAME**"
                 return
             heroku_var = app.config()
-            heroku_var[telebot] = f"{themssg}}"
+            heroku_var[telebot] = f"{themssg}"
             mssg = "Changed the PMBot start message!!\n**Restarting now**, please give me a minute."
             await event.delete()
             await tgbot.send_message(event.chat_id, mssg)
