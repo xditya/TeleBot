@@ -26,7 +26,7 @@ from telethon.tl.functions.photos import GetUserPhotosRequest
 from telethon.tl.functions.users import GetFullUserRequest
 from telethon.tl.types import MessageEntityMentionName
 
-from telebot import CMD_HRLP
+from telebot import CMD_HELP
 
 TMP_DOWNLOAD_DIRECTORY = "./"
 
