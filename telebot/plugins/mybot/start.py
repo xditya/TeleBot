@@ -16,7 +16,7 @@
 
 import re
 from telebot.plugins.mybot import *
-from telethon import events, custom, Button
+from telethon import events,Button
 import heroku3
 import asyncio
 import os
@@ -39,14 +39,14 @@ async def start_all(event):
     if LOAD_MYBOT == "False":
         await tgbot.send_message(event.chat_id,
                                  startotherdis,
-                                 buttons=[(custom.Button.inline("What can I do here?", data="wew"))]
+                                 buttons=[(Button.inline("What can I do here?", data="wew"))]
                                  )
     elif LOAD_MYBOT == "True":
         await tgbot.send_message(event.chat_id,
                                  startotherena,
                                  buttons=[
                                      [Button.url("TeleBot", url="https://github.com/xditya/TeleBot")],
-                                     [custom.Button.inline("Whats this?", data="telebot")]
+                                     [Button.inline("Whats this?", data="telebot")]
                                  ]
                                  )
 
@@ -61,9 +61,9 @@ async def owner(event):
                              buttons=[
                                  [Button.url("Support",
                                              url="https://t.me/TeleBotSupport")],
-                                 [custom.Button.inline(
+                                 [Button.inline(
                                      "Settings ⚙️", data="settings")],
-                                 [custom.Button.inline(
+                                 [Button.inline(
                                      "Stats ⚙️", data="stats")]
                              ])
 
@@ -105,7 +105,7 @@ async def settings(event):
     await tgbot.send_message(event.chat_id,
                              "There isn't much that you can do over here rn.",
                              buttons=[
-                                     [custom.Button.inline("Deploy me for yourself", data="deployme")]
+                                     [Button.inline("Deploy me for yourself", data="deployme")]
                              ])
 
 
@@ -116,7 +116,7 @@ async def settings(event):
     await tgbot.send_message(event.chat_id,
                              f"This is the personal help bot of {TELE_NAME}. You can contact me using this bot if necessary, or if I missed out your PM.",
                              buttons=[
-                                     [custom.Button.inline("Deploy me for yourself", data="deployme")]
+                                     [Button.inline("Deploy me for yourself", data="deployme")]
                              ])
 
 
@@ -139,7 +139,7 @@ async def settings(event):
         await tgbot.send_message(event.chat_id,
                                  "Here are the available options.",
                                  buttons=[
-                                     [custom.Button.inline(
+                                     [Button.inline(
                                          "PM Bot", data="pmbot")],
                                      [Button.url(
                                          "Logs", url=f"https://t.me/{Var.TG_BOT_USER_NAME_BF_HER}?start=logs")]
@@ -169,7 +169,7 @@ async def pmbot(event):
         await tgbot.send_message(event.chat_id,
                                  "Here are the availabe settings for PM bot.",
                                  buttons=[
-                                     [custom.Button.inline("Enable/Disable", data="onoff"), custom.Button.inline(
+                                     [Button.inline("Enable/Disable", data="onoff"), Button.inline(
                                          "Custom Message", data="cmssg")]
                                  ])
     else:
@@ -184,7 +184,7 @@ async def pmbot(event):
         await tgbot.send_message(event.chat_id,
                                  f"Turn the PM bot on or off.\nCurrently enabled: {LOAD_MYBOT}",
                                  buttons=[
-                                     [custom.Button.inline("Enable", data="enable"), custom.Button.inline(
+                                     [Button.inline("Enable", data="enable"), Button.inline(
                                          "Disable", data="disable")]
                                  ])
     else:
@@ -195,7 +195,6 @@ async def pmbot(event):
           )  # pylint: disable=oof
 async def custom(event):
     if event.sender_id == OWNER_ID:
-        await event.delete()
         await event.reply("You can change your PMBot start message here.\nSend the message you want to display when someone started the bot -")
         async with event.client.conversation(OWNER_ID) as conv:
             response = conv.wait_event(events.NewMessage(chats=OWNER_ID))
