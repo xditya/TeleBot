@@ -25,6 +25,7 @@ import os
 from telethon.tl.functions.photos import GetUserPhotosRequest
 from telethon.tl.functions.users import GetFullUserRequest
 from telethon.tl.types import MessageEntityMentionName
+
 from telebot import CMD_HRLP
 
 TMP_DOWNLOAD_DIRECTORY = "./"
@@ -42,9 +43,12 @@ async def who(event):
     replied_user = await get_user(event)
     caption = await fetch_info(replied_user, event)
     message_id_to_reply = event.message.reply_to_msg_id
-    replied_user_profile_photos = await borg(GetUserPhotosRequest(user_id=replied_user.user.id, offset=42, max_id=0, limit=80))
-    replied_user_profile_photos_count = "NaN"
-    
+    replied_user_profile_photos = await borg(
+        GetUserPhotosRequest(
+            user_id=replied_user.user.id, offset=42, max_id=0, limit=80
+        )
+    )
+
     if not message_id_to_reply:
         message_id_to_reply = None
 
@@ -125,7 +129,7 @@ async def fetch_info(replied_user, event):
     try:
         replied_user_profile_photos_count = replied_user_profile_photos.count
     except AttributeError:
-        pass 
+        pass
     username = "@{}".format(username) if username else ("This User has no Username")
     user_bio = "This User has no About" if not user_bio else user_bio
 
@@ -151,8 +155,9 @@ async def fetch_info(replied_user, event):
 
     return caption
 
+
 CMD_HRLP.update(
     {
-        "whois":".whois <id/reply to mssg>\nUse - Get full details about a persons telegram account."
+        "whois": ".whois <id/reply to mssg>\nUse - Get full details about a persons telegram account."
     }
 )
