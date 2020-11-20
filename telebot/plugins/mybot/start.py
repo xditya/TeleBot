@@ -1,19 +1,3 @@
-#    TeleBot - UserBot
-#    Copyright (C) 2020 TeleBot
-
-#    This program is free software: you can redistribute it and/or modify
-#    it under the terms of the GNU Affero General Public License as published by
-#    the Free Software Foundation, either version 3 of the License, or
-#    (at your option) any later version.
-
-#    This program is distributed in the hope that it will be useful,
-#    but WITHOUT ANY WARRANTY; without even the implied warranty of
-#    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-#    GNU Affero General Public License for more details.
-
-#    You should have received a copy of the GNU Affero General Public License
-#    along with this program.  If not, see <https://www.gnu.org/licenses/>.
-
 import re
 from telebot.plugins.mybot import *
 from telethon import events, custom, Button
@@ -145,7 +129,7 @@ async def settings(event):
                                          "Logs", url=f"https://t.me/{Var.TG_BOT_USER_NAME_BF_HER}?start=logs")]
                                  ])
     else:
-        await event.answer("You can't use this bot.", alert=True)
+        await event.answer("You cant use this bot.", alert=True)
 
 
 @tgbot.on(events.callbackquery.CallbackQuery(data=re.compile(b"stats"))
@@ -158,7 +142,7 @@ async def settings(event):
             allu, blu)
         await event.answer(pop, alert=True)
     else:
-        await event.answer("You can't use this bot.", alert=True)
+        await event.answer("You cant use this bot.", alert=True)
 
 
 @tgbot.on(events.callbackquery.CallbackQuery(data=re.compile(b"pmbot"))
@@ -167,52 +151,13 @@ async def pmbot(event):
     if event.sender_id == OWNER_ID:
         await event.delete()
         await tgbot.send_message(event.chat_id,
-                                 "Here are the availabe settings for PM bot.",
-                                 buttons=[
-                                     [custom.Button.inline("Enable/Disable", data="onoff"), custom.Button.inline(
-                                         "Custom Message", data="cmssg")]
-                                 ])
-    else:
-        await event.answer("You can't use this bot.", alert=True)
-
-
-@tgbot.on(events.callbackquery.CallbackQuery(data=re.compile(b"onoff"))
-          )  # pylint: disable=oof
-async def pmbot(event):
-    if event.sender_id == OWNER_ID:
-        await event.delete()
-        await tgbot.send_message(event.chat_id,
-                                 f"Turn the PM bot on or off.\nCurrently enabled: {LOAD_MYBOT}",
+                                 f"Here are the availabe settings for PM bot.\nCurrently active: {LOAD_MYBOT}",
                                  buttons=[
                                      [custom.Button.inline("Enable", data="enable"), custom.Button.inline(
                                          "Disable", data="disable")]
                                  ])
     else:
-        await event.answer("You can't use this bot.", alert=True)
-
-
-@tgbot.on(events.callbackquery.CallbackQuery(data=re.compile(b"cmssg"))
-          )  # pylint: disable=oof
-async def custom(event):
-    if event.sender_id == OWNER_ID:
-        await event.reply("You can change your PMBot start message here.\nSend the message you want to display when someone started the bot -")
-        async with event.client.conversation(OWNER_ID) as conv:
-            response = conv.wait_event(events.NewMessage(chats=OWNER_ID))
-            response = await response
-            themssg = response.message.message
-            telebot = "PMBOT_START_MSSG"
-            if Var.HEROKU_APP_NAME is not None:
-                app = Heroku.app(Var.HEROKU_APP_NAME)
-            else:
-                mssg = "`**HEROKU**:" "\nPlease setup your` **HEROKU_APP_NAME**"
-                return
-            heroku_var = app.config()
-            heroku_var[telebot] = f"{themssg}"
-            mssg = "Changed the PMBot start message!!\n**Restarting now**, please give me a minute."
-            await event.delete()
-            await tgbot.send_message(event.chat_id, mssg)
-    else:
-        await event.answer("You can't use this bot.", alert=True)
+        await event.answer("You cant use this bot.", alert=True)
 
 
 @tgbot.on(events.callbackquery.CallbackQuery(data=re.compile(b"enable"))  # pylint: disable=oof
@@ -231,7 +176,7 @@ async def enable(event):
         await event.delete()
         await tgbot.send_message(event.chat_id, mssg)
     else:
-        await event.answer("You can't use this bot.", alert=True)
+        await event.answer("You cant use this bot.", alert=True)
 
 
 @tgbot.on(events.callbackquery.CallbackQuery(data=re.compile(b"disable"))
@@ -250,4 +195,4 @@ async def enable(event):
         await event.delete()
         await tgbot.send_message(event.chat_id, mssg)
     else:
-        await event.answer("You can't use this bot.", alert=True)
+        await event.answer("You cant use this bot.", alert=True)
