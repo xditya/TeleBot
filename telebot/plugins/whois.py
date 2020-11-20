@@ -156,7 +156,7 @@ async def fetch_info(replied_user, event):
     return caption
 
 
-CMD_HRLP.update(
+CMD_HELP.update(
     {
         "whois": ".whois <id/reply to mssg>\nUse - Get full details about a persons telegram account."
     }
