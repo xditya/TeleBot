@@ -176,7 +176,8 @@ async def pmbot(event):
         await event.answer("You can't use this bot.", alert=True)
 
 
-@tgbot.on(events.callbackquery.CallbackQuery(data=re.compile(b"onoff")))  # pylint: disable=oof
+@tgbot.on(events.callbackquery.CallbackQuery(data=re.compile(b"onoff"))
+          )  # pylint: disable=oof
 async def pmbot(event):
     if event.sender_id == OWNER_ID:
         await event.delete()
@@ -190,9 +191,10 @@ async def pmbot(event):
         await event.answer("You can't use this bot.", alert=True)
 
 
-@tgbot.on(events.callbackquery.CallbackQuery(data=re.compile(b"cmssg")))  # pylint: disable=oof
+@tgbot.on(events.callbackquery.CallbackQuery(data=re.compile(b"cmssg"))
+          )  # pylint: disable=oof
 async def custom(event):
-    if event.sender_id==OWNER_ID:
+    if event.sender_id == OWNER_ID:
         await event.reply("You can change your PMBot start message here.\nSend the message you want to display when someone started the bot -")
         async with event.client.conversation(OWNER_ID) as conv:
             response = conv.wait_event(events.NewMessage(chats=OWNER_ID))
@@ -211,7 +213,6 @@ async def custom(event):
             await tgbot.send_message(event.chat_id, mssg)
     else:
         await event.answer("You can't use this bot.", alert=True)
-
 
 
 @tgbot.on(events.callbackquery.CallbackQuery(data=re.compile(b"enable"))  # pylint: disable=oof
