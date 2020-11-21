@@ -24,13 +24,14 @@ import requests
 from telebot.plugins.mybot.sql.blacklist_sql import all_bl_users
 from telebot.plugins.mybot.sql.users_sql import all_users
 from telebot.plugins import TELE_NAME
-from telebot.plugins.mybot.sql.userbase_sql import add_to_userbase, full_userbase, present_in_userbase
+from telebot.plugins.mybot.sql.userbase_sql import add_to_userbase, present_in_userbase
 
 LOAD_MYBOT = Var.LOAD_MYBOT
 Heroku = heroku3.from_key(Var.HEROKU_API_KEY)
 heroku_api = "https://api.heroku.com"
 
 # start-others
+
 
 @tgbot.on(events.NewMessage(pattern="^/start"))  # pylint: disable=oof
 async def start_all(event):
@@ -42,7 +43,7 @@ async def start_all(event):
     else:
         try:
             add_to_userbase(target)
-        except:
+        except BaseException:
             pass
     if LOAD_MYBOT == "False":
         await tgbot.send_message(event.chat_id,
