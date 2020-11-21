@@ -18,9 +18,10 @@ class blacklist(BASE):
     def __init__(self, chat_id):
         self.chat_id = int(chat_id)
         # self.reason = reason
-        
+
     def __repr__(self):
         return "<BL %s>" % self.chat_id
+
 
 blacklist.__table__.create(checkfirst=True)
 
@@ -30,6 +31,7 @@ def add_user_to_bl(chat_id: int):
     __user = blacklist(str(chat_id))
     SESSION.add(__user)
     SESSION.commit()
+
 
 def check_is_black_list(chat_id):
     """check if blacklisted"""
