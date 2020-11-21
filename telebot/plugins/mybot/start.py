@@ -195,11 +195,14 @@ async def pmbot(event):
           )  # pylint: disable=oof
 async def custom(event):
     if event.sender_id == OWNER_ID:
-        await event.reply("You can change your PMBot start message here.\nSend the message you want to display when someone started the bot -")
+        await event.reply("You can change your PMBot start message here.\nSend the message you want to display when someone started the bot, /cancel to cancel the operation.")
         async with event.client.conversation(OWNER_ID) as conv:
             response = conv.wait_event(events.NewMessage(chats=OWNER_ID))
             response = await response
             themssg = response.message.message
+            if themssg == "/cancel":
+                await tgbot.send_message(event.chat_id, "Operation Cancelled.")
+                return
             telebot = "PMBOT_START_MSSG"
             if Var.HEROKU_APP_NAME is not None:
                 app = Heroku.app(Var.HEROKU_APP_NAME)
