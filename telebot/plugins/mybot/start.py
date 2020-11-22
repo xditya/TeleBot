@@ -24,14 +24,19 @@ import requests
 from telebot.plugins.mybot.sql.blacklist_sql import all_bl_users
 from telebot.plugins.mybot.sql.users_sql import all_users
 from telebot.plugins import TELE_NAME
-from telebot.plugins.mybot.sql.userbase_sql import add_to_userbase, present_in_userbase
+from telebot.plugins.mybot.sql.userbase_sql import add_to_userbase, present_in_userbase, full_userbase
+import time
+from datetime import datetime
+from telethon import events
+from telebot.telebotConfig import Var
 
+##################--CONSTANTS--##################
 LOAD_MYBOT = Var.LOAD_MYBOT
 Heroku = heroku3.from_key(Var.HEROKU_API_KEY)
 heroku_api = "https://api.heroku.com"
+################--CONSTANTS-END-#################
 
 # start-others
-
 
 @tgbot.on(events.NewMessage(pattern="^/start"))  # pylint: disable=oof
 async def start_all(event):
@@ -68,12 +73,14 @@ async def owner(event):
     await tgbot.send_message(event.chat_id,
                              startowner,
                              buttons=[
-                                 [Button.url("Support",
-                                             url="https://t.me/TeleBotSupport")],
                                  [Button.inline(
                                      "Settings ⚙️", data="settings")],
-                                 [Button.inline(
-                                     "Stats ⚙️", data="stats")]
+                                 Button.inline(
+                                     "Stats ⚙️", data="stats")],
+                                [Button.inline("Broadcast",
+                                             data="telebroad")],
+                                 [Button.url("Support",
+                                             url="https://t.me/TeleBotSupport")]
                              ])
 
 
@@ -263,3 +270,49 @@ async def enable(event):
         await tgbot.send_message(event.chat_id, mssg)
     else:
         await event.answer("You can't use this bot.", alert=True)
+
+@tgbot.on(events.callbackquery.CallbackQuery(data=re.compile(b"telebroad")))  # pylint: disable=oof
+async def broadcast(event):
+    if event.sender_id not OWNER_ID:
+        await event.answer("You can't use this bot")
+        return
+    await tgbot.send_message(event.chat_id, "Send the message you want to broadcast!\nSend /cancel to stop.")
+    async with event.client.conversation(OWNER_ID) as conv:
+            response = conv.wait_event(events.NewMessage(chats=OWNER_ID))
+            response = await response
+            themssg = response.message.message
+    if themssg == None:
+        await tgbot.send_message(event.chat_id, "An error has occured...")
+    if themssg == "/cancel":
+        await tgbot.send_message(event.chat_id, "Broadcast cancelled!")
+        return
+    targets = full_userbase()
+    users_cnt = len(full_userbase())
+    err = 0
+    success = 0
+    lmao = await tgbot.send_message(event.chat_id, "Starting broadcast to {} users.".format(users_cnt))
+    start = datetime.now()
+    for ok in targets:
+        try:
+            await tgbot.send_message(int(ok.chat_id), themssg)
+            success += 1
+            await asyncio.sleep(0.1)
+        except Exception as e:
+            err += 1 
+            try:
+                await tgbot.send_message(Var.PRIVATE_GROUP_ID, f"**Error**\n{str(e)}\nFailed for user: {chat_id}")
+            except:
+                pass
+    end = datetime.now()
+    ms = (end - start).seconds
+    done_mssg = """
+Broadcast completed!\n
+Sent to `{} ` users in `{}` seconds.\n
+Failed for `{}` users.\n
+Total users in bot: `{}`.\n
+""".format(success, ms, err, users_cnt)
+    await lmao.edit(done_mssg)
+    try:
+        await tgbot.send_message(Var.PRIVATE_GROUP_ID, f"#Broadcast\nCompleted sending a broadcast to {success} users.")
+    except:
+        await tgbot.send_message(event.chat_id, "Please add me to your Private log group for proper use.")
