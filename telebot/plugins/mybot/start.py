@@ -89,7 +89,9 @@ async def owner(event):
                                              url="https://t.me/TeleBotSupport")]
                              ])
 
-@tgbot.on(events.NewMessage(pattern="^/start logs",from_users=OWNER_ID))  # pylint: disable=oof
+
+@tgbot.on(events.NewMessage(pattern="^/start logs",
+     from_users=OWNER_ID))  # pylint: disable=oof
 async def logs(event):
     try:
         Heroku = heroku3.from_key(Var.HEROKU_API_KEY)
