@@ -263,7 +263,7 @@ async def enable(event):
         await event.answer("You can't use this bot.", alert=True)
 
 
-@ tgbot.on(events.callbackquery.CallbackQuery(data=re.compile(b"disable"))
+@tgbot.on(events.callbackquery.CallbackQuery(data=re.compile(b"disable"))
            )  # pylint: disable=oof
 async def enable(event):
     if event.sender_id == OWNER_ID:
@@ -282,7 +282,7 @@ async def enable(event):
         await event.answer("You can't use this bot.", alert=True)
 
 
-@ tgbot.on(events.callbackquery.CallbackQuery(data=re.compile(b"telebroad"))
+@tgbot.on(events.callbackquery.CallbackQuery(data=re.compile(b"telebroad"))
            )  # pylint: disable=oof
 async def broadcast(event):
     if event.sender_id not OWNER_ID:
