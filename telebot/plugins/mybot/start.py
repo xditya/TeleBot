@@ -38,7 +38,6 @@ heroku_api = "https://api.heroku.com"
 
 # start-others
 
-
 @tgbot.on(events.NewMessage(pattern="^/start"))  # pylint: disable=oof
 async def start_all(event):
     if event.chat_id == OWNER_ID:
@@ -54,27 +53,21 @@ async def start_all(event):
     if LOAD_MYBOT == "False":
         await tgbot.send_message(event.chat_id,
                                  startotherdis,
-                                 buttons=[
-                                     (Button.inline(
-        "What can I do here?",
-        data="wew"))]
-            )
+                                 buttons=[(Button.inline("What can I do here?", data="wew"))]
+                                 )
     elif LOAD_MYBOT == "True":
         await tgbot.send_message(event.chat_id,
                                  startotherena,
                                  buttons=[
-                                     [Button.url(
-                                         "TeleBot", url="https://github.com/xditya/TeleBot")],
-                                     [Button.inline(
-                                         "Whats this?", data="telebot")]
+                                     [Button.url("TeleBot", url="https://github.com/xditya/TeleBot")],
+                                     [Button.inline("Whats this?", data="telebot")]
                                  ]
                                  )
 
 # start-owner
 
 
-@tgbot.on(events.NewMessage(pattern="^/start",
-                            from_users=OWNER_ID))  # pylint: disable=oof
+@tgbot.on(events.NewMessage(pattern="^/start",from_users=OWNER_ID))  # pylint: disable=oof
 async def owner(event):
     await tgbot.send_message(event.chat_id,
                              startowner,
@@ -83,15 +76,14 @@ async def owner(event):
                                      "Settings ⚙️", data="settings"),
                                  Button.inline(
                                      "Stats ⚙️", data="stats")],
-                             [Button.inline("Broadcast",
-                                               data="telebroad")],
-                             [Button.url("Support",
+                                [Button.inline("Broadcast",
+                                             data="telebroad")],
+                                 [Button.url("Support",
                                              url="https://t.me/TeleBotSupport")]
                              ])
 
 
-@tgbot.on(events.NewMessage(pattern="^/start logs",
-     from_users=OWNER_ID))  # pylint: disable=oof
+@tgbot.on(events.NewMessage(pattern="^/start logs", from_users=OWNER_ID)) # pylint: disable=oof
 async def logs(event):
     try:
         Heroku = heroku3.from_key(Var.HEROKU_API_KEY)
@@ -106,7 +98,7 @@ async def logs(event):
     r = requests.post(url, data=ok.encode("UTF-8")).json()
     url = f"https://del.dog/{r['key']}"
     await tgbot.send_file(
-       event.chat_id,
+        event.chat_id,
         "logs.txt",
         reply_to=event.id,
         caption="**Heroku** TeleBot Logs",
@@ -114,133 +106,126 @@ async def logs(event):
             [Button.url("View Online", f"{url}")],
             [Button.url("Crashed?", "t.me/TeleBotHelpChat")]
         ])
-        await asyncio.sleep(5)
-        return os.remove('logs.txt')
+    await asyncio.sleep(5)
+    return os.remove('logs.txt')
 
-        # callbacks
 
-        @ tgbot.on(events.callbackquery.CallbackQuery(data=re.compile(b"wew"))
-          )  # pylint: disable=oof
-               async def settings(event):
+# callbacks
+
+
+@tgbot.on(events.callbackquery.CallbackQuery(data=re.compile(b"wew")))  # pylint: disable=oof
+async def settings(event):
     await event.delete()
     await tgbot.send_message(event.chat_id,
-                            "There isn't much that you can do over here rn.",
+                             "There isn't much that you can do over here rn.",
                              buttons=[
-                                 [Button.inline(
-                                         "Deploy me for yourself", data="deployme")]
-                             ])
-
-                             @ tgbot.on(events.callbackquery.CallbackQuery(data=re.compile(b"telebot"))
-           )  # pylint: disable=oof
-           async def settings(event):
-           await event.delete()
-           await tgbot.send_message(event.chat_id,
-                            f"This is the personal help bot of {TELE_NAME}. You can contact me using this bot if necessary, or if I missed out your PM.",
-                             buttons = [
-                                 [Button.inline(
-                                         "Deploy me for yourself", data="deployme")]
+                                     [Button.inline("Deploy me for yourself", data="deployme")]
                              ])
 
 
-                             @ tgbot.on(events.callbackquery.CallbackQuery(data=re.compile(b"deployme"))
-           )  # pylint: disable=oof
-           async def settings(event):
-           await event.edit("Browse through the available options:",
-                    buttons = [
+@tgbot.on(events.callbackquery.CallbackQuery(data=re.compile(b"telebot")))  # pylint: disable=oof
+async def settings(event):
+    await event.delete()
+    await tgbot.send_message(event.chat_id,
+                             f"This is the personal help bot of {TELE_NAME}. You can contact me using this bot if necessary, or if I missed out your PM.",
+                             buttons=[
+                                     [Button.inline("Deploy me for yourself", data="deployme")]
+                             ])
+
+
+@tgbot.on(events.callbackquery.CallbackQuery(data=re.compile(b"deployme")))  # pylint: disable=oof
+async def settings(event):
+    await event.edit("Browse through the available options:",
+                     buttons=[
                          [(Button.url("Repository", url="https://github.com/xditya/TeleBot")),
                           (Button.url("Deploy", url="https://dashboard.heroku.com/new?button-url=https%3A%2F%2Fgithub.com%2Fxditya%2FTeleBot%2F&template=https%3A%2F%2Fgithub.com%2Fxditya%2FTeleBot"))],
-                         [Button.url("Support",
-                                     url="https://t.me/TeleBotSupport")]
+                         [Button.url("Support", url="https://t.me/TeleBotSupport")]
                      ])
 
 
-                         @ tgbot.on(events.callbackquery.CallbackQuery(data=re.compile(b"settings"))
-           )  # pylint: disable=oof
-           async def settings(event):
-           if event.sender_id == OWNER_ID:
-           await event.delete()
-           await tgbot.send_message(event.chat_id,
-                                "Here are the available options.",
-                                 buttons = [
+@tgbot.on(events.callbackquery.CallbackQuery(data=re.compile(b"settings")))  # pylint: disable=oof
+async def settings(event):
+    if event.sender_id == OWNER_ID:
+        await event.delete()
+        await tgbot.send_message(event.chat_id,
+                                 "Here are the available options.",
+                                 buttons=[
                                      [Button.inline(
                                          "PM Bot", data="pmbot")],
                                      [Button.url(
                                          "Logs", url=f"https://t.me/{Var.TG_BOT_USER_NAME_BF_HER}?start=logs")]
                                  ])
-                                 else:
-                                 await event.answer("You can't use this bot.", alert = True)
+    else:
+        await event.answer("You can't use this bot.", alert=True)
 
 
-                                     @ tgbot.on(events.callbackquery.CallbackQuery(data=re.compile(b"stats"))
-           )  # pylint: disable=oof
-           async def settings(event):
-           if event.sender_id == OWNER_ID:
-           allu=len(all_users())
-           blu=len(all_bl_users())
-           pop="Here is the stats for your bot:\nTotal Users = {}\nBlacklisted Users = {}".format(
-           allu, blu)
-                await event.answer(pop, alert = True)
-                else:
-        await event.answer("You can't use this bot.", alert = True)
+@tgbot.on(events.callbackquery.CallbackQuery(data=re.compile(b"stats")))  # pylint: disable=oof
+async def settings(event):
+    if event.sender_id == OWNER_ID:
+        allu = len(all_users())
+        blu = len(all_bl_users())
+        pop = "Here is the stats for your bot:\nTotal Users = {}\nBlacklisted Users = {}".format(
+            allu, blu)
+        await event.answer(pop, alert=True)
+    else:
+        await event.answer("You can't use this bot.", alert=True)
 
 
-@ tgbot.on(events.callbackquery.CallbackQuery(data=re.compile(b"pmbot")))  # pylint: disable=oof
-                async def pmbot(event):
+@tgbot.on(events.callbackquery.CallbackQuery(data=re.compile(b"pmbot")))  # pylint: disable=oof
+async def pmbot(event):
     if event.sender_id == OWNER_ID:
         await event.delete()
         await tgbot.send_message(event.chat_id,
-                                "Here are the availabe settings for PM bot.",
-                                 buttons = [
+                                 "Here are the availabe settings for PM bot.",
+                                 buttons=[
                                      [Button.inline("Enable/Disable", data="onoff"), Button.inline(
                                          "Custom Message", data="cmssg")]
                                  ])
-                                 else:
-                                 await event.answer("You can't use this bot.", alert = True)
+    else:
+        await event.answer("You can't use this bot.", alert=True)
 
 
-@ tgbot.on(events.callbackquery.CallbackQuery(data=re.compile(b"onoff")))  # pylint: disable=oof
-                                     async def pmbot(event):
+@tgbot.on(events.callbackquery.CallbackQuery(data=re.compile(b"onoff")))  # pylint: disable=oof
+async def pmbot(event):
     if event.sender_id == OWNER_ID:
         await event.delete()
         await tgbot.send_message(event.chat_id,
                                  f"Turn the PM bot on or off.\nCurrently enabled: {LOAD_MYBOT}",
-                                 buttons = [
+                                 buttons=[
                                      [Button.inline("Enable", data="enable"), Button.inline(
                                          "Disable", data="disable")]
                                  ])
-                                 else:
-                                 await event.answer("You can't use this bot.", alert = True)
+    else:
+        await event.answer("You can't use this bot.", alert=True)
 
 
-@ tgbot.on(events.callbackquery.CallbackQuery(data=re.compile(b"cmssg")))  # pylint: disable=oof
-                                     async def custom(event):
+@tgbot.on(events.callbackquery.CallbackQuery(data=re.compile(b"cmssg")))  # pylint: disable=oof
+async def custom(event):
     if event.sender_id == OWNER_ID:
         await event.reply("You can change your PMBot start message here.\nSend the message you want to display when someone started the bot, /cancel to cancel the operation.")
         async with event.client.conversation(OWNER_ID) as conv:
-            response=conv.wait_event(events.NewMessage(chats=OWNER_ID))
-            response=await response
-            themssg=response.message.message
+            response = conv.wait_event(events.NewMessage(chats=OWNER_ID))
+            response = await response
+            themssg = response.message.message
             if themssg == "/cancel":
                 await tgbot.send_message(event.chat_id, "Operation Cancelled.")
                 return
-            telebot="PMBOT_START_MSSG"
+            telebot = "PMBOT_START_MSSG"
             if Var.HEROKU_APP_NAME is not None:
-                app=Heroku.app(Var.HEROKU_APP_NAME)
+                app = Heroku.app(Var.HEROKU_APP_NAME)
             else:
-                mssg="`**HEROKU**:" "\nPlease setup your` **HEROKU_APP_NAME**"
+                mssg = "`**HEROKU**:" "\nPlease setup your` **HEROKU_APP_NAME**"
                 return
-            heroku_var=app.config()
-            heroku_var[telebot]=f"{themssg}"
-            mssg="Changed the PMBot start message!!\n**Restarting now**, please give me a minute."
+            heroku_var = app.config()
+            heroku_var[telebot] = f"{themssg}"
+            mssg = "Changed the PMBot start message!!\n**Restarting now**, please give me a minute."
             await event.delete()
             await tgbot.send_message(event.chat_id, mssg)
     else:
-        await event.answer("You can't use this bot.", alert = True)
+        await event.answer("You can't use this bot.", alert=True)
 
 
-@ tgbot.on(events.callbackquery.CallbackQuery(data=re.compile(b"enable"))  # pylint: disable=oof)  # pylint: disable=oof
-
-
+@tgbot.on(events.callbackquery.CallbackQuery(data=re.compile(b"enable"))  # pylint: disable=oof)  # pylint: disable=oof
 async def enable(event):
     if event.sender_id == OWNER_ID:
         telebot = "LOAD_MYBOT"
@@ -255,11 +240,10 @@ async def enable(event):
         await event.delete()
         await tgbot.send_message(event.chat_id, mssg)
     else:
-        await event.answer("You can't use this bot.", alert= True)
+        await event.answer("You can't use this bot.", alert=True)
 
 
-@tgbot.on(events.callbackquery.CallbackQuery(data=re.compile(b"disable"))
-          )  # pylint: disable=oof
+@tgbot.on(events.callbackquery.CallbackQuery(data=re.compile(b"disable")))  # pylint: disable=oof
 async def enable(event):
     if event.sender_id == OWNER_ID:
         telebot = "LOAD_MYBOT"
@@ -274,8 +258,7 @@ async def enable(event):
         await event.delete()
         await tgbot.send_message(event.chat_id, mssg)
     else:
-        await event.answer("You can't use this bot.", alert= True)
-
+        await event.answer("You can't use this bot.", alert=True)
 
 @tgbot.on(events.callbackquery.CallbackQuery(data=re.compile(b"telebroad")))  # pylint: disable=oof
 async def broadcast(event):
@@ -285,9 +268,9 @@ async def broadcast(event):
     await tgbot.send_message(event.chat_id, "Send the message you want to broadcast!\nSend /cancel to stop.")
     async with event.client.conversation(OWNER_ID) as conv:
             response = conv.wait_event(events.NewMessage(chats=OWNER_ID))
-            response =await response
+            response = await response
             themssg = response.message.message
-    if themssg is None:
+    if themssg == None:
         await tgbot.send_message(event.chat_id, "An error has occured...")
     if themssg == "/cancel":
         await tgbot.send_message(event.chat_id, "Broadcast cancelled!")
@@ -296,7 +279,7 @@ async def broadcast(event):
     users_cnt = len(full_userbase())
     err = 0
     success = 0
-    lmao =await tgbot.send_message(event.chat_id, "Starting broadcast to {} users.".format(users_cnt))
+    lmao = await tgbot.send_message(event.chat_id, "Starting broadcast to {} users.".format(users_cnt))
     start = datetime.now()
     for ok in targets:
         try:
@@ -304,14 +287,14 @@ async def broadcast(event):
             success += 1
             await asyncio.sleep(0.1)
         except Exception as e:
-            err += 1
+            err += 1 
             try:
                 await tgbot.send_message(Var.PRIVATE_GROUP_ID, f"**Error**\n{str(e)}\nFailed for user: {chat_id}")
-            except BaseException:
+            except:
                 pass
     end = datetime.now()
     ms = (end - start).seconds
-    done_mssg ="""
+    done_mssg = """
 Broadcast completed!\n
 Sent to `{} ` users in `{}` seconds.\n
 Failed for `{}` users.\n
@@ -320,5 +303,5 @@ Total users in bot: `{}`.\n
     await lmao.edit(done_mssg)
     try:
         await tgbot.send_message(Var.PRIVATE_GROUP_ID, f"#Broadcast\nCompleted sending a broadcast to {success} users.")
-    except BaseException:
+    except:
         await tgbot.send_message(event.chat_id, "Please add me to your Private log group for proper use.")
