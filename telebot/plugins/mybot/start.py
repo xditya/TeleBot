@@ -318,7 +318,7 @@ async def broadcast(event):
     ms = (end - start).seconds
     done_mssg = """
 Broadcast completed!\n
-Sent to `{} ` users in `{}` seconds.\n
+Sent to `{}` users in `{}` seconds.\n
 Failed for `{}` users.\n
 Total users in bot: `{}`.\n
 """.format(success, ms, err, users_cnt)
