@@ -48,7 +48,7 @@ async def set_not_afk(event):
     if ".afk" not in current_message and "yes" in USER_AFK:  # pylint:disable=E0602
         try:
             await borg.send_message(  # pylint:disable=E0602
-                Config.PRIVATE_GROUP_BOT_API_ID,  # pylint:disable=E0602
+                Var.PRIVATE_GROUP_ID,  # pylint:disable=E0602
                 "Set AFK mode to False",
             )
         except Exception as e:  # pylint:disable=C0103,W0703
@@ -98,7 +98,7 @@ async def _(event):
         await event.delete()
         try:
             await borg.send_message(  # pylint:disable=E0602
-                Config.PRIVATE_GROUP_BOT_API_ID,  # pylint:disable=E0602
+                Var.PRIVATE_GROUP_ID,  # pylint:disable=E0602
                 f"#AFK\nSet AFK mode to True, with Reason - {reason}",
             )
         except Exception as e:  # pylint:disable=C0103,W0703

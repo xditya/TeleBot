@@ -14,23 +14,34 @@
 #    You should have received a copy of the GNU Affero General Public License
 #    along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-import html
+from telebot.plugins import OWNER_ID, TELE_NAME
 import time
-from telethon.tl.functions.photos import GetUserPhotosRequest
-from telethon.tl.functions.users import GetFullUserRequest
-from telethon.tl.types import MessageEntityMentionName
-from telethon.utils import get_input_location
-from telebot import ALIVE_NAME
-from telebot.__init__ import StartTime
 from datetime import datetime
+from telebot.telebotConfig import Var
 
-# /start
-started = f"**Welcome To TeleBot**\nHi, this is the assistant bot of {ALIVE_NAME}.\nSend `/help` to see what you can do here!\n\n(c) @TeleBotSupport"
+# start-other disabled
+startotherdis = """
+Hi there. I am {}'s bot. Nice to see you here.
+""".format(TELE_NAME)
 
-# /help
-helpmefast = "Here are the things that you can do with this bot!\n\n`/info @username` - get information about the user.\n`/ping` - Ping stats\n`/tr <lang_code>` - Use as reply to the text to translate, language codes can be foung [here](https://t.me/TeleBotHelpChat/22678)!\n`/id` - To get user/sender id.\n`/logs` - To view the app logs.\n`/usage` - To get app dyno usage.\n`/help` - This menu.\n\n__Set-up your own TeleBot via @TeleBotSupport to get such amazing features and more!__"
+# start-other enabled
+if Var.PMBOT_START_MSSG is None:
+    MSSG = """
+Hi there, I am {}'s personal bot.
+You can contact him through me 😌.
 
-# /ping
+Have a nice time!
+""".format(TELE_NAME)
+else:
+    MSSG = Var.PMBOT_START_MSSG
+startotherena = MSSG
+
+# start-owner
+startowner = """
+Welcome back {}. Choose the options available from below:
+""".format(TELE_NAME)
+
+# for ping
 
 
 def get_readable_time(seconds: int) -> str:
@@ -59,7 +70,7 @@ def get_readable_time(seconds: int) -> str:
     return ping_time
 
 
-start = datetime.now()
-end = datetime.now()
-ms = (end - start).microseconds / 1000
-forping = f"🏓Ping speed: {ms}"
+xstart = datetime.now()
+xend = datetime.now()
+ms = (xend - xstart).microseconds / 1000
+ping = f"🏓Pong\nPing speed: {ms}"

@@ -34,10 +34,9 @@ async def _(event):
 
         # else:
         # logger.info(r.stringify())
-        # await borg.send_message(  # pylint:disable=E0602
-        #     Config.PRIVATE_GROUP_BOT_API_ID,  # pylint:disable=E0602
-        #     "Successfully Changed Profile Name"
-        # )
+        await borg.send_message(
+            Var.PRIVATE_GROUP_ID, "#Auto_Name\nSuccessfully started AutoName"
+        )
         await asyncio.sleep(DEL_TIME_OUT)
     await event.edit(f"Auto Name has been started...")
 

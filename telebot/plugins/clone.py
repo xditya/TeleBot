@@ -13,12 +13,12 @@ from .. import ALIVE_NAME, CMD_HELP
 from ..utils import admin_cmd
 
 DEFAULTUSER = str(ALIVE_NAME) if ALIVE_NAME else "TeleBot"
-DEFAULTUSERBIO = "404: No bio found!˙"
-if Config.PRIVATE_GROUP_BOT_API_ID is None:
+DEFAULTUSERBIO = "404: No bio found!"
+if Var.PRIVATE_GROUP_ID is None:
     BOTLOG = False
 else:
     BOTLOG = True
-    BOTLOG_CHATID = Config.PRIVATE_GROUP_BOT_API_ID
+    BOTLOG_CHATID = Var.PRIVATE_GROUP_ID
 
 
 @telebot.on(admin_cmd(pattern="clone ?(.*)"))

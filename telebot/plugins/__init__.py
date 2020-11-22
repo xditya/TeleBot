@@ -29,7 +29,7 @@ from telebot.telebotConfig import Config, Var
 from telebot.utils import admin_cmd, sudo_cmd
 
 # stats
-if Config.PRIVATE_GROUP_BOT_API_ID:
+if Var.PRIVATE_GROUP_ID:
     log = "Enabled"
 else:
     log = "Disabled"

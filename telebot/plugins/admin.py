@@ -308,10 +308,8 @@ async def muter(moot):
     """ Used for deleting the messages of muted people """
     try:
         from telebot.plugins.sql_helper.gmute_sql import is_gmuted
-        from telebot.plugins.sql_helper.spam_mute_sql import is_muted
     except AttributeError:
         return
-    muted = is_muted(moot.chat_id)
     gmuted = is_gmuted(moot.sender_id)
     rights = ChatBannedRights(
         until_date=None,
@@ -323,13 +321,6 @@ async def muter(moot):
         send_inline=True,
         embed_links=True,
     )
-    if muted:
-        for i in muted:
-            if str(i.sender) == str(moot.sender_id):
-                await moot.delete()
-                await moot.client(
-                    EditBannedRequest(moot.chat_id, moot.sender_id, rights)
-                )
     for i in gmuted:
         if i.sender == str(moot.sender_id):
             await moot.delete()

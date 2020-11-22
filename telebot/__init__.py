@@ -44,7 +44,7 @@ if bool(ENV):
         )
     else:
         basicConfig(
-            format="%(asctime)s - %(name)s - %(levelname)s - %(message)s",
+            format="✘ %(asctime)s ✘ - ⫸ %(name)s ⫷ - ⛝ %(levelname)s ⛝ - ║ %(message)s ║",
             level=INFO)
     LOGS = getLogger(__name__)
 

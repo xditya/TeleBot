@@ -22,7 +22,7 @@ from asyncio import sleep
 from telethon import events
 
 from telebot import CMD_HELP
-from telebot.telebotConfig import Config
+from telebot.telebotConfig import Var
 from telebot.utils import admin_cmd
 
 logging.basicConfig(
@@ -32,7 +32,7 @@ logging.basicConfig(
 NO_PM_LOG_USERS = []
 
 BOTLOG = True
-BOTLOG_CHATID = Config.PRIVATE_GROUP_BOT_API_ID
+BOTLOG_CHATID = Var.PRIVATE_GROUP_ID
 
 
 @telebot.on(admin_cmd(outgoing=True, pattern=r"save(?: |$)([\s\S]*)"))
@@ -51,6 +51,8 @@ async def log(log_text):
             await log_text.edit("`What am I supposed to log?`")
             return
         await eor(log_text, "`Message saved 😁`")
+        await sleep(5)
+        await log_text.delete()
     else:
         await eor(log_text, "`This feature requires Logging to be enabled!`")
     await sleep(2)

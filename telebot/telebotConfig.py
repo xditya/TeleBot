@@ -54,6 +54,7 @@ class Var(object):
         int(x) for x in os.environ.get(
             "SUPPORT_USERS", "").split())
     LYDIA_API_KEY = os.environ.get("LYDIA_API_KEY", None)
+    PMBOT_START_MSSG = os.environ.get("PMBOT_START_MSSG", None)
     LESS_SPAMMY = os.environ.get("LESS_SPAMMY", None)
     HEROKU_API_KEY = os.environ.get("HEROKU_API_KEY", None)
     HEROKU_APP_NAME = os.environ.get("HEROKU_APP_NAME", None)
@@ -78,6 +79,7 @@ class Var(object):
         t_file = open(TEMP_DOWNLOAD_DIRECTORY + "auth_token.txt", "w")
         t_file.write(AUTH_TOKEN_DATA)
         t_file.close()
+    LOAD_MYBOT = os.environ.get("LOAD_MYBOT", "True")
     PRIVATE_GROUP_ID = os.environ.get("PRIVATE_GROUP_ID", None)
     if PRIVATE_GROUP_ID is not None:
         try:
@@ -102,9 +104,6 @@ if ENV:
         # http://api.screenshotlayer.com/api/capture
         SCREEN_SHOT_LAYER_ACCESS_KEY = os.environ.get(
             "SCREEN_SHOT_LAYER_ACCESS_KEY", None)
-        # Send .get_id in any group to fill this value.
-        PRIVATE_GROUP_BOT_API_ID = int(os.environ.get(
-            "PRIVATE_GROUP_BOT_API_ID", -100123456789))
         # Send .get_id in any channel to fill this value. ReQuired for
         # @Manuel15 inspiration to work!
         PRIVATE_CHANNEL_BOT_API_ID = int(os.environ.get(

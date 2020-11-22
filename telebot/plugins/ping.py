@@ -6,7 +6,7 @@ from datetime import datetime
 
 from telebot import CMD_HELP
 from telebot.__init__ import StartTime
-from telebot.utils import admin_cmd, sudo_cmd
+from telebot.plugins import OWNER_ID, TELE_NAME
 
 
 def get_readable_time(seconds: int) -> str:
@@ -46,11 +46,13 @@ async def _(event):
     if event.fwd_from:
         return
     start = datetime.now()
-    x = await eor(event, "🏓 Pong!")
+    x = await eor(event, "⛝ Pong! ⛝")
     end = datetime.now()
     ms = (end - start).microseconds / 1000
     uptime = get_readable_time((time.time() - StartTime))
-    await x.edit(f"🏓Ping speed: {ms}\n🤖TeleBot Uptime: {uptime}")
+    await x.edit(
+        f"⪼ **Ping speed** : `{ms}`\n⪼ **Uptime** : `{uptime}`\n⪼ **Owner** : [{TELE_NAME}](tg://user?id={OWNER_ID})"
+    )
 
 
 CMD_HELP.update({"ping": ".ping\nUse - See the ping stats and uptime of userbot."})

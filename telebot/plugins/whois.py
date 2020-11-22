@@ -148,10 +148,10 @@ async def fetch_info(replied_user, event):
     caption += f"✯ <b>Is Vᴇʀɪғɪᴇᴅ ʙʏ Tᴇʟᴇɢʀᴀᴍ</b>: <code>{verified}</code> \n"
     caption += f"✯ <b>ID</b>: <code>{user_id}</code> \n"
     caption += f"✯ <b>Bɪᴏ</b>: <code>{user_bio}</code> \n\n"
-    caption += f"✯ <b>Nᴜᴍʙᴇʀ ᴏғ Pʀᴏғɪʟᴇ Pɪᴄs</b>: <code>{replied_user_profile_photos_count}</code> \n\n"
+    caption += f"✯ <b>Nᴜᴍʙᴇʀ ᴏғ Pʀᴏғɪʟᴇ Pɪᴄs</b>: <code>{replied_user_profile_photos_count}</code> \n"
+    caption += f"\n✯ <b>Cᴏᴍᴍᴏɴ Cʜᴀᴛs</b>: <code>{common_chat} </code>\n\n"
     caption += f"✯ <b>Pᴇʀᴍᴀɴᴇɴᴛ Lɪɴᴋ</b>: "
     caption += f'<a href="tg://user?id={user_id}">{first_name}</a>'
-    caption += f"\n\n✯ <b>Cᴏᴍᴍᴏɴ Cʜᴀᴛs</b>: <code>{common_chat} </code>\n"
 
     return caption
 

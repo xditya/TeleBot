@@ -5,7 +5,7 @@ from telethon.tl.functions.contacts import BlockRequest, UnblockRequest
 from telethon.tl.types import MessageEntityMentionName
 
 from telebot import CMD_HELP, bot
-from telebot.utils import admin_cmd, sudo_cmd
+from telebot.utils import admin_cmd
 
 client = bot
 
@@ -81,7 +81,6 @@ async def handler(tele):
 
 
 @telebot.on(admin_cmd(pattern="gban(?: |$)(.*)"))
-@telebot.on(sudo_cmd(pattern="gban(?: |$)(.*)", allow_sudo=True))
 async def gspider(rk):
     lazy = rk
     sender = await lazy.get_sender()
@@ -146,7 +145,6 @@ async def gspider(rk):
 
 
 @telebot.on(admin_cmd(pattern="ungban(?: |$)(.*)"))
-@telebot.on(sudo_cmd(pattern="ungban(?: |$)(.*)", allow_sudo=True))
 async def gspider(rk):
     lazy = rk
     sender = await lazy.get_sender()
