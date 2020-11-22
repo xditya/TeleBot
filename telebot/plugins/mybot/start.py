@@ -25,7 +25,6 @@ from telebot.plugins.mybot.sql.blacklist_sql import all_bl_users
 from telebot.plugins.mybot.sql.users_sql import all_users
 from telebot.plugins import TELE_NAME
 from telebot.plugins.mybot.sql.userbase_sql import add_to_userbase, present_in_userbase, full_userbase
-import time
 from datetime import datetime
 from telethon import events
 from telebot.telebotConfig import Var
@@ -264,7 +263,7 @@ async def enable(event):
 
 
 @tgbot.on(events.callbackquery.CallbackQuery(data=re.compile(b"disable"))
-           )  # pylint: disable=oof
+          )  # pylint: disable=oof
 async def enable(event):
     if event.sender_id == OWNER_ID:
         telebot = "LOAD_MYBOT"
@@ -283,7 +282,7 @@ async def enable(event):
 
 
 @tgbot.on(events.callbackquery.CallbackQuery(data=re.compile(b"telebroad"))
-           )  # pylint: disable=oof
+          )  # pylint: disable=oof
 async def broadcast(event):
     if event.sender_id is not OWNER_ID:
         await event.answer("You can't use this bot")
