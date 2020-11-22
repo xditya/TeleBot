@@ -1,4 +1,4 @@
-# by @StarkGang 😋 
+# by @StarkGang 😋
 
 from telebot.plugins.mybot.sql.users_sql import get_user_id
 from telethon import events
