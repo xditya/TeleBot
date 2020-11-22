@@ -89,37 +89,34 @@ async def owner(event):
                                              url="https://t.me/TeleBotSupport")]
                              ])
 
-
         @ tgbot.on(events.NewMessage(pattern="^/start logs",
                              from_users=OWNER_ID))  # pylint: disable=oof
         async def logs(event):
     try:
-        Heroku= heroku3.from_key(Var.HEROKU_API_KEY)
-        app= Heroku.app(Var.HEROKU_APP_NAME)
+        Heroku = heroku3.from_key(Var.HEROKU_API_KEY)
+        app = Heroku.app(Var.HEROKU_APP_NAME)
     except BaseException:
         await tgbot.send_message(event.chat_id, " Please make sure your Heroku API Key, Your App name are configured correctly in the heroku var !")
         return
     with open('logs.txt', 'w') as log:
         log.write(app.get_log())
-    ok= app.get_log()
-    url= "https://del.dog/documents"
-    r= requests.post(url, data=ok.encode("UTF-8")).json()
-    url= f"https://del.dog/{r['key']}"
+    ok = app.get_log()
+    url = "https://del.dog/documents"
+    r = requests.post(url, data=ok.encode("UTF-8")).json()
+    url = f"https://del.dog/{r['key']}"
     await tgbot.send_file(
        event.chat_id,
         "logs.txt",
-        reply_to = event.id,
-        caption = "**Heroku** TeleBot Logs",
-        buttons = [
+        reply_to=event.id,
+        caption="**Heroku** TeleBot Logs",
+        buttons=[
             [Button.url("View Online", f"{url}")],
             [Button.url("Crashed?", "t.me/TeleBotHelpChat")]
         ])
         await asyncio.sleep(5)
         return os.remove('logs.txt')
 
-
         # callbacks
-
 
         @ tgbot.on(events.callbackquery.CallbackQuery(data=re.compile(b"wew"))
           )  # pylint: disable=oof
@@ -127,11 +124,10 @@ async def owner(event):
     await event.delete()
     await tgbot.send_message(event.chat_id,
                             "There isn't much that you can do over here rn.",
-                             buttons = [
+                             buttons=[
                                  [Button.inline(
                                          "Deploy me for yourself", data="deployme")]
                              ])
-
 
                              @ tgbot.on(events.callbackquery.CallbackQuery(data=re.compile(b"telebot"))
            )  # pylint: disable=oof
