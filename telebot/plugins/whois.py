@@ -138,7 +138,7 @@ async def fetch_info(replied_user, event):
     else:
         common_chat = "I've seen them in... Wow. Are they stalking me? "
         common_chat += "They're in all the same places I am... oh. It's me."
-        
+
     caption = "<u><b>Dᴇᴛᴀɪʟᴇᴅ UsᴇʀIɴғᴏ</b></u>\n\n"
     caption += f"✯ <b>Fɪʀsᴛ Nᴀᴍᴇ</b>: <code>{first_name}</code> \n"
     caption += f"✯ <b>Lᴀsᴛ Nᴀᴍᴇ</b>: <code>{last_name}</code> \n"
@@ -152,7 +152,7 @@ async def fetch_info(replied_user, event):
     caption += f"\n✯ <b>Cᴏᴍᴍᴏɴ Cʜᴀᴛs</b>: <code>{common_chat} </code>\n\n"
     caption += f"✯ <b>Pᴇʀᴍᴀɴᴇɴᴛ Lɪɴᴋ</b>: "
     caption += f'<a href="tg://user?id={user_id}">{first_name}</a>'
-    
+
     return caption
 
 
