@@ -55,9 +55,9 @@ async def start_all(event):
         await tgbot.send_message(event.chat_id,
                                  startotherdis,
                                  buttons=[
-    (Button.inline(
-        "What can I do here?",
-         data="wew"))]
+                                     (Button.inline(
+                                         "What can I do here?",
+                                         data="wew"))]
                                  )
     elif LOAD_MYBOT == "True":
         await tgbot.send_message(event.chat_id,
@@ -74,24 +74,24 @@ async def start_all(event):
 
 
 @tgbot.on(events.NewMessage(pattern="^/start",
-     from_users=OWNER_ID))  # pylint: disable=oof
+                            from_users=OWNER_ID))  # pylint: disable=oof
 async def owner(event):
     await tgbot.send_message(event.chat_id,
                              startowner,
                              buttons=[
                                  [Button.inline(
                                      "Settings ⚙️", data="settings"),
-                                 Button.inline(
+                                  Button.inline(
                                      "Stats ⚙️", data="stats")],
-                                [Button.inline("Broadcast",
-                                             data="telebroad")],
+                                 [Button.inline("Broadcast",
+                                                data="telebroad")],
                                  [Button.url("Support",
                                              url="https://t.me/TeleBotSupport")]
                              ])
 
 
 @tgbot.on(events.NewMessage(pattern="^/start logs",
-     from_users=OWNER_ID))  # pylint: disable=oof
+                            from_users=OWNER_ID))  # pylint: disable=oof
 async def logs(event):
     try:
         Heroku = heroku3.from_key(Var.HEROKU_API_KEY)
@@ -153,7 +153,7 @@ async def settings(event):
                          [(Button.url("Repository", url="https://github.com/xditya/TeleBot")),
                           (Button.url("Deploy", url="https://dashboard.heroku.com/new?button-url=https%3A%2F%2Fgithub.com%2Fxditya%2FTeleBot%2F&template=https%3A%2F%2Fgithub.com%2Fxditya%2FTeleBot"))],
                          [Button.url("Support",
-     url="https://t.me/TeleBotSupport")]
+                                     url="https://t.me/TeleBotSupport")]
                      ])
 
 
@@ -243,7 +243,9 @@ async def custom(event):
     else:
         await event.answer("You can't use this bot.", alert=True)
 
-@tgbot.on(events.callbackquery.CallbackQuery(data=re.compile(b"disable")))  # pylint: disable=oof
+
+@tgbot.on(events.callbackquery.CallbackQuery(data=re.compile(b"disable"))
+          )  # pylint: disable=oof
 async def enable(event):
     if event.sender_id == OWNER_ID:
         telebot = "LOAD_MYBOT"
@@ -265,19 +267,20 @@ async def enable(event):
            )  # pylint: disable=oof
 async def enable(event):
     if event.sender_id == OWNER_ID:
-        telebot="LOAD_MYBOT"
+        telebot = "LOAD_MYBOT"
         if Var.HEROKU_APP_NAME is not None:
-            app=Heroku.app(Var.HEROKU_APP_NAME)
+            app = Heroku.app(Var.HEROKU_APP_NAME)
         else:
-            mssg="`**HEROKU**:" "\nPlease setup your` **HEROKU_APP_NAME**"
+            mssg = "`**HEROKU**:" "\nPlease setup your` **HEROKU_APP_NAME**"
             return
-        heroku_var=app.config()
-        heroku_var[telebot]="False"
-        mssg="Successfully turned off PM Bot. Restarting now, please give me a minute."
+        heroku_var = app.config()
+        heroku_var[telebot] = "False"
+        mssg = "Successfully turned off PM Bot. Restarting now, please give me a minute."
         await event.delete()
         await tgbot.send_message(event.chat_id, mssg)
     else:
         await event.answer("You can't use this bot.", alert=True)
+
 
 @ tgbot.on(events.callbackquery.CallbackQuery(data=re.compile(b"telebroad"))
            )  # pylint: disable=oof
@@ -287,20 +290,20 @@ async def broadcast(event):
         return
     await tgbot.send_message(event.chat_id, "Send the message you want to broadcast!\nSend /cancel to stop.")
     async with event.client.conversation(OWNER_ID) as conv:
-            response=conv.wait_event(events.NewMessage(chats=OWNER_ID))
-            response=await response
-            themssg=response.message.message
-    if themssg == None:
+        response = conv.wait_event(events.NewMessage(chats=OWNER_ID))
+        response = await response
+        themssg = response.message.message
+    if themssg is None:
         await tgbot.send_message(event.chat_id, "An error has occured...")
     if themssg == "/cancel":
         await tgbot.send_message(event.chat_id, "Broadcast cancelled!")
         return
-    targets=full_userbase()
-    users_cnt=len(full_userbase())
-    err=0
-    success=0
-    lmao=await tgbot.send_message(event.chat_id, "Starting broadcast to {} users.".format(users_cnt))
-    start=datetime.now()
+    targets = full_userbase()
+    users_cnt = len(full_userbase())
+    err = 0
+    success = 0
+    lmao = await tgbot.send_message(event.chat_id, "Starting broadcast to {} users.".format(users_cnt))
+    start = datetime.now()
     for ok in targets:
         try:
             await tgbot.send_message(int(ok.chat_id), themssg)
@@ -310,11 +313,11 @@ async def broadcast(event):
             err += 1
             try:
                 await tgbot.send_message(Var.PRIVATE_GROUP_ID, f"**Error**\n{str(e)}\nFailed for user: {chat_id}")
-            except:
+            except BaseException:
                 pass
-    end=datetime.now()
-    ms=(end - start).seconds
-    done_mssg="""
+    end = datetime.now()
+    ms = (end - start).seconds
+    done_mssg = """
 Broadcast completed!\n
 Sent to `{} ` users in `{}` seconds.\n
 Failed for `{}` users.\n
@@ -323,5 +326,5 @@ Total users in bot: `{}`.\n
     await lmao.edit(done_mssg)
     try:
         await tgbot.send_message(Var.PRIVATE_GROUP_ID, f"#Broadcast\nCompleted sending a broadcast to {success} users.")
-    except:
+    except BaseException:
         await tgbot.send_message(event.chat_id, "Please add me to your Private log group for proper use.")
