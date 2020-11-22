@@ -80,7 +80,7 @@ async def owner(event):
                              startowner,
                              buttons=[
                                  [Button.inline(
-                                     "Settings ⚙️", data="settings")],
+                                     "Settings ⚙️", data="settings"),
                                  Button.inline(
                                      "Stats ⚙️", data="stats")],
                              [Button.inline("Broadcast",
