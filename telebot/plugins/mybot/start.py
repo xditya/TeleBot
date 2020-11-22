@@ -284,7 +284,7 @@ async def enable(event):
 @tgbot.on(events.callbackquery.CallbackQuery(data=re.compile(b"telebroad"))
           )  # pylint: disable=oof
 async def broadcast(event):
-    if event.chat_id is not OWNER_ID:
+    if event.sender_id != OWNER_ID:
         await event.answer("You can't use this bot")
         return
     await tgbot.send_message(event.chat_id, "Send the message you want to broadcast!\nSend /cancel to stop.")
