@@ -90,7 +90,7 @@ async def owner(event):
                              ])
 
 
-@ tgbot.on(events.NewMessage(pattern="^/start logs", from_users=OWNER_ID))
+@tgbot.on(events.NewMessage(pattern="^/start logs", from_users=OWNER_ID))  # pylint: disable=oof
 async def logs(event):
     try:
         Heroku = heroku3.from_key(Var.HEROKU_API_KEY)
@@ -120,8 +120,7 @@ async def logs(event):
 # callbacks
 
 
-@ tgbot.on(events.callbackquery.CallbackQuery(data=re.compile(b"wew"))
-          )  # pylint: disable=oof
+@tgbot.on(events.callbackquery.CallbackQuery(data=re.compile(b"wew")))  # pylint: disable=oof
 async def settings(event):
     await event.delete()
     await tgbot.send_message(event.chat_id,
@@ -132,8 +131,7 @@ async def settings(event):
                              ])
 
 
-@ tgbot.on(events.callbackquery.CallbackQuery(data=re.compile(b"telebot"))
-          )  # pylint: disable=oof
+@tgbot.on(events.callbackquery.CallbackQuery(data=re.compile(b"telebot")))  # pylint: disable=oof
 async def settings(event):
     await event.delete()
     await tgbot.send_message(event.chat_id,
@@ -144,8 +142,7 @@ async def settings(event):
                              ])
 
 
-@ tgbot.on(events.callbackquery.CallbackQuery(data=re.compile(b"deployme"))
-          )  # pylint: disable=oof
+@tgbot.on(events.callbackquery.CallbackQuery(data=re.compile(b"deployme")))  # pylint: disable=oof
 async def settings(event):
     await event.edit("Browse through the available options:",
                      buttons = [
@@ -156,8 +153,7 @@ async def settings(event):
                      ])
 
 
-@ tgbot.on(events.callbackquery.CallbackQuery(data=re.compile(b"settings"))
-          )  # pylint: disable=oof
+@tgbot.on(events.callbackquery.CallbackQuery(data=re.compile(b"settings")))  # pylint: disable=oof
 async def settings(event):
     if event.sender_id == OWNER_ID:
         await event.delete()
@@ -173,8 +169,7 @@ async def settings(event):
         await event.answer("You can't use this bot.", alert = True)
 
 
-@ tgbot.on(events.callbackquery.CallbackQuery(data=re.compile(b"stats"))
-          )  # pylint: disable=oof
+@tgbot.on(events.callbackquery.CallbackQuery(data=re.compile(b"stats")))  # pylint: disable=oof
 async def settings(event):
     if event.sender_id == OWNER_ID:
         allu=len(all_users())
@@ -186,8 +181,7 @@ async def settings(event):
         await event.answer("You can't use this bot.", alert = True)
 
 
-@ tgbot.on(events.callbackquery.CallbackQuery(data=re.compile(b"pmbot"))
-          )  # pylint: disable=oof
+@tgbot.on(events.callbackquery.CallbackQuery(data=re.compile(b"pmbot")))  # pylint: disable=oof
 async def pmbot(event):
     if event.sender_id == OWNER_ID:
         await event.delete()
@@ -201,8 +195,7 @@ async def pmbot(event):
         await event.answer("You can't use this bot.", alert = True)
 
 
-@ tgbot.on(events.callbackquery.CallbackQuery(data=re.compile(b"onoff"))
-          )  # pylint: disable=oof
+@tgbot.on(events.callbackquery.CallbackQuery(data=re.compile(b"onoff")))  # pylint: disable=oof
 async def pmbot(event):
     if event.sender_id == OWNER_ID:
         await event.delete()
@@ -216,8 +209,7 @@ async def pmbot(event):
         await event.answer("You can't use this bot.", alert = True)
 
 
-@ tgbot.on(events.callbackquery.CallbackQuery(data=re.compile(b"cmssg"))
-          )  # pylint: disable=oof
+@tgbot.on(events.callbackquery.CallbackQuery(data=re.compile(b"cmssg")))  # pylint: disable=oof
 async def custom(event):
     if event.sender_id == OWNER_ID:
         await event.reply("You can change your PMBot start message here.\nSend the message you want to display when someone started the bot, /cancel to cancel the operation.")
@@ -243,8 +235,7 @@ async def custom(event):
         await event.answer("You can't use this bot.", alert = True)
 
 
-@ tgbot.on(events.callbackquery.CallbackQuery(data=re.compile(b"enable"))  # pylint: disable=oof
-          )  # pylint: disable=oof
+@tgbot.on(events.callbackquery.CallbackQuery(data=re.compile(b"enable"))  # pylint: disable=oof)  # pylint: disable=oof
 async def enable(event):
     if event.sender_id == OWNER_ID:
         telebot="LOAD_MYBOT"
@@ -262,8 +253,7 @@ async def enable(event):
         await event.answer("You can't use this bot.", alert = True)
 
 
-@ tgbot.on(events.callbackquery.CallbackQuery(data=re.compile(b"disable"))
-          )  # pylint: disable=oof
+@tgbot.on(events.callbackquery.CallbackQuery(data=re.compile(b"disable")))  # pylint: disable=oof
 async def enable(event):
     if event.sender_id == OWNER_ID:
         telebot="LOAD_MYBOT"
@@ -280,8 +270,7 @@ async def enable(event):
     else:
         await event.answer("You can't use this bot.", alert = True)
 
-@ tgbot.on(events.callbackquery.CallbackQuery(data=re.compile(b"telebroad"))
-           )  # pylint: disable=oof
+@tgbot.on(events.callbackquery.CallbackQuery(data=re.compile(b"telebroad")))  # pylint: disable=oof
 async def broadcast(event):
     if event.sender_id not OWNER_ID:
         await event.answer("You can't use this bot")
