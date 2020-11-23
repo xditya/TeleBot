@@ -308,6 +308,8 @@ CMD_HELP.update(
         "giveawayhelper": ".add\nUse - Add the channel/group to your database.\
         \n\n.rm <channel/group id>\nUse - Remove the channel/group from database.\
         \n\n.broadcast <reply to message>\nUse - Send the message to all channels/groups in the db.\
-        \n\n.forward <reply to polls/stickers>\nUse - Forwards the poll/sticker to all channels/groups in db."
+        \n\n.forward <reply to polls/stickers>\nUse - Forwards the poll/sticker to all channels/groups in db.\
+        \n\n.listchannels\nUse - List all added channels.\
+        \n\n.search <channel id>\nUse - Search for the channel name from id."
     }
 )
