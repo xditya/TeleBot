@@ -9,10 +9,6 @@ from telebot import CMD_LIST
 import re
 import logging
 import inspect
-import traceback
-from time import gmtime, strftime
-from asyncio import create_subprocess_shell as asyncsubshell
-from asyncio import subprocess as asyncsub
 
 handler = Config.CMD_HNDLR if Config.CMD_HNDLR else r"\."
 sudo_hndlr = Config.SUDO_HNDLR if Config.SUDO_HNDLR else "!"
