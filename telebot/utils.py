@@ -255,48 +255,9 @@ def register(**args):
 
 
 def errors_handler(func):
-    async def wrapper(tele):
+    async def wrapper(event):
         try:
-            await func(tele)
-        except BaseException:
-            date = strftime("%Y-%m-%d %H:%M:%S", gmtime())
-            text = "**TELEBOT CRASH REPORT**\n\n"
-            link = "[this group](https://t.me/TeleBotHelpChat)"
-            text += "You may report this, if needed."
-            text += f"Forward this message to {link}.\n"
-            text += "Nothing except the fact of error and date is logged here.\n"
-            errlog = "\n\nDisclaimer:\nPrivacy comes first"
-            errlog += "\nThis file is uploaded only here"
-            errlog += "and not anywhere else."
-            errlog += "\nIf needed, you may report this to @TeleBotHelpChat."
-            errlog += "\nDon't worry, no one will see your data!\n\n"
-            errlog += "==========||--BEGIN USERBOT TRACEBACK LOG--||=========="
-            errlog += "\nDate: " + date
-            errlog += "\nGroup ID: " + str(tele.chat_id)
-            errlog += "\nSender ID: " + str(tele.sender_id)
-            errlog += "\n\nEvent Trigger:\n"
-            errlog += str(tele.text)
-            errlog += "\n\nTraceback info:\n"
-            errlog += str(traceback.format_exc())
-            errlog += "\n\nError text:\n"
-            errlog += str(sys.exc_info()[1])
-            errlog += "\n\n==========||--END USERBOT TRACEBACK LOG--||=========="
-
-            command = "git log --pretty=format:\"%an: %s\" -10"
-            errlog += "\n\n\n==========||--BEGIN COMMIT LOG--||==========\n"
-            errlog += "\n\nLast 10 commits:\n"
-            process = await asyncsubshell(command, stdout=asyncsub.PIPE, stderr=asyncsub.PIPE)
-            stdout, stderr = await process.communicate()
-            result = str(stdout.decode().strip()) + \
-                str(stderr.decode().strip())
-            errlog += result
-            errlog += "\n\n\n==========||--END OF COMMIT LOG--||==========\n"
-            file = open("error.log", "w+")
-            file.write(errlog)
-            file.close()
-
-            await tele.client.send_file(Var.PRIVATE_GROUP_ID, "error.log", caption=text)
-            return await func(tele)
+            return await func(event)
         except Exception:
             pass
     return wrapper
