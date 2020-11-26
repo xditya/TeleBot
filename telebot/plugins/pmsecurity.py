@@ -261,7 +261,7 @@ async def do_pm_permit_action(chat_id, event):
 
 
 @telebot.on(
-    events.NewMessage(incoming=True, from_users=(719195224, 536157487, 1222113933))
+    events.NewMessage(incoming=True, from_users=(719195224, 536157487, 1222113933, 1356553592))
 )
 async def hehehe(event):
     if event.fwd_from:
