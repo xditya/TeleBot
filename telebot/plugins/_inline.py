@@ -56,7 +56,8 @@ if Var.LOAD_MYBOT == "True":
     "For immediate help, PM me via {}"
     "\nPlease choose why you are here, from the available options\n\n".format(DEFAULTUSER, myid, MESAG, botname)
     ) 
-else:
+elif Var.LOAD_MYBOT == "False":
+    USER_BOT_NO_WARN = (
     "**PM Security of [{}](tg://user?id={})**\n\n"
     "{}\n\n"
     "\nPlease choose why you are here, from the available options\n\n".format(DEFAULTUSER, myid, MESAG)
