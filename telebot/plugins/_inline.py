@@ -36,6 +36,11 @@ TELEPIC = (
 PM_WARNS = {}
 PREV_REPLY_MESSAGE = {}
 myid = bot.uid
+mybot = Var.TG_BOT_USER_NAME_BG_HER
+if mybot.startswith('@'):
+    botname = mybot
+else:
+    botname = f"@{mybot}"
 LOG_GP = Var.PRIVATE_GROUP_ID
 MESAG = (
     str(CUSTOM_PMPERMIT)
@@ -44,12 +49,18 @@ MESAG = (
 )
 DEFAULTUSER = str(ALIVE_NAME) if ALIVE_NAME else "TeleBot User"
 USER_BOT_WARN_ZERO = "`I had warned you not to spam. Now you have been blocked and reported until further notice.`\n\n**GoodBye!** "
-USER_BOT_NO_WARN = (
-    f"**PM Security ~ TeleBot**\n\nNice to see you here, but  "
-    "[{}](tg://user?id={}) is currently unavailable.\nThis is an automated message.\n\n"
-    "{}\n"
-    "\nPlease choose why you are here, from the available options\n\n            ~ Thank You."
-)
+if Var.LOAD_MYBOT == "True":
+    USER_BOT_NO_WARN = (
+    "**PM Security of [{}](tg://user?id={})**\n\n"
+    "{}\n\n"
+    "For immediate help, PM me via {}"
+    "\nPlease choose why you are here, from the available options\n\n".format(DEFAULTUSER, myid, MESAG, botname)
+    ) 
+else:
+    "**PM Security of [{}](tg://user?id={})**\n\n"
+    "{}\n\n"
+    "\nPlease choose why you are here, from the available options\n\n".format(DEFAULTUSER, myid, MESAG)
+    )
 
 CUSTOM_HELP_EMOJI = os.environ.get("CUSTOM_HELP_EMOJI", "⚡")
 HELP_ROWS = int(os.environ.get("HELP_ROWS", 5))
@@ -87,18 +98,17 @@ if Var.TG_BOT_USER_NAME_BF_HER is not None and tgbot is not None:
                 ],
             )
         elif event.query.user_id == bot.uid and query.startswith("**PM"):
-            TELEBT = USER_BOT_NO_WARN.format(DEFAULTUSER, myid, MESAG)
+            TELEBT = USER_BOT_NO_WARN
             result = builder.photo(
                 file=TELEPIC,
                 text=TELEBT,
                 buttons=[
                     [
-                        custom.Button.inline("Request Something 😁", data="req"),
-                        custom.Button.inline("Get Help 🆘", data="plshelpme"),
+                        custom.Button.inline("Request", data="req")
+                        custom.Button.inline("Chat 💭", data="chat")
                     ],
                     [
-                        custom.Button.inline("Random Chat 💭", data="chat"),
-                        custom.Button.inline("To spam 🚫", data="heheboi"),
+                        custom.Button.inline("To Spam 🚫", data="heheboi"),
                     ],
                     [custom.Button.inline("What is this ❓", data="pmclick")],
                 ],
@@ -205,23 +215,6 @@ if Var.TG_BOT_USER_NAME_BF_HER is not None and tgbot is not None:
             tosend = f"Hey {DEFAULTUSER}, [{first_name}](tg://user?id={ok}) wants to PM you for **Random Chatting**!"
             await tgbot.send_message(LOG_GP, tosend)
 
-    @tgbot.on(events.callbackquery.CallbackQuery(data=re.compile(b"plshelpme")))
-    async def on_pm_click(event):
-        if event.query.user_id == bot.uid:
-            reply_pop_up_alert = "This ain't for you, master!"
-            await event.answer(reply_pop_up_alert, cache_time=0, alert=True)
-        else:
-            await event.edit(
-                f"Oh!\n{DEFAULTUSER} would be glad to help you out...\nPlease leave your message here **in a single line** and wait till I respond 😊"
-            )
-            target = await event.client(GetFullUserRequest(event.query.user_id))
-            first_name = html.escape(target.user.first_name)
-            ok = event.query.user_id
-            if first_name is not None:
-                first_name = first_name.replace("\u2060", "")
-            tosend = f"Hey {DEFAULTUSER}, [{first_name}](tg://user?id={ok}) wants to PM you for **help**!"
-            await tgbot.send_message(LOG_GP, tosend)
-
     @tgbot.on(events.callbackquery.CallbackQuery(data=re.compile(b"heheboi")))
     async def on_pm_click(event):
         if event.query.user_id == bot.uid:
@@ -246,7 +239,7 @@ if Var.TG_BOT_USER_NAME_BF_HER is not None and tgbot is not None:
     @tgbot.on(events.callbackquery.CallbackQuery(data=re.compile(b"close")))
     async def on_plug_in_callback_query_handler(event):
         if event.query.user_id == bot.uid:
-            await event.edit("Menu Closed!!")
+            await event.edit("Menu Closed!!", buttons= [Button.inline("Re-open Menu", data="helpme")])
         else:
             reply_pop_up_alert = "Please get your own userbot from @TeleBotSupport "
             await event.answer(reply_pop_up_alert, cache_time=0, alert=True)
