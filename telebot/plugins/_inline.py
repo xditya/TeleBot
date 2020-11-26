@@ -36,7 +36,7 @@ TELEPIC = (
 PM_WARNS = {}
 PREV_REPLY_MESSAGE = {}
 myid = bot.uid
-mybot = Var.TG_BOT_USER_NAME_BG_HER
+mybot = Var.TG_BOT_USER_NAME_BF_HER
 if mybot.startswith("@"):
     botname = mybot
 else:
