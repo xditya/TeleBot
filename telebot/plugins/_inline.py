@@ -105,7 +105,7 @@ if Var.TG_BOT_USER_NAME_BF_HER is not None and tgbot is not None:
                 text=TELEBT,
                 buttons=[
                     [
-                        custom.Button.inline("Request", data="req")
+                        custom.Button.inline("Request", data="req"),
                         custom.Button.inline("Chat 💭", data="chat")
                     ],
                     [
