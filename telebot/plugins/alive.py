@@ -96,7 +96,7 @@ async def amireallyalive(alive):
             f"{telemoji} **Sudo** :` `{sudo}`\n"
             f"{telemoji} **TeleBot Uptime**:` `{uptime}`\n"
             f"{telemoji} **Database Status**:` `All OK 👌!`\n"
-            tele += f"{telemoji} **My pro owner** : [{DEFAULTUSER}](tg://user?id={myid})\n\n"
+            f"{telemoji} **My pro owner** : [{DEFAULTUSER}](tg://user?id={myid})\n\n"
             "    [✨ GitHub Repository ✨](https://github.com/xditya/TeleBot)",
             link_preview=False,
         )
