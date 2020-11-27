@@ -9,16 +9,21 @@ from PIL import Image
 
 from telebot import ALIVE_NAME, CMD_HELP, telever
 from telebot.__init__ import StartTime
-from telebot.telebotConfig import Var, Config
+from telebot.telebotConfig import Config, Var
 
-#======CONSTANTS=========#
-CUSTOM_ALIVE = Var.CUSTOM_ALIVE if Var.CUSTOM_ALIVE else "Hey! I'm alive. All systems online and functioning normally!"
+# ======CONSTANTS=========#
+CUSTOM_ALIVE = (
+    Var.CUSTOM_ALIVE
+    if Var.CUSTOM_ALIVE
+    else "Hey! I'm alive. All systems online and functioning normally!"
+)
 telemoji = Var.CUSTOM_ALIVE_EMOJI if Var.CUSTOM_ALIVE_EMOJI else "`⃝`"
 if Config.SUDO_USERS:
     sudo = "Enabled"
 else:
     sudo = "Disabled"
-#======CONSTANTS=========#
+# ======CONSTANTS=========#
+
 
 def get_readable_time(seconds: int) -> str:
     count = 0
@@ -63,13 +68,17 @@ async def amireallyalive(alive):
     if ALV_PIC:
         tele = f"**Welcome To TeleBot **\n\n"
         tele += f"`{CUSTOM_ALIVE}`\n\n"
-        tele += f"{telemoji} **Telethon version**: `1.17`\n{telemoji} **Python**: `3.8.3`\n"
+        tele += (
+            f"{telemoji} **Telethon version**: `1.17`\n{telemoji} **Python**: `3.8.3`\n"
+        )
         tele += f"`{telemoji} **TeleBot Version**: `{telever}`\n"
         tele += f"{telemoji} **More Info**:` @TeleBotSupport\n"
         tele += f"{telemoji} **Sudo** :` `{sudo}`\n"
         tele += f"{telemoji} **TeleBot Uptime**:` `{uptime}`\n"
         tele += f"{telemoji} **Database Status**:` `All OK 👌!`\n"
-        tele += f"{telemoji} **My pro owner** : [{DEFAULTUSER}](tg://user?id={myid})\n\n"
+        tele += (
+            f"{telemoji} **My pro owner** : [{DEFAULTUSER}](tg://user?id={myid})\n\n"
+        )
         tele += "    [✨ GitHub Repository ✨](https://github.com/xditya/TeleBot)"
         await alive.get_chat()
         await alive.delete()
