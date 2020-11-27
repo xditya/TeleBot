@@ -54,6 +54,7 @@ class Var(object):
         int(x) for x in os.environ.get(
             "SUPPORT_USERS", "").split())
     # custom vars
+    ALV_PIC = os.environ.get("ALIVE_PIC", None)
     CUSTOM_ALIVE = os.environ.get("CUSTOM_ALIVE", None)
     CUSTOM_ALIVE_EMOJI = os.environ.get("CUSTOM_ALIVE_EMOJI", None)
     LYDIA_API_KEY = os.environ.get("LYDIA_API_KEY", None)
