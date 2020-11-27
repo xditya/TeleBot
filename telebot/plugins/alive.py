@@ -1,6 +1,5 @@
 # For @TeleBotHelp
 """Check if your userbot is working."""
-import os
 import time
 from datetime import datetime
 from io import BytesIO
@@ -10,16 +9,16 @@ from PIL import Image
 
 from telebot import ALIVE_NAME, CMD_HELP, telever
 from telebot.__init__ import StartTime
-from telebot.telebotConfig import Config
-from telebot.utils import admin_cmd, sudo_cmd
+from telebot.telebotConfig import Var, Config
 
-ALV_PIC = os.environ.get("ALIVE_PIC", None)
-
+#======CONSTANTS=========#
+CUSTOM_ALIVE = Var.CUSTOM_ALIVE if Var.CUSTOM_ALIVE else "Hey! I'm alive. All systems online and functioning normally!"
+telemoji = Var.CUSTOM_ALIVE_EMOJI if Var.CUSTOM_ALIVE_EMOJI else "`⃝`"
 if Config.SUDO_USERS:
     sudo = "Enabled"
 else:
     sudo = "Disabled"
-
+#======CONSTANTS=========#
 
 def get_readable_time(seconds: int) -> str:
     count = 0
@@ -63,16 +62,15 @@ async def amireallyalive(alive):
     uptime = get_readable_time((time.time() - StartTime))
     if ALV_PIC:
         tele = f"**Welcome To TeleBot **\n\n"
-        tele += "`Hey! I'm alive. All systems online and functioning normally!`\n\n"
-        tele += "` 🔸 Telethon version:` **1.17**\n` 🔹 Python:` **3.8.3**\n"
-        tele += f"` 🔸 TeleBot Version:` **{telever}**\n"
-        tele += "` 🔹 More Info:` **@TeleBotSupport**\n"
-        tele += f"` 🔸 Sudo :` **{sudo}**\n"
-        tele += f"` 🔹 TeleBot Uptime:` **{uptime}**\n"
-        tele += "` 🔸 Database Status:` **All OK 👌!**\n"
-        tele += f"` 🔹 My pro owner` : **[{DEFAULTUSER}](tg://user?id={myid})**\n\n"
+        tele += f"`{CUSTOM_ALIVE}`\n\n"
+        tele += f"{telemoji} **Telethon version**: `1.17`\n{telemoji} **Python**: `3.8.3`\n"
+        tele += f"`{telemoji} **TeleBot Version**: `{telever}`\n"
+        tele += f"{telemoji} **More Info**:` @TeleBotSupport\n"
+        tele += f"{telemoji} **Sudo** :` `{sudo}`\n"
+        tele += f"{telemoji} **TeleBot Uptime**:` `{uptime}`\n"
+        tele += f"{telemoji} **Database Status**:` `All OK 👌!`\n"
+        tele += f"{telemoji} **My pro owner** : [{DEFAULTUSER}](tg://user?id={myid})\n\n"
         tele += "    [✨ GitHub Repository ✨](https://github.com/xditya/TeleBot)"
-
         await alive.get_chat()
         await alive.delete()
         """ For .alive command, check if the bot is running.  """
@@ -91,14 +89,14 @@ async def amireallyalive(alive):
         await borg.send_message(
             alive.chat_id,
             f"**Welcome To TeleBot **\n\n"
-            "`Hey! I'm alive. All systems online and functioning normally!`\n\n"
-            "` 🔸 Telethon version:` **1.17**\n` 🔹 Python:` **3.8.3**\n"
-            f"` 🔸 TeleBot Version:` **{telever}**\n"
-            "` 🔹 More Info:` **@TeleBotSupport**\n"
-            f"` 🔸 Sudo :` **{sudo}**\n"
-            f"` 🔹 TeleBot Uptime:` **{uptime}**\n"
-            "` 🔸 Database Status:` **All OK 👌!**\n"
-            f"` 🔹 My pro owner` : **[{DEFAULTUSER}](tg://user?id={myid})**\n\n"
+            f"`{CUSTOM_ALIVE}`\n\n"
+            f"{telemoji} **Telethon version**: `1.17`\n{telemoji} **Python**: `3.8.3`\n"
+            f"`{telemoji} **TeleBot Version**: `{telever}`\n"
+            f"{telemoji} **More Info**:` @TeleBotSupport\n"
+            f"{telemoji} **Sudo** :` `{sudo}`\n"
+            f"{telemoji} **TeleBot Uptime**:` `{uptime}`\n"
+            f"{telemoji} **Database Status**:` `All OK 👌!`\n"
+            tele += f"{telemoji} **My pro owner** : [{DEFAULTUSER}](tg://user?id={myid})\n\n"
             "    [✨ GitHub Repository ✨](https://github.com/xditya/TeleBot)",
             link_preview=False,
         )
