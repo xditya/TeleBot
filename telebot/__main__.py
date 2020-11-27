@@ -21,7 +21,7 @@ async def add_bot(bot_token):
 
 async def startup_log_all_done():
     try:
-        await bot.send_message(TELE, f"**TeleBot has been deployed.**\nSend** `{CMD_HNDLR}alive` **to see if the bot is working.\n\n__Add** @{BOTNAME} **to this group and make it admin for enabling all the features of TeleBot**__")
+        await bot.send_message(TELE, f"**TeleBot has been deployed.\nSend** `{CMD_HNDLR}alive` **to see if the bot is working.\n\nAdd** @{BOTNAME} **to this group and make it admin for enabling all the features of TeleBot**")
     except BaseException:
         print("Either PRIVATE_GROUP_ID is wrong or you have left the group.")
 
