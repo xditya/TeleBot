@@ -49,6 +49,7 @@ MESAG = (
 )
 DEFAULTUSER = str(ALIVE_NAME) if ALIVE_NAME else "TeleBot User"
 USER_BOT_WARN_ZERO = "`I had warned you not to spam. Now you have been blocked and reported until further notice.`\n\n**GoodBye!** "
+
 if Var.LOAD_MYBOT == "True":
     USER_BOT_NO_WARN = (
         "**PM Security of [{}](tg://user?id={})**\n\n"
@@ -103,7 +104,7 @@ if Var.TG_BOT_USER_NAME_BF_HER is not None and tgbot is not None:
                 ],
             )
         elif event.query.user_id == bot.uid and query.startswith("**PM"):
-            TELEBT = USER_BOT_NO_WARN
+            TELEBT = USER_BOT_NO_WARN.format(DEFAULTUSER, myid, MESAG)
             result = builder.photo(
                 file=TELEPIC,
                 text=TELEBT,
@@ -113,7 +114,8 @@ if Var.TG_BOT_USER_NAME_BF_HER is not None and tgbot is not None:
                         custom.Button.inline("Chat 💭", data="chat"),
                     ],
                     [
-                        custom.Button.inline("To Spam 🚫", data="heheboi"),
+                        custom.Button.inline("Random Chat 💭", data="chat"),
+                        custom.Button.inline("To spam 🚫", data="heheboi"),
                     ],
                     [custom.Button.inline("What is this ❓", data="pmclick")],
                 ],
@@ -227,6 +229,23 @@ if Var.TG_BOT_USER_NAME_BF_HER is not None and tgbot is not None:
             if first_name is not None:
                 first_name = first_name.replace("\u2060", "")
             tosend = f"Hey {DEFAULTUSER}, [{first_name}](tg://user?id={ok}) wants to PM you for **Random Chatting**!"
+            await tgbot.send_message(LOG_GP, tosend)
+
+    @tgbot.on(events.callbackquery.CallbackQuery(data=re.compile(b"plshelpme")))
+    async def on_pm_click(event):
+        if event.query.user_id == bot.uid:
+            reply_pop_up_alert = "This ain't for you, master!"
+            await event.answer(reply_pop_up_alert, cache_time=0, alert=True)
+        else:
+            await event.edit(
+                f"Oh!\n{DEFAULTUSER} would be glad to help you out...\nPlease leave your message here **in a single line** and wait till I respond 😊"
+            )
+            target = await event.client(GetFullUserRequest(event.query.user_id))
+            first_name = html.escape(target.user.first_name)
+            ok = event.query.user_id
+            if first_name is not None:
+                first_name = first_name.replace("\u2060", "")
+            tosend = f"Hey {DEFAULTUSER}, [{first_name}](tg://user?id={ok}) wants to PM you for **help**!"
             await tgbot.send_message(LOG_GP, tosend)
 
     @tgbot.on(events.callbackquery.CallbackQuery(data=re.compile(b"heheboi")))
