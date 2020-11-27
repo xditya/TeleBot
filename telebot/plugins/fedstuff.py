@@ -63,6 +63,7 @@ async def _(event):
             except YouBlockedUserError:
                 await ok.edit("**Error**\n `Unblock` @MissRose_Bot `and try again!")
 
+
 @telebot.on(admin_cmd(pattern="fedinfo ?(.*)"))
 @telebot.on(sudo_cmd(pattern="fedinfo ?(.*)", allow_sudo=True))
 async def _(event):
@@ -79,6 +80,7 @@ async def _(event):
             await ok.edit(audio.text + "\n\nFedInfo Excracted by TeleBot")
         except YouBlockedUserError:
             await ok.edit("**Error**\n `Unblock` @MissRose_Bot `and try again!")
+
 
 CMD_HELP.update(
     {
