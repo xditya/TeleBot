@@ -61,8 +61,8 @@ if Var.LOAD_MYBOT == "True":
 elif Var.LOAD_MYBOT == "False":
     USER_BOT_NO_WARN = (
         "**PM Security of [{}](tg://user?id={})**\n\n"
-        "{}\n\n"
-        "\nPlease choose why you are here, from the available options\n\n".format(
+        "{}\n"
+        "\nPlease choose why you are here, from the available options\n".format(
             DEFAULTUSER, myid, MESAG
         )
     )
