@@ -17,6 +17,7 @@ CUSTOM_ALIVE = (
     if Var.CUSTOM_ALIVE
     else "Hey! I'm alive. All systems online and functioning normally!"
 )
+ALV_PIC = Var.ALIVE_PIC if Var.ALIVE_PIC else None
 telemoji = Var.CUSTOM_ALIVE_EMOJI if Var.CUSTOM_ALIVE_EMOJI else "`⃝`"
 if Config.SUDO_USERS:
     sudo = "Enabled"
