@@ -64,8 +64,27 @@ async def _(event):
                 await ok.edit("**Error**\n `Unblock` @MissRose_Bot `and try again!")
 
 
+@telebot.on(admin_cmd(pattern="fedinfo ?(.*)"))
+@telebot.on(sudo_cmd(pattern="fedinfo ?(.*)", allow_sudo=True))
+async def _(event):
+    if event.fwd_from:
+        return
+    ok = await event.edit("`Extracting information...`")
+    sysarg = event.pattern_match.group(1)
+    async with borg.conversation(bot) as conv:
+        try:
+            await conv.send_message("/start")
+            await conv.get_response()
+            await conv.send_message("/fedinfo " + sysarg)
+            audio = await conv.get_response()
+            await ok.edit(audio.text + "\n\nFedInfo Excracted by TeleBot")
+        except YouBlockedUserError:
+            await ok.edit("**Error**\n `Unblock` @MissRose_Bot `and try again!")
+
+
 CMD_HELP.update(
     {
-        "fedstat": ".fstat <username/userid/reply to user>\nUse - To check the persons fedban stat in @MissRose_Bot."
+        "fedstuff": ".fstat <username/userid/reply to user>\nUse - To check the persons fedban stat in @MissRose_Bot.\
+        \n\n.fedinfo <fedid>\nUse - To see info about the fed."
     }
 )
