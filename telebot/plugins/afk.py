@@ -136,7 +136,7 @@ async def on_afk(event):
                     )
 
 
-@telebot.on(admin_cmd(pattern=r"tafk ?(.*)"))
+@telebot.on(admin_cmd(pattern=r"afk ?(.*)"))
 async def _(event):
     if event.fwd_from:
         return
