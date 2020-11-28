@@ -20,22 +20,24 @@
 AFK Plugin for TeleBot
 Syntax: .afk REASON
 """
-import os
 import asyncio
+import os
 from datetime import datetime
-from telethon import events, Button
-from telethon.tl import functions, types
-from telebot import CMD_HELP
-from telebot.telebotConfig import Var, Config
-from telegraph import Telegraph, upload_file
 
-#--=============================================--#
+from telegraph import Telegraph, upload_file
+from telethon import Button, events
+from telethon.tl import functions, types
+
+from telebot import CMD_HELP
+from telebot.telebotConfig import Config, Var
+
+# --=============================================--#
 global USER_AFK  # pylint:disable=E0602
 global afk_time  # pylint:disable=E0602
 global last_afk_message  # pylint:disable=E0602
 global afk_start  # pylint:disable=E0602
 global afk_end  # pylint:disable=E0602
-#--=============================================--#
+# --=============================================--#
 USER_AFK = {}
 afk_time = None
 last_afk_message = {}
@@ -43,19 +45,22 @@ afk_start = {}
 BOTLOG = True
 CUSTOM_AFK = Var.CUSTOM_AFK if Var.CUSTOM_AFK else "I am currently unavailable!"
 botname = Var.TG_BOT_USER_NAME_BF_HER
-if botname.startswith('@'):
+if botname.startswith("@"):
     MYBOT = botname
 else:
     MYBOT = f"@{botname}"
 path = Config.TMP_DOWNLOAD_DIRECTORY
 if not os.path.isdir(path):
-        os.makedirs(path)
+    os.makedirs(path)
 telegraph = Telegraph()
 r = telegraph.create_account(short_name=Config.TELEGRAPH_SHORT_NAME)
 auth_url = r["auth_url"]
-#--=============================================--#
+# --=============================================--#
 
-@telebot.on(events.NewMessage(incoming=True, func=lambda e: bool(e.mentioned or e.is_private)))
+
+@telebot.on(
+    events.NewMessage(incoming=True, func=lambda e: bool(e.mentioned or e.is_private))
+)
 async def on_afk(event):
     if event.fwd_from:
         return
@@ -92,11 +97,17 @@ async def on_afk(event):
     if USER_AFK and not (await event.get_sender()).bot:
         msg = None
         if reason is not None and tele == "True":
-            message_to_reply = "**AFK**\n{}\n\n**Last active** `{}` **ago.**\n\n**Reason** : {}".format(CUSTOM_AFK, endtime, reason)
+            message_to_reply = "**AFK**\n{}\n\n**Last active** `{}` **ago.**\n\n**Reason** : {}".format(
+                CUSTOM_AFK, endtime, reason
+            )
         elif tele == "False":
-            message_to_reply = "**AFK**\n{}\n\n**Last active** `{}` **ago.**{}".format(CUSTOM_AFK, endtime, reason)
+            message_to_reply = "**AFK**\n{}\n\n**Last active** `{}` **ago.**{}".format(
+                CUSTOM_AFK, endtime, reason
+            )
         else:
-            message_to_reply = "**AFK**\n{}\n\n**Last active** {} **ago.**".format(CUSTOM_AFK, endtime)
+            message_to_reply = "**AFK**\n{}\n\n**Last active** {} **ago.**".format(
+                CUSTOM_AFK, endtime
+            )
         if event.chat_id not in Config.UB_BLACK_LIST_CHAT:
             msg = await event.reply(message_to_reply)
         if event.chat_id in last_afk_message:
@@ -111,10 +122,19 @@ async def on_afk(event):
                     await tgbot.send_message(
                         Var.PRIVATE_GROUP_ID,
                         mssgtosend,
-                        buttons=[Button.url("Go to Message", url=f"https://t.me/c/{chat.id}/{event.message.id}")]
+                        buttons=[
+                            Button.url(
+                                "Go to Message",
+                                url=f"https://t.me/c/{chat.id}/{event.message.id}",
+                            )
+                        ],
                     )
-                except:
-                    await telebot.send_message(Var.PRIVATE_GROUP_ID, f"Please add {MYBOT} here for afk tags to work.")
+                except BaseException:
+                    await telebot.send_message(
+                        Var.PRIVATE_GROUP_ID,
+                        f"Please add {MYBOT} here for afk tags to work.",
+                    )
+
 
 @telebot.on(admin_cmd(pattern=r"tafk ?(.*)"))
 async def _(event):
@@ -140,7 +160,7 @@ async def _(event):
             try:
                 url = upload_file(media)
                 os.remove(media)
-            except:
+            except BaseException:
                 pass
             input_str = event.pattern_match.group(1)
             if url:
@@ -156,12 +176,16 @@ async def _(event):
         else:
             input_str = event.pattern_match.group(1)
             reason = f"`{input_str}`"
-        last_seen_status = await event.client(functions.account.GetPrivacyRequest(types.InputPrivacyKeyStatusTimestamp()))
+        last_seen_status = await event.client(
+            functions.account.GetPrivacyRequest(types.InputPrivacyKeyStatusTimestamp())
+        )
         if isinstance(last_seen_status.rules, types.PrivacyValueAllowAll):
             afk_time = datetime.now()
         USER_AFK = f"on: {reason}"
         if reason:
-            await event.edit(f"`Your status has been set to AFK.`\n**Reason** - {reason}")
+            await event.edit(
+                f"`Your status has been set to AFK.`\n**Reason** - {reason}"
+            )
             await asyncio.sleep(5)
             await event.delete()
         else:
@@ -179,6 +203,7 @@ async def _(event):
                     Var.PRIVATE_GROUP_ID,
                     f"#AFK \nAFK - Active\nReason - None Specified.",
                 )
+
 
 @telebot.on(events.NewMessage(outgoing=True))
 async def set_not_afk(event):
@@ -219,8 +244,9 @@ async def set_not_afk(event):
         await shite.delete()
         if BOTLOG:
             await event.client.send_message(
-                Var.PRIVATE_GROUP_ID,
-                f"#AFK \n`AFK - Disabled\nAFK for {endtime}`")
+                Var.PRIVATE_GROUP_ID, f"#AFK \n`AFK - Disabled\nAFK for {endtime}`"
+            )
+
 
 CMD_HELP.update(
     {
