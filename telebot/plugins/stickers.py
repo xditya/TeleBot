@@ -21,7 +21,7 @@ from telethon.tl.types import (
 )
 
 from telebot import CMD_HELP, bot
-from telebot.utils import admin_cmd, sudo_cmd
+from telebot.telebotConfig import Var
 
 KANGING_STR = [
     "Using Witchery to kang this sticker...",
@@ -36,6 +36,7 @@ KANGING_STR = [
     "Mr.Steal Your Sticker is stealing this sticker... ",
 ]
 
+telename = Var.CUSTOM_STICKER_PACK_NAME
 
 @telebot.on(admin_cmd(outgoing=True, pattern="kang"))
 @telebot.on(sudo_cmd(pattern="kang", allow_sudo=True))
@@ -103,7 +104,7 @@ async def kang(args):
                 emoji = splat[1]
 
         packname = f"a{user.id}_by_TB_{pack}"
-        packnick = f"@{user.username}'s TeleBot Vol.{pack}"
+        packnick = f"{telename} Vol.{pack}" if telename else f"@{user.username}'s TeleBot Vol.{pack}"
         cmd = "/newpack"
         file = io.BytesIO()
 
@@ -135,7 +136,7 @@ async def kang(args):
                 while "120" in x.text:
                     pack += 1
                     packname = f"a{user.id}_by_{user.username}_{pack}"
-                    packnick = f"@{user.username}'s TeleBot Vol.{pack}"
+                    packnick = f"{telename} Vol.{pack}" if telename else f"@{user.username}'s TeleBot Vol.{pack}"
                     await args.edit(
                         "`Switching to Pack "
                         + str(pack)
