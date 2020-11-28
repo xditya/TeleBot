@@ -38,6 +38,7 @@ KANGING_STR = [
 
 telename = Var.CUSTOM_STICKER_PACK_NAME
 
+
 @telebot.on(admin_cmd(outgoing=True, pattern="kang"))
 @telebot.on(sudo_cmd(pattern="kang", allow_sudo=True))
 async def kang(args):
@@ -104,7 +105,11 @@ async def kang(args):
                 emoji = splat[1]
 
         packname = f"a{user.id}_by_TB_{pack}"
-        packnick = f"{telename} Vol.{pack}" if telename else f"@{user.username}'s TeleBot Vol.{pack}"
+        packnick = (
+            f"{telename} Vol.{pack}"
+            if telename
+            else f"@{user.username}'s TeleBot Vol.{pack}"
+        )
         cmd = "/newpack"
         file = io.BytesIO()
 
@@ -136,7 +141,11 @@ async def kang(args):
                 while "120" in x.text:
                     pack += 1
                     packname = f"a{user.id}_by_{user.username}_{pack}"
-                    packnick = f"{telename} Vol.{pack}" if telename else f"@{user.username}'s TeleBot Vol.{pack}"
+                    packnick = (
+                        f"{telename} Vol.{pack}"
+                        if telename
+                        else f"@{user.username}'s TeleBot Vol.{pack}"
+                    )
                     await args.edit(
                         "`Switching to Pack "
                         + str(pack)
