@@ -76,7 +76,7 @@ async def list(event):
     userlist = f"List of GMuted users by {TELE_NAME}\n"
     if len(allgmuted) > 0:
         for i in allgmuted:
-            userlist += f"✘ [{i.chat_id}](tg://user?id={i.chat_id}"
+            userlist += f"✘ [{i.sender}](tg://user?id={i.sender}"
     else:
         userlist = f"{TELE_NAME} has not GMuted anyone!"
     if len(userlist) > 4095:
