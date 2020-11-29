@@ -101,7 +101,7 @@ async def on_afk(event):
                 CUSTOM_AFK, endtime, reason
             )
         elif tele == "False":
-            message_to_reply = "**AFK**\n{}\n\n**Last active** `{}` **ago.**{}".format(
+            message_to_reply = "**AFK**\n{}\n\n**Last active** `{}` **ago.**\n\n**Reason** - {}".format(
                 CUSTOM_AFK, endtime, reason
             )
         else:
