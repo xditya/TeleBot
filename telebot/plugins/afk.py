@@ -151,6 +151,7 @@ async def _(event):
     afk_time = None
     last_afk_message = {}
     afk_end = {}
+    tele = "False"
     start_1 = datetime.now()
     afk_start = start_1.replace(microsecond=0)
     if not USER_AFK:
