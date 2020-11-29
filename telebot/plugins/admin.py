@@ -29,7 +29,7 @@ from telethon.tl.types import (
 
 from telebot import BOTLOG, BOTLOG_CHATID, CMD_HELP
 from telebot.telebotConfig import Var
-from telebot.utils import admin_cmd, errors_handler, register, sudo_cmd
+from telebot.utils import admin_cmd, errors_handler, sudo_cmd
 
 # =================== CONSTANT ===================
 PP_TOO_SMOL = "`The image is too small`"
@@ -300,6 +300,7 @@ async def _(event):
         await eor(event, str(exc))
     else:
         await eor(event, f"{input_cmd}ned Successfully!")
+
 
 @telebot.on(admin_cmd(outgoing=True, pattern="admins$"))
 @errors_handler

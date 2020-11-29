@@ -39,6 +39,7 @@ def ungmute(sender):
         SESSION.delete(rem)
         SESSION.commit()
 
+
 def all_gmuted():
     rem = SESSION.query(GMute).all()
     SESSION.close()

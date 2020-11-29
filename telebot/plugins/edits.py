@@ -1140,6 +1140,7 @@ async def _(event):
     await wait([event.respond(repmessage) for i in range(count)])
     await event.delete()
 
+
 @telebot.on(admin_cmd(pattern="wtf"))
 async def _(event):
     if event.fwd_from:
@@ -1148,11 +1149,11 @@ async def _(event):
     animation_ttl = range(0, 5)
     await event.edit(input_str)
     animation_chars = [
-            "What",
-            "What The",
-            "What The F",
-            "What The F Brah",
-            "[What The F Brah](https://telegra.ph//file/f3b760e4a99340d331f9b.jpg)",
+        "What",
+        "What The",
+        "What The F",
+        "What The F Brah",
+        "[What The F Brah](https://telegra.ph//file/f3b760e4a99340d331f9b.jpg)",
     ]
     for i in animation_ttl:
         await asyncio.sleep(animation_interval)

@@ -1,7 +1,9 @@
 import asyncio
+
 from telebot import CMD_HELP
-from telebot.plugins.sql_helper.gmute_sql import is_gmuted, gmute, ungmute, all_gmuted
 from telebot.plugins import TELE_NAME
+from telebot.plugins.sql_helper.gmute_sql import all_gmuted, gmute, is_gmuted, ungmute
+
 
 @telebot.on(admin_cmd(outgoing=True, pattern=r"gmute ?(\d+)?"))
 @telebot.on(sudo_cmd(allow_sudo=True, pattern=r"gmute ?(\d+)?"))
@@ -65,6 +67,7 @@ async def endgmute(event):
     else:
         await doing.edit("`Successfully ungmuted that person!`")
 
+
 @telebot.on(admin_cmd(pattern="listgmuted"))
 @telebot.on(sudo_cmd(pattern="listgmuted", allow_sudo=True))
 async def list(event):
@@ -90,6 +93,7 @@ async def list(event):
             await event.delete()
     else:
         await doing.edit(userlist)
+
 
 @command(incoming=True)
 async def watcher(event):
