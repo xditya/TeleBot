@@ -67,7 +67,7 @@ async def endgmute(event):
     else:
         await doing.edit("`Successfully ungmuted that person!`")
 
-
+# By @its_xditya
 @telebot.on(admin_cmd(pattern="listgmuted"))
 @telebot.on(sudo_cmd(pattern="listgmuted", allow_sudo=True))
 async def list(event):
@@ -76,7 +76,7 @@ async def list(event):
     userlist = f"List of GMuted users by {TELE_NAME}\n"
     if len(allgmuted) > 0:
         for i in allgmuted:
-            userlist += f"✘ [{i.sender}](tg://user?id={i.sender}"
+            userlist += f"✘ [{i.sender}](tg://user?id={i.sender})"
     else:
         userlist = f"{TELE_NAME} has not GMuted anyone!"
     if len(userlist) > 4095:
