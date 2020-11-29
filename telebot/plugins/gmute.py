@@ -67,7 +67,10 @@ async def endgmute(event):
     else:
         await doing.edit("`Successfully ungmuted that person!`")
 
+
 # By @its_xditya
+
+
 @telebot.on(admin_cmd(pattern="listgmuted"))
 @telebot.on(sudo_cmd(pattern="listgmuted", allow_sudo=True))
 async def list(event):
