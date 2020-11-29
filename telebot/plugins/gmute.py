@@ -27,10 +27,10 @@ async def startgmute(event):
         return await doing.edit("`Please` **reply to a user** `to GMute him!`")
     event.chat_id
     await event.get_chat()
-    if is_gmuted(userid, "gmute"):
+    if is_gmuted(userid):
         return await doing.edit("`This user is already gmuted`")
     try:
-        gmute(userid, "gmute")
+        gmute(userid)
     except Exception as e:
         await doing.edit("Error occured!\nError is " + str(e))
     else:
@@ -58,10 +58,10 @@ async def endgmute(event):
     else:
         return await doing.edit("`Please` **reply to a user** `to GMute him!`")
     event.chat_id
-    if not is_gmuted(userid, "gmute"):
+    if not is_gmuted(userid):
         return await doing.edit("`This user ain't GMuted`")
     try:
-        ungmute(userid, "gmute")
+        ungmute(userid)
     except Exception as e:
         await doing.edit("`Error occured!`\n" + str(e))
     else:
