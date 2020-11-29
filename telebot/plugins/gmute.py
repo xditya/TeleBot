@@ -97,7 +97,7 @@ async def list(event):
 
 @command(incoming=True)
 async def watcher(event):
-    if is_gmuted(event.sender_id, "gmute"):
+    if is_gmuted(event.sender_id):
         await event.delete()
 
 
