@@ -45,7 +45,7 @@ async def endgmute(event):
     if event.fwd_from:
         return
     elif event.is_private:
-        await doint.edit("`Unexpected issues or ugly errors may occur!`")
+        await doing.edit("`Unexpected issues or ugly errors may occur!`")
         await asyncio.sleep(3)
         private = True
     reply = await event.get_reply_message()
