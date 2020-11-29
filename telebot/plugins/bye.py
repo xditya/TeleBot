@@ -23,7 +23,7 @@ async def leave(e):
     name = x.first_name
     if not e.text[0].isalpha() and e.text[0] not in ("/", "#", "@", "!"):
 
-        await e.edit(f"`My master, {name}, has left this group, bye!!.`")
+        await e.edit(f"`{name} has left this group, bye!!.`")
 
         time.sleep(3)
 
