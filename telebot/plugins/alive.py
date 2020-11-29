@@ -102,7 +102,7 @@ async def amireallyalive(alive):
             f"`{CUSTOM_ALIVE}`\n\n"
             f"{telemoji} **Telethon version**: `1.17`\n{telemoji} **Python**: `3.8.3`\n"
             f"{telemoji} **TeleBot Version**: `{telever}`\n"
-            f"{telemoji} **More Info**:` @TeleBotSupport\n"
+            f"{telemoji} **More Info**: @TeleBotSupport\n"
             f"{telemoji} **Sudo** : `{sudo}`\n"
             f"{telemoji} **TeleBot Uptime**: `{uptime}`\n"
             f"{telemoji} **Database Status**: `All OK 👌!`\n"
