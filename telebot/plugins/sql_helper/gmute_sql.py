@@ -5,7 +5,7 @@ from sqlalchemy import Column, String
 
 
 class GMute(BASE):
-    __tablename__ = "mute"
+    __tablename__ = "gmute"
     sender = Column(String(14), primary_key=True)
     chat_id = Column(String(14), primary_key=True)
 
