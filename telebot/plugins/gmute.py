@@ -1,5 +1,3 @@
-# fixed?
-
 #    TeleBot - UserBot
 #    Copyright (C) 2020 TeleBot
 
@@ -16,9 +14,7 @@
 #    You should have received a copy of the GNU Affero General Public License
 #    along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-
 import asyncio
-
 from telebot.plugins import OWNER_ID, TELE_NAME
 from telebot.plugins.sql_helper.mute_sql import all_muted, is_muted, mute, unmute
 from telebot.telebotConfig import Var
@@ -36,7 +32,7 @@ async def gmoot(event):
         await tele.edit(r"Are you dumb nigga? Why would you mute yourself!!")
         return
     elif event.is_private:
-        await tele.edit("Globally muted [user](tg://user?id={}".format(userid))
+        await tele.edit("Globally muted [user](tg://user?id={})".format(userid))
         await asyncio.sleep(3)
         private = True
     reply = await event.get_reply_message()
@@ -52,7 +48,7 @@ async def gmoot(event):
     await event.get_chat()
     if is_muted(userid, "gmute"):
         return await tele.edit(
-            "This [user](tg://user?id={} is already GMuted!!".format(userid)
+            "This [user](tg://user?id={}) is already GMuted!!".format(userid)
         )
     try:
         mute(userid, "gmute")
@@ -60,14 +56,14 @@ async def gmoot(event):
         await tele.edit("**Error**\n" + str(e))
     else:
         await tele.edit(
-            "**GMuted!**\nUserID - {}\nLink - [here](tg://user?id={}".format(
+            "**GMuted!**\nUserID - {}\nLink - [here](tg://user?id={})".format(
                 userid, userid
             )
         )
     try:
         await telebot.send_message(
             Var.PRIVATE_GROUP_ID,
-            "#GMute\nUserID - {}\nLink - [here](tg://user?id={}".format(userid, userid),
+            "#GMute\nUserID - {}\nLink - [here](tg://user?id={})".format(userid, userid),
         )
     except BaseException:
         pass
@@ -101,14 +97,14 @@ async def endgmute(event):
         await tele.edit("**Error**\n" + str(e))
     else:
         await tele.edit(
-            "**UnGMuted!**\nUserID - {}\nLink - [here](tg://user?id={}".format(
+            "**UnGMuted!**\nUserID - {}\nLink - [here](tg://user?id={})".format(
                 userid, userid
             )
         )
     try:
         await telebot.send_message(
             Var.PRIVATE_GROUP_ID,
-            "#UnGMute\nUserID - {}\nLink - [here](tg://user?id={}".format(
+            "#UnGMute\nUserID - {}\nLink - [here](tg://user?id={})".format(
                 userid, userid
             ),
         )
