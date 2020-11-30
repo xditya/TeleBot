@@ -34,7 +34,6 @@ DEFAULTUSER = str(ALIVE_NAME) if ALIVE_NAME else "TeleBot User"
 @telebot.on(admin_cmd(pattern=r"send (?P<shortname>\w+)", outgoing=True))
 @telebot.on(sudo_cmd(pattern=r"send (?P<shortname>\w+)", allow_sudo=True))
 async def send(event):
-    ok = await eor(event, "Sending...")
     if event.fwd_from:
         return
     hmm = bot.uid
@@ -43,7 +42,6 @@ async def send(event):
     input_str = event.pattern_match.group(1)
     the_plugin_file = "./telebot/plugins/{}.py".format(input_str)
     if os.path.exists(the_plugin_file):
-        await ok.delete()
         start = datetime.now()
         pro = await event.client.send_file(
             event.chat_id,
@@ -59,8 +57,9 @@ async def send(event):
             f"**► Plugin Name:** `{input_str}`\n**► Uploaded in {time_taken_in_ms} seconds.**\n**► Uploaded by:** [{DEFAULTUSER}](tg://user?id={hmm})\n\n© @TeleBotSupport"
         )
         await asyncio.sleep(DELETE_TIMEOUT)
+        await event.delete()
     else:
-        await ok.edit("**404**: `No Such Plugin!`")
+        await edit_or_reply(event, "**404**: __File Not Found__")
 
 
 @telebot.on(admin_cmd(pattern="install"))
