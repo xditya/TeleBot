@@ -29,7 +29,7 @@ from telethon.tl.types import (
 
 from telebot import BOTLOG, BOTLOG_CHATID, CMD_HELP
 from telebot.telebotConfig import Var
-from telebot.utils import admin_cmd, errors_handler, register, sudo_cmd
+from telebot.utils import admin_cmd, errors_handler, sudo_cmd
 
 # =================== CONSTANT ===================
 PP_TOO_SMOL = "`The image is too small`"
@@ -302,127 +302,6 @@ async def _(event):
         await eor(event, f"{input_cmd}ned Successfully!")
 
 
-@register(incoming=True)
-@errors_handler
-async def muter(moot):
-    """ Used for deleting the messages of muted people """
-    try:
-        from telebot.plugins.sql_helper.gmute_sql import is_gmuted
-    except AttributeError:
-        return
-    gmuted = is_gmuted(moot.sender_id)
-    rights = ChatBannedRights(
-        until_date=None,
-        send_messages=True,
-        send_media=True,
-        send_stickers=True,
-        send_gifs=True,
-        send_games=True,
-        send_inline=True,
-        embed_links=True,
-    )
-    for i in gmuted:
-        if i.sender == str(moot.sender_id):
-            await moot.delete()
-
-
-@telebot.on(admin_cmd(pattern="affk(?: |$)(.*)"))
-@telebot.on(sudo_cmd(pattern="affk(?: |$)(.*)", allow_sudo=True))
-@errors_handler
-async def promote(promt):
-    """ For .promote command, promotes the replied/tagged person """
-    # Get targeted chat
-    chat = await promt.get_chat()
-    # Grab admin status or creator in a chat
-    chat.admin_rights
-    chat.creator
-
-    new_rights = ChatAdminRights(
-        add_admins=False,
-        invite_users=True,
-        change_info=False,
-        ban_users=True,
-        delete_messages=True,
-        pin_messages=True,
-    )
-
-    await eor(promt, "`Promoting...`")
-    user, rank = await get_user_from_event(promt)
-    if not rank:
-        rank = "pero"  # Just in case.
-    if user:
-        pass
-    else:
-        return
-
-    # Try to promote if current user is admin or creator
-    try:
-        await promt.client(EditAdminRequest(promt.chat_id, user.id, new_rights, rank))
-        await eor(promt, "`Promoted User Successfully! Enjoy!!`")
-
-    # If Telethon spit BadRequestError, assume
-    # we don't have Promote permission
-    except BadRequestError:
-        await eor(promt, NO_PERM)
-        return
-
-    # Announce to the logging group if we have promoted successfully
-    if BOTLOG:
-        await promt.client.send_message(
-            BOTLOG_CHATID,
-            "#PROMOTE\n"
-            f"USER: [{user.first_name}](tg://user?id={user.id})\n"
-            f"CHAT: {promt.chat.title}(`{promt.chat_id}`)",
-        )
-
-
-@telebot.on(admin_cmd(outgoing=True, pattern="gmute(?: |$)(.*)"))
-@telebot.on(sudo_cmd(outgoing=True, pattern="gmute(?: |$)(.*)", allow_sudo=True))
-@errors_handler
-async def gspider(gspdr):
-    """ For .gmute command, globally mutes the replied/tagged person """
-    # Admin or creator check
-    chat = await gspdr.get_chat()
-    admin = chat.admin_rights
-    creator = chat.creator
-
-    # If not admin and not creator, return
-    if not admin and not creator:
-        await eor(gspdr, NO_ADMIN)
-        return
-
-    # Check if the function running under SQL mode
-    try:
-        from telebot.plugins.sql_helper.gmute_sql import gmute
-    except AttributeError:
-        await gspdr.edit(NO_SQL)
-        return
-
-    user, reason = await get_user_from_event(gspdr)
-    if user:
-        pass
-    else:
-        return
-
-    # If pass, inform and start gmuting
-    await eor(gspdr, "`Grabs a huge, sticky duct tape!`")
-    if gmute(user.id) is False:
-        await gspdr.edit("`Error! User probably already gmuted.\nRe-rolls the tape.`")
-    else:
-        if reason:
-            await eor(gspdr, f"`Globally taped!`Reason: {reason}")
-        else:
-            await eor(gspdr, "`Globally taped!`")
-
-        if BOTLOG:
-            await gspdr.client.send_message(
-                BOTLOG_CHATID,
-                "#GMUTE\n"
-                f"USER: [{user.first_name}](tg://user?id={user.id})\n"
-                f"CHAT: {gspdr.chat.title}(`{gspdr.chat_id}`)",
-            )
-
-
 @telebot.on(admin_cmd(outgoing=True, pattern="admins$"))
 @errors_handler
 async def get_admin(show):
@@ -647,12 +526,6 @@ CMD_HELP.update(
 \nUse - : Mutes the person in the chat, works on admins too.\
 \n\n.unmute <username/reply>\
 \nUse - : Removes the person from the muted list.\
-\n\n.gmute <username/reply> <reason (optional)>\
-\nUse - : Mutes the person in all groups you have in common with them.\
-\n\n.ungmute <username/reply>\
-\nUse - : Reply someone's message with .ungmute to remove them from the gmuted list.\
-\n\n.delusers\
-\nUse - : Searches for deleted accounts in a group. Use .delusers clean to remove deleted accounts from the group.\
 \n\n.admins\
 \nUse - : Retrieves a list of admins in the chat.\
 \n\n.users or .users <name of member>\

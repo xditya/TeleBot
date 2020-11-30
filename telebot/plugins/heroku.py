@@ -98,13 +98,13 @@ async def variable(var):
             return await toput.edit(f"`{variable}`** doesn't exist**")
 
 
-@telebot.on(admin_cmd(outgoing=True, pattern=r"usage(?: |$)"))
-@telebot.on(sudo_cmd(allow_sudo=True, pattern=r"usage(?: |$)"))
+@telebot.on(admin_cmd(pattern="usage"))
+@telebot.on(sudo_cmd(pattern="usage", allow_sudo=True))
 async def dyno_usage(dyno):
     """
     Get your account Dyno Usage
     """
-    await eor(dyno, "`Processing...`")
+    dyno = await eor(dyno, "`Processing...`")
     useragent = (
         "Mozilla/5.0 (Linux; Android 10; SM-G975F) "
         "AppleWebKit/537.36 (KHTML, like Gecko) "
@@ -119,21 +119,20 @@ async def dyno_usage(dyno):
     path = "/accounts/" + user_id + "/actions/get-quota"
     r = requests.get(heroku_api + path, headers=headers)
     if r.status_code != 200:
-        return await eor(
-            dyno, "`Error: something bad happened`\n\n" f">.`{r.reason}`\n"
+        return await dyno.edit(
+            "`Error: something bad happened`\n\n" f">.`{r.reason}`\n"
         )
     result = r.json()
     quota = result["account_quota"]
     quota_used = result["quota_used"]
 
-    """ - Used - """
+    # - Used -
     remaining_quota = quota - quota_used
     percentage = math.floor(remaining_quota / quota * 100)
     minutes_remaining = remaining_quota / 60
     hours = math.floor(minutes_remaining / 60)
     minutes = math.floor(minutes_remaining % 60)
-
-    """ - Current - """
+    # - Current -
     App = result["apps"]
     try:
         App[0]["quota_used"]
@@ -145,11 +144,8 @@ async def dyno_usage(dyno):
         AppPercentage = math.floor(App[0]["quota_used"] * 100 / quota)
     AppHours = math.floor(AppQuotaUsed / 60)
     AppMinutes = math.floor(AppQuotaUsed % 60)
-
     await asyncio.sleep(1.5)
-
-    return await eor(
-        dyno,
+    return await dyno.edit(
         "**⚙️ Dyno Usage ⚙️**:\n\n"
         f" -> `Dyno usage for`  **{Var.HEROKU_APP_NAME}**:\n"
         f"     •  `{AppHours}`**h**  `{AppMinutes}`**m**  "
@@ -157,7 +153,7 @@ async def dyno_usage(dyno):
         "\n\n"
         " -> `Dyno hours quota remaining this month`:\n"
         f"     •  `{hours}`**h**  `{minutes}`**m**  "
-        f"**|**  [`{percentage}`**%**]",
+        f"**|**  [`{percentage}`**%**]"
     )
 
 

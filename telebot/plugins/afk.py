@@ -14,158 +14,243 @@
 #    You should have received a copy of the GNU Affero General Public License
 #    along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
+# Based of AFK by @SpEcHIDe
+# Media Afk, Time, by @xditya
 """
 AFK Plugin for TeleBot
 Syntax: .afk REASON
 """
-
 import asyncio
-import datetime
+import os
+from datetime import datetime
 
-from telethon import events
+from telegraph import Telegraph, upload_file
+from telethon import Button, events
 from telethon.tl import functions, types
 
-from telebot import ALIVE_NAME, CMD_HELP
-from telebot.utils import admin_cmd
+from telebot import CMD_HELP
+from telebot.telebotConfig import Config, Var
 
-ALIVE_NAME = str(ALIVE_NAME) if ALIVE_NAME else "TeleBot User"
+# --=============================================--#
 global USER_AFK  # pylint:disable=E0602
 global afk_time  # pylint:disable=E0602
 global last_afk_message  # pylint:disable=E0602
+global afk_start  # pylint:disable=E0602
+global afk_end  # pylint:disable=E0602
+# --=============================================--#
 USER_AFK = {}
 afk_time = None
 last_afk_message = {}
-
-
-@telebot.on(events.NewMessage(outgoing=True))  # pylint:disable=E0602
-async def set_not_afk(event):
-    global USER_AFK  # pylint:disable=E0602
-    global afk_time  # pylint:disable=E0602
-    global last_afk_message  # pylint:disable=E0602
-    current_message = event.message.message
-    me = await borg.get_me()
-    (me.first_name)
-    if ".afk" not in current_message and "yes" in USER_AFK:  # pylint:disable=E0602
-        try:
-            await borg.send_message(  # pylint:disable=E0602
-                Var.PRIVATE_GROUP_ID,  # pylint:disable=E0602
-                "Set AFK mode to False",
-            )
-        except Exception as e:  # pylint:disable=C0103,W0703
-            await borg.send_message(  # pylint:disable=E0602
-                event.chat_id,
-                "Please set `PRIVATE_GROUP_BOT_API_ID` "
-                + "for the proper functioning of afk functionality "
-                + "\nCheck pinned message in @TeleBotSupport for more info.\n\n `{}`".format(
-                    str(e)
-                ),
-                reply_to=event.message.id,
-                silent=True,
-            )
-        USER_AFK = {}  # pylint:disable=E0602
-        afk_time = None  # pylint:disable=E0602
-
-
-@telebot.on(admin_cmd(pattern=r"afk ?(.*)"))  # pylint:disable=E0602
-async def _(event):
-    if event.fwd_from:
-        return
-    global USER_AFK  # pylint:disable=E0602
-    global afk_time  # pylint:disable=E0602
-    global last_afk_message  # pylint:disable=E0602
-    global reason
-    USER_AFK = {}
-    afk_time = None
-    last_afk_message = {}
-    reason = event.pattern_match.group(1)
-    me = await borg.get_me()
-    me.first_name
-    (me.last_name)
-    if not USER_AFK:  # pylint:disable=E0602
-        last_seen_status = await borg(  # pylint:disable=E0602
-            functions.account.GetPrivacyRequest(types.InputPrivacyKeyStatusTimestamp())
-        )
-        if isinstance(last_seen_status.rules, types.PrivacyValueAllowAll):
-            afk_time = datetime.datetime.now()  # pylint:disable=E0602
-        USER_AFK = f"yes: {reason}"  # pylint:disable=E0602
-        if reason:
-            await event.edit(
-                f"`Your status has been set to AFK.`\n**Reason** - __{reason}__"
-            )
-        else:
-            await event.edit(f"`Your status has been set to AFK.`")
-        await asyncio.sleep(5)
-        await event.delete()
-        try:
-            await borg.send_message(  # pylint:disable=E0602
-                Var.PRIVATE_GROUP_ID,  # pylint:disable=E0602
-                f"#AFK\nSet AFK mode to True, with Reason - {reason}",
-            )
-        except Exception as e:  # pylint:disable=C0103,W0703
-            logger.warn(str(e))  # pylint:disable=E0602
+afk_start = {}
+BOTLOG = True
+CUSTOM_AFK = Var.CUSTOM_AFK if Var.CUSTOM_AFK else "I am currently unavailable!"
+botname = Var.TG_BOT_USER_NAME_BF_HER
+if botname.startswith("@"):
+    MYBOT = botname
+else:
+    MYBOT = f"@{botname}"
+path = Config.TMP_DOWNLOAD_DIRECTORY
+if not os.path.isdir(path):
+    os.makedirs(path)
+telegraph = Telegraph()
+r = telegraph.create_account(short_name=Config.TELEGRAPH_SHORT_NAME)
+auth_url = r["auth_url"]
+# --=============================================--#
 
 
 @telebot.on(
-    events.NewMessage(  # pylint:disable=E0602
-        incoming=True, func=lambda e: bool(e.mentioned or e.is_private)
-    )
+    events.NewMessage(incoming=True, func=lambda e: bool(e.mentioned or e.is_private))
 )
 async def on_afk(event):
     if event.fwd_from:
         return
-    global USER_AFK  # pylint:disable=E0602
-    global afk_time  # pylint:disable=E0602
-    global last_afk_message  # pylint:disable=E0602
-    afk_since = "**a while ago**"
+    global USER_AFK
+    global afk_time
+    global last_afk_message
+    global afk_start
+    global afk_end
+    back_alivee = datetime.now()
+    afk_end = back_alivee.replace(microsecond=0)
+    if afk_start != {}:
+        total_afk_time = afk_end - afk_start
+        time = int(total_afk_time.seconds)
+        d = time // (24 * 3600)
+        time %= 24 * 3600
+        h = time // 3600
+        time %= 3600
+        m = time // 60
+        time %= 60
+        s = time
+        endtime = ""
+        if d > 0:
+            endtime += f"{d}d {h}h {m}m {s}s"
+        else:
+            if h > 0:
+                endtime += f"{h}h {m}m {s}s"
+            else:
+                endtime += f"{m}m {s}s" if m > 0 else f"{s}s"
     current_message_text = event.message.message.lower()
     if "afk" in current_message_text:
         # userbot's should not reply to other userbot's
         # https://core.telegram.org/bots/faq#why-doesn-39t-my-bot-see-messages-from-other-bots
         return False
-    if USER_AFK and not (await event.get_sender()).bot:  # pylint:disable=E0602
-        if afk_time:  # pylint:disable=E0602
-            now = datetime.datetime.now()
-            datime_since_afk = now - afk_time  # pylint:disable=E0602
-            time = float(datime_since_afk.seconds)
-            days = time // (24 * 3600)
-            time = time % (24 * 3600)
-            hours = time // 3600
-            time %= 3600
-            minutes = time // 60
-            time %= 60
-            seconds = time
-            if days == 1:
-                afk_since = "**Yesterday**"
-            elif days > 1:
-                if days > 6:
-                    date = now + datetime.timedelta(
-                        days=-days, hours=-hours, minutes=-minutes
-                    )
-                    afk_since = date.strftime("%A, %Y %B %m, %H:%I")
-                else:
-                    wday = now + datetime.timedelta(days=-days)
-                    afk_since = wday.strftime("%A")
-            elif hours > 1:
-                afk_since = f"`{int(hours)}h{int(minutes)}m` **ago**"
-            elif minutes > 0:
-                afk_since = f"`{int(minutes)}m{int(seconds)}s` **ago**"
-            else:
-                afk_since = f"`{int(seconds)}s` **ago**"
+    if USER_AFK and not (await event.get_sender()).bot:
         msg = None
-        message_to_reply = (
-            f"**[AFK]** `Hi, I'm not available.`\n\n**Reason - ** __{reason}__\n\n**Last seen** - __{afk_since}__"
-            if reason
-            else f"**[AFK]** `I am unavailable. Please leave your message, I will look into it soon!`\n\n**Last seen** - __{afk_since}__ "
+        if reason is not None and tele == "True":
+            message_to_reply = "**AFK**\n{}\n\n**Last active** `{}` **ago.**\n\n**Reason** : {}".format(
+                CUSTOM_AFK, endtime, reason
+            )
+        elif tele == "False":
+            message_to_reply = "**AFK**\n{}\n\n**Last active** `{}` **ago.**\n\n**Reason** - {}".format(
+                CUSTOM_AFK, endtime, reason
+            )
+        else:
+            message_to_reply = "**AFK**\n{}\n\n**Last active** {} **ago.**".format(
+                CUSTOM_AFK, endtime
+            )
+        if event.chat_id not in Config.UB_BLACK_LIST_CHAT:
+            msg = await event.reply(message_to_reply)
+        if event.chat_id in last_afk_message:
+            await last_afk_message[event.chat_id].delete()
+        last_afk_message[event.chat_id] = msg
+        chat = await event.get_chat()
+        if Var.PRIVATE_GROUP_ID:
+            await asyncio.sleep(5)
+            if not event.is_private:
+                mssgtosend = f"#AFK \nYou were tagged in `{chat.title}`"
+                try:
+                    await tgbot.send_message(
+                        Var.PRIVATE_GROUP_ID,
+                        mssgtosend,
+                        buttons=[
+                            Button.url(
+                                "Go to Message",
+                                url=f"https://t.me/c/{chat.id}/{event.message.id}",
+                            )
+                        ],
+                    )
+                except BaseException:
+                    await telebot.send_message(
+                        Var.PRIVATE_GROUP_ID,
+                        f"Please add {MYBOT} here for afk tags to work.",
+                    )
+
+
+@telebot.on(admin_cmd(pattern=r"afk ?(.*)"))
+async def _(event):
+    if event.fwd_from:
+        return
+    global USER_AFK
+    global afk_time
+    global last_afk_message
+    global afk_start
+    global afk_end
+    global reason
+    global tele
+    USER_AFK = {}
+    afk_time = None
+    last_afk_message = {}
+    afk_end = {}
+    tele = "False"
+    start_1 = datetime.now()
+    afk_start = start_1.replace(microsecond=0)
+    if not USER_AFK:
+        if event.reply_to_msg_id:
+            reply_message = await event.get_reply_message()
+            media = await telebot.download_media(reply_message, "AFK_media")
+            try:
+                url = upload_file(media)
+                os.remove(media)
+            except BaseException:
+                pass
+            input_str = event.pattern_match.group(1)
+            if url:
+                if input_str is not None:
+                    tele = "True"
+                    reason = f"`{input_str}`[‎‏‏‎ ‎](https://telegra.ph/{url[0]})"
+                else:
+                    tele = "False"
+                    reason = f"[‎‏‏‎ ‎](https://telegra.ph/{url[0]})"
+            else:
+                if input_str is not None:
+                    reason = f"`{input_str}`"
+        else:
+            input_str = event.pattern_match.group(1)
+            reason = f"`{input_str}`"
+        last_seen_status = await event.client(
+            functions.account.GetPrivacyRequest(types.InputPrivacyKeyStatusTimestamp())
         )
-        msg = await event.reply(message_to_reply)
+        if isinstance(last_seen_status.rules, types.PrivacyValueAllowAll):
+            afk_time = datetime.now()
+        USER_AFK = f"on: {reason}"
+        if reason:
+            await event.edit(
+                f"`Your status has been set to AFK.`\n**Reason** - {reason}"
+            )
+            await asyncio.sleep(5)
+            await event.delete()
+        else:
+            await event.edit("`Your status has been set to AFK.`")
+            await asyncio.sleep(5)
+            await event.delete()
+        if BOTLOG:
+            if reason:
+                await event.client.send_message(
+                    Var.PRIVATE_GROUP_ID,
+                    f"#AFK \nAFK - Active\nReason - {reason}",
+                )
+            else:
+                await event.client.send_message(
+                    Var.PRIVATE_GROUP_ID,
+                    f"#AFK \nAFK - Active\nReason - None Specified.",
+                )
+
+
+@telebot.on(events.NewMessage(outgoing=True))
+async def set_not_afk(event):
+    global USER_AFK
+    global afk_time
+    global last_afk_message
+    global afk_start
+    global afk_end
+    back_alive = datetime.now()
+    afk_end = back_alive.replace(microsecond=0)
+    if afk_start != {}:
+        total_afk_time = afk_end - afk_start
+        time = int(total_afk_time.seconds)
+        d = time // (24 * 3600)
+        time %= 24 * 3600
+        h = time // 3600
+        time %= 3600
+        m = time // 60
+        time %= 60
+        s = time
+        endtime = ""
+        if d > 0:
+            endtime += f"{d}d {h}h {m}m {s}s"
+        else:
+            if h > 0:
+                endtime += f"{h}h {m}m {s}s"
+            else:
+                endtime += f"{m}m {s}s" if m > 0 else f"{s}s"
+    current_message = event.message.message
+    if "afk" not in current_message and "on" in USER_AFK:
+        shite = await event.client.send_message(
+            event.chat_id,
+            f"`I'm back!\nWas afk for {endtime}`",
+        )
+        USER_AFK = {}
+        afk_time = None
         await asyncio.sleep(5)
-        if event.chat_id in last_afk_message:  # pylint:disable=E0602
-            await last_afk_message[event.chat_id].delete()  # pylint:disable=E0602
-        last_afk_message[event.chat_id] = msg  # pylint:disable=E0602
+        await shite.delete()
+        if BOTLOG:
+            await event.client.send_message(
+                Var.PRIVATE_GROUP_ID, f"#AFK \n`AFK - Disabled\nAFK for {endtime}`"
+            )
 
 
 CMD_HELP.update(
     {
-        "afk": "➟ `.afk` <optional reason>\nUse - Sets your status to AwayFromKeyboard. The bot will reply when you are tagged in groups."
+        "afk": "➟ `.afk` <optional reason>\nUse - Sets your status to AwayFromKeyboard. The bot will reply when you are tagged in groups. Will be auto turned off when you message again!"
     }
 )

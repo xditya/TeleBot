@@ -1,13 +1,10 @@
 """Emoji
-
 Available Commands:
-
 .wtf"""
-
 
 import asyncio
 
-from telebot.utils import admin_cmd
+from telebot import CMD_HELP
 
 
 @telebot.on(admin_cmd(pattern="(.*)"))
@@ -31,3 +28,6 @@ async def _(event):
 
             await asyncio.sleep(animation_interval)
             await event.edit(animation_chars[i % 5])
+
+
+CMD_HELP.update({"wtf": ".wtf\nUse - Animation Plugin to spam the chat recents lel"})
