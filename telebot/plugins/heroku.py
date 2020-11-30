@@ -157,7 +157,6 @@ async def dyno_usage(dyno):
     )
 
 
-
 @telebot.on(admin_cmd(pattern="info heroku"))
 @telebot.on(sudo_cmd(pattern="info heroku", allow_sudo=True))
 async def info(event):
