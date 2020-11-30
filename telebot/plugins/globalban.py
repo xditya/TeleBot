@@ -1,43 +1,23 @@
-# Imported by @its_xditya
+#    TeleBot - UserBot
+#    Copyright (C) 2020 TeleBot
+
+#    This program is free software: you can redistribute it and/or modify
+#    it under the terms of the GNU Affero General Public License as published by
+#    the Free Software Foundation, either version 3 of the License, or
+#    (at your option) any later version.
+
+#    This program is distributed in the hope that it will be useful,
+#    but WITHOUT ANY WARRANTY; without even the implied warranty of
+#    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+#    GNU Affero General Public License for more details.
+
+#    You should have received a copy of the GNU Affero General Public License
+#    along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 from telethon.events import ChatAction
 from telethon.tl.functions.contacts import BlockRequest, UnblockRequest
 from telethon.tl.types import MessageEntityMentionName
-
-from telebot import CMD_HELP, bot
-from telebot.utils import admin_cmd
-
-client = bot
-
-
-async def get_user_from_event(event):
-    args = event.pattern_match.group(1).split(":", 1)
-    extra = None
-    if event.reply_to_msg_id and not len(args) == 2:
-        previous_message = await event.get_reply_message()
-        user_obj = await event.client.get_entity(previous_message.from_id)
-        extra = event.pattern_match.group(1)
-    elif len(args[0]) > 0:
-        user = args[0]
-        if len(args) == 2:
-            extra = args[1]
-        if user.isnumeric():
-            user = int(user)
-        if not user:
-            await eor(event, f"* Pass the user's username, id or reply!**")
-            return
-        if event.message.entities is not None:
-            probable_user_mention_entity = event.message.entities[0]
-            if isinstance(probable_user_mention_entity, MessageEntityMentionName):
-                user_id = probable_user_mention_entity.user_id
-                user_obj = await event.client.get_entity(user_id)
-                return user_obj
-        try:
-            user_obj = await event.client.get_entity(user)
-        except Exception as err:
-            return await eor(event, "Failed \n **Error**\n", str(err))
-    return user_obj, extra
-
+from telebot import CMD_HELP
 
 async def get_user_from_id(user, event):
     if isinstance(user, str):
@@ -54,14 +34,14 @@ async def get_user_from_id(user, event):
 async def handler(tele):
     if tele.user_joined or tele.user_added:
         try:
-            from telebot.plugins.sql_helper.gmute_sql import is_gmuted
+            from telebot.plugins.sql_helper.gban_sql import is_gbanned
 
             guser = await tele.get_user()
-            gmuted = is_gmuted(guser.id)
+            gbanned = is_gbanned(guser.id)
         except BaseException:
             return
-        if gmuted:
-            for i in gmuted:
+        if gbanned:
+            for i in gbanned:
                 if i.sender == str(guser.id):
                     chat = await tele.get_chat()
                     admin = chat.admin_rights
@@ -76,6 +56,7 @@ async def handler(tele):
                                 f"**Victim Id**: [{guser.id}](tg://user?id={guser.id})\n"
                                 f"**Action **  : `Banned`"
                             )
+                            await telebot.send_message("#GBan_Action\n**Chat** - {}\n**User** - [{}](tg://user?id={})\n**Action** - `Banned`".format(tele.chat_id, guser.id))
                         except BaseException:
                             return
 
@@ -113,7 +94,7 @@ async def gspider(rk):
         if user.id == 719195224:
             return await rkp.edit("**Error! cant gban this user.**")
         try:
-            from telebot.plugins.sql_helper.gmute_sql import gmute
+            from telebot.plugins.sql_helper.gban_sql import gban
         except BaseException:
             pass
         try:
@@ -135,7 +116,7 @@ async def gspider(rk):
     else:
         await rkp.edit(f"**Reply to a user !! **")
     try:
-        if gmute(user.id) is False:
+        if gban(user.id) is False:
             return await rkp.edit(f"**Error! User probably already gbanned.**")
     except BaseException:
         pass
@@ -177,7 +158,7 @@ async def gspider(rk):
         if user.id == 719195224:
             return await rkp.edit(f"**Error! cant ungban this user.**")
         try:
-            from telebot.plugins.sql_helper.gmute_sql import ungmute
+            from telebot.plugins.sql_helper.gban_sql import ungban
         except BaseException:
             pass
         try:
@@ -199,7 +180,7 @@ async def gspider(rk):
     else:
         await rkp.edit(f"**Reply to a user !! **")
     try:
-        if ungmute(user.id) is False:
+        if ungban(user.id) is False:
             return await rkp.edit(f"**Error! User probably already ungbanned.**")
     except BaseException:
         pass
@@ -207,13 +188,72 @@ async def gspider(rk):
         f"**UnGbanned** [{user.first_name}](tg://user?id={user.id}) **\nChats affected - {a}\nUnBlocked and removed user from Gban watch **"
     )
 
+@telebot.on(admin_cmd(pattern="listgbanned"))
+@telebot.on(sudo_cmd(pattern="listgbanned", allow_sudo=True))
+async def list(event):
+    try:
+        from telebot.plugins.sql_helper.gban_sql import all_gbanned
+    except:
+        await event.edit("Error. SQL Not found!")
+        return
+    doing = await eor(event, "`Making a list of GBanned Users`")
+    allgbanned = all_gbanned()
+    userlist = f"List of GBanned users by {TELE_NAME}\n"
+    if len(allgbanned) > 0:
+        for i in allgbanned:
+            userlist += f"✘ [{i.sender}](tg://user?id={i.sender})"
+    else:
+        userlist = f"{TELE_NAME} has not GBanned anyone!"
+    if len(userlist) > 4095:
+        with io.BytesIO(str.encode(userlist)) as gbanned_list:
+            gbanned_list.name = "GBanned.text"
+            await telebot.send_file(
+                event.chat_id,
+                gbanned_list,
+                force_document=True,
+                allow_cache=False,
+                caption=f"List of GBanned Users by {TELE_NAME}",
+                reply_to=event,
+            )
+            await event.delete()
+    else:
+        await doing.edit(userlist)
+        
+async def get_user_from_event(event):
+    args = event.pattern_match.group(1).split(":", 1)
+    extra = None
+    if event.reply_to_msg_id and not len(args) == 2:
+        previous_message = await event.get_reply_message()
+        user_obj = await event.client.get_entity(previous_message.from_id)
+        extra = event.pattern_match.group(1)
+    elif len(args[0]) > 0:
+        user = args[0]
+        if len(args) == 2:
+            extra = args[1]
+        if user.isnumeric():
+            user = int(user)
+        if not user:
+            await eor(event, f"* Pass the user's username, id or reply!**")
+            return
+        if event.message.entities is not None:
+            probable_user_mention_entity = event.message.entities[0]
+            if isinstance(probable_user_mention_entity, MessageEntityMentionName):
+                user_id = probable_user_mention_entity.user_id
+                user_obj = await event.client.get_entity(user_id)
+                return user_obj
+        try:
+            user_obj = await event.client.get_entity(user)
+        except Exception as err:
+            return await eor(event, "Failed \n **Error**\n", str(err))
+    return user_obj, extra
+
 
 CMD_HELP.update(
     {
-        "gban": ".gban <username> / <userid> / <reply to a user>\
-\n**Usage**: Global ban the person in all groups, channels , block in pm , add gban watch (use with solution) \
-\n\n.ungban <username> / <userid> / <reply to a user>\
-\n**Usage**: unban user from all groups, channels , remove user from gban watch.\
-"
+        "gban": ".gban <username/userid/reply to a user>\
+        \nUse - Global ban the person in all groups, channels , block in pm , add gban watch (use with solution)\
+        \n\n.ungban <username/userid/reply to a user>\
+        \nUse - UnbGan user from all groups, channels , remove user from gban watch.\
+        \n\n.listgbanned\nUse - List all gbanned users."
     }
 )
