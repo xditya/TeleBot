@@ -17,7 +17,7 @@
 import asyncio
 
 from telebot.plugins import OWNER_ID, TELE_NAME
-from telebot.plugins.sql_helper.gmute_sql import all_gmuted, is_gmuted, gmute, ungmute
+from telebot.plugins.sql_helper.gmute_sql import all_gmuted, gmute, is_gmuted, ungmute
 from telebot.telebotConfig import Var
 
 
