@@ -1143,11 +1143,12 @@ async def _(event):
 
 @telebot.on(admin_cmd(pattern="wtf"))
 async def _(event):
+    ok = await event.edit(".")
     if event.fwd_from:
         return
     animation_interval = 0.3
     animation_ttl = range(0, 5)
-    await event.edit(input_str)
+    await event.edit(ok)
     animation_chars = [
         "What",
         "What The",
