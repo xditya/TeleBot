@@ -1,4 +1,4 @@
-# fixed? 
+# fixed?
 
 #    TeleBot - UserBot
 #    Copyright (C) 2020 TeleBot
@@ -17,11 +17,12 @@
 #    along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 
-from telebot.plugins.sql_helper.mute_sql import is_muted, mute, unmute, all_muted
 import asyncio
-from telethon import events
+
 from telebot.plugins import OWNER_ID, TELE_NAME
+from telebot.plugins.sql_helper.mute_sql import all_muted, is_muted, mute, unmute
 from telebot.telebotConfig import Var
+
 
 @telebot.on(admin_cmd(pattern=r"gmute ?(\d+)?"))
 async def gmoot(event):
@@ -31,8 +32,8 @@ async def gmoot(event):
         return
     reply = await event.get_reply_message()
     userid = reply.from_id
-    if userid == OWNER_ID:	
-        await tele.edit(r"Are you dumb nigga? Why would you mute yourself!!")	
+    if userid == OWNER_ID:
+        await tele.edit(r"Are you dumb nigga? Why would you mute yourself!!")
         return
     elif event.is_private:
         await tele.edit("Globally muted [user](tg://user?id={}".format(userid))
@@ -47,20 +48,30 @@ async def gmoot(event):
         userid = event.chat_id
     else:
         return await tele.edit("`Reply to a person or give me his id to GMute!!`")
-    chat_id = event.chat_id
-    chat = await event.get_chat()
+    event.chat_id
+    await event.get_chat()
     if is_muted(userid, "gmute"):
-        return await tele.edit("This [user](tg://user?id={} is already GMuted!!".format(userid))
+        return await tele.edit(
+            "This [user](tg://user?id={} is already GMuted!!".format(userid)
+        )
     try:
         mute(userid, "gmute")
     except Exception as e:
         await tele.edit("**Error**\n" + str(e))
     else:
-        await tele.edit("**GMuted!**\nUserID - {}\nLink - [here](tg://user?id={}".format(userid, userid))
+        await tele.edit(
+            "**GMuted!**\nUserID - {}\nLink - [here](tg://user?id={}".format(
+                userid, userid
+            )
+        )
     try:
-        await telebot.send_message(Var.PRIVATE_GROUP_ID, "#GMute\nUserID - {}\nLink - [here](tg://user?id={}".format(userid, userid))
-    except:
+        await telebot.send_message(
+            Var.PRIVATE_GROUP_ID,
+            "#GMute\nUserID - {}\nLink - [here](tg://user?id={}".format(userid, userid),
+        )
+    except BaseException:
         pass
+
 
 @telebot.on(admin_cmd(pattern=r"ungmute ?(\d+)?"))
 async def endgmute(event):
@@ -81,7 +92,7 @@ async def endgmute(event):
         userid = event.chat_id
     else:
         return await tele.edit("`Reply to a person or give me his id to UnGMute!!`")
-    chat_id = event.chat_id
+    event.chat_id
     if not is_muted(userid, "gmute"):
         return await tele.edit("Hmm.. This person is not GMuted, yet!")
     try:
@@ -89,12 +100,22 @@ async def endgmute(event):
     except Exception as e:
         await tele.edit("**Error**\n" + str(e))
     else:
-        await tele.edit("**UnGMuted!**\nUserID - {}\nLink - [here](tg://user?id={}".format(userid, userid))
+        await tele.edit(
+            "**UnGMuted!**\nUserID - {}\nLink - [here](tg://user?id={}".format(
+                userid, userid
+            )
+        )
     try:
-        await telebot.send_message(Var.PRIVATE_GROUP_ID, "#UnGMute\nUserID - {}\nLink - [here](tg://user?id={}".format(userid, userid))
-    except:
+        await telebot.send_message(
+            Var.PRIVATE_GROUP_ID,
+            "#UnGMute\nUserID - {}\nLink - [here](tg://user?id={}".format(
+                userid, userid
+            ),
+        )
+    except BaseException:
         pass
-        
+
+
 @command(incoming=True)
 async def watcher(event):
     if is_muted(event.sender_id, "gmute"):
