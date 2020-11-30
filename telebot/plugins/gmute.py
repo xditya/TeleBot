@@ -17,7 +17,7 @@
 import asyncio
 
 from telebot.plugins import OWNER_ID, TELE_NAME
-from telebot.plugins.sql_helper.mute_sql import all_muted, is_muted, mute, unmute
+from telebot.plugins.sql_helper.gmute_sql import all_gmuted, is_gmuted, gmute, ungmute
 from telebot.telebotConfig import Var
 
 
@@ -47,12 +47,12 @@ async def gmoot(event):
         return await tele.edit("`Reply to a person or give me his id to GMute!!`")
     event.chat_id
     await event.get_chat()
-    if is_muted(userid, "gmute"):
+    if is_gmuted(userid, "gmute"):
         return await tele.edit(
             "This [user](tg://user?id={}) is already GMuted!!".format(userid)
         )
     try:
-        mute(userid, "gmute")
+        gmute(userid, "gmute")
     except Exception as e:
         await tele.edit("**Error**\n" + str(e))
     else:
@@ -92,10 +92,10 @@ async def endgmute(event):
     else:
         return await tele.edit("`Reply to a person or give me his id to UnGMute!!`")
     event.chat_id
-    if not is_muted(userid, "gmute"):
+    if not is_gmuted(userid, "gmute"):
         return await tele.edit("Hmm.. This person is not GMuted, yet!")
     try:
-        unmute(userid, "gmute")
+        ungmute(userid, "gmute")
     except Exception as e:
         await tele.edit("**Error**\n" + str(e))
     else:
@@ -117,7 +117,7 @@ async def endgmute(event):
 
 @command(incoming=True)
 async def watcher(event):
-    if is_muted(event.sender_id, "gmute"):
+    if is_gmuted(event.sender_id, "gmute"):
         await event.delete()
 
 
@@ -125,10 +125,10 @@ async def watcher(event):
 @telebot.on(sudo_cmd(pattern="listgmuted", allow_sudo=True))
 async def list(event):
     doing = await eor(event, "`Making a list of GMuted Users`")
-    allmuted = all_muted()
+    allgmuted = all_gmuted()
     userlist = f"List of GMuted users by {TELE_NAME}\n"
-    if len(allmuted) > 0:
-        for i in allmuted:
+    if len(allgmuted) > 0:
+        for i in allgmuted:
             userlist += f"✘ [{i.sender}](tg://user?id={i.sender})"
     else:
         userlist = f"{TELE_NAME} has not GMuted anyone!"
