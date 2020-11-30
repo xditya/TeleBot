@@ -15,6 +15,7 @@
 #    along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 import asyncio
+
 from telebot.plugins import OWNER_ID, TELE_NAME
 from telebot.plugins.sql_helper.mute_sql import all_muted, is_muted, mute, unmute
 from telebot.telebotConfig import Var
@@ -63,7 +64,9 @@ async def gmoot(event):
     try:
         await telebot.send_message(
             Var.PRIVATE_GROUP_ID,
-            "#GMute\nUserID - {}\nLink - [here](tg://user?id={})".format(userid, userid),
+            "#GMute\nUserID - {}\nLink - [here](tg://user?id={})".format(
+                userid, userid
+            ),
         )
     except BaseException:
         pass
