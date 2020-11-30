@@ -1139,4 +1139,3 @@ async def _(event):
     repmessage = message * count
     await wait([event.respond(repmessage) for i in range(count)])
     await event.delete()
-
