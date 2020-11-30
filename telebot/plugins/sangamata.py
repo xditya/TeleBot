@@ -23,7 +23,6 @@ async def _(event):
     if reply_message.sender.bot:
         await ok.edit("Reply to actual users message and not a bots...")
         return
-    await event.edit("Checking...")
     async with event.client.conversation(chat) as conv:
         try:
             response1 = conv.wait_event(
