@@ -28,7 +28,7 @@ async def gmoot(event):
     if event.fwd_from:
         return
     reply = await event.get_reply_message()
-    userid = reply.from_id
+    userid = reply.sender_id
     if userid == OWNER_ID:
         await tele.edit(r"Are you dumb nigga? Why would you mute yourself!!")
         return
