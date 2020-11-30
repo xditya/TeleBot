@@ -2,12 +2,9 @@
 # Made by team cobra with @xditya
 # Retrieves the name history and the username history of the replied user..
 
-import datetime
 from telethon import events
 from telethon.errors.rpcerrorlist import YouBlockedUserError
-from telethon.tl.functions.account import UpdateNotifySettingsRequest
-from telebot.utils import admin_cmd
-from telebot import, CMD_HELP
+from telebot import CMD_HELP
 
 @telebot.on(admin_cmd(pattern="sg ?(.*)"))
 @telebot.on(sudo_cmd(pattern="sg ?(.*)", allow_sudo=True))
