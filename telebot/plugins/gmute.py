@@ -15,9 +15,11 @@
 #    along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 import asyncio
+
 from telebot.plugins import OWNER_ID, TELE_NAME
 from telebot.plugins.sql_helper.mute_sql import all_muted, is_muted, mute, unmute
 from telebot.telebotConfig import Var
+
 
 @telebot.on(admin_cmd(pattern=r"gmute ?(\d+)?"))
 async def gmoot(event):
