@@ -3,6 +3,7 @@
 from telebot.plugins.sql_helper import SESSION, BASE
 from sqlalchemy import Column, String
 
+
 class GMute(BASE):
     __tablename__ = "mute"
     sender = Column(String(14), primary_key=True)
