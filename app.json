@@ -1,7 +1,7 @@
 {
  "name": "TeleBot - UserBot",
  "description": "An advanced Telethon Userbot, from @TeleBotSupport",
- "logo": "./resources/TeleBot.jpeg",
+ "logo": "https://telegra.ph/file/3dc21f1867a67f4649b1b.jpg",
  "keywords": [
   "telegram",
   "userbot",
