@@ -17,8 +17,10 @@
 from telethon.events import ChatAction
 from telethon.tl.functions.contacts import BlockRequest, UnblockRequest
 from telethon.tl.types import MessageEntityMentionName
-from . import TELE_NAME
+
 from telebot import CMD_HELP
+
+from . import TELE_NAME
 
 
 async def get_user_from_id(user, event):
@@ -37,6 +39,7 @@ async def handler(tele):
     if tele.user_joined or tele.user_added:
         try:
             from telebot.plugins.sql_helper.gban_sql import is_gbanned
+
             guser = await tele.get_user()
             gbanned = is_gbanned(guser.id)
         except BaseException:
