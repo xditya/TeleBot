@@ -1,6 +1,7 @@
 from telebot.plugins.sql_helper import SESSION, BASE
 from sqlalchemy import Column, String
 
+
 class GBan(BASE):
     __tablename__ = "gban"
     sender = Column(String(14), primary_key=True)

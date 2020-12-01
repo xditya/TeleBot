@@ -1,7 +1,8 @@
 import asyncio
 
 from telebot import CMD_HELP
-from telebot.plugins.sql_helper.mute_sql import is_muted, mute, unmute, all_muted
+from telebot.plugins.sql_helper.mute_sql import all_muted, is_muted, mute, unmute
+
 from . import TELE_NAME
 
 
@@ -31,7 +32,9 @@ async def startmute(event):
         if chat.admin_rights.delete_messages is True:
             pass
         else:
-            return await ok.edit("You can't mute a person if you dont have delete messages permission")
+            return await ok.edit(
+                "You can't mute a person if you dont have delete messages permission"
+            )
     elif "creator" in vars(chat):
         pass
     elif private:
@@ -45,7 +48,9 @@ async def startmute(event):
     except Exception as e:
         await ok.edit("Error occured!\nError is " + str(e))
     else:
-        await ok.edit("Successfully muted [that person](tg://user?id={})".format(userid))
+        await ok.edit(
+            "Successfully muted [that person](tg://user?id={})".format(userid)
+        )
 
 
 @telebot.on(admin_cmd(outgoing=True, pattern=r"unmute ?(\d+)?"))
@@ -76,7 +81,9 @@ async def endmute(event):
     except Exception as e:
         await ok.edit("Error occured!\nError is " + str(e))
     else:
-        await ok.edit("Successfully unmuted [that person](tg://user?id={})".format(userid))
+        await ok.edit(
+            "Successfully unmuted [that person](tg://user?id={})".format(userid)
+        )
 
 
 @telebot.on(admin_cmd(incoming=True))
@@ -110,7 +117,8 @@ async def list(event):
             await event.delete()
     else:
         await doing.edit(userlist)
-        
+
+
 CMD_HELP.update(
     {
         "mute": ".mute <reply to user>\nUse - Mute the user.\

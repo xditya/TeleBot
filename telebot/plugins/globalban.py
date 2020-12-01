@@ -17,7 +17,9 @@
 from telethon.events import ChatAction
 from telethon.tl.functions.contacts import BlockRequest, UnblockRequest
 from telethon.tl.types import MessageEntityMentionName
+
 from telebot import CMD_HELP
+
 
 async def get_user_from_id(user, event):
     if isinstance(user, str):
@@ -56,7 +58,11 @@ async def handler(tele):
                                 f"**Victim Id**: [{guser.id}](tg://user?id={guser.id})\n"
                                 f"**Action **  : `Banned`"
                             )
-                            await telebot.send_message("#GBan_Action\n**Chat** - {}\n**User** - [{}](tg://user?id={})\n**Action** - `Banned`".format(tele.chat_id, guser.id))
+                            await telebot.send_message(
+                                "#GBan_Action\n**Chat** - {}\n**User** - [{}](tg://user?id={})\n**Action** - `Banned`".format(
+                                    tele.chat_id, guser.id
+                                )
+                            )
                         except BaseException:
                             return
 
@@ -188,12 +194,13 @@ async def gspider(rk):
         f"**UnGbanned** [{user.first_name}](tg://user?id={user.id}) **\nChats affected - {a}\nUnBlocked and removed user from Gban watch **"
     )
 
+
 @telebot.on(admin_cmd(pattern="listgbanned"))
 @telebot.on(sudo_cmd(pattern="listgbanned", allow_sudo=True))
 async def list(event):
     try:
         from telebot.plugins.sql_helper.gban_sql import all_gbanned
-    except:
+    except BaseException:
         await event.edit("Error. SQL Not found!")
         return
     doing = await eor(event, "`Making a list of GBanned Users`")
@@ -218,7 +225,8 @@ async def list(event):
             await event.delete()
     else:
         await doing.edit(userlist)
-        
+
+
 async def get_user_from_event(event):
     args = event.pattern_match.group(1).split(":", 1)
     extra = None
