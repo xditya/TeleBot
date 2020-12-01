@@ -17,7 +17,7 @@
 from telethon.events import ChatAction
 from telethon.tl.functions.contacts import BlockRequest, UnblockRequest
 from telethon.tl.types import MessageEntityMentionName
-
+from telebot.plugins.sql_helper.gban_sql import *
 from telebot import CMD_HELP
 
 from . import TELE_NAME
@@ -38,8 +38,6 @@ async def get_user_from_id(user, event):
 async def handler(tele):
     if tele.user_joined or tele.user_added:
         try:
-            from telebot.plugins.sql_helper.gban_sql import is_gbanned
-
             guser = await tele.get_user()
             gbanned = is_gbanned(guser.id)
         except BaseException:
@@ -75,9 +73,9 @@ async def gspider(rk):
     sender = await lazy.get_sender()
     me = await lazy.client.get_me()
     if not sender.id == me.id:
-        rkp = await lazy.reply("`processing...`")
+        rkp = await lazy.reply("`Processing...`")
     else:
-        rkp = await lazy.edit("`processing...`")
+        rkp = await lazy.edit("`Processing...`")
     me = await rk.client.get_me()
     await rkp.edit(f"**Global Banning User!!**")
     my_mention = "[{}](tg://user?id={})".format(me.first_name, me.id)
@@ -101,10 +99,6 @@ async def gspider(rk):
     if user:
         if user.id == 719195224:
             return await rkp.edit("**Error! cant gban this user.**")
-        try:
-            from telebot.plugins.sql_helper.gban_sql import gban
-        except BaseException:
-            pass
         try:
             await rk.client(BlockRequest(user))
         except BaseException:
@@ -165,10 +159,6 @@ async def gspider(rk):
     if user:
         if user.id == 719195224:
             return await rkp.edit(f"**Error! cant ungban this user.**")
-        try:
-            from telebot.plugins.sql_helper.gban_sql import ungban
-        except BaseException:
-            pass
         try:
             await rk.client(UnblockRequest(user))
         except BaseException:
