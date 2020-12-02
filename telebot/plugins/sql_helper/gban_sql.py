@@ -5,11 +5,9 @@ from sqlalchemy import Column, String
 class GBan(BASE):
     __tablename__ = "gban"
     sender = Column(String(14), primary_key=True)
-    reason = Column(String(127))
 
-    def __init__(self, sender, reason=""):
+    def __init__(self, sender):
         self.sender = str(sender)
-        self.reason = reason
 
 
 GBan.__table__.create(checkfirst=True)
@@ -24,8 +22,8 @@ def is_gbanned(sender_id):
         SESSION.close()
 
 
-def gban(sender, reason):
-    adder = GBan(str(sender), str(reason))
+def gban(sender):
+    adder = GBan(str(sender))
     SESSION.add(adder)
     SESSION.commit()
 
