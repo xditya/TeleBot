@@ -11,6 +11,7 @@ class GBan(BASE):
         self.sender = str(sender)
         self.reason = reason
 
+
 GBan.__table__.create(checkfirst=True)
 
 
