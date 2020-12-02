@@ -61,5 +61,7 @@ OWNER_ID = bot.me.id
 
 
 async def tele_grps(event):
-    tele_grps = [x.entity.id for x in await telebot.get_dialogs() if (x.is_group or x.is_channel)]
+    tele_grps = [
+        x.entity.id for x in await telebot.get_dialogs() if (x.is_group or x.is_channel)
+    ]
     return tele_grps
