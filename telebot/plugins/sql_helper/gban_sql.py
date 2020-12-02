@@ -24,7 +24,7 @@ def is_gbanned(sender_id):
         SESSION.close()
 
 
-def gban(sender):
+def gban(sender, reason):
     adder = GBan(str(sender), str(reason))
     SESSION.add(adder)
     SESSION.commit()
