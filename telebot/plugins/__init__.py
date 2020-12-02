@@ -57,14 +57,9 @@ telestats = f"{tele}"
 TELE_NAME = bot.me.first_name
 OWNER_ID = bot.me.id
 
-# count number of groups
+# count total number of groups
 
 
 async def tele_grps(event):
-    a = 0
-    tele_grps = [
-        x.entity.id for x in await telebot.get_dialogs() if (x.is_group or x.is_channel)
-    ]
-    for i in tele_grps:
-        a += 1
-    return a
+    tele_grps = [x.entity.id for x in await telebot.get_dialogs() if (x.is_group or x.is_channel)]
+    return tele_grps
