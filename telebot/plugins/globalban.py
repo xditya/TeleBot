@@ -30,12 +30,6 @@ from . import OWNER_ID, TELE_NAME, tele_grps
 async def banhammer(event):
     tele = await eor(event, "`Processing...`")
     sender = await event.get_sender()
-    me = OWNER_ID
-    if sender.id == me:
-        await tele.edit(
-            "`Yeah, now start gbanning yourself.`\n**Aborting... You can't gban yourself**"
-        )
-        return
     start = datetime.now
     grps = len(tele_grps())
     await tele.edit(
@@ -59,6 +53,11 @@ async def banhammer(event):
     if user:
         if user.id == 719195224:
             return await tele.edit("`You can't GBan my Dev!`")
+        if user.id == OWNER_ID:
+            await tele.edit(
+            "`Yeah, now start gbanning yourself.`\n`Aborting... You can't gban yourself`"
+        )
+        return
         try:
             await event.client(BlockRequest(user))
         except BaseException:
@@ -98,12 +97,6 @@ async def banhammer(event):
 async def unban(event):
     tele = await eor(event, "`Processing...`")
     sender = await event.get_sender()
-    me = OWNER_ID
-    if sender.id == me:
-        await tele.edit(
-            "`Yeah, now start ungbanning yourself.`\n**Aborting... You can't ungban yourself coz u cant be gbanned, lol**"
-        )
-        return
     start = datetime.now
     grps = len(tele_grps())
     await tele.edit(
@@ -127,6 +120,11 @@ async def unban(event):
     if user:
         if user.id == 719195224:
             return await tele.edit("`You can't GBan/UnGban my Dev!`")
+        if user.id == OWNER_ID:
+            await tele.edit(
+            "`Yeah, now start (un)gbanning yourself.`\n`Aborting... You can't (un)gban yourself`"
+        )
+        return
         try:
             await event.client(UnblockRequest(user))
         except BaseException:
