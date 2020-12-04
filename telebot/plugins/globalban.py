@@ -34,7 +34,7 @@ async def banhammer(event):
     xdi, grps = await tele_grps(event)
     await tele.edit(
         "`Initiating a Global Ban of` [User](tg://user?id={}) `in` **{}** `chats!!`".format(
-            sender.id, grps
+            sender.id, xdi
         )
     )
     await event.get_chat()
@@ -63,7 +63,7 @@ async def banhammer(event):
         except BaseException:
             pass
         await tele.edit(
-            f"**Global Banning user!**\nUser - {user.id}\n**Chats Affecting** - `{grps}`\n**Satus** - `In progress...`"
+            f"**Global Banning user!**\nUser - {user.id}\n**Chats Affecting** - `{xdi}`\n**Satus** - `In progress...`"
         )
         for i in xdi:
             try:
@@ -85,8 +85,8 @@ async def banhammer(event):
     )
     await telebot.send_message(
         Var.PRIVATE_GROUP_ID,
-        "#GBan\nUser - {}\nDone in `{}` chats, failed in `{}` chats coz you are not an admin!".format(
-            user.id, a, b
+        "#GBan\nUser - {}\nTotal chats - {}\nDone in `{}` chats, failed in `{}` chats coz you are not an admin!".format(
+            user.id, xdi, a, b
         ),
     )
     return
@@ -100,7 +100,7 @@ async def unban(event):
     xdi, grps = await tele_grps(event)
     await tele.edit(
         "`Regression of Global Ban on` [User](tg://user?id={}) `in` **{}** `chats!!`".format(
-            sender.id, grps
+            sender.id, xdi
         )
     )
     await event.get_chat()
@@ -129,7 +129,7 @@ async def unban(event):
         except BaseException:
             pass
         await tele.edit(
-            f"**Global UnBanning user!**\nUser - {user.id}\n**Chats Affecting** - `{grps}`\n**Satus** - `In progress...`"
+            f"**Global UnBanning user!**\nUser - {user.id}\n**Chats Affecting** - `{xdi}`\n**Satus** - `In progress...`"
         )
         for i in xdi:
             try:
@@ -153,8 +153,8 @@ async def unban(event):
     )
     await telebot.send_message(
         Var.PRIVATE_GROUP_ID,
-        "#UnGBan\nUser - {}\nDone in `{}` chats, failed in `{}` chats coz you are not an admin!".format(
-            user.id, a, b
+        "#UnGBan\nUser - {}\nTotal chats - {}\nDone in `{}` chats, failed in `{}` chats coz you are not an admin!".format(
+            user.id, xdi, a, b
         ),
     )
     return
@@ -175,7 +175,7 @@ async def list(event):
         for i in allgbanned:
             userlist += f"✘ [{i.sender}](tg://user?id={i.sender})"
     else:
-        userlist = f"{TELE_NAME} has not GBanned anyone!"
+        userlist = f"`{TELE_NAME} has not GBanned anyone!`"
     if len(userlist) > 4095:
         with io.BytesIO(str.encode(userlist)) as gbanned_list:
             gbanned_list.name = "GBanned.text"
