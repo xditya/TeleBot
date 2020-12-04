@@ -55,8 +55,8 @@ async def banhammer(event):
             return await tele.edit("`You can't GBan my Dev!`")
         if user.id == OWNER_ID:
             await tele.edit(
-            "`Yeah, now start gbanning yourself.`\n`Aborting... You can't gban yourself`"
-        )
+                "`Yeah, now start gbanning yourself.`\n`Aborting... You can't gban yourself`"
+            )
         return
         try:
             await event.client(BlockRequest(user))
@@ -122,8 +122,8 @@ async def unban(event):
             return await tele.edit("`You can't GBan/UnGban my Dev!`")
         if user.id == OWNER_ID:
             await tele.edit(
-            "`Yeah, now start (un)gbanning yourself.`\n`Aborting... You can't (un)gban yourself`"
-        )
+                "`Yeah, now start (un)gbanning yourself.`\n`Aborting... You can't (un)gban yourself`"
+            )
         return
         try:
             await event.client(UnblockRequest(user))
