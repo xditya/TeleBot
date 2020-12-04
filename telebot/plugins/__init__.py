@@ -14,9 +14,9 @@
 #    You should have received a copy of the GNU Affero General Public License
 #    along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
+from telebot import *
 from telebot import ALIVE_NAME, bot, telever
 from telebot.telebotConfig import Config, Var
-from telebot import *
 
 # stats
 if Var.PRIVATE_GROUP_ID:
