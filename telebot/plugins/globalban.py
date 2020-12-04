@@ -14,13 +14,17 @@
 #    You should have received a copy of the GNU Affero General Public License
 #    along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
+from datetime import datetime
+
 from telethon.events import ChatAction
 from telethon.tl.functions.contacts import BlockRequest, UnblockRequest
 from telethon.tl.types import MessageEntityMentionName
+
 from telebot import CMD_HELP
 from telebot.plugins.sql_helper.gban_sql import *
-from . import TELE_NAME, OWNER_ID, tele_grps
-from datetime import datetime
+
+from . import OWNER_ID, TELE_NAME, tele_grps
+
 
 @telebot.on(admin_cmd(pattern="gban(?: |$)(.*)"))
 async def banhammer(event):
@@ -28,18 +32,24 @@ async def banhammer(event):
     sender = await event.get_sender()
     me = OWNER_ID
     if sender.id == me:
-        await tele.edit("`Yeah, now start gbanning yourself.`\n**Aborting... You can't gban yourself**")
+        await tele.edit(
+            "`Yeah, now start gbanning yourself.`\n**Aborting... You can't gban yourself**"
+        )
         return
     start = datetime.now
     grps = len(tele_grps())
-    await tele.edit("`Initiating a Global Ban of` [User](tg://user?id={}) `in` **{}** `chats!!`".format(sender.id, grps))
+    await tele.edit(
+        "`Initiating a Global Ban of` [User](tg://user?id={}) `in` **{}** `chats!!`".format(
+            sender.id, grps
+        )
+    )
     await event.get_chat()
     a = b = 0
     if event.is_private:
         user = event.pattern_match.group(1)
         if not user:
             await tele.edit("`No user was designated. Aborting...`")
-            return  
+            return
     else:
         event.chat.title
     try:
@@ -54,7 +64,9 @@ async def banhammer(event):
         except BaseException:
             pass
         xdi = tele_grps()
-        await tele.edit(f"**Global Banning user!**\nUser - {user.id}\n**Chats Affecting** - `{grps}`\n**Satus** - `In progress...`")
+        await tele.edit(
+            f"**Global Banning user!**\nUser - {user.id}\n**Chats Affecting** - `{grps}`\n**Satus** - `In progress...`"
+        )
         for i in xdi:
             try:
                 await telebot.edit_permissions(i, user, view_messages=False)
@@ -70,9 +82,17 @@ async def banhammer(event):
         pass
     end = datetime.now
     timetaken = (end - start).seconds
-    await tele.edit(f"**GBan**\n**User** - [{user.first_name}](tg://user?id={user.id})\n**Chats affected** - {a}\n**Blocked user** - `True`\n**Time taken** - `{timetaken} seconds`")
-    await telebot.send_message(Var.PRIVATE_GROUP_ID, "#GBan\nUser - {}\nDone in `{}` chats, failed in `{}` chats coz you are not an admin!".format(user.id, a, b))
+    await tele.edit(
+        f"**GBan**\n**User** - [{user.first_name}](tg://user?id={user.id})\n**Chats affected** - {a}\n**Blocked user** - `True`\n**Time taken** - `{timetaken} seconds`"
+    )
+    await telebot.send_message(
+        Var.PRIVATE_GROUP_ID,
+        "#GBan\nUser - {}\nDone in `{}` chats, failed in `{}` chats coz you are not an admin!".format(
+            user.id, a, b
+        ),
+    )
     return
+
 
 @telebot.on(admin_cmd(pattern="ungban(?: |$)(.*)"))
 async def unban(event):
@@ -80,11 +100,17 @@ async def unban(event):
     sender = await event.get_sender()
     me = OWNER_ID
     if sender.id == me:
-        await tele.edit("`Yeah, now start ungbanning yourself.`\n**Aborting... You can't ungban yourself coz u cant be gbanned, lol**")
+        await tele.edit(
+            "`Yeah, now start ungbanning yourself.`\n**Aborting... You can't ungban yourself coz u cant be gbanned, lol**"
+        )
         return
     start = datetime.now
     grps = len(tele_grps())
-    await tele.edit("`Regression of Global Ban on` [User](tg://user?id={}) `in` **{}** `chats!!`".format(sender.id, grps))
+    await tele.edit(
+        "`Regression of Global Ban on` [User](tg://user?id={}) `in` **{}** `chats!!`".format(
+            sender.id, grps
+        )
+    )
     await event.get_chat()
     a = b = 0
     if event.is_private:
@@ -106,7 +132,9 @@ async def unban(event):
         except BaseException:
             pass
         xdi = tele_grps()
-        await tele.edit(f"**Global UnBanning user!**\nUser - {user.id}\n**Chats Affecting** - `{grps}`\n**Satus** - `In progress...`")
+        await tele.edit(
+            f"**Global UnBanning user!**\nUser - {user.id}\n**Chats Affecting** - `{grps}`\n**Satus** - `In progress...`"
+        )
         for i in xdi:
             try:
                 await event.client.edit_permissions(i, user, send_messages=True)
@@ -117,13 +145,22 @@ async def unban(event):
         await tele.edit(f"`**`Reply to a user !!`")
     try:
         if ungban(user.id) is False:
-            return await tele.edit(f"`This user wasn't gbanned or is already ungbanned!!`")
+            return await tele.edit(
+                f"`This user wasn't gbanned or is already ungbanned!!`"
+            )
     except BaseException:
         pass
     end = datetime.now
     timetaken = (end - start).seconds
-    await tele.edit(f"**UnGBan**\n**User** - [{user.first_name}](tg://user?id={user.id})\n**Chats affected** - {a}\n**UnBlocked user** - `True`\n**Time taken** - `{timetaken} seconds`")
-    await telebot.send_message(Var.PRIVATE_GROUP_ID, "#UnGBan\nUser - {}\nDone in `{}` chats, failed in `{}` chats coz you are not an admin!".format(user.id, a, b))
+    await tele.edit(
+        f"**UnGBan**\n**User** - [{user.first_name}](tg://user?id={user.id})\n**Chats affected** - {a}\n**UnBlocked user** - `True`\n**Time taken** - `{timetaken} seconds`"
+    )
+    await telebot.send_message(
+        Var.PRIVATE_GROUP_ID,
+        "#UnGBan\nUser - {}\nDone in `{}` chats, failed in `{}` chats coz you are not an admin!".format(
+            user.id, a, b
+        ),
+    )
     return
 
 
@@ -187,7 +224,10 @@ async def get_user_from_event(event):
             return await eor(event, "Failed \n **Error**\n", str(err))
     return user_obj, extra
 
+
 # supposed to be a gban watch
+
+
 @telebot.on(ChatAction)
 async def handler(tele):
     if tele.user_joined or tele.user_added:
@@ -219,6 +259,7 @@ async def handler(tele):
                             )
                         except BaseException:
                             return
+
 
 CMD_HELP.update(
     {
