@@ -16,6 +16,7 @@
 
 from telebot import ALIVE_NAME, bot, telever
 from telebot.telebotConfig import Config, Var
+from telebot import *
 
 # stats
 if Var.PRIVATE_GROUP_ID:
@@ -61,7 +62,10 @@ OWNER_ID = bot.me.id
 
 
 async def tele_grps(event):
+    c = 0
     xdi_grps = [
         x.entity.id for x in await telebot.get_dialogs() if (x.is_group or x.is_channel)
     ]
-    return xdi_grps
+    for i in xdi_grps:
+        c += 1
+    return c, xdi_grps
