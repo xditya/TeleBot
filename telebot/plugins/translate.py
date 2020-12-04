@@ -8,7 +8,7 @@ Available Commands:
 import emoji
 from googletrans import Translator
 
-from telebot import CMD_HNDLR, CMD_HELP
+from telebot import CMD_HELP, CMD_HNDLR
 
 
 @telebot.on(admin_cmd(pattern="tr ?(.*)"))
@@ -27,7 +27,9 @@ async def _(event):
     elif "|" in input_str:
         lan, text = input_str.split("|")
     else:
-        await x.edit(f"`{CMD_HNDLR}tr LanguageCode` as reply to a message.\nLanguage codes can be found [here](https://t.me/TeleBotHelpChat/22678)",)
+        await x.edit(
+            f"`{CMD_HNDLR}tr LanguageCode` as reply to a message.\nLanguage codes can be found [here](https://t.me/TeleBotHelpChat/22678)",
+        )
         return
     text = emoji.demojize(text.strip())
     lan = lan.strip()
@@ -40,15 +42,17 @@ async def _(event):
 
 **{} ➟ {}**
 
-`{}`""".format(translated.src, lan, after_tr_text)
+`{}`""".format(
+            translated.src, lan, after_tr_text
+        )
         await x.edit(output_str)
     except Exception as exc:
         await x.edit(f"Error\n `{str(exc)}`")
 
+
 CMD_HELP.update(
     {
-        "translate":
-        ".tr <LanguageCode> <reply to a message>\
+        "translate": ".tr <LanguageCode> <reply to a message>\
         \nUse - Translate the replied text\
         \n\n.tr <LangaugeCode> | <text to translate>\
         \nUse - Translate the given text.\
