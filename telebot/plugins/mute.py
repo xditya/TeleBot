@@ -3,7 +3,7 @@ import asyncio
 from telebot import CMD_HELP
 from telebot.plugins.sql_helper.mute_sql import all_muted, is_muted, mute, unmute
 
-from . import TELE_NAME
+from . import TELE_NAME, OWNER_ID
 
 
 @telebot.on(admin_cmd(outgoing=True, pattern=r"mute ?(\d+)?"))
@@ -26,6 +26,9 @@ async def startmute(event):
         userid = event.chat_id
     else:
         return await ok.edit("Please reply to a user or send thier id to mute them.")
+    if userid == OWNER_ID:
+        await ok.edit("`Are you dumb?? Why are you trying to mute yourself??`")
+        return
     chat_id = event.chat_id
     chat = await event.get_chat()
     if "admin_rights" in vars(chat) and vars(chat)["admin_rights"] is not None:
