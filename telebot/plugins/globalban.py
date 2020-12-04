@@ -32,7 +32,7 @@ async def banhammer(event):
         return
     start = datetime.now
     grps = len(tele_grps())
-    await tele.edit(f"`Initiating a Global Ban of` [User](tg://user?id={}) `in` **{}** `chats!!`".format(sender.id, grps))
+    await tele.edit("`Initiating a Global Ban of` [User](tg://user?id={}) `in` **{}** `chats!!`".format(sender.id, grps))
     await event.get_chat()
     a = b = 0
     if event.is_private:
@@ -84,7 +84,7 @@ async def unban(event):
         return
     start = datetime.now
     grps = len(tele_grps())
-    await tele.edit(f"`Regression of Global Ban on` [User](tg://user?id={}) `in` **{}** `chats!!`".format(sender.id, grps))
+    await tele.edit("`Regression of Global Ban on` [User](tg://user?id={}) `in` **{}** `chats!!`".format(sender.id, grps))
     await event.get_chat()
     a = b = 0
     if event.is_private:
