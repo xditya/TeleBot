@@ -1,13 +1,14 @@
-""" Google Translate
+"""
+Google Translate
 Available Commands:
 .tr LanguageCode as reply to a message
-.tr LangaugeCode | text to translate"""
+.tr LangaugeCode | text to translate
+"""
 
 import emoji
 from googletrans import Translator
 
-from telebot import CMD_HNDLR
-from telebot.utils import admin_cmd
+from telebot import CMD_HNDLR, CMD_HELP
 
 
 @telebot.on(admin_cmd(pattern="tr ?(.*)"))
@@ -16,8 +17,8 @@ async def _(event):
     if event.fwd_from:
         return
     if "trim" in event.raw_text:
-        # https://t.me/c/1220993104/192075
         return
+    x = await eor(event, "Translating...")
     input_str = event.pattern_match.group(1)
     if event.reply_to_msg_id:
         previous_message = await event.get_reply_message()
@@ -26,10 +27,7 @@ async def _(event):
     elif "|" in input_str:
         lan, text = input_str.split("|")
     else:
-        await eor(
-            event,
-            f"`{CMD_HNDLR}tr LanguageCode` as reply to a message.\nLanguage codes can be found [here](https://t.me/TeleBotHelpChat/22678)",
-        )
+        await x.edit(f"`{CMD_HNDLR}tr LanguageCode` as reply to a message.\nLanguage codes can be found [here](https://t.me/TeleBotHelpChat/22678)",)
         return
     text = emoji.demojize(text.strip())
     lan = lan.strip()
@@ -37,12 +35,23 @@ async def _(event):
     try:
         translated = translator.translate(text, dest=lan)
         after_tr_text = translated.text
-        # TODO: emojify the :
-        # either here, or before translation
-        output_str = """**Translated by TeleBot**\nFrom {} to {}
-{}""".format(
-            translated.src, lan, after_tr_text
-        )
-        await eor(event, output_str)
+        output_str = """
+**Tʀᴀɴsʟᴀᴛɪᴏɴ**
+
+**{} ➟ {}**
+
+`{}`""".format(translated.src, lan, after_tr_text)
+        await x.edit(output_str)
     except Exception as exc:
-        await eor(event, str(exc))
+        await x.edit(f"Error\n `{str(exc)}`")
+
+CMD_HELP.update(
+    {
+        "translate":
+        ".tr <LanguageCode> <reply to a message>\
+        \nUse - Translate the replied text\
+        \n\n.tr <LangaugeCode> | <text to translate>\
+        \nUse - Translate the given text.\
+        \n\nLanguage codes can be found [here](https://t.me/TeleBotHelpChat/22678)."
+    }
+)
