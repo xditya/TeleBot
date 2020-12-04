@@ -3,7 +3,7 @@ import asyncio
 from telebot import CMD_HELP
 from telebot.plugins.sql_helper.mute_sql import all_muted, is_muted, mute, unmute
 
-from . import TELE_NAME, OWNER_ID
+from . import OWNER_ID, TELE_NAME
 
 
 @telebot.on(admin_cmd(outgoing=True, pattern=r"mute ?(\d+)?"))
