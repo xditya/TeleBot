@@ -31,7 +31,7 @@ async def banhammer(event):
     tele = await eor(event, "`Processing...`")
     start = datetime.now
     xdi, grps = await tele_grps(event)
-    xdi = int(xdi)
+    xdi = str(xdi)
     await tele.edit("`Initiating a Global Ban of User in` **{}** `chats!!`".format(xdi))
     await event.get_chat()
     a = b = 0
@@ -93,7 +93,7 @@ async def unban(event):
     tele = await eor(event, "`Processing...`")
     start = datetime.now
     xdi, grps = await tele_grps(event)
-    xdi = int(xdi)
+    xdi = str(xdi)
     await tele.edit(
         "`Regression of Global Ban of User in` **{}** `chats!!`".format(xdi)
     )
