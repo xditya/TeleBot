@@ -29,7 +29,7 @@ from . import OWNER_ID, TELE_NAME, tele_grps
 @telebot.on(admin_cmd(pattern="gban(?: |$)(.*)"))
 async def banhammer(event):
     tele = await eor(event, "`Processing...`")
-    start = datetime.now
+    start = datetime.now()
     xdi, grps = await tele_grps(event)
     xdi = str(xdi)
     await tele.edit("`Initiating a Global Ban of User in` **{}** `chats!!`".format(xdi))
@@ -74,7 +74,7 @@ async def banhammer(event):
             return await tele.edit(f"**Error! User probably already gbanned.**")
     except BaseException:
         pass
-    end = datetime.now
+    end = datetime.now()
     timetaken = (end - start).seconds
     await tele.edit(
         f"**GBan**\n**User** - [{user.first_name}](tg://user?id={user.id})\n**Chats affected** - {a}\n**Blocked user** - `True`\n**Time taken** - `{timetaken} seconds`"
@@ -91,7 +91,7 @@ async def banhammer(event):
 @telebot.on(admin_cmd(pattern="ungban(?: |$)(.*)"))
 async def unban(event):
     tele = await eor(event, "`Processing...`")
-    start = datetime.now
+    start = datetime.now()
     xdi, grps = await tele_grps(event)
     xdi = str(xdi)
     await tele.edit(
@@ -140,7 +140,7 @@ async def unban(event):
             )
     except BaseException:
         pass
-    end = datetime.now
+    end = datetime.now()
     timetaken = (end - start).seconds
     await tele.edit(
         f"**UnGBan**\n**User** - [{user.first_name}](tg://user?id={user.id})\n**Chats affected** - {a}\n**UnBlocked user** - `True`\n**Time taken** - `{timetaken} seconds`"
