@@ -29,35 +29,34 @@ from . import OWNER_ID, TELE_NAME, tele_grps
 @telebot.on(admin_cmd(pattern="gban(?: |$)(.*)"))
 async def banhammer(event):
     tele = await eor(event, "`Processing...`")
-    sender = await event.get_sender()
     start = datetime.now
     xdi, grps = await tele_grps(event)
     await tele.edit(
-        "`Initiating a Global Ban of` [User](tg://user?id={}) `in` **{}** `chats!!`".format(
-            sender.id, xdi
-        )
+        "`Initiating a Global Ban of User in` **{}** `chats!!`".format(xdi)
     )
     await event.get_chat()
     a = b = 0
     if event.is_private:
-        user = event.pattern_match.group(1)
-        if not user:
-            await tele.edit("`No user was designated. Aborting...`")
-            return
+        user = event.chat
+        reason = event.pattern_match.group(1)
     else:
         event.chat.title
     try:
         user, reason = await get_user_from_event(event)
     except BaseException:
         pass
+    try:
+        if not reason:
+            reason = "Private"
+    except BaseException:
+        return await tele.edit("**Error! Unknown user.**")
     if user:
         if user.id == 719195224:
             return await tele.edit("`You can't GBan my Dev!`")
         if user.id == OWNER_ID:
             await tele.edit(
-                "`Yeah, now start gbanning yourself.`\n`Aborting... You can't gban yourself`"
+                "`Yeah, now start gbanning yourself.`"
             )
-        return
         try:
             await event.client(BlockRequest(user))
         except BaseException:
@@ -95,37 +94,36 @@ async def banhammer(event):
 @telebot.on(admin_cmd(pattern="ungban(?: |$)(.*)"))
 async def unban(event):
     tele = await eor(event, "`Processing...`")
-    sender = await event.get_sender()
     start = datetime.now
     xdi, grps = await tele_grps(event)
     await tele.edit(
-        "`Regression of Global Ban on` [User](tg://user?id={}) `in` **{}** `chats!!`".format(
-            sender.id, xdi
-        )
+        "`Regression of Global Ban of User in` **{}** `chats!!`".format(xdi)
     )
     await event.get_chat()
     a = b = 0
     if event.is_private:
-        user = event.pattern_match.group(1)
-        if not user:
-            await tele.edit("`No user was designated... Aborting...`")
-            return
+        user = event.chat
+        reason = event.pattern_match.group(1)
     else:
         event.chat.title
     try:
-        user = await get_user_from_event(event)
+        user, reason = await get_user_from_event(event)
     except BaseException:
         pass
+    try:
+        if not reason:
+            reason = "Private"
+    except BaseException:
+        return await tele.edit("**Error! Unknown user.**")
     if user:
         if user.id == 719195224:
-            return await tele.edit("`You can't GBan/UnGban my Dev!`")
+            return await tele.edit("`You can't (un)GBan my Dev!`")
         if user.id == OWNER_ID:
             await tele.edit(
-                "`Yeah, now start (un)gbanning yourself.`\n`Aborting... You can't (un)gban yourself`"
+                "`Yeah, now start (un)gbanning yourself.`"
             )
-        return
         try:
-            await event.client(UnblockRequest(user))
+            await event.client(BlockRequest(user))
         except BaseException:
             pass
         await tele.edit(
