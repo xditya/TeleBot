@@ -9,11 +9,12 @@ from telethon.tl.functions.messages import ImportChatInviteRequest
 from telethon.tl.types import InputMessagesFilterMusic
 
 from telebot.plugins import OWNER_ID, TELE_NAME
+from . import CMD_HELP
 
 PROF = f"[{TELE_NAME}](tg://user?id={OWNER_ID})"
 
 
-@borg.on(admin_cmd("song ?(.*)"))
+@borg.on(admin_cmd("spotify ?(.*)"))
 async def _(event):
     try:
         await telebot(ImportChatInviteRequest("DdR2SUvJPBouSW4QlbJU4g"))
@@ -27,7 +28,7 @@ async def _(event):
     name = event.pattern_match.group(1)
     if not name:
         await event.edit(
-            "Song donwloader.\nSyntax - `.song name`\nFor better results, use Artist Name -Song Name."
+            "Song donwloader.\nSyntax - `.spotify name`\nFor better results, use Artist Name -Song Name."
         )
         return
     chat = -1001271479322
@@ -49,3 +50,9 @@ async def _(event):
             f"`Song, {name}, not found. For better results, use Artist Name -Song Name.`"
         )
         return
+
+CMD_HELP.update(
+    {
+        "spotify": ".spotify <song name>\nUse - Download song from spotify"
+    }
+)
