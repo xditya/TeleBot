@@ -47,7 +47,7 @@ async def banhammer(event):
     else:
         event.chat.title
     try:
-        user = await get_user_from_event(event)
+        user, reason = await get_user_from_event(event)
     except BaseException:
         pass
     if user:
@@ -192,8 +192,8 @@ async def list(event):
         await doing.edit(userlist)
 
 
-async def get_user_from_event(event):
-    args = event.pattern_match.group(1).split(":", 1)
+async def get_user_from_event(event):  
+    args = event.pattern_match.group(1).split(':', 1)
     extra = None
     if event.reply_to_msg_id and not len(args) == 2:
         previous_message = await event.get_reply_message()
@@ -206,19 +206,21 @@ async def get_user_from_event(event):
         if user.isnumeric():
             user = int(user)
         if not user:
-            await eor(event, f"* Pass the user's username, id or reply!**")
+            await event.edit(f"* Pass the user's username, id or reply!**")
             return
         if event.message.entities is not None:
             probable_user_mention_entity = event.message.entities[0]
-            if isinstance(probable_user_mention_entity, MessageEntityMentionName):
+            if isinstance(probable_user_mention_entity,
+                          MessageEntityMentionName):
                 user_id = probable_user_mention_entity.user_id
                 user_obj = await event.client.get_entity(user_id)
                 return user_obj
         try:
             user_obj = await event.client.get_entity(user)
         except Exception as err:
-            return await eor(event, "Failed \n **Error**\n", str(err))
+            return await event.edit("Failed \n **Error**\n", str(err))           
     return user_obj, extra
+
 
 
 # supposed to be a gban watch
