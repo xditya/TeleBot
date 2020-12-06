@@ -17,7 +17,7 @@
 from datetime import datetime
 
 from telethon.events import ChatAction
-from telethon.tl.functions.contacts import BlockRequest, UnBlockRequest
+from telethon.tl.functions.contacts import BlockRequest, UnblockRequest
 from telethon.tl.types import MessageEntityMentionName
 
 from telebot import CMD_HELP
@@ -117,7 +117,7 @@ async def unban(event):
         if user.id == OWNER_ID:
             await tele.edit("`Yeah, now start (un)gbanning yourself.`")
         try:
-            await event.client(UnBlockRequest(user))
+            await event.client(UnblockRequest(user))
         except BaseException:
             pass
         await tele.edit(
