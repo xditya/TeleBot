@@ -9,6 +9,7 @@ from telethon.tl.functions.messages import ImportChatInviteRequest
 from telethon.tl.types import InputMessagesFilterMusic
 
 from telebot.plugins import OWNER_ID, TELE_NAME
+
 from . import CMD_HELP
 
 PROF = f"[{TELE_NAME}](tg://user?id={OWNER_ID})"
@@ -51,8 +52,5 @@ async def _(event):
         )
         return
 
-CMD_HELP.update(
-    {
-        "spotify": ".spotify <song name>\nUse - Download song from spotify"
-    }
-)
+
+CMD_HELP.update({"spotify": ".spotify <song name>\nUse - Download song from spotify"})
