@@ -17,7 +17,7 @@
 from datetime import datetime
 
 from telethon.events import ChatAction
-from telethon.tl.functions.contacts import BlockRequest, UnblockRequest
+from telethon.tl.functions.contacts import BlockRequest
 from telethon.tl.types import MessageEntityMentionName
 
 from telebot import CMD_HELP
@@ -31,9 +31,7 @@ async def banhammer(event):
     tele = await eor(event, "`Processing...`")
     start = datetime.now
     xdi, grps = await tele_grps(event)
-    await tele.edit(
-        "`Initiating a Global Ban of User in` **{}** `chats!!`".format(xdi)
-    )
+    await tele.edit("`Initiating a Global Ban of User in` **{}** `chats!!`".format(xdi))
     await event.get_chat()
     a = b = 0
     if event.is_private:
@@ -54,9 +52,7 @@ async def banhammer(event):
         if user.id == 719195224:
             return await tele.edit("`You can't GBan my Dev!`")
         if user.id == OWNER_ID:
-            await tele.edit(
-                "`Yeah, now start gbanning yourself.`"
-            )
+            await tele.edit("`Yeah, now start gbanning yourself.`")
         try:
             await event.client(BlockRequest(user))
         except BaseException:
@@ -119,9 +115,7 @@ async def unban(event):
         if user.id == 719195224:
             return await tele.edit("`You can't (un)GBan my Dev!`")
         if user.id == OWNER_ID:
-            await tele.edit(
-                "`Yeah, now start (un)gbanning yourself.`"
-            )
+            await tele.edit("`Yeah, now start (un)gbanning yourself.`")
         try:
             await event.client(BlockRequest(user))
         except BaseException:
