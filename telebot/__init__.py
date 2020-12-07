@@ -24,6 +24,7 @@ CMD_LIST = {}
 CMD_HELP = {}
 INT_PLUG = ""
 LOAD_PLUG = {}
+CMD_HNDLR = Var.CMD_HNDLR
 
 # PaperPlaneExtended Support Vars
 ENV = os.environ.get("ENV", False)
