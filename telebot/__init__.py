@@ -30,7 +30,6 @@ CMD_HNDLR = Var.CMD_HNDLR
 ENV = os.environ.get("ENV", False)
 """ PPE initialization. """
 
-
 # Bot Logs setup:
 if bool(ENV):
     CONSOLE_LOGGER_VERBOSE = sb(
