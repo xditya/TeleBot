@@ -14,6 +14,8 @@
 #    You should have received a copy of the GNU Affero General Public License
 #    along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
+# (c) @xditya
+
 import re
 from telebot.plugins.mybot import *
 from telethon import events, Button
@@ -276,10 +278,11 @@ async def bot(event):
         else:
             mssg = "`**HEROKU**:" "\nPlease setup your` **HEROKU_APP_NAME**"
             return
+        xx = await tgbot.send_message("Changing your Bot Pic, please wait for a minute")
         heroku_var = app.config()
         heroku_var[telebot] = f"{url}"
-        mssg = f"Successfully changed your alive pic.\nPlease wait for a minute."
-        await conv.send_message(event.chat_id, mssg)
+        mssg = f"Successfully changed your bot pic.\n"
+        await xx.edit(mssg)
     else:
         await event.answer("You can't use this bot.", alert=True)
 
@@ -415,7 +418,6 @@ async def alv(event):
                         [Button.inline("Picture", data="alv_pic")]
                     ])
 
-# pylint: disable=ffs_dont_edit
 @tgbot.on(events.callbackquery.CallbackQuery(data=re.compile(b"alv_txt")))
 async def a_txt(event):
     if event.sender_id == OWNER_ID:
@@ -438,13 +440,13 @@ async def a_txt(event):
             if themssg == "/cancel":
                 await conv.send_message("Cancelled!!")
             heroku_var=app.config()
+            xx = await tgbot.send_message("Changing your Alive Message, please wait for a minute")
             heroku_var[telebot]=f"{themssg}"
-            mssg=f"Changed your alive text from\n`{old_alv}`\nto\n`{themssg}`\nPlease wait for a minute."
-            await conv.send_message(event.chat_id, mssg)
+            mssg=f"Changed your alive text from\n`{old_alv}`\nto\n`{themssg}`\n"
+            await xx.edit(mssg)
     else:
         await event.answer("You can't use this bot.", alert=True)
 
-# pylint: disable=ffs_dont_edit
 @tgbot.on(events.callbackquery.CallbackQuery(data=re.compile(b"alv_pic"))
            )  # pylint: disable=C0321
 async def alv_pic(event):
@@ -473,10 +475,85 @@ async def alv_pic(event):
         else:
             mssg="`**HEROKU**:" "\nPlease setup your` **HEROKU_APP_NAME**"
             return
+        xx = await tgbot.send_message("Changing your Alive Pic, please wait for a minute")
         heroku_var=app.config()
         heroku_var[telebot]=f"{url}"
-        mssg=f"Successfully changed your alive pic.\nPlease wait for a minute."
-        await conv.send_message(event.chat_id, mssg)
+        mssg=f"Successfully changed your alive pic.\n"
+        await xx.edit(mssg)
     else:
         await event.answer("You can't use this bot.", alert=True)
+
+@tgbot.on(events.callbackquery.CallbackQuery(data=re.compile(b"pm_cus")))
+async def alv(event):
+    await event.edit("Here are the avaialble customisations for PMSecurity",
+                    buttons=[
+                        [Button.inline("Message", data="pm_txt")],
+                        [Button.inline("Picture", data="pm_pic")]
+                    ])
+
+@tgbot.on(events.callbackquery.CallbackQuery(data=re.compile(b"pm_txt")))
+async def a_txt(event):
+    if event.sender_id == OWNER_ID:
+        await event.delete()
+        old_alv=Var.CUSTOM_PMPERMIT if Var.CUSTOM_PMPERMIT else "Default PMSecurity message"
+        telebot="CUSTOM_ALIVE"
+        if Var.HEROKU_APP_NAME is not None:
+            app=Heroku.app(Var.HEROKU_APP_NAME)
+        else:
+            mssg="`**HEROKU**:" "\nPlease setup your` **HEROKU_APP_NAME**"
+            return
+        async with event.client.conversation(OWNER_ID) as conv:
+            await conv.send_message("Send the text which you want as your PMSecurity Message!\nUse /cancel to cancel the operation.")
+            response=conv.wait_event(events.NewMessage(chats=OWNER_ID))
+            response=await response
+            themssg=response.message.message
+            if themssg == None:
+                await conv.send_message("Error!")
+                return
+            if themssg == "/cancel":
+                await conv.send_message("Cancelled!!")
+            heroku_var=app.config()
+            xx = await tgbot.send_message("Changing your PMSecurity Message, please wait for a minute")
+            heroku_var[telebot]=f"{themssg}"
+            mssg=f"Changed your PMsecurity Message from\n`{old_alv}`\nto\n`{themssg}`\n"
+            await xx.edit(mssg)
+    else:
+        await event.answer("You can't use this bot.", alert=True)
+
+@tgbot.on(events.callbackquery.CallbackQuery(data=re.compile(b"pm_pic"))
+           )  # pylint: disable=C0321
+async def alv_pic(event):
+    if event.sender_id == OWNER_ID:
+        await event.delete()
+        await tgbot.send_message(event.chat_id, "Send me a pic so as to set it as your PMSecurity pic.")
+        async with event.client.conversation(OWNER_ID) as conv:
+            await conv.send_message("Send /cancel to cancel the operation!")
+            response = await conv.get_response()
+            try:
+                themssg=response.message.message
+                if themssg == "/cancel":
+                    await conv.send_message("Operation cancelled!!")
+                    return
+            except:
+                pass
+            media=await event.client.download_media(response, "PM_PIC")
+            try:
+                url=upload_file(media)
+                os.remove(media)
+            except BaseException:
+                return await conv.send_message("Error!")
+        telebot="ALIVE_PIC"
+        if Var.HEROKU_APP_NAME is not None:
+            app=Heroku.app(Var.HEROKU_APP_NAME)
+        else:
+            mssg="`**HEROKU**:" "\nPlease setup your` **HEROKU_APP_NAME**"
+            return
+        xx = await tgbot.send_message("Changing your PMSecurity Pic, please wait for a minute")
+        heroku_var=app.config()
+        heroku_var[telebot]=f"{url}"
+        mssg=f"Successfully changed your PMSecurity pic.\n"
+        await xx.edit(mssg)
+    else:
+        await event.answer("You can't use this bot.", alert=True)
+
 # fmt: on
