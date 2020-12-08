@@ -409,7 +409,8 @@ async def custommm(event):
                     ]
 
 # pylint: disable=oof
-@tgbot.on(events.callbackquery.CallbackQuery(data=re.compile(b"alive_cus")))  # pylint: disable=oof
+@ tgbot.on(events.callbackquery.CallbackQuery(data=re.compile(b"alive_cus"))
+           )  # pylint: disable=oof
 async def alv_cs(event):
     await event.edit("Here are the avaialble customisations for alive",
                     buttons=[
@@ -418,7 +419,8 @@ async def alv_cs(event):
                     ])
 
  # pylint: disable=oof
-@tgbot.on(events.callbackquery.CallbackQuery(data=re.compile(b"alv_txt")))  # pylint: disable=oof
+@ tgbot.on(events.callbackquery.CallbackQuery(data=re.compile(b"alv_txt"))
+           )  # pylint: disable=oof
 async def alv_txt(event):
     if event.sender_id == OWNER_ID:
         await event.delete()
@@ -447,7 +449,8 @@ async def alv_txt(event):
         await event.answer("You can't use this bot.", alert=True)
 
  # pylint: disable=oof
-@tgbot.on(events.callbackquery.CallbackQuery(data=re.compile(b"alv_pic")))  # pylint: disable=oof
+@ tgbot.on(events.callbackquery.CallbackQuery(data=re.compile(b"alv_pic"))
+           )  # pylint: disable=oof
 async def alv_pic(event):
     if event.sender_id == OWNER_ID:
         await event.delete()
