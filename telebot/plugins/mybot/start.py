@@ -279,7 +279,7 @@ async def bot(event):
         else:
             mssg = "`**HEROKU**:" "\nPlease setup your` **HEROKU_APP_NAME**"
             return
-        xx = await tgbot.send_message("Changing your Bot Pic, please wait for a minute")
+        xx = await tgbot.send_message(event.chat_id, "Changing your Bot Pic, please wait for a minute")
         heroku_var = app.config()
         heroku_var[telebot] = f"{url}"
         mssg = f"Successfully changed your bot pic.\n"
@@ -441,7 +441,7 @@ async def a_txt(event):
             if themssg == "/cancel":
                 await conv.send_message("Cancelled!!")
             heroku_var=app.config()
-            xx = await tgbot.send_message("Changing your Alive Message, please wait for a minute")
+            xx = await tgbot.send_message(event.chat_id, "Changing your Alive Message, please wait for a minute")
             heroku_var[telebot]=f"{themssg}"
             mssg=f"Changed your alive text from\n`{old_alv}`\nto\n`{themssg}`\n"
             await xx.edit(mssg)
@@ -477,7 +477,7 @@ async def alv_pic(event):
         else:
             mssg="`**HEROKU**:" "\nPlease setup your` **HEROKU_APP_NAME**"
             return
-        xx = await tgbot.send_message("Changing your Alive Pic, please wait for a minute")
+        xx = await tgbot.send_message(event.chat_id, "Changing your Alive Pic, please wait for a minute")
         heroku_var=app.config()
         heroku_var[telebot]=f"{url}"
         mssg=f"Successfully changed your alive pic.\n"
@@ -515,7 +515,7 @@ async def a_txt(event):
             if themssg == "/cancel":
                 await conv.send_message("Cancelled!!")
             heroku_var=app.config()
-            xx = await tgbot.send_message("Changing your PMSecurity Message, please wait for a minute")
+            xx = await tgbot.send_message(event.chat_id, "Changing your PMSecurity Message, please wait for a minute")
             heroku_var[telebot]=f"{themssg}"
             mssg=f"Changed your PMsecurity Message from\n`{old_alv}`\nto\n`{themssg}`\n"
             await xx.edit(mssg)
@@ -551,7 +551,7 @@ async def alv_pic(event):
         else:
             mssg="`**HEROKU**:" "\nPlease setup your` **HEROKU_APP_NAME**"
             return
-        xx = await tgbot.send_message("Changing your PMSecurity Pic, please wait for a minute")
+        xx = await tgbot.send_message(event.chat_id, "Changing your PMSecurity Pic, please wait for a minute")
         heroku_var=app.config()
         heroku_var[telebot]=f"{url}"
         mssg=f"Successfully changed your PMSecurity pic.\n"
