@@ -60,13 +60,13 @@ async def start_all(event):
     if LOAD_MYBOT == "False":
         if BOT_PIC:
             await tgbot.send_file(event.chat_id,
-                                     BOT_PIC,
-                                     caption=startotherdis,
-                                     buttons=[
-                                         (Button.inline(
-                                             "What can I do here?",
-                                             data="wew"))]
-                                     )
+                                  BOT_PIC,
+                                  caption=startotherdis,
+                                  buttons=[
+                                      (Button.inline(
+                                          "What can I do here?",
+                                          data="wew"))]
+                                  )
         else:
             await tgbot.send_message(event.chat_id,
                                      startotherdis,
@@ -78,15 +78,15 @@ async def start_all(event):
     elif LOAD_MYBOT == "True":
         if BOT_PIC:
             await tgbot.send_file(event.chat_id,
-                                     BOT_PIC,
-                                     caption=startotherena,
-                                     buttons=[
-                                         [Button.url(
-                                             "TeleBot", url="https://github.com/xditya/TeleBot")],
-                                         [Button.inline(
-                                             "Whats this?", data="telebot")]
-                                     ]
-                                     )
+                                  BOT_PIC,
+                                  caption=startotherena,
+                                  buttons=[
+                                      [Button.url(
+                                          "TeleBot", url="https://github.com/xditya/TeleBot")],
+                                      [Button.inline(
+                                          "Whats this?", data="telebot")]
+                                  ]
+                                  )
         else:
             await tgbot.send_message(event.chat_id,
                                      startotherena,
