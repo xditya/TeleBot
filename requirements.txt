@@ -50,7 +50,7 @@ spamwatch
 speedtest-cli>=2.0.2
 sqlalchemy>=1.2
 telegraph
-telethon>=1.17
+telethon>=1.18.2
 tswift
 urbandict
 validators
