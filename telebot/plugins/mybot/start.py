@@ -22,7 +22,6 @@ import asyncio
 import os
 import requests
 from telebot.plugins.mybot.sql.blacklist_sql import all_bl_users
-from telebot.plugins.mybot.sql.users_sql import all_users
 from telebot.plugins import TELE_NAME
 from telebot.plugins.mybot.sql.userbase_sql import add_to_userbase, present_in_userbase, full_userbase
 from datetime import datetime
