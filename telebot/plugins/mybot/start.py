@@ -253,7 +253,7 @@ async def pmbot(event):
 async def bot(event):
     if event.sender_id == OWNER_ID:
         await event.delete()
-        async with telebot.conversation(OWNER_ID) as conv:
+        async with event.client.conversation(OWNER_ID) as conv:
             await conv.send_message("Send the new pic you want to be shown when someone starts the bot:")
             await conv.send_message("Send /cancel to cancel the operation!")
             response = conv.wait_event(events.NewMessage(chats=OWNER_ID))
@@ -265,7 +265,7 @@ async def bot(event):
                     return
             except BaseException:
                 pass
-            media = await telebot.download_media(response, "Bot_Pic")
+            media = await event.client.download_media(response, "Bot_Pic")
             try:
                 url = upload_file(media)
                 os.remove(media)
@@ -463,7 +463,7 @@ async def alv_pic(event):
                     return
             except:
                 pass
-            media=await telebot.download_media(response, "Alive_Pic")
+            media=await event.client.download_media(response, "Alive_Pic")
             try:
                 url=upload_file(media)
                 os.remove(media)
