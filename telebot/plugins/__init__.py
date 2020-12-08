@@ -65,8 +65,8 @@ async def tele_grps(event):
     a = []
     async for dialog in telebot.iter_dialogs():
         entity = dialog.entity
-        if (isinstance(entity, Channel)):
-            if(entity.megagroup):
-                if(entity.creator or entity.admin_rights):
+        if isinstance(entity, Channel):
+            if entity.megagroup:
+                if entity.creator or entity.admin_rights:
                     a.append(entity.id)
     return len(a), a
