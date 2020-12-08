@@ -408,9 +408,8 @@ async def custommm(event):
                         [Button.inline("PMSecurity", data="pm_cus")]
                     ]
 # fmt: off
-@tgbot.on(events.callbackquery.CallbackQuery(data=re.compile(b"alive_cus"))
-           )  # pylint: disable=C0321
-async def alv_cs(event):
+@tgbot.on(events.callbackquery.CallbackQuery(data=re.compile(b"alive_cus")))
+async def alv(event):
     await event.edit("Here are the avaialble customisations for alive",
                     buttons=[
                         [Button.inline("Text", data="alv_txt")],
@@ -418,9 +417,8 @@ async def alv_cs(event):
                     ])
 
 # pylint: disable=ffs_dont_edit
-@tgbot.on(events.callbackquery.CallbackQuery(data=re.compile(b"alv_txt"))
-           )  # pylint: disable=C0321
-async def alv_txt(event):
+@tgbot.on(events.callbackquery.CallbackQuery(data=re.compile(b"alv_txt")))
+async def a_txt(event):
     if event.sender_id == OWNER_ID:
         await event.delete()
         old_alv=Var.CUSTOM_ALIVE if var.CUSTOM_ALIVE else "Default Alive message"
