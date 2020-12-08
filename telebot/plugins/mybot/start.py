@@ -248,7 +248,9 @@ async def pmbot(event):
     else:
         await event.answer("You can't use this bot.", alert=True)
 
-@tgbot.on(events.callbackquery.CallbackQuery(data=re.compile(b"btpic")))  # pylint: disable=oof
+
+@tgbot.on(events.callbackquery.CallbackQuery(data=re.compile(b"btpic"))
+          )  # pylint: disable=oof
 async def bot(event):
     if event.sender_id == OWNER_ID:
         await event.delete()
@@ -282,6 +284,7 @@ async def bot(event):
             await conv.send_message(event.chat_id, mssg)
     else:
         await event.answer("You can't use this bot.", alert=True)
+
 
 @tgbot.on(events.callbackquery.CallbackQuery(data=re.compile(b"cmssg"))
           )  # pylint: disable=oof
@@ -395,16 +398,18 @@ Total users in bot: `{}`.\n
     except BaseException:
         await tgbot.send_message(event.chat_id, "Please add me to your Private log group for proper use.")
 
-@tgbot.on(events.callbackquery.CallbackQuery(data=re.compile(b"custom")))  # pylint: disable=oof
+
+@tgbot.on(events.callbackquery.CallbackQuery(data=re.compile(b"custom"))
+          )  # pylint: disable=oof
 async def custommm(event):
     await event.edit("Modules which you can customise -",
-                    buttons=
-                    [
+                    buttons=[
                         [Button.inline("Alive", data="alive_cus")],
                         [Button.inline("PMSecurity", data="pm_cus")]
                     ]
 
-@tgbot.on(events.callbackquery.CallbackQuery(data=re.compile(b"alive_cus")))  # pylint: disable=oof
+@ tgbot.on(events.callbackquery.CallbackQuery(data=re.compile(b"alive_cus"))
+           )  # pylint: disable=oof
 async def alv_cs(event):
     await event.edit("Here are the avaialble customisations for alive",
                     buttons=[
@@ -412,65 +417,67 @@ async def alv_cs(event):
                         [Button.inline("Picture", data="alv_pic")]
                     ])
 
-@tgbot.on(events.callbackquery.CallbackQuery(data=re.compile(b"alv_txt")))  # pylint: disable=oof
+@ tgbot.on(events.callbackquery.CallbackQuery(data=re.compile(b"alv_txt"))
+           )  # pylint: disable=oof
 async def alv_txt(event):
     if event.sender_id == OWNER_ID:
         await event.delete()
-        old_alv = Var.CUSTOM_ALIVE if var.CUSTOM_ALIVE else "Default Alive message"
-        telebot = "CUSTOM_ALIVE"
+        old_alv=Var.CUSTOM_ALIVE if var.CUSTOM_ALIVE else "Default Alive message"
+        telebot="CUSTOM_ALIVE"
         if Var.HEROKU_APP_NAME is not None:
-            app = Heroku.app(Var.HEROKU_APP_NAME)
+            app=Heroku.app(Var.HEROKU_APP_NAME)
         else:
-            mssg = "`**HEROKU**:" "\nPlease setup your` **HEROKU_APP_NAME**"
+            mssg="`**HEROKU**:" "\nPlease setup your` **HEROKU_APP_NAME**"
             return
         async with telebot.conversation(OWNER_ID) as conv:
             await conv.send_message("Send the text which you want as your alive text.\nUse /cancel to cancel the operation.")
-            response = conv.wait_event(events.NewMessage(chats=OWNER_ID))
-            response = await response
-            themssg = response.message.message
+            response=conv.wait_event(events.NewMessage(chats=OWNER_ID))
+            response=await response
+            themssg=response.message.message
             if themssg == None:
                 await conv.send_message("Error!")
                 return
             if themssg == "/cancel":
                 await conv.send_message("Cancelled!!")
-            heroku_var = app.config()
-            heroku_var[telebot] = f"{themssg}"
-            mssg = f"Changed your alive text from\n`{old_alv}`\nto\n`{themssg}`\nPlease wait for a minute."
+            heroku_var=app.config()
+            heroku_var[telebot]=f"{themssg}"
+            mssg=f"Changed your alive text from\n`{old_alv}`\nto\n`{themssg}`\nPlease wait for a minute."
             await conv.send_message(event.chat_id, mssg)
     else:
         await event.answer("You can't use this bot.", alert=True)
 
-@tgbot.on(events.callbackquery.CallbackQuery(data=re.compile(b"alv_pic")))  # pylint: disable=oof
+@ tgbot.on(events.callbackquery.CallbackQuery(data=re.compile(b"alv_pic"))
+           )  # pylint: disable=oof
 async def alv_pic(event):
     if event.sender_id == OWNER_ID:
         await event.delete()
         await tgbot.send_message(event.chat_id, "Send me a pic so as to set it as your alive pic.")
         async with telebot.conversation(OWNER_ID) as conv:
             await conv.send_message("Send /cancel to cancel the operation!")
-            response = conv.wait_event(events.NewMessage(chats=OWNER_ID))
-            response = await response
+            response=conv.wait_event(events.NewMessage(chats=OWNER_ID))
+            response=await response
             try:
-                themssg = response.message.message
+                themssg=response.message.message
                 if themssg == "/cancel":
                     await conv.send_message("Operation cancelled!!")
                     return
             except:
                 pass
-            media = await telebot.download_media(response, "Alive_Pic")
+            media=await telebot.download_media(response, "Alive_Pic")
             try:
-                url = upload_file(media)
+                url=upload_file(media)
                 os.remove(media)
             except BaseException:
                 return await conv.send_file("Error!")
-        telebot = "ALIVE_PIC"
+        telebot="ALIVE_PIC"
         if Var.HEROKU_APP_NAME is not None:
-            app = Heroku.app(Var.HEROKU_APP_NAME)
+            app=Heroku.app(Var.HEROKU_APP_NAME)
         else:
-            mssg = "`**HEROKU**:" "\nPlease setup your` **HEROKU_APP_NAME**"
+            mssg="`**HEROKU**:" "\nPlease setup your` **HEROKU_APP_NAME**"
             return
-        heroku_var = app.config()
-            heroku_var[telebot] = f"{url}"
-            mssg = f"Successfully changed your alive pic.\nPlease wait for a minute."
+        heroku_var=app.config()
+            heroku_var[telebot]=f"{url}"
+            mssg=f"Successfully changed your alive pic.\nPlease wait for a minute."
             await conv.send_message(event.chat_id, mssg)
     else:
         await event.answer("You can't use this bot.", alert=True)
