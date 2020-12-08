@@ -59,7 +59,7 @@ async def start_all(event):
             pass
     if LOAD_MYBOT == "False":
         if BOT_PIC:
-            await tgbot.send_message(event.chat_id,
+            await tgbot.send_file(event.chat_id,
                                      BOT_PIC,
                                      caption=startotherdis,
                                      buttons=[
@@ -77,7 +77,7 @@ async def start_all(event):
                                      )
     elif LOAD_MYBOT == "True":
         if BOT_PIC:
-            await tgbot.send_message(event.chat_id,
+            await tgbot.send_file(event.chat_id,
                                      BOT_PIC,
                                      caption=startotherena,
                                      buttons=[
