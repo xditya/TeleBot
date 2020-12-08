@@ -282,7 +282,7 @@ async def bot(event):
         xx = await tgbot.send_message(event.chat_id, "Changing your Bot Pic, please wait for a minute")
         heroku_var = app.config()
         heroku_var[telebot] = f"{url}"
-        mssg = f"Successfully changed your bot pic.\n"
+        mssg = f"Successfully changed your bot pic. Please wait for a minute.\n"
         await xx.edit(mssg)
     else:
         await event.answer("You can't use this bot.", alert=True)
@@ -480,7 +480,7 @@ async def alv_pic(event):
         xx = await tgbot.send_message(event.chat_id, "Changing your Alive Pic, please wait for a minute")
         heroku_var=app.config()
         heroku_var[telebot]=f"{url}"
-        mssg=f"Successfully changed your alive pic.\n"
+        mssg=f"Successfully changed your alive pic. Please wait for a minute.\n"
         await xx.edit(mssg)
     else:
         await event.answer("You can't use this bot.", alert=True)
@@ -545,7 +545,7 @@ async def alv_pic(event):
                 os.remove(media)
             except BaseException:
                 return await conv.send_message("Error!")
-        telebot="ALIVE_PIC"
+        telebot="PMPERMIT_PIC"
         if Var.HEROKU_APP_NAME is not None:
             app=Heroku.app(Var.HEROKU_APP_NAME)
         else:
@@ -554,7 +554,7 @@ async def alv_pic(event):
         xx = await tgbot.send_message(event.chat_id, "Changing your PMSecurity Pic, please wait for a minute")
         heroku_var=app.config()
         heroku_var[telebot]=f"{url}"
-        mssg=f"Successfully changed your PMSecurity pic.\n"
+        mssg=f"Successfully changed your PMSecurity pic. Please wait for a minute.\n"
         await xx.edit(mssg)
     else:
         await event.answer("You can't use this bot.", alert=True)
