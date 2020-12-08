@@ -399,8 +399,7 @@ Total users in bot: `{}`.\n
         await tgbot.send_message(event.chat_id, "Please add me to your Private log group for proper use.")
 
 
-@tgbot.on(events.callbackquery.CallbackQuery(data=re.compile(b"custom"))
-          )  # pylint: disable=oof
+@tgbot.on(events.callbackquery.CallbackQuery(data=re.compile(b"custom")))  # pylint: disable=oof
 async def custommm(event):
     await event.edit("Modules which you can customise -",
                     buttons=[
@@ -408,8 +407,7 @@ async def custommm(event):
                         [Button.inline("PMSecurity", data="pm_cus")]
                     ]
 
-@ tgbot.on(events.callbackquery.CallbackQuery(data=re.compile(b"alive_cus"))
-           )  # pylint: disable=oof
+@tgbot.on(events.callbackquery.CallbackQuery(data=re.compile(b"alive_cus")))  # pylint: disable=oof
 async def alv_cs(event):
     await event.edit("Here are the avaialble customisations for alive",
                     buttons=[
@@ -417,8 +415,7 @@ async def alv_cs(event):
                         [Button.inline("Picture", data="alv_pic")]
                     ])
 
-@ tgbot.on(events.callbackquery.CallbackQuery(data=re.compile(b"alv_txt"))
-           )  # pylint: disable=oof
+@tgbot.on(events.callbackquery.CallbackQuery(data=re.compile(b"alv_txt")))  # pylint: disable=oof
 async def alv_txt(event):
     if event.sender_id == OWNER_ID:
         await event.delete()
@@ -446,8 +443,7 @@ async def alv_txt(event):
     else:
         await event.answer("You can't use this bot.", alert=True)
 
-@ tgbot.on(events.callbackquery.CallbackQuery(data=re.compile(b"alv_pic"))
-           )  # pylint: disable=oof
+@tgbot.on(events.callbackquery.CallbackQuery(data=re.compile(b"alv_pic")))  # pylint: disable=oof
 async def alv_pic(event):
     if event.sender_id == OWNER_ID:
         await event.delete()
