@@ -268,8 +268,8 @@ async def bot(event):
                 pass
             media = await event.client.download_media(response, "Bot_Pic")
             try:
-                upload_file(media)
-                url = f"https://telegra.ph/{url[0]}"
+                x = upload_file(media)
+                url = f"https://telegra.ph/{x[0]}"
                 os.remove(media)
             except BaseException:
                 return await conv.send_message("Error!")
@@ -466,8 +466,8 @@ async def alv_pic(event):
                 pass
             media=await event.client.download_media(response, "Alive_Pic")
             try:
-                upload_file(media)
-                url = f"https://telegra.ph/{url[0]}"
+                x = upload_file(media)
+                url = f"https://telegra.ph/{x[0]}"
                 os.remove(media)
             except BaseException:
                 return await conv.send_message("Error!")
@@ -540,8 +540,8 @@ async def alv_pic(event):
                 pass
             media=await event.client.download_media(response, "PM_PIC")
             try:
-                upload_file(media)
-                url = f"https://telegra.ph/{url[0]}"
+                x = upload_file(media)
+                url = f"https://telegra.ph/{x[0]}"
                 os.remove(media)
             except BaseException:
                 return await conv.send_message("Error!")
