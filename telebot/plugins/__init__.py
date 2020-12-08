@@ -17,6 +17,7 @@
 from telebot import *
 from telebot import ALIVE_NAME, bot, telever
 from telebot.telebotConfig import Config, Var
+from telethon.tl.types import Channel
 
 # stats
 if Var.PRIVATE_GROUP_ID:
