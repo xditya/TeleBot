@@ -26,7 +26,7 @@ from telebot.plugins import TELE_NAME
 from telebot.plugins.mybot.sql.userbase_sql import add_to_userbase, present_in_userbase, full_userbase
 from datetime import datetime
 from telethon import events
-from telebot.telebotConfig import Var
+from telebot.telebotConfig import Var, Config
 from telegraph import Telegraph, upload_file
 
 ##################--CONSTANTS--##################
