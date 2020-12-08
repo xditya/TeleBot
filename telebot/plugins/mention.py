@@ -4,6 +4,7 @@
 
 from telebot import CMD_HELP
 
+
 @telebot.on(admin_cmd(pattern=r"mention (.*)"))
 @telebot.on(sudo_cmd(pattern=r"mention (.*)", allow_sudo=True))
 async def _(event):
