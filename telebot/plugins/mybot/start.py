@@ -268,7 +268,7 @@ async def bot(event):
                 pass
             media = await event.client.download_media(response, "Bot_Pic")
             try:
-                x = upload_file(media)
+                upload_file(media)
                 url = f"https://telegra.ph/{url[0]}"
                 os.remove(media)
             except BaseException:
@@ -466,7 +466,7 @@ async def alv_pic(event):
                 pass
             media=await event.client.download_media(response, "Alive_Pic")
             try:
-                x = upload_file(media)
+                upload_file(media)
                 url = f"https://telegra.ph/{url[0]}"
                 os.remove(media)
             except BaseException:
@@ -540,7 +540,7 @@ async def alv_pic(event):
                 pass
             media=await event.client.download_media(response, "PM_PIC")
             try:
-                x = upload_file(media)
+                upload_file(media)
                 url = f"https://telegra.ph/{url[0]}"
                 os.remove(media)
             except BaseException:
