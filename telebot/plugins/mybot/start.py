@@ -484,4 +484,3 @@ async def alv_pic(event):
     else:
         await event.answer("You can't use this bot.", alert=True)
 # fmt: on
-                     
