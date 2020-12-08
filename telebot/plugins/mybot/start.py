@@ -279,9 +279,9 @@ async def bot(event):
             mssg = "`**HEROKU**:" "\nPlease setup your` **HEROKU_APP_NAME**"
             return
         heroku_var = app.config()
-            heroku_var[telebot] = f"{url}"
-            mssg = f"Successfully changed your alive pic.\nPlease wait for a minute."
-            await conv.send_message(event.chat_id, mssg)
+        heroku_var[telebot] = f"{url}"
+        mssg = f"Successfully changed your alive pic.\nPlease wait for a minute."
+        await conv.send_message(event.chat_id, mssg)
     else:
         await event.answer("You can't use this bot.", alert=True)
 
