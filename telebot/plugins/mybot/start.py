@@ -421,7 +421,7 @@ async def alv(event):
 async def a_txt(event):
     if event.sender_id == OWNER_ID:
         await event.delete()
-        old_alv=Var.CUSTOM_ALIVE if var.CUSTOM_ALIVE else "Default Alive message"
+        old_alv=Var.CUSTOM_ALIVE if Var.CUSTOM_ALIVE else "Default Alive message"
         telebot="CUSTOM_ALIVE"
         if Var.HEROKU_APP_NAME is not None:
             app=Heroku.app(Var.HEROKU_APP_NAME)
