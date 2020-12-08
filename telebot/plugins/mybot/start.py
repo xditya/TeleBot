@@ -28,11 +28,19 @@ from telebot.plugins.mybot.sql.userbase_sql import add_to_userbase, present_in_u
 from datetime import datetime
 from telethon import events
 from telebot.telebotConfig import Var
+from telegraph import Telegraph, upload_file
 
 ##################--CONSTANTS--##################
 LOAD_MYBOT = Var.LOAD_MYBOT
 Heroku = heroku3.from_key(Var.HEROKU_API_KEY)
+BOT_PIC = Var.BOT_PIC if Var.BOT_PIC else None
 heroku_api = "https://api.heroku.com"
+path = Config.TMP_DOWNLOAD_DIRECTORY
+if not os.path.isdir(path):
+    os.makedirs(path)
+telegraph = Telegraph()
+r = telegraph.create_account(short_name=Config.TELEGRAPH_SHORT_NAME)
+auth_url = r["auth_url"]
 ################--CONSTANTS-END-#################
 
 # start-others
@@ -51,7 +59,17 @@ async def start_all(event):
         except BaseException:
             pass
     if LOAD_MYBOT == "False":
-        await tgbot.send_message(event.chat_id,
+        if BOT_PIC:
+            await tgbot.send_message(event.chat_id,
+                                 BOT_PIC,
+                                 caption=startotherdis,
+                                 buttons=[
+                                     (Button.inline(
+                                         "What can I do here?",
+                                         data="wew"))]
+                                 )
+        else:
+            await tgbot.send_message(event.chat_id,
                                  startotherdis,
                                  buttons=[
                                      (Button.inline(
@@ -59,7 +77,19 @@ async def start_all(event):
                                          data="wew"))]
                                  )
     elif LOAD_MYBOT == "True":
-        await tgbot.send_message(event.chat_id,
+        if BOT_PIC:
+            await tgbot.send_message(event.chat_id,
+                                 BOT_PIC,
+                                 caption=startotherena,
+                                 buttons=[
+                                     [Button.url(
+                                         "TeleBot", url="https://github.com/xditya/TeleBot")],
+                                     [Button.inline(
+                                         "Whats this?", data="telebot")]
+                                 ]
+                                 )
+        else:
+            await tgbot.send_message(event.chat_id,
                                  startotherena,
                                  buttons=[
                                      [Button.url(
@@ -166,6 +196,8 @@ async def settings(event):
                                  buttons=[
                                      [Button.inline(
                                          "PM Bot", data="pmbot")],
+                                     [Button.inline(
+                                         "Customs", data="custom")],
                                      [Button.url(
                                          "Logs", url=f"https://t.me/{Var.TG_BOT_USER_NAME_BF_HER}?start=logs")]
                                  ])
@@ -177,7 +209,7 @@ async def settings(event):
           )  # pylint: disable=oof
 async def settings(event):
     if event.sender_id == OWNER_ID:
-        allu = len(all_users())
+        allu = len(full_userbase())
         blu = len(all_bl_users())
         pop = "Here is the stats for your bot:\nTotal Users = {}\nBlacklisted Users = {}".format(
             allu, blu)
@@ -195,7 +227,8 @@ async def pmbot(event):
                                  "Here are the availabe settings for PM bot.",
                                  buttons=[
                                      [Button.inline("Enable/Disable", data="onoff"), Button.inline(
-                                         "Custom Message", data="cmssg")]
+                                         "Custom Message", data="cmssg")],
+                                     [Button.inline("Bot Pic", data="btpic")]
                                  ])
     else:
         await event.answer("You can't use this bot.", alert=True)
@@ -215,6 +248,40 @@ async def pmbot(event):
     else:
         await event.answer("You can't use this bot.", alert=True)
 
+@tgbot.on(events.callbackquery.CallbackQuery(data=re.compile(b"btpic")))  # pylint: disable=oof
+async def bot(event):
+    if event.sender_id == OWNER_ID:
+        await event.delete()
+        async with telebot.conversation(OWNER_ID) as conv:
+            await conv.send_message("Send the new pic you want to be shown when someone starts the bot:")
+            await conv.send_message("Send /cancel to cancel the operation!")
+            response = conv.wait_event(events.NewMessage(chats=OWNER_ID))
+            response = await response
+            try:
+                themssg = response.message.message
+                if themssg == "/cancel":
+                    await conv.send_message("Operation cancelled!!")
+                    return
+            except:
+                pass
+            media = await telebot.download_media(response, "Bot_Pic")
+            try:
+                url = upload_file(media)
+                os.remove(media)
+            except BaseException:
+                return await conv.send_file("Error!")
+        telebot = "BOT_PIC"
+        if Var.HEROKU_APP_NAME is not None:
+            app = Heroku.app(Var.HEROKU_APP_NAME)
+        else:
+            mssg = "`**HEROKU**:" "\nPlease setup your` **HEROKU_APP_NAME**"
+            return
+        heroku_var = app.config()
+            heroku_var[telebot] = f"{url}"
+            mssg = f"Successfully changed your alive pic.\nPlease wait for a minute."
+            await conv.send_message(event.chat_id, mssg)
+    else:
+        await event.answer("You can't use this bot.", alert=True)
 
 @tgbot.on(events.callbackquery.CallbackQuery(data=re.compile(b"cmssg"))
           )  # pylint: disable=oof
@@ -327,3 +394,83 @@ Total users in bot: `{}`.\n
         await tgbot.send_message(Var.PRIVATE_GROUP_ID, f"#Broadcast\nCompleted sending a broadcast to {success} users.")
     except BaseException:
         await tgbot.send_message(event.chat_id, "Please add me to your Private log group for proper use.")
+
+@tgbot.on(events.callbackquery.CallbackQuery(data=re.compile(b"custom")))  # pylint: disable=oof
+async def custommm(event):
+    await event.edit("Modules which you can customise -",
+                    buttons=
+                    [
+                        [Button.inline("Alive", data="alive_cus")],
+                        [Button.inline("PMSecurity", data="pm_cus")]
+                    ]
+
+@tgbot.on(events.callbackquery.CallbackQuery(data=re.compile(b"alive_cus")))  # pylint: disable=oof
+async def alv_cs(event):
+    await event.edit("Here are the avaialble customisations for alive",
+                    buttons=[
+                        [Button.inline("Text", data="alv_txt")],
+                        [Button.inline("Picture", data="alv_pic")]
+                    ])
+
+@tgbot.on(events.callbackquery.CallbackQuery(data=re.compile(b"alv_txt")))  # pylint: disable=oof
+async def alv_txt(event):
+    if event.sender_id == OWNER_ID:
+        await event.delete()
+        old_alv = Var.CUSTOM_ALIVE if var.CUSTOM_ALIVE else "Default Alive message"
+        telebot = "CUSTOM_ALIVE"
+        if Var.HEROKU_APP_NAME is not None:
+            app = Heroku.app(Var.HEROKU_APP_NAME)
+        else:
+            mssg = "`**HEROKU**:" "\nPlease setup your` **HEROKU_APP_NAME**"
+            return
+        async with telebot.conversation(OWNER_ID) as conv:
+            await conv.send_message("Send the text which you want as your alive text.\nUse /cancel to cancel the operation.")
+            response = conv.wait_event(events.NewMessage(chats=OWNER_ID))
+            response = await response
+            themssg = response.message.message
+            if themssg == None:
+                await conv.send_message("Error!")
+                return
+            if themssg == "/cancel":
+                await conv.send_message("Cancelled!!")
+            heroku_var = app.config()
+            heroku_var[telebot] = f"{themssg}"
+            mssg = f"Changed your alive text from\n`{old_alv}`\nto\n`{themssg}`\nPlease wait for a minute."
+            await conv.send_message(event.chat_id, mssg)
+    else:
+        await event.answer("You can't use this bot.", alert=True)
+
+@tgbot.on(events.callbackquery.CallbackQuery(data=re.compile(b"alv_pic")))  # pylint: disable=oof
+async def alv_pic(event):
+    if event.sender_id == OWNER_ID:
+        await event.delete()
+        await tgbot.send_message(event.chat_id, "Send me a pic so as to set it as your alive pic.")
+        async with telebot.conversation(OWNER_ID) as conv:
+            await conv.send_message("Send /cancel to cancel the operation!")
+            response = conv.wait_event(events.NewMessage(chats=OWNER_ID))
+            response = await response
+            try:
+                themssg = response.message.message
+                if themssg == "/cancel":
+                    await conv.send_message("Operation cancelled!!")
+                    return
+            except:
+                pass
+            media = await telebot.download_media(response, "Alive_Pic")
+            try:
+                url = upload_file(media)
+                os.remove(media)
+            except BaseException:
+                return await conv.send_file("Error!")
+        telebot = "ALIVE_PIC"
+        if Var.HEROKU_APP_NAME is not None:
+            app = Heroku.app(Var.HEROKU_APP_NAME)
+        else:
+            mssg = "`**HEROKU**:" "\nPlease setup your` **HEROKU_APP_NAME**"
+            return
+        heroku_var = app.config()
+            heroku_var[telebot] = f"{url}"
+            mssg = f"Successfully changed your alive pic.\nPlease wait for a minute."
+            await conv.send_message(event.chat_id, mssg)
+    else:
+        await event.answer("You can't use this bot.", alert=True)
