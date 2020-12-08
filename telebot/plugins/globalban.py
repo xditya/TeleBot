@@ -14,145 +14,221 @@
 #    You should have received a copy of the GNU Affero General Public License
 #    along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-from datetime import datetime
-
+from telebot.plugins.sql_helper.gban_sql import *
 from telethon.events import ChatAction
 from telethon.tl.functions.contacts import BlockRequest, UnblockRequest
 from telethon.tl.types import MessageEntityMentionName
+from telebot import CMD_HELP, bot
+from telebot.utils import admin_cmd
 
-from telebot import CMD_HELP
-from telebot.plugins.sql_helper.gban_sql import *
+client = bot
+async def get_user_from_event(event):
+    args = event.pattern_match.group(1).split(":", 1)
+    extra = None
+    if event.reply_to_msg_id and not len(args) == 2:
+        previous_message = await event.get_reply_message()
+        user_obj = await event.client.get_entity(previous_message.from_id)
+        extra = event.pattern_match.group(1)
+    elif len(args[0]) > 0:
+        user = args[0]
+        if len(args) == 2:
+            extra = args[1]
+        if user.isnumeric():
+            user = int(user)
+        if not user:
+            await eor(event, f"* Pass the user's username, id or reply!**")
+            return
+        if event.message.entities is not None:
+            probable_user_mention_entity = event.message.entities[0]
+            if isinstance(probable_user_mention_entity, MessageEntityMentionName):
+                user_id = probable_user_mention_entity.user_id
+                user_obj = await event.client.get_entity(user_id)
+                return user_obj
+        try:
+            user_obj = await event.client.get_entity(user)
+        except Exception as err:
+            return await eor(event, "Failed \n **Error**\n", str(err))
+    return user_obj, extra
 
-from . import OWNER_ID, TELE_NAME, tele_grps
+
+async def get_user_from_id(user, event):
+    if isinstance(user, str):
+        user = int(user)
+    try:
+        user_obj = await event.client.get_entity(user)
+    except (TypeError, ValueError) as err:
+        await eor(event, str(err))
+        return None
+    return user_obj
+
+
+@telebot.on(ChatAction)
+async def handler(tele):
+    if tele.user_joined or tele.user_added:
+        try:
+            from telebot.plugins.sql_helper.gban_sql import is_gbanned
+
+            guser = await tele.get_user()
+            gbanned = is_gbanned(guser.id)
+        except BaseException:
+            return
+        if gbanned:
+            for i in gbanned:
+                if i.sender == str(guser.id):
+                    chat = await tele.get_chat()
+                    admin = chat.admin_rights
+                    creator = chat.creator
+                    if admin or creator:
+                        try:
+                            await client.edit_permissions(
+                                tele.chat_id, guser.id, view_messages=False
+                            )
+                            await tele.reply(
+                                f"** Gbanned User Joined!!** \n"
+                                f"**Victim Id**: [{guser.id}](tg://user?id={guser.id})\n"
+                                f"**Action **  : `Banned`"
+                            )
+                        except BaseException:
+                            return
 
 
 @telebot.on(admin_cmd(pattern="gban(?: |$)(.*)"))
-async def banhammer(event):
-    tele = await eor(event, "`Processing...`")
-    start = datetime.now()
-    xdi, grps = await tele_grps(event)
-    xdi = str(xdi)
-    await tele.edit("`Initiating a Global Ban of User in` **{}** `chats!!`".format(xdi))
-    await event.get_chat()
-    a = b = 0
-    if event.is_private:
-        user = event.chat
-        reason = event.pattern_match.group(1)
+async def gspider(rk):
+    lazy = rk
+    sender = await lazy.get_sender()
+    me = await lazy.client.get_me()
+    if not sender.id == me.id:
+        rkp = await lazy.reply("`processing...`")
     else:
-        event.chat.title
+        rkp = await lazy.edit("`processing...`")
+    me = await rk.client.get_me()
+    await rkp.edit(f"**Global Banning User!!**")
+    my_mention = "[{}](tg://user?id={})".format(me.first_name, me.id)
+    f"@{me.username}" if me.username else my_mention
+    await rk.get_chat()
+    a = b = 0
+    if rk.is_private:
+        user = rk.chat
+        reason = rk.pattern_match.group(1)
+    else:
+        rk.chat.title
     try:
-        user, reason = await get_user_from_event(event)
+        user, reason = await get_user_from_event(rk)
     except BaseException:
         pass
     try:
         if not reason:
             reason = "Private"
     except BaseException:
-        return await tele.edit("**Error! Unknown user.**")
+        return await rkp.edit("**Error! Unknown user.**")
     if user:
         if user.id == 719195224:
-            return await tele.edit("`You can't GBan my Dev!`")
-        if user.id == OWNER_ID:
-            await tele.edit("`Yeah, now start gbanning yourself.`")
+            return await rkp.edit("**Error! cant gban this user.**")
         try:
-            await event.client(BlockRequest(user))
+            from telebot.plugins.sql_helper.gban_sql import gban
         except BaseException:
             pass
-        await tele.edit(
-            f"**Global Banning user!**\nUser - {user.id}\n**Chats Affecting** - `{xdi}`\n**Satus** - `In progress...`"
-        )
-        for i in xdi:
+        try:
+            await rk.client(BlockRequest(user))
+        except BaseException:
+            pass
+        testrk = [
+            d.entity.id
+            for d in await rk.client.get_dialogs()
+            if (d.is_group or d.is_channel)
+        ]
+        await rkp.edit(f"**Gbanning user!\nIn progress...**")
+        for i in testrk:
             try:
-                await telebot.edit_permissions(i, user, view_messages=False)
+                await rk.client.edit_permissions(i, user, view_messages=False)
                 a += 1
             except BaseException:
                 b += 1
     else:
-        await tele.edit(f"`Reply to a user!!`")
+        await rkp.edit(f"**Reply to a user !! **")
     try:
         if gban(user.id) is False:
-            return await tele.edit(f"**Error! User probably already gbanned.**")
+            return await rkp.edit(f"**Error! User probably already gbanned.**")
     except BaseException:
         pass
-    end = datetime.now()
-    timetaken = (end - start).seconds
-    await tele.edit(
-        f"**GBan**\n**User** - [{user.first_name}](tg://user?id={user.id})\n**Chats affected** - {a}\n**Blocked user** - `True`\n**Time taken** - `{timetaken} seconds`"
+    return await rkp.edit(
+        f"**Gbanned** [{user.first_name}](tg://user?id={user.id}) **\nChats affected - {a}\nBlocked user and added to Gban watch **"
     )
-    await telebot.send_message(
-        Var.PRIVATE_GROUP_ID,
-        "#GBan\nUser - {}\nTotal chats - {}\nDone in `{}` chats, failed in `{}` chats coz you are not an admin!".format(
-            user.id, xdi, a, b
-        ),
-    )
-    return
 
 
 @telebot.on(admin_cmd(pattern="ungban(?: |$)(.*)"))
-async def unban(event):
-    tele = await eor(event, "`Processing...`")
-    start = datetime.now()
-    xdi, grps = await tele_grps(event)
-    xdi = str(xdi)
-    await tele.edit(
-        "`Regression of Global Ban of User in` **{}** `chats!!`".format(xdi)
-    )
-    await event.get_chat()
-    a = b = 0
-    if event.is_private:
-        user = event.chat
-        reason = event.pattern_match.group(1)
+async def gspider(rk):
+    lazy = rk
+    sender = await lazy.get_sender()
+    me = await lazy.client.get_me()
+    if not sender.id == me.id:
+        rkp = await lazy.reply("`Processing...`")
     else:
-        event.chat.title
+        rkp = await lazy.edit("`Processing...`")
+    me = await rk.client.get_me()
+    await rkp.edit(f"**Requesting  to ungban user!**")
+    my_mention = "[{}](tg://user?id={})".format(me.first_name, me.id)
+    f"@{me.username}" if me.username else my_mention
+    await rk.get_chat()
+    a = b = 0
+    if rk.is_private:
+        user = rk.chat
+        reason = rk.pattern_match.group(1)
+    else:
+        rk.chat.title
     try:
-        user, reason = await get_user_from_event(event)
+        user, reason = await get_user_from_event(rk)
     except BaseException:
         pass
     try:
         if not reason:
             reason = "Private"
     except BaseException:
-        return await tele.edit("**Error! Unknown user.**")
+        return await rkp.edit(f"**Error! Unknown user.**")
     if user:
         if user.id == 719195224:
-            return await tele.edit("`You can't (un)GBan my Dev!`")
-        if user.id == OWNER_ID:
-            await tele.edit("`Yeah, now start (un)gbanning yourself.`")
+            return await rkp.edit(f"**Error! cant ungban this user.**")
         try:
-            await event.client(UnblockRequest(user))
+            from telebot.plugins.sql_helper.gban_sql import ungban
         except BaseException:
             pass
-        await tele.edit(
-            f"**Global UnBanning user!**\nUser - {user.id}\n**Chats Affecting** - `{xdi}`\n**Satus** - `In progress...`"
-        )
-        for i in xdi:
+        try:
+            await rk.client(UnblockRequest(user))
+        except BaseException:
+            pass
+        testrk = [
+            d.entity.id
+            for d in await rk.client.get_dialogs()
+            if (d.is_group or d.is_channel)
+        ]
+        await rkp.edit(f"**Requesting  to ungban user!\nUnban in progress...**")
+        for i in testrk:
             try:
-                await event.client.edit_permissions(i, user, send_messages=True)
+                await rk.client.edit_permissions(i, user, send_messages=True)
                 a += 1
             except BaseException:
                 b += 1
     else:
-        await tele.edit(f"`**`Reply to a user !!`")
+        await rkp.edit(f"**Reply to a user !! **")
     try:
         if ungban(user.id) is False:
-            return await tele.edit(
-                f"`This user wasn't gbanned or is already ungbanned!!`"
-            )
+            return await rkp.edit(f"**Error! User probably already ungbanned.**")
     except BaseException:
         pass
-    end = datetime.now()
-    timetaken = (end - start).seconds
-    await tele.edit(
-        f"**UnGBan**\n**User** - [{user.first_name}](tg://user?id={user.id})\n**Chats affected** - {a}\n**UnBlocked user** - `True`\n**Time taken** - `{timetaken} seconds`"
+    return await rkp.edit(
+        f"**UnGbanned** [{user.first_name}](tg://user?id={user.id}) **\nChats affected - {a}\nUnBlocked and removed user from Gban watch **"
     )
-    await telebot.send_message(
-        Var.PRIVATE_GROUP_ID,
-        "#UnGBan\nUser - {}\nTotal chats - {}\nDone in `{}` chats, failed in `{}` chats coz you are not an admin!".format(
-            user.id, xdi, a, b
-        ),
-    )
-    return
 
+
+CMD_HELP.update(
+    {
+        "gban": ".gban <username> / <userid> / <reply to a user>\
+\n**Usage**: Global ban the person in all groups, channels , block in pm , add gban watch (use with solution) \
+\n\n.ungban <username> / <userid> / <reply to a user>\
+\n**Usage**: unban user from all groups, channels , remove user from gban watch.\
+"
+    }
+)
 
 @telebot.on(admin_cmd(pattern="listgbanned"))
 @telebot.on(sudo_cmd(pattern="listgbanned", allow_sudo=True))
@@ -184,72 +260,6 @@ async def list(event):
             await event.delete()
     else:
         await doing.edit(userlist)
-
-
-async def get_user_from_event(event):
-    args = event.pattern_match.group(1).split(":", 1)
-    extra = None
-    if event.reply_to_msg_id and not len(args) == 2:
-        previous_message = await event.get_reply_message()
-        user_obj = await event.client.get_entity(previous_message.from_id)
-        extra = event.pattern_match.group(1)
-    elif len(args[0]) > 0:
-        user = args[0]
-        if len(args) == 2:
-            extra = args[1]
-        if user.isnumeric():
-            user = int(user)
-        if not user:
-            await event.edit(f"* Pass the user's username, id or reply!**")
-            return
-        if event.message.entities is not None:
-            probable_user_mention_entity = event.message.entities[0]
-            if isinstance(probable_user_mention_entity, MessageEntityMentionName):
-                user_id = probable_user_mention_entity.user_id
-                user_obj = await event.client.get_entity(user_id)
-                return user_obj
-        try:
-            user_obj = await event.client.get_entity(user)
-        except Exception as err:
-            return await event.edit("Failed \n **Error**\n", str(err))
-    return user_obj, extra
-
-
-# supposed to be a gban watch
-
-
-@telebot.on(ChatAction)
-async def handler(tele):
-    if tele.user_joined or tele.user_added:
-        try:
-            guser = await tele.get_user()
-            gbanned = is_gbanned(guser.id)
-        except BaseException:
-            return
-        if gbanned:
-            for i in gbanned:
-                if i.sender == str(guser.id):
-                    chat = await tele.get_chat()
-                    admin = chat.admin_rights
-                    creator = chat.creator
-                    if admin or creator:
-                        try:
-                            await client.edit_permissions(
-                                tele.chat_id, guser.id, view_messages=False
-                            )
-                            await tele.reply(
-                                f"** Gbanned User Joined!!** \n"
-                                f"**Victim Id**: [{guser.id}](tg://user?id={guser.id})\n"
-                                f"**Action **  : `Banned`"
-                            )
-                            await telebot.send_message(
-                                "#GBan_Action\n**Chat** - {}\n**User** - [{}](tg://user?id={})\n**Action** - `Banned`".format(
-                                    tele.chat_id, guser.id
-                                )
-                            )
-                        except BaseException:
-                            return
-
 
 CMD_HELP.update(
     {
