@@ -256,8 +256,7 @@ async def bot(event):
         async with event.client.conversation(OWNER_ID) as conv:
             await conv.send_message("Send the new pic you want to be shown when someone starts the bot:")
             await conv.send_message("Send /cancel to cancel the operation!")
-            response = conv.wait_event(events.NewMessage(chats=OWNER_ID))
-            response = await response
+            response = await conv.get_response()
             try:
                 themssg = response.message.message
                 if themssg == "/cancel":
@@ -270,7 +269,7 @@ async def bot(event):
                 url = upload_file(media)
                 os.remove(media)
             except BaseException:
-                return await conv.send_file("Error!")
+                return await conv.send_message("Error!")
         telebot = "BOT_PIC"
         if Var.HEROKU_APP_NAME is not None:
             app = Heroku.app(Var.HEROKU_APP_NAME)
@@ -454,8 +453,7 @@ async def alv_pic(event):
         await tgbot.send_message(event.chat_id, "Send me a pic so as to set it as your alive pic.")
         async with event.client.conversation(OWNER_ID) as conv:
             await conv.send_message("Send /cancel to cancel the operation!")
-            response=conv.wait_event(events.NewMessage(chats=OWNER_ID))
-            response=await response
+            response = await conv.get_response()
             try:
                 themssg=response.message.message
                 if themssg == "/cancel":
@@ -468,7 +466,7 @@ async def alv_pic(event):
                 url=upload_file(media)
                 os.remove(media)
             except BaseException:
-                return await conv.send_file("Error!")
+                return await conv.send_message("Error!")
         telebot="ALIVE_PIC"
         if Var.HEROKU_APP_NAME is not None:
             app=Heroku.app(Var.HEROKU_APP_NAME)
