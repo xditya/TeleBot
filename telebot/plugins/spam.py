@@ -108,7 +108,7 @@ async def spammer(e):
             
 CMD_HELP.update(
     {
-        "spammer": ".tspam <sentence>\nUse - Text spam\
+        "spam": ".tspam <sentence>\nUse - Text spam\
         \n\n.spam <number> <sentence>\nUse - Spam\
         \n\n.bigspam <number> <sentence>\nUse - Bigger Spam\
         \n\n.picspam <reply to pic> <number>\nUse - Picture Spam\
