@@ -61,43 +61,43 @@ async def start_all(event):
     if LOAD_MYBOT == "False":
         if BOT_PIC:
             await tgbot.send_message(event.chat_id,
-                                 BOT_PIC,
-                                 caption=startotherdis,
-                                 buttons=[
-                                     (Button.inline(
-                                         "What can I do here?",
-                                         data="wew"))]
-                                 )
+                                     BOT_PIC,
+                                     caption=startotherdis,
+                                     buttons=[
+                                         (Button.inline(
+                                             "What can I do here?",
+                                             data="wew"))]
+                                     )
         else:
             await tgbot.send_message(event.chat_id,
-                                 startotherdis,
-                                 buttons=[
-                                     (Button.inline(
-                                         "What can I do here?",
-                                         data="wew"))]
-                                 )
+                                     startotherdis,
+                                     buttons=[
+                                         (Button.inline(
+                                             "What can I do here?",
+                                             data="wew"))]
+                                     )
     elif LOAD_MYBOT == "True":
         if BOT_PIC:
             await tgbot.send_message(event.chat_id,
-                                 BOT_PIC,
-                                 caption=startotherena,
-                                 buttons=[
-                                     [Button.url(
-                                         "TeleBot", url="https://github.com/xditya/TeleBot")],
-                                     [Button.inline(
-                                         "Whats this?", data="telebot")]
-                                 ]
-                                 )
+                                     BOT_PIC,
+                                     caption=startotherena,
+                                     buttons=[
+                                         [Button.url(
+                                             "TeleBot", url="https://github.com/xditya/TeleBot")],
+                                         [Button.inline(
+                                             "Whats this?", data="telebot")]
+                                     ]
+                                     )
         else:
             await tgbot.send_message(event.chat_id,
-                                 startotherena,
-                                 buttons=[
-                                     [Button.url(
-                                         "TeleBot", url="https://github.com/xditya/TeleBot")],
-                                     [Button.inline(
-                                         "Whats this?", data="telebot")]
-                                 ]
-                                 )
+                                     startotherena,
+                                     buttons=[
+                                         [Button.url(
+                                             "TeleBot", url="https://github.com/xditya/TeleBot")],
+                                         [Button.inline(
+                                             "Whats this?", data="telebot")]
+                                     ]
+                                     )
 
 # start-owner
 
@@ -264,7 +264,7 @@ async def bot(event):
                 if themssg == "/cancel":
                     await conv.send_message("Operation cancelled!!")
                     return
-            except:
+            except BaseException:
                 pass
             media = await telebot.download_media(response, "Bot_Pic")
             try:
@@ -403,11 +403,11 @@ Total users in bot: `{}`.\n
           )  # pylint: disable=oof
 async def custommm(event):
     await event.edit("Modules which you can customise -",
-                    buttons=[
-                        [Button.inline("Alive", data="alive_cus")],
-                        [Button.inline("PMSecurity", data="pm_cus")]
-                    ]
-                    )
+                     buttons=[
+                         [Button.inline("Alive", data="alive_cus")],
+                         [Button.inline("PMSecurity", data="pm_cus")]
+                     ]
+                     )
 # fmt: off
 @tgbot.on(events.callbackquery.CallbackQuery(data=re.compile(b"alive_cus")))
 async def alv(event):
