@@ -14,14 +14,17 @@
 #    You should have received a copy of the GNU Affero General Public License
 #    along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-from telebot.plugins.sql_helper.gban_sql import *
 from telethon.events import ChatAction
 from telethon.tl.functions.contacts import BlockRequest, UnblockRequest
 from telethon.tl.types import MessageEntityMentionName
+
 from telebot import CMD_HELP, bot
+from telebot.plugins.sql_helper.gban_sql import *
 from telebot.utils import admin_cmd
 
 client = bot
+
+
 async def get_user_from_event(event):
     args = event.pattern_match.group(1).split(":", 1)
     extra = None
@@ -230,6 +233,7 @@ CMD_HELP.update(
     }
 )
 
+
 @telebot.on(admin_cmd(pattern="listgbanned"))
 @telebot.on(sudo_cmd(pattern="listgbanned", allow_sudo=True))
 async def list(event):
@@ -260,6 +264,7 @@ async def list(event):
             await event.delete()
     else:
         await doing.edit(userlist)
+
 
 CMD_HELP.update(
     {
