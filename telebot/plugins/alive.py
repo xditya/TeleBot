@@ -70,7 +70,7 @@ async def amireallyalive(alive):
         tele = f"**Welcome To TeleBot **\n\n"
         tele += f"`{CUSTOM_ALIVE}`\n\n"
         tele += (
-            f"{telemoji} **Telethon version**: `1.17`\n{telemoji} **Python**: `3.8.3`\n"
+            f"{telemoji} **Telethon version**: `1.18.2`\n{telemoji} **Python**: `3.8.3`\n"
         )
         tele += f"{telemoji} **TeleBot Version**: `{telever}`\n"
         tele += f"{telemoji} **More Info**: @TeleBotSupport\n"
@@ -100,7 +100,7 @@ async def amireallyalive(alive):
             alive.chat_id,
             f"**Welcome To TeleBot **\n\n"
             f"`{CUSTOM_ALIVE}`\n\n"
-            f"{telemoji} **Telethon version**: `1.17`\n{telemoji} **Python**: `3.8.3`\n"
+            f"{telemoji} **Telethon version**: `1.18.2`\n{telemoji} **Python**: `3.8.3`\n"
             f"{telemoji} **TeleBot Version**: `{telever}`\n"
             f"{telemoji} **More Info**: @TeleBotSupport\n"
             f"{telemoji} **Sudo** : `{sudo}`\n"
