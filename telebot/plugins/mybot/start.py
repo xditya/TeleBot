@@ -428,7 +428,7 @@ async def a_txt(event):
         else:
             mssg="`**HEROKU**:" "\nPlease setup your` **HEROKU_APP_NAME**"
             return
-        async with telebot.conversation(OWNER_ID) as conv:
+        async with event.client.conversation(OWNER_ID) as conv:
             await conv.send_message("Send the text which you want as your alive text.\nUse /cancel to cancel the operation.")
             response=conv.wait_event(events.NewMessage(chats=OWNER_ID))
             response=await response
@@ -452,7 +452,7 @@ async def alv_pic(event):
     if event.sender_id == OWNER_ID:
         await event.delete()
         await tgbot.send_message(event.chat_id, "Send me a pic so as to set it as your alive pic.")
-        async with telebot.conversation(OWNER_ID) as conv:
+        async with event.client.conversation(OWNER_ID) as conv:
             await conv.send_message("Send /cancel to cancel the operation!")
             response=conv.wait_event(events.NewMessage(chats=OWNER_ID))
             response=await response
