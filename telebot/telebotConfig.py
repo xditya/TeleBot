@@ -59,6 +59,7 @@ class Var(object):
     CUSTOM_ALIVE_EMOJI = os.environ.get("CUSTOM_ALIVE_EMOJI", None)
     CUSTOM_AFK = os.environ.get("CUSTOM_AFK", None)
     CUSTOM_STICKER_PACK_NAME = os.environ.get("CUSTOM_STICKER_PACK_NAME", None)
+    BOT_PIC = os.environ.get("BOT_PIC", None)
     LYDIA_API_KEY = os.environ.get("LYDIA_API_KEY", None)
     PMBOT_START_MSSG = os.environ.get("PMBOT_START_MSSG", None)
     LESS_SPAMMY = os.environ.get("LESS_SPAMMY", None)
