@@ -407,6 +407,7 @@ async def custommm(event):
                         [Button.inline("Alive", data="alive_cus")],
                         [Button.inline("PMSecurity", data="pm_cus")]
                     ]
+                    )
 # fmt: off
 @tgbot.on(events.callbackquery.CallbackQuery(data=re.compile(b"alive_cus")))
 async def alv(event):
