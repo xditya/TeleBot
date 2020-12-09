@@ -30,6 +30,7 @@ from datetime import datetime
 from telethon import events
 from telebot.telebotConfig import Var, Config
 from telegraph import Telegraph, upload_file
+from telebot import CUSTOM_PMPERMIT
 
 ##################--CONSTANTS--##################
 LOAD_MYBOT = Var.LOAD_MYBOT
@@ -497,7 +498,7 @@ async def alv(event):
 async def a_txt(event):
     if event.sender_id == OWNER_ID:
         await event.delete()
-        old_alv=Var.CUSTOM_PMPERMIT if Var.CUSTOM_PMPERMIT else "Default PMSecurity message"
+        old_alv= CUSTOM_PMPERMIT if CUSTOM_PMPERMIT else "Default PMSecurity message"
         telebot="CUSTOM_ALIVE"
         if Var.HEROKU_APP_NAME is not None:
             app=Heroku.app(Var.HEROKU_APP_NAME)
