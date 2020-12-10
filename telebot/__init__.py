@@ -18,17 +18,17 @@ else:
     bot = TelegramClient(session_name, Var.APP_ID, Var.API_HASH)
 
 StartTime = time.time()
-telever = "5.0"
+telever = "5.0.1"
 
 CMD_LIST = {}
 CMD_HELP = {}
 INT_PLUG = ""
 LOAD_PLUG = {}
+CMD_HNDLR = Var.CMD_HNDLR
 
 # PaperPlaneExtended Support Vars
 ENV = os.environ.get("ENV", False)
 """ PPE initialization. """
-
 
 # Bot Logs setup:
 if bool(ENV):

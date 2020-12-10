@@ -1,11 +1,27 @@
-# Imported by @its_xditya
+#    TeleBot - UserBot
+#    Copyright (C) 2020 TeleBot
+
+#    This program is free software: you can redistribute it and/or modify
+#    it under the terms of the GNU Affero General Public License as published by
+#    the Free Software Foundation, either version 3 of the License, or
+#    (at your option) any later version.
+
+#    This program is distributed in the hope that it will be useful,
+#    but WITHOUT ANY WARRANTY; without even the implied warranty of
+#    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+#    GNU Affero General Public License for more details.
+
+#    You should have received a copy of the GNU Affero General Public License
+#    along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 from telethon.events import ChatAction
 from telethon.tl.functions.contacts import BlockRequest, UnblockRequest
 from telethon.tl.types import MessageEntityMentionName
 
 from telebot import CMD_HELP, bot
-from telebot.utils import admin_cmd
+from telebot.plugins.sql_helper.gban_sql import *
+
+from . import TELE_NAME
 
 client = bot
 
@@ -54,14 +70,14 @@ async def get_user_from_id(user, event):
 async def handler(tele):
     if tele.user_joined or tele.user_added:
         try:
-            from telebot.plugins.sql_helper.gmute_sql import is_gmuted
+            from telebot.plugins.sql_helper.gban_sql import is_gbanned
 
             guser = await tele.get_user()
-            gmuted = is_gmuted(guser.id)
+            gbanned = is_gbanned(guser.id)
         except BaseException:
             return
-        if gmuted:
-            for i in gmuted:
+        if gbanned:
+            for i in gbanned:
                 if i.sender == str(guser.id):
                     chat = await tele.get_chat()
                     admin = chat.admin_rights
@@ -113,7 +129,7 @@ async def gspider(rk):
         if user.id == 719195224:
             return await rkp.edit("**Error! cant gban this user.**")
         try:
-            from telebot.plugins.sql_helper.gmute_sql import gmute
+            from telebot.plugins.sql_helper.gban_sql import gban
         except BaseException:
             pass
         try:
@@ -135,7 +151,7 @@ async def gspider(rk):
     else:
         await rkp.edit(f"**Reply to a user !! **")
     try:
-        if gmute(user.id) is False:
+        if gban(user.id) is False:
             return await rkp.edit(f"**Error! User probably already gbanned.**")
     except BaseException:
         pass
@@ -177,7 +193,7 @@ async def gspider(rk):
         if user.id == 719195224:
             return await rkp.edit(f"**Error! cant ungban this user.**")
         try:
-            from telebot.plugins.sql_helper.gmute_sql import ungmute
+            from telebot.plugins.sql_helper.gban_sql import ungban
         except BaseException:
             pass
         try:
@@ -199,7 +215,7 @@ async def gspider(rk):
     else:
         await rkp.edit(f"**Reply to a user !! **")
     try:
-        if ungmute(user.id) is False:
+        if ungban(user.id) is False:
             return await rkp.edit(f"**Error! User probably already ungbanned.**")
     except BaseException:
         pass
@@ -215,5 +231,48 @@ CMD_HELP.update(
 \n\n.ungban <username> / <userid> / <reply to a user>\
 \n**Usage**: unban user from all groups, channels , remove user from gban watch.\
 "
+    }
+)
+
+
+@telebot.on(admin_cmd(pattern="listgbanned"))
+@telebot.on(sudo_cmd(pattern="listgbanned", allow_sudo=True))
+async def list(event):
+    try:
+        from telebot.plugins.sql_helper.gban_sql import all_gbanned
+    except BaseException:
+        await event.edit("Error. SQL Not found!")
+        return
+    doing = await eor(event, "`Making a list of GBanned Users`")
+    allgbanned = all_gbanned()
+    userlist = f"List of GBanned users by {TELE_NAME}\n"
+    if len(allgbanned) > 0:
+        for i in allgbanned:
+            userlist += f"✘ [{i.sender}](tg://user?id={i.sender})"
+    else:
+        userlist = f"`{TELE_NAME} has not GBanned anyone!`"
+    if len(userlist) > 4095:
+        with io.BytesIO(str.encode(userlist)) as gbanned_list:
+            gbanned_list.name = "GBanned.text"
+            await telebot.send_file(
+                event.chat_id,
+                gbanned_list,
+                force_document=True,
+                allow_cache=False,
+                caption=f"List of GBanned Users by {TELE_NAME}",
+                reply_to=event,
+            )
+            await event.delete()
+    else:
+        await doing.edit(userlist)
+
+
+CMD_HELP.update(
+    {
+        "gban": ".gban <username/userid/reply to a user>\
+        \nUse - Global ban the person in all groups, channels , block in pm , add gban watch (use with solution)\
+        \n\n.ungban <username/userid/reply to a user>\
+        \nUse - UnbGan user from all groups, channels , remove user from gban watch.\
+        \n\n.listgbanned\nUse - List all gbanned users."
     }
 )

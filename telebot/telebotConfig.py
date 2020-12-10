@@ -59,6 +59,7 @@ class Var(object):
     CUSTOM_ALIVE_EMOJI = os.environ.get("CUSTOM_ALIVE_EMOJI", None)
     CUSTOM_AFK = os.environ.get("CUSTOM_AFK", None)
     CUSTOM_STICKER_PACK_NAME = os.environ.get("CUSTOM_STICKER_PACK_NAME", None)
+    BOT_PIC = os.environ.get("BOT_PIC", None)
     LYDIA_API_KEY = os.environ.get("LYDIA_API_KEY", None)
     PMBOT_START_MSSG = os.environ.get("PMBOT_START_MSSG", None)
     LESS_SPAMMY = os.environ.get("LESS_SPAMMY", None)
@@ -74,6 +75,8 @@ class Var(object):
     GDRIVE_FOLDER_ID = os.environ.get("GDRIVE_FOLDER_ID", "root")
     AUTH_TOKEN_DATA = os.environ.get("AUTH_TOKEN_DATA", None)
     PMSECURITY = os.environ.get("PMSECURITY", "ON")
+    CMD_HNDLR = os.environ.get("CMD_HNDLR", r"\.")
+    SUDO_HNDLR = os.environ.get("SUDO_HNDLR", r"\!")
     # for autopic
     AUTOPIC_TEXT = os.environ.get(
         "AUTOPIC_TEXT",
