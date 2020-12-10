@@ -1,39 +1,18 @@
-#    TeleBot - UserBot
-#    Copyright (C) 2020 TeleBot
-
-#    This program is free software: you can redistribute it and/or modify
-#    it under the terms of the GNU Affero General Public License as published by
-#    the Free Software Foundation, either version 3 of the License, or
-#    (at your option) any later version.
-
-#    This program is distributed in the hope that it will be useful,
-#    but WITHOUT ANY WARRANTY; without even the implied warranty of
-#    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-#    GNU Affero General Public License for more details.
-
-#    You should have received a copy of the GNU Affero General Public License
-#    along with this program.  If not, see <https://www.gnu.org/licenses/>.
-
 import asyncio
 
-from telebot.plugins import OWNER_ID, TELE_NAME
-from telebot.plugins.sql_helper.gmute_sql import all_gmuted, gmute, is_gmuted, ungmute
-from telebot.telebotConfig import Var
+from telebot import CMD_HELP
+from telebot.plugins.sql_helper.mute_sql import is_muted, mute, unmute
+from telebot.utils import admin_cmd
 
 
-@telebot.on(admin_cmd(pattern=r"gmute ?(\d+)?"))
-async def gmoot(event):
-    tele = await eor(event, "`GMuting user...`")
+@telebot.on(admin_cmd(outgoing=True, pattern=r"gmute ?(\d+)?"))
+@telebot.on(sudo_cmd(allow_sudo=True, pattern=r"gmute ?(\d+)?"))
+async def startgmute(event):
     private = False
     if event.fwd_from:
         return
-    reply = await event.get_reply_message()
-    userid = reply.sender_id
-    if userid == OWNER_ID:
-        await tele.edit(r"Are you dumb nigga? Why would you mute yourself!!")
-        return
     elif event.is_private:
-        await tele.edit("Globally muted [user](tg://user?id={})".format(userid))
+        await eor(event, "Unexpected issues or ugly errors may occur!")
         await asyncio.sleep(3)
         private = True
     reply = await event.get_reply_message()
@@ -44,42 +23,29 @@ async def gmoot(event):
     elif private is True:
         userid = event.chat_id
     else:
-        return await tele.edit("`Reply to a person or give me his id to GMute!!`")
+        return await eor(
+            event, "Please reply to a user or add their into the command to gmute them."
+        )
     event.chat_id
     await event.get_chat()
-    if is_gmuted(userid, "gmute"):
-        return await tele.edit(
-            "This [user](tg://user?id={}) is already GMuted!!".format(userid)
-        )
+    if is_muted(userid, "gmute"):
+        return await eor(event, "This user is already gmuted")
     try:
-        gmute(userid, "gmute")
+        mute(userid, "gmute")
     except Exception as e:
-        await tele.edit("**Error**\n" + str(e))
+        await eor(event, "Error occured!\nError is " + str(e))
     else:
-        await tele.edit(
-            "**GMuted!**\nUserID - {}\nLink - [here](tg://user?id={})".format(
-                userid, userid
-            )
-        )
-    try:
-        await telebot.send_message(
-            Var.PRIVATE_GROUP_ID,
-            "#GMute\nUserID - {}\nLink - [here](tg://user?id={})".format(
-                userid, userid
-            ),
-        )
-    except BaseException:
-        pass
+        await eor(event, "Silence now. **Successfully gmuted that person**")
 
 
-@telebot.on(admin_cmd(pattern=r"ungmute ?(\d+)?"))
+@telebot.on(admin_cmd(outgoing=True, pattern=r"ungmute ?(\d+)?"))
+@telebot.on(sudo_cmd(allow_sudo=True, pattern=r"ungmute ?(\d+)?"))
 async def endgmute(event):
     private = False
-    tele = await eor(event, "`UnGMuting user...`")
     if event.fwd_from:
         return
     elif event.is_private:
-        await tele.edit("UnGMuted user")
+        await eor(event, "Unexpected issues or ugly errors may occur!")
         await asyncio.sleep(3)
         private = True
     reply = await event.get_reply_message()
@@ -90,59 +56,30 @@ async def endgmute(event):
     elif private is True:
         userid = event.chat_id
     else:
-        return await tele.edit("`Reply to a person or give me his id to UnGMute!!`")
+        return await eor(
+            event,
+            "Please reply to a user or add their into the command to ungmute them.",
+        )
     event.chat_id
-    if not is_gmuted(userid, "gmute"):
-        return await tele.edit("Hmm.. This person is not GMuted, yet!")
+    if not is_muted(userid, "gmute"):
+        return await eor(event, "This user is not gmuted")
     try:
-        ungmute(userid, "gmute")
+        unmute(userid, "gmute")
     except Exception as e:
-        await tele.edit("**Error**\n" + str(e))
+        await eor(event, "Error occured!\nError is " + str(e))
     else:
-        await tele.edit(
-            "**UnGMuted!**\nUserID - {}\nLink - [here](tg://user?id={})".format(
-                userid, userid
-            )
-        )
-    try:
-        await telebot.send_message(
-            Var.PRIVATE_GROUP_ID,
-            "#UnGMute\nUserID - {}\nLink - [here](tg://user?id={})".format(
-                userid, userid
-            ),
-        )
-    except BaseException:
-        pass
+        await eor(event, "Successfully ungmuted that person")
 
 
 @command(incoming=True)
 async def watcher(event):
-    if is_gmuted(event.sender_id, "gmute"):
+    if is_muted(event.sender_id, "gmute"):
         await event.delete()
 
 
-@telebot.on(admin_cmd(pattern="listgmuted"))
-@telebot.on(sudo_cmd(pattern="listgmuted", allow_sudo=True))
-async def list(event):
-    doing = await eor(event, "`Making a list of GMuted Users`")
-    allgmuted = all_gmuted()
-    userlist = f"List of GMuted users by {TELE_NAME}\n"
-    if len(allgmuted) > 0:
-        for i in allgmuted:
-            userlist += f"✘ [{i.sender}](tg://user?id={i.sender})"
-    else:
-        userlist = f"{TELE_NAME} has not GMuted anyone!"
-    if len(userlist) > 4095:
-        with io.BytesIO(str.encode(userlist)) as gmuted_list:
-            gmuted_list.name = "GMuted.text"
-            await telebot.send_file(
-                event.chat_id,
-                gmuted_list,
-                force_document=True,
-                allow_cache=False,
-                caption=f"List of GMuted Users by {TELE_NAME}",
-                reply_to=event,
-            )
-            await event.delete()
-    else:
-        await doing.edit(userlist)
+CMD_HELP.update(
+    {
+        "gmute": ".gmute <reply to user>\nUse - Globally mute the person (across all chats).\
+        \n\n.ungmute <reply to user>\nUse - Globally UnMute the person."
+    }
+)
