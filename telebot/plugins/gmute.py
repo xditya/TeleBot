@@ -1,4 +1,5 @@
 import asyncio
+
 from telebot import CMD_HELP
 from telebot.plugins.sql_helper.mute_sql import is_muted, mute, unmute
 from telebot.utils import admin_cmd
@@ -75,9 +76,10 @@ async def watcher(event):
     if is_muted(event.sender_id, "gmute"):
         await event.delete()
 
+
 CMD_HELP.update(
     {
-        "gmute":".gmute <reply to user>\nUse - Globally mute the person (across all chats).\
+        "gmute": ".gmute <reply to user>\nUse - Globally mute the person (across all chats).\
         \n\n.ungmute <reply to user>\nUse - Globally UnMute the person."
     }
 )
