@@ -184,7 +184,7 @@ async def _(event):
             await bot_conv.send_message("/myfeds")
             response = await bot_conv.get_response()
             if "make a file" in response.text:
-                await asyncio.sleep(1)
+                await asyncio.sleep(3)
                 await response.click(0)
                 fedfile = await bot_conv.get_response()
                 if fedfile.media:
@@ -226,12 +226,12 @@ async def _(event):
     except BaseException:
         await event.edit("FBAN_GROUP_ID is incorrect.")
         return
-    await asyncio.sleep(3)
+    await asyncio.sleep(5)
     for fed in fedList:
         await telebot.send_message(chat, f"/joinfed {fed}")
-        await asyncio.sleep(3)
+        await asyncio.sleep(5)
         await telebot.send_message(chat, f"/unfban {FBAN}")
-        await asyncio.sleep(3)
+        await asyncio.sleep(5)
     await event.edit(f"SuperUnFBan Completed. Affected {len(fedList)} feds.\n#TB")
 
 
