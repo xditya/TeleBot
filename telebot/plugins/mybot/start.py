@@ -440,7 +440,7 @@ async def a_txt(event):
                 await conv.send_message("Error!")
                 return
             if themssg == "/cancel":
-                await conv.send_message("Cancelled!!")
+                return await conv.send_message("Cancelled!!")
             heroku_var=app.config()
             xx = await tgbot.send_message(event.chat_id, "Changing your Alive Message, please wait for a minute")
             heroku_var[telebot]=f"{themssg}"
