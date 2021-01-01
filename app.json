@@ -85,7 +85,7 @@
    "required": false
   },
   "PRIVATE_GROUP_ID": {
-   "description": "Same value as PRIVATE_GROUP_BOT_API_ID. Must read https://telegra.ph/TeleBot-Setup-06-06 for knowing how to get the value. Required for pmpermit.",
+   "description": "ID of your private log channel/group. Read https://telegra.ph/TeleBot-Setup-06-06 for details.",
    "value": "",
    "required": true
   },
@@ -95,7 +95,7 @@
    "required": true
   },
   "TG_BOT_TOKEN_BF_HER": {
-   "description": "Needed for inline buttons maker. Make a bot at [BotFather](http://telegram.dog/BotFather) and get the token of your bot. Get it else .help won't work.",
+   "description": "Needed for inline buttons maker. Make a bot at @BotFather and get the token of your bot.",
    "value": "",
    "required": true
   },
@@ -105,7 +105,7 @@
    "required": true
   },
   "ALIVE_NAME": {
-   "description": "Your Telegram Username. ",
+   "description": "Your Telegram Profile name. (not @username). ",
    "value": "",
    "required": false
   },  
@@ -136,14 +136,14 @@
   },
   "TZ": {
    "description": "Required for Correct Time on autopic/get time. Know your timezone from http://www.timezoneconverter.com/cgi-bin/findzone.tzc",
-   "value": "",
+   "value": "Asia/Kolkata",
    "required": false
   }
  },
  "addons": [{
   "plan": "heroku-postgresql",
   "options": {
-   "version": "9.6"
+   "version": "12"
   }
  }]
 }
