@@ -15,7 +15,9 @@
 #    along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 import requests
+
 from . import CMD_HELP
+
 
 @telebot.on(admin_cmd(pattern="grpcnt ?(.*)"))
 async def counter(tele):
@@ -24,13 +26,18 @@ async def counter(tele):
         chat = f"@{tele.chat.username}"
     if not chat:
         return await tele.edit("`Give a channel/group @username`")
-    request_url = "https://api.telegram.org/bot{}/getChatMembersCount?chat_id={}".format(Var.TG_BOT_TOKEN_BF_HER, chat)
+    request_url = (
+        "https://api.telegram.org/bot{}/getChatMembersCount?chat_id={}".format(
+            Var.TG_BOT_TOKEN_BF_HER, chat
+        )
+    )
     current_response = requests.get(request_url).json()
     try:
         ok = current_response["result"]
-    except:
-         return await tele.edit("`Invalid UserName or Not a Public Group!!`")
+    except BaseException:
+        return await tele.edit("`Invalid UserName or Not a Public Group!!`")
     await tele.edit(f"`Chat` - {chat}\n`Members` - {ok}")
+
 
 CMD_HELP.update(
     {
