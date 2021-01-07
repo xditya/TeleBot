@@ -193,6 +193,9 @@ async def settings(event):
 async def settings(event):
     if event.sender_id == OWNER_ID:
         await event.delete()
+        ok = Var.TG_BOT_USER_NAME_BF_HER
+        if ok.startswith('@'):
+            ok = ok.split('@')[1]
         await tgbot.send_message(event.chat_id,
                                  "Here are the available options.",
                                  buttons=[
@@ -201,7 +204,7 @@ async def settings(event):
                                      [Button.inline(
                                          "Customs", data="custom")],
                                      [Button.url(
-                                         "Logs", url=f"https://t.me/{Var.TG_BOT_USER_NAME_BF_HER}?start=logs")]
+                                         "Logs", url=f"https://t.me/{ok}?start=logs")]
                                  ])
     else:
         await event.answer("You can't use this bot.", alert=True)
