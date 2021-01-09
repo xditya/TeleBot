@@ -40,7 +40,9 @@ async def forw(event):
         try:
             await borg.forward_messages(int(channel.chat_id), previous_message)
             sent_count += 1
-            await mssg.edit(f"Sent : {sent_count}\nError : {error_count}\nTotal : {len(channels)}")
+            await mssg.edit(
+                f"Sent : {sent_count}\nError : {error_count}\nTotal : {len(channels)}"
+            )
         except Exception as error:
             try:
                 await borg.send_message(
