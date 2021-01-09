@@ -23,11 +23,12 @@ logs_id = Var.PRIVATE_GROUP_ID
 async def forw(event):
     if event.fwd_from:
         return
+    mssg = await eor(event, "`...'")
     if not event.is_reply:
-        await eor(event, "Reply to a message to broadcast.")
+        await mssg.edit("Reply to a message to broadcast.")
         return
     channels = get_all_channels()
-    await eor(event, "Sending...")
+    await mssg.edit("Sending...")
     error_count = 0
     sent_count = 0
     if event.reply_to_msg_id:
@@ -39,10 +40,7 @@ async def forw(event):
         try:
             await borg.forward_messages(int(channel.chat_id), previous_message)
             sent_count += 1
-            await eor(
-                event,
-                f"Sent : {sent_count}\nError : {error_count}\nTotal : {len(channels)}",
-            )
+            await mssg.edit(f"Sent : {sent_count}\nError : {error_count}\nTotal : {len(channels)}")
         except Exception as error:
             try:
                 await borg.send_message(
@@ -50,23 +48,22 @@ async def forw(event):
                 )
                 await borg.send_message(logs_id, "Error! " + str(error))
                 if error == "The message cannot be empty unless a file is provided":
-                    event.edit(
+                    mssg.edit(
                         "For sending files, upload in Saved Messages and reply .forward to in."
                     )
                     return
             except BaseException:
                 pass
             error_count += 1
-            await eor(
-                event,
+            await mssg.edit(
                 f"Sent : {sent_count}\nError : {error_count}\nTotal : {len(channels)}",
             )
-    await eor(event, f"{sent_count} messages sent with {error_count} errors.")
+    await mssg.edit(f"{sent_count} messages sent with {error_count} errors.")
     if error_count > 0:
         try:
             await borg.send_message(logs_id, f"{error_count} Errors")
         except BaseException:
-            await eor(event, "Set up log channel for checking errors.")
+            await mssg.edit("Set up log channel for checking errors.")
 
 
 @telebot.on(admin_cmd(pattern="broadcast ?(.*)"))
@@ -74,17 +71,18 @@ async def forw(event):
 async def _(event):
     if event.fwd_from:
         return
+    mssg = await eor(event, "`...`")
     if not event.is_reply:
-        await eor(event, "Reply to a message to broadcast.")
+        await mssg.edit("Reply to a message to broadcast.")
         return
     channels = get_all_channels()
     error_count = 0
     sent_count = 0
-    await eor(event, "Sending....")
+    await mssg.edit(Sending....")
     if event.reply_to_msg_id:
         previous_message = await event.get_reply_message()
         if previous_message.sticker or previous_message.poll:
-            await eor(event, "Reply .forward for stickers and polls.")
+            await mssg.edit("Reply .forward for stickers and polls.")
             return
         if (
             previous_message.gif
@@ -97,7 +95,7 @@ async def _(event):
             or previous_message.geo
             or previous_message.invoice
         ):  # Written by @HeisenbergTheDanger
-            await eor(event, "Not supported. Try .forward")
+            await mssg.edit("Not supported. Try `.forward`")
             return
         if not previous_message.web_preview and previous_message.photo:
             file = await borg.download_file(previous_message.media)
@@ -115,8 +113,7 @@ async def _(event):
                         )
 
                     sent_count += 1
-                    await eor(
-                        event,
+                    await mssg.edit(
                         f"Sent : {sent_count}\nError : {error_count}\nTotal : {len(channels)}",
                     )
                 except Exception as error:
@@ -129,18 +126,17 @@ async def _(event):
                             error
                             == "The message cannot be empty unless a file is provided"
                         ):
-                            event.edit(
+                            mssg.edit(
                                 "For sending files, upload in Saved Messages and reply .forward to in."
                             )
                             return
                     except BaseException:
                         pass
                     error_count += 1
-                    await eor(
-                        event,
+                    await mssg.edit(
                         f"Sent : {sent_count}\nError : {error_count}\nTotal : {len(channels)}",
                     )
-            await eor(event, f"{sent_count} messages sent with {error_count} errors.")
+            await mssg.edit(f"{sent_count} messages sent with {error_count} errors.")
             if error_count > 0:
                 try:
                     await borg.send_message(logs_id, f"{error_count} Errors")
@@ -154,8 +150,7 @@ async def _(event):
                         int(channel.chat_id), raw_text, link_preview=False
                     )
                     sent_count += 1
-                    await eor(
-                        event,
+                    await mssg.edit(
                         f"Sent : {sent_count}\nError : {error_count}\nTotal : {len(channels)}",
                     )
                 except Exception as error:
@@ -168,23 +163,22 @@ async def _(event):
                             error
                             == "The message cannot be empty unless a file is provided"
                         ):
-                            event.edit(
+                            mssg.edit(
                                 "For sending files, upload in Saved Messages and reply .forward to in."
                             )
                             return
                     except BaseException:
                         pass
                     error_count += 1
-                    await eor(
-                        event,
+                    await mssg.edit(
                         f"Sent : {sent_count}\nError : {error_count}\nTotal : {len(channels)}",
                     )
-            await eor(event, f"{sent_count} messages sent with {error_count} errors.")
+            await mssg.edit(f"{sent_count} messages sent with {error_count} errors.")
             if error_count > 0:
                 try:
                     await borg.send_message(logs_id, f"{error_count} Errors")
                 except BaseException:
-                    await eor(event, "Set up log channel for checking errors.")
+                    await mssg.edit("Set up log channel for checking errors.")
 
 
 # Written by @HeisenbergTheDanger
@@ -306,7 +300,7 @@ async def search(event):
 CMD_HELP.update(
     {
         "giveawayhelper": ".add\nUse - Add the channel/group to your database.\
-        \n\n.rm <channel/group id>\nUse - Remove the channel/group from database.\
+        \n\n.rm (all)<channel/group id>\nUse - Remove the channel/group from database. Use rm all to remove all groups.\
         \n\n.broadcast <reply to message>\nUse - Send the message to all channels/groups in the db.\
         \n\n.forward <reply to polls/stickers>\nUse - Forwards the poll/sticker to all channels/groups in db.\
         \n\n.listchannels\nUse - List all added channels.\
