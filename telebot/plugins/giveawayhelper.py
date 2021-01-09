@@ -78,7 +78,7 @@ async def _(event):
     channels = get_all_channels()
     error_count = 0
     sent_count = 0
-    await mssg.edit(Sending....")
+    await mssg.edit("Sending....")
     if event.reply_to_msg_id:
         previous_message = await event.get_reply_message()
         if previous_message.sticker or previous_message.poll:
