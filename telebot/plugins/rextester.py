@@ -17,7 +17,9 @@
 # by @its_xditya
 
 from rextester_py import rexec
+
 from . import CMD_HELP
+
 
 @telebot.on(admin_cmd(pattern="rex"))
 async def _(event):
@@ -28,8 +30,10 @@ async def _(event):
     try:
         lang = evtxt.split("//", maxsplit=1)[0]
         cmd = evtxt.split("//", maxsplit=1)[1]
-    except:
-        return await event.edit(f"Syntax - \n`{Var.CMD_HNDLR}rex language//code`\nLanguages can be found [here](https://github.com/nitanmarcel/rextester_py#languages).")
+    except BaseException:
+        return await event.edit(
+            f"Syntax - \n`{Var.CMD_HNDLR}rex language//code`\nLanguages can be found [here](https://github.com/nitanmarcel/rextester_py#languages)."
+        )
 
     try:
         res = rexec(lang, cmd, None).results
@@ -38,7 +42,9 @@ async def _(event):
         # statt = rexec(lang, cmd, None).stats
     except Exception as e:
         if str(e) == "Unknown language":
-            return await event.edit("**ERROR**:\n`Unknown Language!!\nCheck available languages `[here](https://github.com/nitanmarcel/rextester_py#languages)")
+            return await event.edit(
+                "**ERROR**:\n`Unknown Language!!\nCheck available languages `[here](https://github.com/nitanmarcel/rextester_py#languages)"
+            )
         return await event.edit(f"**ERROR:**\n`{str(e)}`")
     out = f"**- Rextester**\n\n**Language:** `{lang}`\n**Code:** `{cmd}`\n\n**Output:** `{res}`\n\n"
     if err is not None:
@@ -49,6 +55,7 @@ async def _(event):
     # out += f"**Stats:** `{statt}`"
 
     await event.edit(out)
+
 
 CMD_HELP.update(
     {
