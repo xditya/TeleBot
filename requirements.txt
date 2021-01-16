@@ -30,6 +30,7 @@ humanize
 lxml
 lyricsgenius
 oauth2client
+pygments
 psycopg2-binary
 pySmartDL
 pybase64>=0.4.0
