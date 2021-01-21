@@ -58,5 +58,6 @@ urbandict
 validators
 wheel
 wikipedia>=1.4.0
-youtube-dl
-youtube-search-python
+youtube-dl>=2021.1.8
+youtube-search-python>=1.3.2
+youtube-search>=1.1.1
