@@ -25,8 +25,8 @@ Join [TeleBot Support group](https://t.me/TeleBotSupport) for updates and new pl
 Do fork and star the repo 
 
 ### Session String 
-<a href="https://repl.it/@xditya/telebot#main.py" target="_blank"><img src="https://img.shields.io/badge/run-string__session.py-red?style=for-the-badge&logo=repl.it" alt="generate_string" /></a>
-[Mirror sites can be found here, incase the top one doesn't work.](https://t.me/TeleBotHelpChat/272145)
+<a href="https://repl.it/@xditya/telebot#main.py" target="_blank"><img src="https://img.shields.io/badge/run-string__session.py-red?style=for-the-badge&logo=repl.it" alt="generate_string" /></a>    
+Mirror sites can be found [here](https://t.me/TeleBotHelpChat/272145), incase the top one doesn't work.
 
 ### The Normal Way
 
