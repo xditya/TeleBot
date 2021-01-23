@@ -13,7 +13,7 @@ covid
 cowpy
 cryptg
 dnspython
-emoji
+emoji==1.0.0
 gTTS-token>=1.1.3
 gTTS>=2.0.1
 geopy
