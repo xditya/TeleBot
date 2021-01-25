@@ -6,7 +6,6 @@ from telebot import CMD_HELP
 from telebot.telebotConfig import Var
 from telebot.utils import admin_cmd
 
-
 CLIENT_ID = Var.GITA_CLIENT_ID
 CLIENT_SECRET = Var.GITA_CLIENT_SECRET
 """Get API crendentials from https://bhagavadgita.io."""
@@ -43,6 +42,7 @@ async def gita_hindi(event):
     verse_number = int(event.pattern_match.group(2))
     verse = pygita.get_verse(chapter_number, verse_number, language="hi")
     await event.edit(f"**{verse.text}** {verse.meaning}")
+
 
 CMD_HELP.update(
     {
