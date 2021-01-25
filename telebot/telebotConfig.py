@@ -231,6 +231,8 @@ if ENV:
         MAX_SPAM = int(os.environ.get("MAX_SPAM", 3))
         # Lydia API
         LYDIA_API = os.environ.get("LYDIA_API", None)
+        GITA_CLIENT_ID = os.environ.get("GITA_CLIENT_ID",  None)
+        GITA_CLIENT_SECRET = os.environ.get("GITA_CLIENT_SECRET", None)
         FBAN_GROUP_ID = os.environ.get("FBAN_GROUP_ID", None)
         if FBAN_GROUP_ID:
             FBAN_GROUP_ID = int(FBAN_GROUP_ID)
