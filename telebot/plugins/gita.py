@@ -6,8 +6,8 @@ from telebot import CMD_HELP
 from telebot.telebotConfig import Var
 from telebot.utils import admin_cmd
 
-CLIENT_ID = Var.GITA_CLIENT_ID
-CLIENT_SECRET = Var.GITA_CLIENT_SECRET
+CLIENT_ID = Config.GITA_CLIENT_ID
+CLIENT_SECRET = Config.GITA_CLIENT_SECRET
 """Get API crendentials from https://bhagavadgita.io."""
 
 
