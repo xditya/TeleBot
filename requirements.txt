@@ -33,6 +33,7 @@ oauth2client
 pygments
 psycopg2-binary
 pySmartDL
+pygita
 pybase64>=0.4.0
 pyfiglet
 pylast
