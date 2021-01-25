@@ -17,9 +17,7 @@ async def gita(event):
     """To get a specific verse from a specific chapter in English."""
     if CLIENT_ID is None or CLIENT_SECRET is None:
         await event.edit(
-            event,
-            "`Please add required GITA_CLIENT_SECRET and GITA_CLIENT_ID env var`",
-            10,
+            "`Please add required GITA_CLIENT_SECRET and GITA_CLIENT_ID env var`"
         )
         return
     pygita.auth(CLIENT_ID, CLIENT_SECRET)
@@ -37,9 +35,7 @@ async def gita_hindi(event):
     """To get a specific verse from a specific chapter in Hindi."""
     if CLIENT_ID is None or CLIENT_SECRET is None:
         await event.edit(
-            event,
-            "`Please add required GITA_CLIENT_SECRET and GITA_CLIENT_ID env var`",
-            10,
+            "`Please add required GITA_CLIENT_SECRET and GITA_CLIENT_ID env var`"
         )
         return
     pygita.auth(CLIENT_ID, CLIENT_SECRET)
