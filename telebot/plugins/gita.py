@@ -3,7 +3,6 @@
 import pygita
 
 from telebot import CMD_HELP
-from telebot.telebotConfig import Var
 from telebot.utils import admin_cmd
 
 CLIENT_ID = Config.GITA_CLIENT_ID
